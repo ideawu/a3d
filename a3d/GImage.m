@@ -1,5 +1,5 @@
-//  Created by ideawu on 28/12/2017.
-//  Copyright © 2017 ideawu. All rights reserved.
+//  Created by ideawu on 28/12/2018.
+//  Copyright © 2018 ideawu. All rights reserved.
 //
 
 #import "GImage.h"
