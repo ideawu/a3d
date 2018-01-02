@@ -1,0 +1,55 @@
+//
+//  PrefixHeader.pch
+//  moveff
+//
+//  Created by ideawu on 26/12/2017.
+//  Copyright © 2017 ideawu. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+inline
+static void my_log(NSString *fmt, ...){
+    NSDateFormatter *f = [[NSDateFormatter alloc] init];
+    [f setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    NSString *time = [f stringFromDate:[NSDate date]];
+    
+    va_list args;
+    va_start(args, fmt);
+    NSString *msg = [[NSString alloc] initWithFormat:fmt arguments:args];
+    va_end(args);
+    
+    printf("%s %s\n", time.UTF8String, msg.UTF8String);
+}
+#endif
+
+#define L_MYLOG(level, fmt, args...) \
+my_log((level @" %@(%d): " fmt), [@(__FILE__) lastPathComponent],  __LINE__, ##args)
+
+#ifdef DEBUG
+#    define VERSION  VER_NUM "(for development only)"
+#    define log_trace(...) L_MYLOG(@"[TRACE]", __VA_ARGS__)
+#    define log_debug(...) L_MYLOG(@"[DEBUG]", __VA_ARGS__)
+#else
+#    define VERSION  VER_NUM "(for production)"
+#    define log_trace(...)
+#    define log_debug(...)
+#endif
+
+#define log_info(...)  L_MYLOG(@"[INFO] ", __VA_ARGS__)
+#define log_error(...) L_MYLOG(@"[ERROR]", __VA_ARGS__)
+
+#ifdef DEBUG
+#    define LOG_FIRST_RUN() do{ \
+static int i = 0; \
+if(i == 0){ \
+i = 1; \
+log_debug(@"== FIRST_RUN == %s", __func__); \
+} \
+}while(0)
+#endif
+
+#endif /* PrefixHeader_pch */

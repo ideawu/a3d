@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*.xcuserstate
+*.xcuserdatad
+build
+a3d.xcodeproj/project.xcworkspace/xcshareddata/a3d.xccheckout
+a3d.xcodeproj/project.xcworkspace/xcuserdata/
+a3d.xcodeproj/xcuserdata/
+UserInterfaceState.xcuserstate
+
