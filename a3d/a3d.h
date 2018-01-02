@@ -12,4 +12,6 @@
 #import "GNode.h"
 #import "GImage.h"
 
+#import "ui/GNSView.h"
+
 #endif

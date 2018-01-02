@@ -20,7 +20,7 @@
 	return (const GLfloat *)&_matrix;
 }
 
-#pragma 物体在坐标系内的变换
+#pragma mark - 物体在坐标系内的变换
 
 - (float)x{
 	return _matrix.m30;
@@ -44,7 +44,7 @@
 	_depth *= dRatio;
 }
 
-#pragma 物体自身坐标系的变换
+#pragma mark - 物体自身坐标系的变换
 
 - (void)moveX:(float)x y:(float)y z:(float)z{
 	_matrix = GLKMatrix4Translate(_matrix, x, y, z);
@@ -75,6 +75,26 @@
 
 - (void)rotate:(float)degree x:(float)x y:(float)y z:(float)z{
 	_matrix = GLKMatrix4Rotate(_matrix, GLKMathDegreesToRadians(degree), x, y, z);
+}
+
+// 绕自身坐标系内的任意轴(p0->p1)旋转
+- (void)orbit:(float)degree p0:(GLKVector3)p0 p1:(GLKVector3)p1{
+	GLKVector3 vec = GLKVector3Subtract(p1, p0);
+	_matrix = GLKMatrix4TranslateWithVector3(_matrix, p0);
+	_matrix = GLKMatrix4RotateWithVector3(_matrix, GLKMathDegreesToRadians(degree), vec);
+	_matrix = GLKMatrix4TranslateWithVector3(_matrix, GLKVector3Negate(p0));
+}
+
+- (void)orbitX:(float)degree y:(float)y z:(float)z{
+	[self orbit:degree p0:GLKVector3Make(0, y, z) p1:GLKVector3Make(1, y, z)];
+}
+
+- (void)orbitY:(float)degree x:(float)x z:(float)z{
+	[self orbit:degree p0:GLKVector3Make(x, 0, z) p1:GLKVector3Make(x, 1, z)];
+}
+
+- (void)orbitZ:(float)degree x:(float)x y:(float)y{
+	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
 }
 
 @end

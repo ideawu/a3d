@@ -3,8 +3,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OpenGL/gl.h>
+#import "a3d.h"
 
-@interface MyOpenGLView : NSOpenGLView
+@interface MyOpenGLView : GNSView
 
 @end

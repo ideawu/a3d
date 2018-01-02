@@ -15,8 +15,10 @@
 - (void)enableOffscreenBuffer;
 - (void)disableOffscreenBuffer;
 
-// 输入参数会被自动转成整数，如果不是偶数，加1变成偶数。
+// 输入width,height参数会被自动转成整数，如果不是偶数，加1变成偶数。
 - (void)setCameraWidth:(float)width height:(float)height;
+- (void)setCameraWidth:(float)width height:(float)height depth:(float)depth;
+- (void)setCameraFovy:(float)fovy width:(float)width height:(float)height depth:(float)depth;
 
 /*
  一般是如下调用顺序，此顺序不能改变：

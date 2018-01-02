@@ -6,12 +6,12 @@
 #import <OpenGL/gl.h>
 #import <GLKit/GLKit.h>
 
-// 在父坐标中的位置
+// 在父坐标中的位置(矩阵中的偏移分量)
 //		GLKVector4 zero = GLKVector4Make(0, 0, 0, 1);
 //		zero = GLKMatrix4MultiplyVector4(_world.camera.matrix, zero);
 //		NSLog(@"\n%@", [NSStringFromGLKVector4(zero) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
-// 获取旋转角度
-//		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(_world.camera.matrix);
+// 获取旋转角度分量
+//		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(matrix);
 //		NSLog(@"quat: %@, angle: %.2f", NSStringFromGLKQuaternion(quat), GLKQuaternionAngle(quat));
 
 
@@ -36,19 +36,29 @@
 - (void)scaleWidth:(float)wRatio height:(float)hRatio depth:(float)dRatio;
 
 
-// 物体在自身坐标上移动
+// 坐标原点在自身坐标方向上移动
 - (void)moveX:(float)xDistance y:(float)yDistance z:(float)zDistance;
 - (void)moveX:(float)distance;
 - (void)moveY:(float)distance;
 - (void)moveZ:(float)distance;
 
-// 物体绕自身的X轴旋转
+// 坐标系绕自身的X轴旋转
 - (void)rotateX:(float)degree;
-// 物体绕自身的Y轴旋转
+// 坐标系绕自身的Y轴旋转
 - (void)rotateY:(float)degree;
-// 物体绕自身的Z轴旋转
+// 坐标系绕自身的Z轴旋转
 - (void)rotateZ:(float)degree;
-// 物体绕自身坐标内的向量(x,y,z)旋转
+// 坐标系绕自身坐标内的向量(x,y,z)旋转
 - (void)rotate:(float)degree x:(float)x y:(float)y z:(float)z;
+
+
+// orbit 是一种轨道运动，将同时改变坐标系的原点位置和各轴的方向。
+
+// 坐标系绕与X轴平行且经过(0,y,z)线旋转
+- (void)orbitX:(float)degree y:(float)y z:(float)z;
+// 坐标系绕与Y轴平行且经过(0,y,z)线旋转
+- (void)orbitY:(float)degree x:(float)x z:(float)z;
+// 坐标系绕与Z轴平行且经过(0,y,z)线旋转
+- (void)orbitZ:(float)degree x:(float)x y:(float)y;
 
 @end

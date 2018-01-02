@@ -7,6 +7,7 @@
 #import <GLKit/GLKit.h>
 #import "GObject.h"
 
+// 对相机坐标系做变换，相当于对世界坐标系做相反的变换
 @interface GCamera : GObject
 
 // 竖直方向的视角

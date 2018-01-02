@@ -72,6 +72,10 @@
 	[self setCameraFovy:_camera.fovy width:width height:height depth:_camera.depth];
 }
 
+- (void)setCameraWidth:(float)width height:(float)height depth:(float)depth{
+	[self setCameraFovy:_camera.fovy width:width height:height depth:depth];
+}
+
 - (void)setupCamera{
 	float width = _camera.width;
 	float height = _camera.height;
@@ -136,7 +140,7 @@
 	glLoadMatrixf((const GLfloat *)&_matrix3d);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
+
 	// 相机不是真正的物体，而是矩阵变换的记录。视野中的物体，将做与相机相反的变换。
 	GLKMatrix4 matrix = GLKMatrix4Invert(_camera.matrix, NULL);
 	glLoadMatrixf((const GLfloat *)&matrix);

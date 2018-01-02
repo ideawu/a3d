@@ -1,8 +1,5 @@
 #import "MyOpenGLView.h"
 #import <GLKit/GLKit.h>
-#import "GWorld.h"
-#import "GImage.h"
-#import "GFrame.h"
 
 @interface MyOpenGLView(){
 	GWorld *_world;
@@ -14,37 +11,13 @@
 
 @implementation MyOpenGLView
 
-- (id)init{
-	self = [super init];
-	return self;
-}
-
-- (id)initWithFrame:(NSRect)frameRect {
-	log_debug(@"%s", __func__);
-	NSOpenGLPixelFormatAttribute attrs[] = {
-		NSOpenGLPFANoRecovery, // Enable automatic use of OpenGL "share" contexts.
-		NSOpenGLPFAColorSize, 24,
-		NSOpenGLPFAAlphaSize, 8,
-		NSOpenGLPFADepthSize, 16,
-		NSOpenGLPFADoubleBuffer,
-		NSOpenGLPFAAccelerated,
-		0
-	};
-	// Create our pixel format.
-	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-	self = [super initWithFrame:frameRect pixelFormat:pixelFormat];
-	return self;
-}
-
 - (void)prepareOpenGL {
 	log_debug(@"%s", __func__);
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
 
 	_world = [[GWorld alloc] init];
-	[_world.camera lookAtX:0 y:0 z:300];
-	[_world.camera moveX:self.bounds.size.width/2];
-	[_world.camera moveY:self.bounds.size.height/2];
+	[_world.camera lookAtX:self.bounds.size.width/2 y:50 z:200];
 
 //	{
 //		NSString *filename = @"/Users/ideawu/Downloads/imgs/camera.jpg";
