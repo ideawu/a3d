@@ -24,6 +24,14 @@
 		3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0E91FFB39DD0005EDDE /* GNSView.m */; };
 		3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0EC1FFB3C160005EDDE /* PrefixHeader.pch */; };
 		3124F0EF1FFB42C20005EDDE /* a3d.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F0C61FFB37F40005EDDE /* a3d.h */; };
+		3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0F71FFB463A0005EDDE /* AppDelegate.m */; };
+		3124F0FA1FFB463A0005EDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3124F0F91FFB463A0005EDDE /* Assets.xcassets */; };
+		3124F0FD1FFB463A0005EDDE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3124F0FB1FFB463A0005EDDE /* MainMenu.xib */; };
+		3124F1001FFB463A0005EDDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0FF1FFB463A0005EDDE /* main.m */; };
+		3124F1091FFB47940005EDDE /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1061FFB47940005EDDE /* TestController.m */; };
+		3124F10A1FFB47940005EDDE /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3124F1071FFB47940005EDDE /* TestController.xib */; };
+		3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */; };
+		3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +65,19 @@
 		3124F0E81FFB39DD0005EDDE /* GNSView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GNSView.h; sourceTree = "<group>"; };
 		3124F0E91FFB39DD0005EDDE /* GNSView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GNSView.m; sourceTree = "<group>"; };
 		3124F0EC1FFB3C160005EDDE /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		3124F0F41FFB463A0005EDDE /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3124F0F61FFB463A0005EDDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3124F0F71FFB463A0005EDDE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3124F0F91FFB463A0005EDDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3124F0FC1FFB463A0005EDDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3124F0FE1FFB463A0005EDDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3124F0FF1FFB463A0005EDDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3124F1011FFB463A0005EDDE /* Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Test.entitlements; sourceTree = "<group>"; };
+		3124F1061FFB47940005EDDE /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
+		3124F1071FFB47940005EDDE /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
+		3124F1081FFB47940005EDDE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
+		3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenGLView.h; sourceTree = "<group>"; };
+		3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOpenGLView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +88,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3124F0F11FFB463A0005EDDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -74,7 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				3124F0C51FFB37F40005EDDE /* a3d */,
+				3124F0F51FFB463A0005EDDE /* Test */,
 				3124F0C41FFB37F40005EDDE /* Products */,
+				3124F10F1FFB48D30005EDDE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				3124F0C31FFB37F40005EDDE /* liba3d.a */,
+				3124F0F41FFB463A0005EDDE /* Test.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +147,48 @@
 				3124F0E91FFB39DD0005EDDE /* GNSView.m */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		3124F0F51FFB463A0005EDDE /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				3124F0F61FFB463A0005EDDE /* AppDelegate.h */,
+				3124F0F71FFB463A0005EDDE /* AppDelegate.m */,
+				3124F1081FFB47940005EDDE /* TestController.h */,
+				3124F1061FFB47940005EDDE /* TestController.m */,
+				3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */,
+				3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */,
+				3124F10B1FFB488E0005EDDE /* xib */,
+				3124F1051FFB469B0005EDDE /* Supporting Files */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		3124F1051FFB469B0005EDDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3124F0FF1FFB463A0005EDDE /* main.m */,
+				3124F0F91FFB463A0005EDDE /* Assets.xcassets */,
+				3124F0FE1FFB463A0005EDDE /* Info.plist */,
+				3124F1011FFB463A0005EDDE /* Test.entitlements */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3124F10B1FFB488E0005EDDE /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				3124F1071FFB47940005EDDE /* TestController.xib */,
+				3124F0FB1FFB463A0005EDDE /* MainMenu.xib */,
+			);
+			name = xib;
+			sourceTree = "<group>";
+		};
+		3124F10F1FFB48D30005EDDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +231,23 @@
 			productReference = 3124F0C31FFB37F40005EDDE /* liba3d.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		3124F0F31FFB463A0005EDDE /* Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3124F1021FFB463A0005EDDE /* Build configuration list for PBXNativeTarget "Test" */;
+			buildPhases = (
+				3124F0F01FFB463A0005EDDE /* Sources */,
+				3124F0F11FFB463A0005EDDE /* Frameworks */,
+				3124F0F21FFB463A0005EDDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test;
+			productName = Test;
+			productReference = 3124F0F41FFB463A0005EDDE /* Test.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -170,6 +261,15 @@
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
+					3124F0F31FFB463A0005EDDE = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 3124F0BE1FFB37F40005EDDE /* Build configuration list for PBXProject "a3d" */;
@@ -178,6 +278,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 3124F0BA1FFB37F40005EDDE;
 			productRefGroup = 3124F0C41FFB37F40005EDDE /* Products */;
@@ -185,9 +286,23 @@
 			projectRoot = "";
 			targets = (
 				3124F0C21FFB37F40005EDDE /* a3d */,
+				3124F0F31FFB463A0005EDDE /* Test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3124F0F21FFB463A0005EDDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3124F10A1FFB47940005EDDE /* TestController.xib in Resources */,
+				3124F0FA1FFB463A0005EDDE /* Assets.xcassets in Resources */,
+				3124F0FD1FFB463A0005EDDE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3124F0BF1FFB37F40005EDDE /* Sources */ = {
@@ -204,7 +319,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3124F0F01FFB463A0005EDDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3124F1001FFB463A0005EDDE /* main.m in Sources */,
+				3124F1091FFB47940005EDDE /* TestController.m in Sources */,
+				3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */,
+				3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3124F0FB1FFB463A0005EDDE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3124F0FC1FFB463A0005EDDE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3124F0CA1FFB37F40005EDDE /* Debug */ = {
@@ -336,6 +473,34 @@
 			};
 			name = Release;
 		};
+		3124F1031FFB463A0005EDDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideawu.a3d.Test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
+			};
+			name = Debug;
+		};
+		3124F1041FFB463A0005EDDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideawu.a3d.Test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -353,6 +518,15 @@
 			buildConfigurations = (
 				3124F0CD1FFB37F40005EDDE /* Debug */,
 				3124F0CE1FFB37F40005EDDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3124F1021FFB463A0005EDDE /* Build configuration list for PBXNativeTarget "Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3124F1031FFB463A0005EDDE /* Debug */,
+				3124F1041FFB463A0005EDDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
