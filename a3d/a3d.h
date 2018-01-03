@@ -13,5 +13,6 @@
 #import "GImage.h"
 
 #import "ui/GNSView.h"
+#import "draft/GDraftScene.h"
 
 #endif

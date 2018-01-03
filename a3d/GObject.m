@@ -5,19 +5,44 @@
 #import "GObject.h"
 
 @interface GObject(){
+	GLKMatrix4 _matrix;
 }
+@property GObject *target;
+@property GLKMatrix4 targetOldMatrix;
 @end
 
 @implementation GObject
 
 - (id)init{
 	self = [super init];
+	_angle = [[GVector3 alloc] init];
 	_matrix = GLKMatrix4MakeTranslation(0, 0, 0);
 	return self;
 }
 
-- (const GLfloat *)glMatrix{
-	return (const GLfloat *)&_matrix;
+- (GLKMatrix4)angleMatrix{
+	GLKMatrix4 mat = _matrix;
+	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(_angle.x));
+	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(_angle.y));
+	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(_angle.z));
+	return mat;
+}
+
+// self.matrix = _matrix * angle * _follow
+- (GLKMatrix4)matrix{
+//	log_debug(@"%f %f %f", _angle.x, _angle.y, _angle.z);
+	GLKMatrix4 mat = [self angleMatrix];
+	if(_target){
+		// p * -p * old * diff * p * -old
+		// = new * p * -old
+		mat = GLKMatrix4Multiply(_target.matrix, mat);
+		mat = GLKMatrix4Multiply(mat, GLKMatrix4Invert(_targetOldMatrix, NULL));
+	}
+	return mat;
+}
+
+- (void)setMatrix:(GLKMatrix4)matrix{
+	_matrix = matrix;
 }
 
 #pragma mark - 物体在坐标系内的变换
@@ -45,6 +70,11 @@
 }
 
 #pragma mark - 物体自身坐标系的变换
+
+- (void)rotateToAngle{
+	_matrix = [self angleMatrix];
+	[_angle reset];
+}
 
 - (void)moveX:(float)x y:(float)y z:(float)z{
 	_matrix = GLKMatrix4Translate(_matrix, x, y, z);
@@ -95,6 +125,22 @@
 
 - (void)orbitZ:(float)degree x:(float)x y:(float)y{
 	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
+}
+
+
+#pragma mark - 物体跟随
+
+- (void)follow:(GObject *)target{
+	_target = target;
+	_targetOldMatrix = target.matrix;
+}
+
+- (void)unfollow{
+	// p * -p * old * diff * p * -old
+	// = new * p * -old
+	_matrix = GLKMatrix4Multiply(_target.matrix, _matrix);
+	_matrix = GLKMatrix4Multiply(_matrix, GLKMatrix4Invert(_targetOldMatrix, NULL));
+	_target = nil;
 }
 
 

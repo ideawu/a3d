@@ -11,7 +11,8 @@
 
 - (void)render{
 	glPushMatrix();
-	glMultMatrixf(self.glMatrix);
+	GLKMatrix4 mat = self.matrix;
+	glMultMatrixf((const GLfloat *)&mat);
 	[self draw];
 	glPopMatrix();
 }

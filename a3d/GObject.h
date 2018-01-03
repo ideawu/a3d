@@ -5,6 +5,7 @@
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/gl.h>
 #import <GLKit/GLKit.h>
+#import "math/GVector3.h"
 
 // 新坐标系原点在父坐标系中的位置，也即父坐标系内的任意点经过变换后，在父坐标系中的位置
 //		GLKVector4 zero = GLKVector4Make(0, 0, 0, 1);
@@ -19,11 +20,15 @@
 //		NSLog(@"quat: %@, angle: %.2f", NSStringFromGLKQuaternion(quat), GLKQuaternionAngle(quat));
 
 
+// GObject=坐标系+坐标系内的物体
 @interface GObject : NSObject
+
+// 物体视角相对于自身坐标系转动的角度
+@property GVector3 *angle;
 
 @property GLKMatrix4 matrix;
 
-// 物体在自身坐标系中的坐标
+// 物体在父坐标系中的坐标
 @property (readonly) float x;
 @property (readonly) float y;
 @property (readonly) float z;
@@ -33,12 +38,13 @@
 @property float height;
 @property float depth;
 
-- (const GLfloat *)glMatrix;
-
 // scale只改变体积，不改变坐标系！
 - (void)scale:(float)ratio;
 - (void)scaleWidth:(float)wRatio height:(float)hRatio depth:(float)dRatio;
+// zoom: 改变坐标系，不改变物体
 
+// 将自身坐标系转向视线方向
+- (void)rotateToAngle;
 
 // 坐标原点在自身坐标方向上移动
 - (void)moveX:(float)xDistance y:(float)yDistance z:(float)zDistance;
@@ -64,5 +70,10 @@
 - (void)orbitY:(float)degree x:(float)x z:(float)z;
 // 坐标系绕与Z轴平行且经过(0,y,z)线旋转
 - (void)orbitZ:(float)degree x:(float)x y:(float)y;
+
+
+// 在父坐标系中跟踪指定物体，始终保持与目标相同的相对角度和相对位置
+- (void)follow:(GObject *)target;
+- (void)unfollow;
 
 @end

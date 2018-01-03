@@ -10,6 +10,7 @@
 	float _rotateY;
 	int _auto_rotate_x;
 	int _auto_rotate_y;
+	GDraftScene *_scene;
 }
 @end
 
@@ -24,8 +25,13 @@
 	_rotateY = 0;
 
 	_world = [[GWorld alloc] init];
-//	[_world.camera moveX:100];
-//	[_world.camera lookAtX:self.bounds.size.width/2 y:50 z:200];
+	_world.width = 10000;
+	_world.height = 10000;
+	_world.depth = 10000;
+	_scene = [[GDraftScene alloc] init];
+	_scene.width = _world.width;
+	_scene.height = _world.height;
+	_scene.depth = _world.depth;
 
 	{
 		NSString *filename = @"/Users/ideawu/Downloads/imgs/camera.jpg";
@@ -62,7 +68,7 @@
 	// 操作前务必要切换上下文
 	[[self openGLContext] makeCurrentContext];
 	log_debug(@"%.2f %.2f", self.bounds.size.width, self.bounds.size.height);
-	[_world setCameraWidth:self.bounds.size.width height:self.bounds.size.height];
+	[_world setCameraWidth:self.bounds.size.width height:self.bounds.size.height depth:self.bounds.size.width*10];
 }
 
 - (void)drawRect:(NSRect)aRect {
@@ -82,10 +88,7 @@
 - (void)draw3D{
 	[_img1 render];
 	[_img2 render];
-	glPushMatrix();
-	glTranslatef(0, 0, 1); // 将坐标轴往远处稍微移一些，在前截面上画的线不会显示
-	[self drawRoom];
-	glPopMatrix();
+	[_scene render];
 }
 
 - (void)draw2D{
@@ -107,57 +110,6 @@
 	glEnd();
 }
 
-- (void)drawRoom{
-	glDisable(GL_LINE_STIPPLE);
-	
-	float size = 10000;
-	int grids = 100;
-	int grid_width = size/grids;
-	for(int i=0; i<=grids; i++){
-		if(i == 0){
-			glLineWidth(1);
-		}else{
-			glLineWidth(0.5);
-		}
-		float v = grid_width * i;
-		
-		// 地板
-		glColor4f(0.5, 0.5, 1, 1);
-		glBegin(GL_LINES);
-		{
-			// x
-			glVertex3f(0, 0, v);
-			glVertex3f(size, 0, v);
-			// z
-			glVertex3f(v, 0, 0);
-			glVertex3f(v, 0, size);
-		}
-		glEnd();
-
-		// 左边墙
-		glColor4f(1, 1, 0.5, 1);
-		glBegin(GL_LINES);
-		{
-			// y
-			glVertex3f(0, 0, v);
-			glVertex3f(0, size, v);
-			// z
-			glVertex3f(0, v, 0);
-			glVertex3f(0, v, size);
-		}
-		glEnd();
-	}
-
-	// 画一条额外的z轴
-	glLineWidth(2);
-	glColor4f(1, 1, 1, 1);
-	glBegin(GL_LINES);
-	{
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, 0, size);
-	}
-	glEnd();
-}
 
 - (void)rotate{
 	log_debug(@"auto rotate");
@@ -212,7 +164,7 @@
 	
 	dx = 90 * dx/(self.bounds.size.width/2);
 	dy = 90 * dy/(self.bounds.size.height/2);
-//	log_debug(@"%f %f", dx, dy);
+	log_debug(@"%f %f", dx, dy);
 
 	_world.camera.angle.x = -dy;
 	_world.camera.angle.y = dx;

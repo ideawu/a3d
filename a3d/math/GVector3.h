@@ -10,4 +10,6 @@
 @property float y;
 @property float z;
 
+- (void)reset;
+
 @end

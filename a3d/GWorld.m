@@ -23,7 +23,6 @@
 	
 	_camera = [[GCamera alloc] init];
 	_camera.fovy = 60;
-	_camera.depth = 10000;
 	
 	_nodes3d = [[NSMutableArray alloc] init];
 	return self;
@@ -69,10 +68,6 @@
 	if(isNew3d){
 		[self setupCamera];
 	}
-}
-
-- (void)setCameraWidth:(float)width height:(float)height{
-	[self setCameraFovy:_camera.fovy width:width height:height depth:_camera.depth];
 }
 
 - (void)setCameraWidth:(float)width height:(float)height depth:(float)depth{
@@ -159,9 +154,6 @@
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
 	}
-	
-	//	glAlphaFunc(GL_GREATER, 0.5);
-	//	glEnable(GL_ALPHA_TEST);
 }
 
 - (void)bind2D{

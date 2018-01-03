@@ -6,4 +6,8 @@
 
 @implementation GVector3
 
+- (void)reset{
+	_x = _y = _z = 0;
+}
+
 @end
