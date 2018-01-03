@@ -12,15 +12,30 @@
 
 @implementation GCamera
 
-// 相机的移动比较特殊，以视线坐标为基准来移动
+// 相机的移动和移动比较特殊，以视线坐标为基准来移动
+
 - (void)moveX:(float)x y:(float)y z:(float)z{
-	[self rotateX:self.angle.x];
-	[self rotateY:self.angle.y];
-	[self rotateZ:self.angle.z];
+	[super rotateZ:self.angle.z];
+	[super rotateY:self.angle.y];
+	[super rotateX:self.angle.x];
+	
 	[super moveX:x y:y z:z];
-	[self rotateZ:-self.angle.z];
-	[self rotateY:-self.angle.y];
-	[self rotateX:-self.angle.x];
+	
+	[super rotateX:-self.angle.x];
+	[super rotateY:-self.angle.y];
+	[super rotateZ:-self.angle.z];
+}
+
+- (void)rotateX:(float)degree{
+	[super rotateZ:self.angle.z];
+	[super rotateY:self.angle.y];
+	[super rotateX:self.angle.x];
+	
+	[super rotateX:degree];
+	
+	[super rotateX:-self.angle.x];
+	[super rotateY:-self.angle.y];
+	[super rotateZ:-self.angle.z];
 }
 
 // 相机绕Y轴的旋转比较特殊，始终保持相机与父坐标系Y轴的角度
@@ -40,6 +55,18 @@
 	self.matrix = mat;
 	
 	self.angle = angle;
+}
+
+- (void)rotateZ:(float)degree{
+	[super rotateZ:self.angle.z];
+	[super rotateY:self.angle.y];
+	[super rotateX:self.angle.x];
+	
+	[super rotateZ:degree];
+	
+	[super rotateX:-self.angle.x];
+	[super rotateY:-self.angle.y];
+	[super rotateZ:-self.angle.z];
 }
 
 @end
