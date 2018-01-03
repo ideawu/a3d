@@ -20,6 +20,10 @@
 	return self;
 }
 
+- (GLKMatrix4)baseMatrix{
+	return _matrix;
+}
+
 - (GLKMatrix4)angleMatrix{
 	GLKMatrix4 mat = _matrix;
 	// 注意顺序，我们要求如果不旋转z轴时，x轴应该保持在x-z平面上，所以先旋转y轴再旋转x轴。

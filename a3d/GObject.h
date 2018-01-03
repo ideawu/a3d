@@ -28,7 +28,7 @@
 
 @property GLKMatrix4 matrix;
 
-// 物体在父坐标系中的坐标
+// 物体在父坐标系中的坐标(不随follow即时更新，unfollow后才更新)
 @property (readonly) float x;
 @property (readonly) float y;
 @property (readonly) float z;
@@ -43,6 +43,7 @@
 - (void)scaleWidth:(float)wRatio height:(float)hRatio depth:(float)dRatio;
 // zoom: 改变坐标系，不改变物体
 
+- (GLKMatrix4)baseMatrix;
 - (GLKMatrix4)angleMatrix;
 // 将自身坐标系转向视线方向
 - (void)rotateToAngle;
