@@ -4,6 +4,11 @@
 
 #import "GNSView.h"
 
+@interface GNSView(){
+	NSTrackingArea *_trackingArea;
+}
+@end
+
 @implementation GNSView
 
 - (id)init{
@@ -25,6 +30,19 @@
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	self = [super initWithFrame:frameRect pixelFormat:pixelFormat];
 	return self;
+}
+
+- (void)updateTrackingAreas{
+	if(!_trackingArea){
+		[self removeTrackingArea:_trackingArea];
+	}
+	NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect |
+									 NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved);
+	_trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
+												 options:options
+												   owner:self
+												userInfo:nil];
+	[self addTrackingArea:_trackingArea];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

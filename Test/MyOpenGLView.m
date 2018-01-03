@@ -6,7 +6,6 @@
 	GImage *_img1;
 	GImage *_img2;
 	GImage *_camera;
-	NSTrackingArea *_trackingArea;
 	float _rotateX;
 	float _rotateY;
 	int _auto_rotate_x;
@@ -160,19 +159,6 @@
 	glEnd();
 }
 
-- (void)updateTrackingAreas{
-	if(!_trackingArea){
-		[self removeTrackingArea:_trackingArea];
-	}
-	NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect |
-									 NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved);
-	_trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
-												 options:options
-												   owner:self
-												userInfo:nil];
-	[self addTrackingArea:_trackingArea];
-}
-
 - (void)rotate{
 	log_debug(@"auto rotate");
 	[_world.camera rotateX:-_rotateX];
@@ -293,14 +279,6 @@
 	[_world.camera moveZ:dz];
 //	log_debug(@"%f %f %f", dx, dy, dz);
 	[self setNeedsDisplay:YES];
-
-	{
-//		GLKVector4 zero = GLKVector4Make(0, 0, 0, 1);
-//		zero = GLKMatrix4MultiplyVector4(_world.camera.matrix, zero);
-//		NSLog(@"\n%@", [NSStringFromGLKVector4(zero) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
-//		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(_world.camera.matrix);
-//		NSLog(@"quat: %@, angle: %.2f", NSStringFromGLKQuaternion(quat), GLKQuaternionAngle(quat));
-	}
 }
 @end
 
