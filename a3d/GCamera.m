@@ -11,6 +11,18 @@
 @end
 
 @implementation GCamera
+
+// 相机的移动比较特殊，以视线坐标为基准来移动
+- (void)moveX:(float)x y:(float)y z:(float)z{
+	[self rotateX:self.angle.x];
+	[self rotateY:self.angle.y];
+	[self rotateZ:self.angle.z];
+	[super moveX:x y:y z:z];
+	[self rotateZ:-self.angle.z];
+	[self rotateY:-self.angle.y];
+	[self rotateX:-self.angle.x];
+}
+
 // 相机绕Y轴的旋转比较特殊，始终保持相机与父坐标系Y轴的角度
 - (void)rotateY:(float)degree{
 	GVector3 *angle = self.angle;

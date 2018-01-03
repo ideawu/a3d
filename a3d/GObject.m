@@ -79,6 +79,7 @@
 - (void)moveX:(float)x y:(float)y z:(float)z{
 	_matrix = GLKMatrix4Translate(_matrix, x, y, z);
 }
+
 - (void)moveX:(float)distance{
 	[self moveX:distance y:0 z:0];
 }
@@ -90,6 +91,9 @@
 - (void)moveZ:(float)distance{
 	[self moveX:0 y:0 z:distance];
 }
+
+// 旋转的顺序有关系，此函数有歧义
+//- (void)rotateX:(float)xDegree y:(float)yDegree z:(float)zDegree
 
 - (void)rotateX:(float)degree{
 	_matrix = GLKMatrix4RotateX(_matrix, GLKMathDegreesToRadians(degree));
