@@ -6,6 +6,8 @@
 
 @interface GCamera(){
 }
+@property GObject *target;
+@property GLKMatrix4 targetOriginMatrix;
 @end
 
 @implementation GCamera
@@ -25,10 +27,15 @@
 	GLKMatrix4 mat = self.matrix;
 	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(mat);
 	GLKQuaternion quat_i = GLKQuaternionInvert(quat);
+	// 进入旋转轴的坐标系(旋转轴位于父坐标系内)
 	mat = GLKMatrix4Translate(mat, _lookAt.x, _lookAt.y, _lookAt.z);
+	// 与旋转轴坐标系重合
 	mat = GLKMatrix4Multiply(mat, GLKMatrix4MakeWithQuaternion(quat_i));
+	// 旋转
 	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
+	// 与旋转轴坐标系逆重合
 	mat = GLKMatrix4Multiply(mat, GLKMatrix4MakeWithQuaternion(quat));
+	// 退出旋转轴的坐标系
 	mat = GLKMatrix4Translate(mat, -_lookAt.x, -_lookAt.y, -_lookAt.z);
 	self.matrix = mat;
 }

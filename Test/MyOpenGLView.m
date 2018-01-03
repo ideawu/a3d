@@ -6,6 +6,11 @@
 	GImage *_img1;
 	GImage *_img2;
 	GImage *_camera;
+	NSTrackingArea *_trackingArea;
+	float _rotateX;
+	float _rotateY;
+	int _auto_rotate_x;
+	int _auto_rotate_y;
 }
 @end
 
@@ -15,15 +20,18 @@
 	log_debug(@"%s", __func__);
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
+	
+	_rotateX = 0;
+	_rotateY = 0;
 
 	_world = [[GWorld alloc] init];
-	[_world.camera lookAtX:self.bounds.size.width/2 y:50 z:200];
+//	[_world.camera lookAtX:self.bounds.size.width/2 y:50 z:200];
 
-//	{
-//		NSString *filename = @"/Users/ideawu/Downloads/imgs/camera.jpg";
-//		_camera = [[GImage alloc] initWithContentsOfFile:filename];
-//		[_camera scale:0.1];
-//	}
+	{
+		NSString *filename = @"/Users/ideawu/Downloads/imgs/camera.jpg";
+		_camera = [[GImage alloc] initWithContentsOfFile:filename];
+		[_camera scale:0.1];
+	}
 
 	{
 		NSString *filename = @"/Users/ideawu/Downloads/imgs/1.jpg";
@@ -153,6 +161,82 @@
 		glVertex3f(0, 0, size);
 	}
 	glEnd();
+}
+
+- (void)updateTrackingAreas{
+	if(!_trackingArea){
+		[self removeTrackingArea:_trackingArea];
+	}
+	NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect |
+									 NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved);
+	_trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
+												 options:options
+												   owner:self
+												userInfo:nil];
+	[self addTrackingArea:_trackingArea];
+}
+
+- (void)rotate{
+	log_debug(@"auto rotate");
+	[_world.camera rotateX:-_rotateX];
+	[_world.camera rotateY:-_rotateY];
+	if(_rotateX){
+		_rotateX += _auto_rotate_x * 5;
+	}
+	if(_rotateY){
+		_rotateY += _auto_rotate_y * 5;
+	}
+	[_world.camera rotateX:_rotateX];
+	[_world.camera rotateY:_rotateY];
+	[self setNeedsDisplay:YES];
+}
+
+- (void)mouseMoved:(NSEvent *)event{
+	static NSTimer *_rotateDetectTimer = nil;
+	if(!_rotateDetectTimer){
+		_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+			[self rotate];
+		}];
+		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
+	}
+	
+	NSPoint pos = [event locationInWindow];
+	pos = [self convertPoint:pos fromView:nil];
+//	log_debug(@"%f %f", pos.x, pos.y);
+	float dx, dy;
+	float mx = self.bounds.size.width/2;
+	float my = self.bounds.size.height/2;
+	dx = pos.x - mx;
+	dy = pos.y - my;
+	
+		if(fabs(dx) > self.bounds.size.width/2 - 20){
+			_auto_rotate_y = (int)dx/fabs(dx);
+		}else{
+			_auto_rotate_y = 0;
+		}
+		if(fabs(dy) > self.bounds.size.height/2 - 20){
+			_auto_rotate_x = (int)dy/fabs(dy);
+		}else{
+			_auto_rotate_x = 0;
+		}
+		if(_auto_rotate_x || _auto_rotate_y){
+			log_debug(@"%f %f", _auto_rotate_y, _auto_rotate_x);
+			[_rotateDetectTimer setFireDate:[NSDate date]];
+			return;
+		}else{
+			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
+		}
+	
+	float angle_x = -dy;
+	float angle_y = dx;
+
+//	[_world.camera rotateX:-_rotateX];
+	[_world.camera rotateY:-_rotateY];
+//	[_world.camera rotateX:_rotateX];
+	[_world.camera rotateY:_rotateY + angle_y];
+	[self setNeedsDisplay:YES];
+	
+//	log_debug(@"%f %f", dx, dy);
 }
 
 - (void)mouseDown:(NSEvent *)event{

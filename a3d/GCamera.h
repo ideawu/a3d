@@ -2,13 +2,10 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <OpenGL/gl.h>
-#import <GLKit/GLKit.h>
-#import "GObject.h"
+#import "GObserver.h"
 
-// 对相机坐标系做变换，相当于对世界坐标系做相反的变换
-@interface GCamera : GObject
+// 相机是虚拟的物体，只表示坐标系。对相机坐标系做变换，相当于对世界坐标系做相反的变换
+@interface GCamera : GObserver
 
 // 竖直方向的视角
 @property float fovy;

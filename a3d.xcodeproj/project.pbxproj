@@ -32,6 +32,8 @@
 		3124F10A1FFB47940005EDDE /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3124F1071FFB47940005EDDE /* TestController.xib */; };
 		3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */; };
 		3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
+		3124F11B1FFC8F770005EDDE /* GObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1191FFC8F770005EDDE /* GObserver.h */; };
+		3124F11C1FFC8F770005EDDE /* GObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F11A1FFC8F770005EDDE /* GObserver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +80,8 @@
 		3124F1081FFB47940005EDDE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenGLView.h; sourceTree = "<group>"; };
 		3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOpenGLView.m; sourceTree = "<group>"; };
+		3124F1191FFC8F770005EDDE /* GObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GObserver.h; sourceTree = "<group>"; };
+		3124F11A1FFC8F770005EDDE /* GObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GObserver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,10 +131,12 @@
 				3124F0D51FFB38A40005EDDE /* GWorld.m */,
 				3124F0D41FFB38A40005EDDE /* GFrame.h */,
 				3124F0D21FFB38A40005EDDE /* GFrame.m */,
-				3124F0D71FFB38A40005EDDE /* GCamera.h */,
-				3124F0DA1FFB38A40005EDDE /* GCamera.m */,
 				3124F0D81FFB38A40005EDDE /* GObject.h */,
 				3124F0D31FFB38A40005EDDE /* GObject.m */,
+				3124F1191FFC8F770005EDDE /* GObserver.h */,
+				3124F11A1FFC8F770005EDDE /* GObserver.m */,
+				3124F0D71FFB38A40005EDDE /* GCamera.h */,
+				3124F0DA1FFB38A40005EDDE /* GCamera.m */,
 				3124F0D61FFB38A40005EDDE /* GNode.h */,
 				3124F0D11FFB38A40005EDDE /* GNode.m */,
 				3124F0D91FFB38A40005EDDE /* GImage.h */,
@@ -198,6 +204,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3124F11B1FFC8F770005EDDE /* GObserver.h in Headers */,
 				3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */,
 				3124F0E01FFB38A40005EDDE /* GFrame.h in Headers */,
 				3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */,
@@ -309,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3124F11C1FFC8F770005EDDE /* GObserver.m in Sources */,
 				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
 				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
 				3124F0DE1FFB38A40005EDDE /* GFrame.m in Sources */,

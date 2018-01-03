@@ -2,7 +2,6 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "GObject.h"
 
 /*

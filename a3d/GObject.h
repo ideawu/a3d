@@ -6,9 +6,13 @@
 #import <OpenGL/gl.h>
 #import <GLKit/GLKit.h>
 
-// 在父坐标中的位置(矩阵中的偏移分量)
+// 新坐标系原点在父坐标系中的位置，也即父坐标系内的任意点经过变换后，在父坐标系中的位置
 //		GLKVector4 zero = GLKVector4Make(0, 0, 0, 1);
-//		zero = GLKMatrix4MultiplyVector4(_world.camera.matrix, zero);
+//		zero = GLKMatrix4MultiplyVector4(matrix, zero);
+//		NSLog(@"\n%@", [NSStringFromGLKVector4(zero) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
+// 父坐标系内的任意点，在新坐标系中的位置
+//		GLKVector4 pos = GLKVector4Make(x, y, z, 1);
+//		pos = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(matrix), pos);
 //		NSLog(@"\n%@", [NSStringFromGLKVector4(zero) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
 // 获取旋转角度分量
 //		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(matrix);
