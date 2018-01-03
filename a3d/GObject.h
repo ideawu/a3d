@@ -43,6 +43,7 @@
 - (void)scaleWidth:(float)wRatio height:(float)hRatio depth:(float)dRatio;
 // zoom: 改变坐标系，不改变物体
 
+- (GLKMatrix4)angleMatrix;
 // 将自身坐标系转向视线方向
 - (void)rotateToAngle;
 
