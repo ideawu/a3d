@@ -20,6 +20,7 @@
 }
 
 // GObject 的 matrix 方法被重写
+// self.matrix = _matrix * angle * _follow
 - (GLKMatrix4)matrix{
 	GLKMatrix4 mat = super.matrix; // 注意是 super
 	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(_angle.x));
@@ -32,6 +33,13 @@
 		mat = GLKMatrix4Multiply(mat, GLKMatrix4Invert(_targetOldMatrix, NULL));
 	}
 	return mat;
+}
+
+- (void)setMatrix:(GLKMatrix4)matrix{
+	super.matrix = matrix;
+//	_angle.x = 0;
+//	_angle.y = 0;
+//	_angle.z = 0;
 }
 
 #pragma mark - 目标跟随

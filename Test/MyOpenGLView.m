@@ -223,7 +223,7 @@
 		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
 	}
 	
-	_world.camera.angle.x = dy;
+	_world.camera.angle.x = -dy;
 	_world.camera.angle.y = dx;
 
 
