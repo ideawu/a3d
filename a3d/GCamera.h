@@ -9,9 +9,9 @@
 
 // 竖直方向的视角
 @property float fovy;
-// 视觉的焦点坐标
-@property GLKVector3 lookAt;
-
-- (void)lookAtX:(float)x y:(float)y z:(float)z;
+//// 视觉的焦点坐标
+//@property GLKVector3 lookAt;
+//
+//- (void)lookAtX:(float)x y:(float)y z:(float)z;
 
 @end

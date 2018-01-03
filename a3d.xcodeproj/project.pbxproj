@@ -34,6 +34,8 @@
 		3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 		3124F11B1FFC8F770005EDDE /* GObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1191FFC8F770005EDDE /* GObserver.h */; };
 		3124F11C1FFC8F770005EDDE /* GObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F11A1FFC8F770005EDDE /* GObserver.m */; };
+		3124F1201FFC95A00005EDDE /* GVector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F11E1FFC95A00005EDDE /* GVector3.h */; };
+		3124F1211FFC95A00005EDDE /* GVector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F11F1FFC95A00005EDDE /* GVector3.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +84,8 @@
 		3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOpenGLView.m; sourceTree = "<group>"; };
 		3124F1191FFC8F770005EDDE /* GObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GObserver.h; sourceTree = "<group>"; };
 		3124F11A1FFC8F770005EDDE /* GObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GObserver.m; sourceTree = "<group>"; };
+		3124F11E1FFC95A00005EDDE /* GVector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GVector3.h; sourceTree = "<group>"; };
+		3124F11F1FFC95A00005EDDE /* GVector3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GVector3.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				3124F0E71FFB396A0005EDDE /* ui */,
+				3124F11D1FFC957A0005EDDE /* math */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
 				3124F0CF1FFB38A40005EDDE /* GWorld.h */,
 				3124F0D51FFB38A40005EDDE /* GWorld.m */,
@@ -197,6 +202,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3124F11D1FFC957A0005EDDE /* math */ = {
+			isa = PBXGroup;
+			children = (
+				3124F11E1FFC95A00005EDDE /* GVector3.h */,
+				3124F11F1FFC95A00005EDDE /* GVector3.m */,
+			);
+			path = math;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -211,6 +225,7 @@
 				3124F0E51FFB38A40005EDDE /* GImage.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				3124F0E21FFB38A40005EDDE /* GNode.h in Headers */,
+				3124F1201FFC95A00005EDDE /* GVector3.h in Headers */,
 				3124F0DB1FFB38A40005EDDE /* GWorld.h in Headers */,
 				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
@@ -322,6 +337,7 @@
 				3124F0DE1FFB38A40005EDDE /* GFrame.m in Sources */,
 				3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */,
 				3124F0E11FFB38A40005EDDE /* GWorld.m in Sources */,
+				3124F1211FFC95A00005EDDE /* GVector3.m in Sources */,
 				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,
 				3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */,
 			);

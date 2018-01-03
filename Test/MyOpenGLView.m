@@ -80,10 +80,6 @@
 }
 
 - (void)draw3D{
-	_camera.matrix = _world.camera.matrix;
-	[_camera moveX:_world.camera.lookAt.x y:_world.camera.lookAt.y z:_world.camera.lookAt.z];
-	[_camera render];
-
 	[_img1 render];
 	[_img2 render];
 	glPushMatrix();
@@ -209,61 +205,31 @@
 	dx = pos.x - mx;
 	dy = pos.y - my;
 	
-		if(fabs(dx) > self.bounds.size.width/2 - 20){
-			_auto_rotate_y = (int)dx/fabs(dx);
-		}else{
-			_auto_rotate_y = 0;
-		}
-		if(fabs(dy) > self.bounds.size.height/2 - 20){
-			_auto_rotate_x = (int)dy/fabs(dy);
-		}else{
-			_auto_rotate_x = 0;
-		}
-		if(_auto_rotate_x || _auto_rotate_y){
-			log_debug(@"%f %f", _auto_rotate_y, _auto_rotate_x);
-			[_rotateDetectTimer setFireDate:[NSDate date]];
-			return;
-		}else{
-			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
-		}
+	if(fabs(dx) > self.bounds.size.width/2 - 20){
+		_auto_rotate_y = (int)dx/fabs(dx);
+	}else{
+		_auto_rotate_y = 0;
+	}
+	if(fabs(dy) > self.bounds.size.height/2 - 20){
+		_auto_rotate_x = (int)dy/fabs(dy);
+	}else{
+		_auto_rotate_x = 0;
+	}
+	if(_auto_rotate_x || _auto_rotate_y){
+		log_debug(@"%f %f", _auto_rotate_y, _auto_rotate_x);
+		[_rotateDetectTimer setFireDate:[NSDate date]];
+		return;
+	}else{
+		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
+	}
 	
-	float angle_x = -dy;
-	float angle_y = dx;
+	_world.camera.angle.x = dy;
+	_world.camera.angle.y = dx;
 
-//	[_world.camera rotateX:-_rotateX];
-	[_world.camera rotateY:-_rotateY];
-//	[_world.camera rotateX:_rotateX];
-	[_world.camera rotateY:_rotateY + angle_y];
+
 	[self setNeedsDisplay:YES];
 	
 //	log_debug(@"%f %f", dx, dy);
-}
-
-- (void)mouseDown:(NSEvent *)event{
-	BOOL dragging = YES;
-	NSPoint windowPoint;
-	NSPoint lastWindowPoint = [event locationInWindow];
-	float dx, dy;
-	
-	while (dragging) {
-		event = [self.window nextEventMatchingMask:NSLeftMouseUpMask | NSLeftMouseDraggedMask];
-		windowPoint = [event locationInWindow];
-		switch ([event type]) {
-			case NSLeftMouseUp:
-				dragging = NO;
-				break;
-			case NSLeftMouseDragged:
-				dx = windowPoint.x - lastWindowPoint.x;
-				dy = windowPoint.y - lastWindowPoint.y;
-				lastWindowPoint = windowPoint;
-				[_world.camera rotateX:-dy];
-				[_world.camera rotateY:dx];
-				[self setNeedsDisplay:YES];
-				break;
-			default:
-				break;
-		}
-	}
 }
 
 - (BOOL)acceptsFirstResponder{

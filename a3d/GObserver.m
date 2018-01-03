@@ -13,6 +13,12 @@
 
 @implementation GObserver
 
+- (id)init{
+	self = [super init];
+	_angle = [[GVector3 alloc] init];
+	return self;
+}
+
 // GObject 的 matrix 方法被重写
 - (GLKMatrix4)matrix{
 	GLKMatrix4 mat = super.matrix; // 注意是 super

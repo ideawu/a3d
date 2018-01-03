@@ -12,15 +12,15 @@
 
 @implementation GCamera
 
-- (void)lookAtX:(float)x y:(float)y z:(float)z{
-	_lookAt.x = x;
-	_lookAt.y = y;
-	_lookAt.z = z;
-}
-
-- (void)rotateX:(float)degree{
-	[self orbitX:degree y:_lookAt.y z:_lookAt.z];
-}
+//- (void)lookAtX:(float)x y:(float)y z:(float)z{
+//	_lookAt.x = x;
+//	_lookAt.y = y;
+//	_lookAt.z = z;
+//}
+//
+//- (void)rotateX:(float)degree{
+//	[self orbitX:degree y:_lookAt.y z:_lookAt.z];
+//}
 
 // 相机绕Y轴的旋转比较特殊，始终保持相机与父坐标系Y轴的角度
 - (void)rotateY:(float)degree{
@@ -28,7 +28,7 @@
 	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(mat);
 	GLKQuaternion quat_i = GLKQuaternionInvert(quat);
 	// 进入旋转轴的坐标系(旋转轴位于父坐标系内)
-	mat = GLKMatrix4Translate(mat, _lookAt.x, _lookAt.y, _lookAt.z);
+//	mat = GLKMatrix4Translate(mat, _lookAt.x, _lookAt.y, _lookAt.z);
 	// 与旋转轴坐标系重合
 	mat = GLKMatrix4Multiply(mat, GLKMatrix4MakeWithQuaternion(quat_i));
 	// 旋转
@@ -36,12 +36,12 @@
 	// 与旋转轴坐标系逆重合
 	mat = GLKMatrix4Multiply(mat, GLKMatrix4MakeWithQuaternion(quat));
 	// 退出旋转轴的坐标系
-	mat = GLKMatrix4Translate(mat, -_lookAt.x, -_lookAt.y, -_lookAt.z);
+//	mat = GLKMatrix4Translate(mat, -_lookAt.x, -_lookAt.y, -_lookAt.z);
 	self.matrix = mat;
 }
 
-- (void)rotateZ:(float)degree{
-	[self orbitZ:degree x:_lookAt.x y:_lookAt.y];
-}
+//- (void)rotateZ:(float)degree{
+//	[self orbitZ:degree x:_lookAt.x y:_lookAt.y];
+//}
 
 @end
