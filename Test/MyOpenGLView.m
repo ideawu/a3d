@@ -25,6 +25,7 @@
 	_rotateY = 0;
 
 	_world = [[GWorld alloc] init];
+//	[_world.camera moveX:100];
 //	[_world.camera lookAtX:self.bounds.size.width/2 y:50 z:200];
 
 	{
@@ -223,6 +224,10 @@
 		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
 	}
 	
+	dx = 90 * dx/(self.bounds.size.width/2);
+	dy = 90 * dy/(self.bounds.size.height/2);
+//	log_debug(@"%f %f", dx, dy);
+
 	_world.camera.angle.x = -dy;
 	_world.camera.angle.y = dx;
 
