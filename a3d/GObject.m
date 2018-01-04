@@ -5,63 +5,49 @@
 #import "GObject.h"
 
 @interface GObject(){
-	GLKMatrix4 _matrix;
 }
-@property GObject *target;
-@property GLKMatrix4 targetOldMatrix;
+@property GObject *parent;
 @end
 
 @implementation GObject
 
 - (id)init{
 	self = [super init];
-	_angle = [[GVector3 alloc] init];
-	_matrix = GLKMatrix4MakeTranslation(0, 0, 0);
+	_localMatrix = GLKMatrix4MakeTranslation(0, 0, 0);
 	return self;
 }
 
-- (GLKMatrix4)baseMatrix{
-	return _matrix;
-}
-
-- (GLKMatrix4)angleMatrix{
-	GLKMatrix4 mat = _matrix;
-	// 注意顺序，我们要求如果不旋转z轴时，x轴应该保持在x-z平面上，所以先旋转y轴再旋转x轴。
-	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(_angle.z));
-	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(_angle.y));
-	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(_angle.x));
-	return mat;
-}
-
-// self.matrix = _matrix * angle * _follow
 - (GLKMatrix4)matrix{
-//	log_debug(@"%f %f %f", _angle.x, _angle.y, _angle.z);
-	GLKMatrix4 mat = [self angleMatrix];
-	if(_target){
-		// p * -p * old * diff * p * -old
-		// = new * p * -old
-		mat = GLKMatrix4Multiply(_target.matrix, mat);
-		mat = GLKMatrix4Multiply(mat, GLKMatrix4Invert(_targetOldMatrix, NULL));
+	GLKMatrix4 mat = _localMatrix;
+	if(_parent){
+		mat = GLKMatrix4Multiply(mat, GLKMatrix4Invert(_parent.matrix, NULL));
 	}
 	return mat;
 }
 
-- (void)setMatrix:(GLKMatrix4)matrix{
-	_matrix = matrix;
+#pragma mark - 物体跟随
+
+- (void)follow:(GObject *)target{
+	_parent = target;
+}
+
+- (void)unfollow{
+	_localMatrix = self.matrix;
+	_parent = nil;
 }
 
 #pragma mark - 物体在坐标系内的变换
 
 - (float)x{
-	return _matrix.m30;
+	return _localMatrix.m30;
 }
 
 - (float)y{
-	return _matrix.m31;
+	return _localMatrix.m31;
 }
 
 - (float)z{
-	return _matrix.m32;
+	return _localMatrix.m32;
 }
 
 - (void)scale:(float)ratio{
@@ -76,13 +62,8 @@
 
 #pragma mark - 物体自身坐标系的变换
 
-- (void)rotateToAngle{
-	_matrix = [self angleMatrix];
-	[_angle reset];
-}
-
 - (void)moveX:(float)x y:(float)y z:(float)z{
-	_matrix = GLKMatrix4Translate(_matrix, x, y, z);
+	_localMatrix = GLKMatrix4Translate(_localMatrix, x, y, z);
 }
 
 - (void)moveX:(float)distance{
@@ -101,27 +82,27 @@
 //- (void)rotateX:(float)xDegree y:(float)yDegree z:(float)zDegree
 
 - (void)rotateX:(float)degree{
-	_matrix = GLKMatrix4RotateX(_matrix, GLKMathDegreesToRadians(degree));
+	_localMatrix = GLKMatrix4RotateX(_localMatrix, GLKMathDegreesToRadians(degree));
 }
 
 - (void)rotateY:(float)degree{
-	_matrix = GLKMatrix4RotateY(_matrix, GLKMathDegreesToRadians(degree));
+	_localMatrix = GLKMatrix4RotateY(_localMatrix, GLKMathDegreesToRadians(degree));
 }
 
 - (void)rotateZ:(float)degree{
-	_matrix = GLKMatrix4RotateZ(_matrix, GLKMathDegreesToRadians(degree));
+	_localMatrix = GLKMatrix4RotateZ(_localMatrix, GLKMathDegreesToRadians(degree));
 }
 
 - (void)rotate:(float)degree x:(float)x y:(float)y z:(float)z{
-	_matrix = GLKMatrix4Rotate(_matrix, GLKMathDegreesToRadians(degree), x, y, z);
+	_localMatrix = GLKMatrix4Rotate(_localMatrix, GLKMathDegreesToRadians(degree), x, y, z);
 }
 
 // 绕自身坐标系内的任意轴(p0->p1)旋转
 - (void)orbit:(float)degree p0:(GLKVector3)p0 p1:(GLKVector3)p1{
 	GLKVector3 vec = GLKVector3Subtract(p1, p0);
-	_matrix = GLKMatrix4TranslateWithVector3(_matrix, p0);
-	_matrix = GLKMatrix4RotateWithVector3(_matrix, GLKMathDegreesToRadians(degree), vec);
-	_matrix = GLKMatrix4TranslateWithVector3(_matrix, GLKVector3Negate(p0));
+	_localMatrix = GLKMatrix4TranslateWithVector3(_localMatrix, p0);
+	_localMatrix = GLKMatrix4RotateWithVector3(_localMatrix, GLKMathDegreesToRadians(degree), vec);
+	_localMatrix = GLKMatrix4TranslateWithVector3(_localMatrix, GLKVector3Negate(p0));
 }
 
 - (void)orbitX:(float)degree y:(float)y z:(float)z{
@@ -136,21 +117,6 @@
 	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
 }
 
-
-#pragma mark - 物体跟随
-
-- (void)follow:(GObject *)target{
-	_target = target;
-	_targetOldMatrix = target.matrix;
-}
-
-- (void)unfollow{
-	// p * -p * old * diff * p * -old
-	// = new * p * -old
-	_matrix = GLKMatrix4Multiply(_target.matrix, _matrix);
-	_matrix = GLKMatrix4Multiply(_matrix, GLKMatrix4Invert(_targetOldMatrix, NULL));
-	_target = nil;
-}
 
 
 @end

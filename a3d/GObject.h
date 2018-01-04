@@ -5,28 +5,25 @@
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/gl.h>
 #import <GLKit/GLKit.h>
-#import "math/GVector3.h"
 
 // 新坐标系原点在父坐标系中的位置，也即父坐标系内的任意点经过变换后，在父坐标系中的位置
 //		GLKVector4 zero = GLKVector4Make(0, 0, 0, 1);
 //		zero = GLKMatrix4MultiplyVector4(matrix, zero);
-//		NSLog(@"\n%@", [NSStringFromGLKVector4(zero) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
 // 父坐标系内的任意点，在新坐标系中的位置
-//		GLKVector4 pos = GLKVector4Make(x, y, z, 1);
 //		pos = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(matrix), pos);
-//		NSLog(@"\n%@", [NSStringFromGLKVector4(zero) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
 // 获取旋转角度分量
 //		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(matrix);
-//		NSLog(@"quat: %@, angle: %.2f", NSStringFromGLKQuaternion(quat), GLKQuaternionAngle(quat));
+// 将同一世界内的某坐标系移到另一坐标系内，可用于物体跟随
+//		GLKMatrix4Multiply(A, GLKMatrix4Invert(B));
 
 
 // GObject=坐标系+坐标系内的物体
 @interface GObject : NSObject
 
-// 物体视角相对于自身坐标系转动的角度
-@property GVector3 *angle;
-
-@property GLKMatrix4 matrix;
+// 物体在世界中的坐标系，当物体直接放于世界中是，matrix=localMatrix
+@property (readonly) GLKMatrix4 matrix;
+// 物体自身的坐标系，当物体跟随其它物体时（也即处于其它物体的坐标系内），matrix != localMatrix
+@property GLKMatrix4 localMatrix;
 
 // 物体在父坐标系中的坐标(不随follow即时更新，unfollow后才更新)
 @property (readonly) float x;
@@ -43,10 +40,6 @@
 - (void)scaleWidth:(float)wRatio height:(float)hRatio depth:(float)dRatio;
 // zoom: 改变坐标系，不改变物体
 
-- (GLKMatrix4)baseMatrix;
-- (GLKMatrix4)angleMatrix;
-// 将自身坐标系转向视线方向
-- (void)rotateToAngle;
 
 // 坐标原点在自身坐标方向上移动
 - (void)moveX:(float)xDistance y:(float)yDistance z:(float)zDistance;

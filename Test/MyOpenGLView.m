@@ -229,7 +229,7 @@
 	[_world.camera moveX:dx];
 	[_world.camera moveY:dy];
 	[_world.camera moveZ:dz];
-//	log_debug(@"%f %f %f", dx, dy, dz);
+	log_debug(@"%f %f %f", dx, dy, dz);
 	[self setNeedsDisplay:YES];
 }
 @end
