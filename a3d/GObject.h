@@ -15,15 +15,15 @@
 //		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(matrix);
 // 将同一世界内的某坐标系移到另一坐标系内，可用于物体跟随
 //		GLKMatrix4Multiply(A, GLKMatrix4Invert(B));
+// 将某坐标系移到另一坐标系外面
+//		GLKMatrix4Multiply(A, B);
 
 
 // GObject=坐标系+坐标系内的物体
 @interface GObject : NSObject
 
-// 物体在世界中的坐标系，当物体直接放于世界中是，matrix=localMatrix
-@property (readonly) GLKMatrix4 matrix;
-// 物体自身的坐标系，当物体跟随其它物体时（也即处于其它物体的坐标系内），matrix != localMatrix
-@property GLKMatrix4 localMatrix;
+// 物体在世界中的坐标系
+@property GLKMatrix4 matrix;
 
 @property GAngle *angle;
 
@@ -67,10 +67,5 @@
 - (void)orbitY:(float)degree x:(float)x z:(float)z;
 // 坐标系绕与Z轴平行且经过(0,y,z)线旋转
 - (void)orbitZ:(float)degree x:(float)x y:(float)y;
-
-
-// 在父坐标系中跟踪指定物体，始终保持与目标相同的相对角度和相对位置
-- (void)follow:(GObject *)target;
-- (void)unfollow;
 
 @end

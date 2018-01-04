@@ -12,4 +12,10 @@
 // 竖直方向的视角
 @property float fovy;
 
+- (GLKMatrix4)bodyMatrix;
+
+// 在父坐标系中跟踪指定物体，始终保持与目标相同的相对角度和相对位置
+- (void)follow:(GObject *)target;
+- (void)unfollow;
+
 @end

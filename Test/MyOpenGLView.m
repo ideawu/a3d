@@ -12,6 +12,7 @@
 	int _auto_rotate_y;
 	GDraftScene *_scene;
 	GDraftSprite *_hero;
+	GDraftSprite *_camera_hero;
 }
 // 当前被控制的对象
 @property GObject *currentObject;
@@ -67,9 +68,14 @@
 	_hero.width = 100;
 	_hero.height = 100;
 	_hero.depth = 100;
-	[_hero moveX:300 y:_hero.height/2 z:200];
-	
-	[_world.camera follow:_hero];
+	[_hero moveX:200 y:_hero.height/2 z:200];
+
+	_camera_hero = [[GDraftSprite alloc] init];
+	_camera_hero.width = 100;
+	_camera_hero.height = 100;
+	_camera_hero.depth = 100;
+
+//	[_world.camera follow:_hero];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
@@ -116,6 +122,12 @@
 	[_img1 render];
 	[_img2 render];
 	[_hero render];
+	
+	_camera_hero.matrix = _world.camera.bodyMatrix;
+	_camera_hero.angle = _world.camera.angle;
+	[_camera_hero moveX:0 y:-100 z:100];
+	[_camera_hero render];
+	
 	[_scene render];
 }
 
