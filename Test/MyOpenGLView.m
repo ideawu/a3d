@@ -11,9 +11,11 @@
 	int _auto_rotate_x;
 	int _auto_rotate_y;
 	GDraftScene *_scene;
+	GDraftSprite *_hero;
 }
 // 当前被控制的对象
 @property GObject *currentObject;
+@property NSMutableArray *objects;
 @end
 
 @implementation MyOpenGLView
@@ -48,8 +50,8 @@
 		[_img1 moveX:_img1.width/2];
 		[_img1 moveY:_img1.height/2];
 		
-		[_img1 moveX:300];
-		[_img1 moveZ:300];
+		[_img1 moveX:400];
+		[_img1 moveZ:500];
 	}
 	{
 		NSString *filename = @"/Users/ideawu/Downloads/imgs/9.jpg";
@@ -61,10 +63,31 @@
 		[_img2 moveZ:4000];
 	}
 	
-	_currentObject = _world.camera;
+	_hero = [[GDraftSprite alloc] init];
+	_hero.width = 100;
+	_hero.height = 100;
+	_hero.depth = 100;
+	[_hero moveX:300 y:_hero.height/2 z:200];
+	
+	[_world.camera follow:_hero];
 
-//	[_img moveX:50];
-//	[_img moveY:50];
+	_objects = [[NSMutableArray alloc] init];
+	[_objects addObject:_world.camera];
+	[_objects addObject:_hero];
+
+	_currentObject = _world.camera;
+}
+
+- (void)switchSprite{
+	int next = 0;
+	for(int i=0; i<_objects.count; i++){
+		GObject *obj = [_objects objectAtIndex:i];
+		if(obj == _currentObject){
+			next = (i + 1) % _objects.count;
+			break;
+		}
+	}
+	_currentObject = [_objects objectAtIndex:next];
 }
 
 - (void)reshape {
@@ -92,6 +115,7 @@
 - (void)draw3D{
 	[_img1 render];
 	[_img2 render];
+	[_hero render];
 	[_scene render];
 }
 
@@ -112,6 +136,7 @@
 		glVertex3f(width/2, height, 0);
 	}
 	glEnd();
+	glDisable(GL_LINE_STIPPLE);
 }
 
 
@@ -170,8 +195,8 @@
 	dy = 90 * dy/(self.bounds.size.height/2);
 //	log_debug(@"%f %f", dx, dy);
 
-	_world.camera.angle.x = -dy;
-	_world.camera.angle.y = dx;
+	_currentObject.angle.x = -dy;
+	_currentObject.angle.y = dx;
 
 
 	[self setNeedsDisplay:YES];
@@ -193,19 +218,24 @@
 	float dy = 0;
 	float dz = 0;
 	switch(c){
+		case ' ':{
+			// 切换被控制角色
+			[self switchSprite];
+			break;
+		}
 		case NSLeftArrowFunctionKey:{
-			[_world.camera rotateY:-5];
+			[_currentObject rotateY:-5];
 			break;
 		}
 		case NSRightArrowFunctionKey:{
-			[_world.camera rotateY:5];
+			[_currentObject rotateY:5];
 			break;
 		}
 		case NSUpArrowFunctionKey:
-			[_world.camera rotateX:5];
+			[_currentObject rotateX:5];
 			break;
 		case NSDownArrowFunctionKey:
-			[_world.camera rotateX:-5];
+			[_currentObject rotateX:-5];
 			break;
 		case 'a':
 		case 'A':
@@ -230,9 +260,9 @@
 	dx *= speed;
 	dz *= speed;
 	dy *= speed;
-	[_world.camera moveX:dx];
-	[_world.camera moveY:dy];
-	[_world.camera moveZ:dz];
+	[_currentObject moveX:dx];
+	[_currentObject moveY:dy];
+	[_currentObject moveZ:dz];
 //	log_debug(@"%f %f %f", dx, dy, dz);
 	[self setNeedsDisplay:YES];
 }

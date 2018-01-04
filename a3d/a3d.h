@@ -14,5 +14,6 @@
 
 #import "ui/GNSView.h"
 #import "draft/GDraftScene.h"
+#import "draft/GDraftSprite.h"
 
 #endif

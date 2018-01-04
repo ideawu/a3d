@@ -18,19 +18,19 @@
 
 	
 	CGRect frame = self.window.frame;
-	frame.size.width = 800;
+	frame.size.width = 840;
 	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
 	
-	CGFloat width = 500 + 100;
-	CGFloat height = 158 + 100;
+	CGFloat width = frame.size.width - 50;
+	CGFloat height = frame.size.height - 100;
 	CGFloat x = (frame.size.width - width)/2;
 	CGFloat y = (frame.size.height - height)/2;
 	
 	CGRect frame2 = CGRectMake(x, y, width, height);
 	_videoView = [[MyOpenGLView alloc] initWithFrame:frame2];
 	[self.window.contentView addSubview:_videoView];
-	[_videoView becomeFirstResponder];
+	[self.window makeFirstResponder:_videoView];
 }
 
 - (void)keyDown:(NSEvent *)event{

@@ -94,6 +94,7 @@
 		3124F12C1FFDEB560005EDDE /* GDraftSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftSprite.m; sourceTree = "<group>"; };
 		3124F12F1FFDED250005EDDE /* GAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAngle.h; sourceTree = "<group>"; };
 		3124F1301FFDED250005EDDE /* GAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAngle.m; sourceTree = "<group>"; };
+		3124F1331FFE2CB80005EDDE /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +226,7 @@
 			children = (
 				3124F1231FFCABE80005EDDE /* GDraftScene.h */,
 				3124F1241FFCABE80005EDDE /* GDraftScene.m */,
+				3124F1331FFE2CB80005EDDE /* test.c */,
 				3124F12B1FFDEB560005EDDE /* GDraftSprite.h */,
 				3124F12C1FFDEB560005EDDE /* GDraftSprite.m */,
 			);

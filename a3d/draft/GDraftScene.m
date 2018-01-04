@@ -68,6 +68,18 @@
 		glVertex3f(0, 0, depth);
 	}
 	glEnd();
+	
+	
+	glLineWidth(1);
+	glColor4f(1, 0, 0, 1);
+	glTranslatef(200, 50, 200);
+	float scale = 10;
+	glScalef(scale, scale, scale);
+	[self test];
+}
+
+- (void)test{
+#include "test.c"
 }
 
 @end
