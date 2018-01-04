@@ -36,6 +36,10 @@
 		3124F1211FFC95A00005EDDE /* GVector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F11F1FFC95A00005EDDE /* GVector3.m */; };
 		3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1231FFCABE80005EDDE /* GDraftScene.h */; };
 		3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1241FFCABE80005EDDE /* GDraftScene.m */; };
+		3124F12D1FFDEB560005EDDE /* GDraftSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12B1FFDEB560005EDDE /* GDraftSprite.h */; };
+		3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F12C1FFDEB560005EDDE /* GDraftSprite.m */; };
+		3124F1311FFDED250005EDDE /* GAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12F1FFDED250005EDDE /* GAngle.h */; };
+		3124F1321FFDED250005EDDE /* GAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1301FFDED250005EDDE /* GAngle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +90,10 @@
 		3124F11F1FFC95A00005EDDE /* GVector3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GVector3.m; sourceTree = "<group>"; };
 		3124F1231FFCABE80005EDDE /* GDraftScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftScene.h; sourceTree = "<group>"; };
 		3124F1241FFCABE80005EDDE /* GDraftScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftScene.m; sourceTree = "<group>"; };
+		3124F12B1FFDEB560005EDDE /* GDraftSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftSprite.h; sourceTree = "<group>"; };
+		3124F12C1FFDEB560005EDDE /* GDraftSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftSprite.m; sourceTree = "<group>"; };
+		3124F12F1FFDED250005EDDE /* GAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAngle.h; sourceTree = "<group>"; };
+		3124F1301FFDED250005EDDE /* GAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAngle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +147,8 @@
 				3124F0D21FFB38A40005EDDE /* GFrame.m */,
 				3124F0D81FFB38A40005EDDE /* GObject.h */,
 				3124F0D31FFB38A40005EDDE /* GObject.m */,
+				3124F12F1FFDED250005EDDE /* GAngle.h */,
+				3124F1301FFDED250005EDDE /* GAngle.m */,
 				3124F0D71FFB38A40005EDDE /* GCamera.h */,
 				3124F0DA1FFB38A40005EDDE /* GCamera.m */,
 				3124F0D61FFB38A40005EDDE /* GNode.h */,
@@ -215,6 +225,8 @@
 			children = (
 				3124F1231FFCABE80005EDDE /* GDraftScene.h */,
 				3124F1241FFCABE80005EDDE /* GDraftScene.m */,
+				3124F12B1FFDEB560005EDDE /* GDraftSprite.h */,
+				3124F12C1FFDEB560005EDDE /* GDraftSprite.m */,
 			);
 			path = draft;
 			sourceTree = "<group>";
@@ -233,7 +245,9 @@
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				3124F0E21FFB38A40005EDDE /* GNode.h in Headers */,
 				3124F1201FFC95A00005EDDE /* GVector3.h in Headers */,
+				3124F12D1FFDEB560005EDDE /* GDraftSprite.h in Headers */,
 				3124F0DB1FFB38A40005EDDE /* GWorld.h in Headers */,
+				3124F1311FFDED250005EDDE /* GAngle.h in Headers */,
 				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */,
@@ -340,9 +354,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
+				3124F1321FFDED250005EDDE /* GAngle.m in Sources */,
 				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
 				3124F0DE1FFB38A40005EDDE /* GFrame.m in Sources */,
 				3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */,
+				3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */,
 				3124F0E11FFB38A40005EDDE /* GWorld.m in Sources */,
 				3124F1211FFC95A00005EDDE /* GVector3.m in Sources */,
 				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,

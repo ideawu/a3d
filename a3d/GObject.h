@@ -3,8 +3,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OpenGL/gl.h>
 #import <GLKit/GLKit.h>
+#import "GAngle.h"
 
 // 新坐标系原点在父坐标系中的位置，也即父坐标系内的任意点经过变换后，在父坐标系中的位置
 //		GLKVector4 zero = GLKVector4Make(0, 0, 0, 1);
@@ -24,6 +24,8 @@
 @property (readonly) GLKMatrix4 matrix;
 // 物体自身的坐标系，当物体跟随其它物体时（也即处于其它物体的坐标系内），matrix != localMatrix
 @property GLKMatrix4 localMatrix;
+
+@property GAngle *angle;
 
 // 物体在父坐标系中的坐标(不随follow即时更新，unfollow后才更新)
 @property (readonly) float x;

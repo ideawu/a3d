@@ -14,6 +14,7 @@
 - (id)init{
 	self = [super init];
 	_localMatrix = GLKMatrix4MakeTranslation(0, 0, 0);
+	_angle = [[GAngle alloc] init];
 	return self;
 }
 

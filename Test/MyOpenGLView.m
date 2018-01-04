@@ -12,6 +12,8 @@
 	int _auto_rotate_y;
 	GDraftScene *_scene;
 }
+// 当前被控制的对象
+@property GObject *currentObject;
 @end
 
 @implementation MyOpenGLView
@@ -58,6 +60,8 @@
 		[_img2 moveX:2000];
 		[_img2 moveZ:4000];
 	}
+	
+	_currentObject = _world.camera;
 
 //	[_img moveX:50];
 //	[_img moveY:50];
@@ -229,7 +233,7 @@
 	[_world.camera moveX:dx];
 	[_world.camera moveY:dy];
 	[_world.camera moveZ:dz];
-	log_debug(@"%f %f %f", dx, dy, dz);
+//	log_debug(@"%f %f %f", dx, dy, dz);
 	[self setNeedsDisplay:YES];
 }
 @end

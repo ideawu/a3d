@@ -3,7 +3,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OpenGL/gl.h>
 #import <GLKit/GLKit.h>
 #import "GNode.h"
 #import "GCamera.h"

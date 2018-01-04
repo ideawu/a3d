@@ -3,7 +3,6 @@
 //
 
 #import "GImage.h"
-#import <GLKit/GLKit.h>
 
 @interface GImage (){
 }

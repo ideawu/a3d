@@ -3,6 +3,7 @@
 //
 
 #import "GObject.h"
+#import <OpenGL/gl.h>
 
 /*
  物体的 Z 轴为前后，Y 轴为上下，X轴为左右。
