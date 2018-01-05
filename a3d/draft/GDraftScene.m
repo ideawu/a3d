@@ -22,7 +22,6 @@
 		NSString *filename = @"/Users/ideawu/Downloads/glass_gray.png";
 		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
 	}
-	glBindTexture(GL_TEXTURE_2D, _texture.name);
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 	for(int i=0; i<=grids; i++){
 		for(int j=0; j<=grids; j++){
@@ -30,15 +29,25 @@
 			float z0 = j * grid_width;
 			float x1 = (i+1) * grid_width;
 			float z1 = (j+1) * grid_width;
+			
+//			glColor4f(1, 1, 1, 1);
+//			glBegin(GL_POLYGON);
+//			glVertex3f(x0, -5, z1);
+//			glVertex3f(x1, -5, z1);
+//			glVertex3f(x1, -5, z0);
+//			glVertex3f(x0, -5, z0);
+//			glEnd();
+			
+			glBindTexture(GL_TEXTURE_2D, _texture.name);
 			glBegin(GL_POLYGON);
 			glTexCoord2f(0, 1); glVertex3f(x0, -1, z1);
 			glTexCoord2f(1, 1); glVertex3f(x1, -1, z1);
 			glTexCoord2f(1, 0); glVertex3f(x1, -1, z0);
 			glTexCoord2f(0, 0); glVertex3f(x0, -1, z0);
 			glEnd();
+			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 	}
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 
 	// 地板
@@ -97,26 +106,10 @@
 	glEnd();
 	
 	
-	glLineWidth(1);
-	glColor4f(1, 0, 0, 1);
-	glTranslatef(800, 50, 800);
-	float scale = 10;
-	glScalef(scale, scale, scale);
 	[self test];
 }
 
 - (void)test{
-	static GLKTextureInfo *_texture = nil;
-	if(!_texture){
-		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(0)};
-		NSError *error = nil;
-		NSString *filename = @"/Users/ideawu/Downloads/alex.png";
-		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
-	}
-	glBindTexture(GL_TEXTURE_2D, _texture.name);
-	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
-#include "test.c"
-	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 @end

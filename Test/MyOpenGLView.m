@@ -1,5 +1,6 @@
 #import "MyOpenGLView.h"
 #import <GLKit/GLKit.h>
+#import "MySprite.h"
 
 @interface MyOpenGLView(){
 	GWorld *_world;
@@ -10,9 +11,10 @@
 	int _auto_rotate_x;
 	int _auto_rotate_y;
 	GDraftScene *_scene;
-	GDraftSprite *_hero;
+	GDraftSprite *_flag;
 	GDraftSprite *_camera_hero;
 	GAngle *_mouseAngle;
+	MySprite *_hero;
 }
 // 当前被控制的对象
 @property GObject *currentObject;
@@ -60,23 +62,27 @@
 		[_img2 moveZ:4000];
 	}
 	
-	_hero = [[GDraftSprite alloc] init];
-	_hero.width = 100;
-	_hero.height = 100;
-	_hero.depth = 100;
-	_hero.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
-	[_hero moveX:200 y:_hero.height/2 z:200];
+	_flag = [[GDraftSprite alloc] init];
+	_flag.width = 100;
+	_flag.height = 100;
+	_flag.depth = 100;
+	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
+	[_flag moveX:200 y:_flag.height/2 z:200];
 
 	_camera_hero = [[GDraftSprite alloc] init];
 	_camera_hero.width = 100;
 	_camera_hero.height = 100;
 	_camera_hero.depth = 100;
+	
+	_hero = [[MySprite alloc] init];
+	[_hero moveX:800 y:0 z:800];
 
 	[_world.camera follow:_hero];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
 	[_objects addObject:_hero];
+	[_objects addObject:_flag];
 
 	_currentObject = _world.camera;
 }
@@ -119,8 +125,9 @@
 - (void)draw3D{
 	[_img1 render];
 	[_img2 render];
+	[_flag render];
 	[_hero render];
-	
+
 	_camera_hero.matrix = _world.camera.bodyMatrix;
 	_camera_hero.angle = _world.camera.angle;
 	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2+2 z:50];

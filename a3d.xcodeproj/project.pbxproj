@@ -40,6 +40,7 @@
 		3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F12C1FFDEB560005EDDE /* GDraftSprite.m */; };
 		3124F1311FFDED250005EDDE /* GAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12F1FFDED250005EDDE /* GAngle.h */; };
 		3124F1321FFDED250005EDDE /* GAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1301FFDED250005EDDE /* GAngle.m */; };
+		3124F1371FFF984D0005EDDE /* MySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1361FFF984D0005EDDE /* MySprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +96,8 @@
 		3124F12F1FFDED250005EDDE /* GAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAngle.h; sourceTree = "<group>"; };
 		3124F1301FFDED250005EDDE /* GAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAngle.m; sourceTree = "<group>"; };
 		3124F1331FFE2CB80005EDDE /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
+		3124F1351FFF984D0005EDDE /* MySprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySprite.h; sourceTree = "<group>"; };
+		3124F1361FFF984D0005EDDE /* MySprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +180,9 @@
 				3124F0F71FFB463A0005EDDE /* AppDelegate.m */,
 				3124F1081FFB47940005EDDE /* TestController.h */,
 				3124F1061FFB47940005EDDE /* TestController.m */,
+				3124F1351FFF984D0005EDDE /* MySprite.h */,
+				3124F1361FFF984D0005EDDE /* MySprite.m */,
+				3124F1331FFE2CB80005EDDE /* test.c */,
 				3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */,
 				3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */,
 				3124F10B1FFB488E0005EDDE /* xib */,
@@ -226,7 +232,6 @@
 			children = (
 				3124F1231FFCABE80005EDDE /* GDraftScene.h */,
 				3124F1241FFCABE80005EDDE /* GDraftScene.m */,
-				3124F1331FFE2CB80005EDDE /* test.c */,
 				3124F12B1FFDEB560005EDDE /* GDraftSprite.h */,
 				3124F12C1FFDEB560005EDDE /* GDraftSprite.m */,
 			);
@@ -376,6 +381,7 @@
 				3124F1001FFB463A0005EDDE /* main.m in Sources */,
 				3124F1091FFB47940005EDDE /* TestController.m in Sources */,
 				3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */,
+				3124F1371FFF984D0005EDDE /* MySprite.m in Sources */,
 				3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
