@@ -29,7 +29,20 @@
 	};
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	self = [super initWithFrame:frameRect pixelFormat:pixelFormat];
+	_mouseBasePoint.x = -1;
 	return self;
+}
+
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    
+    // Drawing code here.
+}
+
+#pragma mark - Keyboard and Mouse event handle
+
+- (BOOL)acceptsFirstResponder{
+	return YES;
 }
 
 - (void)updateTrackingAreas{
@@ -45,10 +58,29 @@
 	[self addTrackingArea:_trackingArea];
 }
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+- (NSPoint)mousePoint:(NSEvent *)event{
+	NSPoint pos = [event locationInWindow];
+	pos = [self convertPoint:pos fromView:nil];
+	return pos;
+}
+
+- (void)mouseEntered:(NSEvent *)event{
+	NSPoint pos = [self mousePoint:event];
+	_mouseBasePoint.x = pos.x - _mouseTranslate.x;
+	_mouseBasePoint.y = pos.y - _mouseTranslate.y;
+//	log_debug(@"%s (%.2f, %.2f)", __func__, pos.x, pos.y);
+}
+
+- (void)mouseExited:(NSEvent *)event{
+//	NSPoint pos = [self mousePoint:event];
+//	log_debug(@"%s (%.2f, %.2f)", __func__, pos.x, pos.y);
+}
+
+- (void)mouseMoved:(NSEvent *)event{
+	NSPoint pos = [self mousePoint:event];
+//	log_debug(@"%s (%.2f, %.2f)", __func__, pos.x, pos.y);
+	_mouseTranslate.x = pos.x - _mouseBasePoint.x;
+	_mouseTranslate.y = pos.y - _mouseBasePoint.y;
 }
 
 @end

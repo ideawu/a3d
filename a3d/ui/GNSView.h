@@ -6,4 +6,8 @@
 
 @interface GNSView : NSOpenGLView
 
+// 以鼠标进入视图点为基点，当前相对基点的偏移量。
+@property (readonly) NSPoint mouseBasePoint;
+@property (readonly) NSPoint mouseTranslate;
+
 @end

@@ -4,9 +4,12 @@
 
 #import "GCamera.h"
 
+// 注意：对于相机来说，视线的横向转动，并不是绕着相机自身的Y轴转动，
+// 而是绕着其所观察的世界的Y轴进行转动，这样，视线横扫时可以始终保持相机与地面的固定角度。
+
 @interface GCamera(){
 }
-@property GObject *parent;
+@property GObject *target;
 @end
 
 @implementation GCamera
@@ -16,21 +19,35 @@
 	return self;
 }
 
-// 相机的世界坐标系 = matrix + angle.matrix
+- (GLKMatrix4)eyeMatrix{
+	GLKVector3 vec0 = GLKVector3Make(0, 1, 0);
+	GLKVector3 vec1 = GLKMatrix4MultiplyVector3(super.matrix, vec0);
+	float dp = GLKVector3DotProduct(vec0, vec1);
+	float rad = acos(dp);
+	
+	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
+	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(self.angle.z));
+	mat = GLKMatrix4RotateX(mat, -rad);
+	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(self.angle.y));
+	mat = GLKMatrix4RotateX(mat, rad);
+	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(self.angle.x));
+	return mat;
+}
+
 - (GLKMatrix4)matrix{
-	GLKMatrix4 mat = super.matrix;
-	if(_parent){
-		mat = GLKMatrix4Multiply(mat, _parent.matrix);
+	GLKMatrix4 mat;
+	mat = GLKMatrix4Multiply(super.matrix, self.eyeMatrix);
+	if(_target){
+		mat = GLKMatrix4Multiply(mat, _target.matrix);
 	}
-	mat = GLKMatrix4Multiply(mat, self.angle.matrix);
 	return mat;
 }
 
 // 相机身体在世界（不是在被跟随物体中）坐标中的坐标系
 - (GLKMatrix4)bodyMatrix{
 	GLKMatrix4 mat = super.matrix;
-	if(_parent){
-		mat = GLKMatrix4Multiply(mat, _parent.matrix);
+	if(_target){
+		mat = GLKMatrix4Multiply(mat, _target.matrix);
 	}
 	return mat;
 }
@@ -38,48 +55,41 @@
 #pragma mark - 目标跟随
 
 - (void)follow:(GObject *)target{
-	_parent = target;
-	super.matrix = GLKMatrix4Multiply(super.matrix, GLKMatrix4Invert(_parent.matrix, NULL));
+	_target = target;
+	super.matrix = GLKMatrix4Multiply(super.matrix, GLKMatrix4Invert(_target.matrix, NULL));
 }
 
 - (void)unfollow{
 	super.matrix = self.bodyMatrix;
-	_parent = nil;
+	_target = nil;
 }
 
-// 相机的移动和移动比较特殊，以视线坐标为基准来移动
+// 相机的移动比较特殊，以视线坐标为基准来移动
 - (void)moveX:(float)x y:(float)y z:(float)z{
-	GLKMatrix4 mat1 = self.angle.matrix;
+	GLKMatrix4 mat1 = self.eyeMatrix;
 	GLKMatrix4 mat2 = GLKMatrix4Invert(mat1, NULL);
 	super.matrix = GLKMatrix4Multiply(super.matrix, mat1);
 	super.matrix = GLKMatrix4Translate(super.matrix, x, y, z);
 	super.matrix = GLKMatrix4Multiply(super.matrix, mat2);
 }
 
-// 旋转时，以视角坐标为基准
+// X 轴只旋转基座
 - (void)rotateX:(float)degree{
-	GLKMatrix4 mat1 = self.angle.matrix;
-	GLKMatrix4 mat2 = GLKMatrix4Invert(mat1, NULL);
-	super.matrix = GLKMatrix4Multiply(super.matrix, mat1);
 	super.matrix = GLKMatrix4RotateX(super.matrix, GLKMathDegreesToRadians(degree));
-	super.matrix = GLKMatrix4Multiply(super.matrix, mat2);
 }
 
+// Z 轴只旋转基座
 - (void)rotateZ:(float)degree{
-	GLKMatrix4 mat1 = self.angle.matrix;
-	GLKMatrix4 mat2 = GLKMatrix4Invert(mat1, NULL);
-	super.matrix = GLKMatrix4Multiply(super.matrix, mat1);
-	super.matrix = GLKMatrix4RotateZ(super.matrix, GLKMathDegreesToRadians(degree));
-	super.matrix = GLKMatrix4Multiply(super.matrix, mat2);
+	super.matrix = GLKMatrix4RotateY(super.matrix, GLKMathDegreesToRadians(degree));
 }
 
-// 相机绕Y轴的旋转比较特殊，始终保持相机与父坐标系Y轴的角度
+// 相机绕Y轴的旋转比较特殊，始终保持相机基座与父坐标系Y轴的角度
 - (void)rotateY:(float)degree{
 	// p * -p * n * t * -n * p
 	GLKMatrix4 mat = GLKMatrix4MakeTranslation(self.x, self.y, self.z); // Y轴坐标系
 	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
 	mat = GLKMatrix4Translate(mat, -self.x, -self.y, -self.z); // 退出Y轴坐标系
-	mat = GLKMatrix4Multiply(mat, self.bodyMatrix);
+	mat = GLKMatrix4Multiply(mat, super.matrix);
 	super.matrix = mat;
 }
 

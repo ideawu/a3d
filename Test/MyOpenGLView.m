@@ -125,7 +125,7 @@
 	
 	_camera_hero.matrix = _world.camera.bodyMatrix;
 	_camera_hero.angle = _world.camera.angle;
-	[_camera_hero moveX:0 y:-100 z:100];
+	[_camera_hero moveX:0 y:-100 z:200];
 	[_camera_hero render];
 	
 	[_scene render];
@@ -168,56 +168,29 @@
 }
 
 - (void)mouseMoved:(NSEvent *)event{
-	static NSTimer *_rotateDetectTimer = nil;
-	if(!_rotateDetectTimer){
-		_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-			[self rotate];
-		}];
-		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
-	}
+	[super mouseMoved:event];
 	
-	NSPoint pos = [event locationInWindow];
-	pos = [self convertPoint:pos fromView:nil];
-//	log_debug(@"%f %f", pos.x, pos.y);
-	float dx, dy;
-	float mx = self.bounds.size.width/2;
-	float my = self.bounds.size.height/2;
-	dx = pos.x - mx;
-	dy = pos.y - my;
+//	static NSTimer *_rotateDetectTimer = nil;
+//	if(!_rotateDetectTimer){
+//		_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//			[self rotate];
+//		}];
+//		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
+//	}
 	
-	if(fabs(dx) > self.bounds.size.width/2 - 20){
-		_auto_rotate_y = (int)dx/fabs(dx);
-	}else{
-		_auto_rotate_y = 0;
-	}
-	if(fabs(dy) > self.bounds.size.height/2 - 20){
-		_auto_rotate_x = (int)dy/fabs(dy);
-	}else{
-		_auto_rotate_x = 0;
-	}
-	if(_auto_rotate_x || _auto_rotate_y){
-		log_debug(@"%f %f", _auto_rotate_y, _auto_rotate_x);
-		[_rotateDetectTimer setFireDate:[NSDate date]];
-		return;
-	}else{
-		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
-	}
+	float dx = self.mouseTranslate.x;
+	float dy = self.mouseTranslate.y;
 	
-	dx = 90 * dx/(self.bounds.size.width/2);
-	dy = 90 * dy/(self.bounds.size.height/2);
+	dx = 90 * dx/(self.bounds.size.width);
+	dy = 90 * dy/(self.bounds.size.height);
 //	log_debug(@"%f %f", dx, dy);
 
 	_currentObject.angle.x = -dy;
 	_currentObject.angle.y = dx;
 
-
 	[self setNeedsDisplay:YES];
 	
 //	log_debug(@"%f %f", dx, dy);
-}
-
-- (BOOL)acceptsFirstResponder{
-	return YES;
 }
 
 - (void)keyDown:(NSEvent *)event{
