@@ -28,7 +28,7 @@
 	glBindTexture(GL_TEXTURE_2D, _texture.name);
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 
-	float scale = 20;
+	float scale = 10;
 	glScalef(scale, scale, scale);
 
 	[self drawHead];
