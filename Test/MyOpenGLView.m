@@ -169,18 +169,18 @@
 	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
 	float ax = -dy;
 	float ay = dx;
-//	log_debug(@"%f %f", ax, ay);
+	log_debug(@"%f %f", ax, ay);
 
 	_currentObject.angle.x = ax;
 	_currentObject.angle.y = ay;
 	
-	if(_currentObject == _camera_hero){
-		_rotateX = (fabs(ax) < 80)? 0 : ax/fabs(ax) * 2;
-		_rotateY = (fabs(ay) < 80)? 0 : ay/fabs(ay) * 2;
+//	if(_currentObject == _camera_hero){
+		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;
+		_rotateY = (fabs(ay) < 70)? 0 : ay/fabs(ay) * 1;
 		static NSTimer *_rotateDetectTimer = nil;
 		if(_rotateX || _rotateY){
 			if(!_rotateDetectTimer){
-				_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+				_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 repeats:YES block:^(NSTimer * _Nonnull timer) {
 					[self rotate];
 				}];
 			}
@@ -188,7 +188,7 @@
 		}else{
 			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
 		}
-	}
+//	}
 
 	[self setNeedsDisplay:YES];
 	
@@ -198,8 +198,8 @@
 - (void)rotate{
 	log_debug(@"auto rotate %.2f, %.2f", _rotateX, _rotateY);
 	// 注意先后顺序
-	[_world.camera rotateY:_rotateY];
-	[_world.camera rotateX:_rotateX];
+	[_currentObject rotateY:_rotateY];
+	[_currentObject rotateX:_rotateX];
 	[self setNeedsDisplay:YES];
 }
 
