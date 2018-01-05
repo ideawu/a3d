@@ -128,10 +128,10 @@
 	[_flag render];
 	[_hero render];
 
-	_camera_hero.matrix = _world.camera.bodyMatrix;
-	_camera_hero.angle = _world.camera.angle;
-	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2+2 z:50];
-	[_camera_hero render];
+//	_camera_hero.matrix = _world.camera.bodyMatrix;
+//	_camera_hero.angle = _world.camera.angle;
+//	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2+2 z:50];
+//	[_camera_hero render];
 	
 	[_scene render];
 }
@@ -139,18 +139,23 @@
 - (void)draw2D{
 	float width = self.bounds.size.width;
 	float height = self.bounds.size.height;
+	float len = 10;
+	float x0 = width/2 - len;
+	float y0 = height/2 - len;
+	float x1 = width/2 + len;
+	float y1 = height/2 + len;
 
-	glEnable(GL_LINE_STIPPLE);
-	glLineStipple(1, 0x0f0f);
+//	glEnable(GL_LINE_STIPPLE);
+//	glLineStipple(1, 0x0f0f);
 	glLineWidth(1);
 	
-	glColor4f(1, 0.5, 0.5, 0.5);
+	glColor4f(0, 1, 0, 1);
 	glBegin(GL_LINES);
 	{
-		glVertex3f(0, height/2, 0);
-		glVertex3f(width, height/2, 0);
-		glVertex3f(width/2, 50, 0);
-		glVertex3f(width/2, height, 0);
+		glVertex3f(x0, height/2, 0);
+		glVertex3f(x1, height/2, 0);
+		glVertex3f(width/2, y0, 0);
+		glVertex3f(width/2, y1, 0);
 	}
 	glEnd();
 	glDisable(GL_LINE_STIPPLE);

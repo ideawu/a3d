@@ -19,7 +19,7 @@
 	if(!_texture){
 		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(1)};
 		NSError *error = nil;
-		NSString *filename = @"/Users/ideawu/Downloads/glass_gray.png";
+		NSString *filename = @"/Users/ideawu/Downloads/grass_top.png";
 		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
 	}
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
@@ -51,27 +51,27 @@
 
 
 	// 地板
-	grids = self.width / grid_width;
-//	log_debug(@"%d %d %f %f", grids, grid_width, self.width, self.depth);
-	for(int i=0; i<=grids; i++){
-		if(i == 0){
-			glLineWidth(1);
-		}else{
-			glLineWidth(0.5);
-		}
-		float v = grid_width * i;
-		glColor4f(0.5, 0.5, 1, 1);
-		glBegin(GL_LINES);
-		{
-			// x
-			glVertex3f(0, 0, v);
-			glVertex3f(depth, 0, v);
-			// z
-			glVertex3f(v, 0, 0);
-			glVertex3f(v, 0, depth);
-		}
-		glEnd();
-	}
+//	grids = self.width / grid_width;
+////	log_debug(@"%d %d %f %f", grids, grid_width, self.width, self.depth);
+//	for(int i=0; i<=grids; i++){
+//		if(i == 0){
+//			glLineWidth(1);
+//		}else{
+//			glLineWidth(0.5);
+//		}
+//		float v = grid_width * i;
+//		glColor4f(0.5, 0.5, 1, 1);
+//		glBegin(GL_LINES);
+//		{
+//			// x
+//			glVertex3f(0, 0, v);
+//			glVertex3f(depth, 0, v);
+//			// z
+//			glVertex3f(v, 0, 0);
+//			glVertex3f(v, 0, depth);
+//		}
+//		glEnd();
+//	}
 
 //	// 左边墙
 //	grids = self.height / grid_width;
