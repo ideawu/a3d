@@ -48,53 +48,6 @@ glEnd();
 
 glPopMatrix();
 
- // head
-glPushMatrix();
-glTranslatef(0, 8, 0);
-glTranslatef(0, 24, 0);
-glBegin(GL_POLYGON);
-glTexCoord2f(0.125, 0); glVertex3f(-3.5, 5, 4.5);
-glTexCoord2f(0.25, 0); glVertex3f(4.5, 5, 4.5);
-glTexCoord2f(0.25, 0.125); glVertex3f(4.5, 5, -3.5);
-glTexCoord2f(0.125, 0.125); glVertex3f(-3.5, 5, -3.5);
-glEnd();
-
-glBegin(GL_POLYGON);
-glTexCoord2f(0.25, 0); glVertex3f(4.5, -3, 4.5);
-glTexCoord2f(0.375, 0); glVertex3f(-3.5, -3, 4.5);
-glTexCoord2f(0.375, 0.125); glVertex3f(-3.5, -3, -3.5);
-glTexCoord2f(0.25, 0.125); glVertex3f(4.5, -3, -3.5);
-glEnd();
-
-glBegin(GL_POLYGON);
-glTexCoord2f(0, 0.125); glVertex3f(-3.5, 5, 4.5);
-glTexCoord2f(0.125, 0.125); glVertex3f(-3.5, 5, -3.5);
-glTexCoord2f(0.125, 0.25); glVertex3f(-3.5, -3, -3.5);
-glTexCoord2f(0, 0.25); glVertex3f(-3.5, -3, 4.5);
-glEnd();
-
-glBegin(GL_POLYGON);
-glTexCoord2f(0.125, 0.125); glVertex3f(-3.5, 5, -3.5);
-glTexCoord2f(0.25, 0.125); glVertex3f(4.5, 5, -3.5);
-glTexCoord2f(0.25, 0.25); glVertex3f(4.5, -3, -3.5);
-glTexCoord2f(0.125, 0.25); glVertex3f(-3.5, -3, -3.5);
-glEnd();
-
-glBegin(GL_POLYGON);
-glTexCoord2f(0.25, 0.125); glVertex3f(4.5, 5, -3.5);
-glTexCoord2f(0.375, 0.125); glVertex3f(4.5, 5, 4.5);
-glTexCoord2f(0.375, 0.25); glVertex3f(4.5, -3, 4.5);
-glTexCoord2f(0.25, 0.25); glVertex3f(4.5, -3, -3.5);
-glEnd();
-
-glBegin(GL_POLYGON);
-glTexCoord2f(0.375, 0.125); glVertex3f(4.5, 5, 4.5);
-glTexCoord2f(0.5, 0.125); glVertex3f(-3.5, 5, 4.5);
-glTexCoord2f(0.5, 0.25); glVertex3f(-3.5, -3, 4.5);
-glTexCoord2f(0.375, 0.25); glVertex3f(4.5, -3, 4.5);
-glEnd();
-
-glPopMatrix();
 
  // left_arm
 glPushMatrix();

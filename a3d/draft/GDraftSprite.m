@@ -63,8 +63,8 @@
 	glColor4f(1, 1, 0, 1);
 	glBegin(GL_LINES);
 	{
-		glVertex3f(0, 0, z0);
-		glVertex3f(0, 0, z1-20);
+		glVertex3f(0, y1, z0);
+		glVertex3f(0, y1, z1-20);
 	}
 	glEnd();
 	// 方向-箭头
@@ -72,9 +72,9 @@
 	glColor4f(1, 1, 1, 1);
 	glBegin(GL_POLYGON);
 	{
-		glVertex3f(0, 0, z1);
-		glVertex3f(-10, 0, z1-20);
-		glVertex3f(10, 0, z1-20);
+		glVertex3f(0, y1, z1);
+		glVertex3f(-10, y1, z1-20);
+		glVertex3f(10, y1, z1-20);
 	}
 	glEnd();
 	glEnable(GL_CULL_FACE);
