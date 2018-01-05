@@ -77,18 +77,7 @@
 
 // X 轴旋转以基座为基准
 - (void)rotateX:(float)degree{
-	GLKMatrix4 mat = super.matrix;
-//	if(_target){
-//		// 回到世界中(从目标脱离)
-//		mat = GLKMatrix4Multiply(_target.matrix, mat);
-//	}
-	// 转动
-	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(degree));
-//	if(_target){
-//		// 回到被跟随目标中
-//		mat = GLKMatrix4Multiply(mat, GLKMatrix4Invert(_target.matrix, NULL));
-//	}
-	super.matrix = mat;
+	super.matrix = GLKMatrix4RotateX(super.matrix, GLKMathDegreesToRadians(degree));
 }
 
 // Z 轴旋转以基座为基准

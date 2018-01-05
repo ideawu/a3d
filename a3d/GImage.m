@@ -39,8 +39,7 @@
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	// 清除可能的tint颜色影响
-	glColor4f(1, 1, 1, 1);
+	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 	glBindTexture(GL_TEXTURE_2D, _texture.name);
 	glBegin(GL_POLYGON);
 	{

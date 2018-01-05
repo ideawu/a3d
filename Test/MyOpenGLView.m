@@ -5,7 +5,6 @@
 	GWorld *_world;
 	GImage *_img1;
 	GImage *_img2;
-	GImage *_camera;
 	float _rotateX;
 	float _rotateY;
 	int _auto_rotate_x;
@@ -40,12 +39,6 @@
 	_scene.width = _world.width;
 	_scene.height = _world.height;
 	_scene.depth = _world.depth;
-
-	{
-		NSString *filename = @"/Users/ideawu/Downloads/imgs/camera.jpg";
-		_camera = [[GImage alloc] initWithContentsOfFile:filename];
-		[_camera scale:0.1];
-	}
 
 	{
 		NSString *filename = @"/Users/ideawu/Downloads/imgs/1.jpg";
@@ -130,7 +123,7 @@
 	
 	_camera_hero.matrix = _world.camera.bodyMatrix;
 	_camera_hero.angle = _world.camera.angle;
-	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2 z:50];
+	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2+2 z:50];
 	[_camera_hero render];
 	
 	[_scene render];

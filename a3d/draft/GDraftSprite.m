@@ -30,6 +30,16 @@
 	super.matrix = GLKMatrix4Add(super.matrix, mat3);
 }
 
+// 相机绕Y轴的旋转比较特殊，始终保持相机基座与父坐标系Y轴的角度
+- (void)rotateY:(float)degree{
+	// p * -p * n * t * -n * p
+	GLKMatrix4 mat = GLKMatrix4MakeTranslation(self.x, self.y, self.z); // Y轴坐标系
+	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
+	mat = GLKMatrix4Translate(mat, -self.x, -self.y, -self.z); // 退出Y轴坐标系
+	mat = GLKMatrix4Multiply(mat, super.matrix);
+	super.matrix = mat;
+}
+
 - (void)draw{
 	[self drawHead];
 
