@@ -10,7 +10,6 @@
 @interface GCamera(){
 }
 @property GObject *target;
-@property GLKMatrix4 matrixInTarget;
 @end
 
 @implementation GCamera
@@ -47,7 +46,7 @@
 
 // 基座在世界坐标中的矩阵
 - (GLKMatrix4)bodyMatrix{
-	GLKMatrix4 mat = _matrixInTarget;
+	GLKMatrix4 mat = super.matrix;
 	if(_target){
 		mat = GLKMatrix4Multiply(_target.matrix, mat);
 	}

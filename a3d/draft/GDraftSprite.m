@@ -22,6 +22,14 @@
 	return mat;
 }
 
+// 以视线坐标为基准来移动
+- (void)moveX:(float)x y:(float)y z:(float)z{
+	GLKMatrix4 mat1 = self.matrix;
+	GLKMatrix4 mat2 = GLKMatrix4Translate(mat1, x, y, z);
+	GLKMatrix4 mat3 = GLKMatrix4Subtract(mat2, mat1);
+	super.matrix = GLKMatrix4Add(super.matrix, mat3);
+}
+
 - (void)draw{
 	[self drawHead];
 
