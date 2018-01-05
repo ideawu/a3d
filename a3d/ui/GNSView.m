@@ -58,26 +58,35 @@
 	[self addTrackingArea:_trackingArea];
 }
 
-- (NSPoint)mousePoint:(NSEvent *)event{
+- (void)resetMousePoint{
+	_mouseBasePoint.x += _mouseTranslate.x;
+	_mouseBasePoint.y += _mouseTranslate.y;
+	_mouseTranslate.x = 0;
+	_mouseTranslate.y = 0;
+}
+
+- (NSPoint)mousePointFromEvent:(NSEvent *)event{
 	NSPoint pos = [event locationInWindow];
 	pos = [self convertPoint:pos fromView:nil];
 	return pos;
 }
 
 - (void)mouseEntered:(NSEvent *)event{
-	NSPoint pos = [self mousePoint:event];
+	NSPoint pos = [self mousePointFromEvent:event];
+	_mousePoint = pos;
 	_mouseBasePoint.x = pos.x - _mouseTranslate.x;
 	_mouseBasePoint.y = pos.y - _mouseTranslate.y;
 //	log_debug(@"%s (%.2f, %.2f)", __func__, pos.x, pos.y);
 }
 
 - (void)mouseExited:(NSEvent *)event{
-//	NSPoint pos = [self mousePoint:event];
+//	NSPoint pos = [self mousePointFromEvent:event];
 //	log_debug(@"%s (%.2f, %.2f)", __func__, pos.x, pos.y);
 }
 
 - (void)mouseMoved:(NSEvent *)event{
-	NSPoint pos = [self mousePoint:event];
+	NSPoint pos = [self mousePointFromEvent:event];
+	_mousePoint = pos;
 //	log_debug(@"%s (%.2f, %.2f)", __func__, pos.x, pos.y);
 	_mouseTranslate.x = pos.x - _mouseBasePoint.x;
 	_mouseTranslate.y = pos.y - _mouseBasePoint.y;

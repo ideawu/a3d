@@ -13,6 +13,7 @@
 	GDraftScene *_scene;
 	GDraftSprite *_hero;
 	GDraftSprite *_camera_hero;
+	GAngle *_mouseAngle;
 }
 // 当前被控制的对象
 @property GObject *currentObject;
@@ -25,6 +26,8 @@
 	log_debug(@"%s", __func__);
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
+	
+	_mouseAngle = [[GAngle alloc] init];
 	
 	_rotateX = 0;
 	_rotateY = 0;
@@ -68,6 +71,7 @@
 	_hero.width = 100;
 	_hero.height = 100;
 	_hero.depth = 100;
+	_hero.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
 	[_hero moveX:200 y:_hero.height/2 z:200];
 
 	_camera_hero = [[GDraftSprite alloc] init];
@@ -75,7 +79,7 @@
 	_camera_hero.height = 100;
 	_camera_hero.depth = 100;
 
-//	[_world.camera follow:_hero];
+	[_world.camera follow:_hero];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
@@ -94,6 +98,7 @@
 		}
 	}
 	_currentObject = [_objects objectAtIndex:next];
+//	[self resetMousePoint];
 }
 
 - (void)reshape {
@@ -125,7 +130,7 @@
 	
 	_camera_hero.matrix = _world.camera.bodyMatrix;
 	_camera_hero.angle = _world.camera.angle;
-	[_camera_hero moveX:0 y:-100 z:200];
+	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2 z:50];
 	[_camera_hero render];
 	
 	[_scene render];
@@ -152,45 +157,45 @@
 }
 
 
-- (void)rotate{
-	log_debug(@"auto rotate");
-	[_world.camera rotateX:-_rotateX];
-	[_world.camera rotateY:-_rotateY];
-	if(_rotateX){
-		_rotateX += _auto_rotate_x * 5;
-	}
-	if(_rotateY){
-		_rotateY += _auto_rotate_y * 5;
-	}
-	[_world.camera rotateX:_rotateX];
-	[_world.camera rotateY:_rotateY];
-	[self setNeedsDisplay:YES];
-}
-
 - (void)mouseMoved:(NSEvent *)event{
 	[super mouseMoved:event];
 	
-//	static NSTimer *_rotateDetectTimer = nil;
-//	if(!_rotateDetectTimer){
-//		_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-//			[self rotate];
-//		}];
-//		[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
-//	}
-	
-	float dx = self.mouseTranslate.x;
-	float dy = self.mouseTranslate.y;
-	
-	dx = 90 * dx/(self.bounds.size.width);
-	dy = 90 * dy/(self.bounds.size.height);
-//	log_debug(@"%f %f", dx, dy);
+	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
+	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
+	float ax = -dy;
+	float ay = dx;
+//	log_debug(@"%f %f", ax, ay);
 
-	_currentObject.angle.x = -dy;
-	_currentObject.angle.y = dx;
+	_currentObject.angle.x = ax;
+	_currentObject.angle.y = ay;
+	
+	if(_currentObject == _camera_hero){
+		_rotateX = (fabs(ax) < 80)? 0 : ax/fabs(ax) * 2;
+		_rotateY = (fabs(ay) < 80)? 0 : ay/fabs(ay) * 2;
+		static NSTimer *_rotateDetectTimer = nil;
+		if(_rotateX || _rotateY){
+			if(!_rotateDetectTimer){
+				_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+					[self rotate];
+				}];
+			}
+			[_rotateDetectTimer setFireDate:[NSDate date]];
+		}else{
+			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
+		}
+	}
 
 	[self setNeedsDisplay:YES];
 	
 //	log_debug(@"%f %f", dx, dy);
+}
+
+- (void)rotate{
+	log_debug(@"auto rotate %.2f, %.2f", _rotateX, _rotateY);
+	// 注意先后顺序
+	[_world.camera rotateY:_rotateY];
+	[_world.camera rotateX:_rotateX];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)keyDown:(NSEvent *)event{

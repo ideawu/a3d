@@ -12,7 +12,11 @@
 // 竖直方向的视角
 @property float fovy;
 
+// 相机身体在世界（不是在被跟随物体中）坐标中的坐标系
 - (GLKMatrix4)bodyMatrix;
+
+// 按相机特有的操作顺序，先后旋转 z-y-z 轴
+- (void)rotateX:(float)x y:(float)y z:(float)z;
 
 // 在父坐标系中跟踪指定物体，始终保持与目标相同的相对角度和相对位置
 - (void)follow:(GObject *)target;

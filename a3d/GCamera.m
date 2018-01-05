@@ -10,6 +10,7 @@
 @interface GCamera(){
 }
 @property GObject *target;
+@property GLKMatrix4 matrixInTarget;
 @end
 
 @implementation GCamera
@@ -24,7 +25,6 @@
 	GLKVector3 vec1 = GLKMatrix4MultiplyVector3(super.matrix, vec0);
 	float dp = GLKVector3DotProduct(vec0, vec1);
 	float rad = acos(dp);
-	
 	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
 	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(self.angle.z));
 	mat = GLKMatrix4RotateX(mat, -rad);
@@ -35,19 +35,21 @@
 }
 
 - (GLKMatrix4)matrix{
-	GLKMatrix4 mat;
-	mat = GLKMatrix4Multiply(super.matrix, self.eyeMatrix);
+	GLKMatrix4 old = super.matrix;
 	if(_target){
-		mat = GLKMatrix4Multiply(mat, _target.matrix);
+		super.matrix = GLKMatrix4Multiply(_target.matrix, super.matrix);
 	}
+	[self rotateX:self.angle.x y:self.angle.y z:self.angle.z];
+	GLKMatrix4 mat = super.matrix;
+	super.matrix = old;
 	return mat;
 }
 
-// 相机身体在世界（不是在被跟随物体中）坐标中的坐标系
+// 基座在世界坐标中的矩阵
 - (GLKMatrix4)bodyMatrix{
-	GLKMatrix4 mat = super.matrix;
+	GLKMatrix4 mat = _matrixInTarget;
 	if(_target){
-		mat = GLKMatrix4Multiply(mat, _target.matrix);
+		mat = GLKMatrix4Multiply(_target.matrix, mat);
 	}
 	return mat;
 }
@@ -60,25 +62,37 @@
 }
 
 - (void)unfollow{
-	super.matrix = self.bodyMatrix;
+	if(_target){
+		super.matrix = GLKMatrix4Multiply(_target.matrix, super.matrix);
+	}
 	_target = nil;
 }
 
-// 相机的移动比较特殊，以视线坐标为基准来移动
+// 相机的移动以视线坐标为基准来移动
 - (void)moveX:(float)x y:(float)y z:(float)z{
-	GLKMatrix4 mat1 = self.eyeMatrix;
-	GLKMatrix4 mat2 = GLKMatrix4Invert(mat1, NULL);
-	super.matrix = GLKMatrix4Multiply(super.matrix, mat1);
-	super.matrix = GLKMatrix4Translate(super.matrix, x, y, z);
-	super.matrix = GLKMatrix4Multiply(super.matrix, mat2);
+	GLKMatrix4 mat1 = self.matrix;
+	GLKMatrix4 mat2 = GLKMatrix4Translate(mat1, x, y, z);
+	GLKMatrix4 mat3 = GLKMatrix4Subtract(mat2, mat1);
+	super.matrix = GLKMatrix4Add(super.matrix, mat3);
 }
 
-// X 轴只旋转基座
+// X 轴旋转以基座为基准
 - (void)rotateX:(float)degree{
-	super.matrix = GLKMatrix4RotateX(super.matrix, GLKMathDegreesToRadians(degree));
+	GLKMatrix4 mat = super.matrix;
+//	if(_target){
+//		// 回到世界中(从目标脱离)
+//		mat = GLKMatrix4Multiply(_target.matrix, mat);
+//	}
+	// 转动
+	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(degree));
+//	if(_target){
+//		// 回到被跟随目标中
+//		mat = GLKMatrix4Multiply(mat, GLKMatrix4Invert(_target.matrix, NULL));
+//	}
+	super.matrix = mat;
 }
 
-// Z 轴只旋转基座
+// Z 轴旋转以基座为基准
 - (void)rotateZ:(float)degree{
 	super.matrix = GLKMatrix4RotateY(super.matrix, GLKMathDegreesToRadians(degree));
 }
@@ -91,6 +105,13 @@
 	mat = GLKMatrix4Translate(mat, -self.x, -self.y, -self.z); // 退出Y轴坐标系
 	mat = GLKMatrix4Multiply(mat, super.matrix);
 	super.matrix = mat;
+}
+
+// 按相机特有的操作顺序，先后旋转 z-y-z 轴
+- (void)rotateX:(float)x y:(float)y z:(float)z{
+	[self rotateZ:z];
+	[self rotateY:y];
+	[self rotateX:x];
 }
 
 @end

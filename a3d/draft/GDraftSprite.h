@@ -7,4 +7,6 @@
 
 @interface GDraftSprite : GNode
 
+@property GLKVector4 color;
+
 @end

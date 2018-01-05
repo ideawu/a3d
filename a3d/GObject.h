@@ -15,8 +15,8 @@
 //		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(matrix);
 // 将同一世界内的某坐标系移到另一坐标系内，可用于物体跟随
 //		GLKMatrix4Multiply(A, GLKMatrix4Invert(B));
-// 将某坐标系移到另一坐标系外面
-//		GLKMatrix4Multiply(A, B);
+// 将某坐标系A从另一坐标系B当中移出
+//		GLKMatrix4Multiply(B, A);
 
 
 // GObject=坐标系+坐标系内的物体
