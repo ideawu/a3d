@@ -7,6 +7,7 @@
 
 @interface GCamera(){
 	GObject *_target;
+	GLKMatrix4 _matrixInTarget;
 	GFollow *_follow;
 }
 // 观察的焦点在相机坐标系内的位置，默认为相机原点
@@ -17,7 +18,7 @@
 
 - (id)init{
 	self = [super init];
-	_center = GLKVector3Make(0, 0, 500); // TODO
+	_center = GLKVector3Make(0, 0, 100); // TODO
 	return self;
 }
 
@@ -36,45 +37,46 @@
 }
 
 - (GLKMatrix4)matrix{
-	GLKMatrix4 mat = super.matrix;
-	if(_follow){
-		mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-//		mat = GLKMatrix4Multiply(_follow.matrix, mat);
-		mat = GLKMatrix4Multiply(mat, _follow.matrix);
-		mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+	GLKMatrix4 mat;
+	if(_target){
+		mat = GLKMatrix4Multiply(_target.matrix, _matrixInTarget);
+	}else{
+		mat = super.matrix;
 	}
 	return mat;
 }
+//
+//// 基座在世界坐标中的矩阵
+//- (GLKMatrix4)bodyMatrix{
+//	GLKMatrix4 mat = super.matrix;
+//	if(_target){
+//		mat = GLKMatrix4Multiply(_target.matrix, mat);
+//	}
+//	return mat;
+//}
 
 #pragma mark - 目标跟随
 
 - (GObject *)target{
-//	return _target;
-	return _follow.target;
+	return _target;
 }
 
 // 跟随有几种模式：位移，X，Y，Z各轴旋转的跟随应该单独可配。
 - (void)follow:(GObject *)target{
-	if(_follow){
+	if(_target){
 		[self unfollow];
 	}
-	_follow = [[GFollow alloc] init];
-	_follow.target = target;
+	_target = target;
 	_center = GLKVector3Make(target.x - super.x, target.y - super.y, target.z - super.z);
-//	_center = GLKVector3Make(0, 0, target.z - super.z);
-	log_debug(@"%f %f %f", _center.x, _center.y, _center.z);
+	_matrixInTarget = GLKMatrix4Multiply(GLKMatrix4Invert(_target.matrix, NULL), super.matrix);
 }
 
 - (void)unfollow{
-	if(_follow){
-		GLKMatrix4 mat = super.matrix;
-		mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-		mat = GLKMatrix4Multiply(_follow.matrix, mat);
-		mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-		super.matrix = mat;
+	if(_target){
+		super.matrix = GLKMatrix4Multiply(_target.matrix, _matrixInTarget);
 //		_center = GLKVector3Make(0, 0, 0);
 	}
-	_follow = nil;
+	_target = nil;
 }
 
 // 相机的移动以视线坐标为基准来移动

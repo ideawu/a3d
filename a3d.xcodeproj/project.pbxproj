@@ -41,6 +41,10 @@
 		3124F1311FFDED250005EDDE /* GAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12F1FFDED250005EDDE /* GAngle.h */; };
 		3124F1321FFDED250005EDDE /* GAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1301FFDED250005EDDE /* GAngle.m */; };
 		3124F1371FFF984D0005EDDE /* MySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1361FFF984D0005EDDE /* MySprite.m */; };
+		3124F13B2000ACF70005EDDE /* GBaseCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1392000ACF70005EDDE /* GBaseCamera.h */; };
+		3124F13C2000ACF70005EDDE /* GBaseCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F13A2000ACF70005EDDE /* GBaseCamera.m */; };
+		3124F13F2000B3200005EDDE /* GFollow.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F13D2000B3200005EDDE /* GFollow.h */; };
+		3124F1402000B3200005EDDE /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F13E2000B3200005EDDE /* GFollow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,6 +102,10 @@
 		3124F1331FFE2CB80005EDDE /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		3124F1351FFF984D0005EDDE /* MySprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySprite.h; sourceTree = "<group>"; };
 		3124F1361FFF984D0005EDDE /* MySprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySprite.m; sourceTree = "<group>"; };
+		3124F1392000ACF70005EDDE /* GBaseCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBaseCamera.h; sourceTree = "<group>"; };
+		3124F13A2000ACF70005EDDE /* GBaseCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBaseCamera.m; sourceTree = "<group>"; };
+		3124F13D2000B3200005EDDE /* GFollow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFollow.h; sourceTree = "<group>"; };
+		3124F13E2000B3200005EDDE /* GFollow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFollow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +161,10 @@
 				3124F0D31FFB38A40005EDDE /* GObject.m */,
 				3124F12F1FFDED250005EDDE /* GAngle.h */,
 				3124F1301FFDED250005EDDE /* GAngle.m */,
+				3124F1392000ACF70005EDDE /* GBaseCamera.h */,
+				3124F13A2000ACF70005EDDE /* GBaseCamera.m */,
+				3124F13D2000B3200005EDDE /* GFollow.h */,
+				3124F13E2000B3200005EDDE /* GFollow.m */,
 				3124F0D71FFB38A40005EDDE /* GCamera.h */,
 				3124F0DA1FFB38A40005EDDE /* GCamera.m */,
 				3124F0D61FFB38A40005EDDE /* GNode.h */,
@@ -247,6 +259,8 @@
 			files = (
 				3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */,
 				3124F0E01FFB38A40005EDDE /* GFrame.h in Headers */,
+				3124F13B2000ACF70005EDDE /* GBaseCamera.h in Headers */,
+				3124F13F2000B3200005EDDE /* GFollow.h in Headers */,
 				3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */,
 				3124F0E51FFB38A40005EDDE /* GImage.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
@@ -363,6 +377,8 @@
 				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
 				3124F1321FFDED250005EDDE /* GAngle.m in Sources */,
 				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
+				3124F1402000B3200005EDDE /* GFollow.m in Sources */,
+				3124F13C2000ACF70005EDDE /* GBaseCamera.m in Sources */,
 				3124F0DE1FFB38A40005EDDE /* GFrame.m in Sources */,
 				3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */,
 				3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */,

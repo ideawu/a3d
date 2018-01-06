@@ -76,7 +76,7 @@
 	
 	_hero = [[MySprite alloc] init];
 	[_hero moveX:800 y:0 z:800];
-	[_hero rotateZ:30];
+//	[_hero rotateZ:30];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
@@ -84,6 +84,11 @@
 	[_objects addObject:_flag];
 
 	_currentObject = _world.camera;
+	
+	_currentObject = _hero;
+	[_world.camera follow:_hero];
+//	_currentObject = _flag;
+//	[_world.camera follow:_flag];
 }
 
 - (void)switchSprite{
@@ -163,6 +168,8 @@
 
 - (void)mouseMoved:(NSEvent *)event{
 	[super mouseMoved:event];
+//	log_debug(@"ignore mouse");
+	return;
 	
 	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
 	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
@@ -215,6 +222,14 @@
 		case ' ':{
 			// 切换被控制角色
 			[self switchSprite];
+			break;
+		}
+		case '[':{
+			[_currentObject rotateZ:5];
+			break;
+		}
+		case ']':{
+			[_currentObject rotateZ:-5];
 			break;
 		}
 		case NSLeftArrowFunctionKey:{

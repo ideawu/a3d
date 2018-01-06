@@ -12,7 +12,7 @@
 
 - (GLKMatrix4)matrix{
 	GLKMatrix4 mat = super.matrix;
-	mat = GLKMatrix4Multiply(mat, self.angle.matrix);
+//	mat = GLKMatrix4Multiply(mat, self.angle.matrix);
 	return mat;
 }
 
