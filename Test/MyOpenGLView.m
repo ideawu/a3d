@@ -76,8 +76,7 @@
 	
 	_hero = [[MySprite alloc] init];
 	[_hero moveX:800 y:0 z:800];
-
-	[_world.camera follow:_hero];
+	[_hero rotateZ:30];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
@@ -248,6 +247,17 @@
 		case 'S':
 			dz = -1;
 			break;
+		case 'f':
+		case 'F':{
+			if(_world.camera.target){
+				log_debug(@"unfollow");
+				[_world.camera unfollow];
+			}else{
+				log_debug(@"follow");
+				[_world.camera follow:_hero];
+			}
+			break;
+		}
 		default:
 			return;
 	}

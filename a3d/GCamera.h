@@ -12,6 +12,8 @@
 // 竖直方向的视角
 @property float fovy;
 
+@property (readonly) GObject *target;
+
 // 相机身体在世界（不是在被跟随物体中）坐标中的坐标系
 - (GLKMatrix4)bodyMatrix;
 

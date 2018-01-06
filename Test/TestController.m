@@ -18,11 +18,11 @@
 
 	
 	CGRect frame = self.window.frame;
-	frame.size.width = 840;
-	frame.size.height = 600;
+	frame.size.width = 900;
+	frame.size.height = 700;
 	[self.window setFrame:frame display:YES animate:NO];
 	
-	CGFloat width = frame.size.width - 50;
+	CGFloat width = frame.size.width - 100;
 	CGFloat height = frame.size.height - 100;
 	CGFloat x = (frame.size.width - width)/2;
 	CGFloat y = (frame.size.height - height)/2;

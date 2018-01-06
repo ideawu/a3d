@@ -4,18 +4,18 @@
 
 #import "GCamera.h"
 
-// 注意：对于相机来说，视线的横向转动，并不是绕着相机自身的Y轴转动，
-// 而是绕着其所观察的世界的Y轴进行转动，这样，视线横扫时可以始终保持相机与地面的固定角度。
-
 @interface GCamera(){
+	GObject *_target;
 }
-@property GObject *target;
+// 观察的焦点在相机坐标系内的位置，默认为相机原点
+@property GLKVector3 center;
 @end
 
 @implementation GCamera
 
 - (id)init{
 	self = [super init];
+	_center = GLKVector3Make(0, 0, 0);
 	return self;
 }
 
@@ -34,13 +34,18 @@
 }
 
 - (GLKMatrix4)matrix{
-	GLKMatrix4 old = super.matrix;
-	if(_target){
-		super.matrix = GLKMatrix4Multiply(_target.matrix, super.matrix);
-	}
-	[self rotateX:self.angle.x y:self.angle.y z:self.angle.z];
+//	GLKMatrix4 old = super.matrix;
+//	if(_target){
+//		super.matrix = GLKMatrix4Multiply(_target.matrix, super.matrix);
+//	}
+//	[self rotateX:self.angle.x y:self.angle.y z:self.angle.z];
+//	GLKMatrix4 mat = super.matrix;
+//	super.matrix = old;
+//	return mat;
 	GLKMatrix4 mat = super.matrix;
-	super.matrix = old;
+	if(_target){
+		mat = GLKMatrix4Multiply(_target.matrix, mat);
+	}
 	return mat;
 }
 
@@ -55,14 +60,26 @@
 
 #pragma mark - 目标跟随
 
+- (GObject *)target{
+	return _target;
+}
+
 - (void)follow:(GObject *)target{
+	if(_target){
+		[self unfollow];
+	}
 	_target = target;
+	// 跟随一个物体时，并不是将观察焦点移到目标身上，而是延z轴方向前移
+	_center = GLKVector3Make(0, 0, target.z - self.z);
+	log_debug(@"focus: %.2f %.2f %.2f", _center.x, _center.y, _center.z);
+	// 将相机放入被跟随物体内
 	super.matrix = GLKMatrix4Multiply(super.matrix, GLKMatrix4Invert(_target.matrix, NULL));
 }
 
 - (void)unfollow{
 	if(_target){
 		super.matrix = GLKMatrix4Multiply(_target.matrix, super.matrix);
+		_center = GLKVector3Make(0, 0, 0);
 	}
 	_target = nil;
 }
@@ -75,24 +92,47 @@
 	super.matrix = GLKMatrix4Add(super.matrix, mat3);
 }
 
-// X 轴旋转以基座为基准
+// 相机平移到焦点处后绕自身X轴旋转
 - (void)rotateX:(float)degree{
-	super.matrix = GLKMatrix4RotateX(super.matrix, GLKMathDegreesToRadians(degree));
-}
-
-// Z 轴旋转以基座为基准
-- (void)rotateZ:(float)degree{
-	super.matrix = GLKMatrix4RotateY(super.matrix, GLKMathDegreesToRadians(degree));
-}
-
-// 相机绕Y轴的旋转比较特殊，始终保持相机基座与父坐标系Y轴的角度
-- (void)rotateY:(float)degree{
-	// p * -p * n * t * -n * p
-	GLKMatrix4 mat = GLKMatrix4MakeTranslation(self.x, self.y, self.z); // Y轴坐标系
-	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
-	mat = GLKMatrix4Translate(mat, -self.x, -self.y, -self.z); // 退出Y轴坐标系
-	mat = GLKMatrix4Multiply(mat, super.matrix);
+	GLKMatrix4 mat = super.matrix;
+	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(degree));
+	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
 	super.matrix = mat;
+}
+
+// 相机平移到焦点处后绕自身Z轴旋转
+- (void)rotateZ:(float)degree{
+	GLKMatrix4 mat = super.matrix;
+	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(degree));
+	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+	super.matrix = mat;
+}
+
+// 相机平移到焦点处后，绕经过自身原点的世界坐标Y轴的平行轴
+- (void)rotateY:(float)degree{
+	GLKMatrix4 mat1 = super.matrix;
+	GLKMatrix4 mat2 = GLKMatrix4Invert(mat1, NULL);
+	GLKVector3 axis = GLKVector3Make(0, 1, 0); // 世界Y轴
+	axis = GLKMatrix4MultiplyVector3(mat2, axis); // 世界Y轴进入相机坐标系(移到相机原点)
+	axis = GLKVector3Add(axis, _center); // 世界Y轴移到焦点
+	
+	GLKMatrix4 mat = super.matrix;
+	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+	mat = GLKMatrix4RotateWithVector3(mat, GLKMathDegreesToRadians(degree), axis);
+	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+	super.matrix = mat;
+
+//	GLKMatrix4 mat;
+//	mat = GLKMatrix4MakeTranslation(foc.x, foc.y, foc.z);
+//	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
+//	mat = GLKMatrix4Translate(mat, -foc.x, -foc.y, -foc.z);
+////	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+//	mat = GLKMatrix4Multiply(mat, super.matrix);
+//	super.matrix = mat;
+//	foc = GLKMatrix4MultiplyVector3(super.matrix, _center);
+//	log_debug(@"focus: %.2f %.2f %.2f", foc.x, foc.y, foc.z);
 }
 
 // 按相机特有的操作顺序，先后旋转 z-y-z 轴
