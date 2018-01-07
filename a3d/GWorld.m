@@ -58,7 +58,6 @@
 	_camera.width = width;
 	_camera.height = height;
 	_camera.depth = depth;
-	// 将原点坐标移到屏幕右下角
 //	[_camera moveX:width/2];
 //	[_camera moveY:height/2];
 
@@ -88,7 +87,7 @@
 	_matrix3d = GLKMatrix4Translate(_matrix3d, 0, 0, -near);
 	// 翻转z轴，将z轴方向和人看屏幕方向相同
 	_matrix3d = GLKMatrix4Scale(_matrix3d, 1, 1, -1);
-	// 应该移动相机，而不是移动世界
+	// 将原点坐标移到屏幕右下角
 	_matrix3d = GLKMatrix4Translate(_matrix3d, -width/2, -height/2, 0);
 
 	// OpenGL 的老方式

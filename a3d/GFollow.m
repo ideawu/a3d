@@ -13,7 +13,6 @@ static const int FollowRotateZ   = 1<<3;
 	GObject *_target;
 }
 @property int mode;
-@property GLKMatrix4 startMatrix;
 @end
 
 
@@ -21,7 +20,7 @@ static const int FollowRotateZ   = 1<<3;
 
 - (id)init{
 	self = [super init];
-	_mode = FollowTranslate | FollowRotateX | FollowRotateY;
+	_mode = FollowTranslate | FollowRotateX | FollowRotateY | FollowRotateZ;
 	return self;
 }
 
@@ -56,15 +55,58 @@ static const int FollowRotateZ   = 1<<3;
 	_mode |= FollowRotateZ;
 }
 
+// 消除超过某些精度的小数部分，避免如 -0.00001 这样的数影响符号位。
+static float trimf(float f){
+	return fabs(f)<FLT_EPSILON*10? 0 : f;
+}
+
+static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw, const char *mode){
+	float r, p, y, w;
+	float sinr, cosr, sinp, siny, cosy;
+	float qs[3] = {q.x, q.y, q.z};
+	// 各轴顺序
+	int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
+	r = qs[idx[0]];
+	p = qs[idx[1]];
+	y = qs[idx[2]];
+	w = q.w;
+	sinr = 2 * (w * r + p * y);
+	cosr = 1 - 2 * (r * r + p * p);
+	sinp = 2 * (w * p - r * y);
+	siny = 2 * (w * y + r * p);
+	cosy = 1 - 2 * (p * p + y * y);
+	sinr = trimf(sinr);
+	cosr = trimf(cosr);
+	sinp = trimf(sinp);
+	siny = trimf(siny);
+	cosy = trimf(cosy);
+	log_debug(@"%f %f %f %f %f", sinr, cosr, sinp, siny, cosy);
+	
+	r = atan2(sinr, cosr);
+	if (fabs(sinp) >= 1){
+		p = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+	}else{
+		p = asin(sinp);
+	}
+	y = atan2(siny, cosy);
+	
+	*roll = r;
+	*pitch = p;
+	*yaw = y;
+}
+
 - (GLKMatrix4)matrix{
-	GLKMatrix4 now = _target.matrix;
 	GLKMatrix4 old = _startMatrix;
-//	log_debug(@"old \n%@", [NSStringFromGLKMatrix4(old) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
-//	log_debug(@"new \n%@", [NSStringFromGLKMatrix4(now) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
+	GLKMatrix4 now = _target.matrix;
+	// T*A=B => T=B*A'
 	GLKMatrix4 diff = GLKMatrix4Multiply(now, GLKMatrix4Invert(old, NULL));
 	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(diff);
+//	return diff;
+//	GLKQuaternion quat1 = GLKQuaternionMakeWithMatrix4(old);
+//	GLKQuaternion quat2 = GLKQuaternionMakeWithMatrix4(now);
 //	log_debug(@"quat: %f %f %f %f", quat.x, quat.y, quat.z, quat.w);
-	
+//	log_debug(@"quat: %f %f %f %f", quat.x, quat.y, quat.z, quat.w);
+
 	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
 	if(_mode & FollowTranslate){
 		GLKVector4 vec0 = GLKMatrix4MultiplyVector4(old, GLKVector4Make(0, 0, 0, 1));
@@ -73,6 +115,22 @@ static const int FollowRotateZ   = 1<<3;
 //		log_debug(@"vec1: %f %f %f %f", vec1.x, vec1.y, vec1.z, vec1.w);
 		mat = GLKMatrix4Translate(mat, vec1.x, vec1.y, vec1.z);
 	}
+	
+#if 1
+	float roll, pitch, yaw;
+	quat_to_euler(quat, &roll, &pitch, &yaw, "YXZ");
+	log_debug(@"%f %f %f, %f %f %f", roll, pitch, yaw, GLKMathRadiansToDegrees(roll), GLKMathRadiansToDegrees(pitch), GLKMathRadiansToDegrees(yaw));
+	if(_mode & FollowRotateY){
+		mat = GLKMatrix4RotateY(mat, roll);
+	}
+	if(_mode & FollowRotateX){
+		mat = GLKMatrix4RotateX(mat, pitch);
+	}
+	if(_mode & FollowRotateZ){
+//		mat = GLKMatrix4RotateZ(mat, yaw);
+	}
+//	log_debug(@"mat \n%@", [NSStringFromGLKMatrix4(mat) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
+#else
 	if(!(_mode & FollowRotateX)){
 		quat.x = 0;
 	}
@@ -83,33 +141,14 @@ static const int FollowRotateZ   = 1<<3;
 		quat.z = 0;
 	}
 	quat = GLKQuaternionNormalize(quat);
-	log_debug(@"quat: %f %f %f %f", quat.x, quat.y, quat.z, quat.w);
 	GLKMatrix4 mat2 = GLKMatrix4MakeWithQuaternion(quat);
 	mat = GLKMatrix4Multiply(mat, mat2);
 //	log_debug(@"diff \n%@", [NSStringFromGLKMatrix4(diff) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
 //	log_debug(@"\n%@", [NSStringFromGLKMatrix4(mat) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
+#endif
 	return mat;
+	return GLKMatrix4Invert(mat, NULL);
 
-	// 或许可以用四元数来实现？
-//	if(_mode & FollowRotateX){
-//		// Y轴的变动角度，也即X轴旋转角度
-//		GLKVector3 vec0 = GLKVector3Make(0, 1, 0);
-//		GLKVector3 vec1 = GLKMatrix4MultiplyVector3(diff, vec0);
-//		float dp = GLKVector3DotProduct(vec0, vec1);
-//		float rad = fabs(dp - 1)<0.0001? 0 : acos(dp);
-//		log_debug(@"x rotate: %f %f %f", dp, rad, GLKMathRadiansToDegrees(rad));
-//		mat = GLKMatrix4RotateX(mat, rad);
-//	}
-//	if(_mode & FollowRotateY){
-//		// X轴的变动角度，也即Y轴旋转角度
-//		GLKVector3 vec0 = GLKVector3Make(1, 0, 0);
-//		GLKVector3 vec1 = GLKMatrix4MultiplyVector3(diff, vec0);
-//		float dp = GLKVector3DotProduct(vec0, vec1);
-//		float rad = fabs(dp - 1)<0.0001? 0 : acos(dp);
-//		log_debug(@"y rotate: %f %f %f", dp, rad, GLKMathRadiansToDegrees(rad));
-//		mat = GLKMatrix4RotateY(mat, rad);
-//	}
-	
 //	GLKQuaternion quat1 = GLKQuaternionMakeWithMatrix4(old);
 //	GLKQuaternion quat2 = GLKQuaternionMakeWithMatrix4(now);
 //	GLKQuaternion quat = GLKQuaternionSubtract(quat2, quat1);
@@ -123,7 +162,6 @@ static const int FollowRotateZ   = 1<<3;
 //	GLKMatrix4 mat2 = GLKMatrix4MakeWithQuaternion(quat);
 //	NSLog(@"\n%@", [NSStringFromGLKMatrix4(mat2) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
 //	GLKMatrix4 mat = GLKMatrix4Multiply(mat2, mat1);
-//	return mat;
 }
 
 @end

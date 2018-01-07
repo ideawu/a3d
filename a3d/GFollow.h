@@ -7,6 +7,7 @@
 @interface GFollow : NSObject
 
 @property GObject *target;
+@property GLKMatrix4 startMatrix;
 
 - (void)followTranslate;
 - (void)followRotate;

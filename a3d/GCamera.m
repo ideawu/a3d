@@ -13,11 +13,13 @@
 @property GLKVector3 center;
 @end
 
+// 相机跟随算法：开始跟随时，记录相机原点和目标原点的坐标。
+
 @implementation GCamera
 
 - (id)init{
 	self = [super init];
-	_center = GLKVector3Make(0, 0, 500); // TODO
+	_center = GLKVector3Make(0, 0, 0); // TODO
 	return self;
 }
 
@@ -36,11 +38,29 @@
 }
 
 - (GLKMatrix4)matrix{
+//	GLKMatrix4 mat = super.matrix;
+//	if(_follow){
+//		mat = GLKMatrix4Multiply(GLKMatrix4Invert(_follow.startMatrix, NULL), mat);
+//		mat = GLKMatrix4Multiply(_follow.target.matrix, mat);
+//	}
+//	return mat;
+
+//	GLKVector3 vec0 = GLKVector3Make(1, 0, 0);
+//	GLKVector3 vec1 = GLKMatrix4MultiplyVector3(mat, vec0);
+//	float dp = GLKVector3DotProduct(vec0, vec1);
+//	float rad = fabs(dp)<0.001? 0 : acos(dp);
+//	log_debug(@"%f %f", rad, GLKMathRadiansToDegrees(rad));
+//	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+//	mat = GLKMatrix4RotateZ(mat, -rad);
+//	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+
 	GLKMatrix4 mat = super.matrix;
 	if(_follow){
 		mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-//		mat = GLKMatrix4Multiply(_follow.matrix, mat);
+		// 变换被存储在矩阵里，如果想进行矩阵所表示的变换，应该右乘矩阵，而不是左乘，
+		// 因为变换是指在世界中的变换，不是在所要进行变换的矩阵里。也即在世界中做指定变换，不是在自己坐标系内做这个变换。
 		mat = GLKMatrix4Multiply(mat, _follow.matrix);
+//		mat = GLKMatrix4Multiply(_follow.matrix, mat);
 		mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
 	}
 	return mat;
@@ -60,19 +80,18 @@
 	}
 	_follow = [[GFollow alloc] init];
 	_follow.target = target;
-	_center = GLKVector3Make(target.x - super.x, target.y - super.y, target.z - super.z);
+	GLKVector3 pos = GLKVector3Make(target.x, target.y, target.z);
+	_center = GLKMatrix4MultiplyVector3(self.matrix, pos);
+//	_center = GLKVector3Make(pos.x - super.x, pos.y - super.y, pos.z - super.z);
 //	_center = GLKVector3Make(0, 0, target.z - super.z);
-	log_debug(@"%f %f %f", _center.x, _center.y, _center.z);
+	log_debug(@"center: %f %f %f", _center.x, _center.y, _center.z);
+	log_debug(@"target: %f %f %f", target.x, target.y, target.z);
 }
 
 - (void)unfollow{
 	if(_follow){
-		GLKMatrix4 mat = super.matrix;
-		mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-		mat = GLKMatrix4Multiply(_follow.matrix, mat);
-		mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-		super.matrix = mat;
-//		_center = GLKVector3Make(0, 0, 0);
+		super.matrix = self.matrix;
+		_center = GLKVector3Make(0, 0, 0);
 	}
 	_follow = nil;
 }

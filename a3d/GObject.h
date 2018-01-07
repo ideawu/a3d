@@ -13,11 +13,12 @@
 //		pos = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(matrix), pos);
 // 获取旋转角度分量
 //		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(matrix);
-// 如果A和B同级，即是A做了B变换。如果A处于B中，可理解为将A从B中脱离。
+// B做了A变换，结果就是B的新矩阵，也即A在世界中的矩阵。
 //		GLKMatrix4Multiply(B, A);
-// 将同一世界内的某坐标系移到另一坐标系内，可用于物体跟随
+// 将同一世界内的某坐标系移到另一坐标系内
 //		GLKMatrix4Multiply(GLKMatrix4Invert(B), A);
 
+// 欧拉角与四元数的转换：https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 
 // GObject=坐标系+坐标系内的物体
 @interface GObject : NSObject

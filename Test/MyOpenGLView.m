@@ -15,6 +15,7 @@
 	GDraftSprite *_camera_hero;
 	GAngle *_mouseAngle;
 	MySprite *_hero;
+	GCamera *_fakeCamera;
 }
 // 当前被控制的对象
 @property GObject *currentObject;
@@ -89,6 +90,10 @@
 	[_world.camera follow:_hero];
 //	_currentObject = _flag;
 //	[_world.camera follow:_flag];
+	
+	_fakeCamera = [[GCamera alloc] init];
+	[_fakeCamera moveX:_hero.x-120 y:_hero.y+300 z:_hero.z-200];
+//	[_fakeCamera follow:_hero];
 }
 
 - (void)switchSprite{
@@ -132,10 +137,10 @@
 	[_flag render];
 	[_hero render];
 
-//	_camera_hero.matrix = _world.camera.bodyMatrix;
-//	_camera_hero.angle = _world.camera.angle;
+	_camera_hero.matrix = _fakeCamera.matrix;
+//	_camera_hero.angle = _fakeCamera.angle;
 //	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2+2 z:50];
-//	[_camera_hero render];
+	[_camera_hero render];
 	
 	[_scene render];
 }
