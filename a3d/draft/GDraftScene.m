@@ -38,14 +38,14 @@
 //			glVertex3f(x0, -5, z0);
 //			glEnd();
 			
-			glBindTexture(GL_TEXTURE_2D, _texture.name);
-			glBegin(GL_POLYGON);
-			glTexCoord2f(0, 1); glVertex3f(x0, -1, z1);
-			glTexCoord2f(1, 1); glVertex3f(x1, -1, z1);
-			glTexCoord2f(1, 0); glVertex3f(x1, -1, z0);
-			glTexCoord2f(0, 0); glVertex3f(x0, -1, z0);
-			glEnd();
-			glBindTexture(GL_TEXTURE_2D, 0);
+//			glBindTexture(GL_TEXTURE_2D, _texture.name);
+//			glBegin(GL_POLYGON);
+//			glTexCoord2f(0, 1); glVertex3f(x0, -1, z1);
+//			glTexCoord2f(1, 1); glVertex3f(x1, -1, z1);
+//			glTexCoord2f(1, 0); glVertex3f(x1, -1, z0);
+//			glTexCoord2f(0, 0); glVertex3f(x0, -1, z0);
+//			glEnd();
+//			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 	}
 

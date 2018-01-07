@@ -68,32 +68,26 @@
 	_flag.height = 100;
 	_flag.depth = 100;
 	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
-	[_flag moveX:200 y:_flag.height/2 z:200];
+//	[_flag moveX:200 y:_flag.height/2 z:200];
 
-	_camera_hero = [[GDraftSprite alloc] init];
-	_camera_hero.width = 100;
-	_camera_hero.height = 100;
-	_camera_hero.depth = 100;
-	
 	_hero = [[MySprite alloc] init];
 	[_hero moveX:800 y:0 z:800];
 //	[_hero rotateZ:30];
+	
+	_fakeCamera = [[GCamera alloc] init];
+	[_fakeCamera moveX:_hero.x-120 y:_hero.y+200 z:_hero.z-300];
+//	[_fakeCamera follow:_hero];
+	//	[_fakeCamera rotateZ:40];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
 	[_objects addObject:_hero];
-	[_objects addObject:_flag];
+	[_objects addObject:_fakeCamera];
 
 	_currentObject = _world.camera;
 	
 	_currentObject = _hero;
 	[_world.camera follow:_hero];
-//	_currentObject = _flag;
-//	[_world.camera follow:_flag];
-	
-	_fakeCamera = [[GCamera alloc] init];
-	[_fakeCamera moveX:_hero.x-120 y:_hero.y+300 z:_hero.z-200];
-//	[_fakeCamera follow:_hero];
 }
 
 - (void)switchSprite{
@@ -134,13 +128,10 @@
 - (void)draw3D{
 	[_img1 render];
 	[_img2 render];
-	[_flag render];
 	[_hero render];
 
-	_camera_hero.matrix = _fakeCamera.matrix;
-//	_camera_hero.angle = _fakeCamera.angle;
-//	[_camera_hero moveX:0 y:-(_world.camera.height/2)+_camera_hero.height/2+2 z:50];
-	[_camera_hero render];
+	_flag.matrix = _fakeCamera.matrix;
+	[_flag render];
 	
 	[_scene render];
 }
@@ -230,11 +221,11 @@
 			break;
 		}
 		case '[':{
-			[_currentObject rotateZ:5];
+			[_currentObject rotateZ:10];
 			break;
 		}
 		case ']':{
-			[_currentObject rotateZ:-5];
+			[_currentObject rotateZ:-10];
 			break;
 		}
 		case NSLeftArrowFunctionKey:{
@@ -246,10 +237,10 @@
 			break;
 		}
 		case NSUpArrowFunctionKey:
-			[_currentObject rotateX:5];
+			[_currentObject rotateX:10];
 			break;
 		case NSDownArrowFunctionKey:
-			[_currentObject rotateX:-5];
+			[_currentObject rotateX:-10];
 			break;
 		case 'a':
 		case 'A':

@@ -80,7 +80,6 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	sinp = trimf(sinp);
 	siny = trimf(siny);
 	cosy = trimf(cosy);
-	log_debug(@"%f %f %f %f %f", sinr, cosr, sinp, siny, cosy);
 	
 	r = atan2(sinr, cosr);
 	if (fabs(sinp) >= 1){
@@ -90,6 +89,9 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	}
 	y = atan2(siny, cosy);
 	
+//	log_debug(@"%f %f %f", r, p, y);
+//	log_debug(@"%f %f (%f) %f %f", sinr, cosr, sinp, siny, cosy);
+
 	*roll = r;
 	*pitch = p;
 	*yaw = y;
@@ -100,7 +102,6 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	GLKMatrix4 now = _target.matrix;
 	// T*A=B => T=B*A'
 	GLKMatrix4 diff = GLKMatrix4Multiply(now, GLKMatrix4Invert(old, NULL));
-	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(diff);
 //	return diff;
 //	GLKQuaternion quat1 = GLKQuaternionMakeWithMatrix4(old);
 //	GLKQuaternion quat2 = GLKQuaternionMakeWithMatrix4(now);
@@ -118,8 +119,9 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	
 #if 1
 	float roll, pitch, yaw;
+	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(diff);
 	quat_to_euler(quat, &roll, &pitch, &yaw, "YXZ");
-	log_debug(@"%f %f %f, %f %f %f", roll, pitch, yaw, GLKMathRadiansToDegrees(roll), GLKMathRadiansToDegrees(pitch), GLKMathRadiansToDegrees(yaw));
+	log_debug(@"y: %f x: %f z: %f", GLKMathRadiansToDegrees(roll), GLKMathRadiansToDegrees(pitch), GLKMathRadiansToDegrees(yaw));
 	if(_mode & FollowRotateY){
 		mat = GLKMatrix4RotateY(mat, roll);
 	}
@@ -127,7 +129,7 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 		mat = GLKMatrix4RotateX(mat, pitch);
 	}
 	if(_mode & FollowRotateZ){
-//		mat = GLKMatrix4RotateZ(mat, yaw);
+		mat = GLKMatrix4RotateZ(mat, yaw);
 	}
 //	log_debug(@"mat \n%@", [NSStringFromGLKMatrix4(mat) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
 #else
@@ -148,20 +150,6 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 #endif
 	return mat;
 	return GLKMatrix4Invert(mat, NULL);
-
-//	GLKQuaternion quat1 = GLKQuaternionMakeWithMatrix4(old);
-//	GLKQuaternion quat2 = GLKQuaternionMakeWithMatrix4(now);
-//	GLKQuaternion quat = GLKQuaternionSubtract(quat2, quat1);
-//	quat.w = 1;
-//	GLKVector3 offset = GLKVector3Make(now.m30-old.m30, now.m31-old.m31, now.m32-old.m32);
-//	log_debug(@"%f %f %f %f", quat.x, quat.y, quat.z, quat.w);
-//	if(!(_mode & FollowRotateZ)){
-//		quat.z = 0;
-//	}
-//	GLKMatrix4 mat1 = GLKMatrix4MakeTranslation(offset.x, offset.y, offset.z);
-//	GLKMatrix4 mat2 = GLKMatrix4MakeWithQuaternion(quat);
-//	NSLog(@"\n%@", [NSStringFromGLKMatrix4(mat2) stringByReplacingOccurrencesOfString:@"}, " withString:@"},\n"]);
-//	GLKMatrix4 mat = GLKMatrix4Multiply(mat2, mat1);
 }
 
 @end

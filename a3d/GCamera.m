@@ -10,7 +10,7 @@
 	GFollow *_follow;
 }
 // 观察的焦点在相机坐标系内的位置，默认为相机原点
-@property GLKVector3 center;
+@property GLKVector4 center;
 @end
 
 // 相机跟随算法：开始跟随时，记录相机原点和目标原点的坐标。
@@ -19,22 +19,49 @@
 
 - (id)init{
 	self = [super init];
-	_center = GLKVector3Make(0, 0, 0); // TODO
+	_center = GLKVector4Make(110, 110, 110, 1); // TODO
 	return self;
 }
+// 消除超过某些精度的小数部分，避免如 -0.00001 这样的数影响符号位。
+static float trimf(float f){
+	return fabs(f)<FLT_EPSILON*10? 0 : f;
+}
 
-- (GLKMatrix4)eyeMatrix{
-	GLKVector3 vec0 = GLKVector3Make(0, 1, 0);
-	GLKVector3 vec1 = GLKMatrix4MultiplyVector3(super.matrix, vec0);
-	float dp = GLKVector3DotProduct(vec0, vec1);
-	float rad = acos(dp);
-	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
-	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(self.angle.z));
-	mat = GLKMatrix4RotateX(mat, -rad);
-	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(self.angle.y));
-	mat = GLKMatrix4RotateX(mat, rad);
-	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(self.angle.x));
-	return mat;
+static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw, const char *mode){
+	float r, p, y, w;
+	float sinr, cosr, sinp, siny, cosy;
+	float qs[3] = {q.x, q.y, q.z};
+	// 各轴顺序
+	int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
+	r = qs[idx[0]];
+	p = qs[idx[1]];
+	y = qs[idx[2]];
+	w = q.w;
+	sinr = 2 * (w * r + p * y);
+	cosr = 1 - 2 * (r * r + p * p);
+	sinp = 2 * (w * p - r * y);
+	siny = 2 * (w * y + r * p);
+	cosy = 1 - 2 * (p * p + y * y);
+	sinr = trimf(sinr);
+	cosr = trimf(cosr);
+	sinp = trimf(sinp);
+	siny = trimf(siny);
+	cosy = trimf(cosy);
+	
+	r = atan2(sinr, cosr);
+	if (fabs(sinp) >= 1){
+		p = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+	}else{
+		p = asin(sinp);
+	}
+	y = atan2(siny, cosy);
+	
+		log_debug(@"%f %f %f", r, p, y);
+		log_debug(@"%f %f (%f) %f %f", sinr, cosr, sinp, siny, cosy);
+	
+	*roll = r;
+	*pitch = p;
+	*yaw = y;
 }
 
 - (GLKMatrix4)matrix{
@@ -45,23 +72,22 @@
 //	}
 //	return mat;
 
-//	GLKVector3 vec0 = GLKVector3Make(1, 0, 0);
-//	GLKVector3 vec1 = GLKMatrix4MultiplyVector3(mat, vec0);
-//	float dp = GLKVector3DotProduct(vec0, vec1);
-//	float rad = fabs(dp)<0.001? 0 : acos(dp);
-//	log_debug(@"%f %f", rad, GLKMathRadiansToDegrees(rad));
-//	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-//	mat = GLKMatrix4RotateZ(mat, -rad);
-//	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-
 	GLKMatrix4 mat = super.matrix;
 	if(_follow){
-		mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-		// 变换被存储在矩阵里，如果想进行矩阵所表示的变换，应该右乘矩阵，而不是左乘，
-		// 因为变换是指在世界中的变换，不是在所要进行变换的矩阵里。也即在世界中做指定变换，不是在自己坐标系内做这个变换。
-		mat = GLKMatrix4Multiply(mat, _follow.matrix);
-//		mat = GLKMatrix4Multiply(_follow.matrix, mat);
-		mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+		float roll, pitch, yaw;
+		GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(_follow.matrix);
+		quat_to_euler(quat, &roll, &pitch, &yaw, "YXZ");
+		log_debug(@"y: %f x: %f z: %f", GLKMathRadiansToDegrees(roll), GLKMathRadiansToDegrees(pitch), GLKMathRadiansToDegrees(yaw));
+		GLKMatrix4 old = super.matrix;
+		[self rotateY:GLKMathRadiansToDegrees(roll)];
+		[self rotateX:GLKMathRadiansToDegrees(pitch)];
+		[self rotateZ:GLKMathRadiansToDegrees(yaw)];
+//		[self rotateX:GLKMathRadiansToDegrees(pitch) y:GLKMathRadiansToDegrees(roll) z:GLKMathRadiansToDegrees(yaw)];
+//		mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+//		mat = GLKMatrix4Multiply(mat, _follow.matrix);
+//		mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+		mat = super.matrix;
+		super.matrix = old;
 	}
 	return mat;
 }
@@ -78,20 +104,19 @@
 	if(_follow){
 		[self unfollow];
 	}
+	GLKVector4 pos = GLKVector4Make(target.x, target.y, target.z, 1);
+	log_debug(@"target: %f %f %f", target.x, target.y, target.z);
+	log_debug(@"self: %f %f %f", self.x, self.y, self.z);
+	_center = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(self.matrix, NULL), pos);
+	log_debug(@"center: %f %f %f", _center.x, _center.y, _center.z);
 	_follow = [[GFollow alloc] init];
 	_follow.target = target;
-	GLKVector3 pos = GLKVector3Make(target.x, target.y, target.z);
-	_center = GLKMatrix4MultiplyVector3(self.matrix, pos);
-//	_center = GLKVector3Make(pos.x - super.x, pos.y - super.y, pos.z - super.z);
-//	_center = GLKVector3Make(0, 0, target.z - super.z);
-	log_debug(@"center: %f %f %f", _center.x, _center.y, _center.z);
-	log_debug(@"target: %f %f %f", target.x, target.y, target.z);
 }
 
 - (void)unfollow{
 	if(_follow){
 		super.matrix = self.matrix;
-		_center = GLKVector3Make(0, 0, 0);
+		_center = GLKVector4Make(0, 0, 0, 1);
 	}
 	_follow = nil;
 }
@@ -99,66 +124,50 @@
 // 相机的移动以视线坐标为基准来移动
 - (void)moveX:(float)x y:(float)y z:(float)z{
 	GLKMatrix4 mat = self.matrix;
-	if(_target){
-		mat = GLKMatrix4Multiply(_target.matrix, mat);
-	}
 	mat = GLKMatrix4Translate(mat, x, y, z);
-	if(_target){
-		mat = GLKMatrix4Multiply(GLKMatrix4Invert(_target.matrix, NULL), mat);
-	}
 	super.matrix = mat;
 }
 
 // 相机平移到焦点处后绕自身X轴旋转
 - (void)rotateX:(float)degree{
 	GLKMatrix4 mat = super.matrix;
-	if(_target){
-		mat = GLKMatrix4Multiply(_target.matrix, mat);
-	}
-
 	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
 	mat = GLKMatrix4RotateX(mat, GLKMathDegreesToRadians(degree));
 	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-
-	if(_target){
-		mat = GLKMatrix4Multiply(GLKMatrix4Invert(_target.matrix, NULL), mat);
-	}
 	super.matrix = mat;
 }
 
 // 相机平移到焦点处后，绕经过自身原点的世界坐标Y轴的平行轴
 - (void)rotateY:(float)degree{
-	GLKMatrix4 mat = super.matrix;
-	if(_target){
-		mat = GLKMatrix4Multiply(_target.matrix, mat);
-	}
-	
-	GLKVector3 axis = GLKVector3Make(0, 1, 0); // 世界Y轴
-	axis = GLKMatrix4MultiplyVector3(GLKMatrix4Invert(mat, NULL), axis); // 世界Y轴进入相机坐标系(移到相机原点)
-	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-	mat = GLKMatrix4RotateWithVector3(mat, GLKMathDegreesToRadians(degree), axis);
-	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+//	GLKMatrix4 mat = super.matrix;
+//	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+//	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
+//	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+//	super.matrix = mat;
 
-	if(_target){
-		mat = GLKMatrix4Multiply(GLKMatrix4Invert(_target.matrix, NULL), mat);
-	}
+//	GLKMatrix4 mat = super.matrix;
+//	GLKVector4 axis = GLKVector4Make(0, 1, 0, 1); // 世界Y轴
+//	axis = GLKMatrix4MultiplyVector3(GLKMatrix4Invert(mat, NULL), axis); // 世界Y轴进入相机坐标系(移到相机原点)
+//	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
+//	mat = GLKMatrix4RotateWithVector3(mat, GLKMathDegreesToRadians(degree), axis);
+//	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+//	super.matrix = mat;
+	
+	// P * -P * N * T * -N * P
+
+	GLKMatrix4 mat = GLKMatrix4MakeTranslation(_center.x, _center.y, _center.z);
+	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
+	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+	mat = GLKMatrix4Multiply(mat, super.matrix);
 	super.matrix = mat;
 }
 
 // 相机平移到焦点处后绕自身Z轴旋转
 - (void)rotateZ:(float)degree{
 	GLKMatrix4 mat = super.matrix;
-	if(_target){
-		mat = GLKMatrix4Multiply(_target.matrix, mat);
-	}
-	
 	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
 	mat = GLKMatrix4RotateZ(mat, GLKMathDegreesToRadians(degree));
 	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-	
-	if(_target){
-		mat = GLKMatrix4Multiply(GLKMatrix4Invert(_target.matrix, NULL), mat);
-	}
 	super.matrix = mat;
 }
 
