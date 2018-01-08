@@ -23,7 +23,6 @@
 
 @interface GMatrix4(){
 }
-@property GLKMatrix4 matrix;
 @end
 
 
@@ -42,8 +41,12 @@
 
 - (GMatrix4 *)clone{
 	GMatrix4 *ret = [[GMatrix4 alloc] init];
-	ret.matrix = _matrix;
+	[ret copy:self];
 	return ret;
+}
+
+- (void)copy:(GMatrix4 *)src{
+	self.matrix = src.matrix;
 }
 
 - (NSString *)description{

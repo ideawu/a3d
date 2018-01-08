@@ -19,9 +19,14 @@
 
 - (GObject *)clone{
 	GObject *ret = [[GObject alloc] init];
-	// TODO:
-	ret.matrix = super.matrix; // 注意用 super
+	[ret copy:self];
 	return ret;
+}
+
+- (void)copy:(GObject *)src{
+	[super copy:src];
+	// TODO: angle, width, height...
+	super.matrix = src.matrix; // 注意用 super
 }
 
 - (void)scale:(float)ratio{

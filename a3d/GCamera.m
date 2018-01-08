@@ -53,9 +53,7 @@
 	_follow = [[GFollow alloc] init];
 	_follow.target = target;
 	_follow.shadow = [self clone];
-	[_follow.shadow enter:_follow.target];
-//	log_debug(@"target: %f %f %f", target.x, target.y, target.z);
-//	log_debug(@"self: %f %f %f", self.x, self.y, self.z);
+	[_follow.shadow enter:target];
 }
 
 - (void)unfollow{

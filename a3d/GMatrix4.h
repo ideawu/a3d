@@ -7,14 +7,15 @@
 
 @interface GMatrix4 : NSObject
 
+@property GLKMatrix4 matrix;
+
 // 创建一个单位矩阵
 + (GMatrix4 *)make;
+
 - (GMatrix4 *)clone;
+- (void)copy:(GMatrix4 *)src;
 
 #pragma mark - 矩阵运算
-
-- (GLKMatrix4)matrix;
-- (void)setMatrix:(GLKMatrix4)matrix;
 
 - (void)invert;
 

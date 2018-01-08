@@ -17,6 +17,7 @@
 @property float depth;
 
 - (GObject *)clone;
+- (void)copy:(GObject *)src;
 
 - (void)scale:(float)ratio;
 
