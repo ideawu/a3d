@@ -6,7 +6,9 @@
 
 @interface GFollow : NSObject
 
-@property GObject *target;
+@property (retain) GMatrix4 *target;
+@property (retain) GMatrix4 *shadow;
+
 @property GLKMatrix4 startMatrix;
 
 - (void)followTranslate;

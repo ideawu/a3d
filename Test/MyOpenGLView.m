@@ -73,20 +73,19 @@
 	_hero = [[MySprite alloc] init];
 	[_hero moveX:800 y:0 z:800];
 //	[_hero rotateZ:30];
-	
+
 	_fakeCamera = [[GCamera alloc] init];
-	[_fakeCamera moveX:_hero.x-120 y:_hero.y+200 z:_hero.z-300];
+//	[_fakeCamera moveX:_hero.x-120 y:_hero.y+200 z:_hero.z-300];
 //	[_fakeCamera follow:_hero];
-	//	[_fakeCamera rotateZ:40];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
 	[_objects addObject:_hero];
 	[_objects addObject:_fakeCamera];
 
-	_currentObject = _world.camera;
-	
+//	_currentObject = _world.camera;
 	_currentObject = _hero;
+	
 	[_world.camera follow:_hero];
 }
 

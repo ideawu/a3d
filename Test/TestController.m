@@ -19,7 +19,7 @@
 	
 	CGRect frame = self.window.frame;
 	frame.size.width = 900;
-	frame.size.height = 700;
+	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
 	
 	CGFloat width = frame.size.width - 100;

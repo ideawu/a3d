@@ -12,10 +12,7 @@
 // 竖直方向的视角
 @property float fovy;
 
-@property (readonly) GObject *target;
-
-// 相机身体在世界（不是在被跟随物体中）坐标中的坐标系
-//- (GLKMatrix4)bodyMatrix;
+@property (readonly) GMatrix4 *target;
 
 // 按相机特有的操作顺序，先后旋转 z-y-z 轴
 - (void)rotateX:(float)x y:(float)y z:(float)z;

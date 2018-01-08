@@ -45,6 +45,10 @@
 		3124F1402000B3200005EDDE /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F13E2000B3200005EDDE /* GFollow.m */; };
 		3124F1432001C71D0005EDDE /* EulerAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1412001C71D0005EDDE /* EulerAngle.h */; };
 		3124F1442001C71D0005EDDE /* EulerAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1422001C71D0005EDDE /* EulerAngle.m */; };
+		3124F147200344580005EDDE /* GMatrix4.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F145200344580005EDDE /* GMatrix4.h */; };
+		3124F148200344580005EDDE /* GMatrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F146200344580005EDDE /* GMatrix4.m */; };
+		3124F150200371EB0005EDDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F14F200371EB0005EDDE /* main.m */; };
+		3124F154200372690005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +61,15 @@
 				3124F0EF1FFB42C20005EDDE /* a3d.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3124F14B200371EB0005EDDE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -106,6 +119,10 @@
 		3124F13E2000B3200005EDDE /* GFollow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFollow.m; sourceTree = "<group>"; };
 		3124F1412001C71D0005EDDE /* EulerAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EulerAngle.h; sourceTree = "<group>"; };
 		3124F1422001C71D0005EDDE /* EulerAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EulerAngle.m; sourceTree = "<group>"; };
+		3124F145200344580005EDDE /* GMatrix4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMatrix4.h; sourceTree = "<group>"; };
+		3124F146200344580005EDDE /* GMatrix4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMatrix4.m; sourceTree = "<group>"; };
+		3124F14D200371EB0005EDDE /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
+		3124F14F200371EB0005EDDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +141,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3124F14A200371EB0005EDDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3124F154200372690005EDDE /* liba3d.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,6 +157,7 @@
 			children = (
 				3124F0C51FFB37F40005EDDE /* a3d */,
 				3124F0F51FFB463A0005EDDE /* Test */,
+				3124F14E200371EB0005EDDE /* Cli */,
 				3124F0C41FFB37F40005EDDE /* Products */,
 				3124F10F1FFB48D30005EDDE /* Frameworks */,
 			);
@@ -142,6 +168,7 @@
 			children = (
 				3124F0C31FFB37F40005EDDE /* liba3d.a */,
 				3124F0F41FFB463A0005EDDE /* Test.app */,
+				3124F14D200371EB0005EDDE /* Cli */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +184,8 @@
 				3124F0D51FFB38A40005EDDE /* GWorld.m */,
 				3124F0D41FFB38A40005EDDE /* GFrame.h */,
 				3124F0D21FFB38A40005EDDE /* GFrame.m */,
+				3124F145200344580005EDDE /* GMatrix4.h */,
+				3124F146200344580005EDDE /* GMatrix4.m */,
 				3124F0D81FFB38A40005EDDE /* GObject.h */,
 				3124F0D31FFB38A40005EDDE /* GObject.m */,
 				3124F12F1FFDED250005EDDE /* GAngle.h */,
@@ -250,6 +279,14 @@
 			path = draft;
 			sourceTree = "<group>";
 		};
+		3124F14E200371EB0005EDDE /* Cli */ = {
+			isa = PBXGroup;
+			children = (
+				3124F14F200371EB0005EDDE /* main.m */,
+			);
+			path = Cli;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -268,6 +305,7 @@
 				3124F12D1FFDEB560005EDDE /* GDraftSprite.h in Headers */,
 				3124F0DB1FFB38A40005EDDE /* GWorld.h in Headers */,
 				3124F1432001C71D0005EDDE /* EulerAngle.h in Headers */,
+				3124F147200344580005EDDE /* GMatrix4.h in Headers */,
 				3124F1311FFDED250005EDDE /* GAngle.h in Headers */,
 				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
@@ -313,6 +351,23 @@
 			productReference = 3124F0F41FFB463A0005EDDE /* Test.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3124F14C200371EB0005EDDE /* Cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3124F151200371EB0005EDDE /* Build configuration list for PBXNativeTarget "Cli" */;
+			buildPhases = (
+				3124F149200371EB0005EDDE /* Sources */,
+				3124F14A200371EB0005EDDE /* Frameworks */,
+				3124F14B200371EB0005EDDE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cli;
+			productName = Cli;
+			productReference = 3124F14D200371EB0005EDDE /* Cli */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -335,6 +390,10 @@
 							};
 						};
 					};
+					3124F14C200371EB0005EDDE = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 3124F0BE1FFB37F40005EDDE /* Build configuration list for PBXProject "a3d" */;
@@ -352,6 +411,7 @@
 			targets = (
 				3124F0C21FFB37F40005EDDE /* a3d */,
 				3124F0F31FFB463A0005EDDE /* Test */,
+				3124F14C200371EB0005EDDE /* Cli */,
 			);
 		};
 /* End PBXProject section */
@@ -386,6 +446,7 @@
 				3124F1211FFC95A00005EDDE /* GVector3.m in Sources */,
 				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,
 				3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */,
+				3124F148200344580005EDDE /* GMatrix4.m in Sources */,
 				3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +460,14 @@
 				3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */,
 				3124F1371FFF984D0005EDDE /* MySprite.m in Sources */,
 				3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3124F149200371EB0005EDDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3124F150200371EB0005EDDE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +642,24 @@
 			};
 			name = Release;
 		};
+		3124F152200371EB0005EDDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
+			};
+			name = Debug;
+		};
+		3124F153200371EB0005EDDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -599,6 +686,15 @@
 			buildConfigurations = (
 				3124F1031FFB463A0005EDDE /* Debug */,
 				3124F1041FFB463A0005EDDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3124F151200371EB0005EDDE /* Build configuration list for PBXNativeTarget "Cli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3124F152200371EB0005EDDE /* Debug */,
+				3124F153200371EB0005EDDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
