@@ -52,11 +52,11 @@
 // Z轴的偏转角度
 - (float)zAngle;
 
-// X轴的旋转角度，为了将Y轴转回与原YX平面平行, pitch
+// X轴的旋转角度，为了将Y轴转回与原XY平面平行, pitch
 - (float)xRoll;
-// Y轴的旋转角度，为了将Z轴转回与原ZY平面平行, yaw
+// Y轴的旋转角度，为了将Z轴转回与原YZ平面平行, yaw
 - (float)yRoll;
-// Z轴的旋转角度，为了将X轴转回与原XZ平面平行, roll
+// Z轴的旋转角度，为了将X轴转回与原ZX平面平行, roll
 - (float)zRoll;
 
 // 复位X轴的旋转
