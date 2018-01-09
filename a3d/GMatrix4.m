@@ -141,41 +141,79 @@
 	return GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 0, 1));
 }
 
-// X轴到父坐标系XZ平面的角度
 - (float)xAngle{
 	GLKVector3 v = self.xAxis;
-	float sina = v.y;
+	float sina = sqrt(v.y*v.y + v.z*v.z);
 	float cosa = v.x;
-	return atan2(sina, cosa);
+	float rad = atan2(sina, cosa);
+	return GLKMathRadiansToDegrees(rad);
 }
 
-// Y轴到父坐标系XY平面的角度
 - (float)yAngle{
 	GLKVector3 v = self.yAxis;
-	float sina = v.z;
+	float sina = sqrt(v.x*v.x + v.z*v.z);
 	float cosa = v.y;
-	return atan2(sina, cosa);
+	float rad = atan2(sina, cosa);
+	return GLKMathRadiansToDegrees(rad);
 }
 
-// Z轴到父坐标系YZ平面的角度
 - (float)zAngle{
 	GLKVector3 v = self.zAxis;
-	float sina = v.x;
+	float sina = sqrt(v.x*v.x + v.y*v.y);
 	float cosa = v.z;
-	return atan2(sina, cosa);
+	float rad = atan2(sina, cosa);
+	return GLKMathRadiansToDegrees(rad);
 }
 
-- (void)resetXAngle{
-	[self rotateZ:-self.xAngle];
+/*
+ 两向量旋转角(A->B)算法：
+ 1. 确定初始轴，如X轴，或者Y轴，Z轴
+ 2. 将A移回X轴，即A=A-(0,y1,z1)，即normalize(x1, y1-y1, z1-z1)=(1,0,0)
+ 3. 将B=B-(0,y1,z1)=normalize(x2, y2-y1, z2-z1)，记为B'，这时求X轴到B的旋转角
+ 4. tan@ = zB'/xB'
+ */
+static float vector_angle(GLKVector3 vec0, GLKVector3 vec1){
+	GLKVector3 vec = GLKVector3Make(vec1.x, vec1.y - vec0.y, vec1.z - vec0.z);
+	vec = GLKVector3Normalize(vec);
+	float angle = atan2(vec.z, vec.x);
+	return GLKMathRadiansToDegrees(angle);
 }
 
-- (void)resetYAngle{
-	[self rotateY:-self.yAngle];
+// X轴的旋转角度
+- (float)xRoll{
+	GLKVector3 axis = self.yAxis;
+	GLKVector3 u = GLKVector3Make(axis.x, axis.y, 0); // 在XY平面上的投影向量
+	GLKVector3 v = GLKVector3Make(0, 0, axis.z); // 平面垂直方向的向量
+	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
+	return vector_angle(orig, axis);
 }
 
-- (void)resetZAngle{
-	[self rotateZ:-self.zAngle];
+// Y轴的旋转角度
+- (float)yRoll{
+	GLKVector3 axis = self.zAxis;
+	GLKVector3 u = GLKVector3Make(, axis.y, axis.z); // 在YZ平面上的投影向量
+	GLKVector3 v = GLKVector3Make(axis.x, 0, 0); // 平面垂直方向的向量
+	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
+	return vector_angle(orig, axis);
 }
+
+// Z轴的旋转角度
+- (float)zRoll{
+	GLKVector3 axis = self.xAxis;
+	GLKVector3 u = GLKVector3Make(axis.x, 0, axis.z); // 在ZX平面上的投影向量
+	GLKVector3 v = GLKVector3Make(0, axis.y, 0); // 平面垂直方向的向量
+	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
+	return vector_angle(orig, axis);
+}
+
+// 复位X轴的旋转
+//- (void)resetXRoll;
+//// 复位Y轴的旋转
+//- (void)resetYRoll;
+//// 复位Z轴的旋转
+//- (void)resetZRoll;
+
+#pragma mark - 矩阵自身的变换
 
 - (void)reset{
 	_matrix = GLKMatrix4MakeTranslation(0, 0, 0);
@@ -191,11 +229,9 @@
 	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(_matrix);
 	GLKMatrix4 mat = GLKMatrix4MakeWithQuaternion(quat);
 	mat = GLKMatrix4Invert(mat, NULL);
-//	_matrix = GLKMatrix4Multiply(mat, _matrix);
+	//	_matrix = GLKMatrix4Multiply(mat, _matrix);
 	_matrix = GLKMatrix4Multiply(_matrix, mat);
 }
-
-#pragma mark - 矩阵自身的变换
 
 - (void)scale:(float)ratio{
 	_matrix = GLKMatrix4Scale(_matrix, ratio, ratio, ratio);

@@ -32,6 +32,7 @@
 	if(_follow){
 		GMatrix4 *mat = [_follow.shadow clone];
 		[mat leave:_follow.target];
+		// 找出旋转角度
 		return mat.matrix;
 	}
 	return super.matrix;

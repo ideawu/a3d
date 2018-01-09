@@ -5,6 +5,8 @@
 #import <Cocoa/Cocoa.h>
 #import <GLKit/GLKit.h>
 
+// 左手坐标系
+
 @interface GMatrix4 : NSObject
 
 @property GLKMatrix4 matrix;
@@ -43,24 +45,32 @@
 - (GLKVector3)yAxis;
 - (GLKVector3)zAxis;
 
-// X轴到父坐标系XZ平面的角度
+// X轴的偏转角度
 - (float)xAngle;
-// Y轴到父坐标系XY平面的角度
+// Y轴的偏转角度
 - (float)yAngle;
-// Z轴到父坐标系YZ平面的角度
+// Z轴的偏转角度
 - (float)zAngle;
 
-// 通过转动X轴旋转Y轴向量和Z轴向量，通过转动Z轴旋转X轴向量，将各轴角度恢复
-- (void)resetXAngle;
-- (void)resetYAngle;
-- (void)resetZAngle;
+// X轴的旋转角度, pitch
+- (float)xRoll;
+// Y轴的旋转角度, yaw
+- (float)yRoll;
+// Z轴的旋转角度, roll
+- (float)zRoll;
+
+// 复位X轴的旋转
+- (void)resetXRoll;
+// 复位Y轴的旋转
+- (void)resetYRoll;
+// 复位Z轴的旋转
+- (void)resetZRoll;
+
+#pragma mark - 矩阵自身的变换
 
 - (void)reset;
 - (void)resetTranslation;
 - (void)resetRotation;
-
-
-#pragma mark - 矩阵自身的变换
 
 - (void)scale:(float)ratio;
 
