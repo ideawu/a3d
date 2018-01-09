@@ -171,6 +171,7 @@
  2. 将A移回X轴，即A=A-(0,y1,z1)，即normalize(x1, y1-y1, z1-z1)=(1,0,0)
  3. 将B=B-(0,y1,z1)=normalize(x2, y2-y1, z2-z1)，记为B'，这时求X轴到B的旋转角
  4. tan@ = zB'/xB'
+ 5. 初始轴不同，各参数的使用不同
  */
 static float vector_angle(GLKVector3 vec0, GLKVector3 vec1){
 	GLKVector3 vec = GLKVector3Make(vec1.x, vec1.y - vec0.y, vec1.z - vec0.z);
@@ -179,31 +180,43 @@ static float vector_angle(GLKVector3 vec0, GLKVector3 vec1){
 	return GLKMathRadiansToDegrees(angle);
 }
 
-// X轴的旋转角度
+// X轴的旋转角度，为了将Y轴转回与原YX平面平行
 - (float)xRoll{
 	GLKVector3 axis = self.yAxis;
 	GLKVector3 u = GLKVector3Make(axis.x, axis.y, 0); // 在XY平面上的投影向量
-	GLKVector3 v = GLKVector3Make(0, 0, axis.z); // 平面垂直方向的向量
+	GLKVector3 v = GLKVector3Make(0, 0, 1); // 平面垂直方向的向量
 	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
-	return vector_angle(orig, axis);
+
+	GLKVector3 vec = GLKVector3Make(axis.x - orig.x, axis.y, axis.z - orig.z);
+	vec = GLKVector3Normalize(vec);
+	float angle = atan2(vec.x, vec.y);
+	return GLKMathRadiansToDegrees(angle);
 }
 
-// Y轴的旋转角度
+// Y轴的旋转角度，为了将Z轴转回与原ZY平面平行
 - (float)yRoll{
 	GLKVector3 axis = self.zAxis;
-	GLKVector3 u = GLKVector3Make(, axis.y, axis.z); // 在YZ平面上的投影向量
-	GLKVector3 v = GLKVector3Make(axis.x, 0, 0); // 平面垂直方向的向量
+	GLKVector3 u = GLKVector3Make(0, axis.y, axis.z); // 在YZ平面上的投影向量
+	GLKVector3 v = GLKVector3Make(1, 0, 0); // 平面垂直方向的向量
 	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
-	return vector_angle(orig, axis);
+
+	GLKVector3 vec = GLKVector3Make(axis.x - orig.x, axis.y - orig.y, axis.z);
+	vec = GLKVector3Normalize(vec);
+	float angle = atan2(vec.y, vec.z);
+	return GLKMathRadiansToDegrees(angle);
 }
 
-// Z轴的旋转角度
+// Z轴的旋转角度，为了将X轴转回与原XZ平面平行
 - (float)zRoll{
 	GLKVector3 axis = self.xAxis;
 	GLKVector3 u = GLKVector3Make(axis.x, 0, axis.z); // 在ZX平面上的投影向量
-	GLKVector3 v = GLKVector3Make(0, axis.y, 0); // 平面垂直方向的向量
+	GLKVector3 v = GLKVector3Make(0, 1, 0); // 平面垂直方向的向量
 	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
-	return vector_angle(orig, axis);
+	
+	GLKVector3 vec = GLKVector3Make(axis.x, axis.y - orig.y, axis.z - orig.z);
+	vec = GLKVector3Normalize(vec);
+	float angle = atan2(vec.z, vec.x);
+	return GLKMathRadiansToDegrees(angle);
 }
 
 // 复位X轴的旋转

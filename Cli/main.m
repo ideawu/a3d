@@ -4,9 +4,24 @@
 
 static float angle(GLKVector3 axis){
 	axis = GLKVector3Normalize(axis);
-	GLKVector3 u = GLKVector3Make(axis.x, 0, axis.z); // 在平面上的投影向量
-	GLKVector3 v = GLKVector3Make(0, axis.y, 0); // 平面垂直方向的向量
+	
+	// x pitch
+//	GLKVector3 u = GLKVector3Make(axis.x, axis.y, 0); // 在XY平面上的投影向量
+//	GLKVector3 v = GLKVector3Make(0, 0, 1); // 平面垂直方向的向量
+	// y yaw
+	GLKVector3 u = GLKVector3Make(0, axis.y, axis.z); // 在YZ平面上的投影向量
+	GLKVector3 v = GLKVector3Make(1, 0, 0); // 平面垂直方向的向量
+	// z roll
+//	GLKVector3 u = GLKVector3Make(axis.x, 0, axis.z); // 在ZX平面上的投影向量
+//	GLKVector3 v = GLKVector3Make(0, 1, 0); // 平面垂直方向的向量
+	
+	u = GLKVector3Normalize(u);
+	v = GLKVector3Normalize(v);
+
 	GLKVector3 orig = GLKVector3CrossProduct(u, v); // 平面上与轴垂直的向量
+	log_debug(@"%@", NSStringFromGLKVector3(u));
+	log_debug(@"%@", NSStringFromGLKVector3(v));
+	log_debug(@"orig %@", NSStringFromGLKVector3(orig));
 	GLKVector3 vec = GLKVector3Make(axis.x, axis.y - orig.y, axis.z - orig.z);
 	vec = GLKVector3Normalize(vec);
 	float angle = atan2(vec.z, vec.x);
@@ -27,11 +42,11 @@ int main(int argc, const char * argv[]) {
 	log_debug(@"%@", mat);
 	
 	{
-		log_debug(@"%.2f", angle(GLKVector3Make(0, 0, 1)));
-		log_debug(@"%.2f", angle(GLKVector3Make(0, 0, -1)));
-		log_debug(@"%.2f", angle(GLKVector3Make(1, 1, 1)));
-		log_debug(@"%.2f", angle(GLKVector3Make(-1, -0.001, 0)));
-		log_debug(@"%.2f", angle(GLKVector3Make(0, 0, 1)));
+		log_debug(@"%.2f", angle(GLKVector3Make(0, 1, 0)));
+//		log_debug(@"%.2f", angle(GLKVector3Make(0, 0, -1)));
+//		log_debug(@"%.2f", angle(GLKVector3Make(1, 1, 1)));
+//		log_debug(@"%.2f", angle(GLKVector3Make(-1, -0.001, 0)));
+//		log_debug(@"%.2f", angle(GLKVector3Make(0, 0, 1)));
 	}
 	return 0;
 }
