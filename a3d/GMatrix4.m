@@ -108,14 +108,14 @@ static GLKVector3 trimv3(GLKVector3 v){
 - (void)leave:(GMatrix4 *)parent{
 	_matrix = GLKMatrix4Multiply(parent.matrix, _matrix);
 }
-
-- (GLKVector3)multiplyVector3:(GLKVector3)vec{
-	return GLKMatrix4MultiplyVector3(self.matrix, vec);
-}
-
-- (GLKVector4)multiplyVector4:(GLKVector4)vec{
-	return GLKMatrix4MultiplyVector4(self.matrix, vec);
-}
+//
+//- (GLKVector3)multiplyVector3:(GLKVector3)vec{
+//	return GLKMatrix4MultiplyVector3(self.matrix, vec);
+//}
+//
+//- (GLKVector4)multiplyVector4:(GLKVector4)vec{
+//	return GLKMatrix4MultiplyVector4(self.matrix, vec);
+//}
 
 #pragma mark - 矩阵在父坐标系中
 

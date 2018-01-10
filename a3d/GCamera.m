@@ -30,7 +30,7 @@
 - (GLKMatrix4)matrix{
 	GLKMatrix4 mat = super.matrix;
 	if(_target){
-		mat = GLKMatrix4Multiply(mat, _target.matrix);
+		mat = GLKMatrix4Multiply(_target.matrix, mat);
 	}
 	return mat;
 }
@@ -41,20 +41,22 @@
 	if(_target){
 		[self unfollow];
 	}
-	_target = target;
 	[self enter:target];
+	_target = target;
+	GLKVector4 pos = GLKVector4Make(0, 0, 0, 1); // 相机盯着父坐标的原点
+	_center = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), pos);
 }
 
 - (void)unfollow{
 	if(_target){
 		[self leave:_target];
 		_target = nil;
+		_center = GLKVector4Make(0, 0, 0, 1);
 	}
 }
 
-// 相机的移动以视线坐标为基准来移动
+// 相机的移动以视线坐标为基准，且在世界中移动
 - (void)moveX:(float)x y:(float)y z:(float)z{
-	// 先将视线坐标中的位移对应到世界坐标中的位移
 	GLKMatrix4 mat = self.matrix;
 	GLKVector4 v0 = GLKMatrix4MultiplyVector4(mat, GLKVector4Make(0, 0, 0, 1));
 	GLKVector4 v1 = GLKMatrix4MultiplyVector4(mat, GLKVector4Make(x, y, z, 1));
@@ -65,53 +67,38 @@
 }
 
 - (void)rotateX:(float)degree{
-	GLKVector4 focus;
-	if(_target){
-		focus = GLKVector4Make(-self.x, -self.y, -self.z, 1);
-	}else{
-		focus = _center;
-	}
+	GLKVector4 focus = [self focus];
 	[super moveX:focus.x y:focus.y z:focus.z];
 	[super rotateX:degree];
 	[super moveX:-focus.x y:-focus.y z:-focus.z];
 }
 
 - (void)rotateZ:(float)degree{
-	GLKVector4 focus;
-	if(_target){
-		focus = GLKVector4Make(-self.x, -self.y, -self.z, 1);
-	}else{
-		focus = _center;
-	}
+	GLKVector4 focus = [self focus];
 	[super moveX:focus.x y:focus.y z:focus.z];
 	[super rotateZ:degree];
 	[super moveX:-focus.x y:-focus.y z:-focus.z];
 }
 
-// 相机平移到焦点处后，绕经过自身原点的世界坐标Y轴的平行轴
-- (void)rotateY:(float)degree{
-	// P * -P * N * T * -N * P
-	GLKVector4 focus;
+- (GLKVector4)focus{
 	if(_target){
-		focus = GLKVector4Make(-self.x, -self.y, -self.z, 1);
+		return GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), GLKVector4Make(0, 0, 0, 1));
 	}else{
-		focus = _center;
+		return _center;
 	}
-	focus = [self multiplyVector4:focus];
-	
-	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
-	mat = GLKMatrix4Translate(mat, focus.x, focus.y, focus.z);
-	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
-	mat = GLKMatrix4Translate(mat, -focus.x, -focus.y, -focus.z);
-	mat = GLKMatrix4Multiply(mat, super.matrix);
-	super.matrix = mat;
 }
 
-// 按相机特有的操作顺序，先后旋转 z-y-z 轴
-- (void)rotateX:(float)x y:(float)y z:(float)z{
-	[self rotateZ:z];
-	[self rotateY:y];
-	[self rotateX:x];
+// 相机平移到焦点处后，绕经过自身原点的父坐标Y轴的平行轴
+- (void)rotateY:(float)degree{
+	// P * -P * N * T * -N * P
+	GLKVector4 focus = [self focus];
+	GLKVector3 p0 = GLKVector3Make(focus.x, focus.y, focus.z);
+	GLKVector3 p1 = GLKVector3Make(0, 1, 0);
+	// 旋转点在世界中
+	p1 = GLKMatrix4MultiplyVector3(GLKMatrix4Invert(self.matrix, NULL), p1);
+	p1 = GLKVector3Add(p1, p0);
+//	log_debug(@"(%f %f %f)->(%f %f %f)", p0.x, p0.y, p0.z, p1.x, p1.y, p1.z);
+	[super orbit:degree p0:p0 p1:p1];
 }
 
 @end

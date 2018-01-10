@@ -24,8 +24,8 @@
 // 将矩阵从父矩阵中抽出，两者应是父子关系，此操作才有意义
 - (void)leave:(GMatrix4 *)parent;
 
-- (GLKVector3)multiplyVector3:(GLKVector3)vec;
-- (GLKVector4)multiplyVector4:(GLKVector4)vec;
+//- (GLKVector3)multiplyVector3:(GLKVector3)vec;
+//- (GLKVector4)multiplyVector4:(GLKVector4)vec;
 
 
 #pragma mark - 矩阵在父坐标系中
