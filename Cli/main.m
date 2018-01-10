@@ -16,13 +16,25 @@ int main(int argc, const char * argv[]) {
 	log_debug(@"%@", mat);
 //	[mat rotateY:45];
 //	[mat rotateX:45];
-	[mat rotateZ:90];
+	for(int i=0; i<8; i++){
+		[mat rotateX:45];
+		log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+	}
+	log_debug(@"");
+	for(int i=0; i<8; i++){
+		[mat rotateY:45];
+		log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+	}
+	log_debug(@"");
+	for(int i=0; i<8; i++){
+		[mat rotateZ:45];
+		log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+	}
+	log_debug(@"");
 //	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
 //	[mat rotateX:45];
 //	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
 //	[mat rotateY:45];
-	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
-	log_debug(@"");
 
 //	[mat resetRoll];
 //	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);

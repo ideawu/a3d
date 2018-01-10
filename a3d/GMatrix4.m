@@ -24,6 +24,18 @@
 
 // 欧拉角与四元数的转换：https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 
+static float trimf(float f){
+	return fabs(f)<FLT_EPSILON*10? 0 : f;
+}
+
+static GLKVector3 trimv3(GLKVector3 v){
+	v.x = trimf(v.x);
+	v.y = trimf(v.y);
+	v.z = trimf(v.z);
+	return v;
+}
+
+
 @interface GMatrix4(){
 }
 @end
@@ -133,15 +145,15 @@
 }
 
 - (GLKVector3)xAxis{
-	return GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(1, 0, 0));
+	return trimv3(GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(1, 0, 0)));
 }
 
 - (GLKVector3)yAxis{
-	return GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 1, 0));
+	return trimv3(GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 1, 0)));
 }
 
 - (GLKVector3)zAxis{
-	return GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 0, 1));
+	return trimv3(GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 0, 1)));
 }
 
 - (float)xAngle{
@@ -168,17 +180,15 @@
 	return GLKMathRadiansToDegrees(rad);
 }
 
-float trim(float f){
-	return fabs(f)<FLT_EPSILON*10? 0 : f;
-}
-
 static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
 	GLKVector3 cross = GLKVector3CrossProduct(vec0, vec1); // 算角度时的旋转轴
 	float sign = GLKVector3DotProduct(direction, cross); // 旋转轴在方向轴上的投影
 	float dot = GLKVector3DotProduct(vec0, vec1);
 	// 避免计算误差导致符号发生重大改变
-	sign = trim(sign);
-	dot = trim(dot);
+//	log_debug(@"%.10f %.10f %.10f", sign, dot, FLT_EPSILON);
+	sign = trimf(sign);
+	dot = trimf(dot);
+//	log_debug(@"%f %f", sign, dot);
 	float angle = atan2(copysign(GLKVector3Length(cross), sign), dot);
 	return GLKMathRadiansToDegrees(angle);
 }
@@ -186,7 +196,8 @@ static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
 // Z轴的旋转角度，为了将X轴转回与原XZ平面平行
 - (float)rollAngle{
 	GLKVector3 axis = self.zAxis; // 旋转轴
-	GLKVector3 y = GLKVector3Make(axis.x, axis.y+1, axis.z); // 平面垂直方向的向量
+	int sign = self.yAxis.y >= 0? 1 : -1;
+	GLKVector3 y = GLKVector3Make(axis.x, axis.y+sign, axis.z); // 平面垂直方向的向量
 	GLKVector3 vec0 = GLKVector3CrossProduct(y, axis); // 目的向量(在目的平面上)
 	GLKVector3 vec1 = self.xAxis; // 被旋转的向量
 //	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
@@ -197,18 +208,20 @@ static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
 // X轴的旋转角度，为了将Z轴转回与原XZ平面平行
 - (float)pitchAngle{
 	GLKVector3 axis = self.xAxis; // 旋转轴
-	GLKVector3 y = GLKVector3Make(axis.x, axis.y+1, axis.z); // 平面垂直方向的向量
+	int sign = self.yAxis.y >= 0? 1 : -1;
+	GLKVector3 y = GLKVector3Make(axis.x, axis.y+sign, axis.z); // 平面垂直方向的向量
 	GLKVector3 vec0 = GLKVector3CrossProduct(axis, y); // 目的向量(在目的平面上)，左手坐标系
 	GLKVector3 vec1 = self.zAxis; // 被旋转的向量
-	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
-	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
+//	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
+//	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
 	return angle(vec0, vec1, axis);
 }
 
 // Y轴的旋转角度，为了将Z轴转回与原YZ平面平行
 - (float)yawAngle{
 	GLKVector3 axis = self.yAxis; // 旋转轴
-	GLKVector3 x = GLKVector3Make(axis.x+1, axis.y, axis.z); // 平面垂直方向的向量
+	int sign = self.xAxis.x >= 0? 1 : -1;
+	GLKVector3 x = GLKVector3Make(axis.x+sign, axis.y, axis.z); // 平面垂直方向的向量
 	GLKVector3 vec0 = GLKVector3CrossProduct(x, axis); // 目的向量(在目的平面上)
 	GLKVector3 vec1 = self.zAxis; // 被旋转的向量
 //	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
@@ -325,12 +338,6 @@ static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
 
 - (void)orbitZ:(float)degree x:(float)x y:(float)y{
 	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
-}
-
-
-// 消除超过某些精度的小数部分，避免如 -0.00001 这样的数影响符号位。
-static float trimf(float f){
-	return fabs(f)<FLT_EPSILON*10? 0 : f;
 }
 
 // 各轴按顺序做 -roll, -pitch, -yaw 之后，旋转分量将恢复
