@@ -168,59 +168,69 @@
 	return GLKMathRadiansToDegrees(rad);
 }
 
-/*
- 两向量旋转角(A->B)算法：
- 1. 确定初始轴，如X轴，或者Y轴，Z轴
- 2. 将A移回X轴，即A=A-(0,y1,z1)，即normalize(x1, y1-y1, z1-z1)=(1,0,0)
- 3. 将B=B-(0,y1,z1)=normalize(x2, y2-y1, z2-z1)，记为B'，这时求X轴到B的旋转角
- 4. tan@ = zB'/xB'
- 5. 初始轴不同，各参数的使用不同
- */
+float trim(float f){
+	return fabs(f)<FLT_EPSILON*10? 0 : f;
+}
+
 static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
 	GLKVector3 cross = GLKVector3CrossProduct(vec0, vec1); // 算角度时的旋转轴
 	float sign = GLKVector3DotProduct(direction, cross); // 旋转轴在方向轴上的投影
 	float dot = GLKVector3DotProduct(vec0, vec1);
+	// 避免计算误差导致符号发生重大改变
+	sign = trim(sign);
+	dot = trim(dot);
 	float angle = atan2(copysign(GLKVector3Length(cross), sign), dot);
 	return GLKMathRadiansToDegrees(angle);
 }
 
-// X轴的旋转角度，为了将Y轴转回与原XY平面平行
-- (float)xRoll{
-	GLKVector3 axis = self.xAxis;
-	GLKVector3 u = GLKVector3Make(axis.x, axis.y, 0); // 在XY平面上的投影向量
-	GLKVector3 v = GLKVector3Make(0, 0, 1); // 平面垂直方向的向量
-	GLKVector3 vec0 = GLKVector3CrossProduct(v, u); // 平面上与轴垂直的向量，采用左手坐标系
-	GLKVector3 vec1 = self.yAxis;
+// Z轴的旋转角度，为了将X轴转回与原XZ平面平行
+- (float)rollAngle{
+	GLKVector3 axis = self.zAxis; // 旋转轴
+	GLKVector3 y = GLKVector3Make(axis.x, axis.y+1, axis.z); // 平面垂直方向的向量
+	GLKVector3 vec0 = GLKVector3CrossProduct(y, axis); // 目的向量(在目的平面上)
+	GLKVector3 vec1 = self.xAxis; // 被旋转的向量
+//	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
+//	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
+	return angle(vec0, vec1, axis);
+}
+
+// X轴的旋转角度，为了将Z轴转回与原XZ平面平行
+- (float)pitchAngle{
+	GLKVector3 axis = self.xAxis; // 旋转轴
+	GLKVector3 y = GLKVector3Make(axis.x, axis.y+1, axis.z); // 平面垂直方向的向量
+	GLKVector3 vec0 = GLKVector3CrossProduct(axis, y); // 目的向量(在目的平面上)，左手坐标系
+	GLKVector3 vec1 = self.zAxis; // 被旋转的向量
+	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
+	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
 	return angle(vec0, vec1, axis);
 }
 
 // Y轴的旋转角度，为了将Z轴转回与原YZ平面平行
-- (float)yRoll{
-	GLKVector3 axis = self.yAxis;
-	GLKVector3 u = GLKVector3Make(0, axis.y, axis.z); // 在YZ平面上的投影向量
-	GLKVector3 v = GLKVector3Make(1, 0, 0); // 平面垂直方向的向量
-	GLKVector3 vec0 = GLKVector3CrossProduct(v, u); // 平面上与轴垂直的向量，采用左手坐标系
-	GLKVector3 vec1 = self.zAxis;
-//	log_debug(@"a(%.2f %.2f %.2f), vec(%.2f %.2f %.2f)", axis.x, axis.y, axis.z, vec0.x, vec0.y, vec0.z);
+- (float)yawAngle{
+	GLKVector3 axis = self.yAxis; // 旋转轴
+	GLKVector3 x = GLKVector3Make(axis.x+1, axis.y, axis.z); // 平面垂直方向的向量
+	GLKVector3 vec0 = GLKVector3CrossProduct(x, axis); // 目的向量(在目的平面上)
+	GLKVector3 vec1 = self.zAxis; // 被旋转的向量
+//	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
+//	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
 	return angle(vec0, vec1, axis);
 }
 
-// Z轴的旋转角度，为了将X轴转回与原ZX平面平行
-- (float)zRoll{
-	GLKVector3 axis = self.zAxis;
-	GLKVector3 u = GLKVector3Make(axis.x, 0, axis.z); // 在ZX平面上的投影向量
-	GLKVector3 v = GLKVector3Make(0, 1, 0); // 平面垂直方向的向量
-	GLKVector3 vec0 = GLKVector3CrossProduct(v, u); // 平面上与轴垂直的向量，采用左手坐标系
-	GLKVector3 vec1 = self.xAxis;
-	return angle(vec0, vec1, axis);
+// 复位Z轴的旋转
+- (void)resetRoll{
+	[self rotateZ:-self.rollAngle];
 }
 
 // 复位X轴的旋转
-//- (void)resetXRoll;
-//// 复位Y轴的旋转
-//- (void)resetYRoll;
-//// 复位Z轴的旋转
-//- (void)resetZRoll;
+- (void)resetPitch{
+	[self rotateX:-self.pitchAngle];
+}
+
+// 复位Y轴的旋转
+- (void)resetYaw{
+	[self rotateY:-self.yawAngle];
+}
+
 
 #pragma mark - 矩阵自身的变换
 

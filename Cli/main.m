@@ -14,8 +14,22 @@ static float angle(GLKVector3 vec0, GLKVector3 vec1){
 int main(int argc, const char * argv[]) {
 	GMatrix4 *mat = [GMatrix4 make];
 	log_debug(@"%@", mat);
-	[mat rotateZ:45];
-	log_debug(@"xroll: %.2f, yroll: %.2f, zroll: %.2f", mat.xRoll, mat.yRoll, mat.zRoll);
-	
+//	[mat rotateY:45];
+//	[mat rotateX:45];
+	[mat rotateZ:90];
+//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+//	[mat rotateX:45];
+//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+//	[mat rotateY:45];
+	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+	log_debug(@"");
+
+//	[mat resetRoll];
+//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+//	[mat resetPitch];
+//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+//	[mat resetYaw];
+//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
+
 	return 0;
 }
