@@ -5,7 +5,7 @@
 #import <Cocoa/Cocoa.h>
 #import <GLKit/GLKit.h>
 #import "GMatrix4.h"
-#import "GAngle.h"
+#import ""
 
 @interface GObject : GMatrix4
 

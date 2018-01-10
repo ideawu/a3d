@@ -38,8 +38,6 @@
 		3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1241FFCABE80005EDDE /* GDraftScene.m */; };
 		3124F12D1FFDEB560005EDDE /* GDraftSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12B1FFDEB560005EDDE /* GDraftSprite.h */; };
 		3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F12C1FFDEB560005EDDE /* GDraftSprite.m */; };
-		3124F1311FFDED250005EDDE /* GAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12F1FFDED250005EDDE /* GAngle.h */; };
-		3124F1321FFDED250005EDDE /* GAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1301FFDED250005EDDE /* GAngle.m */; };
 		3124F1371FFF984D0005EDDE /* MySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1361FFF984D0005EDDE /* MySprite.m */; };
 		3124F13F2000B3200005EDDE /* GFollow.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F13D2000B3200005EDDE /* GFollow.h */; };
 		3124F1402000B3200005EDDE /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F13E2000B3200005EDDE /* GFollow.m */; };
@@ -110,8 +108,6 @@
 		3124F1241FFCABE80005EDDE /* GDraftScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftScene.m; sourceTree = "<group>"; };
 		3124F12B1FFDEB560005EDDE /* GDraftSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftSprite.h; sourceTree = "<group>"; };
 		3124F12C1FFDEB560005EDDE /* GDraftSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftSprite.m; sourceTree = "<group>"; };
-		3124F12F1FFDED250005EDDE /* GAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAngle.h; sourceTree = "<group>"; };
-		3124F1301FFDED250005EDDE /* GAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAngle.m; sourceTree = "<group>"; };
 		3124F1331FFE2CB80005EDDE /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		3124F1351FFF984D0005EDDE /* MySprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySprite.h; sourceTree = "<group>"; };
 		3124F1361FFF984D0005EDDE /* MySprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySprite.m; sourceTree = "<group>"; };
@@ -190,8 +186,6 @@
 				3124F1422001C71D0005EDDE /* EulerAngle.m */,
 				3124F0D81FFB38A40005EDDE /* GObject.h */,
 				3124F0D31FFB38A40005EDDE /* GObject.m */,
-				3124F12F1FFDED250005EDDE /* GAngle.h */,
-				3124F1301FFDED250005EDDE /* GAngle.m */,
 				3124F13D2000B3200005EDDE /* GFollow.h */,
 				3124F13E2000B3200005EDDE /* GFollow.m */,
 				3124F0D71FFB38A40005EDDE /* GCamera.h */,
@@ -306,7 +300,6 @@
 				3124F0DB1FFB38A40005EDDE /* GWorld.h in Headers */,
 				3124F1432001C71D0005EDDE /* EulerAngle.h in Headers */,
 				3124F147200344580005EDDE /* GMatrix4.h in Headers */,
-				3124F1311FFDED250005EDDE /* GAngle.h in Headers */,
 				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */,
@@ -435,7 +428,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
-				3124F1321FFDED250005EDDE /* GAngle.m in Sources */,
 				3124F1442001C71D0005EDDE /* EulerAngle.m in Sources */,
 				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
 				3124F1402000B3200005EDDE /* GFollow.m in Sources */,
