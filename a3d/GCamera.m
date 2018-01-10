@@ -55,7 +55,7 @@
 // 相机的移动以视线坐标为基准来移动
 - (void)moveX:(float)x y:(float)y z:(float)z{
 	// 先将视线坐标中的位移对应到世界坐标中的位移
-	GLKMatrix4 mat = GLKMatrix4Invert(self.matrix, NULL);
+	GLKMatrix4 mat = self.matrix;
 	GLKVector4 v0 = GLKMatrix4MultiplyVector4(mat, GLKVector4Make(0, 0, 0, 1));
 	GLKVector4 v1 = GLKMatrix4MultiplyVector4(mat, GLKVector4Make(x, y, z, 1));
 	v1 = GLKVector4Subtract(v1, v0);
@@ -65,24 +65,44 @@
 }
 
 - (void)rotateX:(float)degree{
-	[super moveX:_center.x y:_center.y z:_center.z];
+	GLKVector4 focus;
+	if(_target){
+		focus = GLKVector4Make(-self.x, -self.y, -self.z, 1);
+	}else{
+		focus = _center;
+	}
+	[super moveX:focus.x y:focus.y z:focus.z];
 	[super rotateX:degree];
-	[super moveX:-_center.x y:-_center.y z:-_center.z];
+	[super moveX:-focus.x y:-focus.y z:-focus.z];
 }
 
 - (void)rotateZ:(float)degree{
-	[super moveX:_center.x y:_center.y z:_center.z];
+	GLKVector4 focus;
+	if(_target){
+		focus = GLKVector4Make(-self.x, -self.y, -self.z, 1);
+	}else{
+		focus = _center;
+	}
+	[super moveX:focus.x y:focus.y z:focus.z];
 	[super rotateZ:degree];
-	[super moveX:-_center.x y:-_center.y z:-_center.z];
+	[super moveX:-focus.x y:-focus.y z:-focus.z];
 }
 
 // 相机平移到焦点处后，绕经过自身原点的世界坐标Y轴的平行轴
 - (void)rotateY:(float)degree{
 	// P * -P * N * T * -N * P
-
-	GLKMatrix4 mat = GLKMatrix4MakeTranslation(_center.x, _center.y, _center.z);
+	GLKVector4 focus;
+	if(_target){
+		focus = GLKVector4Make(-self.x, -self.y, -self.z, 1);
+	}else{
+		focus = _center;
+	}
+	focus = [self multiplyVector4:focus];
+	
+	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
+	mat = GLKMatrix4Translate(mat, focus.x, focus.y, focus.z);
 	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
-	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
+	mat = GLKMatrix4Translate(mat, -focus.x, -focus.y, -focus.z);
 	mat = GLKMatrix4Multiply(mat, super.matrix);
 	super.matrix = mat;
 }

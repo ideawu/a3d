@@ -102,29 +102,19 @@ static GLKVector3 trimv3(GLKVector3 v){
 }
 
 - (void)enter:(GMatrix4 *)target{
-	GMatrix4 *parent = [target clone];
-	[parent invert];
-	[self leftMultiply:parent];
+	_matrix = GLKMatrix4Multiply(GLKMatrix4Invert(target.matrix, NULL), _matrix);
 }
 
 - (void)leave:(GMatrix4 *)parent{
-	[self leftMultiply:parent];
-}
-
-- (void)multiply:(GMatrix4 *)right{
-	_matrix = GLKMatrix4Multiply(_matrix, right.matrix);
-}
-
-- (void)leftMultiply:(GMatrix4 *)left{
-	_matrix = GLKMatrix4Multiply(left.matrix, _matrix);
+	_matrix = GLKMatrix4Multiply(parent.matrix, _matrix);
 }
 
 - (GLKVector3)multiplyVector3:(GLKVector3)vec{
-	return GLKMatrix4MultiplyVector3(_matrix, vec);
+	return GLKMatrix4MultiplyVector3(self.matrix, vec);
 }
 
 - (GLKVector4)multiplyVector4:(GLKVector4)vec{
-	return GLKMatrix4MultiplyVector4(_matrix, vec);
+	return GLKMatrix4MultiplyVector4(self.matrix, vec);
 }
 
 #pragma mark - 矩阵在父坐标系中

@@ -24,9 +24,6 @@
 // 将矩阵从父矩阵中抽出，两者应是父子关系，此操作才有意义
 - (void)leave:(GMatrix4 *)parent;
 
-- (void)multiply:(GMatrix4 *)right;
-- (void)leftMultiply:(GMatrix4 *)left;
-
 - (GLKVector3)multiplyVector3:(GLKVector3)vec;
 - (GLKVector4)multiplyVector4:(GLKVector4)vec;
 
