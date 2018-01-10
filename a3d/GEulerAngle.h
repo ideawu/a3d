@@ -5,13 +5,15 @@
 #import <Cocoa/Cocoa.h>
 #import "GMatrix4.h"
 
-@interface EulerAngle : NSObject
+@interface GEulerAngle : NSObject
+
+@property (readonly) GLKMatrix4 matrix;
 
 @property float roll;
 @property float pitch;
 @property float yaw;
 
-+ (EulerAngle *)angleOfMatrix:(GMatrix4 *)matrix;
++ (GEulerAngle *)angleOfMatrix:(GMatrix4 *)matrix;
 
 - (id)initWithMatrix:(GMatrix4 *)matrix;
 

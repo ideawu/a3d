@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GMatrix4.h"
-#import "EulerAngle.h"
+#import "GEulerAngle.h"
 
 int main(int argc, const char * argv[]) {
 	GMatrix4 *mat = [GMatrix4 make];
@@ -11,19 +11,19 @@ int main(int argc, const char * argv[]) {
 
 	for(int i=0; i<8; i++){
 		[mat rotateZ:45];
-		log_debug(@"%@", [EulerAngle angleOfMatrix:mat]);
+		log_debug(@"%@", [GEulerAngle angleOfMatrix:mat]);
 	}
 	log_debug(@"");
 
 	for(int i=0; i<8; i++){
 		[mat rotateX:45];
-		log_debug(@"%@", [EulerAngle angleOfMatrix:mat]);
+		log_debug(@"%@", [GEulerAngle angleOfMatrix:mat]);
 	}
 	log_debug(@"");
 
 	for(int i=0; i<8; i++){
 		[mat rotateY:45];
-		log_debug(@"%@", [EulerAngle angleOfMatrix:mat]);
+		log_debug(@"%@", [GEulerAngle angleOfMatrix:mat]);
 	}
 	log_debug(@"");
 

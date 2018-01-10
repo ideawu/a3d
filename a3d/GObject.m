@@ -13,8 +13,13 @@
 
 - (id)init{
 	self = [super init];
-	_angle = [[GAngle alloc] init];
+	_angle = [[GEulerAngle alloc] init];
 	return self;
+}
+
+- (GLKMatrix4)matrix{
+	// TODO: 与欧拉角合并
+	return super.matrix;
 }
 
 - (GObject *)clone{
@@ -25,8 +30,13 @@
 
 - (void)copy:(GObject *)src{
 	[super copy:src];
-	// TODO: angle, width, height...
 	super.matrix = src.matrix; // 注意用 super
+	_angle.roll = src.angle.roll;
+	_angle.pitch = src.angle.pitch;
+	_angle.yaw = src.angle.yaw;
+	_width = src.width;
+	_height = src.height;
+	_depth = src.depth;
 }
 
 - (void)scale:(float)ratio{

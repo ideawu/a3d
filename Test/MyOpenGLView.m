@@ -13,7 +13,6 @@
 	GDraftScene *_scene;
 	GDraftSprite *_flag;
 	GDraftSprite *_camera_hero;
-	GAngle *_mouseAngle;
 	MySprite *_hero;
 	GCamera *_fakeCamera;
 }
@@ -28,8 +27,6 @@
 	log_debug(@"%s", __func__);
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
-	
-	_mouseAngle = [[GAngle alloc] init];
 	
 	_rotateX = 0;
 	_rotateY = 0;
@@ -83,10 +80,10 @@
 	[_objects addObject:_hero];
 	[_objects addObject:_fakeCamera];
 
-//	_currentObject = _world.camera;
-	_currentObject = _hero;
-	
-	[_world.camera follow:_hero];
+	_currentObject = _world.camera;
+
+//	[_world.camera follow:_hero];
+//	_currentObject = _hero;
 }
 
 - (void)switchSprite{
@@ -172,8 +169,8 @@
 	float ay = dx;
 	log_debug(@"%f %f", ax, ay);
 
-	_currentObject.angle.x = ax;
-	_currentObject.angle.y = ay;
+	_currentObject.angle.yaw = ax;
+	_currentObject.angle.pitch = ay;
 	
 //	if(_currentObject == _camera_hero){
 		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;

@@ -7,9 +7,10 @@
 
 #import "GWorld.h"
 #import "GFrame.h"
-#import "GCamera.h"
-#import "GAngle.h"
+#import "GMatrix4.h"
+#import "GEulerAngle.h"
 #import "GObject.h"
+#import "GCamera.h"
 #import "GNode.h"
 #import "GImage.h"
 

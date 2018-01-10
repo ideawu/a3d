@@ -5,11 +5,12 @@
 #import <Cocoa/Cocoa.h>
 #import <GLKit/GLKit.h>
 #import "GMatrix4.h"
-#import ""
+#import "GEulerAngle.h"
 
 @interface GObject : GMatrix4
 
-@property GAngle *angle;
+// 视线角度
+@property GEulerAngle *angle;
 
 // 物体在父坐标系中的体积
 @property float width;

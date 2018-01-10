@@ -3,12 +3,10 @@
 //
 
 #import "GCamera.h"
-#import "GFollow.h"
 
 @interface GCamera(){
-	GObject *_target;
-	GFollow *_follow;
 }
+@property GMatrix4 *target;
 // 观察的焦点在相机坐标系内的位置，默认为相机原点
 @property GLKVector4 center;
 @end
@@ -24,45 +22,34 @@
 - (GCamera *)clone{
 	GCamera *ret = [[GCamera alloc] init];
 	ret.matrix = super.matrix;
+	ret.target = _target;
 	ret.center = _center;
 	return ret;
 }
 
 - (GLKMatrix4)matrix{
-	if(_follow){
-		GMatrix4 *mat = [_follow.shadow clone];
-		[mat leave:_follow.target];
-		// 找出旋转角度
-		return mat.matrix;
+	GLKMatrix4 mat = super.matrix;
+	if(_target){
+		mat = GLKMatrix4Multiply(mat, _target.matrix);
 	}
-	return super.matrix;
+	return mat;
 }
 
 #pragma mark - 目标跟随
 
-- (GMatrix4 *)target{
-	return _follow.target;
-}
-
-// 跟随有几种模式：位移，X，Y，Z各轴旋转的跟随应该单独可配。
-- (void)follow:(GObject *)target{
-	if(_follow){
+- (void)follow:(GMatrix4 *)target{
+	if(_target){
 		[self unfollow];
 	}
-	GLKVector4 pos = GLKVector4Make(target.x, target.y, target.z, 1);
-	_center = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(self.matrix, NULL), pos);
-	_follow = [[GFollow alloc] init];
-	_follow.target = target;
-	_follow.shadow = [self clone];
-	[_follow.shadow enter:target];
+	_target = target;
+	[self enter:target];
 }
 
 - (void)unfollow{
-	if(_follow){
-		super.matrix = self.matrix;
-		_center = GLKVector4Make(0, 0, 0, 1);
+	if(_target){
+		[self leave:_target];
+		_target = nil;
 	}
-	_follow = nil;
 }
 
 // 相机的移动以视线坐标为基准来移动
@@ -91,20 +78,6 @@
 
 // 相机平移到焦点处后，绕经过自身原点的世界坐标Y轴的平行轴
 - (void)rotateY:(float)degree{
-//	GLKMatrix4 mat = super.matrix;
-//	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-//	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(degree));
-//	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-//	super.matrix = mat;
-
-//	GLKMatrix4 mat = super.matrix;
-//	GLKVector4 axis = GLKVector4Make(0, 1, 0, 1); // 世界Y轴
-//	axis = GLKMatrix4MultiplyVector3(GLKMatrix4Invert(mat, NULL), axis); // 世界Y轴进入相机坐标系(移到相机原点)
-//	mat = GLKMatrix4Translate(mat, _center.x, _center.y, _center.z);
-//	mat = GLKMatrix4RotateWithVector3(mat, GLKMathDegreesToRadians(degree), axis);
-//	mat = GLKMatrix4Translate(mat, -_center.x, -_center.y, -_center.z);
-//	super.matrix = mat;
-	
 	// P * -P * N * T * -N * P
 
 	GLKMatrix4 mat = GLKMatrix4MakeTranslation(_center.x, _center.y, _center.z);

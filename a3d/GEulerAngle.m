@@ -2,21 +2,21 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import "EulerAngle.h"
+#import "GEulerAngle.h"
 
 static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw, const char *mode);
 
 
-@interface EulerAngle(){
+@interface GEulerAngle(){
 	char _mode[4];
 }
 @end
 
 
-@implementation EulerAngle
+@implementation GEulerAngle
 
-+ (EulerAngle *)angleOfMatrix:(GMatrix4 *)matrix{
-	EulerAngle *ret = [[EulerAngle alloc] initWithMatrix:matrix];
++ (GEulerAngle *)angleOfMatrix:(GMatrix4 *)matrix{
+	GEulerAngle *ret = [[GEulerAngle alloc] initWithMatrix:matrix];
 	return ret;
 }
 
@@ -31,6 +31,12 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 - (NSString *)description{
 	return [NSString stringWithFormat:@"roll(%c): %.2f, pitch(%c): %.2f, yaw(%c): %.2f",
 			_mode[0], _roll, _mode[1], _pitch, _mode[2], _yaw];
+}
+
+- (GLKMatrix4)matrix{
+	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
+	// TODO:
+	return mat;
 }
 
 - (void)reset{
