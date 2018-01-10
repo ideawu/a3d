@@ -18,8 +18,10 @@
 }
 
 - (GLKMatrix4)matrix{
-	// TODO: 与欧拉角合并
-	return super.matrix;
+	GLKMatrix4 mat = _angle.matrix;
+//	log_debug(@"%@", NSStringFromGLKMatrix4(mat));
+	mat = GLKMatrix4Multiply(mat, super.matrix);
+	return mat;
 }
 
 - (GObject *)clone{

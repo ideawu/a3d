@@ -82,7 +82,7 @@
 
 	_currentObject = _world.camera;
 
-//	[_world.camera follow:_hero];
+	[_world.camera follow:_hero];
 //	_currentObject = _hero;
 }
 
@@ -161,16 +161,17 @@
 - (void)mouseMoved:(NSEvent *)event{
 	[super mouseMoved:event];
 //	log_debug(@"ignore mouse");
-	return;
+//	return;
 	
 	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
 	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
 	float ax = -dy;
 	float ay = dx;
-	log_debug(@"%f %f", ax, ay);
+	log_debug(@"%.2f %.2f", ax, ay);
 
-	_currentObject.angle.yaw = ax;
-	_currentObject.angle.pitch = ay;
+	_currentObject.angle.yaw = ay;
+	_currentObject.angle.pitch = ax;
+//	log_debug(@"%@", _currentObject.angle);
 	
 //	if(_currentObject == _camera_hero){
 		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;

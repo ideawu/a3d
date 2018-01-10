@@ -20,10 +20,16 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	return ret;
 }
 
-- (id)initWithMatrix:(GMatrix4 *)matrix{
+- (id)init{
 	self = [super init];
-	strcpy(_mode, "YZX");
+	[self reset];
+//	strcpy(_mode, "YZX");
 	strcpy(_mode, "ZXY");
+	return self;
+}
+
+- (id)initWithMatrix:(GMatrix4 *)matrix{
+	self = [self init];
 	[self parseMatrix:matrix];
 	return self;
 }
@@ -35,7 +41,24 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 
 - (GLKMatrix4)matrix{
 	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
-	// TODO:
+	mat = [self rotateMatrix:mat degree:_roll axis:_mode[0]];
+	mat = [self rotateMatrix:mat degree:_pitch axis:_mode[1]];
+	mat = [self rotateMatrix:mat degree:_yaw axis:_mode[2]];
+	return mat;
+}
+
+- (GLKMatrix4)rotateMatrix:(GLKMatrix4)mat degree:(float)degree axis:(char)c{
+//	if(degree != 0){
+//		log_debug(@"%c %f", c, degree);
+//	}
+	float radian = GLKMathDegreesToRadians(degree);
+	if(c == 'X'){
+		mat = GLKMatrix4RotateX(mat, radian);
+	}else if(c == 'Y'){
+		mat = GLKMatrix4RotateY(mat, radian);
+	}else if(c == 'Z'){
+		mat = GLKMatrix4RotateZ(mat, radian);
+	}
 	return mat;
 }
 

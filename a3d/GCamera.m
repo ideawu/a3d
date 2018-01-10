@@ -29,6 +29,7 @@
 
 - (GLKMatrix4)matrix{
 	GLKMatrix4 mat = super.matrix;
+//	log_debug(@"%@", self.angle);
 	if(_target){
 		mat = GLKMatrix4Multiply(_target.matrix, mat);
 	}
