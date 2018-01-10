@@ -35,6 +35,19 @@ static GLKVector3 trimv3(GLKVector3 v){
 	return v;
 }
 
+//static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
+//	GLKVector3 cross = GLKVector3CrossProduct(vec0, vec1); // 算角度时的旋转轴
+//	float sign = GLKVector3DotProduct(direction, cross); // 旋转轴在方向轴上的投影
+//	float dot = GLKVector3DotProduct(vec0, vec1);
+//	// 避免计算误差导致符号发生重大改变
+//	//	log_debug(@"%.10f %.10f %.10f", sign, dot, FLT_EPSILON);
+//	sign = trimf(sign);
+//	dot = trimf(dot);
+//	//	log_debug(@"%f %f", sign, dot);
+//	float angle = atan2(copysign(GLKVector3Length(cross), sign), dot);
+//	return GLKMathRadiansToDegrees(angle);
+//}
+
 
 @interface GMatrix4(){
 }
@@ -180,70 +193,6 @@ static GLKVector3 trimv3(GLKVector3 v){
 	return GLKMathRadiansToDegrees(rad);
 }
 
-static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
-	GLKVector3 cross = GLKVector3CrossProduct(vec0, vec1); // 算角度时的旋转轴
-	float sign = GLKVector3DotProduct(direction, cross); // 旋转轴在方向轴上的投影
-	float dot = GLKVector3DotProduct(vec0, vec1);
-	// 避免计算误差导致符号发生重大改变
-//	log_debug(@"%.10f %.10f %.10f", sign, dot, FLT_EPSILON);
-	sign = trimf(sign);
-	dot = trimf(dot);
-//	log_debug(@"%f %f", sign, dot);
-	float angle = atan2(copysign(GLKVector3Length(cross), sign), dot);
-	return GLKMathRadiansToDegrees(angle);
-}
-
-// Z轴的旋转角度，为了将X轴转回与原XZ平面平行
-- (float)rollAngle{
-	GLKVector3 axis = self.zAxis; // 旋转轴
-	int sign = self.yAxis.y >= 0? 1 : -1;
-	GLKVector3 y = GLKVector3Make(axis.x, axis.y+sign, axis.z); // 平面垂直方向的向量
-	GLKVector3 vec0 = GLKVector3CrossProduct(y, axis); // 目的向量(在目的平面上)
-	GLKVector3 vec1 = self.xAxis; // 被旋转的向量
-//	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
-//	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
-	return angle(vec0, vec1, axis);
-}
-
-// X轴的旋转角度，为了将Z轴转回与原XZ平面平行
-- (float)pitchAngle{
-	GLKVector3 axis = self.xAxis; // 旋转轴
-	int sign = self.yAxis.y >= 0? 1 : -1;
-	GLKVector3 y = GLKVector3Make(axis.x, axis.y+sign, axis.z); // 平面垂直方向的向量
-	GLKVector3 vec0 = GLKVector3CrossProduct(axis, y); // 目的向量(在目的平面上)，左手坐标系
-	GLKVector3 vec1 = self.zAxis; // 被旋转的向量
-//	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
-//	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
-	return angle(vec0, vec1, axis);
-}
-
-// Y轴的旋转角度，为了将Z轴转回与原YZ平面平行
-- (float)yawAngle{
-	GLKVector3 axis = self.yAxis; // 旋转轴
-	int sign = self.xAxis.x >= 0? 1 : -1;
-	GLKVector3 x = GLKVector3Make(axis.x+sign, axis.y, axis.z); // 平面垂直方向的向量
-	GLKVector3 vec0 = GLKVector3CrossProduct(x, axis); // 目的向量(在目的平面上)
-	GLKVector3 vec1 = self.zAxis; // 被旋转的向量
-//	log_debug(@"axis(%.2f %.2f %.2f)", axis.x, axis.y, axis.z);
-//	log_debug(@"vec0(%.2f %.2f %.2f) => vec1(%.2f %.2f %.2f)", vec0.x, vec0.y, vec0.z, vec1.x, vec1.y, vec1.z);
-	return angle(vec0, vec1, axis);
-}
-
-// 复位Z轴的旋转
-- (void)resetRoll{
-	[self rotateZ:-self.rollAngle];
-}
-
-// 复位X轴的旋转
-- (void)resetPitch{
-	[self rotateX:-self.pitchAngle];
-}
-
-// 复位Y轴的旋转
-- (void)resetYaw{
-	[self rotateY:-self.yawAngle];
-}
-
 
 #pragma mark - 矩阵自身的变换
 
@@ -339,44 +288,5 @@ static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
 - (void)orbitZ:(float)degree x:(float)x y:(float)y{
 	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
 }
-
-// 各轴按顺序做 -roll, -pitch, -yaw 之后，旋转分量将恢复
-static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw, const char *mode){
-	float r, p, y, w;
-	float sinr, cosr, sinp, siny, cosy;
-	float qs[3] = {q.x, q.y, q.z};
-	// 各轴顺序
-	int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
-	r = qs[idx[0]];
-	p = qs[idx[1]];
-	y = qs[idx[2]];
-	w = q.w;
-	sinr = 2 * (w * r + p * y);
-	cosr = 1 - 2 * (r * r + p * p);
-	sinp = 2 * (w * p - r * y);
-	siny = 2 * (w * y + r * p);
-	cosy = 1 - 2 * (p * p + y * y);
-	sinr = trimf(sinr);
-	cosr = trimf(cosr);
-	sinp = trimf(sinp);
-	siny = trimf(siny);
-	cosy = trimf(cosy);
-	
-	r = atan2(sinr, cosr);
-	if (fabs(sinp) >= 1){
-		p = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
-	}else{
-		p = asin(sinp);
-	}
-	y = atan2(siny, cosy);
-	
-	//		log_debug(@"%f %f %f", r, p, y);
-	//		log_debug(@"%f %f (%f) %f %f", sinr, cosr, sinp, siny, cosy);
-	
-	*roll = r;
-	*pitch = p;
-	*yaw = y;
-}
-
 
 @end

@@ -50,22 +50,6 @@
 // Z轴的偏转角度
 - (float)zAngle;
 
-// 注意，必须在pitch之后先roll，否则无法回到原来的姿态
-
-// (-180, +180]
-// Z轴的旋转角度，为了将X轴转回与原XA平面平行, roll
-- (float)rollAngle;
-// X轴的旋转角度，为了将Z轴转回与原XZ平面平行, pitch
-- (float)pitchAngle;
-// Y轴的旋转角度，为了将Z轴转回与原YZ平面平行, yaw
-- (float)yawAngle;
-
-// 复位Z轴的旋转
-- (void)resetRoll;
-// 复位X轴的旋转
-- (void)resetPitch;
-// 复位Y轴的旋转
-- (void)resetYaw;
 
 #pragma mark - 矩阵自身的变换
 
