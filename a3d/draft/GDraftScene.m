@@ -21,6 +21,7 @@
 		NSError *error = nil;
 		NSString *filename = @"/Users/ideawu/Downloads/grass_top.png";
 		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
+		glBindTexture(GL_TEXTURE_2D, 0); // GLKTextureLoader会自动bind
 	}
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 	for(int i=0; i<=grids; i++){

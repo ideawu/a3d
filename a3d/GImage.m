@@ -19,6 +19,7 @@
 	if(error){
 		log_debug(@"%@", error);
 	}
+	glBindTexture(GL_TEXTURE_2D, 0); // GLKTextureLoader会自动bind
 //	log_debug(@"%@", _texture);
 	self.width = _texture.width;
 	self.height = _texture.height;

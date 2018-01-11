@@ -33,6 +33,7 @@
 		NSError *error = nil;
 		NSString *filename = @"/Users/ideawu/Downloads/alex.png";
 		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
+		glBindTexture(GL_TEXTURE_2D, 0); // GLKTextureLoader会自动bind
 	}
 	
 	glBindTexture(GL_TEXTURE_2D, _texture.name);

@@ -17,7 +17,6 @@
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
-	log_debug(@"%s", __func__);
 	NSOpenGLPixelFormatAttribute attrs[] = {
 		NSOpenGLPFANoRecovery, // Enable automatic use of OpenGL "share" contexts.
 		NSOpenGLPFAColorSize, 24,

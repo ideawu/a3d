@@ -24,7 +24,6 @@
 @implementation MyOpenGLView
 
 - (void)prepareOpenGL {
-	log_debug(@"%s", __func__);
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
 	
@@ -99,10 +98,8 @@
 }
 
 - (void)reshape {
-	log_debug(@"%s", __func__);
 	// 操作前务必要切换上下文
 	[[self openGLContext] makeCurrentContext];
-	log_debug(@"%.2f %.2f", self.bounds.size.width, self.bounds.size.height);
 	[_world setCameraWidth:self.bounds.size.width height:self.bounds.size.height depth:self.bounds.size.width*20];
 }
 
