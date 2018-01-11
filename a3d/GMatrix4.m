@@ -260,23 +260,24 @@ static GLKVector3 trimv3(GLKVector3 v){
 }
 
 // 绕自身坐标系内的任意轴(p0->p1)旋转
-- (void)orbit:(float)degree p0:(GLKVector3)p0 p1:(GLKVector3)p1{
-	GLKVector3 vec = GLKVector3Subtract(p1, p0);
-	_matrix = GLKMatrix4TranslateWithVector3(_matrix, p0);
-	_matrix = GLKMatrix4RotateWithVector3(_matrix, GLKMathDegreesToRadians(degree), vec);
-	_matrix = GLKMatrix4TranslateWithVector3(_matrix, GLKVector3Negate(p0));
+- (void)orbit:(float)degree p0:(GLKVector4)p0 p1:(GLKVector4)p1{
+//	log_debug(@"rotate around: %@ => %@", NSStringFromGLKVector4(p0), NSStringFromGLKVector4(p1));
+	GLKVector4 vec = GLKVector4Make(p1.x-p0.x, p1.y-p0.y, p1.z-p0.z, 1);
+	_matrix = GLKMatrix4TranslateWithVector4(_matrix, p0);
+	_matrix = GLKMatrix4RotateWithVector4(_matrix, GLKMathDegreesToRadians(degree), vec);
+	_matrix = GLKMatrix4TranslateWithVector4(_matrix, GLKVector4Negate(p0));
 }
 
 - (void)orbitX:(float)degree y:(float)y z:(float)z{
-	[self orbit:degree p0:GLKVector3Make(0, y, z) p1:GLKVector3Make(1, y, z)];
+	[self orbit:degree p0:GLKVector4Make(0, y, z, 1) p1:GLKVector4Make(1, y, z, 1)];
 }
 
 - (void)orbitY:(float)degree x:(float)x z:(float)z{
-	[self orbit:degree p0:GLKVector3Make(x, 0, z) p1:GLKVector3Make(x, 1, z)];
+	[self orbit:degree p0:GLKVector4Make(x, 0, z, 1) p1:GLKVector4Make(x, 1, z, 1)];
 }
 
 - (void)orbitZ:(float)degree x:(float)x y:(float)y{
-	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
+	[self orbit:degree p0:GLKVector4Make(x, y, 0, 1) p1:GLKVector4Make(x, y, 1, 1)];
 }
 
 @end

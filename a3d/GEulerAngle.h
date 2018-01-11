@@ -13,11 +13,13 @@
 @property float pitch;
 @property float yaw;
 
-+ (GEulerAngle *)angleOfMatrix:(GMatrix4 *)matrix;
++ (GEulerAngle *)angleWithMatrix:(GMatrix4 *)matrix;
 
 - (id)initWithMatrix:(GMatrix4 *)matrix;
 
 - (void)reset;
 - (void)parseMatrix:(GMatrix4 *)matrix;
+
+- (void)subtract:(GEulerAngle *)right;
 
 @end

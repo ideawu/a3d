@@ -15,7 +15,7 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 
 @implementation GEulerAngle
 
-+ (GEulerAngle *)angleOfMatrix:(GMatrix4 *)matrix{
++ (GEulerAngle *)angleWithMatrix:(GMatrix4 *)matrix{
 	GEulerAngle *ret = [[GEulerAngle alloc] initWithMatrix:matrix];
 	return ret;
 }
@@ -72,6 +72,12 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	_roll = GLKMathRadiansToDegrees(_roll);
 	_pitch = GLKMathRadiansToDegrees(_pitch);
 	_yaw = GLKMathRadiansToDegrees(_yaw);
+}
+
+- (void)subtract:(GEulerAngle *)right{
+	_roll -= right.roll;
+	_pitch -= right.pitch;
+	_yaw -= right.yaw;
 }
 
 @end

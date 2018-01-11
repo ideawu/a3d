@@ -3,6 +3,7 @@
 //
 
 #import "GObject.h"
+#import "GFollow.h"
 
 // 相机是虚拟的物体，只表示坐标系。对相机坐标系做变换，相当于对世界坐标系做相反的变换
 // 相机 = 基座 + 镜头 or 相机 = 身体 + 眼睛
@@ -11,8 +12,10 @@
 
 // 竖直方向的视角
 @property float fovy;
+// 观察的焦点在相机坐标系内的位置，默认为相机原点
+@property GLKVector4 center;
 
-@property (readonly) GMatrix4 *target;
+@property GFollow *follow;
 
 
 // 在父坐标系中跟踪指定物体，始终保持与目标相同的相对角度和相对位置

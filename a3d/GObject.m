@@ -18,9 +18,10 @@
 }
 
 - (GLKMatrix4)matrix{
-	GLKMatrix4 mat = _angle.matrix;
+	GLKMatrix4 mat = super.matrix;
+	// 不包含视线方向，只返回物体本身的矩阵
 //	log_debug(@"%@", NSStringFromGLKMatrix4(mat));
-	mat = GLKMatrix4Multiply(mat, super.matrix);
+//	mat = GLKMatrix4Multiply(_angle.matrix, mat);
 	return mat;
 }
 

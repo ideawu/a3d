@@ -257,7 +257,7 @@
 			break;
 		case 'f':
 		case 'F':{
-			if(_world.camera.target){
+			if(_world.camera.follow){
 				log_debug(@"unfollow");
 				[_world.camera unfollow];
 			}else{

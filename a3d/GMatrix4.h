@@ -80,7 +80,7 @@
 #pragma mark - orbit 是一种轨道运动，将同时改变坐标系的原点位置和各轴的方向。
 
 // 绕自身坐标系内的任意轴(p0->p1)旋转
-- (void)orbit:(float)degree p0:(GLKVector3)p0 p1:(GLKVector3)p1;
+- (void)orbit:(float)degree p0:(GLKVector4)p0 p1:(GLKVector4)p1;
 // 坐标系绕与X轴平行且经过(0,y,z)线旋转
 - (void)orbitX:(float)degree y:(float)y z:(float)z;
 // 坐标系绕与Y轴平行且经过(0,y,z)线旋转
