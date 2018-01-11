@@ -5,6 +5,7 @@
 #import "GCamera.h"
 
 @interface GCamera(){
+	GLKVector4 _focus;
 }
 @end
 
@@ -12,7 +13,7 @@
 
 - (id)init{
 	self = [super init];
-	_center = GLKVector4Make(0, 0, 0, 1);
+	_focus = GLKVector4Make(0, 0, 0, 1);
 	return self;
 }
 
@@ -32,8 +33,6 @@
 	if(_follow){
 		[self unfollow];
 	}
-	GLKVector4 pos = target.pos;
-	_center = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), pos);
 	_follow = [GFollow followTarget:target];
 }
 
@@ -41,7 +40,6 @@
 	if(_follow){
 		super.matrix = self.followMatrix;
 		_follow = nil;
-		_center = GLKVector4Make(0, 0, 0, 1);
 	}
 }
 
@@ -54,10 +52,10 @@
 	float y = _follow.target.y - _follow.origin.y;
 	float z = _follow.target.z - _follow.origin.z;
 
-	GCamera *camera = [[GCamera alloc] init];
 	// 只旋转基座
+	GCamera *camera = [[GCamera alloc] init];
 	camera.matrix = super.matrix;
-	camera.center = self.focus;
+	camera.focus = self.focus;
 	[camera rotateY:targetAngle.roll];
 	[camera rotateX:targetAngle.yaw];
 	
@@ -72,8 +70,12 @@
 		pos = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), pos);
 		return pos;
 	}else{
-		return _center;
+		return _focus;
 	}
+}
+
+- (void)setFocus:(GLKVector4)focus{
+	_focus = focus;
 }
 
 - (void)moveX:(float)x y:(float)y z:(float)z{

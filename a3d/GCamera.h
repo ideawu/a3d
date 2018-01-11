@@ -13,7 +13,7 @@
 // 竖直方向的视角
 @property float fovy;
 // 观察的焦点在相机坐标系内的位置，默认为相机原点
-@property GLKVector4 center;
+@property GLKVector4 focus;
 
 @property GFollow *follow;
 
