@@ -32,7 +32,7 @@
 	if(_follow){
 		[self unfollow];
 	}
-	GLKVector4 pos = GLKVector4Make(target.x, target.y, target.z, 1);
+	GLKVector4 pos = target.pos;
 	_center = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), pos);
 	_follow = [GFollow followTarget:target];
 }
@@ -50,13 +50,30 @@
 	GEulerAngle *targetAngle = [GEulerAngle angleWithMatrix:_follow.target];
 	[targetAngle subtract:originAngle];
 	
+	float x = _follow.target.x - _follow.origin.x;
+	float y = _follow.target.y - _follow.origin.y;
+	float z = _follow.target.z - _follow.origin.z;
+
 	GCamera *camera = [[GCamera alloc] init];
+	// 只旋转基座
 	camera.matrix = super.matrix;
-//	camera.angle = 0; // 因为我们只旋转基座，所以视线先归零
-	camera.center = self.center;
-	[camera rotateY:targetAngle.yaw];
-	[camera rotateX:targetAngle.pitch];
-	return camera.matrix;
+	camera.center = self.focus;
+	[camera rotateY:targetAngle.roll];
+	[camera rotateX:targetAngle.yaw];
+	
+	GLKMatrix4 mat = GLKMatrix4MakeTranslation(x, y, z);
+	mat = GLKMatrix4Multiply(mat, camera.matrix);
+	return mat;
+}
+
+- (GLKVector4)focus{
+	if(_follow){
+		GLKVector4 pos = _follow.target.pos;
+		pos = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), pos);
+		return pos;
+	}else{
+		return _center;
+	}
 }
 
 - (void)moveX:(float)x y:(float)y z:(float)z{
@@ -66,7 +83,7 @@
 }
 
 - (void)rotateX:(float)degree{
-	GLKVector4 p0 = _center;
+	GLKVector4 p0 = self.focus;
 	GLKVector4 p1 = GLKVector4Make(p0.x+1, p0.y, p0.z, 1);
 	p0 = GLKMatrix4MultiplyVector4(self.angle.matrix, p0); // 视线坐标转为基座坐标
 	p1 = GLKMatrix4MultiplyVector4(self.angle.matrix, p1); // 视线坐标转为基座坐标
@@ -74,7 +91,7 @@
 }
 
 - (void)rotateZ:(float)degree{
-	GLKVector4 p0 = _center;
+	GLKVector4 p0 = self.focus;
 	GLKVector4 p1 = GLKVector4Make(p0.x, p0.y, p0.z+1, 1);
 	p0 = GLKMatrix4MultiplyVector4(self.angle.matrix, p0); // 视线坐标转为基座坐标
 	p1 = GLKMatrix4MultiplyVector4(self.angle.matrix, p1); // 视线坐标转为基座坐标
@@ -84,7 +101,7 @@
 // 相机平移到焦点处后，绕经过自身原点的父坐标Y轴的平行轴
 - (void)rotateY:(float)degree{
 	// 先求出旋转轴在世界标中
-	GLKVector4 p0 = GLKMatrix4MultiplyVector4(self.matrix, _center);
+	GLKVector4 p0 = GLKMatrix4MultiplyVector4(self.matrix, self.focus);
 	GLKVector4 p1 = GLKVector4Make(p0.x, p0.y+1, p0.z, 1);
 	// 再将旋转轴放入相机基座坐标系
 	p0 = GLKMatrix4MultiplyVector4(GLKMatrix4Invert(super.matrix, NULL), p0);

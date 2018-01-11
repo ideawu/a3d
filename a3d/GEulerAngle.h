@@ -14,8 +14,10 @@
 @property float yaw;
 
 + (GEulerAngle *)angleWithMatrix:(GMatrix4 *)matrix;
++ (GEulerAngle *)angleWithMatrix:(GMatrix4 *)matrix mode:(const char *)mode;
 
 - (id)initWithMatrix:(GMatrix4 *)matrix;
+- (id)initWithMatrix:(GMatrix4 *)matrix mode:(const char *)mode;
 
 - (void)reset;
 - (void)parseMatrix:(GMatrix4 *)matrix;

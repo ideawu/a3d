@@ -80,10 +80,9 @@
 	[_objects addObject:_hero];
 	[_objects addObject:_fakeCamera];
 
-	_currentObject = _world.camera;
-
+//	_currentObject = _world.camera;
 	[_world.camera follow:_hero];
-//	_currentObject = _hero;
+	_currentObject = _hero;
 }
 
 - (void)switchSprite{
@@ -161,7 +160,7 @@
 - (void)mouseMoved:(NSEvent *)event{
 	[super mouseMoved:event];
 //	log_debug(@"ignore mouse");
-//	return;
+	return;
 	
 	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
 	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
@@ -277,6 +276,9 @@
 	[_currentObject moveY:dy];
 	[_currentObject moveZ:dz];
 //	log_debug(@"%f %f %f", dx, dy, dz);
+
+	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);
+	
 	[self setNeedsDisplay:YES];
 }
 @end

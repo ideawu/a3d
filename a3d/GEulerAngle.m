@@ -16,20 +16,30 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 @implementation GEulerAngle
 
 + (GEulerAngle *)angleWithMatrix:(GMatrix4 *)matrix{
-	GEulerAngle *ret = [[GEulerAngle alloc] initWithMatrix:matrix];
+	return [GEulerAngle angleWithMatrix:matrix mode:NULL];
+}
+
++ (GEulerAngle *)angleWithMatrix:(GMatrix4 *)matrix mode:(const char *)mode{
+	GEulerAngle *ret = [[GEulerAngle alloc] initWithMatrix:matrix mode:mode];
 	return ret;
 }
 
 - (id)init{
 	self = [super init];
 	[self reset];
-//	strcpy(_mode, "YZX");
-	strcpy(_mode, "ZXY");
+	strcpy(_mode, "YZX");
 	return self;
 }
 
 - (id)initWithMatrix:(GMatrix4 *)matrix{
+	return [self initWithMatrix:matrix mode:NULL];
+}
+
+- (id)initWithMatrix:(GMatrix4 *)matrix mode:(const char *)mode{
 	self = [self init];
+	if(mode){
+		strncpy(_mode, mode, 3);
+	}
 	[self parseMatrix:matrix];
 	return self;
 }

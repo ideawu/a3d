@@ -123,6 +123,10 @@ static GLKVector3 trimv3(GLKVector3 v){
 //	return _matrix;
 //}
 
+- (GLKVector4)pos{
+	return GLKVector4Make(self.x, self.y, self.z, 1);
+}
+
 - (float)x{
 	return _matrix.m30;
 }

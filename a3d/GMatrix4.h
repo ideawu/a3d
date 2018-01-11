@@ -35,6 +35,8 @@
 @property float y;
 @property float z;
 
+@property (readonly) GLKVector4 pos;
+
 // 各轴在父坐标系内的向量
 - (GLKVector3)xAxis;
 - (GLKVector3)yAxis;
