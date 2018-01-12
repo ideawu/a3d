@@ -157,16 +157,7 @@
 
 - (void)mouseUp:(NSEvent *)event{
 	GObject *target = _hero;
-	GLKVector3 p1 = vec3(self.mousePoint.x, self.mousePoint.y, 0);
-	GLKVector3 p2 = vec3(self.mousePoint.x, self.mousePoint.y, 100);
-	log_debug(@"%f", _world.camera.z);
-	[_world.camera moveZ:10];
-	log_debug(@"%f", _world.camera.z);
-	p1 = mat4_mul_vec3(_world.camera.matrix, p1);
-	p2 = mat4_mul_vec3(_world.camera.matrix, p2);
-//	p2 = mat4_mul_vec3(mat4_invert(_world.matrix3d), p2);
-	log_debug(@"p1: %@, p2: %@", str_vec3(p1), str_vec3(p2));
-	GRay *ray = [GRay rayFrom:p1 to:p2];
+	GRay *ray = [_world.camera rayFromScreenPointX:self.mousePoint.x y:self.mousePoint.y];
 	GLKVector3 pos = [ray nearestPointTo:target.pos];
 	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
 	pos = mat4_mul_vec3(mat4_invert(target.matrix), pos);
