@@ -11,6 +11,9 @@
 // 相机的世界坐标将考虑视线角度。
 @interface GCamera : GObject
 
+@property (readonly) GLKMatrix4 matrix3d;
+@property (readonly) GLKMatrix4 matrix2d;
+
 // 竖直方向的视角
 @property float fovy;
 // 观察的焦点在相机坐标系内的位置，默认为相机原点

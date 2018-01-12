@@ -7,8 +7,6 @@
 
 @interface GCamera(){
 	GLKVector3 _focus;
-	GLKMatrix4 _matrix3d;
-	GLKMatrix4 _matrix2d;
 }
 @property float near;
 @end
@@ -37,8 +35,6 @@
 	self.near = (height/2) / tan(GLKMathDegreesToRadians(self.fovy/2));
 	float far = self.near + self.depth;
 	
-	glViewport(0, 0, width, height);
-	
 	// 将前裁剪面设置为与viewport同大小
 	_matrix3d = GLKMatrix4MakeFrustum(-width/2, width/2, -height/2, height/2, self.near, far);
 	// 将前裁剪面后移，因为视点默认在 (0,0,0)，所以默认前裁剪面在(near,0,0)，这在旋转物体时不方便
@@ -59,6 +55,8 @@
 	_matrix2d = GLKMatrix4Scale(_matrix2d, 1, -1, -1);
 	// 将原点坐标移到屏幕左上角
 	_matrix2d = GLKMatrix4Translate(_matrix2d, -width/2, -height/2, 0);
+	
+	glViewport(0, 0, width, height);
 }
 
 - (void)bind3D{
