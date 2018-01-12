@@ -4,6 +4,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <GLKit/GLKit.h>
+#import "gmath.h"
 
 @interface GMatrix4 : NSObject
 
@@ -35,7 +36,7 @@
 @property float y;
 @property float z;
 
-@property (readonly) GLKVector4 pos;
+@property (readonly) GLKVector3 pos;
 
 // 各轴在父坐标系内的向量
 - (GLKVector3)xAxis;
@@ -82,7 +83,7 @@
 #pragma mark - orbit 是一种轨道运动，将同时改变坐标系的原点位置和各轴的方向。
 
 // 绕自身坐标系内的任意轴(p0->p1)旋转
-- (void)orbit:(float)degree p0:(GLKVector4)p0 p1:(GLKVector4)p1;
+- (void)orbit:(float)degree p0:(GLKVector3)p0 p1:(GLKVector3)p1;
 // 坐标系绕与X轴平行且经过(0,y,z)线旋转
 - (void)orbitX:(float)degree y:(float)y z:(float)z;
 // 坐标系绕与Y轴平行且经过(0,y,z)线旋转
@@ -90,5 +91,11 @@
 // 坐标系绕与Z轴平行且经过(0,y,z)线旋转
 - (void)orbitZ:(float)degree x:(float)x y:(float)y;
 
+
+#pragma mark - 物理力学
+
+// 将力施加与坐标系的某一位置，当作用于标准球位置时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
+- (void)force:(GLKVector3)force atPoint:(GLKVector3)point;
+- (void)force:(GLKVector3)force atPoint:(GLKVector3)point rotationScalar:(float)radianScalar;
 
 @end

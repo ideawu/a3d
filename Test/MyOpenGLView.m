@@ -38,6 +38,8 @@
 	_scene.width = _world.width;
 	_scene.height = _world.height;
 	_scene.depth = _world.depth;
+	
+//	[_scene moveX:200 y:200 z:5];
 
 	{
 		NSString *filename = @"/Users/ideawu/Downloads/imgs/1.jpg";
@@ -71,8 +73,8 @@
 //	[_hero rotateZ:30];
 
 	_fakeCamera = [[GCamera alloc] init];
-//	[_fakeCamera moveX:_hero.x-120 y:_hero.y+200 z:_hero.z-300];
-//	[_fakeCamera follow:_hero];
+	[_fakeCamera moveX:_hero.x-120 y:_hero.y+200 z:_hero.z-300];
+	[_fakeCamera follow:_hero];
 
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_world.camera];
@@ -80,7 +82,7 @@
 	[_objects addObject:_fakeCamera];
 
 //	_currentObject = _world.camera;
-	[_world.camera follow:_hero];
+//	[_world.camera follow:_hero];
 	_currentObject = _hero;
 }
 
@@ -153,6 +155,31 @@
 	glDisable(GL_LINE_STIPPLE);
 }
 
+- (void)mouseUp:(NSEvent *)event{
+	GObject *target = _hero;
+	GLKVector3 p1 = vec3(self.mousePoint.x, self.mousePoint.y, 0);
+	GLKVector3 p2 = vec3(self.mousePoint.x, self.mousePoint.y, 100);
+	log_debug(@"%f", _world.camera.z);
+	[_world.camera moveZ:10];
+	log_debug(@"%f", _world.camera.z);
+	p1 = mat4_mul_vec3(_world.camera.matrix, p1);
+	p2 = mat4_mul_vec3(_world.camera.matrix, p2);
+//	p2 = mat4_mul_vec3(mat4_invert(_world.matrix3d), p2);
+	log_debug(@"p1: %@, p2: %@", str_vec3(p1), str_vec3(p2));
+	GRay *ray = [GRay rayFrom:p1 to:p2];
+	GLKVector3 pos = [ray nearestPointTo:target.pos];
+	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
+	pos = mat4_mul_vec3(mat4_invert(target.matrix), pos);
+	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
+	
+	
+//	GLKVector3 force = GLKVector3Make(0, 0, 1);
+//	force = GLKMatrix4MultiplyVector3(GLKMatrix4Invert(target.matrix, NULL), force);
+//	force = GLKVector3MultiplyScalar(force, 10);
+//	// 将力转成被控对象坐标系内
+//	[target force:force atPoint:pos rotationScalar:1];
+	[self setNeedsDisplay:YES];
+}
 
 - (void)mouseMoved:(NSEvent *)event{
 	[super mouseMoved:event];
@@ -222,11 +249,11 @@
 			break;
 		}
 		case NSLeftArrowFunctionKey:{
-			[_currentObject rotateY:-5];
+			[_currentObject rotateY:-10];
 			break;
 		}
 		case NSRightArrowFunctionKey:{
-			[_currentObject rotateY:5];
+			[_currentObject rotateY:10];
 			break;
 		}
 		case NSUpArrowFunctionKey:
@@ -274,7 +301,8 @@
 	[_currentObject moveZ:dz];
 //	log_debug(@"%f %f %f", dx, dy, dz);
 
-	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);
+	[GEulerAngle angleWithMatrix:_currentObject];
+//	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);
 	
 	[self setNeedsDisplay:YES];
 }

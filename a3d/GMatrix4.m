@@ -24,9 +24,6 @@
 
 // 欧拉角与四元数的转换：https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 
-static float trimf(float f){
-	return fabs(f)<FLT_EPSILON*10? 0 : f;
-}
 
 static GLKVector3 trimv3(GLKVector3 v){
 	v.x = trimf(v.x);
@@ -58,7 +55,7 @@ static GLKVector3 trimv3(GLKVector3 v){
 
 - (id)init{
 	self = [super init];
-	_matrix = GLKMatrix4MakeTranslation(0, 0, 0);
+	_matrix = GLKMatrix4Identity;
 	return self;
 }
 
@@ -98,24 +95,16 @@ static GLKVector3 trimv3(GLKVector3 v){
 #pragma mark - 矩阵运算
 
 - (void)invert{
-	_matrix = GLKMatrix4Invert(_matrix, NULL);
+	_matrix = mat4_invert(_matrix);
 }
 
 - (void)enter:(GMatrix4 *)target{
-	_matrix = GLKMatrix4Multiply(GLKMatrix4Invert(target.matrix, NULL), _matrix);
+	_matrix = mat4_mul(mat4_invert(target.matrix), _matrix);
 }
 
 - (void)leave:(GMatrix4 *)parent{
-	_matrix = GLKMatrix4Multiply(parent.matrix, _matrix);
+	_matrix = mat4_mul(parent.matrix, _matrix);
 }
-//
-//- (GLKVector3)multiplyVector3:(GLKVector3)vec{
-//	return GLKMatrix4MultiplyVector3(self.matrix, vec);
-//}
-//
-//- (GLKVector4)multiplyVector4:(GLKVector4)vec{
-//	return GLKMatrix4MultiplyVector4(self.matrix, vec);
-//}
 
 #pragma mark - 矩阵在父坐标系中
 
@@ -123,8 +112,8 @@ static GLKVector3 trimv3(GLKVector3 v){
 //	return _matrix;
 //}
 
-- (GLKVector4)pos{
-	return GLKVector4Make(self.x, self.y, self.z, 1);
+- (GLKVector3)pos{
+	return GLKVector3Make(self.x, self.y, self.z);
 }
 
 - (float)x{
@@ -152,15 +141,15 @@ static GLKVector3 trimv3(GLKVector3 v){
 }
 
 - (GLKVector3)xAxis{
-	return trimv3(GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(1, 0, 0)));
+	return trimv3(mat4_mul_vec3(_matrix, GLKVector3Make(1, 0, 0)));
 }
 
 - (GLKVector3)yAxis{
-	return trimv3(GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 1, 0)));
+	return trimv3(mat4_mul_vec3(_matrix, GLKVector3Make(0, 1, 0)));
 }
 
 - (GLKVector3)zAxis{
-	return trimv3(GLKMatrix4MultiplyVector3(_matrix, GLKVector3Make(0, 0, 1)));
+	return trimv3(mat4_mul_vec3(_matrix, GLKVector3Make(0, 0, 1)));
 }
 
 - (float)xAngle{
@@ -191,7 +180,7 @@ static GLKVector3 trimv3(GLKVector3 v){
 #pragma mark - 矩阵自身的变换
 
 - (void)reset{
-	_matrix = GLKMatrix4MakeTranslation(0, 0, 0);
+	_matrix = GLKMatrix4Identity;
 }
 
 - (void)resetTranslation{
@@ -205,7 +194,7 @@ static GLKVector3 trimv3(GLKVector3 v){
 	GLKMatrix4 mat = GLKMatrix4MakeWithQuaternion(quat);
 	mat = GLKMatrix4Invert(mat, NULL);
 	//	_matrix = GLKMatrix4Multiply(mat, _matrix);
-	_matrix = GLKMatrix4Multiply(_matrix, mat);
+	_matrix = mat4_mul(_matrix, mat);
 }
 
 - (void)scale:(float)ratio{
@@ -264,24 +253,63 @@ static GLKVector3 trimv3(GLKVector3 v){
 }
 
 // 绕自身坐标系内的任意轴(p0->p1)旋转
-- (void)orbit:(float)degree p0:(GLKVector4)p0 p1:(GLKVector4)p1{
-//	log_debug(@"rotate around: %@ => %@", NSStringFromGLKVector4(p0), NSStringFromGLKVector4(p1));
-	GLKVector4 vec = GLKVector4Make(p1.x-p0.x, p1.y-p0.y, p1.z-p0.z, 1);
-	_matrix = GLKMatrix4TranslateWithVector4(_matrix, p0);
-	_matrix = GLKMatrix4RotateWithVector4(_matrix, GLKMathDegreesToRadians(degree), vec);
-	_matrix = GLKMatrix4TranslateWithVector4(_matrix, GLKVector4Negate(p0));
+- (void)orbit:(float)degree p0:(GLKVector3)p0 p1:(GLKVector3)p1{
+//	log_debug(@"rotate around: %@ => %@", NSStringFromGLKVector3(p0), NSStringFromGLKVector3(p1));
+	GLKVector3 vec = GLKVector3Make(p1.x-p0.x, p1.y-p0.y, p1.z-p0.z);
+	_matrix = GLKMatrix4TranslateWithVector3(_matrix, p0);
+	_matrix = GLKMatrix4RotateWithVector3(_matrix, GLKMathDegreesToRadians(degree), vec);
+	_matrix = GLKMatrix4TranslateWithVector3(_matrix, GLKVector3Negate(p0));
 }
 
 - (void)orbitX:(float)degree y:(float)y z:(float)z{
-	[self orbit:degree p0:GLKVector4Make(0, y, z, 1) p1:GLKVector4Make(1, y, z, 1)];
+	[self orbit:degree p0:GLKVector3Make(0, y, z) p1:GLKVector3Make(1, y, z)];
 }
 
 - (void)orbitY:(float)degree x:(float)x z:(float)z{
-	[self orbit:degree p0:GLKVector4Make(x, 0, z, 1) p1:GLKVector4Make(x, 1, z, 1)];
+	[self orbit:degree p0:GLKVector3Make(x, 0, z) p1:GLKVector3Make(x, 1, z)];
 }
 
 - (void)orbitZ:(float)degree x:(float)x y:(float)y{
-	[self orbit:degree p0:GLKVector4Make(x, y, 0, 1) p1:GLKVector4Make(x, y, 1, 1)];
+	[self orbit:degree p0:GLKVector3Make(x, y, 0) p1:GLKVector3Make(x, y, 1)];
+}
+
+
+
+#pragma mark - 物理力学
+
+// 将力施加与坐标系的某一位置，当作用于标准球位置时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
+- (void)force:(GLKVector3)force atPoint:(GLKVector3)point{
+	return [self force:force atPoint:point rotationScalar:1];
+}
+
+- (void)force:(GLKVector3)force atPoint:(GLKVector3)point rotationScalar:(float)scalar{
+	GLKVector3 normal = GLKVector3Normalize(GLKVector3Make(point.x, point.y, point.z));
+	// 将力分解为球表面法线方向(或反方向)和切线方向，法线方向即位移，切线方向即旋转方向
+	GLKVector3 offset;
+	GLKVector3 tangent;
+	float len = trimf(GLKVector3DotProduct(force, normal));
+	if(len == 0){ // 力与法线垂直
+		offset = GLKVector3Make(0, 0, 0);
+		tangent = force;
+	}else if(trimf(fabs(len) - 1) == 0){ // 力与法线平行
+		offset = force;
+		tangent = GLKVector3Make(0, 0, 0);
+	}else{
+		offset = GLKVector3MultiplyScalar(normal, len); // 法线力
+		tangent = GLKVector3Subtract(force, offset); // 切线力
+	}
+	GLKVector3 axis = GLKVector3CrossProduct(normal, tangent); // 旋转轴
+	float degree = scalar * GLKVector3Length(tangent);
+	
+	log_debug(@"force: %@", NSStringFromGLKVector3(force));
+	log_debug(@"point: %@", NSStringFromGLKVector3(point));
+	log_debug(@"normal: %@", NSStringFromGLKVector3(normal));
+	log_debug(@"offset: %@", NSStringFromGLKVector3(offset));
+	log_debug(@"tangent: %@", NSStringFromGLKVector3(tangent));
+	log_debug(@"degree: %f, axis: %.2f %.2f %.2f", degree, axis.x, axis.y, axis.z);
+	
+	[self moveX:offset.x y:offset.y z:offset.z];
+	[self rotate:degree x:axis.x y:axis.y z:axis.z];
 }
 
 @end

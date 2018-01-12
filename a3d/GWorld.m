@@ -17,6 +17,10 @@
 
 @implementation GWorld
 
+- (GLKMatrix4)matrix3d{
+	return _matrix3d;
+}
+
 - (id)init{
 	self = [super init];
 	_offscreenEnabled = YES;

@@ -8,6 +8,7 @@
 #import "GWorld.h"
 #import "GFrame.h"
 #import "GMatrix4.h"
+#import "GRay.h"
 #import "GEulerAngle.h"
 #import "GObject.h"
 #import "GCamera.h"

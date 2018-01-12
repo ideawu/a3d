@@ -15,6 +15,8 @@
 
 @property (readonly) GCamera *camera;
 
+@property (readonly) GLKMatrix4 matrix3d;
+
 - (void)enableOffscreenBuffer;
 - (void)disableOffscreenBuffer;
 

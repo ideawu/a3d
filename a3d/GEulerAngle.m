@@ -4,6 +4,7 @@
 
 #import "GEulerAngle.h"
 
+static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction);
 static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw, const char *mode);
 
 
@@ -27,7 +28,7 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 - (id)init{
 	self = [super init];
 	[self reset];
-	strcpy(_mode, "YZX");
+	strcpy(_mode, "ZXY");
 	return self;
 }
 
@@ -50,7 +51,7 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 }
 
 - (GLKMatrix4)matrix{
-	GLKMatrix4 mat = GLKMatrix4MakeTranslation(0, 0, 0);
+	GLKMatrix4 mat = GLKMatrix4Identity;
 	mat = [self rotateMatrix:mat degree:_roll axis:_mode[0]];
 	mat = [self rotateMatrix:mat degree:_pitch axis:_mode[1]];
 	mat = [self rotateMatrix:mat degree:_yaw axis:_mode[2]];
@@ -82,6 +83,44 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	_roll = GLKMathRadiansToDegrees(_roll);
 	_pitch = GLKMathRadiansToDegrees(_pitch);
 	_yaw = GLKMathRadiansToDegrees(_yaw);
+	
+//	log_debug(@"--- %@", self);
+
+	
+	// 当前坐标轴
+	GLKVector3 ax = matrix.xAxis;
+	GLKVector3 ay = matrix.yAxis;
+	GLKVector3 az = matrix.zAxis;
+	
+	GLKVector3 ox = GLKVector3Make(1, 0, 0);
+	GLKVector3 oy = GLKVector3Make(0, 1, 0);
+//	GLKVector3 oz = GLKVector3Make(0, 0, 1);
+	
+	if(trimf(1 - fabs(az.y)) == 0){ // Z轴是否与Y轴重合
+		_roll = 0;
+	}else{
+		GLKVector3 prj = GLKVector3CrossProduct(oy, az);
+		_roll = angle(prj, ax, az);
+	}
+
+	if(trimf(1 - fabs(ax.y)) == 0){ // X轴是否与Y轴重合
+		_pitch = 0;
+	}else{
+		GLKVector3 prj = GLKVector3CrossProduct(ax, oy);
+		_pitch = angle(prj, az, ax);
+	}
+
+	if(trimf(1 - fabs(ay.x)) == 0){ // X轴是否与Y轴重合
+		_yaw = 0;
+	}else{
+		// TODO:
+		GLKVector3 prj = GLKVector3CrossProduct(ox, ay);
+//		log_debug(@"ay: %f %f %f", ay.x, ay.y, ay.z);
+//		log_debug(@"az: %f %f %f, prj: %f %f %f", az.x, az.y, az.z, prj.x, prj.y, prj.z);
+		_yaw = angle(prj, az, ay);
+	}
+
+//	log_debug(@"%@", self);
 }
 
 - (void)subtract:(GEulerAngle *)right{
@@ -93,14 +132,24 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 @end
 
 
-static float trimf(float f){
-	return fabs(f)<FLT_EPSILON*10? 0 : f;
+static float angle(GLKVector3 vec0, GLKVector3 vec1, GLKVector3 direction){
+	GLKVector3 cross = GLKVector3CrossProduct(vec0, vec1); // 算角度时的旋转轴
+	float sign = GLKVector3DotProduct(direction, cross); // 旋转轴在方向轴上的投影
+	float dot = GLKVector3DotProduct(vec0, vec1);
+	// 避免计算误差导致符号发生重大改变
+	//	log_debug(@"%.10f %.10f %.10f", sign, dot, FLT_EPSILON);
+	sign = trimf(sign);
+	dot = trimf(dot);
+	//	log_debug(@"%f %f", sign, dot);
+	float angle = atan2(copysign(GLKVector3Length(cross), sign), dot);
+	return GLKMathRadiansToDegrees(angle);
 }
 
 static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw, const char *mode){
 	float r, p, y, w;
 	float sinr, cosr, sinp, siny, cosy;
 	float qs[3] = {q.x, q.y, q.z};
+//	log_debug(@"quat: %.2f %.2f %.2f w: %.2f", q.x, q.y, q.z, q.w);
 	// 各轴顺序
 	int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
 	r = qs[idx[0]];

@@ -47,6 +47,8 @@
 		3124F154200372690005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 		31CB9B66200700A50068D9B7 /* GFollow.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B64200700A50068D9B7 /* GFollow.h */; };
 		31CB9B67200700A50068D9B7 /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B65200700A50068D9B7 /* GFollow.m */; };
+		31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B682008CD4C0068D9B7 /* GRay.h */; };
+		31CB9B6B2008CD4C0068D9B7 /* GRay.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B692008CD4C0068D9B7 /* GRay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,6 +121,9 @@
 		3124F14F200371EB0005EDDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		31CB9B64200700A50068D9B7 /* GFollow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFollow.h; sourceTree = "<group>"; };
 		31CB9B65200700A50068D9B7 /* GFollow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFollow.m; sourceTree = "<group>"; };
+		31CB9B682008CD4C0068D9B7 /* GRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GRay.h; sourceTree = "<group>"; };
+		31CB9B692008CD4C0068D9B7 /* GRay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GRay.m; sourceTree = "<group>"; };
+		31CB9B6C2008D0CD0068D9B7 /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,12 +181,15 @@
 				3124F11D1FFC957A0005EDDE /* math */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
+				31CB9B6C2008D0CD0068D9B7 /* gmath.h */,
 				3124F0CF1FFB38A40005EDDE /* GWorld.h */,
 				3124F0D51FFB38A40005EDDE /* GWorld.m */,
 				3124F0D41FFB38A40005EDDE /* GFrame.h */,
 				3124F0D21FFB38A40005EDDE /* GFrame.m */,
 				3124F145200344580005EDDE /* GMatrix4.h */,
 				3124F146200344580005EDDE /* GMatrix4.m */,
+				31CB9B682008CD4C0068D9B7 /* GRay.h */,
+				31CB9B692008CD4C0068D9B7 /* GRay.m */,
 				3124F1412001C71D0005EDDE /* GEulerAngle.h */,
 				3124F1422001C71D0005EDDE /* GEulerAngle.m */,
 				3124F0D81FFB38A40005EDDE /* GObject.h */,
@@ -303,6 +311,7 @@
 				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */,
+				31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +446,7 @@
 				3124F0E11FFB38A40005EDDE /* GWorld.m in Sources */,
 				3124F1211FFC95A00005EDDE /* GVector3.m in Sources */,
 				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,
+				31CB9B6B2008CD4C0068D9B7 /* GRay.m in Sources */,
 				3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */,
 				3124F148200344580005EDDE /* GMatrix4.m in Sources */,
 				3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */,
