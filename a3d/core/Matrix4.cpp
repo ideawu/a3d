@@ -9,7 +9,11 @@ namespace a3d{
 	Matrix4::Matrix4(){
 		_mat = GLKMatrix4Identity;
 	}
-	
+
+	Matrix4::Matrix4(const Matrix4 &mat){
+		_mat = mat._mat;
+	}
+
 	Matrix4::Matrix4(GLKMatrix4 mat){
 		_mat = mat;
 	}
@@ -38,6 +42,10 @@ namespace a3d{
 		_mat = GLKMatrix4Translate(_mat, x, y, z);
 	}
 	
+	void Matrix4::translate(Vector3 offset){
+		this->translate(offset.x(), offset.y(), offset.z());
+	}
+
 	void Matrix4::rotateX(float degree){
 		_mat = GLKMatrix4RotateX(_mat, GLKMathDegreesToRadians(degree));
 	}
@@ -50,10 +58,16 @@ namespace a3d{
 		_mat = GLKMatrix4RotateZ(_mat, GLKMathDegreesToRadians(degree));
 	}
 	
-	void Matrix4::rotate(float degree, Vector3 axis){
-		_mat = GLKMatrix4Rotate(_mat, GLKMathDegreesToRadians(degree), axis.x(), axis.y(), axis.z());
+	void Matrix4::rotate(float degree, Vector3 vec){
+		_mat = GLKMatrix4Rotate(_mat, GLKMathDegreesToRadians(degree), vec.x(), vec.y(), vec.z());
 	}
 	
+	void Matrix4::rotate(float degree, const Axis &axis){
+		this->translate(axis.origin);
+		this->Matrix4::rotate(degree, axis.direction);
+		this->translate(axis.origin.invert());
+	}
+
 	void Matrix4::scale(float x, float y, float z){
 		_mat = GLKMatrix4Scale(_mat, x, y, z);
 	}

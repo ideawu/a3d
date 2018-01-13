@@ -39,4 +39,8 @@ namespace a3d{
 		this->translate(x, y, z);
 	}
 	
+	void Object::move(Vector3 offset){
+		this->translate(offset);
+	}
+
 }; // end namespace

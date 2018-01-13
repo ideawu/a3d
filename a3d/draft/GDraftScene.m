@@ -26,10 +26,10 @@
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 	for(int i=0; i<=grids; i++){
 		for(int j=0; j<=grids; j++){
-			float x0 = i * grid_width;
-			float z0 = j * grid_width;
-			float x1 = (i+1) * grid_width;
-			float z1 = (j+1) * grid_width;
+//			float x0 = i * grid_width;
+//			float z0 = j * grid_width;
+//			float x1 = (i+1) * grid_width;
+//			float z1 = (j+1) * grid_width;
 			
 //			glColor4f(1, 1, 1, 1);
 //			glBegin(GL_POLYGON);

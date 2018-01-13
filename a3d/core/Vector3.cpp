@@ -5,6 +5,16 @@
 #include "Vector3.h"
 
 namespace a3d{
+	
+	Vector3::Vector3(){
+		_vec.x = 0;
+		_vec.y = 0;
+		_vec.z = 0;
+	}
+
+	Vector3::Vector3(const Vector3 &vec){
+		_vec = vec._vec;
+	}
 
 	Vector3::Vector3(float x, float y, float z){
 		_vec.x = x;
@@ -36,13 +46,13 @@ namespace a3d{
 		return GLKVector3Length(_vec);
 	}
 	
-	void Vector3::normalize(){
-		_vec = GLKVector3Normalize(_vec);
+	Vector3 Vector3::normalize() const{
+		return Vector3(GLKVector3Normalize(_vec));
 	}
 	
-	void Vector3::normalize(float norm){
+	Vector3 Vector3::normalize(float norm) const{
 		float len = this->length();
-		_vec = GLKVector3MultiplyScalar(_vec, norm/len);
+		return Vector3(GLKVector3MultiplyScalar(_vec, norm/len));
 	}
 	
 	Vector3 Vector3::negate() const{

@@ -32,11 +32,11 @@
 #define vec4_sub		GLKVector4Subtract
 
 
-static float trimf(float f){
+inline static float trimf(float f){
 	return fabs(f)<FLT_EPSILON*10? 0 : f;
 }
 
-static float trimf_to(float f, float up){
+inline static float trimf_to(float f, float up){
 	return fabs(f-up)<FLT_EPSILON*10? up : f;
 }
 

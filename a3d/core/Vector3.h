@@ -17,6 +17,8 @@ namespace a3d{
 	public:
 		static Vector3 zero();
 
+		Vector3();
+		Vector3(const Vector3 &vec);
 		Vector3(float x, float y, float z);
 		
 	public:
@@ -26,8 +28,8 @@ namespace a3d{
 		float length() const;
 
 	public:
-		void normalize();
-		void normalize(float norm);
+		Vector3 normalize() const;
+		Vector3 normalize(float norm) const;
 
 		Vector3 negate() const;
 		// alias of negate

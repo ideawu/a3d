@@ -26,6 +26,9 @@ namespace a3d{
 
 	public:
 		void move(float x, float y, float z);
+		void move(Vector3 offset);
+		
+		
 		// 将力施加与坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
 		void force(Vector3 force, Vector3 atPoint);
 		void force(Vector3 force, Vector3 atPoint, float rotationScalar);
