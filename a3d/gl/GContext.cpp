@@ -42,11 +42,15 @@ namespace a3d{
 	
 	void GContext::bind3D(const Matrix4 &mat){
 		glViewport(0, 0, _width, _height);
+		if(framebuffer()){
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
+		}
+		
 		glMatrixMode(GL_PROJECTION);
 		glLoadMatrixf((const GLfloat *)mat.buffer());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		
+
 		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
@@ -60,14 +64,14 @@ namespace a3d{
 			glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
 		}
-		
-		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
-		}
 	}
 
 	void GContext::bind2D(const Matrix4 &mat){
 		glViewport(0, 0, _width, _height);
+		if(framebuffer()){
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
+		}
+		
 		glMatrixMode(GL_PROJECTION);
 		glLoadMatrixf((const GLfloat *)mat.buffer());
 		glMatrixMode(GL_MODELVIEW);
@@ -87,17 +91,12 @@ namespace a3d{
 			glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
 		}
-
-		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
-		}
 	}
 	
 	void GContext::flush(){
 		if(framebuffer()){
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer());
-			glDrawBuffer(GL_BACK); // Set the back buffer as the draw buffer
 			glBlitFramebuffer(0, 0, (GLsizei)_width, (GLsizei)_height,
 							  0, 0, (GLsizei)_width, (GLsizei)_height,
 							  GL_COLOR_BUFFER_BIT, GL_LINEAR); // GL_LINEAR GL_NEAREST

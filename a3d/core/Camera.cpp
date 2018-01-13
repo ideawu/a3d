@@ -7,6 +7,7 @@
 namespace a3d{
 	Camera::Camera(float fovy, float width, float height, float depth){
 		set(fovy, width, height, depth);
+		setup();
 	}
 	
 	void Camera::set(float fovy, float width, float height, float depth){
@@ -39,17 +40,12 @@ namespace a3d{
 		_matrix3D.scale(1, 1, -1);
 		// 将原点坐标移到屏幕右下角
 		_matrix3D.translate(-width/2, -height/2, 0);
-		
+
 		_matrix2D = Matrix4(GLKMatrix4MakeOrtho(-width/2, width/2, -height/2, height/2, -_far, _far));
 		// 翻转y轴，y轴方向向下
 		_matrix2D.scale(1, -1, -1);
 		// 将原点坐标移到屏幕左上角
 		_matrix2D.translate(-width/2, -height/2, 0);
-	}
-
-	void Camera::setup(float width, float height){
-		set(_fovy, width, height, this->depth());
-		setup();
 	}
 
 	void Camera::setup(float width, float height, float depth){

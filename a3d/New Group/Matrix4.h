@@ -50,7 +50,8 @@ namespace a3d{
 		
 		Vector3 mulVector3(Vector3 vec) const;
 
-	private:
+	public:
+//	private:
 		GLKMatrix4 _mat;
 	};
 	

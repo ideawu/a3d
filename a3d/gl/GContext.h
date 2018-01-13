@@ -16,6 +16,8 @@ namespace a3d{
 		static GContext* memoryContext(float width, float height);
 
 	public:
+		virtual ~GContext(){};
+
 		float width() const;
 		float height() const;
 

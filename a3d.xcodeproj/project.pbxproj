@@ -30,7 +30,7 @@
 		3124F1001FFB463A0005EDDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0FF1FFB463A0005EDDE /* main.m */; };
 		3124F1091FFB47940005EDDE /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1061FFB47940005EDDE /* TestController.m */; };
 		3124F10A1FFB47940005EDDE /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3124F1071FFB47940005EDDE /* TestController.xib */; };
-		3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */; };
+		3124F10E1FFB48A70005EDDE /* MyOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3124F10D1FFB48A60005EDDE /* MyOpenGLView.mm */; };
 		3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 		3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1231FFCABE80005EDDE /* GDraftScene.h */; };
 		3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1241FFCABE80005EDDE /* GDraftScene.m */; };
@@ -61,6 +61,8 @@
 		31CB9B892009EBD10068D9B7 /* GContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* GContext.h */; };
 		31CB9B8C2009F5DA0068D9B7 /* GMemoryContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8A2009F5DA0068D9B7 /* GMemoryContext.cpp */; };
 		31CB9B8D2009F5DA0068D9B7 /* GMemoryContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* GMemoryContext.h */; };
+		31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8F200A01C30068D9B7 /* Engine.cpp */; };
+		31CB9B92200A01C30068D9B7 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,7 +117,7 @@
 		3124F1071FFB47940005EDDE /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
 		3124F1081FFB47940005EDDE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenGLView.h; sourceTree = "<group>"; };
-		3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOpenGLView.m; sourceTree = "<group>"; };
+		3124F10D1FFB48A60005EDDE /* MyOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenGLView.mm; sourceTree = "<group>"; };
 		3124F1231FFCABE80005EDDE /* GDraftScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftScene.h; sourceTree = "<group>"; };
 		3124F1241FFCABE80005EDDE /* GDraftScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftScene.m; sourceTree = "<group>"; };
 		3124F12B1FFDEB560005EDDE /* GDraftSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftSprite.h; sourceTree = "<group>"; };
@@ -150,6 +152,8 @@
 		31CB9B872009EBD10068D9B7 /* GContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GContext.h; sourceTree = "<group>"; };
 		31CB9B8A2009F5DA0068D9B7 /* GMemoryContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GMemoryContext.cpp; sourceTree = "<group>"; };
 		31CB9B8B2009F5DA0068D9B7 /* GMemoryContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMemoryContext.h; sourceTree = "<group>"; };
+		31CB9B8F200A01C30068D9B7 /* Engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
+		31CB9B90200A01C30068D9B7 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,8 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				31CB9B8E2009FF060068D9B7 /* math */,
-				31CB9B6D2009B4C20068D9B7 /* core */,
 				31CB9B852009EA4A0068D9B7 /* gl */,
+				31CB9B6D2009B4C20068D9B7 /* core */,
 				3124F0E71FFB396A0005EDDE /* ui */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
@@ -256,7 +260,7 @@
 				3124F1361FFF984D0005EDDE /* MySprite.m */,
 				3124F1331FFE2CB80005EDDE /* test.c */,
 				3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */,
-				3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */,
+				3124F10D1FFB48A60005EDDE /* MyOpenGLView.mm */,
 				3124F10B1FFB488E0005EDDE /* xib */,
 				3124F1051FFB469B0005EDDE /* Supporting Files */,
 			);
@@ -313,6 +317,8 @@
 		31CB9B6D2009B4C20068D9B7 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				31CB9B90200A01C30068D9B7 /* Engine.h */,
+				31CB9B8F200A01C30068D9B7 /* Engine.cpp */,
 				31CB9B7A2009C5C00068D9B7 /* Object.h */,
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
@@ -354,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */,
+				31CB9B92200A01C30068D9B7 /* Engine.h in Headers */,
 				3124F0E01FFB38A40005EDDE /* GFrame.h in Headers */,
 				3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */,
 				31CB9B892009EBD10068D9B7 /* GContext.h in Headers */,
@@ -503,6 +510,7 @@
 				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
 				31CB9B882009EBD10068D9B7 /* GContext.cpp in Sources */,
 				3124F1442001C71D0005EDDE /* GEulerAngle.m in Sources */,
+				31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */,
 				31CB9B762009BA7D0068D9B7 /* Vector3.cpp in Sources */,
 				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
 				31CB9B67200700A50068D9B7 /* GFollow.m in Sources */,
@@ -530,7 +538,7 @@
 				3124F1091FFB47940005EDDE /* TestController.m in Sources */,
 				3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */,
 				3124F1371FFF984D0005EDDE /* MySprite.m in Sources */,
-				3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */,
+				3124F10E1FFB48A70005EDDE /* MyOpenGLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

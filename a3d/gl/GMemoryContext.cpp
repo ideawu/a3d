@@ -34,12 +34,12 @@ namespace a3d{
 
 		glGenRenderbuffers(1, &_colorbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, _colorbuffer);
-		//	glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, (GLsizei)_width, (GLsizei)_height);
+//			glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, (GLsizei)width, (GLsizei)height);
 		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA, (GLsizei)width, (GLsizei)height);
 		
 		glGenRenderbuffers(1, &_depthbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, _depthbuffer);
-		//	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, (GLsizei)_width, (GLsizei)_height);
+//			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, (GLsizei)width, (GLsizei)height);
 		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT, (GLsizei)width, (GLsizei)height);
 		
 		glGenFramebuffers(1, &_framebuffer);

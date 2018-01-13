@@ -19,7 +19,6 @@ namespace a3d{
 
 	public:
 		void setup();
-		void setup(float width, float height);
 		void setup(float width, float height, float depth);
 		void setup(float fovy, float width, float height, float depth);
 
