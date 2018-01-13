@@ -8,13 +8,16 @@
 #include "Matrix4.h"
 
 namespace a3d{
-	class Object : Matrix4
+	class Object : public Matrix4
 	{
 	private:
 		float _width, _height, _depth;
-		
+
+		Object(const Object &obj);
+
 	public:
 		Object();
+		Object(float w, float h, float d);
 
 	public:
 		float width() const;

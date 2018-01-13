@@ -11,6 +11,8 @@ namespace a3d{
 	class Axis
 	{
 	private:
+		Axis(const Axis &axis){}
+		
 	public:
 		Axis(const Vector3 &origin, const Vector3 &direction);
 		

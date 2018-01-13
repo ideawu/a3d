@@ -10,7 +10,13 @@ namespace a3d{
 		_height = 0;
 		_depth = 0;
 	}
-	
+
+	Object::Object(float w, float h, float d){
+		_width = w;
+		_height = h;
+		_depth = d;
+	}
+
 	float Object::width() const{
 		return _width;
 	}

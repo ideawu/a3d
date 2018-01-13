@@ -57,6 +57,8 @@
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B7F2009D0FA0068D9B7 /* Axis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B7D2009D0FA0068D9B7 /* Axis.cpp */; };
 		31CB9B802009D0FA0068D9B7 /* Axis.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7E2009D0FA0068D9B7 /* Axis.h */; };
+		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
+		31CB9B842009D99F0068D9B7 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -142,6 +144,8 @@
 		31CB9B7A2009C5C00068D9B7 /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		31CB9B7D2009D0FA0068D9B7 /* Axis.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Axis.cpp; sourceTree = "<group>"; };
 		31CB9B7E2009D0FA0068D9B7 /* Axis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Axis.h; sourceTree = "<group>"; };
+		31CB9B812009D99F0068D9B7 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		31CB9B822009D99F0068D9B7 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +325,8 @@
 				31CB9B7D2009D0FA0068D9B7 /* Axis.cpp */,
 				31CB9B7A2009C5C00068D9B7 /* Object.h */,
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
+				31CB9B822009D99F0068D9B7 /* Camera.h */,
+				31CB9B812009D99F0068D9B7 /* Camera.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 				31CB9B802009D0FA0068D9B7 /* Axis.h in Headers */,
 				3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */,
 				31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */,
+				31CB9B842009D99F0068D9B7 /* Camera.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +496,7 @@
 				3124F0E11FFB38A40005EDDE /* GWorld.m in Sources */,
 				3124F1211FFC95A00005EDDE /* GVector3.m in Sources */,
 				31CB9B722009B6750068D9B7 /* Matrix4.cpp in Sources */,
+				31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */,
 				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,
 				31CB9B6B2008CD4C0068D9B7 /* GRay.m in Sources */,
 				3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */,

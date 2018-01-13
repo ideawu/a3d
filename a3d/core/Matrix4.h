@@ -22,7 +22,7 @@ namespace a3d{
 		Matrix4(GLKMatrix4 mat);
 		
 		static Matrix4 identity();
-		
+
 	public:
 		/// 属性
 		Vector3 pos() const;
