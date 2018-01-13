@@ -5,18 +5,10 @@
 #include "Camera.h"
 
 namespace a3d{
-	Camera::Camera(float fovy, float width, float height, float depth){
-		set(fovy, width, height, depth);
-		setup();
-	}
-	
-	void Camera::set(float fovy, float width, float height, float depth){
-		_fovy = fovy;
-		_near = (height/2) / tan(GLKMathDegreesToRadians(fovy/2));
-		_far = _near + depth;
-		this->width(width);
-		this->height(height);
-		this->depth(depth);
+	Camera* Camera::create(float fovy, float width, float height, float depth){
+		Camera *ret = new Camera();
+		ret->setup(fovy, width, height, depth);
+		return ret;
 	}
 	
 	Matrix4 Camera::matrix3D() const{
@@ -28,9 +20,13 @@ namespace a3d{
 		return _matrix2D;
 	}
 	
-	void Camera::setup(){
-		float width = this->width();
-		float height = this->height();
+	void Camera::setup(float fovy, float width, float height, float depth){
+		_fovy = fovy;
+		_near = (height/2) / tan(GLKMathDegreesToRadians(fovy/2));
+		_far = _near + depth;
+		this->width(width);
+		this->height(height);
+		this->depth(depth);
 		
 		// 将近裁剪面设置为与viewport同大小
 		_matrix3D = Matrix4(GLKMatrix4MakeFrustum(-width/2, width/2, -height/2, height/2, _near, _far));
@@ -46,16 +42,6 @@ namespace a3d{
 		_matrix2D.scale(1, -1, -1);
 		// 将原点坐标移到屏幕左上角
 		_matrix2D.translate(-width/2, -height/2, 0);
-	}
-
-	void Camera::setup(float width, float height, float depth){
-		set(_fovy, width, height, depth);
-		setup();
-	}
-
-	void Camera::setup(float fovy, float width, float height, float depth){
-		set(fovy, width, height, depth);
-		setup();
 	}
 
 }; // end namespace

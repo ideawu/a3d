@@ -6,7 +6,6 @@
 #include "Camera.h"
 
 @interface MyOpenGLView(){
-//	GWorld *_world;
 	GImage *_img1;
 	GImage *_img2;
 	float _rotateX;
@@ -39,10 +38,6 @@
 	_rotateX = 0;
 	_rotateY = 0;
 
-//	_world = [[GWorld alloc] init];
-//	_world.width = 10000;
-//	_world.height = 10000;
-//	_world.depth = 10000;
 	_scene = [[GDraftScene alloc] init];
 	_scene.width = 10000;
 	_scene.height = 10000;
@@ -86,12 +81,9 @@
 	[_fakeCamera follow:_hero];
 
 	_objects = [[NSMutableArray alloc] init];
-//	[_objects addObject:_world.camera];
 	[_objects addObject:_hero];
 	[_objects addObject:_fakeCamera];
 
-//	_currentObject = _world.camera;
-//	[_world.camera follow:_hero];
 	_currentObject = _hero;
 }
 
@@ -118,27 +110,21 @@
 	
 	delete _camera;
 	delete _context;
-	_camera = new a3d::Camera(60, width, height, depth);
+	_camera = a3d::Camera::create(60, width, height, depth);
 	_context = a3d::GContext::memoryContext(width, height);
 }
 
 - (void)drawRect:(NSRect)aRect {
 	// 操作前务必要切换上下文
 	[[self openGLContext] makeCurrentContext];
-
-//	[_world beginRender];
-//	[_world render3D];
-//	[self draw3D];
-//	[_world render2D];
-//	[self draw2D];
-//	[_world finishRender];
 	
+	_context->bind();
 	_context->clear(0, 0, 0, 1);
-	_context->bind3D(_camera->matrix3D());
+	_context->setupCamera3D(_camera);
 	[self draw3D];
-	_context->bind2D(_camera->matrix2D());
+	_context->setupCamera2D(_camera);
 	[self draw2D];
-	_context->flush();
+	_context->finish();
 
 	[[self openGLContext] flushBuffer];
 }

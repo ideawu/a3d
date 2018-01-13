@@ -30,6 +30,13 @@ namespace a3d{
 		_height = (int)((double)height/2 + 0.5) * 2;
 	}
 	
+	void GContext::bind(){
+		glViewport(0, 0, _width, _height);
+		if(framebuffer()){
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
+		}
+	}
+	
 	void GContext::clear(){
 		clear(0, 0, 0, 1);
 	}
@@ -40,17 +47,15 @@ namespace a3d{
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
-	void GContext::bind3D(const Matrix4 &mat){
-		glViewport(0, 0, _width, _height);
-		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
-		}
-		
+	void GContext::loadMatrix(const Matrix4 &mat){
 		glMatrixMode(GL_PROJECTION);
 		glLoadMatrixf((const GLfloat *)mat.buffer());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-
+	}
+	
+	void GContext::setupCamera3D(const Camera *camera){
+		loadMatrix(camera->matrix3D());
 		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
@@ -66,17 +71,8 @@ namespace a3d{
 		}
 	}
 
-	void GContext::bind2D(const Matrix4 &mat){
-		glViewport(0, 0, _width, _height);
-		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
-		}
-		
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.buffer());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		
+	void GContext::setupCamera2D(const Camera *camera){
+		loadMatrix(camera->matrix2D());
 		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glDisable(GL_MULTISAMPLE);
 		//	glEnable(GL_DEPTH_TEST);
@@ -93,7 +89,7 @@ namespace a3d{
 		}
 	}
 	
-	void GContext::flush(){
+	void GContext::finish(){
 		if(framebuffer()){
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer());
@@ -102,7 +98,7 @@ namespace a3d{
 							  GL_COLOR_BUFFER_BIT, GL_LINEAR); // GL_LINEAR GL_NEAREST
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		}
-		glFlush();
+		glFinish();
 	}
 
 }; // end namespace

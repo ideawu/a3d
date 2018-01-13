@@ -6,7 +6,7 @@
 #define GLContext_hpp
 
 #include <OpenGL/gl.h>
-#include "Matrix4.h"
+#include "Camera.h"
 
 namespace a3d{
 	class GContext
@@ -21,12 +21,12 @@ namespace a3d{
 		float width() const;
 		float height() const;
 
+		void bind();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
-		void bind3D(const Matrix4 &mat);
-		void bind2D(const Matrix4 &mat);
-		// 将渲染结果复制到默认缓冲
-		void flush();
+		void setupCamera3D(const Camera *camera);
+		void setupCamera2D(const Camera *camera);
+		void finish();
 
 	protected:
 		GContext(){}
@@ -37,6 +37,7 @@ namespace a3d{
 		GContext(const GContext &ctx){}
 		void width(float width);
 		void height(float height);
+		void loadMatrix(const Matrix4 &mat);
 
 		float _width;
 		float _height;
