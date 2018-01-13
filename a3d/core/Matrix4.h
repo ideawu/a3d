@@ -23,6 +23,8 @@ namespace a3d{
 
 	public:
 		/// 属性
+		const float* buffer() const;
+		
 		Vector3 pos() const;
 		float x() const;
 		float y() const;
@@ -40,7 +42,7 @@ namespace a3d{
 		void rotate(float degree, const Axis &axis);
 		void scale(float x, float y, float z);
 
-		Matrix4 invert(Matrix4 mat) const;
+		Matrix4 invert() const;
 
 		Matrix4 add(Matrix4 mat) const;
 		Matrix4 sub(Matrix4 mat) const;

@@ -59,6 +59,10 @@
 		31CB9B802009D0FA0068D9B7 /* Axis.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7E2009D0FA0068D9B7 /* Axis.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
 		31CB9B842009D99F0068D9B7 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
+		31CB9B882009EBD10068D9B7 /* GContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B862009EBD10068D9B7 /* GContext.cpp */; };
+		31CB9B892009EBD10068D9B7 /* GContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* GContext.h */; };
+		31CB9B8C2009F5DA0068D9B7 /* GMemoryContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8A2009F5DA0068D9B7 /* GMemoryContext.cpp */; };
+		31CB9B8D2009F5DA0068D9B7 /* GMemoryContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* GMemoryContext.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,6 +150,10 @@
 		31CB9B7E2009D0FA0068D9B7 /* Axis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Axis.h; sourceTree = "<group>"; };
 		31CB9B812009D99F0068D9B7 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		31CB9B822009D99F0068D9B7 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		31CB9B862009EBD10068D9B7 /* GContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GContext.cpp; sourceTree = "<group>"; };
+		31CB9B872009EBD10068D9B7 /* GContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GContext.h; sourceTree = "<group>"; };
+		31CB9B8A2009F5DA0068D9B7 /* GMemoryContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GMemoryContext.cpp; sourceTree = "<group>"; };
+		31CB9B8B2009F5DA0068D9B7 /* GMemoryContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMemoryContext.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,10 +208,12 @@
 			isa = PBXGroup;
 			children = (
 				31CB9B6D2009B4C20068D9B7 /* core */,
+				31CB9B852009EA4A0068D9B7 /* gl */,
 				3124F0E71FFB396A0005EDDE /* ui */,
 				3124F11D1FFC957A0005EDDE /* math */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
+				31CB9B782009C3830068D9B7 /* util.h */,
 				31CB9B6C2008D0CD0068D9B7 /* gmath.h */,
 				3124F0CF1FFB38A40005EDDE /* GWorld.h */,
 				3124F0D51FFB38A40005EDDE /* GWorld.m */,
@@ -316,7 +326,6 @@
 		31CB9B6D2009B4C20068D9B7 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				31CB9B782009C3830068D9B7 /* util.h */,
 				31CB9B6F2009B4E40068D9B7 /* Matrix4.h */,
 				31CB9B6E2009B4E40068D9B7 /* Matrix4.cpp */,
 				31CB9B752009BA7D0068D9B7 /* Vector3.h */,
@@ -331,6 +340,17 @@
 			path = core;
 			sourceTree = "<group>";
 		};
+		31CB9B852009EA4A0068D9B7 /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				31CB9B872009EBD10068D9B7 /* GContext.h */,
+				31CB9B862009EBD10068D9B7 /* GContext.cpp */,
+				31CB9B8B2009F5DA0068D9B7 /* GMemoryContext.h */,
+				31CB9B8A2009F5DA0068D9B7 /* GMemoryContext.cpp */,
+			);
+			path = gl;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -341,6 +361,7 @@
 				3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */,
 				3124F0E01FFB38A40005EDDE /* GFrame.h in Headers */,
 				3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */,
+				31CB9B892009EBD10068D9B7 /* GContext.h in Headers */,
 				31CB9B66200700A50068D9B7 /* GFollow.h in Headers */,
 				3124F0E51FFB38A40005EDDE /* GImage.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
@@ -356,6 +377,7 @@
 				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				31CB9B802009D0FA0068D9B7 /* Axis.h in Headers */,
+				31CB9B8D2009F5DA0068D9B7 /* GMemoryContext.h in Headers */,
 				3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */,
 				31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */,
 				31CB9B842009D99F0068D9B7 /* Camera.h in Headers */,
@@ -485,11 +507,13 @@
 			files = (
 				31CB9B7F2009D0FA0068D9B7 /* Axis.cpp in Sources */,
 				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
+				31CB9B882009EBD10068D9B7 /* GContext.cpp in Sources */,
 				3124F1442001C71D0005EDDE /* GEulerAngle.m in Sources */,
 				31CB9B762009BA7D0068D9B7 /* Vector3.cpp in Sources */,
 				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
 				31CB9B67200700A50068D9B7 /* GFollow.m in Sources */,
 				3124F0DE1FFB38A40005EDDE /* GFrame.m in Sources */,
+				31CB9B8C2009F5DA0068D9B7 /* GMemoryContext.cpp in Sources */,
 				3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */,
 				31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */,
 				3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */,

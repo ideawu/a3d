@@ -22,6 +22,10 @@ namespace a3d{
 		return Matrix4();
 	}
 
+	const float* Matrix4::buffer() const{
+		return (const float *)&_mat;
+	}
+
 	Vector3 Matrix4::pos() const{
 		return Vector3(x(), y(), z());
 	}
@@ -72,7 +76,7 @@ namespace a3d{
 		_mat = GLKMatrix4Scale(_mat, x, y, z);
 	}
 	
-	Matrix4 Matrix4::invert(Matrix4 mat) const{
+	Matrix4 Matrix4::invert() const{
 		return Matrix4(GLKMatrix4Invert(_mat, NULL));
 	}
 
