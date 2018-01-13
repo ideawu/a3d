@@ -1,12 +1,11 @@
 #import "MyOpenGLView.h"
 #import <GLKit/GLKit.h>
 #import "MySprite.h"
-#import "GDraftSprite.h"
-
 
 #include "a3d/Context.h"
 #include "a3d/Camera.h"
 #include "a3d/DraftScene.h"
+#include "a3d/DraftSprite.h"
 
 @interface MyOpenGLView(){
 	GImage *_img1;
@@ -15,15 +14,14 @@
 	float _rotateY;
 	int _auto_rotate_x;
 	int _auto_rotate_y;
-	GDraftSprite *_flag;
-	GDraftSprite *_camera_hero;
 	MySprite *_hero;
-	GCamera *_fakeCamera;
 	
 	a3d::Camera *_camera;
 	a3d::Context *_context;
 	
 	DraftScene *_scene;
+	DraftSprite *_flag;
+	DraftSprite *_camera_hero;
 
 }
 // 当前被控制的对象
@@ -70,24 +68,20 @@
 		[_img2 moveZ:4000];
 	}
 	
-	_flag = [[GDraftSprite alloc] init];
-	_flag.width = 100;
-	_flag.height = 100;
-	_flag.depth = 100;
-	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
+	_flag = new DraftSprite();
+	_flag->width(100);
+	_flag->height(100);
+	_flag->depth(100);
+
+//	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
 //	[_flag moveX:200 y:_flag.height/2 z:200];
 
 	_hero = [[MySprite alloc] init];
 	[_hero moveX:800 y:0 z:800];
 //	[_hero rotateZ:30];
 
-	_fakeCamera = [[GCamera alloc] init];
-	[_fakeCamera moveX:_hero.x-120 y:_hero.y+200 z:_hero.z-300];
-	[_fakeCamera follow:_hero];
-
 	_objects = [[NSMutableArray alloc] init];
 	[_objects addObject:_hero];
-	[_objects addObject:_fakeCamera];
 
 	_currentObject = _hero;
 }
@@ -138,11 +132,9 @@
 	[_img1 render];
 	[_img2 render];
 	[_hero render];
-
-	_flag.matrix = _fakeCamera.matrix;
-	[_flag render];
 	
 	_scene->render();
+	_flag->render();
 }
 
 - (void)draw2D{
