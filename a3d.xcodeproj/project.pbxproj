@@ -32,8 +32,6 @@
 		3124F10A1FFB47940005EDDE /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3124F1071FFB47940005EDDE /* TestController.xib */; };
 		3124F10E1FFB48A70005EDDE /* MyOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */; };
 		3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
-		3124F1201FFC95A00005EDDE /* GVector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F11E1FFC95A00005EDDE /* GVector3.h */; };
-		3124F1211FFC95A00005EDDE /* GVector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F11F1FFC95A00005EDDE /* GVector3.m */; };
 		3124F1251FFCABE80005EDDE /* GDraftScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1231FFCABE80005EDDE /* GDraftScene.h */; };
 		3124F1261FFCABE80005EDDE /* GDraftScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1241FFCABE80005EDDE /* GDraftScene.m */; };
 		3124F12D1FFDEB560005EDDE /* GDraftSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12B1FFDEB560005EDDE /* GDraftSprite.h */; };
@@ -118,8 +116,6 @@
 		3124F1081FFB47940005EDDE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOpenGLView.h; sourceTree = "<group>"; };
 		3124F10D1FFB48A60005EDDE /* MyOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOpenGLView.m; sourceTree = "<group>"; };
-		3124F11E1FFC95A00005EDDE /* GVector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GVector3.h; sourceTree = "<group>"; };
-		3124F11F1FFC95A00005EDDE /* GVector3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GVector3.m; sourceTree = "<group>"; };
 		3124F1231FFCABE80005EDDE /* GDraftScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftScene.h; sourceTree = "<group>"; };
 		3124F1241FFCABE80005EDDE /* GDraftScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDraftScene.m; sourceTree = "<group>"; };
 		3124F12B1FFDEB560005EDDE /* GDraftSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDraftSprite.h; sourceTree = "<group>"; };
@@ -207,10 +203,10 @@
 		3124F0C51FFB37F40005EDDE /* a3d */ = {
 			isa = PBXGroup;
 			children = (
+				31CB9B8E2009FF060068D9B7 /* math */,
 				31CB9B6D2009B4C20068D9B7 /* core */,
 				31CB9B852009EA4A0068D9B7 /* gl */,
 				3124F0E71FFB396A0005EDDE /* ui */,
-				3124F11D1FFC957A0005EDDE /* math */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
 				31CB9B782009C3830068D9B7 /* util.h */,
@@ -295,15 +291,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3124F11D1FFC957A0005EDDE /* math */ = {
-			isa = PBXGroup;
-			children = (
-				3124F11E1FFC95A00005EDDE /* GVector3.h */,
-				3124F11F1FFC95A00005EDDE /* GVector3.m */,
-			);
-			path = math;
-			sourceTree = "<group>";
-		};
 		3124F1221FFCAB9E0005EDDE /* draft */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,12 +313,6 @@
 		31CB9B6D2009B4C20068D9B7 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				31CB9B6F2009B4E40068D9B7 /* Matrix4.h */,
-				31CB9B6E2009B4E40068D9B7 /* Matrix4.cpp */,
-				31CB9B752009BA7D0068D9B7 /* Vector3.h */,
-				31CB9B742009BA7D0068D9B7 /* Vector3.cpp */,
-				31CB9B7E2009D0FA0068D9B7 /* Axis.h */,
-				31CB9B7D2009D0FA0068D9B7 /* Axis.cpp */,
 				31CB9B7A2009C5C00068D9B7 /* Object.h */,
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
@@ -349,6 +330,20 @@
 				31CB9B8A2009F5DA0068D9B7 /* GMemoryContext.cpp */,
 			);
 			path = gl;
+			sourceTree = "<group>";
+		};
+		31CB9B8E2009FF060068D9B7 /* math */ = {
+			isa = PBXGroup;
+			children = (
+				31CB9B6F2009B4E40068D9B7 /* Matrix4.h */,
+				31CB9B6E2009B4E40068D9B7 /* Matrix4.cpp */,
+				31CB9B752009BA7D0068D9B7 /* Vector3.h */,
+				31CB9B742009BA7D0068D9B7 /* Vector3.cpp */,
+				31CB9B7E2009D0FA0068D9B7 /* Axis.h */,
+				31CB9B7D2009D0FA0068D9B7 /* Axis.cpp */,
+			);
+			name = math;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,7 +364,6 @@
 				31CB9B712009B4E40068D9B7 /* Matrix4.h in Headers */,
 				31CB9B772009BA7D0068D9B7 /* Vector3.h in Headers */,
 				3124F0E21FFB38A40005EDDE /* GNode.h in Headers */,
-				3124F1201FFC95A00005EDDE /* GVector3.h in Headers */,
 				3124F12D1FFDEB560005EDDE /* GDraftSprite.h in Headers */,
 				3124F0DB1FFB38A40005EDDE /* GWorld.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
@@ -518,7 +512,6 @@
 				31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */,
 				3124F12E1FFDEB560005EDDE /* GDraftSprite.m in Sources */,
 				3124F0E11FFB38A40005EDDE /* GWorld.m in Sources */,
-				3124F1211FFC95A00005EDDE /* GVector3.m in Sources */,
 				31CB9B722009B6750068D9B7 /* Matrix4.cpp in Sources */,
 				31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */,
 				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,

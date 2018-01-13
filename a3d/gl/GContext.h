@@ -19,6 +19,8 @@ namespace a3d{
 		float width() const;
 		float height() const;
 
+		void clear();
+		void clear(float r, float g, float b, float a=1);
 		void bind3D(const Matrix4 &mat);
 		void bind2D(const Matrix4 &mat);
 		// 将渲染结果复制到默认缓冲
@@ -27,7 +29,7 @@ namespace a3d{
 	protected:
 		GContext(){}
 
-		virtual GLuint framebuffer(){return 0;};
+		virtual GLuint framebuffer() = 0;
 		virtual void setup() = 0;
 	private:
 		GContext(const GContext &ctx){}

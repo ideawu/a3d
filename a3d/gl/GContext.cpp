@@ -30,6 +30,16 @@ namespace a3d{
 		_height = (int)((double)height/2 + 0.5) * 2;
 	}
 	
+	void GContext::clear(){
+		clear(0, 0, 0, 1);
+	}
+	
+	void GContext::clear(float r, float g, float b, float a){
+		glClearColor(r, g, b, a);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
+	}
+	
 	void GContext::bind3D(const Matrix4 &mat){
 		glViewport(0, 0, _width, _height);
 		glMatrixMode(GL_PROJECTION);
