@@ -10,9 +10,6 @@
 namespace a3d{
 	class Axis
 	{
-	private:
-		Axis(const Axis &axis){}
-		
 	public:
 		Axis(const Vector3 &origin, const Vector3 &direction);
 		
@@ -21,6 +18,9 @@ namespace a3d{
 		Vector3 direction;
 		
 		Vector3 nearestPointTo(const Vector3 &target) const;
+	
+	private:
+		Axis(const Axis &axis){}
 	};
 	
 }; // end namespace

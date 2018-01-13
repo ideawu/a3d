@@ -12,8 +12,6 @@
 namespace a3d{
 	class Matrix4
 	{
-	private:
-		GLKMatrix4 _mat;
 	public:
 		/// 静态方法
 		// 创建一个单位向量
@@ -49,6 +47,9 @@ namespace a3d{
 		Matrix4 mul(Matrix4 mat) const;
 		
 		Vector3 mulVector3(Vector3 vec) const;
+
+	private:
+		GLKMatrix4 _mat;
 	};
 	
 }; // end namespace

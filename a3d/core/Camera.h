@@ -10,24 +10,29 @@
 namespace a3d{
 	class Camera : public Object
 	{
-	private:
-		float _fovy;
-		float _near;
-		float _far;
-		Matrix4 _matrix3d;
-		Matrix4 _matrix2d;
-
-		Camera(const Camera &cam){}
-		void set(float fovy, float width, float height, float depth);
-		
 	public:
 		Camera(float fovy, float width, float height, float depth);
-		
+
+	public:
+		Matrix4 matrix3D() const;
+		Matrix4 matrix2D() const;
+
 	public:
 		void setup();
 		void setup(float width, float height);
 		void setup(float width, float height, float depth);
 		void setup(float fovy, float width, float height, float depth);
+
+	private:
+		float _fovy;
+		float _near;
+		float _far;
+		Matrix4 _matrix3D;
+		Matrix4 _matrix2D;
+		
+		Camera(const Camera &cam){}
+		void set(float fovy, float width, float height, float depth);
+		
 	};
 	
 }; // end namespace

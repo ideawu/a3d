@@ -10,10 +10,6 @@
 namespace a3d{
 	class Vector3
 	{
-	private:
-		GLKVector3 _vec;
-		Vector3(GLKVector3 vec);
-		
 	public:
 		static Vector3 zero();
 
@@ -40,6 +36,11 @@ namespace a3d{
 		float dot(Vector3 vec) const;
 		Vector3 cross(Vector3 vec) const;
 		Vector3 project(Vector3 vec) const;
+
+	private:
+		GLKVector3 _vec;
+		Vector3(GLKVector3 vec);
+		
 	};
 	
 }; // end namespace
