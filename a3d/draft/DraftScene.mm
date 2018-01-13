@@ -2,19 +2,18 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import "GDraftScene.h"
+#include "DraftScene.h"
+#import <GLKit/GLKit.h>
 
-@implementation GDraftScene
-
-- (void)draw{
+void DraftScene::draw(){
 	glDisable(GL_LINE_STIPPLE);
 
 	int grids;
 	int grid_width = 100;
 	int depth;
-	depth = self.depth;
+	depth = this->depth();
 	
-	grids = self.width / grid_width;
+	grids = this->width() / grid_width;
 	static GLKTextureInfo *_texture = nil;
 	if(!_texture){
 		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(1)};
@@ -52,7 +51,7 @@
 
 
 	// 地板
-	grids = self.width / grid_width;
+	grids = this->width() / grid_width;
 //	log_debug(@"%d %d %f %f", grids, grid_width, self.width, self.depth);
 	for(int i=0; i<=grids; i++){
 		if(i == 0){
@@ -75,7 +74,7 @@
 	}
 
 	// 左边墙
-	grids = self.height / grid_width;
+	grids = this->height() / grid_width;
 	for(int i=0; i<=grids; i++){
 		if(i == 0){
 			glLineWidth(1);
@@ -106,11 +105,5 @@
 	}
 	glEnd();
 	
-	
-	[self test];
 }
 
-- (void)test{
-}
-
-@end

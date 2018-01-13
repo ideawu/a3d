@@ -2,17 +2,17 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef GMemoryContext_hpp
-#define GMemoryContext_hpp
+#ifndef MemoryContext_hpp
+#define MemoryContext_hpp
 
-#include "GContext.h"
+#include "Context.h"
 
 namespace a3d{
-	class GMemoryContext : public GContext
+	class MemoryContext : public Context
 	{
 	public:
-		GMemoryContext();
-		~GMemoryContext();
+		MemoryContext();
+		~MemoryContext();
 		
 		virtual GLuint framebuffer();
 		virtual void setup();
@@ -24,4 +24,4 @@ namespace a3d{
 	};
 }; // end namespace
 
-#endif /* GMemoryContext_hpp */
+#endif /* MemoryContext_hpp */

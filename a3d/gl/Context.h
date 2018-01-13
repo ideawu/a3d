@@ -9,14 +9,14 @@
 #include "Camera.h"
 
 namespace a3d{
-	class GContext
+	class Context
 	{
 	public:
 		// 如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
-		static GContext* memoryContext(float width, float height);
+		static Context* memoryContext(float width, float height);
 
 	public:
-		virtual ~GContext(){};
+		virtual ~Context(){};
 
 		float width() const;
 		float height() const;
@@ -29,12 +29,12 @@ namespace a3d{
 		void finish();
 
 	protected:
-		GContext(){}
+		Context(){}
 
 		virtual GLuint framebuffer() = 0;
 		virtual void setup() = 0;
 	private:
-		GContext(const GContext &ctx){}
+		Context(const Context &ctx){}
 		void width(float width);
 		void height(float height);
 		void loadMatrix(const Matrix4 &mat);

@@ -22,7 +22,7 @@ namespace a3d{
 		return Matrix4();
 	}
 
-	const float* Matrix4::buffer() const{
+	const float* Matrix4::matrix() const{
 		return (const float *)&_mat;
 	}
 

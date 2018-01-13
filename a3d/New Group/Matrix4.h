@@ -23,7 +23,7 @@ namespace a3d{
 
 	public:
 		/// 属性
-		const float* buffer() const;
+		const float* matrix() const;
 		
 		Vector3 pos() const;
 		float x() const;

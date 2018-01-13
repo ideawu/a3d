@@ -2,59 +2,59 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "GContext.h"
-#include "GMemoryContext.h"
+#include "Context.h"
+#include "MemoryContext.h"
 
 namespace a3d{
-	GContext* GContext::memoryContext(float width, float height){
-		GMemoryContext *impl = new GMemoryContext();
+	Context* Context::memoryContext(float width, float height){
+		MemoryContext *impl = new MemoryContext();
 		impl->width(width);
 		impl->height(height);
 		impl->setup();
 		return impl;
 	}
 	
-	float GContext::width() const{
+	float Context::width() const{
 		return _width;
 	}
 	
-	float GContext::height() const{
+	float Context::height() const{
 		return _height;
 	}
 	
-	void GContext::width(float width){
+	void Context::width(float width){
 		_width = (int)((double)width/2 + 0.5) * 2;
 	}
 	
-	void GContext::height(float height){
+	void Context::height(float height){
 		_height = (int)((double)height/2 + 0.5) * 2;
 	}
 	
-	void GContext::bind(){
+	void Context::bind(){
 		glViewport(0, 0, _width, _height);
 		if(framebuffer()){
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
 		}
 	}
 	
-	void GContext::clear(){
+	void Context::clear(){
 		clear(0, 0, 0, 1);
 	}
 	
-	void GContext::clear(float r, float g, float b, float a){
+	void Context::clear(float r, float g, float b, float a){
 		glClearColor(r, g, b, a);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
-	void GContext::loadMatrix(const Matrix4 &mat){
+	void Context::loadMatrix(const Matrix4 &mat){
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.buffer());
+		glLoadMatrixf((const GLfloat *)mat.matrix());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 	}
 	
-	void GContext::setupCamera3D(const Camera *camera){
+	void Context::setupCamera3D(const Camera *camera){
 		loadMatrix(camera->matrix3D());
 		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glEnable(GL_MULTISAMPLE);
@@ -71,7 +71,7 @@ namespace a3d{
 		}
 	}
 
-	void GContext::setupCamera2D(const Camera *camera){
+	void Context::setupCamera2D(const Camera *camera){
 		loadMatrix(camera->matrix2D());
 		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glDisable(GL_MULTISAMPLE);
@@ -89,7 +89,7 @@ namespace a3d{
 		}
 	}
 	
-	void GContext::finish(){
+	void Context::finish(){
 		if(framebuffer()){
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer());

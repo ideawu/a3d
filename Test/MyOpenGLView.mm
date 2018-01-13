@@ -1,9 +1,11 @@
 #import "MyOpenGLView.h"
 #import <GLKit/GLKit.h>
 #import "MySprite.h"
+#import "GDraftSprite.h"
 
-#include "GContext.h"
+#include "Context.h"
 #include "Camera.h"
+#include "DraftScene.h"
 
 @interface MyOpenGLView(){
 	GImage *_img1;
@@ -12,14 +14,16 @@
 	float _rotateY;
 	int _auto_rotate_x;
 	int _auto_rotate_y;
-	GDraftScene *_scene;
 	GDraftSprite *_flag;
 	GDraftSprite *_camera_hero;
 	MySprite *_hero;
 	GCamera *_fakeCamera;
 	
 	a3d::Camera *_camera;
-	a3d::GContext *_context;
+	a3d::Context *_context;
+	
+	DraftScene *_scene;
+
 }
 // 当前被控制的对象
 @property GObject *currentObject;
@@ -38,10 +42,10 @@
 	_rotateX = 0;
 	_rotateY = 0;
 
-	_scene = [[GDraftScene alloc] init];
-	_scene.width = 10000;
-	_scene.height = 10000;
-	_scene.depth = 10000;
+	_scene = new DraftScene();
+	_scene->width(10000);
+	_scene->height(10000);
+	_scene->depth(10000);
 	
 //	[_scene moveX:200 y:200 z:5];
 
@@ -111,7 +115,7 @@
 	delete _camera;
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
-	_context = a3d::GContext::memoryContext(width, height);
+	_context = a3d::Context::memoryContext(width, height);
 }
 
 - (void)drawRect:(NSRect)aRect {
@@ -137,7 +141,7 @@
 	_flag.matrix = _fakeCamera.matrix;
 	[_flag render];
 	
-	[_scene render];
+	_scene->render();
 }
 
 - (void)draw2D{

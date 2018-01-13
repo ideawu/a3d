@@ -5,8 +5,6 @@
 #ifndef A3D_h
 #define A3D_h
 
-#import "GWorld.h"
-#import "GFrame.h"
 #import "GMatrix4.h"
 #import "GRay.h"
 #import "GEulerAngle.h"
@@ -16,7 +14,5 @@
 #import "GImage.h"
 
 #import "ui/GNSView.h"
-#import "draft/GDraftScene.h"
-#import "draft/GDraftSprite.h"
 
 #endif

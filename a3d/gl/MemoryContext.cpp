@@ -2,17 +2,17 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "GMemoryContext.h"
+#include "MemoryContext.h"
 
 namespace a3d{
 	
-	GMemoryContext::GMemoryContext(){
+	MemoryContext::MemoryContext(){
 		_framebuffer = 0;
 		_colorbuffer = 0;
 		_depthbuffer = 0;
 	}
 	
-	GMemoryContext::~GMemoryContext(){
+	MemoryContext::~MemoryContext(){
 		if(_framebuffer){
 			glDeleteFramebuffers(1, &_framebuffer);
 		}
@@ -24,11 +24,11 @@ namespace a3d{
 		}
 	}
 	
-	GLuint GMemoryContext::framebuffer(){
+	GLuint MemoryContext::framebuffer(){
 		return _framebuffer;
 	}
 
-	void GMemoryContext::setup(){
+	void MemoryContext::setup(){
 		float width = this->width();
 		float height = this->height();
 
