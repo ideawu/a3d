@@ -8,6 +8,8 @@
 @interface GCamera(){
 	GLKVector3 _focus;
 }
+// 观察的焦点在相机坐标系内的位置，默认为相机原点
+@property GLKVector3 focus;
 @property float near;
 @end
 

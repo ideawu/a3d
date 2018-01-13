@@ -61,7 +61,7 @@
 			glLineWidth(0.5);
 		}
 		float v = grid_width * i;
-		glColor4f(0.9, 0.9, 1, 1);
+		glColor4f(0.3, 0.3, 0.3, 1);
 		glBegin(GL_LINES);
 		{
 			// x
@@ -83,7 +83,7 @@
 			glLineWidth(0.5);
 		}
 		float v = grid_width * i;
-		glColor4f(1, 1, 0.5, 1);
+		glColor4f(0.5, 0.5, 0.5, 1);
 		glBegin(GL_LINES);
 		{
 			// y
