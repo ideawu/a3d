@@ -3,9 +3,10 @@
 #import "MySprite.h"
 #import "GDraftSprite.h"
 
-#include "Context.h"
-#include "Camera.h"
-#include "DraftScene.h"
+
+#include "a3d/Context.h"
+#include "a3d/Camera.h"
+#include "a3d/DraftScene.h"
 
 @interface MyOpenGLView(){
 	GImage *_img1;
