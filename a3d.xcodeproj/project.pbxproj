@@ -37,6 +37,14 @@
 		3124F148200344580005EDDE /* GMatrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F146200344580005EDDE /* GMatrix4.m */; };
 		3124F150200371EB0005EDDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F14F200371EB0005EDDE /* main.m */; };
 		3124F154200372690005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
+		314FE3B2200C5B380067984B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3B1200C5B380067984B /* AppDelegate.m */; };
+		314FE3B4200C5B380067984B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 314FE3B3200C5B380067984B /* Assets.xcassets */; };
+		314FE3B7200C5B380067984B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 314FE3B5200C5B380067984B /* MainMenu.xib */; };
+		314FE3BA200C5B380067984B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3B9200C5B380067984B /* main.m */; };
+		314FE3C2200C5B900067984B /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3C0200C5B900067984B /* TestController.m */; };
+		314FE3C3200C5B900067984B /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 314FE3C1200C5B900067984B /* TestController.xib */; };
+		314FE3C5200C5C9A0067984B /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314FE3C4200C5C9A0067984B /* SceneKit.framework */; };
+		314FE3C7200C5C9F0067984B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314FE3C6200C5C9F0067984B /* SpriteKit.framework */; };
 		31CB9B66200700A50068D9B7 /* GFollow.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B64200700A50068D9B7 /* GFollow.h */; };
 		31CB9B67200700A50068D9B7 /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B65200700A50068D9B7 /* GFollow.m */; };
 		31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B682008CD4C0068D9B7 /* GRay.h */; };
@@ -154,6 +162,19 @@
 		3124F146200344580005EDDE /* GMatrix4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMatrix4.m; sourceTree = "<group>"; };
 		3124F14D200371EB0005EDDE /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
 		3124F14F200371EB0005EDDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		314FE3AE200C5B380067984B /* Scene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scene.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		314FE3B0200C5B380067984B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		314FE3B1200C5B380067984B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		314FE3B3200C5B380067984B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		314FE3B6200C5B380067984B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		314FE3B8200C5B380067984B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		314FE3B9200C5B380067984B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		314FE3BB200C5B380067984B /* Scene.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scene.entitlements; sourceTree = "<group>"; };
+		314FE3BF200C5B900067984B /* TestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
+		314FE3C0200C5B900067984B /* TestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
+		314FE3C1200C5B900067984B /* TestController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
+		314FE3C4200C5C9A0067984B /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		314FE3C6200C5C9F0067984B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		31CB9B64200700A50068D9B7 /* GFollow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFollow.h; sourceTree = "<group>"; };
 		31CB9B65200700A50068D9B7 /* GFollow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFollow.m; sourceTree = "<group>"; };
 		31CB9B682008CD4C0068D9B7 /* GRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GRay.h; sourceTree = "<group>"; };
@@ -211,6 +232,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		314FE3AB200C5B380067984B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				314FE3C7200C5C9F0067984B /* SpriteKit.framework in Frameworks */,
+				314FE3C5200C5C9A0067984B /* SceneKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -220,6 +250,7 @@
 				3124F0C51FFB37F40005EDDE /* a3d */,
 				3124F0F51FFB463A0005EDDE /* Test */,
 				3124F14E200371EB0005EDDE /* Cli */,
+				314FE3AF200C5B380067984B /* Scene */,
 				3124F0C41FFB37F40005EDDE /* Products */,
 				3124F10F1FFB48D30005EDDE /* Frameworks */,
 			);
@@ -231,6 +262,7 @@
 				3124F0C31FFB37F40005EDDE /* liba3d.a */,
 				3124F0F41FFB463A0005EDDE /* Test.app */,
 				3124F14D200371EB0005EDDE /* Cli */,
+				314FE3AE200C5B380067984B /* Scene.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -316,6 +348,8 @@
 		3124F10F1FFB48D30005EDDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				314FE3C6200C5C9F0067984B /* SpriteKit.framework */,
+				314FE3C4200C5C9A0067984B /* SceneKit.framework */,
 				31CB9B732009B9C70068D9B7 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -340,6 +374,23 @@
 				3124F14F200371EB0005EDDE /* main.m */,
 			);
 			path = Cli;
+			sourceTree = "<group>";
+		};
+		314FE3AF200C5B380067984B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				314FE3B0200C5B380067984B /* AppDelegate.h */,
+				314FE3B1200C5B380067984B /* AppDelegate.m */,
+				314FE3BF200C5B900067984B /* TestController.h */,
+				314FE3C0200C5B900067984B /* TestController.m */,
+				314FE3C1200C5B900067984B /* TestController.xib */,
+				314FE3B3200C5B380067984B /* Assets.xcassets */,
+				314FE3B5200C5B380067984B /* MainMenu.xib */,
+				314FE3B8200C5B380067984B /* Info.plist */,
+				314FE3B9200C5B380067984B /* main.m */,
+				314FE3BB200C5B380067984B /* Scene.entitlements */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		31CB9B6D2009B4C20068D9B7 /* core */ = {
@@ -481,12 +532,30 @@
 			productReference = 3124F14D200371EB0005EDDE /* Cli */;
 			productType = "com.apple.product-type.tool";
 		};
+		314FE3AD200C5B380067984B /* Scene */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 314FE3BC200C5B380067984B /* Build configuration list for PBXNativeTarget "Scene" */;
+			buildPhases = (
+				314FE3AA200C5B380067984B /* Sources */,
+				314FE3AB200C5B380067984B /* Frameworks */,
+				314FE3AC200C5B380067984B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Scene;
+			productName = Scene;
+			productReference = 314FE3AE200C5B380067984B /* Scene.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3124F0BB1FFB37F40005EDDE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = ideawu;
 				TargetAttributes = {
@@ -507,6 +576,15 @@
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
+					314FE3AD200C5B380067984B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 3124F0BE1FFB37F40005EDDE /* Build configuration list for PBXProject "a3d" */;
@@ -525,6 +603,7 @@
 				3124F0C21FFB37F40005EDDE /* a3d */,
 				3124F0F31FFB463A0005EDDE /* Test */,
 				3124F14C200371EB0005EDDE /* Cli */,
+				314FE3AD200C5B380067984B /* Scene */,
 			);
 		};
 /* End PBXProject section */
@@ -537,6 +616,16 @@
 				3124F10A1FFB47940005EDDE /* TestController.xib in Resources */,
 				3124F0FA1FFB463A0005EDDE /* Assets.xcassets in Resources */,
 				3124F0FD1FFB463A0005EDDE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		314FE3AC200C5B380067984B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				314FE3C3200C5B900067984B /* TestController.xib in Resources */,
+				314FE3B4200C5B380067984B /* Assets.xcassets in Resources */,
+				314FE3B7200C5B380067984B /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +680,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		314FE3AA200C5B380067984B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				314FE3BA200C5B380067984B /* main.m in Sources */,
+				314FE3C2200C5B900067984B /* TestController.m in Sources */,
+				314FE3B2200C5B380067984B /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -598,6 +697,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				3124F0FC1FFB463A0005EDDE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		314FE3B5200C5B380067984B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				314FE3B6200C5B380067984B /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -782,6 +889,34 @@
 			};
 			name = Release;
 		};
+		314FE3BD200C5B380067984B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Scene/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideawu.Scene;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
+			};
+			name = Debug;
+		};
+		314FE3BE200C5B380067984B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Scene/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideawu.Scene;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -817,6 +952,15 @@
 			buildConfigurations = (
 				3124F152200371EB0005EDDE /* Debug */,
 				3124F153200371EB0005EDDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		314FE3BC200C5B380067984B /* Build configuration list for PBXNativeTarget "Scene" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				314FE3BD200C5B380067984B /* Debug */,
+				314FE3BE200C5B380067984B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
