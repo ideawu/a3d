@@ -11,7 +11,6 @@
 #import "GObject.h"
 #import "GCamera.h"
 #import "GNode.h"
-#import "GImage.h"
 
 #import "ui/GNSView.h"
 

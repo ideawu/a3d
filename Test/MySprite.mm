@@ -6,15 +6,11 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import "MySprite.h"
+#include "MySprite.h"
+#include <GLKit/GLKit.h>
 
-@implementation MySprite
-
-- (GLKMatrix4)matrix{
-	GLKMatrix4 mat = super.matrix;
-//	mat = GLKMatrix4Multiply(mat, self.angle.matrix);
-	return mat;
-}
+static void drawHead();
+static void drawBody();
 
 // 相机绕Y轴的旋转比较特殊，始终保持相机基座与父坐标系Y轴的角度
 //- (void)rotateY:(float)degree{
@@ -26,7 +22,7 @@
 //	super.matrix = mat;
 //}
 
-- (void)draw{
+void MySprite::draw(){
 	static GLKTextureInfo *_texture = nil;
 	if(!_texture){
 		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(0)};
@@ -42,18 +38,20 @@
 	float scale = 10;
 	glScalef(scale, scale, scale);
 
-	[self drawHead];
+	drawHead();
 	
-	glPushMatrix();
-	GLKMatrix4 mat = GLKMatrix4Invert(self.angle.matrix, NULL);
-	glMultMatrixf((const GLfloat *)&mat);
-	[self drawBody];
-	glPopMatrix();
+//	glPushMatrix();
+//	GLKMatrix4 mat = GLKMatrix4Invert(self.angle.matrix, NULL);
+//	glMultMatrixf((const GLfloat *)&mat);
+	
+	drawBody();
+	
+//	glPopMatrix();
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-- (void)drawHead{
+static void drawHead(){
 	// head
 	glPushMatrix();
 	glTranslatef(0, 8, 0);
@@ -103,8 +101,7 @@
 	glPopMatrix();
 }
 
-- (void)drawBody{
+static void drawBody(){
 #include "test.c"
 }
 
-@end

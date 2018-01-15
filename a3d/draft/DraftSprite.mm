@@ -6,7 +6,7 @@
 #import <GLKit/GLKit.h>
 
 DraftSprite::DraftSprite(){
-	color = a3d::Color::grey();
+	color = a3d::Color::gray();
 }
 
 void DraftSprite::draw(){

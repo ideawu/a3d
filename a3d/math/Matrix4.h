@@ -40,6 +40,7 @@ namespace a3d{
 		void rotate(float degree, Vector3 vec);
 		// 绕自身坐标系内的任意轴旋转
 		void rotate(float degree, const Axis &axis);
+		void scale(float xyz);
 		void scale(float x, float y, float z);
 
 		Matrix4 invert() const;

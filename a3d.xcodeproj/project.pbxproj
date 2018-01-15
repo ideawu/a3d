@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3124F0C71FFB37F40005EDDE /* a3d.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0C61FFB37F40005EDDE /* a3d.h */; };
-		3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0D01FFB38A40005EDDE /* GImage.m */; };
 		3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0D11FFB38A40005EDDE /* GNode.m */; };
 		3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0D31FFB38A40005EDDE /* GObject.m */; };
 		3124F0E21FFB38A40005EDDE /* GNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D61FFB38A40005EDDE /* GNode.h */; };
 		3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D71FFB38A40005EDDE /* GCamera.h */; };
 		3124F0E41FFB38A40005EDDE /* GObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D81FFB38A40005EDDE /* GObject.h */; };
-		3124F0E51FFB38A40005EDDE /* GImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D91FFB38A40005EDDE /* GImage.h */; };
 		3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0DA1FFB38A40005EDDE /* GCamera.m */; };
 		3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0E81FFB39DD0005EDDE /* GNSView.h */; };
 		3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0E91FFB39DD0005EDDE /* GNSView.m */; };
@@ -32,7 +30,7 @@
 		3124F1261FFCABE80005EDDE /* DraftScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1241FFCABE80005EDDE /* DraftScene.mm */; };
 		3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F12B1FFDEB560005EDDE /* DraftSprite.h */; };
 		3124F12E1FFDEB560005EDDE /* DraftSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3124F12C1FFDEB560005EDDE /* DraftSprite.mm */; };
-		3124F1371FFF984D0005EDDE /* MySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1361FFF984D0005EDDE /* MySprite.m */; };
+		3124F1371FFF984D0005EDDE /* MySprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1361FFF984D0005EDDE /* MySprite.mm */; };
 		3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1412001C71D0005EDDE /* GEulerAngle.h */; };
 		3124F1442001C71D0005EDDE /* GEulerAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1422001C71D0005EDDE /* GEulerAngle.m */; };
 		3124F147200344580005EDDE /* GMatrix4.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F145200344580005EDDE /* GMatrix4.h */; };
@@ -121,13 +119,11 @@
 /* Begin PBXFileReference section */
 		3124F0C31FFB37F40005EDDE /* liba3d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liba3d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3124F0C61FFB37F40005EDDE /* a3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = a3d.h; sourceTree = "<group>"; };
-		3124F0D01FFB38A40005EDDE /* GImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GImage.m; sourceTree = "<group>"; };
 		3124F0D11FFB38A40005EDDE /* GNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNode.m; sourceTree = "<group>"; };
 		3124F0D31FFB38A40005EDDE /* GObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GObject.m; sourceTree = "<group>"; };
 		3124F0D61FFB38A40005EDDE /* GNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNode.h; sourceTree = "<group>"; };
 		3124F0D71FFB38A40005EDDE /* GCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCamera.h; sourceTree = "<group>"; };
 		3124F0D81FFB38A40005EDDE /* GObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GObject.h; sourceTree = "<group>"; };
-		3124F0D91FFB38A40005EDDE /* GImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GImage.h; sourceTree = "<group>"; };
 		3124F0DA1FFB38A40005EDDE /* GCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCamera.m; sourceTree = "<group>"; };
 		3124F0E81FFB39DD0005EDDE /* GNSView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GNSView.h; sourceTree = "<group>"; };
 		3124F0E91FFB39DD0005EDDE /* GNSView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GNSView.m; sourceTree = "<group>"; };
@@ -151,7 +147,7 @@
 		3124F12C1FFDEB560005EDDE /* DraftSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DraftSprite.mm; sourceTree = "<group>"; };
 		3124F1331FFE2CB80005EDDE /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		3124F1351FFF984D0005EDDE /* MySprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySprite.h; sourceTree = "<group>"; };
-		3124F1361FFF984D0005EDDE /* MySprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySprite.m; sourceTree = "<group>"; };
+		3124F1361FFF984D0005EDDE /* MySprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MySprite.mm; sourceTree = "<group>"; };
 		3124F1412001C71D0005EDDE /* GEulerAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GEulerAngle.h; sourceTree = "<group>"; };
 		3124F1422001C71D0005EDDE /* GEulerAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GEulerAngle.m; sourceTree = "<group>"; };
 		3124F145200344580005EDDE /* GMatrix4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMatrix4.h; sourceTree = "<group>"; };
@@ -265,8 +261,6 @@
 				3124F0DA1FFB38A40005EDDE /* GCamera.m */,
 				3124F0D61FFB38A40005EDDE /* GNode.h */,
 				3124F0D11FFB38A40005EDDE /* GNode.m */,
-				3124F0D91FFB38A40005EDDE /* GImage.h */,
-				3124F0D01FFB38A40005EDDE /* GImage.m */,
 				3124F0EC1FFB3C160005EDDE /* PrefixHeader.pch */,
 			);
 			path = a3d;
@@ -289,7 +283,7 @@
 				3124F1081FFB47940005EDDE /* TestController.h */,
 				3124F1061FFB47940005EDDE /* TestController.m */,
 				3124F1351FFF984D0005EDDE /* MySprite.h */,
-				3124F1361FFF984D0005EDDE /* MySprite.m */,
+				3124F1361FFF984D0005EDDE /* MySprite.mm */,
 				3124F1331FFE2CB80005EDDE /* test.c */,
 				3124F10C1FFB48A60005EDDE /* MyOpenGLView.h */,
 				3124F10D1FFB48A60005EDDE /* MyOpenGLView.mm */,
@@ -388,12 +382,12 @@
 		31CB9B9C200A1F550068D9B7 /* math */ = {
 			isa = PBXGroup;
 			children = (
-				31CB9B9D200A1F6D0068D9B7 /* Axis.cpp */,
 				31CB9B9E200A1F6D0068D9B7 /* Axis.h */,
-				31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */,
+				31CB9B9D200A1F6D0068D9B7 /* Axis.cpp */,
 				31CB9BA0200A1F6D0068D9B7 /* Matrix4.h */,
-				31CB9BA1200A1F6D0068D9B7 /* Vector3.cpp */,
+				31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */,
 				31CB9BA2200A1F6D0068D9B7 /* Vector3.h */,
+				31CB9BA1200A1F6D0068D9B7 /* Vector3.cpp */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -412,7 +406,6 @@
 				31CB9B892009EBD10068D9B7 /* Context.h in Headers */,
 				31CB9BBD200A29D80068D9B7 /* DraftImage.h in Headers */,
 				31CB9B66200700A50068D9B7 /* GFollow.h in Headers */,
-				3124F0E51FFB38A40005EDDE /* GImage.h in Headers */,
 				31CB9BA8200A1F6D0068D9B7 /* Vector3.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */,
@@ -571,7 +564,6 @@
 				31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */,
 				3124F12E1FFDEB560005EDDE /* DraftSprite.mm in Sources */,
 				31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */,
-				3124F0DC1FFB38A40005EDDE /* GImage.m in Sources */,
 				31CB9B6B2008CD4C0068D9B7 /* GRay.m in Sources */,
 				3124F1261FFCABE80005EDDE /* DraftScene.mm in Sources */,
 				3124F148200344580005EDDE /* GMatrix4.m in Sources */,
@@ -586,7 +578,7 @@
 				3124F1001FFB463A0005EDDE /* main.m in Sources */,
 				3124F1091FFB47940005EDDE /* TestController.m in Sources */,
 				3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */,
-				3124F1371FFF984D0005EDDE /* MySprite.m in Sources */,
+				3124F1371FFF984D0005EDDE /* MySprite.mm in Sources */,
 				3124F10E1FFB48A70005EDDE /* MyOpenGLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

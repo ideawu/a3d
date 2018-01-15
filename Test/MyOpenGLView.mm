@@ -2,19 +2,18 @@
 #import <GLKit/GLKit.h>
 #import "MySprite.h"
 
+#include <vector>
 #include "a3d/Context.h"
 #include "a3d/Camera.h"
 #include "a3d/DraftScene.h"
 #include "a3d/DraftSprite.h"
+#include "a3d/DraftImage.h"
 
 @interface MyOpenGLView(){
-	GImage *_img1;
-	GImage *_img2;
 	float _rotateX;
 	float _rotateY;
 	int _auto_rotate_x;
 	int _auto_rotate_y;
-	MySprite *_hero;
 	
 	a3d::Camera *_camera;
 	a3d::Context *_context;
@@ -22,11 +21,15 @@
 	DraftScene *_scene;
 	DraftSprite *_flag;
 	DraftSprite *_camera_hero;
+	DraftImage *_img1;
+	DraftImage *_img2;
 
+	MySprite *_hero;
+
+	std::vector<a3d::Object *> _objects;
 }
 // 当前被控制的对象
-@property GObject *currentObject;
-@property NSMutableArray *objects;
+@property a3d::Object *currentObject;
 @end
 
 @implementation MyOpenGLView
@@ -49,23 +52,15 @@
 //	[_scene moveX:200 y:200 z:5];
 
 	{
-		NSString *filename = @"/Users/ideawu/Downloads/imgs/1.jpg";
-		_img1 = [[GImage alloc] initWithContentsOfFile:filename];
-		[_img1 scale:0.5];
-		[_img1 moveX:_img1.width/2];
-		[_img1 moveY:_img1.height/2];
-		
-		[_img1 moveX:400];
-		[_img1 moveZ:500];
+		_img1 = new DraftImage("/Users/ideawu/Downloads/imgs/1.jpg");
+		_img1->scale(0.5);
+		_img1->move(_img1->width()/2, _img1->height()/2, 0);
+		_img1->move(400, 0, 500);
 	}
 	{
-		NSString *filename = @"/Users/ideawu/Downloads/imgs/9.jpg";
-		_img2 = [[GImage alloc] initWithContentsOfFile:filename];
-		[_img2 moveX:_img2.width/2];
-		[_img2 moveY:_img2.height/2];
-
-		[_img2 moveX:2000];
-		[_img2 moveZ:4000];
+		_img2 = new DraftImage("/Users/ideawu/Downloads/imgs/9.jpg");
+		_img2->move(_img2->width()/2, _img2->height()/2, 0);
+		_img2->move(2000, 0, 4000);
 	}
 	
 	_flag = new DraftSprite();
@@ -76,26 +71,25 @@
 //	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
 //	[_flag moveX:200 y:_flag.height/2 z:200];
 
-	_hero = [[MySprite alloc] init];
-	[_hero moveX:800 y:0 z:800];
-//	[_hero rotateZ:30];
+	_hero = new MySprite();
+	_hero->move(800, 0, 800);
 
-	_objects = [[NSMutableArray alloc] init];
-	[_objects addObject:_hero];
+	_objects.push_back(_hero);
+	_objects.push_back(_camera);
 
 	_currentObject = _hero;
 }
 
 - (void)switchSprite{
 	int next = 0;
-	for(int i=0; i<_objects.count; i++){
-		GObject *obj = [_objects objectAtIndex:i];
+	for(int i=0; i<_objects.size(); i++){
+		a3d::Object *obj = _objects[i];
 		if(obj == _currentObject){
-			next = (i + 1) % _objects.count;
+			next = (i + 1) % _objects.size();
 			break;
 		}
 	}
-	_currentObject = [_objects objectAtIndex:next];
+	_currentObject = _objects[next];
 //	[self resetMousePoint];
 }
 
@@ -111,6 +105,9 @@
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
 	_context = a3d::Context::memoryContext(width, height);
+	//
+	_objects.pop_back();
+	_objects.push_back(_camera);
 }
 
 - (void)drawRect:(NSRect)aRect {
@@ -129,12 +126,11 @@
 }
 
 - (void)draw3D{
-	[_img1 render];
-	[_img2 render];
-	[_hero render];
-	
 	_scene->render();
 	_flag->render();
+	_img1->render();
+	_img2->render();
+	_hero->render();
 }
 
 - (void)draw2D{
@@ -190,8 +186,8 @@
 	float ay = dx;
 	log_debug(@"%.2f %.2f", ax, ay);
 
-	_currentObject.angle.yaw = ay;
-	_currentObject.angle.pitch = ax;
+//	_currentObject.angle.yaw = ay;
+//	_currentObject.angle.pitch = ax;
 //	log_debug(@"%@", _currentObject.angle);
 	
 //	if(_currentObject == _camera_hero){
@@ -216,11 +212,11 @@
 }
 
 - (void)rotate{
-	log_debug(@"auto rotate %.2f, %.2f", _rotateX, _rotateY);
-	// 注意先后顺序
-	[_currentObject rotateY:_rotateY];
-	[_currentObject rotateX:_rotateX];
-	[self setNeedsDisplay:YES];
+//	log_debug(@"auto rotate %.2f, %.2f", _rotateX, _rotateY);
+//	// 注意先后顺序
+//	[_currentObject rotateY:_rotateY];
+//	[_currentObject rotateX:_rotateX];
+//	[self setNeedsDisplay:YES];
 }
 
 - (void)keyDown:(NSEvent *)event{
@@ -239,26 +235,26 @@
 			break;
 		}
 		case '[':{
-			[_currentObject rotateZ:10];
+			_currentObject->rotateZ(10);
 			break;
 		}
 		case ']':{
-			[_currentObject rotateZ:-10];
+			_currentObject->rotateZ(-10);
 			break;
 		}
 		case NSLeftArrowFunctionKey:{
-			[_currentObject rotateY:-10];
+			_currentObject->rotateY(-10);
 			break;
 		}
 		case NSRightArrowFunctionKey:{
-			[_currentObject rotateY:10];
+			_currentObject->rotateY(10);
 			break;
 		}
 		case NSUpArrowFunctionKey:
-			[_currentObject rotateX:10];
+			_currentObject->rotateX(10);
 			break;
 		case NSDownArrowFunctionKey:
-			[_currentObject rotateX:-10];
+			_currentObject->rotateX(-10);
 			break;
 		case 'a':
 		case 'A':
@@ -294,12 +290,10 @@
 	dx *= speed;
 	dz *= speed;
 	dy *= speed;
-	[_currentObject moveX:dx];
-	[_currentObject moveY:dy];
-	[_currentObject moveZ:dz];
+	_currentObject->move(dx, dy, dz);
 //	log_debug(@"%f %f %f", dx, dy, dz);
 
-	[GEulerAngle angleWithMatrix:_currentObject];
+//	[GEulerAngle angleWithMatrix:_currentObject];
 //	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);
 	
 	[self setNeedsDisplay:YES];

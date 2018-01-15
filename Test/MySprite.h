@@ -6,8 +6,11 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import "GNode.h"
+#include "a3d/Drawable.h"
 
-@interface MySprite : GNode
+class MySprite : public a3d::Drawable
+{
+public:
+	virtual void draw();
+};
 
-@end

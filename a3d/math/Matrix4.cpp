@@ -72,6 +72,10 @@ namespace a3d{
 		this->translate(axis.origin.invert());
 	}
 
+	void Matrix4::scale(float xyz){
+		this->scale(xyz, xyz, xyz);
+	}
+
 	void Matrix4::scale(float x, float y, float z){
 		_mat = GLKMatrix4Scale(_mat, x, y, z);
 	}

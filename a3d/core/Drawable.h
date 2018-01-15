@@ -9,6 +9,7 @@
 #include <OpenGL/gl.h>
 
 namespace a3d{
+    // rename Viewable
 	class Drawable : public Object
 	{
 	public:

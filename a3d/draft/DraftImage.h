@@ -5,13 +5,19 @@
 #ifndef DraftImage_hpp
 #define DraftImage_hpp
 
+#include "Drawable.h"
+
 class DraftImage : public a3d::Drawable
 {
 public:
+	~DraftImage();
 	DraftImage(const char *filename);
 	virtual void draw();
+	void scale(float xyz);
+	void scale(float x, float y, float z);
 private:
-	DraftImage(){};
+	DraftImage();
+	id _texture;
 };
 
 #endif /* DraftImage_hpp */

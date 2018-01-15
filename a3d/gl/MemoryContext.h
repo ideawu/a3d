@@ -8,6 +8,7 @@
 #include "Context.h"
 
 namespace a3d{
+    // rename BufferContext
 	class MemoryContext : public Context
 	{
 	public:
