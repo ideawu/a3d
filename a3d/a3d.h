@@ -5,14 +5,6 @@
 #ifndef A3D_h
 #define A3D_h
 
-#import "GMatrix4.h"
-#import "GRay.h"
-#import "GEulerAngle.h"
-#import "GObject.h"
-#import "GCamera.h"
-#import "GNode.h"
-
-#import "ui/GNSView.h"
-
+#import "GLView.h"
 
 #endif

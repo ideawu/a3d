@@ -48,7 +48,8 @@
 
 - (void)render{
 //	log_debug(@"%f", _renderer.sceneTime);
-	[_renderer renderAtTime:CFAbsoluteTimeGetCurrent()];
+	[_renderer renderAtTime:_sceneTime];
+//	[_renderer renderAtTime:CFAbsoluteTimeGetCurrent()];
 }
 
 @end

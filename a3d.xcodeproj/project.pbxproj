@@ -8,14 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3124F0C71FFB37F40005EDDE /* a3d.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0C61FFB37F40005EDDE /* a3d.h */; };
-		3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0D11FFB38A40005EDDE /* GNode.m */; };
-		3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0D31FFB38A40005EDDE /* GObject.m */; };
-		3124F0E21FFB38A40005EDDE /* GNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D61FFB38A40005EDDE /* GNode.h */; };
 		3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D71FFB38A40005EDDE /* GCamera.h */; };
-		3124F0E41FFB38A40005EDDE /* GObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0D81FFB38A40005EDDE /* GObject.h */; };
-		3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0DA1FFB38A40005EDDE /* GCamera.m */; };
-		3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0E81FFB39DD0005EDDE /* GNSView.h */; };
-		3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0E91FFB39DD0005EDDE /* GNSView.m */; };
 		3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3124F0EC1FFB3C160005EDDE /* PrefixHeader.pch */; };
 		3124F0EF1FFB42C20005EDDE /* a3d.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F0C61FFB37F40005EDDE /* a3d.h */; };
 		3124F0F81FFB463A0005EDDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F0F71FFB463A0005EDDE /* AppDelegate.m */; };
@@ -32,9 +25,6 @@
 		3124F12E1FFDEB560005EDDE /* DraftSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3124F12C1FFDEB560005EDDE /* DraftSprite.mm */; };
 		3124F1371FFF984D0005EDDE /* MySprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1361FFF984D0005EDDE /* MySprite.mm */; };
 		3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F1412001C71D0005EDDE /* GEulerAngle.h */; };
-		3124F1442001C71D0005EDDE /* GEulerAngle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F1422001C71D0005EDDE /* GEulerAngle.m */; };
-		3124F147200344580005EDDE /* GMatrix4.h in Headers */ = {isa = PBXBuildFile; fileRef = 3124F145200344580005EDDE /* GMatrix4.h */; };
-		3124F148200344580005EDDE /* GMatrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F146200344580005EDDE /* GMatrix4.m */; };
 		3124F150200371EB0005EDDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3124F14F200371EB0005EDDE /* main.m */; };
 		3124F154200372690005EDDE /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 		314FE3B2200C5B380067984B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3B1200C5B380067984B /* AppDelegate.m */; };
@@ -49,10 +39,10 @@
 		314FE3D0200C83D30067984B /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3CF200C83D30067984B /* Scene.m */; };
 		314FE3D3200C87190067984B /* RenderBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3D2200C87190067984B /* RenderBuffer.m */; };
 		314FE3D4200C93060067984B /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
-		31CB9B66200700A50068D9B7 /* GFollow.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B64200700A50068D9B7 /* GFollow.h */; };
-		31CB9B67200700A50068D9B7 /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B65200700A50068D9B7 /* GFollow.m */; };
-		31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B682008CD4C0068D9B7 /* GRay.h */; };
-		31CB9B6B2008CD4C0068D9B7 /* GRay.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B692008CD4C0068D9B7 /* GRay.m */; };
+		314FE3D6200CAF120067984B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314FE3D5200CAF120067984B /* GLKit.framework */; };
+		314FE3D9200CAF560067984B /* GLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE3D7200CAF560067984B /* GLView.h */; };
+		314FE3DA200CAF560067984B /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3D8200CAF560067984B /* GLView.m */; };
+		314FE3DB200CAFB30067984B /* GLView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE3D7200CAF560067984B /* GLView.h */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -81,7 +71,6 @@
 		31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
 		31CB9BB1200A1FC80068D9B7 /* Drawable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Drawable.h */; };
-		31CB9BB2200A1FC80068D9B7 /* GNSView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F0E81FFB39DD0005EDDE /* GNSView.h */; };
 		31CB9BB3200A1FC80068D9B7 /* DraftScene.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F1231FFCABE80005EDDE /* DraftScene.h */; };
 		31CB9BB4200A24990068D9B7 /* DraftSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F12B1FFDEB560005EDDE /* DraftSprite.h */; };
 		31CB9BB7200A25360068D9B7 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9BB5200A25360068D9B7 /* Color.cpp */; };
@@ -99,6 +88,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				314FE3DB200CAFB30067984B /* GLView.h in CopyFiles */,
 				31CB9BBE200A29F60068D9B7 /* DraftImage.h in CopyFiles */,
 				31CB9BB9200A26DF0068D9B7 /* Color.h in CopyFiles */,
 				31CB9BB4200A24990068D9B7 /* DraftSprite.h in CopyFiles */,
@@ -111,7 +101,6 @@
 				31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */,
 				31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */,
 				31CB9BB1200A1FC80068D9B7 /* Drawable.h in CopyFiles */,
-				31CB9BB2200A1FC80068D9B7 /* GNSView.h in CopyFiles */,
 				31CB9BB3200A1FC80068D9B7 /* DraftScene.h in CopyFiles */,
 				3124F0EF1FFB42C20005EDDE /* a3d.h in CopyFiles */,
 			);
@@ -131,14 +120,8 @@
 /* Begin PBXFileReference section */
 		3124F0C31FFB37F40005EDDE /* liba3d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liba3d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3124F0C61FFB37F40005EDDE /* a3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = a3d.h; sourceTree = "<group>"; };
-		3124F0D11FFB38A40005EDDE /* GNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNode.m; sourceTree = "<group>"; };
-		3124F0D31FFB38A40005EDDE /* GObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GObject.m; sourceTree = "<group>"; };
-		3124F0D61FFB38A40005EDDE /* GNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNode.h; sourceTree = "<group>"; };
 		3124F0D71FFB38A40005EDDE /* GCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCamera.h; sourceTree = "<group>"; };
-		3124F0D81FFB38A40005EDDE /* GObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GObject.h; sourceTree = "<group>"; };
 		3124F0DA1FFB38A40005EDDE /* GCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCamera.m; sourceTree = "<group>"; };
-		3124F0E81FFB39DD0005EDDE /* GNSView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GNSView.h; sourceTree = "<group>"; };
-		3124F0E91FFB39DD0005EDDE /* GNSView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GNSView.m; sourceTree = "<group>"; };
 		3124F0EC1FFB3C160005EDDE /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3124F0F41FFB463A0005EDDE /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3124F0F61FFB463A0005EDDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -162,8 +145,6 @@
 		3124F1361FFF984D0005EDDE /* MySprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MySprite.mm; sourceTree = "<group>"; };
 		3124F1412001C71D0005EDDE /* GEulerAngle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GEulerAngle.h; sourceTree = "<group>"; };
 		3124F1422001C71D0005EDDE /* GEulerAngle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GEulerAngle.m; sourceTree = "<group>"; };
-		3124F145200344580005EDDE /* GMatrix4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMatrix4.h; sourceTree = "<group>"; };
-		3124F146200344580005EDDE /* GMatrix4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMatrix4.m; sourceTree = "<group>"; };
 		3124F14D200371EB0005EDDE /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
 		3124F14F200371EB0005EDDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		314FE3AE200C5B380067984B /* Scene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scene.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,10 +166,9 @@
 		314FE3CF200C83D30067984B /* Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
 		314FE3D1200C87190067984B /* RenderBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderBuffer.h; sourceTree = "<group>"; };
 		314FE3D2200C87190067984B /* RenderBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RenderBuffer.m; sourceTree = "<group>"; };
-		31CB9B64200700A50068D9B7 /* GFollow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFollow.h; sourceTree = "<group>"; };
-		31CB9B65200700A50068D9B7 /* GFollow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFollow.m; sourceTree = "<group>"; };
-		31CB9B682008CD4C0068D9B7 /* GRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GRay.h; sourceTree = "<group>"; };
-		31CB9B692008CD4C0068D9B7 /* GRay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GRay.m; sourceTree = "<group>"; };
+		314FE3D5200CAF120067984B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		314FE3D7200CAF560067984B /* GLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		314FE3D8200CAF560067984B /* GLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 		31CB9B6C2008D0CD0068D9B7 /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
 		31CB9B732009B9C70068D9B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31CB9B782009C3830068D9B7 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
@@ -230,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314FE3D6200CAF120067984B /* GLKit.framework in Frameworks */,
 				3124F1101FFB48D30005EDDE /* liba3d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,39 +264,19 @@
 			children = (
 				31CB9B93200A14DD0068D9B7 /* util */,
 				31CB9B9C200A1F550068D9B7 /* math */,
-				31CB9B852009EA4A0068D9B7 /* gl */,
 				31CB9B6D2009B4C20068D9B7 /* core */,
+				31CB9B852009EA4A0068D9B7 /* gl */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
-				3124F0E71FFB396A0005EDDE /* ui */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
 				31CB9B782009C3830068D9B7 /* util.h */,
 				31CB9B6C2008D0CD0068D9B7 /* gmath.h */,
-				3124F145200344580005EDDE /* GMatrix4.h */,
-				3124F146200344580005EDDE /* GMatrix4.m */,
-				31CB9B682008CD4C0068D9B7 /* GRay.h */,
-				31CB9B692008CD4C0068D9B7 /* GRay.m */,
 				3124F1412001C71D0005EDDE /* GEulerAngle.h */,
 				3124F1422001C71D0005EDDE /* GEulerAngle.m */,
-				3124F0D81FFB38A40005EDDE /* GObject.h */,
-				3124F0D31FFB38A40005EDDE /* GObject.m */,
-				31CB9B64200700A50068D9B7 /* GFollow.h */,
-				31CB9B65200700A50068D9B7 /* GFollow.m */,
 				3124F0D71FFB38A40005EDDE /* GCamera.h */,
 				3124F0DA1FFB38A40005EDDE /* GCamera.m */,
-				3124F0D61FFB38A40005EDDE /* GNode.h */,
-				3124F0D11FFB38A40005EDDE /* GNode.m */,
 				3124F0EC1FFB3C160005EDDE /* PrefixHeader.pch */,
 			);
 			path = a3d;
-			sourceTree = "<group>";
-		};
-		3124F0E71FFB396A0005EDDE /* ui */ = {
-			isa = PBXGroup;
-			children = (
-				3124F0E81FFB39DD0005EDDE /* GNSView.h */,
-				3124F0E91FFB39DD0005EDDE /* GNSView.m */,
-			);
-			path = ui;
 			sourceTree = "<group>";
 		};
 		3124F0F51FFB463A0005EDDE /* Test */ = {
@@ -359,6 +320,7 @@
 		3124F10F1FFB48D30005EDDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				314FE3D5200CAF120067984B /* GLKit.framework */,
 				314FE3C6200C5C9F0067984B /* SpriteKit.framework */,
 				314FE3C4200C5C9A0067984B /* SceneKit.framework */,
 				31CB9B732009B9C70068D9B7 /* Foundation.framework */,
@@ -434,6 +396,8 @@
 				31CB9B862009EBD10068D9B7 /* Context.cpp */,
 				31CB9B8B2009F5DA0068D9B7 /* MemoryContext.h */,
 				31CB9B8A2009F5DA0068D9B7 /* MemoryContext.cpp */,
+				314FE3D7200CAF560067984B /* GLView.h */,
+				314FE3D8200CAF560067984B /* GLView.m */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -469,26 +433,21 @@
 			files = (
 				3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */,
 				31CB9B92200A01C30068D9B7 /* Engine.h in Headers */,
-				3124F0EA1FFB39DD0005EDDE /* GNSView.h in Headers */,
 				31CB9BA4200A1F6D0068D9B7 /* Axis.h in Headers */,
+				314FE3D9200CAF560067984B /* GLView.h in Headers */,
 				31CB9B892009EBD10068D9B7 /* Context.h in Headers */,
 				31CB9BBD200A29D80068D9B7 /* DraftImage.h in Headers */,
-				31CB9B66200700A50068D9B7 /* GFollow.h in Headers */,
 				31CB9BA8200A1F6D0068D9B7 /* Vector3.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */,
-				3124F0E21FFB38A40005EDDE /* GNode.h in Headers */,
 				31CB9B9B200A18750068D9B7 /* Drawable.h in Headers */,
 				31CB9B96200A150C0068D9B7 /* log.h in Headers */,
 				3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
-				3124F147200344580005EDDE /* GMatrix4.h in Headers */,
-				3124F0E41FFB38A40005EDDE /* GObject.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				31CB9B8D2009F5DA0068D9B7 /* MemoryContext.h in Headers */,
 				31CB9BA6200A1F6D0068D9B7 /* Matrix4.h in Headers */,
 				3124F1251FFCABE80005EDDE /* DraftScene.h in Headers */,
-				31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */,
 				31CB9BB8200A25360068D9B7 /* Color.h in Headers */,
 				31CB9B842009D99F0068D9B7 /* Camera.h in Headers */,
 			);
@@ -654,26 +613,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */,
-				3124F0E61FFB38A40005EDDE /* GCamera.m in Sources */,
 				31CB9B882009EBD10068D9B7 /* Context.cpp in Sources */,
-				3124F1442001C71D0005EDDE /* GEulerAngle.m in Sources */,
 				31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */,
-				3124F0DD1FFB38A40005EDDE /* GNode.m in Sources */,
 				31CB9BA7200A1F6D0068D9B7 /* Vector3.cpp in Sources */,
 				31CB9BB7200A25360068D9B7 /* Color.cpp in Sources */,
 				31CB9B9A200A18750068D9B7 /* Drawable.cpp in Sources */,
-				31CB9B67200700A50068D9B7 /* GFollow.m in Sources */,
 				31CB9BA5200A1F6D0068D9B7 /* Matrix4.cpp in Sources */,
 				31CB9B8C2009F5DA0068D9B7 /* MemoryContext.cpp in Sources */,
-				3124F0DF1FFB38A40005EDDE /* GObject.m in Sources */,
 				31CB9BBC200A29D80068D9B7 /* DraftImage.mm in Sources */,
 				31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */,
 				3124F12E1FFDEB560005EDDE /* DraftSprite.mm in Sources */,
 				31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */,
-				31CB9B6B2008CD4C0068D9B7 /* GRay.m in Sources */,
 				3124F1261FFCABE80005EDDE /* DraftScene.mm in Sources */,
-				3124F148200344580005EDDE /* GMatrix4.m in Sources */,
-				3124F0EB1FFB39DD0005EDDE /* GNSView.m in Sources */,
+				314FE3DA200CAF560067984B /* GLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@
 
 @property SCNNode *photoNode;
 
-@property GNSView *view;
+@property GLView *view;
 @end
 
 @implementation TestController
@@ -26,7 +26,7 @@
 	frame.size = CGSizeMake(900, 600+(self.window.frame.size.height-self.window.contentView.bounds.size.height));
 	[self.window setFrame:frame display:YES];
 
-	_view = [[GNSView alloc] initWithFrame:self.window.contentView.bounds];
+	_view = [[GLView alloc] initWithFrame:self.window.contentView.bounds];
 	[self.window.contentView addSubview:_view];
 	
 	[self setupScene];

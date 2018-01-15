@@ -45,3 +45,38 @@ namespace a3d{
 	}
 
 }; // end namespace
+
+/*
+ - (void)moveX:(float)x y:(float)y z:(float)z{
+ GLKVector3 p1 = vec3(x, y, z);
+ p1 = mat4_mul_vec3(self.angle.matrix, p1); // 视线坐标转为基座坐标
+ [super moveX:p1.x y:p1.y z:p1.z];
+ }
+ 
+ - (void)rotateX:(float)degree{
+ GLKVector3 p0 = self.focus;
+ GLKVector3 p1 = vec3(p0.x+1, p0.y, p0.z);
+ p0 = mat4_mul_vec3(self.angle.matrix, p0); // 视线坐标转为基座坐标
+ p1 = mat4_mul_vec3(self.angle.matrix, p1); // 视线坐标转为基座坐标
+ [super orbit:degree p0:p0 p1:p1];
+ }
+ 
+ - (void)rotateZ:(float)degree{
+ GLKVector3 p0 = self.focus;
+ GLKVector3 p1 = vec3(p0.x, p0.y, p0.z+1);
+ p0 = mat4_mul_vec3(self.angle.matrix, p0); // 视线坐标转为基座坐标
+ p1 = mat4_mul_vec3(self.angle.matrix, p1); // 视线坐标转为基座坐标
+ [super orbit:degree p0:p0 p1:p1];
+ }
+ 
+ // 相机平移到焦点处后，绕经过自身原点的父坐标Y轴的平行轴
+ - (void)rotateY:(float)degree{
+ // 先求出旋转轴在世界标中
+ GLKVector3 p0 = mat4_mul_vec3(self.matrix, self.focus);
+ GLKVector3 p1 = vec3(p0.x, p0.y+1, p0.z);
+ // 再将旋转轴放入相机基座坐标系
+ p0 = mat4_mul_vec3(mat4_invert(super.matrix), p0);
+ p1 = mat4_mul_vec3(mat4_invert(super.matrix), p1);
+ [super orbit:degree p0:p0 p1:p1];
+ }
+*/
