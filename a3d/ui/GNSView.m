@@ -11,12 +11,7 @@
 
 @implementation GNSView
 
-- (id)init{
-	self = [self initWithFrame:NSMakeRect(0, 0, 1, 1)];
-	return self;
-}
-
-- (id)initWithFrame:(NSRect)frameRect {
++ (NSOpenGLPixelFormat*)defaultPixelFormat{
 	NSOpenGLPixelFormatAttribute attrs[] = {
 		NSOpenGLPFANoRecovery, // Enable automatic use of OpenGL "share" contexts.
 		NSOpenGLPFAColorSize, 24,
@@ -27,14 +22,22 @@
 		0
 	};
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-	self = [super initWithFrame:frameRect pixelFormat:pixelFormat];
+	return pixelFormat;
+}
+
+- (id)init{
+	self = [self initWithFrame:NSMakeRect(0, 0, 1, 1)];
+	return self;
+}
+
+- (id)initWithFrame:(NSRect)frameRect {
+	self = [super initWithFrame:frameRect pixelFormat:nil];
 	_mouseBasePoint.x = -1;
 	return self;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
     // Drawing code here.
 }
 

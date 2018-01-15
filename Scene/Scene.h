@@ -6,7 +6,6 @@
 
 @interface Scene : NSObject
 
-@property (readonly) SCNScene *scene;
 @property (readonly) SCNCamera *camera;
 
 - (id)initWithViewportWidth:(float)width height:(float)height depth:(float)depth;

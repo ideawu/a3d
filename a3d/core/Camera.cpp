@@ -31,9 +31,9 @@ namespace a3d{
 		// 将近裁剪面设置为与viewport同大小
 		_matrix3D = Matrix4(GLKMatrix4MakeFrustum(-width/2, width/2, -height/2, height/2, _near, _far));
 		// 将前裁剪面后移，因为视点默认在 (0,0,0)，所以默认前裁剪面在(near,0,0)，这在旋转物体时不方便
-		_matrix3D.translate(0, 0, -_near);
-		// 翻转z轴，将z轴方向和人看屏幕方向相同
-		_matrix3D.scale(1, 1, -1);
+		_matrix3D.translate(0, 0, -_near-0.01);
+//		// 翻转z轴，将z轴方向和人看屏幕方向相同
+//		_matrix3D.scale(1, 1, -1);
 		// 将原点坐标移到屏幕右下角
 		_matrix3D.translate(-width/2, -height/2, 0);
 

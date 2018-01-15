@@ -28,7 +28,9 @@
 
 	_view = [[GNSView alloc] initWithFrame:self.window.contentView.bounds];
 	[self.window.contentView addSubview:_view];
+	
 	[self setupScene];
+	[self render]; // 没有显示出来
 }
 
 - (void)setupScene{
@@ -61,27 +63,21 @@
 }
 
 - (void)render{
+	[_view lockFocus];
 	[_view.openGLContext makeCurrentContext];
-	
+
 	glClearColor(1, 1, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-//	glColor4f(1, 0.6, 0.6, 1);
-//	glLineWidth(10);
-//	glBegin(GL_LINES);
-//	{
-//		glVertex3f(0, 0, 0);
-//		glVertex3f(100, 0, 0);
-//	}
-//	glEnd();
-//	glColor4f(0, 0, 0, 1);
-	
+	glClear(GL_DEPTH_BUFFER_BIT);
 	[_scene1 render];
+	// 场景之间要 clear depth，因为两个场景的depth的比较没有意义
 	glClear(GL_DEPTH_BUFFER_BIT);
 	[_scene2 render];
-
+	
 	[_view.openGLContext flushBuffer];
+	[_view unlockFocus];
 	[_view setNeedsDisplay:YES];
 }
 

@@ -6,8 +6,8 @@
 
 @interface Scene(){
 }
+@property SCNScene *scene;
 @property SCNNode *cameraNode;
-@property SCNNode *lightNode;
 @property SCNRenderer *renderer;
 @end
 
@@ -24,12 +24,6 @@
 	_camera.zNear = (height/2)/tan(M_PI*2 * (_camera.fieldOfView/2/360));
 	//log_debug(@"%f %f %f %f %f", _camera.fieldOfView, _camera.zNear, width, height, depth);
 	_camera.zFar = _camera.zNear + depth;
-	
-//	_lightNode = [SCNNode node];
-//	_lightNode.light = [SCNLight light];
-//	_lightNode.light.type = SCNLightTypeAmbient;
-//	_lightNode.light.color = [SCNColor blackColor];
-//	[_scene.rootNode addChildNode:_lightNode];
 
 	_cameraNode = [SCNNode node];
 	_cameraNode.camera = _camera;
@@ -40,7 +34,7 @@
 	_renderer = [SCNRenderer rendererWithContext:ctx options:nil];
 //	_renderer.autoenablesDefaultLighting = YES;
 //	_renderer.pointOfView = _cameraNode; // not necessary
-	_renderer.showsStatistics = YES;
+//	_renderer.showsStatistics = YES;
 	_renderer.playing = YES;
 
 	_renderer.scene = _scene;
