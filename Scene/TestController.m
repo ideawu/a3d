@@ -8,7 +8,9 @@
 #import "Scene.h"
 #import "a3d.h"
 
-@interface TestController ()
+@interface TestController (){
+	NSTimer *_timer;
+}
 @property Scene *scene1;
 @property Scene *scene2;
 
@@ -30,7 +32,12 @@
 	[self.window.contentView addSubview:_view];
 	
 	[self setupScene];
-	[self render]; // 没有显示出来
+//	[self render]; // 没有显示出来
+	
+	// TODO:
+	_timer = [NSTimer scheduledTimerWithTimeInterval:0.03 repeats:YES block:^(NSTimer * timer) {
+		[self render];
+	}];
 }
 
 - (void)setupScene{
@@ -70,6 +77,8 @@
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
+	_scene1.sceneTime += 0.05;
+//	log_debug(@"%f", _scene1.sceneTime);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	[_scene1 render];
 	// 场景之间要 clear depth，因为两个场景的depth的比较没有意义
@@ -92,11 +101,15 @@
 	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
 	switch(c){
 		case NSLeftArrowFunctionKey:{
-			pos.x -= 5;
+			SCNAction *move = [SCNAction moveTo:SCNVector3Make(pos.x-200, 0, 0) duration:1];
+			move.timingMode = SCNActionTimingModeEaseOut;
+			[_photoNode runAction:move];
 			break;
 		}
 		case NSRightArrowFunctionKey:{
-			pos.x += 5;
+			SCNAction *move = [SCNAction moveTo:SCNVector3Make(pos.x+200, 0, 0) duration:1];
+			move.timingMode = SCNActionTimingModeEaseOut;
+			[_photoNode runAction:move];
 			break;
 		}
 		case NSUpArrowFunctionKey:
@@ -106,7 +119,7 @@
 			pos.y -= 5;
 			break;
 	}
-	_photoNode.position = pos;
+//	_photoNode.position = pos;
 	[self render];
 }
 @end

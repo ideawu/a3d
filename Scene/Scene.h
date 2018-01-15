@@ -6,7 +6,6 @@
 
 @interface Scene : NSObject
 
-@property (readonly) SCNCamera *camera;
 @property CFTimeInterval sceneTime;
 
 - (id)initWithViewportWidth:(float)width height:(float)height depth:(float)depth;

@@ -7,6 +7,7 @@
 @interface Scene(){
 }
 @property SCNScene *scene;
+@property (readonly) SCNCamera *camera;
 @property SCNNode *cameraNode;
 @property SCNRenderer *renderer;
 @end
@@ -47,9 +48,7 @@
 }
 
 - (void)render{
-//	log_debug(@"%f", _renderer.sceneTime);
-	[_renderer renderAtTime:_sceneTime];
-//	[_renderer renderAtTime:CFAbsoluteTimeGetCurrent()];
+	[_renderer renderAtTime:self.sceneTime];
 }
 
 @end
