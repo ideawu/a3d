@@ -45,6 +45,10 @@
 		314FE3C3200C5B900067984B /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 314FE3C1200C5B900067984B /* TestController.xib */; };
 		314FE3C5200C5C9A0067984B /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314FE3C4200C5C9A0067984B /* SceneKit.framework */; };
 		314FE3C7200C5C9F0067984B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314FE3C6200C5C9F0067984B /* SpriteKit.framework */; };
+		314FE3CD200C79790067984B /* FrameBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3CC200C79790067984B /* FrameBuffer.m */; };
+		314FE3D0200C83D30067984B /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3CF200C83D30067984B /* Scene.m */; };
+		314FE3D3200C87190067984B /* RenderBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3D2200C87190067984B /* RenderBuffer.m */; };
+		314FE3D4200C93060067984B /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
 		31CB9B66200700A50068D9B7 /* GFollow.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B64200700A50068D9B7 /* GFollow.h */; };
 		31CB9B67200700A50068D9B7 /* GFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B65200700A50068D9B7 /* GFollow.m */; };
 		31CB9B6A2008CD4C0068D9B7 /* GRay.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B682008CD4C0068D9B7 /* GRay.h */; };
@@ -175,6 +179,12 @@
 		314FE3C1200C5B900067984B /* TestController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
 		314FE3C4200C5C9A0067984B /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		314FE3C6200C5C9F0067984B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		314FE3CB200C79790067984B /* FrameBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
+		314FE3CC200C79790067984B /* FrameBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrameBuffer.m; sourceTree = "<group>"; };
+		314FE3CE200C83D30067984B /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		314FE3CF200C83D30067984B /* Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
+		314FE3D1200C87190067984B /* RenderBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderBuffer.h; sourceTree = "<group>"; };
+		314FE3D2200C87190067984B /* RenderBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RenderBuffer.m; sourceTree = "<group>"; };
 		31CB9B64200700A50068D9B7 /* GFollow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFollow.h; sourceTree = "<group>"; };
 		31CB9B65200700A50068D9B7 /* GFollow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFollow.m; sourceTree = "<group>"; };
 		31CB9B682008CD4C0068D9B7 /* GRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GRay.h; sourceTree = "<group>"; };
@@ -236,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314FE3D4200C93060067984B /* liba3d.a in Frameworks */,
 				314FE3C7200C5C9F0067984B /* SpriteKit.framework in Frameworks */,
 				314FE3C5200C5C9A0067984B /* SceneKit.framework in Frameworks */,
 			);
@@ -383,6 +394,12 @@
 				314FE3B1200C5B380067984B /* AppDelegate.m */,
 				314FE3BF200C5B900067984B /* TestController.h */,
 				314FE3C0200C5B900067984B /* TestController.m */,
+				314FE3CE200C83D30067984B /* Scene.h */,
+				314FE3CF200C83D30067984B /* Scene.m */,
+				314FE3D1200C87190067984B /* RenderBuffer.h */,
+				314FE3D2200C87190067984B /* RenderBuffer.m */,
+				314FE3CB200C79790067984B /* FrameBuffer.h */,
+				314FE3CC200C79790067984B /* FrameBuffer.m */,
 				314FE3C1200C5B900067984B /* TestController.xib */,
 				314FE3B3200C5B380067984B /* Assets.xcassets */,
 				314FE3B5200C5B380067984B /* MainMenu.xib */,
@@ -684,9 +701,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314FE3CD200C79790067984B /* FrameBuffer.m in Sources */,
 				314FE3BA200C5B380067984B /* main.m in Sources */,
 				314FE3C2200C5B900067984B /* TestController.m in Sources */,
+				314FE3D3200C87190067984B /* RenderBuffer.m in Sources */,
 				314FE3B2200C5B380067984B /* AppDelegate.m in Sources */,
+				314FE3D0200C83D30067984B /* Scene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

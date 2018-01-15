@@ -9,6 +9,7 @@
 #include "Camera.h"
 
 namespace a3d{
+	// 改名 FrameBuffer
 	class Context
 	{
 	public:
