@@ -30,4 +30,9 @@
 	return YES;
 }
 
+- (IBAction)onNew:(id)sender {
+	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
+	[_test showWindow:self];
+}
+
 @end

@@ -26,4 +26,8 @@
 	return YES;
 }
 
+- (IBAction)onNewAction:(id)sender {
+	log_debug(@"");
+}
+
 @end
