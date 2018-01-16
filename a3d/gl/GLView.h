@@ -6,4 +6,7 @@
 
 @interface GLView : NSOpenGLView
 
+@property (readonly) CGSize viewportSize;
+@property (readonly) CGSize framebufferSize;
+
 @end

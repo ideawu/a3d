@@ -9,6 +9,7 @@
 }
 @end
 
+// 显示效果为什么比SCNView差那么多？
 @implementation GLView
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat{
@@ -17,6 +18,8 @@
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFAAlphaSize, 8,
 		NSOpenGLPFADepthSize, 16,
+//		NSOpenGLPFASampleBuffers, 1,
+//		NSOpenGLPFASamples, 4,
 		NSOpenGLPFADoubleBuffer,
 		NSOpenGLPFAAccelerated,
 		0
@@ -25,9 +28,33 @@
 	return pixelFormat;
 }
 
+- (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format{
+	self = [super initWithFrame:frameRect pixelFormat:format];
+	[self setWantsBestResolutionOpenGLSurface:YES];
+	//	CGSize ret = [self convertSizeToBacking:self.bounds.size];
+	return self;
+}
+
+- (CGSize)viewportSize{
+	return self.bounds.size;
+}
+
+- (CGSize)framebufferSize{
+	return [self convertSizeToBacking:self.bounds.size];
+}
+
+- (void)prepareOpenGL{
+	[super prepareOpenGL];
+	
+	//	glEnable(GL_MULTISAMPLE);
+	//	glEnable(GL_LINE_SMOOTH);
+	//	glEnable(GL_BLEND);
+	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//	glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
 	[super drawRect:dirtyRect];
-	log_debug(@"");
 }
 
 #pragma mark - Keyboard and Mouse event handle
@@ -50,3 +77,4 @@
 }
 
 @end
+

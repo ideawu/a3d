@@ -5,8 +5,11 @@
 #import <SceneKit/SceneKit.h>
 
 @interface Scene : NSObject
+@property SCNScene *scene;
 
 @property CFTimeInterval sceneTime;
+
+- (void)setCameraWidth:(float)width height:(float)height depth:(float)depth;
 
 - (id)initWithViewportWidth:(float)width height:(float)height depth:(float)depth;
 

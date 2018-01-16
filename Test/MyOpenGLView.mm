@@ -35,6 +35,8 @@
 @implementation MyOpenGLView
 
 - (void)prepareOpenGL {
+//	[super prepareOpenGL];
+	
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
 	
@@ -60,7 +62,7 @@
 	{
 		_img2 = new DraftImage("/Users/ideawu/Downloads/imgs/9.jpg");
 		_img2->move(_img2->width()/2, _img2->height()/2, 0);
-		_img2->move(100, 100, 0.1);
+		_img2->move(100, 0, 4000);
 	}
 	
 	_flag = new DraftSprite();
@@ -97,14 +99,14 @@
 	// 操作前务必要切换上下文
 	[[self openGLContext] makeCurrentContext];
 	
-	float width = self.bounds.size.width;
-	float height = self.bounds.size.height;
+	float width = self.viewportSize.width;
+	float height = self.viewportSize.height;
 	float depth = width * 20;
-	
+
 	delete _camera;
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
-	_context = a3d::Context::memoryContext(width, height);
+	_context = a3d::Context::memoryContext(self.framebufferSize.width, self.framebufferSize.height);
 	//
 	_objects.pop_back();
 	_objects.push_back(_camera);
