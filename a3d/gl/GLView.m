@@ -27,6 +27,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
 	[super drawRect:dirtyRect];
+	log_debug(@"");
 }
 
 #pragma mark - Keyboard and Mouse event handle

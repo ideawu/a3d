@@ -5,6 +5,6 @@
 #import <Cocoa/Cocoa.h>
 #import "a3d.h"
 
-@interface MyOpenGLView : GNSView
+@interface MyOpenGLView : GLView
 
 @end

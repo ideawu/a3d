@@ -8,7 +8,7 @@
 #import "Scene.h"
 #import "a3d.h"
 
-@interface TestController (){
+@interface TestController ()<NSWindowDelegate>{
 	NSTimer *_timer;
 }
 @property Scene *scene1;
@@ -21,22 +21,42 @@
 
 @implementation TestController
 
-- (void)windowDidLoad {
-    [super windowDidLoad];
+- (id)initWithWindowNibName:(NSNibName)windowNibName{
+	self = [super initWithWindowNibName:windowNibName];
+	self.window.delegate = self;
 	
 	CGRect frame = self.window.frame;
 	frame.size = CGSizeMake(900, 600+(self.window.frame.size.height-self.window.contentView.bounds.size.height));
 	[self.window setFrame:frame display:YES];
-
+	
 	_view = [[GLView alloc] initWithFrame:self.window.contentView.bounds];
 	[self.window.contentView addSubview:_view];
-	
 	[self setupScene];
-//	[self render]; // 没有显示出来
+	return self;
+}
+
+- (IBAction)showWindow:(id)sender{
+	[super showWindow:sender];
 	
+	log_debug(@"%s", __func__);
+	[self render]; // 没有显示出来
+}
+
+- (void)windowDidResize:(NSNotification *)notification{
+	log_debug(@"%s", __func__);
+}
+- (void)windowDidExpose:(NSNotification *)notification{
+	log_debug(@"%s", __func__);
+}
+
+- (void)windowDidLoad {
+    [super windowDidLoad];
+	
+	
+
 	// TODO:
 	_timer = [NSTimer scheduledTimerWithTimeInterval:0.03 repeats:YES block:^(NSTimer * timer) {
-		[self render];
+//		[self render];
 	}];
 }
 
@@ -70,8 +90,10 @@
 }
 
 - (void)render{
-	[_view lockFocus];
+	log_debug(@"");
+	CGLLockContext(_view.openGLContext.CGLContextObj);
 	[_view.openGLContext makeCurrentContext];
+	[_view lockFocus];
 
 	glClearColor(1, 1, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -85,9 +107,9 @@
 	glClear(GL_DEPTH_BUFFER_BIT);
 	[_scene2 render];
 	
-	[_view.openGLContext flushBuffer];
 	[_view unlockFocus];
-	[_view setNeedsDisplay:YES];
+	[_view.openGLContext flushBuffer];
+	CGLUnlockContext(_view.openGLContext.CGLContextObj);
 }
 
 - (void)keyDown:(NSEvent *)event{

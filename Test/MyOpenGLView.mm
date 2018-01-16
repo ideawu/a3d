@@ -60,7 +60,7 @@
 	{
 		_img2 = new DraftImage("/Users/ideawu/Downloads/imgs/9.jpg");
 		_img2->move(_img2->width()/2, _img2->height()/2, 0);
-		_img2->move(2000, 0, 4000);
+		_img2->move(100, 100, 0.1);
 	}
 	
 	_flag = new DraftSprite();
@@ -180,33 +180,33 @@
 //	log_debug(@"ignore mouse");
 	return;
 	
-	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
-	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
-	float ax = -dy;
-	float ay = dx;
-	log_debug(@"%.2f %.2f", ax, ay);
-
-//	_currentObject.angle.yaw = ay;
-//	_currentObject.angle.pitch = ax;
-//	log_debug(@"%@", _currentObject.angle);
-	
-//	if(_currentObject == _camera_hero){
-		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;
-		_rotateY = (fabs(ay) < 70)? 0 : ay/fabs(ay) * 1;
-		static NSTimer *_rotateDetectTimer = nil;
-		if(_rotateX || _rotateY){
-			if(!_rotateDetectTimer){
-				_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 repeats:YES block:^(NSTimer * _Nonnull timer) {
-					[self rotate];
-				}];
-			}
-			[_rotateDetectTimer setFireDate:[NSDate date]];
-		}else{
-			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
-		}
-//	}
-
-	[self setNeedsDisplay:YES];
+//	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
+//	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
+//	float ax = -dy;
+//	float ay = dx;
+//	log_debug(@"%.2f %.2f", ax, ay);
+//
+////	_currentObject.angle.yaw = ay;
+////	_currentObject.angle.pitch = ax;
+////	log_debug(@"%@", _currentObject.angle);
+//
+////	if(_currentObject == _camera_hero){
+//		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;
+//		_rotateY = (fabs(ay) < 70)? 0 : ay/fabs(ay) * 1;
+//		static NSTimer *_rotateDetectTimer = nil;
+//		if(_rotateX || _rotateY){
+//			if(!_rotateDetectTimer){
+//				_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//					[self rotate];
+//				}];
+//			}
+//			[_rotateDetectTimer setFireDate:[NSDate date]];
+//		}else{
+//			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
+//		}
+////	}
+//
+//	[self setNeedsDisplay:YES];
 	
 //	log_debug(@"%f %f", dx, dy);
 }

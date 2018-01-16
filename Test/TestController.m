@@ -5,7 +5,7 @@
 #import "TestController.h"
 #import "MyOpenGLView.h"
 
-@interface TestController (){
+@interface TestController ()<NSWindowDelegate>{
 	double offset;
 }
 @property MyOpenGLView *videoView;
@@ -22,19 +22,17 @@
 	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
 	
-	CGFloat width = frame.size.width - 100;
-	CGFloat height = frame.size.height - 100;
-	CGFloat x = (frame.size.width - width)/2;
-	CGFloat y = (frame.size.height - height)/2;
-	
-	CGRect frame2 = CGRectMake(x, y, width, height);
-	_videoView = [[MyOpenGLView alloc] initWithFrame:frame2];
+	_videoView = [[MyOpenGLView alloc] initWithFrame:self.window.contentView.frame];
 	[self.window.contentView addSubview:_videoView];
 	[self.window makeFirstResponder:_videoView];
 }
 
 - (void)keyDown:(NSEvent *)event{
 	[_videoView keyDown:event];
+}
+
+- (void)windowDidResize:(NSNotification *)notification{
+	_videoView.frame = self.window.contentView.frame;
 }
 
 @end
