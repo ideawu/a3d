@@ -47,8 +47,8 @@
 		31CB9B842009D99F0068D9B7 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
 		31CB9B882009EBD10068D9B7 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B862009EBD10068D9B7 /* Context.cpp */; };
 		31CB9B892009EBD10068D9B7 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* Context.h */; };
-		31CB9B8C2009F5DA0068D9B7 /* MemoryContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8A2009F5DA0068D9B7 /* MemoryContext.cpp */; };
-		31CB9B8D2009F5DA0068D9B7 /* MemoryContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* MemoryContext.h */; };
+		31CB9B8C2009F5DA0068D9B7 /* BufferContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */; };
+		31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */; };
 		31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8F200A01C30068D9B7 /* Engine.cpp */; };
 		31CB9B92200A01C30068D9B7 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 		31CB9B96200A150C0068D9B7 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B94200A150C0068D9B7 /* log.h */; };
@@ -64,7 +64,7 @@
 		31CB9BAA200A1FC80068D9B7 /* Matrix4.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BA0200A1F6D0068D9B7 /* Matrix4.h */; };
 		31CB9BAB200A1FC80068D9B7 /* Vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BA2200A1F6D0068D9B7 /* Vector3.h */; };
 		31CB9BAC200A1FC80068D9B7 /* Context.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* Context.h */; };
-		31CB9BAD200A1FC80068D9B7 /* MemoryContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* MemoryContext.h */; };
+		31CB9BAD200A1FC80068D9B7 /* BufferContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */; };
 		31CB9BAE200A1FC80068D9B7 /* Engine.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 		31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
@@ -94,7 +94,7 @@
 				31CB9BAA200A1FC80068D9B7 /* Matrix4.h in CopyFiles */,
 				31CB9BAB200A1FC80068D9B7 /* Vector3.h in CopyFiles */,
 				31CB9BAC200A1FC80068D9B7 /* Context.h in CopyFiles */,
-				31CB9BAD200A1FC80068D9B7 /* MemoryContext.h in CopyFiles */,
+				31CB9BAD200A1FC80068D9B7 /* BufferContext.h in CopyFiles */,
 				31CB9BAE200A1FC80068D9B7 /* Engine.h in CopyFiles */,
 				31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */,
 				31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */,
@@ -172,8 +172,8 @@
 		31CB9B822009D99F0068D9B7 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		31CB9B862009EBD10068D9B7 /* Context.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		31CB9B872009EBD10068D9B7 /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
-		31CB9B8A2009F5DA0068D9B7 /* MemoryContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryContext.cpp; sourceTree = "<group>"; };
-		31CB9B8B2009F5DA0068D9B7 /* MemoryContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemoryContext.h; sourceTree = "<group>"; };
+		31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BufferContext.cpp; sourceTree = "<group>"; };
+		31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BufferContext.h; sourceTree = "<group>"; };
 		31CB9B8F200A01C30068D9B7 /* Engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
 		31CB9B90200A01C30068D9B7 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		31CB9B94200A150C0068D9B7 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
@@ -384,8 +384,8 @@
 			children = (
 				31CB9B872009EBD10068D9B7 /* Context.h */,
 				31CB9B862009EBD10068D9B7 /* Context.cpp */,
-				31CB9B8B2009F5DA0068D9B7 /* MemoryContext.h */,
-				31CB9B8A2009F5DA0068D9B7 /* MemoryContext.cpp */,
+				31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */,
+				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
 				314FE3D7200CAF560067984B /* GLView.h */,
 				314FE3D8200CAF560067984B /* GLView.m */,
 			);
@@ -435,7 +435,7 @@
 				3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
-				31CB9B8D2009F5DA0068D9B7 /* MemoryContext.h in Headers */,
+				31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */,
 				31CB9BA6200A1F6D0068D9B7 /* Matrix4.h in Headers */,
 				3124F1251FFCABE80005EDDE /* DraftScene.h in Headers */,
 				31CB9BB8200A25360068D9B7 /* Color.h in Headers */,
@@ -609,7 +609,7 @@
 				31CB9BB7200A25360068D9B7 /* Color.cpp in Sources */,
 				31CB9B9A200A18750068D9B7 /* Drawable.cpp in Sources */,
 				31CB9BA5200A1F6D0068D9B7 /* Matrix4.cpp in Sources */,
-				31CB9B8C2009F5DA0068D9B7 /* MemoryContext.cpp in Sources */,
+				31CB9B8C2009F5DA0068D9B7 /* BufferContext.cpp in Sources */,
 				31CB9BBC200A29D80068D9B7 /* DraftImage.mm in Sources */,
 				31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */,
 				3124F12E1FFDEB560005EDDE /* DraftSprite.mm in Sources */,

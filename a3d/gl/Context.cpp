@@ -3,11 +3,11 @@
 //
 
 #include "Context.h"
-#include "MemoryContext.h"
+#include "BufferContext.h"
 
 namespace a3d{
-	Context* Context::memoryContext(float width, float height){
-		MemoryContext *impl = new MemoryContext();
+	Context* Context::bufferContext(float width, float height){
+		BufferContext *impl = new BufferContext();
 		impl->width(width);
 		impl->height(height);
 		impl->setup();

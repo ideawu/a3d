@@ -106,7 +106,7 @@
 	delete _camera;
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
-	_context = a3d::Context::memoryContext(self.framebufferSize.width, self.framebufferSize.height);
+	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 	//
 	_objects.pop_back();
 	_objects.push_back(_camera);

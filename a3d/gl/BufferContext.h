@@ -2,18 +2,17 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef MemoryContext_hpp
-#define MemoryContext_hpp
+#ifndef BufferContext_hpp
+#define BufferContext_hpp
 
 #include "Context.h"
 
 namespace a3d{
-    // rename BufferContext
-	class MemoryContext : public Context
+ 	class BufferContext : public Context
 	{
 	public:
-		MemoryContext();
-		~MemoryContext();
+		BufferContext();
+		~BufferContext();
 		
 		virtual GLuint framebuffer();
 		virtual void setup();
@@ -25,4 +24,4 @@ namespace a3d{
 	};
 }; // end namespace
 
-#endif /* MemoryContext_hpp */
+#endif /* BufferContext_hpp */

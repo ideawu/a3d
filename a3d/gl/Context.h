@@ -8,12 +8,11 @@
 #include "Camera.h"
 
 namespace a3d{
-	// 改名 FrameBuffer?
 	class Context
 	{
 	public:
 		// 如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
-		static Context* memoryContext(float width, float height);
+		static Context* bufferContext(float width, float height);
 
 	public:
 		virtual ~Context(){};
