@@ -6,7 +6,6 @@
 #define Drawable_hpp
 
 #include "Object.h"
-#include <OpenGL/gl.h>
 
 namespace a3d{
     // rename Viewable

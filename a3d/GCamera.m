@@ -3,7 +3,6 @@
 //
 
 #import "GCamera.h"
-#import <OpenGL/gl.h>
 
 @interface GCamera(){
 	GLKVector3 _focus;

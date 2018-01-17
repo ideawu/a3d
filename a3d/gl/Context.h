@@ -5,7 +5,6 @@
 #ifndef GLContext_hpp
 #define GLContext_hpp
 
-#include <OpenGL/gl.h>
 #include "Camera.h"
 
 namespace a3d{

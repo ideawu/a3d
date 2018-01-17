@@ -4,7 +4,6 @@
 
 #import "TestController.h"
 #import <SceneKit/SceneKit.h>
-#import <OpenGL/gl.h>
 #import "Scene.h"
 #import "a3d.h"
 

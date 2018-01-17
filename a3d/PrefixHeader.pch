@@ -9,6 +9,8 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#include <OpenGL/gl.h>
+
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 inline

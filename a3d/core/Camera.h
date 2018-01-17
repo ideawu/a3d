@@ -11,6 +11,7 @@ namespace a3d{
 	class Camera : public Object
 	{
 	public:
+		// in points, not in pixels
 		static Camera* create(float fovy, float width, float height, float depth);
 
 	public:
@@ -26,6 +27,7 @@ namespace a3d{
 		
 		Camera(){}
 		Camera(const Camera &cam){}
+		// in points, not in pixels
 		void setup(float fovy, float width, float height, float depth);
 	};
 	
