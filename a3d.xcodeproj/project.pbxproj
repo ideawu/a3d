@@ -41,6 +41,8 @@
 		314FE3D9200CAF560067984B /* GLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE3D7200CAF560067984B /* GLView.h */; };
 		314FE3DA200CAF560067984B /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE3D8200CAF560067984B /* GLView.m */; };
 		314FE3DB200CAFB30067984B /* GLView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE3D7200CAF560067984B /* GLView.h */; };
+		314FE464200F77740067984B /* Texture.m in Sources */ = {isa = PBXBuildFile; fileRef = 314FE462200F77740067984B /* Texture.m */; };
+		314FE465200F77740067984B /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE463200F77740067984B /* Texture.h */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -163,6 +165,8 @@
 		314FE3D5200CAF120067984B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		314FE3D7200CAF560067984B /* GLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		314FE3D8200CAF560067984B /* GLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
+		314FE462200F77740067984B /* Texture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Texture.m; sourceTree = "<group>"; };
+		314FE463200F77740067984B /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		31CB9B6C2008D0CD0068D9B7 /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
 		31CB9B732009B9C70068D9B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31CB9B782009C3830068D9B7 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
@@ -386,6 +390,8 @@
 				31CB9B862009EBD10068D9B7 /* Context.cpp */,
 				31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */,
 				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
+				314FE463200F77740067984B /* Texture.h */,
+				314FE462200F77740067984B /* Texture.m */,
 				314FE3D7200CAF560067984B /* GLView.h */,
 				314FE3D8200CAF560067984B /* GLView.m */,
 			);
@@ -431,6 +437,7 @@
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */,
 				31CB9B9B200A18750068D9B7 /* Node.h in Headers */,
+				314FE465200F77740067984B /* Texture.h in Headers */,
 				31CB9B96200A150C0068D9B7 /* log.h in Headers */,
 				3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
@@ -602,6 +609,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314FE464200F77740067984B /* Texture.m in Sources */,
 				31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */,
 				31CB9B882009EBD10068D9B7 /* Context.cpp in Sources */,
 				31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */,
