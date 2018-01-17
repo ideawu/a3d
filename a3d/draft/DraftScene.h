@@ -6,9 +6,9 @@
 #ifndef DRAFT_SCENE_H
 #define DRAFT_SCENE_H
 
-#include "Drawable.h"
+#include "Node.h"
 
-class DraftScene : public a3d::Drawable
+class DraftScene : public a3d::Node
 {
 public:
 	DraftScene(){}

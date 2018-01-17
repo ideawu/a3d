@@ -5,9 +5,9 @@
 #ifndef DraftImage_hpp
 #define DraftImage_hpp
 
-#include "Drawable.h"
+#include "Node.h"
 
-class DraftImage : public a3d::Drawable
+class DraftImage : public a3d::Node
 {
 public:
 	~DraftImage();

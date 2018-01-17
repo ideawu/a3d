@@ -6,9 +6,9 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "a3d/Drawable.h"
+#include "a3d/Node.h"
 
-class MySprite : public a3d::Drawable
+class MySprite : public a3d::Node
 {
 public:
 	virtual void draw();

@@ -9,7 +9,7 @@
 
 namespace a3d{
     // rename Viewable
-	class Drawable : public Object
+	class Node : public Object
 	{
 	public:
 		// 子类实现此方法，但子类的使用者不直接调用此方法，而是调用 render()。
@@ -18,13 +18,13 @@ namespace a3d{
 		void render();
 		
 	protected:
-		Drawable(){}
+		Node(){}
 		
 		void pushMatrix();
 		void popMatrix();
 		
 	private:
-		Drawable(const Drawable &d){}
+		Node(const Node &d){}
 	};
 	
 }; // end namespace

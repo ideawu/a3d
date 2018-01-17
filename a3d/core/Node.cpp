@@ -2,21 +2,21 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "Drawable.h"
+#include "Node.h"
 
 namespace a3d{
-	void Drawable::render(){
+	void Node::render(){
 		pushMatrix();
 		draw();
 		popMatrix();
 	}
 
-	void Drawable::pushMatrix(){
+	void Node::pushMatrix(){
 		glPushMatrix();
 		glMultMatrixf((const GLfloat *)this->matrix());
 	}
 	
-	void Drawable::popMatrix(){
+	void Node::popMatrix(){
 		glPopMatrix();
 	}
 	

@@ -52,8 +52,8 @@
 		31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8F200A01C30068D9B7 /* Engine.cpp */; };
 		31CB9B92200A01C30068D9B7 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 		31CB9B96200A150C0068D9B7 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B94200A150C0068D9B7 /* log.h */; };
-		31CB9B9A200A18750068D9B7 /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B98200A18750068D9B7 /* Drawable.cpp */; };
-		31CB9B9B200A18750068D9B7 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Drawable.h */; };
+		31CB9B9A200A18750068D9B7 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B98200A18750068D9B7 /* Node.cpp */; };
+		31CB9B9B200A18750068D9B7 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Node.h */; };
 		31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B9D200A1F6D0068D9B7 /* Axis.cpp */; };
 		31CB9BA4200A1F6D0068D9B7 /* Axis.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B9E200A1F6D0068D9B7 /* Axis.h */; };
 		31CB9BA5200A1F6D0068D9B7 /* Matrix4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */; };
@@ -68,7 +68,7 @@
 		31CB9BAE200A1FC80068D9B7 /* Engine.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 		31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
-		31CB9BB1200A1FC80068D9B7 /* Drawable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Drawable.h */; };
+		31CB9BB1200A1FC80068D9B7 /* Node.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Node.h */; };
 		31CB9BB3200A1FC80068D9B7 /* DraftScene.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F1231FFCABE80005EDDE /* DraftScene.h */; };
 		31CB9BB4200A24990068D9B7 /* DraftSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3124F12B1FFDEB560005EDDE /* DraftSprite.h */; };
 		31CB9BB7200A25360068D9B7 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9BB5200A25360068D9B7 /* Color.cpp */; };
@@ -98,7 +98,7 @@
 				31CB9BAE200A1FC80068D9B7 /* Engine.h in CopyFiles */,
 				31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */,
 				31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */,
-				31CB9BB1200A1FC80068D9B7 /* Drawable.h in CopyFiles */,
+				31CB9BB1200A1FC80068D9B7 /* Node.h in CopyFiles */,
 				31CB9BB3200A1FC80068D9B7 /* DraftScene.h in CopyFiles */,
 				3124F0EF1FFB42C20005EDDE /* a3d.h in CopyFiles */,
 			);
@@ -178,8 +178,8 @@
 		31CB9B90200A01C30068D9B7 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		31CB9B94200A150C0068D9B7 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		31CB9B95200A150C0068D9B7 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
-		31CB9B98200A18750068D9B7 /* Drawable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
-		31CB9B99200A18750068D9B7 /* Drawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
+		31CB9B98200A18750068D9B7 /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		31CB9B99200A18750068D9B7 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		31CB9B9D200A1F6D0068D9B7 /* Axis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Axis.cpp; sourceTree = "<group>"; };
 		31CB9B9E200A1F6D0068D9B7 /* Axis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Axis.h; sourceTree = "<group>"; };
 		31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix4.cpp; sourceTree = "<group>"; };
@@ -373,8 +373,8 @@
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
 				31CB9B812009D99F0068D9B7 /* Camera.cpp */,
-				31CB9B99200A18750068D9B7 /* Drawable.h */,
-				31CB9B98200A18750068D9B7 /* Drawable.cpp */,
+				31CB9B99200A18750068D9B7 /* Node.h */,
+				31CB9B98200A18750068D9B7 /* Node.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -430,7 +430,7 @@
 				31CB9BA8200A1F6D0068D9B7 /* Vector3.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */,
-				31CB9B9B200A18750068D9B7 /* Drawable.h in Headers */,
+				31CB9B9B200A18750068D9B7 /* Node.h in Headers */,
 				31CB9B96200A150C0068D9B7 /* log.h in Headers */,
 				3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
@@ -607,7 +607,7 @@
 				31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */,
 				31CB9BA7200A1F6D0068D9B7 /* Vector3.cpp in Sources */,
 				31CB9BB7200A25360068D9B7 /* Color.cpp in Sources */,
-				31CB9B9A200A18750068D9B7 /* Drawable.cpp in Sources */,
+				31CB9B9A200A18750068D9B7 /* Node.cpp in Sources */,
 				31CB9BA5200A1F6D0068D9B7 /* Matrix4.cpp in Sources */,
 				31CB9B8C2009F5DA0068D9B7 /* BufferContext.cpp in Sources */,
 				31CB9BBC200A29D80068D9B7 /* DraftImage.mm in Sources */,

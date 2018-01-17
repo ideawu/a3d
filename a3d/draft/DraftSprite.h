@@ -6,10 +6,10 @@
 #ifndef DRAFT_SPRITE_H
 #define DRAFT_SPRITE_H
 
-#include "Drawable.h"
+#include "Node.h"
 #include "Color.h"
 
-class DraftSprite : public a3d::Drawable
+class DraftSprite : public a3d::Node
 {
 public:
 	a3d::Color color;
