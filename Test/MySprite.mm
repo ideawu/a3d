@@ -38,6 +38,7 @@ void MySprite::draw(){
 	float scale = 10;
 	glScalef(scale, scale, scale);
 
+	glFrontFace(GL_CW);
 	drawHead();
 	
 //	glPushMatrix();
@@ -45,6 +46,7 @@ void MySprite::draw(){
 //	glMultMatrixf((const GLfloat *)&mat);
 	
 	drawBody();
+	glFrontFace(GL_CCW);
 	
 //	glPopMatrix();
 	

@@ -60,9 +60,6 @@ namespace a3d{
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
-		{
-			glFrontFace(GL_CW); // 将顺时针方向多边形设为正表面，符合上右下左惯例顺序
-		}
 		glDisable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
 		{
