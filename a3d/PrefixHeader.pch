@@ -1,13 +1,11 @@
-//
-//  PrefixHeader.pch
-//  moveff
-//
 //  Created by ideawu on 26/12/2018.
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
+
+#define __cpp__
 
 #include <stdio.h>
 #include <string.h>

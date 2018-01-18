@@ -6,10 +6,14 @@
 
 namespace a3d{
 	Node::Node(){
+		_parent = NULL;
+		_subs = NULL;
 		_animation = NULL;
 	}
 
 	Node::Node(const Node &d) : Object(d){
+		_parent = NULL;
+		_subs = NULL;
 		_animation = NULL;
 	}
 	
@@ -19,8 +23,46 @@ namespace a3d{
 	}
 
 	Node::~Node(){
+		if(_subs){
+			delete _subs;
+		}
 		if(_animation){
 			delete _animation;
+		}
+	}
+
+	Node* Node::parent() const{
+		return _parent;
+	}
+	
+	void Node::removeFromParent(){
+		if(_parent){
+			_parent->removeSubNode(this);
+		}
+	}
+	
+	void Node::addSubNode(Node *node){
+		if(!_subs){
+			_subs = new std::vector<Node *>();
+		}
+		if(node->_parent){
+			node->removeFromParent();
+		}
+		node->_parent = this;
+		_subs->push_back(node);
+	}
+	
+	void Node::removeSubNode(Node *node){
+		if(!_subs){
+			return;
+		}
+		for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
+			const Node *n = *it;
+			if(n == node){
+				node->_parent = NULL;
+				_subs->erase(it);
+				return;
+			}
 		}
 	}
 
