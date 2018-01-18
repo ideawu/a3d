@@ -116,7 +116,7 @@ namespace a3d{
 
 	void Node::runAnimation(Animate *action){
 		if(!_animation){
-			_animation = new NodeAnimate();
+			_animation = new NodeAnimation();
 			_animation->origin = *this;
 			_animation->current = *this;
 		}

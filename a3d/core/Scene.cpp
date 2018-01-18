@@ -7,13 +7,9 @@
 namespace a3d{
 	
 	Scene::Scene(){
-		_camera = new Camera();
-		_rootNode = new Node();
 	}
 	
 	Scene::~Scene(){
-		delete _camera;
-		delete _rootNode;
 	}
 	
 	Scene* Scene::create(){
@@ -22,7 +18,7 @@ namespace a3d{
 	}
 	
 	Camera* Scene::camera() const{
-		return _camera;
+		return &_camera;
 	}
 
 	float Scene::time() const{
@@ -34,11 +30,11 @@ namespace a3d{
 	}
 
 	void Scene::addNode(Node *node){
-		_rootNode->addSubNode(node);
+		_rootNode.addSubNode(node);
 	}
 	
 	void Scene::removeNode(Node *node){
-		_rootNode->removeSubNode(node);
+		_rootNode.removeSubNode(node);
 	}
 
 }; // end namespace

@@ -10,7 +10,7 @@
 #include "Animate.h"
 
 namespace a3d{
-	class NodeAnimate;
+	class NodeAnimation;
 	
  	class Node : public Object
 	{
@@ -47,12 +47,12 @@ namespace a3d{
 		void removeAllAnimations();
 		bool hasAnimations();
 	private:
-		NodeAnimate *_animation;
+		NodeAnimation *_animation;
 	};
 
 	
 	// 辅助类
-	class NodeAnimate
+	class NodeAnimation
 	{
 	public:
 		Node origin;
