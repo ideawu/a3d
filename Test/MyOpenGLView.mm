@@ -296,7 +296,7 @@
 		case '2':{
 			static float time = 0;
 			time += 0.1;
-			_hero->render(time);
+			_hero->renderAtTime(time);
 			[self setNeedsDisplay:YES];
 		}
 		default:

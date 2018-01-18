@@ -16,16 +16,21 @@ namespace a3d{
 		static Scene* create();
 
 		Camera* camera() const;
-		
+		float time() const;
+		void time(float time);
+
 		// node 内存不由 Scene 管理
 		void addNode(Node *node);
 		void removeNode(Node *node);
-		
+
+		void renderAtTime(float time);
+
 	private:
 		Scene();
 		Scene(const Scene &d);
 		Scene& operator =(const Scene& d);
 		
+		float _time;
 		Camera *_camera;
 		Node *_rootNode;
 	};

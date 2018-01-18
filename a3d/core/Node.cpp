@@ -76,10 +76,10 @@ namespace a3d{
 	}
 
 	void Node::render(){
-		render(-1);
+		renderAtTime(-1);
 	}
 
-	void Node::render(float time){
+	void Node::renderAtTime(float time){
 		if(time >= 0 && _animation && _animation->actions.size() > 0){
 			Node *origin = &_animation->origin;
 			Node *current = &_animation->current;

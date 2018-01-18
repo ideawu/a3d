@@ -27,7 +27,7 @@ namespace a3d{
 		virtual void draw(){};
 		
 		void render(); // render(-1)
-		void render(float time);
+		void renderAtTime(float time);
 		
 	protected:
 		void pushMatrix();

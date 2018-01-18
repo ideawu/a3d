@@ -25,6 +25,14 @@ namespace a3d{
 		return _camera;
 	}
 
+	float Scene::time() const{
+		return _time;
+	}
+	
+	void Scene::time(float time){
+		_time = time;
+	}
+
 	void Scene::addNode(Node *node){
 		_rootNode->addSubNode(node);
 	}
