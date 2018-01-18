@@ -9,9 +9,13 @@
 #include "Vector3.h"
 
 namespace a3d{
+	class Object;
+	
 	class Transform
 	{
 	public:
+		static Transform transformBetween(const Object &first, const Object &second);
+		
 		Vector3 size;
 		Matrix4 matrix;
 	};

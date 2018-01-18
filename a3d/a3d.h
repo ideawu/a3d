@@ -5,6 +5,4 @@
 #ifndef A3D_h
 #define A3D_h
 
-#import "GLView.h"
-
 #endif

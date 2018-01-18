@@ -3,7 +3,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "a3d.h"
+#import "a3d/GLView.h"
 
 @interface MyOpenGLView : GLView
 

@@ -9,6 +9,7 @@
 #include "a3d/DraftSprite.h"
 #include "a3d/DraftImage.h"
 #include "a3d/AnimatePosition.h"
+#include "a3d/a3d.h"
 
 @interface MyOpenGLView(){
 	float _rotateX;
