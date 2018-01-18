@@ -5,9 +5,6 @@
 #ifndef util_h
 #define util_h
 
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
 #include <ImageIO/CGImageSource.h>
 
 namespace a3d{

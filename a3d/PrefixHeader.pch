@@ -9,6 +9,9 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
 #include <OpenGL/gl.h>
 
 #ifdef __OBJC__

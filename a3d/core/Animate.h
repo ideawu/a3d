@@ -5,9 +5,9 @@
 #ifndef Animation_hpp
 #define Animation_hpp
 
-#include "Node.h"
-
 namespace a3d{
+	class Node;
+	
 	typedef enum{
 		AnimateStateNone,
 		AnimateStateBegin,
@@ -25,9 +25,10 @@ namespace a3d{
 		
 		AnimateState state() const;
 		
-		void updateAtTime(float time);
 		// 子类方法
-		virtual void update(float progress) = 0;
+		virtual void update(float progress){};
+
+		void updateAtTime(float time);
 	private:
 		AnimateState _state;
 		Node *_target;

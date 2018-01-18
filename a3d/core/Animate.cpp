@@ -50,7 +50,7 @@ namespace a3d{
 				progress = 1;
 			}else{
 				progress = (_currentTime - _beginTime)/_duration;
-				if(progress >= 1 - FLT_EPSILON){
+				if(progress >= 1 - __FLT_EPSILON__){
 					progress = 1;
 				}
 			}
