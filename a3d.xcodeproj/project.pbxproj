@@ -48,6 +48,8 @@
 		314FE46C200F78E40067984B /* Animate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE46A200F78E40067984B /* Animate.cpp */; };
 		314FE46D200F78E40067984B /* Animate.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE46B200F78E40067984B /* Animate.h */; };
 		314FE47520104EDC0067984B /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE47420104EDC0067984B /* util.cpp */; };
+		314FE478201054190067984B /* AnimatePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE476201054190067984B /* AnimatePosition.cpp */; };
+		314FE479201054190067984B /* AnimatePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -180,6 +182,8 @@
 		314FE47020104DAF0067984B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		314FE47120104DAF0067984B /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		314FE47420104EDC0067984B /* util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		314FE476201054190067984B /* AnimatePosition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatePosition.cpp; sourceTree = "<group>"; };
+		314FE477201054190067984B /* AnimatePosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatePosition.h; sourceTree = "<group>"; };
 		31CB9B6C2008D0CD0068D9B7 /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
 		31CB9B732009B9C70068D9B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31CB9B782009C3830068D9B7 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
@@ -398,6 +402,8 @@
 				31CB9B98200A18750068D9B7 /* Node.cpp */,
 				314FE46B200F78E40067984B /* Animate.h */,
 				314FE46A200F78E40067984B /* Animate.cpp */,
+				314FE477201054190067984B /* AnimatePosition.h */,
+				314FE476201054190067984B /* AnimatePosition.cpp */,
 				314FE467200F789F0067984B /* Scene.h */,
 				314FE466200F789F0067984B /* Scene.cpp */,
 			);
@@ -463,6 +469,7 @@
 				31CB9B96200A150C0068D9B7 /* log.h in Headers */,
 				3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
+				314FE479201054190067984B /* AnimatePosition.h in Headers */,
 				314FE46D200F78E40067984B /* Animate.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */,
@@ -648,6 +655,7 @@
 				3124F12E1FFDEB560005EDDE /* DraftSprite.mm in Sources */,
 				31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */,
 				3124F1261FFCABE80005EDDE /* DraftScene.mm in Sources */,
+				314FE478201054190067984B /* AnimatePosition.cpp in Sources */,
 				314FE3DA200CAF560067984B /* GLView.m in Sources */,
 				314FE46C200F78E40067984B /* Animate.cpp in Sources */,
 			);
