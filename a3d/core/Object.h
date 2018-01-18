@@ -6,6 +6,7 @@
 #define Object_hpp
 
 #include "Matrix4.h"
+#include "Transform.h"
 
 namespace a3d{
 	// 不继承，而是使用 Matrix？
@@ -16,6 +17,9 @@ namespace a3d{
 		Object(float w, float h, float d);
 
 	public:
+		Vector3 size() const;
+		void size(Vector3 size);
+		
 		float width() const;
 		void width(float w);
 		float height() const;
@@ -27,14 +31,17 @@ namespace a3d{
 		void move(float x, float y, float z);
 		void move(Vector3 offset);
 		
-		
+		void transform(Vector3 size);
+		void transform(Matrix4 mat);
+		void transform(Transform trans);
+
 		// 将力施加与坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
 		void force(Vector3 force, Vector3 atPoint);
 		void force(Vector3 force, Vector3 atPoint, float rotationScalar);
 
 	private:
-		float _width, _height, _depth;
-		
+		Vector3 _size;
+
 		Object(const Object &obj);
 	};
 	

@@ -34,12 +34,24 @@ namespace a3d{
 		return _vec.x;
 	}
 	
+	void Vector3::x(float x){
+		_vec.x = x;
+	}
+
 	float Vector3::y() const{
 		return _vec.y;
+	}
+	
+	void Vector3::y(float y){
+		_vec.y = y;
 	}
 
 	float Vector3::z() const{
 		return _vec.z;
+	}
+	
+	void Vector3::z(float z){
+		_vec.z = z;
 	}
 
 	float Vector3::length() const{

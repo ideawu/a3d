@@ -6,39 +6,42 @@
 
 namespace a3d{
 	Object::Object(){
-		_width = 0;
-		_height = 0;
-		_depth = 0;
 	}
 
 	Object::Object(float w, float h, float d){
-		_width = w;
-		_height = h;
-		_depth = d;
+		_size = Vector3(w, h, d);
+	}
+
+	Vector3 Object::size() const{
+		return _size;
+	}
+	
+	void Object::size(Vector3 size){
+		_size = size;
 	}
 
 	float Object::width() const{
-		return _width;
-	}
-	
-	float Object::height() const{
-		return _height;
-	}
-	
-	float Object::depth() const{
-		return _depth;
+		return _size.x();
 	}
 	
 	void Object::width(float w){
-		_width = w;
+		_size.x(w);
+	}
+
+	float Object::height() const{
+		return _size.y();
 	}
 	
 	void Object::height(float h){
-		_height = h;
+		_size.y(h);
+	}
+
+	float Object::depth() const{
+		return _size.z();
 	}
 	
 	void Object::depth(float d){
-		_depth = d;
+		_size.z(d);
 	}
 	
 	void Object::move(float x, float y, float z){
@@ -47,6 +50,19 @@ namespace a3d{
 	
 	void Object::move(Vector3 offset){
 		this->translate(offset);
+	}
+
+	void Object::transform(Vector3 size){
+		this->size(_size.add(size));
+	}
+
+	void Object::transform(Matrix4 mat){
+		this->mul(mat);
+	}
+
+	void Object::transform(Transform trans){
+		this->transform(trans.size);
+		this->transform(trans.matrix);
 	}
 
 }; // end namespace

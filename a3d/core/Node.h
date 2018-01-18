@@ -5,6 +5,7 @@
 #ifndef Drawable_hpp
 #define Drawable_hpp
 
+#include <vector>
 #include "Object.h"
 #include "Animate.h"
 
@@ -32,13 +33,24 @@ namespace a3d{
 		
 		///// 动画
 	public:
-		void runAnimation(const Animate &animate);
+		void runAnimation(Animate animate);
 		void removeAllAnimations();
 		bool hasAnimations();
 	private:
 		NodeAnimate *_animate;
 	};
+
 	
+	// 辅助类
+	class NodeAnimate
+	{
+	public:
+		Node origin;
+		Node current;
+		
+		std::vector<Animate> actions;
+	};
+
 }; // end namespace
 
 #endif /* Drawable_hpp */

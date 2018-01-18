@@ -83,17 +83,13 @@ namespace a3d{
 	Matrix4 Matrix4::invert() const{
 		return Matrix4(GLKMatrix4Invert(_mat, NULL));
 	}
-
-	Matrix4 Matrix4::add(Matrix4 mat) const{
-		return Matrix4(GLKMatrix4Add(_mat, mat._mat));
-	}
-	
-	Matrix4 Matrix4::sub(Matrix4 mat) const{
-		return Matrix4(GLKMatrix4Subtract(_mat, mat._mat));
-	}
 	
 	Matrix4 Matrix4::mul(Matrix4 mat) const{
 		return Matrix4(GLKMatrix4Multiply(_mat, mat._mat));
+	}
+	
+	Matrix4 Matrix4::diff(Matrix4 second) const{
+		return this->mul(second.invert()).invert();;
 	}
 	
 	Vector3 Matrix4::mulVector3(Vector3 vec) const{

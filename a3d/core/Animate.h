@@ -22,19 +22,19 @@ namespace a3d{
 		Animate();
 		Animate(const Animate &a);
 		~Animate();
-		
-		AnimateState state() const;
-		
-		// 子类方法
-		virtual void update(float progress){};
 
-		void updateAtTime(float time);
+		AnimateState state() const;
+
+		// 子类方法
+		virtual void update(float progress, Node *current, const Node *origin);
+
+		// 根据 origin 更新 current
+		void updateAtTime(float time, Node *current, const Node *origin);
 	private:
 		AnimateState _state;
-		Node *_target;
 		float _beginTime;
-		float _duration;
 		float _currentTime;
+		float _duration;
 		
 		void updateState(AnimateState state);
 	};

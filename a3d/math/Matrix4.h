@@ -44,10 +44,9 @@ namespace a3d{
 		void scale(float x, float y, float z);
 
 		Matrix4 invert() const;
-
-		Matrix4 add(Matrix4 mat) const;
-		Matrix4 sub(Matrix4 mat) const;
 		Matrix4 mul(Matrix4 mat) const;
+		// 返回当前矩阵要达到目标矩阵需要做的变换
+		Matrix4 diff(Matrix4 second) const;
 		
 		Vector3 mulVector3(Vector3 vec) const;
 

@@ -19,8 +19,11 @@ namespace a3d{
 		
 	public:
 		float x() const;
+		void x(float x);
 		float y() const;
+		void y(float y);
 		float z() const;
+		void z(float z);
 		float length() const;
 
 	public:

@@ -50,8 +50,7 @@
 		314FE47520104EDC0067984B /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE47420104EDC0067984B /* util.cpp */; };
 		314FE478201054190067984B /* AnimatePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE476201054190067984B /* AnimatePosition.cpp */; };
 		314FE479201054190067984B /* AnimatePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
-		314FE47C2010787B0067984B /* NodeAnimate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE47A2010787B0067984B /* NodeAnimate.cpp */; };
-		314FE47D2010787B0067984B /* NodeAnimate.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE47B2010787B0067984B /* NodeAnimate.h */; };
+		314FE48320108D570067984B /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE48120108D570067984B /* Transform.h */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -186,9 +185,8 @@
 		314FE47420104EDC0067984B /* util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		314FE476201054190067984B /* AnimatePosition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatePosition.cpp; sourceTree = "<group>"; };
 		314FE477201054190067984B /* AnimatePosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatePosition.h; sourceTree = "<group>"; };
-		314FE47A2010787B0067984B /* NodeAnimate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimate.cpp; sourceTree = "<group>"; };
-		314FE47B2010787B0067984B /* NodeAnimate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeAnimate.h; sourceTree = "<group>"; };
 		314FE47E20107F180067984B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		314FE48120108D570067984B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
 		31CB9B6C2008D0CD0068D9B7 /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
 		31CB9B732009B9C70068D9B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31CB9B782009C3830068D9B7 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
@@ -402,12 +400,11 @@
 				31CB9B8F200A01C30068D9B7 /* Engine.cpp */,
 				31CB9B7A2009C5C00068D9B7 /* Object.h */,
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
+				314FE48120108D570067984B /* Transform.h */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
 				31CB9B812009D99F0068D9B7 /* Camera.cpp */,
 				31CB9B99200A18750068D9B7 /* Node.h */,
 				31CB9B98200A18750068D9B7 /* Node.cpp */,
-				314FE47B2010787B0067984B /* NodeAnimate.h */,
-				314FE47A2010787B0067984B /* NodeAnimate.cpp */,
 				314FE46B200F78E40067984B /* Animate.h */,
 				314FE46A200F78E40067984B /* Animate.cpp */,
 				314FE477201054190067984B /* AnimatePosition.h */,
@@ -467,12 +464,12 @@
 				31CB9BA4200A1F6D0068D9B7 /* Axis.h in Headers */,
 				314FE3D9200CAF560067984B /* GLView.h in Headers */,
 				31CB9B892009EBD10068D9B7 /* Context.h in Headers */,
+				314FE48320108D570067984B /* Transform.h in Headers */,
 				31CB9BBD200A29D80068D9B7 /* DraftImage.h in Headers */,
 				314FE469200F789F0067984B /* Scene.h in Headers */,
 				31CB9BA8200A1F6D0068D9B7 /* Vector3.h in Headers */,
 				3124F0C71FFB37F40005EDDE /* a3d.h in Headers */,
 				31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */,
-				314FE47D2010787B0067984B /* NodeAnimate.h in Headers */,
 				31CB9B9B200A18750068D9B7 /* Node.h in Headers */,
 				314FE465200F77740067984B /* Texture.h in Headers */,
 				31CB9B96200A150C0068D9B7 /* log.h in Headers */,
@@ -657,7 +654,6 @@
 				31CB9B9A200A18750068D9B7 /* Node.cpp in Sources */,
 				31CB9BA5200A1F6D0068D9B7 /* Matrix4.cpp in Sources */,
 				314FE468200F789F0067984B /* Scene.cpp in Sources */,
-				314FE47C2010787B0067984B /* NodeAnimate.cpp in Sources */,
 				31CB9B8C2009F5DA0068D9B7 /* BufferContext.cpp in Sources */,
 				31CB9BBC200A29D80068D9B7 /* DraftImage.mm in Sources */,
 				314FE47520104EDC0067984B /* util.cpp in Sources */,

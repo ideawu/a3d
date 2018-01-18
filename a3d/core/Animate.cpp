@@ -7,18 +7,16 @@
 namespace a3d{
 	Animate::Animate(){
 		_state = AnimateStateNone;
-		_target = NULL;
 		_beginTime = -1;
-		_duration = 0;
 		_currentTime = -1;
+		_duration = 0;
 	}
 	
 	Animate::Animate(const Animate &a){
 		_state = a._state;
-		_target = a._target;
 		_beginTime = a._beginTime;
-		_duration = a._duration;
 		_currentTime = a._currentTime;
+		_duration = a._duration;
 	}
 	
 	Animate::~Animate(){
@@ -32,7 +30,10 @@ namespace a3d{
 		_state = state;
 	}
 
-	void Animate::updateAtTime(float time){
+	void Animate::update(float progress, Node *current, const Node *origin){
+	}
+
+	void Animate::updateAtTime(float time, Node *current, const Node *origin){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
 			_currentTime = time;
@@ -57,7 +58,7 @@ namespace a3d{
 			// TODO: TimingFunc, example: progress = progress * progress
 
 			updateState(AnimateStateWillUpdate);
-			update(progress);
+			update(progress, current, origin);
 			updateState(AnimateStateDidUpdate);
 
 			if(progress == 1){
