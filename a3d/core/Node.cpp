@@ -34,7 +34,7 @@ namespace a3d{
 	}
 
 	void Node::render(){
-		render(0);
+		render(-1);
 	}
 
 	void Node::render(float time){
