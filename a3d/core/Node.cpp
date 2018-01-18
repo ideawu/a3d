@@ -28,7 +28,7 @@ namespace a3d{
 		}
 		if(_animation){
 			std::vector<Animate*> *actions = &_animation->actions;
-			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
+			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); it++){
 				Animate *action = *it;
 				delete action;
 			}
