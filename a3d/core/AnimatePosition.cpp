@@ -7,17 +7,17 @@
 
 namespace a3d{
 
-	AnimatePosition AnimatePosition::move(Vector3 offset){
-		AnimatePosition ret;
-		ret._type = MoveTypeOffset;
-		ret._vec = offset;
+	AnimatePosition* AnimatePosition::move(Vector3 offset){
+		AnimatePosition *ret = new AnimatePosition();
+		ret->_type = MoveTypeOffset;
+		ret->_vec = offset;
 		return ret;
 	}
 	
-	AnimatePosition AnimatePosition::moveTo(Vector3 pos){
-		AnimatePosition ret;
-		ret._type = MoveTypeDestination;
-		ret._vec = pos;
+	AnimatePosition* AnimatePosition::moveTo(Vector3 pos){
+		AnimatePosition *ret = new AnimatePosition();
+		ret->_type = MoveTypeDestination;
+		ret->_vec = pos;
 		return ret;
 	}
 	
@@ -31,7 +31,8 @@ namespace a3d{
 		
 		float len = progress * offset.length();
 		offset = offset.normalize(len);
-		current->move(offset);
+		Vector3 pos = origin->pos().add(offset);
+		current->pos(pos);
 	}
 
 }; // end namespace

@@ -24,12 +24,14 @@ namespace a3d{
 		~Animate();
 
 		AnimateState state() const;
+		float duration() const;
+		void duration(float duration);
 
 		// 子类方法
 		virtual void update(float progress, Node *current, const Node *origin);
 
-		// 根据 origin 更新 current
-		void updateAtTime(float time, Node *current, const Node *origin);
+		// 根据 origin 更新 current，返回是否发生了更新
+		bool updateAtTime(float time, Node *current, const Node *origin);
 	private:
 		AnimateState _state;
 		float _beginTime;

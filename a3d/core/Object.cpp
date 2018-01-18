@@ -57,7 +57,7 @@ namespace a3d{
 	}
 
 	void Object::transform(Matrix4 mat){
-		this->mul(mat);
+		Matrix4::operator=(this->mul(mat));
 	}
 
 	void Object::transform(Transform trans){

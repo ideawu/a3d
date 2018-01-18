@@ -48,8 +48,8 @@ namespace a3d{
 
 		Matrix4 invert() const;
 		Matrix4 mul(Matrix4 mat) const;
-		// 返回当前矩阵要达到目标矩阵需要做的变换
-		Matrix4 diff(Matrix4 second) const;
+		// 返回目标矩阵距离当前矩阵需要做的变换
+		Matrix4 div(Matrix4 mat) const;
 		
 		Vector3 mulVector3(Vector3 vec) const;
 

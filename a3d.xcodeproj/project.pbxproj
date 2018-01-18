@@ -51,6 +51,12 @@
 		314FE478201054190067984B /* AnimatePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE476201054190067984B /* AnimatePosition.cpp */; };
 		314FE479201054190067984B /* AnimatePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
 		314FE48320108D570067984B /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE48120108D570067984B /* Transform.h */; };
+		314FE4842010AF270067984B /* Transform.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE48120108D570067984B /* Transform.h */; };
+		314FE4852010AF270067984B /* Animate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE46B200F78E40067984B /* Animate.h */; };
+		314FE4862010AF270067984B /* AnimatePosition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
+		314FE4872010AF270067984B /* Scene.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE467200F789F0067984B /* Scene.h */; };
+		314FE4882010AF270067984B /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE463200F77740067984B /* Texture.h */; };
+		314FE4892010AF270067984B /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B782009C3830068D9B7 /* util.h */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -93,6 +99,12 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				314FE4842010AF270067984B /* Transform.h in CopyFiles */,
+				314FE4852010AF270067984B /* Animate.h in CopyFiles */,
+				314FE4862010AF270067984B /* AnimatePosition.h in CopyFiles */,
+				314FE4872010AF270067984B /* Scene.h in CopyFiles */,
+				314FE4882010AF270067984B /* Texture.h in CopyFiles */,
+				314FE4892010AF270067984B /* util.h in CopyFiles */,
 				314FE3DB200CAFB30067984B /* GLView.h in CopyFiles */,
 				31CB9BBE200A29F60068D9B7 /* DraftImage.h in CopyFiles */,
 				31CB9BB9200A26DF0068D9B7 /* Color.h in CopyFiles */,

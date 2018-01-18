@@ -38,34 +38,39 @@ namespace a3d{
 	}
 
 	void Node::render(float time){
-		if(_animation){
-			if(_animation->actions.size() > 0){
-				Node *target = this;
-				Node *origin = &_animation->origin;
-				Node *current = &_animation->current;
+		if(time >= 0 && _animation && _animation->actions.size() > 0){
+			Node *origin = &_animation->origin;
+			Node *current = &_animation->current;
+			
+			// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
+			
+			// size 变动
+			Vector3 size1 = this->size();
+			Vector3 size2 = current->size();
+			Vector3 size_diff = size1.sub(size2);
+			Vector3 size_new = origin->size().add(size_diff);
+			origin->size(size_new);
+			
+			// matrix 变动
+			Matrix4 mat1(*this);
+			Matrix4 mat2(*current);
+			Matrix4 mat_diff = mat1.div(mat2);
+			origin->transform(mat_diff);
+
+			std::vector<Animate*> *actions = &_animation->actions;
+			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
+				Animate *action = *it;
+				action->updateAtTime(time, current, origin);
 				
-				// 动画进行前，检查 current 和 target，将 diff 更新到 origin 中，因为运动进行过程中，target 可能被更新
-				
-				// size 变动
-				Vector3 size1 = target->size();
-				Vector3 size2 = current->size();
-				Vector3 size_diff = size2.sub(size1);
-				Vector3 size_new = origin->size().add(size_diff);
-				origin->size(size_new);
-				
-				// matrix 变动
-				Matrix4 mat1(*target);
-				Matrix4 mat2(*current);
-				Matrix4 mat_diff = mat1.diff(mat2);
-				origin->transform(mat_diff);
-				
-				for(int i=0; i<_animation->actions.size(); i++){
-					Animate &animate = _animation->actions.at(i);
-					animate.updateAtTime(time, current, origin);
+				if(action->state() == AnimateStateEnd){
+					it = actions->erase(it);
+					delete action;
+				}else{
+					it ++;
 				}
-				// 动画进行时，同时更新 current 和 target
-				*target = *current;
 			}
+			// 动画进行时，同时更新 current 和 this
+			*this = *current;
 		}
 		
 		pushMatrix();
@@ -73,13 +78,13 @@ namespace a3d{
 		popMatrix();
 	}
 
-	void Node::runAnimation(Animate animate){
+	void Node::runAnimation(Animate *action){
 		if(!_animation){
 			_animation = new NodeAnimate();
 			_animation->origin = *this;
 			_animation->current = *this;
 		}
-		_animation->actions.push_back(animate);
+		_animation->actions.push_back(action);
 	}
 	
 	void Node::removeAllAnimations(){

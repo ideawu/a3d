@@ -9,11 +9,11 @@
 #include "Vector3.h"
 
 namespace a3d{
-	class AnimatePosition
+	class AnimatePosition : public Animate
 	{
 	public:
-		static AnimatePosition move(Vector3 offset);
-		static AnimatePosition moveTo(Vector3 pos);
+		static AnimatePosition* move(Vector3 offset);
+		static AnimatePosition* moveTo(Vector3 pos);
 
 		virtual void update(float progress, Node *current, const Node *origin);
 	private:

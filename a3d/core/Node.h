@@ -34,7 +34,8 @@ namespace a3d{
 		
 		///// 动画
 	public:
-		void runAnimation(Animate animate);
+		// action 内存由 Node 管理
+		void runAnimation(Animate *action);
 		void removeAllAnimations();
 		bool hasAnimations();
 	private:
@@ -49,7 +50,7 @@ namespace a3d{
 		Node origin;
 		Node current;
 		
-		std::vector<Animate> actions;
+		std::vector<Animate *> actions;
 	};
 
 }; // end namespace

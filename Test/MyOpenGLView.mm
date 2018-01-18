@@ -8,6 +8,7 @@
 #include "a3d/DraftScene.h"
 #include "a3d/DraftSprite.h"
 #include "a3d/DraftImage.h"
+#include "a3d/AnimatePosition.h"
 
 @interface MyOpenGLView(){
 	float _rotateX;
@@ -285,6 +286,18 @@
 //			}
 			break;
 		}
+		case '1':{
+			a3d::AnimatePosition *action = a3d::AnimatePosition::move(a3d::Vector3(100, 0, 0));
+			action->duration(1);
+			_hero->runAnimation(action);
+			break;
+		}
+		case '2':{
+			static float time = 0;
+			time += 0.1;
+			_hero->render(time);
+			[self setNeedsDisplay:YES];
+		}
 		default:
 			return;
 	}
@@ -293,7 +306,7 @@
 	dz *= speed;
 	dy *= speed;
 	_currentObject->move(dx, dy, dz);
-//	log_debug(@"%f %f %f", dx, dy, dz);
+	log_debug(@"%f %f %f", _currentObject->x(), _currentObject->y(), _currentObject->z());
 
 //	[GEulerAngle angleWithMatrix:_currentObject];
 //	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);

@@ -28,12 +28,21 @@ namespace a3d{
 
 	void Animate::updateState(AnimateState state){
 		_state = state;
+		// TODO: callback
+	}
+
+	float Animate::duration() const{
+		return _duration;
+	}
+	
+	void Animate::duration(float duration){
+		_duration = duration;
 	}
 
 	void Animate::update(float progress, Node *current, const Node *origin){
 	}
 
-	void Animate::updateAtTime(float time, Node *current, const Node *origin){
+	bool Animate::updateAtTime(float time, Node *current, const Node *origin){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
 			_currentTime = time;
@@ -42,7 +51,7 @@ namespace a3d{
 		
 		if(_state != AnimateStateNone && _state != AnimateStateEnd){
 			if(time < _currentTime){
-				return;
+				return false;
 			}
 			_currentTime = time;
 			
@@ -50,7 +59,7 @@ namespace a3d{
 			if(_duration == 0){
 				progress = 1;
 			}else{
-				progress = (_currentTime - _beginTime)/_duration;
+				progress = (0.01 + _currentTime - _beginTime)/_duration;
 				if(progress >= 1 - __FLT_EPSILON__){
 					progress = 1;
 				}
@@ -65,6 +74,7 @@ namespace a3d{
 				updateState(AnimateStateEnd);
 			}
 		}
+		return true;
 	}
 
 }; // end namespace

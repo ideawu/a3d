@@ -106,8 +106,8 @@ namespace a3d{
 		return Matrix4(GLKMatrix4Multiply(_mat, mat._mat));
 	}
 	
-	Matrix4 Matrix4::diff(Matrix4 second) const{
-		return this->mul(second.invert()).invert();;
+	Matrix4 Matrix4::div(Matrix4 mat) const{
+		return this->mul(mat.invert());
 	}
 	
 	Vector3 Matrix4::mulVector3(Vector3 vec) const{
