@@ -289,8 +289,9 @@
 			isa = PBXGroup;
 			children = (
 				31CB9B93200A14DD0068D9B7 /* util */,
-				31CB9B9C200A1F550068D9B7 /* math */,
+				31CB9B9C200A1F550068D9B7 /* base */,
 				31CB9B6D2009B4C20068D9B7 /* core */,
+				314FE4912010C6AD0067984B /* animation */,
 				31CB9B852009EA4A0068D9B7 /* gl */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
 				31CB9B782009C3830068D9B7 /* util.h */,
@@ -399,23 +400,28 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
+		314FE4912010C6AD0067984B /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				314FE477201054190067984B /* AnimatePosition.h */,
+				314FE476201054190067984B /* AnimatePosition.cpp */,
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
 		31CB9B6D2009B4C20068D9B7 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				31CB9BB6200A25360068D9B7 /* Color.h */,
-				31CB9BB5200A25360068D9B7 /* Color.cpp */,
 				31CB9B7A2009C5C00068D9B7 /* Object.h */,
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
 				314FE48120108D570067984B /* Transform.h */,
 				314FE48A2010C0F90067984B /* Transform.cpp */,
-				31CB9B822009D99F0068D9B7 /* Camera.h */,
-				31CB9B812009D99F0068D9B7 /* Camera.cpp */,
 				31CB9B99200A18750068D9B7 /* Node.h */,
 				31CB9B98200A18750068D9B7 /* Node.cpp */,
 				314FE46B200F78E40067984B /* Animate.h */,
 				314FE46A200F78E40067984B /* Animate.cpp */,
-				314FE477201054190067984B /* AnimatePosition.h */,
-				314FE476201054190067984B /* AnimatePosition.cpp */,
+				31CB9B822009D99F0068D9B7 /* Camera.h */,
+				31CB9B812009D99F0068D9B7 /* Camera.cpp */,
 				314FE467200F789F0067984B /* Scene.h */,
 				314FE466200F789F0067984B /* Scene.cpp */,
 			);
@@ -446,7 +452,7 @@
 			path = util;
 			sourceTree = "<group>";
 		};
-		31CB9B9C200A1F550068D9B7 /* math */ = {
+		31CB9B9C200A1F550068D9B7 /* base */ = {
 			isa = PBXGroup;
 			children = (
 				31CB9B9E200A1F6D0068D9B7 /* Axis.h */,
@@ -455,8 +461,10 @@
 				31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */,
 				31CB9BA2200A1F6D0068D9B7 /* Vector3.h */,
 				31CB9BA1200A1F6D0068D9B7 /* Vector3.cpp */,
+				31CB9BB6200A25360068D9B7 /* Color.h */,
+				31CB9BB5200A25360068D9B7 /* Color.cpp */,
 			);
-			path = math;
+			path = base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
