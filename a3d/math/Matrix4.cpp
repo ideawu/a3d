@@ -10,9 +10,9 @@ namespace a3d{
 		_mat = GLKMatrix4Identity;
 	}
 
-	Matrix4::Matrix4(const Matrix4 &mat){
-		_mat = mat._mat;
-	}
+//	Matrix4::Matrix4(const Matrix4 &mat){
+//		_mat = mat._mat;
+//	}
 
 	Matrix4::Matrix4(GLKMatrix4 mat){
 		_mat = mat;
@@ -30,18 +30,36 @@ namespace a3d{
 		return Vector3(x(), y(), z());
 	}
 	
+	void Matrix4::pos(Vector3 pos){
+		this->x(pos.x());
+		this->y(pos.y());
+		this->z(pos.z());
+	}
+	
 	float Matrix4::x() const{
 		return _mat.m30;
 	}
 	
+	void Matrix4::x(float x){
+		_mat.m30 = x;
+	}
+
 	float Matrix4::y() const{
 		return _mat.m31;
 	}
 	
+	void Matrix4::y(float y){
+		_mat.m31 = y;
+	}
+
 	float Matrix4::z() const{
 		return _mat.m32;
 	}
 	
+	void Matrix4::z(float z){
+		_mat.m32  = z;
+	}
+
 	void Matrix4::translate(float x, float y, float z){
 		_mat = GLKMatrix4Translate(_mat, x, y, z);
 	}

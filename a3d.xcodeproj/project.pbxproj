@@ -59,8 +59,6 @@
 		31CB9B892009EBD10068D9B7 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* Context.h */; };
 		31CB9B8C2009F5DA0068D9B7 /* BufferContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */; };
 		31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */; };
-		31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B8F200A01C30068D9B7 /* Engine.cpp */; };
-		31CB9B92200A01C30068D9B7 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 		31CB9B96200A150C0068D9B7 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B94200A150C0068D9B7 /* log.h */; };
 		31CB9B9A200A18750068D9B7 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B98200A18750068D9B7 /* Node.cpp */; };
 		31CB9B9B200A18750068D9B7 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Node.h */; };
@@ -75,7 +73,6 @@
 		31CB9BAB200A1FC80068D9B7 /* Vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BA2200A1F6D0068D9B7 /* Vector3.h */; };
 		31CB9BAC200A1FC80068D9B7 /* Context.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* Context.h */; };
 		31CB9BAD200A1FC80068D9B7 /* BufferContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */; };
-		31CB9BAE200A1FC80068D9B7 /* Engine.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B90200A01C30068D9B7 /* Engine.h */; };
 		31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
 		31CB9BB1200A1FC80068D9B7 /* Node.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Node.h */; };
@@ -105,7 +102,6 @@
 				31CB9BAB200A1FC80068D9B7 /* Vector3.h in CopyFiles */,
 				31CB9BAC200A1FC80068D9B7 /* Context.h in CopyFiles */,
 				31CB9BAD200A1FC80068D9B7 /* BufferContext.h in CopyFiles */,
-				31CB9BAE200A1FC80068D9B7 /* Engine.h in CopyFiles */,
 				31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */,
 				31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */,
 				31CB9BB1200A1FC80068D9B7 /* Node.h in CopyFiles */,
@@ -198,8 +194,6 @@
 		31CB9B872009EBD10068D9B7 /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BufferContext.cpp; sourceTree = "<group>"; };
 		31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BufferContext.h; sourceTree = "<group>"; };
-		31CB9B8F200A01C30068D9B7 /* Engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
-		31CB9B90200A01C30068D9B7 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		31CB9B94200A150C0068D9B7 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		31CB9B95200A150C0068D9B7 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		31CB9B98200A18750068D9B7 /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
@@ -396,8 +390,6 @@
 			children = (
 				31CB9BB6200A25360068D9B7 /* Color.h */,
 				31CB9BB5200A25360068D9B7 /* Color.cpp */,
-				31CB9B90200A01C30068D9B7 /* Engine.h */,
-				31CB9B8F200A01C30068D9B7 /* Engine.cpp */,
 				31CB9B7A2009C5C00068D9B7 /* Object.h */,
 				31CB9B792009C5C00068D9B7 /* Object.cpp */,
 				314FE48120108D570067984B /* Transform.h */,
@@ -460,7 +452,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3124F0E31FFB38A40005EDDE /* GCamera.h in Headers */,
-				31CB9B92200A01C30068D9B7 /* Engine.h in Headers */,
 				31CB9BA4200A1F6D0068D9B7 /* Axis.h in Headers */,
 				314FE3D9200CAF560067984B /* GLView.h in Headers */,
 				31CB9B892009EBD10068D9B7 /* Context.h in Headers */,
@@ -648,7 +639,6 @@
 				314FE464200F77740067984B /* Texture.cpp in Sources */,
 				31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */,
 				31CB9B882009EBD10068D9B7 /* Context.cpp in Sources */,
-				31CB9B91200A01C30068D9B7 /* Engine.cpp in Sources */,
 				31CB9BA7200A1F6D0068D9B7 /* Vector3.cpp in Sources */,
 				31CB9BB7200A25360068D9B7 /* Color.cpp in Sources */,
 				31CB9B9A200A18750068D9B7 /* Node.cpp in Sources */,

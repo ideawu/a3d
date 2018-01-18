@@ -41,8 +41,6 @@ namespace a3d{
 
 	private:
 		Vector3 _size;
-
-		Object(const Object &obj);
 	};
 	
 }; // end namespace

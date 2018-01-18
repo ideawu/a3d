@@ -23,13 +23,14 @@ namespace a3d{
 		
 		void render();
 		void render(float time);
-
+		
 	protected:
 		void pushMatrix();
 		void popMatrix();
 		
 	private:
-		Node(const Node &d){}
+		Node(const Node &d);
+		Node& operator =(const Node& d);
 		
 		///// 动画
 	public:
@@ -37,7 +38,7 @@ namespace a3d{
 		void removeAllAnimations();
 		bool hasAnimations();
 	private:
-		NodeAnimate *_animate;
+		NodeAnimate *_animation;
 	};
 
 	

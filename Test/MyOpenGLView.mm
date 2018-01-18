@@ -36,7 +36,7 @@
 
 - (void)prepareOpenGL {
 //	[super prepareOpenGL];
-	
+
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
 	

@@ -18,9 +18,6 @@ namespace a3d{
 		Vector3 direction;
 		
 		Vector3 nearestPointTo(const Vector3 &target) const;
-	
-	private:
-		Axis(const Axis &axis){}
 	};
 	
 }; // end namespace

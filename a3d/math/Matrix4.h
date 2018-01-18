@@ -16,7 +16,6 @@ namespace a3d{
 		/// 静态方法
 		// 创建一个单位向量
 		Matrix4();
-		Matrix4(const Matrix4 &mat);
 		Matrix4(GLKMatrix4 mat);
 		
 		static Matrix4 identity();
@@ -26,10 +25,14 @@ namespace a3d{
 		const float* matrix() const;
 		
 		Vector3 pos() const;
+		void pos(Vector3 pos);
 		float x() const;
+		void x(float x);
 		float y() const;
+		void y(float y);
 		float z() const;
-		
+		void z(float z);
+
 	public:
 		/// 方法
 		void translate(float x, float y, float z);

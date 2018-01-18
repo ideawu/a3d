@@ -14,7 +14,6 @@ namespace a3d{
 		static Vector3 zero();
 
 		Vector3();
-		Vector3(const Vector3 &vec);
 		Vector3(float x, float y, float z);
 		
 	public:

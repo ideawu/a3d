@@ -12,10 +12,6 @@ namespace a3d{
 		_vec.z = 0;
 	}
 
-	Vector3::Vector3(const Vector3 &vec){
-		_vec = vec._vec;
-	}
-
 	Vector3::Vector3(float x, float y, float z){
 		_vec.x = x;
 		_vec.y = y;
