@@ -55,11 +55,14 @@ namespace a3d{
 	}
 	
 	Vector3 Vector3::normalize() const{
-		return Vector3(GLKVector3Normalize(_vec));
+		return normalize(1);
 	}
 	
 	Vector3 Vector3::normalize(float norm) const{
 		float len = this->length();
+		if(len == 0){
+			return *this;
+		}
 		return Vector3(GLKVector3MultiplyScalar(_vec, norm/len));
 	}
 	
