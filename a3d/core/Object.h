@@ -8,6 +8,7 @@
 #include "Matrix4.h"
 
 namespace a3d{
+	// 不继承，而是使用 Matrix？
 	class Object : public Matrix4
 	{
 	public:
@@ -16,10 +17,10 @@ namespace a3d{
 
 	public:
 		float width() const;
-		float height() const;
-		float depth() const;
 		void width(float w);
+		float height() const;
 		void height(float h);
+		float depth() const;
 		void depth(float d);
 
 	public:

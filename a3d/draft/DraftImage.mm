@@ -79,7 +79,5 @@ void DraftImage::draw(){
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
-	//	glEnable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
 }
 

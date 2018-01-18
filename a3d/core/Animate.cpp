@@ -2,4 +2,7 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "Texture.h"
+#include "Animate.h"
+
+namespace a3d{
+}; // end namespace

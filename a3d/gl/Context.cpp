@@ -56,34 +56,20 @@ namespace a3d{
 	
 	void Context::setupCamera3D(const Camera *camera){
 		loadMatrix(camera->matrix3D());
-		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
-		glDisable(GL_BLEND);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
-		{
-			glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-			glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
-		}
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
 	}
 
 	void Context::setupCamera2D(const Camera *camera){
 		loadMatrix(camera->matrix2D());
-		// 2D和3D用的属性一般不同，所以每一次都设置一遍
 		glDisable(GL_MULTISAMPLE);
-		//	glEnable(GL_DEPTH_TEST);
-		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
-		glEnable(GL_BLEND);
-		{
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		}
-		glEnable(GL_TEXTURE_2D);
-		{
-			glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-			glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
-		}
 	}
 	
 	void Context::finish(){

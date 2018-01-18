@@ -5,6 +5,27 @@
 #ifndef Texture_hpp
 #define Texture_hpp
 
-#include <stdio.h>
+namespace a3d{
+	class Texture
+	{
+	public:
+		Texture();
+		~Texture();
+		
+		GLuint id() const;
+		void id(GLuint i);
+		int width() const;
+		void width(int w);
+		int height() const;
+		void height(int h);
+
+		int loadImageFile(const char *filename);
+	private:
+		Texture(const Texture &tex){}
+		GLuint _id;
+		int _width;
+		int _height;
+	};
+}; // end namespace
 
 #endif /* Texture_hpp */

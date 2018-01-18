@@ -6,6 +6,9 @@
 #define util_h
 
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ImageIO/CGImageSource.h>
 
 namespace a3d{
 }; // end namespace
@@ -14,6 +17,10 @@ namespace a3d{
 	inline static float trimf(float f){
 		return fabs(f)<FLT_EPSILON*10? 0 : f;
 	}
+	
+	CGImageRef load_cgimage(const char *filename);
+	char *load_image_data(const char *filename, int *width, int *height);
+
 }; // end namespace
 
 #endif /* util_h */
