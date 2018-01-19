@@ -28,9 +28,6 @@ namespace a3d{
 		Matrix4 _matrix3D;
 		Matrix4 _matrix2D;
 
-		Matrix4 matrix3D() const;
-		Matrix4 matrix2D() const;
-
 		Camera(const Camera &d);
 		Camera& operator =(const Camera& d);
 	};

@@ -25,7 +25,13 @@ namespace a3d{
 		this->y(pos.y);
 		this->z(pos.z);
 	}
-	
+
+	void Object::pos(float x, float y, float z){
+		this->x(x);
+		this->y(y);
+		this->z(z);
+	}
+
 	float Object::x() const{
 		return _matrix.x();
 	}

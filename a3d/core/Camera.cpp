@@ -12,15 +12,6 @@ namespace a3d{
 		return ret;
 	}
 	
-	Matrix4 Camera::matrix3D() const{
-		// 视野中的物体，将做与相机相反的变换。
-		return _matrix3D.mul(this->matrix().invert());
-	}
-	
-	Matrix4 Camera::matrix2D() const{
-		return _matrix2D;
-	}
-	
 	void Camera::setup(float fovy, float width, float height, float depth){
 		_fovy = fovy;
 		_near = (fmax(width, height)/2) / tan(degree_to_radian(fovy/2));
@@ -46,8 +37,10 @@ namespace a3d{
 	}
 
 	void Camera::view3D(){
+		// 视野中的物体，将做与相机相反的运动
+		Matrix4 mat = _matrix3D.mul(this->matrix().invert());
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)_matrix3D.array());
+		glLoadMatrixf((const GLfloat *)mat.array());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
@@ -62,8 +55,9 @@ namespace a3d{
 	}
 
 	void Camera::view2D(){
+		Matrix4 mat = _matrix2D;
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)_matrix2D.array());
+		glLoadMatrixf((const GLfloat *)mat.array());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		

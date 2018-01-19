@@ -20,6 +20,7 @@ namespace a3d{
 		
 		Vector3 pos() const;
 		void pos(const Vector3 &pos);
+		void pos(float x, float y, float z);
 		float x() const;
 		void x(float x);
 		float y() const;
