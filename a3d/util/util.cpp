@@ -40,8 +40,8 @@ namespace a3d{
 		CGColorSpaceRelease(colorSpace);
 
 		// flip
-		CGContextTranslateCTM(context, 0.0, h);
-		CGContextScaleCTM(context, 1.0, -1.0);
+//		CGContextTranslateCTM(context, 0.0, h);
+//		CGContextScaleCTM(context, 1.0, -1.0);
 		// Set the blend mode to copy before drawing since the previous contents of memory aren't used.
 		// This avoids unnecessary blending.
 		CGContextSetBlendMode(context, kCGBlendModeCopy);

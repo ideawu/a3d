@@ -41,9 +41,9 @@ void DraftImage::scale(float x, float y, float z){
 
 void DraftImage::draw(){
 	float x0 = 0 - this->width()/2;
-	float y0 = 0 - this->height()/2;
+	float y0 = 0 + this->height()/2;
 	float x1 = 0 + this->width()/2;
-	float y1 = 0 + this->height()/2;
+	float y1 = 0 - this->height()/2;
 	float z = 0;
 	//	log_debug(@"%.2f %.2f %.2f %.2f", x0, y0, x1, y1);
 	
