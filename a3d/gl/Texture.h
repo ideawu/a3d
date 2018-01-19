@@ -11,6 +11,7 @@ namespace a3d{
 	public:
 		Texture();
 		~Texture();
+		static Texture* textureFromImageFile(const char *filename);
 		
 		GLuint id() const;
 		void id(GLuint i);
@@ -19,13 +20,16 @@ namespace a3d{
 		int height() const;
 		void height(int h);
 
-		int loadImageFile(const char *filename);
 	private:
-		Texture(const Texture &tex){}
+		Texture(const Texture &d);
+		Texture& operator =(const Texture& d);
+
 		GLuint _id;
 		int _width;
 		int _height;
-	};
+
+		int loadImageFile(const char *filename);
+};
 }; // end namespace
 
 #endif /* Texture_hpp */

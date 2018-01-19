@@ -16,6 +16,15 @@ namespace a3d{
 		}
 	}
 
+	Texture* Texture::textureFromImageFile(const char *filename){
+		Texture *ret = new Texture();
+		if(ret->loadImageFile(filename) == -1){
+			delete ret;
+			return NULL;
+		}
+		return ret;
+	}
+
 	GLuint Texture::id() const{
 		return _id;
 	}
