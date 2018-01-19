@@ -23,9 +23,10 @@ namespace a3d{
 		void bind();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
-		void setupCamera3D(const Camera *camera);
-		void setupCamera2D(const Camera *camera);
+		void setupCamera3D(const Matrix4 &mat);
+		void setupCamera2D(const Matrix4 &mat);
 		void finish();
+		void blit();
 
 	protected:
 		Context(){}
@@ -33,7 +34,9 @@ namespace a3d{
 		virtual GLuint framebuffer() = 0;
 		virtual void setup() = 0;
 	private:
-		Context(const Context &ctx){}
+		Context(const Context &d);
+		Context& operator =(const Context& d);
+
 		void width(float width);
 		void height(float height);
 		void loadMatrix(const Matrix4 &mat);
