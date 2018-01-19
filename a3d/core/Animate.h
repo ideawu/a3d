@@ -19,12 +19,14 @@ namespace a3d{
 	class Animate
 	{
 	public:
-		Animate();
-		Animate(const Animate &a);
+//		static Animate* move(Vector3 offset);
+//		static Animate* moveTo(Vector3 pos);
+
+	public:
 		~Animate();
 
 		// 子类方法
-		virtual void update(float progress, Node *current, const Node *origin);
+		virtual void update(float progress, Node *current, const Node *origin){}
 
 		AnimateState state() const;
 		float duration() const;
@@ -32,7 +34,13 @@ namespace a3d{
 
 		// 根据 origin 更新 current，返回节点是否发生了更新(不是动画状态是否更新)
 		void updateAtTime(float time, Node *current, const Node *origin);
+
+	protected:
+		Animate();
 	private:
+		Animate(const Animate &a);
+		Animate& operator =(const Animate& d);
+
 		AnimateState _state;
 		float _beginTime;
 		float _currentTime;

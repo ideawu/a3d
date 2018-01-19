@@ -22,14 +22,14 @@ namespace a3d{
 		void view2D();
 
 	private:
+		Camera(const Camera &d);
+		Camera& operator =(const Camera& d);
+
 		float _fovy;
 		float _near;
 		float _far;
 		Matrix4 _matrix3D;
 		Matrix4 _matrix2D;
-
-		Camera(const Camera &d);
-		Camera& operator =(const Camera& d);
 	};
 	
 }; // end namespace

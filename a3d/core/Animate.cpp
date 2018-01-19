@@ -39,9 +39,6 @@ namespace a3d{
 		_duration = duration;
 	}
 
-	void Animate::update(float progress, Node *current, const Node *origin){
-	}
-
 	void Animate::updateAtTime(float time, Node *current, const Node *origin){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
