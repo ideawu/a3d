@@ -18,9 +18,9 @@ namespace a3d{
 	public:
 		Matrix4 matrix() const;
 		
-		Vector3 pos() const;
-		void pos(const Vector3 &pos);
-		void pos(float x, float y, float z);
+		Vector3 position() const;
+		void position(const Vector3 &pos);
+		void position(float x, float y, float z);
 		float x() const;
 		void x(float x);
 		float y() const;

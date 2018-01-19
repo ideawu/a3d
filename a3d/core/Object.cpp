@@ -16,17 +16,17 @@ namespace a3d{
 		return _matrix;
 	}
 
-	Vector3 Object::pos() const{
+	Vector3 Object::position() const{
 		return Vector3(x(), y(), z());
 	}
 	
-	void Object::pos(const Vector3 &pos){
+	void Object::position(const Vector3 &pos){
 		this->x(pos.x);
 		this->y(pos.y);
 		this->z(pos.z);
 	}
 
-	void Object::pos(float x, float y, float z){
+	void Object::position(float x, float y, float z){
 		this->x(x);
 		this->y(y);
 		this->z(z);

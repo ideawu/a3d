@@ -27,13 +27,13 @@ namespace a3d{
 		if(_type == MoveTypeOffset){
 			offset = _vec;
 		}else{
-			offset = _vec.sub(origin->pos());
+			offset = _vec.sub(origin->position());
 		}
 		float len = progress * offset.length();
 		offset = offset.normalize(len);
 //		log_debug("offset.x: %f", offset.x);
-		Vector3 pos = origin->pos().add(offset);
-		current->pos(pos);
+		Vector3 pos = origin->position().add(offset);
+		current->position(pos);
 	}
 
 }; // end namespace
