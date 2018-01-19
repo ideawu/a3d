@@ -60,8 +60,8 @@ namespace a3d{
 //		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
 
 	private:
-		Vector3 _size;
 		Matrix4 _matrix;
+		Vector3 _size;
 	};
 	
 }; // end namespace

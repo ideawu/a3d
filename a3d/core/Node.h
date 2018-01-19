@@ -17,18 +17,23 @@ namespace a3d{
 	public:
 		Node();
 		~Node();
-		
+
+		// 子类实现此方法，但子类的使用者不直接调用此方法，而是调用 render()。
+		virtual void draw(){};
+
 		Node* parent() const;
 		void removeFromParent();
 		void addSubNode(Node *node);
 		void removeSubNode(Node *node);
-
-		// 子类实现此方法，但子类的使用者不直接调用此方法，而是调用 render()。
-		virtual void draw(){};
 		
 		void render(); // render(-1)
 		void renderAtTime(float time);
-		
+
+		// action 内存由 Node 管理
+		void runAnimation(Animate *action);
+		void removeAllAnimations();
+		bool hasAnimations();
+
 	protected:
 		void pushMatrix();
 		void popMatrix();
@@ -39,14 +44,6 @@ namespace a3d{
 		
 		Node *_parent;
 		std::vector<Node *> *_subs;
-
-		///// 动画
-	public:
-		// action 内存由 Node 管理
-		void runAnimation(Animate *action);
-		void removeAllAnimations();
-		bool hasAnimations();
-	private:
 		NodeAnimation *_animation;
 		
 		void updateAnimationAtTime(float time);

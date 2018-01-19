@@ -43,17 +43,17 @@ namespace a3d{
 	void Animate::update(float progress, Node *current, const Node *origin){
 	}
 
-	bool Animate::updateAtTime(float time, Node *current, const Node *origin){
+	void Animate::updateAtTime(float time, Node *current, const Node *origin){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
 			_currentTime = time;
 			updateState(AnimateStateBegin);
-			return false;
+			return;
 		}
 		
 		if(_state != AnimateStateNone && _state != AnimateStateEnd){
 			if(time < _currentTime){
-				return false;
+				return;
 			}
 			_currentTime = time;
 			
@@ -77,7 +77,6 @@ namespace a3d{
 				updateState(AnimateStateEnd);
 			}
 		}
-		return true;
 	}
 
 }; // end namespace

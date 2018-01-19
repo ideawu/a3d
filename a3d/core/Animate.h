@@ -23,15 +23,15 @@ namespace a3d{
 		Animate(const Animate &a);
 		~Animate();
 
+		// 子类方法
+		virtual void update(float progress, Node *current, const Node *origin);
+
 		AnimateState state() const;
 		float duration() const;
 		void duration(float duration);
 
-		// 子类方法
-		virtual void update(float progress, Node *current, const Node *origin);
-
 		// 根据 origin 更新 current，返回节点是否发生了更新(不是动画状态是否更新)
-		bool updateAtTime(float time, Node *current, const Node *origin);
+		void updateAtTime(float time, Node *current, const Node *origin);
 	private:
 		AnimateState _state;
 		float _beginTime;
