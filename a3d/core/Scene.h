@@ -23,6 +23,7 @@ namespace a3d{
 		void addNode(Node *node);
 		void removeNode(Node *node);
 
+		void render();
 		void renderAtTime(float time);
 
 	private:

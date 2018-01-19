@@ -6,13 +6,13 @@
 #define Rect_hpp
 
 namespace a3d{
-	class Rect
+	class Frame
 	{
 	public:
 		float x, y, width, height;
 		
-		Rect();
-		Rect(float x, float y, float width, float height);
+		Frame();
+		Frame(float x, float y, float width, float height);
 	};
 }; // end namespace
 

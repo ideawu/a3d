@@ -2,15 +2,15 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "Rect.h"
+#include "Frame.h"
 
 namespace a3d{
 	
-	Rect::Rect(){
+	Frame::Frame(){
 		x = y = width = height = 0;
 	}
 	
-	Rect::Rect(float x, float y, float width, float height){
+	Frame::Frame(float x, float y, float width, float height){
 		this->x = x;
 		this->y = y;
 		this->width = width;

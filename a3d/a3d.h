@@ -12,7 +12,7 @@ namespace a3d{
 #include "Axis.h"
 #include "Vector3.h"
 #include "Color.h"
-#include "Rect.h"
+#include "Frame.h"
 
 #include "Object.h"
 #include "Transform.h"
@@ -25,7 +25,5 @@ namespace a3d{
 
 #include "Context.h"
 #include "Texture.h"
-
-#import "GLView.h"
 
 #endif
