@@ -83,7 +83,6 @@
 		31CB9BAA200A1FC80068D9B7 /* Matrix4.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BA0200A1F6D0068D9B7 /* Matrix4.h */; };
 		31CB9BAB200A1FC80068D9B7 /* Vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BA2200A1F6D0068D9B7 /* Vector3.h */; };
 		31CB9BAC200A1FC80068D9B7 /* Context.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B872009EBD10068D9B7 /* Context.h */; };
-		31CB9BAD200A1FC80068D9B7 /* BufferContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */; };
 		31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B822009D99F0068D9B7 /* Camera.h */; };
 		31CB9BB1200A1FC80068D9B7 /* Node.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B99200A18750068D9B7 /* Node.h */; };
@@ -95,6 +94,8 @@
 		31CB9BBC200A29D80068D9B7 /* DraftImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9BBA200A29D80068D9B7 /* DraftImage.mm */; };
 		31CB9BBD200A29D80068D9B7 /* DraftImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9BBB200A29D80068D9B7 /* DraftImage.h */; };
 		31CB9BBE200A29F60068D9B7 /* DraftImage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BBB200A29D80068D9B7 /* DraftImage.h */; };
+		31DF6E98201253290078153E /* SharedContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6E96201253290078153E /* SharedContext.cpp */; };
+		31DF6E99201253290078153E /* SharedContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6E97201253290078153E /* SharedContext.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,7 +120,6 @@
 				31CB9BAA200A1FC80068D9B7 /* Matrix4.h in CopyFiles */,
 				31CB9BAB200A1FC80068D9B7 /* Vector3.h in CopyFiles */,
 				31CB9BAC200A1FC80068D9B7 /* Context.h in CopyFiles */,
-				31CB9BAD200A1FC80068D9B7 /* BufferContext.h in CopyFiles */,
 				31CB9BAF200A1FC80068D9B7 /* Object.h in CopyFiles */,
 				31CB9BB0200A1FC80068D9B7 /* Camera.h in CopyFiles */,
 				31CB9BB1200A1FC80068D9B7 /* Node.h in CopyFiles */,
@@ -228,6 +228,8 @@
 		31CB9BB6200A25360068D9B7 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		31CB9BBA200A29D80068D9B7 /* DraftImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DraftImage.mm; sourceTree = "<group>"; };
 		31CB9BBB200A29D80068D9B7 /* DraftImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DraftImage.h; sourceTree = "<group>"; };
+		31DF6E96201253290078153E /* SharedContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SharedContext.cpp; sourceTree = "<group>"; };
+		31DF6E97201253290078153E /* SharedContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedContext.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +438,8 @@
 			children = (
 				31CB9B872009EBD10068D9B7 /* Context.h */,
 				31CB9B862009EBD10068D9B7 /* Context.cpp */,
+				31DF6E97201253290078153E /* SharedContext.h */,
+				31DF6E96201253290078153E /* SharedContext.cpp */,
 				31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */,
 				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
 				314FE463200F77740067984B /* Texture.h */,
@@ -498,6 +502,7 @@
 				3124F12D1FFDEB560005EDDE /* DraftSprite.h in Headers */,
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
 				314FE479201054190067984B /* AnimatePosition.h in Headers */,
+				31DF6E99201253290078153E /* SharedContext.h in Headers */,
 				314FE46D200F78E40067984B /* Animate.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */,
@@ -667,6 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DF6E98201253290078153E /* SharedContext.cpp in Sources */,
 				314FE464200F77740067984B /* Texture.cpp in Sources */,
 				31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */,
 				31CB9B882009EBD10068D9B7 /* Context.cpp in Sources */,

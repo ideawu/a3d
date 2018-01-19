@@ -109,6 +109,8 @@
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
 	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
+
+	glViewport(0, 0, self.framebufferSize.width, self.framebufferSize.height);
 	//
 	_objects.pop_back();
 	_objects.push_back(_camera);
@@ -120,9 +122,9 @@
 
 	_context->bind();
 	_context->clear(0, 0, 0, 1);
-	_camera->view3D();
+	_context->loadMatrix3D(_camera->matrix3D());
 	[self draw3D];
-	_camera->view2D();
+	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->blit();
 

@@ -23,7 +23,7 @@ namespace a3d{
 //		static Animate* moveTo(Vector3 pos);
 
 	public:
-		~Animate();
+		virtual ~Animate();
 
 		// 子类方法
 		virtual void update(float progress, Node *current, const Node *origin){}

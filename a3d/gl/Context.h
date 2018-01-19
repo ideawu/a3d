@@ -5,13 +5,15 @@
 #ifndef GLContext_hpp
 #define GLContext_hpp
 
-#include "Camera.h"
+#include "Matrix4.h"
 
 namespace a3d{
 	class Context
 	{
 	public:
-		// 如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
+		// 使用当前的OpenGL上下文
+		static Context* shared();
+		// 创建一个FBO，如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
 		static Context* bufferContext(float width, float height);
 
 	public:
@@ -19,15 +21,19 @@ namespace a3d{
 
 		float width() const;
 		float height() const;
+		
+		void loadMatrix3D(const Matrix4 &mat);
+		void loadMatrix2D(const Matrix4 &mat);
 
 		void bind();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
+		void flush();
 		void finish();
 		void blit();
 
 	protected:
-		Context(){}
+		Context();
 
 		virtual GLuint framebuffer() = 0;
 		virtual void setup() = 0;

@@ -35,39 +35,14 @@ namespace a3d{
 		_matrix2D.translate(-width/2, -height/2, -0.01);
 	}
 
-	void Camera::view3D(){
+	Matrix4 Camera::matrix3D() const{
 		// 视野中的物体，将做与相机相反的运动
 		Matrix4 mat = _matrix3D.mul(this->matrix().invert());
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.array());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		glEnable(GL_MULTISAMPLE);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		return mat;
 	}
 
-	void Camera::view2D(){
-		Matrix4 mat = _matrix2D;
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.array());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		
-		glDisable(GL_MULTISAMPLE);
-		glDisable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, 0);
+	Matrix4 Camera::matrix2D() const{
+		return _matrix2D;
 	}
 	
 }; // end namespace

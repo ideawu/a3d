@@ -23,9 +23,7 @@ namespace a3d{
 	}
 
 	Node::~Node(){
-		if(_subs){
-			delete _subs;
-		}
+		delete _subs;
 		if(_animation){
 			removeAllAnimations();
 			delete _animation;

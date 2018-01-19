@@ -15,9 +15,7 @@ DraftImage::DraftImage(){
 }
 
 DraftImage::~DraftImage(){
-	if(_texture){
-		delete _texture;
-	}
+	delete _texture;
 }
 
 DraftImage::DraftImage(const char *filename){

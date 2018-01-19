@@ -14,6 +14,7 @@ namespace a3d{
 	public:
 		Object();
 		Object(float w, float h, float d);
+		virtual ~Object(){}
 
 	public:
 		Matrix4 matrix() const;

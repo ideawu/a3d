@@ -18,8 +18,9 @@ namespace a3d{
 		
 		// in points, not in pixels
 		void setup(float fovy, float width, float height, float depth);
-		void view3D();
-		void view2D();
+		
+		Matrix4 matrix3D() const;
+		Matrix4 matrix2D() const;
 
 	private:
 		Camera(const Camera &d);

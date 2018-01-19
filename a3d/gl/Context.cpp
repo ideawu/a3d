@@ -3,15 +3,28 @@
 //
 
 #include "Context.h"
+#include "SharedContext.h"
 #include "BufferContext.h"
 
 namespace a3d{
+	
+	Context* Context::shared(){
+		SharedContext *ret = new SharedContext();
+		ret->setup();
+		return ret;
+	}
+
 	Context* Context::bufferContext(float width, float height){
 		BufferContext *impl = new BufferContext();
 		impl->width(width);
 		impl->height(height);
 		impl->setup();
 		return impl;
+	}
+	
+	Context::Context(){
+		_width = 0;
+		_height = 0;
 	}
 	
 	float Context::width() const{
@@ -29,9 +42,40 @@ namespace a3d{
 	void Context::height(float height){
 		_height = (int)((double)height/2 + 0.5) * 2;
 	}
+
+	void Context::loadMatrix3D(const Matrix4 &mat){
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf((const GLfloat *)mat.array());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 	
+	void Context::loadMatrix2D(const Matrix4 &mat){
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf((const GLfloat *)mat.array());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		glDisable(GL_MULTISAMPLE);
+		glDisable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
 	void Context::bind(){
-		glViewport(0, 0, _width, _height);
 		if(framebuffer()){
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
 		}
@@ -47,6 +91,10 @@ namespace a3d{
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
+	void Context::flush(){
+		glFlush();
+	}
+
 	void Context::finish(){
 		glFinish();
 	}
