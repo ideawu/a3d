@@ -132,7 +132,7 @@ namespace a3d{
 				node->draw();
 			}
 		}
-		draw();
+		this->draw();
 		
 		popMatrix();
 	}

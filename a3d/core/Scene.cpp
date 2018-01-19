@@ -41,4 +41,9 @@ namespace a3d{
 		_rootNode->removeSubNode(node);
 	}
 
+	void Scene::renderAtTime(float time){
+		_time = time;
+		_rootNode->renderAtTime(time);
+	}
+
 }; // end namespace

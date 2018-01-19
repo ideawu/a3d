@@ -46,6 +46,7 @@ namespace a3d{
 		void rotate(float degree, const Vector3 &vec);
 		// 绕自身坐标系内的任意轴旋转
 		void rotate(float degree, const Axis &axis);
+		// 同时缩放自身体积和坐标系
 		void scale(float xyz);
 		void scale(float x, float y, float z);
 		
@@ -54,8 +55,8 @@ namespace a3d{
 		void transform(const Transform &trans);
 
 		// 将力施加与坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
-		void force(const Vector3 &force, const Vector3 &atPoint);
-		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
+//		void force(const Vector3 &force, const Vector3 &atPoint);
+//		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
 
 	private:
 		Vector3 _size;
