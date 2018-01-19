@@ -5,12 +5,21 @@
 #ifndef util_h
 #define util_h
 
+#include <math.h>
 #include <ImageIO/CGImageSource.h>
 
 namespace a3d{
 }; // end namespace
 
 namespace a3d{
+	inline static float degree_to_radian(float degrees){
+		return degrees * (M_PI / 180);
+	}
+	
+	inline static float radian_to_degree(float radians){
+		return radians * (180 / M_PI);
+	}
+
 	inline static float trimf(float f){
 		return fabs(f)<FLT_EPSILON*10? 0 : f;
 	}

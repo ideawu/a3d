@@ -3,6 +3,7 @@
 //
 
 #include "Matrix4.h"
+#include "util.h"
 
 namespace a3d{
 	
@@ -20,6 +21,14 @@ namespace a3d{
 	
 	Matrix4 Matrix4::identity(){
 		return Matrix4();
+	}
+
+	Matrix4 Matrix4::frustum(float left, float right, float bottom, float top, float nearZ, float farZ){
+		return Matrix4(GLKMatrix4MakeFrustum(left, right, bottom, top, nearZ, farZ));
+	}
+	
+	Matrix4 Matrix4::ortho(float left, float right, float bottom, float top, float nearZ, float farZ){
+		return Matrix4(GLKMatrix4MakeOrtho(left, right, bottom, top, nearZ, farZ));
 	}
 
 	const float* Matrix4::array() const{
@@ -59,19 +68,19 @@ namespace a3d{
 	}
 
 	void Matrix4::rotateX(float degree){
-		_mat = GLKMatrix4RotateX(_mat, GLKMathDegreesToRadians(degree));
+		_mat = GLKMatrix4RotateX(_mat, degree_to_radian(degree));
 	}
 	
 	void Matrix4::rotateY(float degree){
-		_mat = GLKMatrix4RotateY(_mat, GLKMathDegreesToRadians(degree));
+		_mat = GLKMatrix4RotateY(_mat, degree_to_radian(degree));
 	}
 	
 	void Matrix4::rotateZ(float degree){
-		_mat = GLKMatrix4RotateZ(_mat, GLKMathDegreesToRadians(degree));
+		_mat = GLKMatrix4RotateZ(_mat, degree_to_radian(degree));
 	}
 	
 	void Matrix4::rotate(float degree, const Vector3 &vec){
-		_mat = GLKMatrix4Rotate(_mat, GLKMathDegreesToRadians(degree), vec.x(), vec.y(), vec.z());
+		_mat = GLKMatrix4Rotate(_mat, degree_to_radian(degree), vec.x(), vec.y(), vec.z());
 	}
 	
 	void Matrix4::rotate(float degree, const Axis &axis){

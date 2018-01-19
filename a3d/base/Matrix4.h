@@ -13,12 +13,13 @@ namespace a3d{
 	class Matrix4
 	{
 	public:
-		/// 静态方法
 		// 创建一个单位向量
 		Matrix4();
-		Matrix4(const GLKMatrix4 &mat);
 		
+		/// 静态方法
 		static Matrix4 identity();
+		static Matrix4 frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
+		static Matrix4 ortho(float left, float right, float bottom, float top, float nearZ, float farZ);
 
 	public:
 		/// 属性
@@ -51,9 +52,9 @@ namespace a3d{
 		
 		Vector3 mulVector3(const Vector3 &vec) const;
 
-//	public:
 	private:
 		GLKMatrix4 _mat;
+		Matrix4(const GLKMatrix4 &mat);
 	};
 	
 }; // end namespace

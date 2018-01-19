@@ -18,10 +18,6 @@ namespace a3d{
 		_z = z;
 	}
 
-	Vector3 Vector3::zero(){
-		return Vector3(0, 0, 0);
-	}
-
 	float Vector3::x() const{
 		return _x;
 	}
@@ -96,8 +92,9 @@ namespace a3d{
 	}
 	
 	Vector3 Vector3::project(const Vector3 &vec) const{
-		float len = this->dot(vec);
-		return vec.normalize(len);
+		float a = this->dot(vec);
+		float b = vec.dot(vec);
+		return vec.mul(a/b);
 	}
 
 }; // end namespace

@@ -9,8 +9,6 @@ namespace a3d{
 	class Vector3
 	{
 	public:
-		static Vector3 zero();
-
 		Vector3();
 		Vector3(float x, float y, float z);
 		

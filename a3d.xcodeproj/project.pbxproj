@@ -197,7 +197,6 @@
 		314FE47E20107F180067984B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		314FE48120108D570067984B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
 		314FE48A2010C0F90067984B /* Transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
-		31CB9B6C2008D0CD0068D9B7 /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
 		31CB9B732009B9C70068D9B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31CB9B782009C3830068D9B7 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		31CB9B792009C5C00068D9B7 /* Object.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
@@ -294,10 +293,7 @@
 				314FE4912010C6AD0067984B /* animation */,
 				31CB9B852009EA4A0068D9B7 /* gl */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
-				31CB9B782009C3830068D9B7 /* util.h */,
-				314FE47420104EDC0067984B /* util.cpp */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
-				31CB9B6C2008D0CD0068D9B7 /* gmath.h */,
 				3124F1412001C71D0005EDDE /* GEulerAngle.h */,
 				3124F1422001C71D0005EDDE /* GEulerAngle.m */,
 				3124F0D71FFB38A40005EDDE /* GCamera.h */,
@@ -446,6 +442,8 @@
 		31CB9B93200A14DD0068D9B7 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				31CB9B782009C3830068D9B7 /* util.h */,
+				314FE47420104EDC0067984B /* util.cpp */,
 				31CB9B94200A150C0068D9B7 /* log.h */,
 				31CB9B95200A150C0068D9B7 /* log.cpp */,
 			);
