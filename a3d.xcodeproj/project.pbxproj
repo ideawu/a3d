@@ -61,6 +61,7 @@
 		314FE49B2011C79B0067984B /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314FE4992011C79B0067984B /* Frame.cpp */; };
 		314FE49C2011C79B0067984B /* Frame.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE49A2011C79B0067984B /* Frame.h */; };
 		314FE49D2011C8A00067984B /* Frame.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE49A2011C79B0067984B /* Frame.h */; };
+		314FE4A320120BE20067984B /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B95200A150C0068D9B7 /* log.cpp */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -675,6 +676,7 @@
 				31CB9BA5200A1F6D0068D9B7 /* Matrix4.cpp in Sources */,
 				314FE468200F789F0067984B /* Scene.cpp in Sources */,
 				314FE48B2010C0F90067984B /* Transform.cpp in Sources */,
+				314FE4A320120BE20067984B /* log.cpp in Sources */,
 				31CB9B8C2009F5DA0068D9B7 /* BufferContext.cpp in Sources */,
 				31CB9BBC200A29D80068D9B7 /* DraftImage.mm in Sources */,
 				314FE47520104EDC0067984B /* util.cpp in Sources */,

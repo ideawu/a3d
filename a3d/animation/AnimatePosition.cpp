@@ -4,6 +4,7 @@
 
 #include "AnimatePosition.h"
 #include "Node.h"
+#include "log.h"
 
 namespace a3d{
 
@@ -28,9 +29,9 @@ namespace a3d{
 		}else{
 			offset = _vec.sub(origin->pos());
 		}
-		
 		float len = progress * offset.length();
 		offset = offset.normalize(len);
+		log_debug("offset.x: %f", offset.x);
 		Vector3 pos = origin->pos().add(offset);
 		current->pos(pos);
 	}

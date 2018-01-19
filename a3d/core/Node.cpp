@@ -3,6 +3,7 @@
 //
 
 #include "Node.h"
+#include "log.h"
 
 namespace a3d{
 	Node::Node(){
@@ -91,13 +92,15 @@ namespace a3d{
 			
 			// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
 			Transform trans = Transform::transformBetween(*current, *this);
-			origin->transform(trans);
+			if(trans.matrix.x() != 0){
+				origin->transform(trans);
+				log_debug("sync origin x: %f", trans.matrix.x());
+			}
 			
 			std::vector<Animate*> *actions = &_animation->actions;
 			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
 				Animate *action = *it;
 				action->updateAtTime(time, current, origin);
-				
 				if(action->state() == AnimateStateEnd){
 					it = actions->erase(it);
 					delete action;

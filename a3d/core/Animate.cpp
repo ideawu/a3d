@@ -3,6 +3,7 @@
 //
 
 #include "Animate.h"
+#include "log.h"
 
 namespace a3d{
 	Animate::Animate(){
@@ -65,6 +66,7 @@ namespace a3d{
 				}
 			}
 			// TODO: TimingFunc, example: progress = progress * progress
+			log_debug("progress: %f, begin time: %f, current time: %f", progress, _beginTime, _currentTime);
 
 			updateState(AnimateStateWillUpdate);
 			update(progress, current, origin);

@@ -94,24 +94,29 @@ void set_log_level(const char *s);
 int log_write(int level, const char *fmt, ...);
 
 
+inline static const char* log_basename__(const char *file){
+	const char *s = strrchr(file, '/');
+	return s? s+1 : file;
+}
+
 #ifndef IOS
 	#ifdef NDEBUG
 		#define log_trace(fmt, args...) do{}while(0)
 	#else
 		#define log_trace(fmt, args...)	\
-			log_write(Logger::LEVEL_TRACE, "%s(%d): " fmt, __FILE__, __LINE__, ##args)
+			log_write(Logger::LEVEL_TRACE, "%s(%d): " fmt, log_basename__(__FILE__), __LINE__, ##args)
 	#endif
 
 	#define log_debug(fmt, args...)	\
-		log_write(Logger::LEVEL_DEBUG, "%s(%d): " fmt, __FILE__, __LINE__, ##args)
+		log_write(Logger::LEVEL_DEBUG, "%s(%d): " fmt, log_basename__(__FILE__), __LINE__, ##args)
 	#define log_info(fmt, args...)	\
-		log_write(Logger::LEVEL_INFO,  "%s(%d): " fmt, __FILE__, __LINE__, ##args)
+		log_write(Logger::LEVEL_INFO,  "%s(%d): " fmt, log_basename__(__FILE__), __LINE__, ##args)
 	#define log_warn(fmt, args...)	\
-		log_write(Logger::LEVEL_WARN,  "%s(%d): " fmt, __FILE__, __LINE__, ##args)
+		log_write(Logger::LEVEL_WARN,  "%s(%d): " fmt, log_basename__(__FILE__), __LINE__, ##args)
 	#define log_error(fmt, args...)	\
-		log_write(Logger::LEVEL_ERROR, "%s(%d): " fmt, __FILE__, __LINE__, ##args)
+		log_write(Logger::LEVEL_ERROR, "%s(%d): " fmt, log_basename__(__FILE__), __LINE__, ##args)
 	#define log_fatal(fmt, args...)	\
-		log_write(Logger::LEVEL_FATAL, "%s(%d): " fmt, __FILE__, __LINE__, ##args)
+		log_write(Logger::LEVEL_FATAL, "%s(%d): " fmt, log_basename__(__FILE__), __LINE__, ##args)
 #else
 	#define log_trace(fmt, args...) do{}while(0)
 	#define log_debug(fmt, args...) do{}while(0)
