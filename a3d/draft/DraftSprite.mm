@@ -3,7 +3,6 @@
 //
 
 #import "DraftSprite.h"
-#import <GLKit/GLKit.h>
 
 DraftSprite::DraftSprite(){
 	color = a3d::Color::gray();

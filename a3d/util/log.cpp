@@ -251,7 +251,7 @@ int Logger::logv(int level, const char *fmt, va_list ap){
 	memcpy(ptr, get_level_name(level), LEVEL_NAME_LEN);
 	ptr += LEVEL_NAME_LEN;
 
-	int space = sizeof(buf) - (ptr - buf) - 10;
+	int space = (int)(sizeof(buf) - (ptr - buf) - 10);
 	len = vsnprintf(ptr, space, fmt, ap);
 	if(len < 0){
 		return -1;
@@ -260,7 +260,7 @@ int Logger::logv(int level, const char *fmt, va_list ap){
 	*ptr++ = '\n';
 	*ptr = '\0';
 
-	len = ptr - buf;
+	len = (int)(ptr - buf);
 	if(this->mutex){
 		pthread_mutex_lock(this->mutex);
 	}

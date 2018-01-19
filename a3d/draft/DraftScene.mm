@@ -3,7 +3,6 @@
 //
 
 #include "DraftScene.h"
-#import <GLKit/GLKit.h>
 
 void DraftScene::draw(){
 	glDisable(GL_LINE_STIPPLE);
@@ -14,14 +13,6 @@ void DraftScene::draw(){
 	depth = this->depth();
 	
 	grids = this->width() / grid_width;
-	static GLKTextureInfo *_texture = nil;
-	if(!_texture){
-		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(1)};
-		NSError *error = nil;
-		NSString *filename = @"/Users/ideawu/Downloads/grass_top.png";
-		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
-		glBindTexture(GL_TEXTURE_2D, 0); // GLKTextureLoader会自动bind
-	}
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 	for(int i=0; i<=grids; i++){
 		for(int j=0; j<=grids; j++){

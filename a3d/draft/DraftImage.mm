@@ -7,7 +7,6 @@
 //
 
 #include "DraftImage.h"
-#import <GLKit/GLKit.h>
 
 // 如果不在构造函数初始列表里置空objc对象，编译器会调用[objc release]导致出错
 
