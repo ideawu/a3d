@@ -3,7 +3,6 @@
 //
 
 #include "Texture.h"
-#include "util.h"
 
 namespace a3d{
 	Texture::Texture(){

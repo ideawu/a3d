@@ -3,7 +3,6 @@
 //
 
 #include "Camera.h"
-#include "util.h"
 
 namespace a3d{
 	Camera* Camera::create(float fovy, float width, float height, float depth){

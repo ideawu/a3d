@@ -5,12 +5,17 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#define __cpp__
-
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 #include <OpenGL/gl.h>
+
+#ifdef __cplusplus
+#include "util.h"
+#include "log.h"
+#endif
+
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
@@ -27,10 +32,14 @@ static void my_log(NSString *fmt, ...){
     
     printf("%s %s\n", time.UTF8String, msg.UTF8String);
 }
-#endif
 
 #define L_MYLOG(level, fmt, args...) \
 my_log((level @" %@(%d): " fmt), [@(__FILE__) lastPathComponent],  __LINE__, ##args)
+
+#undef log_trace
+#undef log_debug
+#undef log_info
+#undef log_error
 
 #ifdef DEBUG
 #    define VERSION  VER_NUM "(for development only)"
@@ -54,5 +63,7 @@ log_debug(@"== FIRST_RUN == %s", __func__); \
 } \
 }while(0)
 #endif
+
+#endif // end __OBJC__
 
 #endif /* PrefixHeader_pch */

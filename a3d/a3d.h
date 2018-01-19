@@ -5,8 +5,10 @@
 #ifndef A3D_h
 #define A3D_h
 
+#ifdef __cplusplus
 namespace a3d{
 }; // end namespace
+#endif
 
 #include "Matrix4.h"
 #include "Axis.h"

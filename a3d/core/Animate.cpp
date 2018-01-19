@@ -3,7 +3,6 @@
 //
 
 #include "Animate.h"
-#include "log.h"
 
 namespace a3d{
 	Animate::Animate(){

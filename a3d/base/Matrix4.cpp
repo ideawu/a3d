@@ -3,7 +3,6 @@
 //
 
 #include "Matrix4.h"
-#include "util.h"
 
 namespace a3d{
 	

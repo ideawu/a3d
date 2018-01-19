@@ -4,7 +4,6 @@
 
 #include "AnimatePosition.h"
 #include "Node.h"
-#include "log.h"
 
 namespace a3d{
 
