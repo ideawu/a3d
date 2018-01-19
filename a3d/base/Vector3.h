@@ -9,19 +9,14 @@ namespace a3d{
 	class Vector3
 	{
 	public:
+		float x, y, z;
+
 		Vector3();
 		Vector3(float x, float y, float z);
 		
 	public:
-		float x() const;
-		void x(float x);
-		float y() const;
-		void y(float y);
-		float z() const;
-		void z(float z);
 		float length() const;
 
-	public:
 		Vector3 normalize() const;
 		Vector3 normalize(float norm) const;
 
@@ -35,11 +30,6 @@ namespace a3d{
 		float dot(const Vector3 &vec) const;
 		Vector3 cross(const Vector3 &vec) const;
 		Vector3 project(const Vector3 &vec) const;
-
-	private:
-		float _x;
-		float _y;
-		float _z;
 	};
 	
 }; // end namespace

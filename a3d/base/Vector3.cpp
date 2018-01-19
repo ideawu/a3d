@@ -7,43 +7,17 @@
 namespace a3d{
 	
 	Vector3::Vector3(){
-		_x = 0;
-		_y = 0;
-		_z = 0;
+		x = y = z = 0;
 	}
 
 	Vector3::Vector3(float x, float y, float z){
-		_x = x;
-		_y = y;
-		_z = z;
-	}
-
-	float Vector3::x() const{
-		return _x;
-	}
-	
-	void Vector3::x(float x){
-		_x = x;
-	}
-
-	float Vector3::y() const{
-		return _y;
-	}
-	
-	void Vector3::y(float y){
-		_y = y;
-	}
-
-	float Vector3::z() const{
-		return _z;
-	}
-	
-	void Vector3::z(float z){
-		_z = z;
+		this->x = x;
+		this->y = y;
+		this->z = z;
 	}
 
 	float Vector3::length() const{
-		return sqrt(_x*_x + _y*_y + _z*_z);
+		return sqrt(x*x + y*y + z*z);
 	}
 	
 	Vector3 Vector3::normalize() const{
@@ -60,7 +34,7 @@ namespace a3d{
 	}
 	
 	Vector3 Vector3::negate() const{
-		return Vector3(-_x, -_y, -_z);
+		return Vector3(-x, -y, -z);
 	}
 	
 	// alias of negate
@@ -69,25 +43,25 @@ namespace a3d{
 	}
 	
 	Vector3 Vector3::add(const Vector3 &vec) const{
-		return Vector3(_x + vec._x, _y + vec._y, _z + vec._z);
+		return Vector3(this->x + vec.x, this->y + vec.y, this->z + vec.z);
 	}
 	
 	Vector3 Vector3::sub(const Vector3 &vec) const{
-		return Vector3(_x - vec._x, _y - vec._y, _z - vec._z);
+		return Vector3(this->x - vec.x, this->y - vec.y, this->z - vec.z);
 	}
 
 	Vector3 Vector3::mul(float scalar) const{
-		return Vector3(_x * scalar, _y * scalar, _z * scalar);
+		return Vector3(this->x * scalar, this->y * scalar, this->z * scalar);
 	}
 
 	float Vector3::dot(const Vector3 &vec) const{
-		return (_x * vec._x) + (_y * vec._y) + (_z * vec._z);
+		return (this->x * vec.x) + (this->y * vec.y) + (this->z * vec.z);
 	}
 	
 	Vector3 Vector3::cross(const Vector3 &vec) const{
-		float x = _y * vec._z - _z * vec._y;
-		float y = _z * vec._x - _x * vec._z;
-		float z = _x * vec._y - _y * vec._x;
+		float x = this->y * vec.z - this->z * vec.y;
+		float y = this->z * vec.x - this->x * vec.z;
+		float z = this->x * vec.y - this->y * vec.x;
 		return Vector3(x, y, z);
 	}
 	

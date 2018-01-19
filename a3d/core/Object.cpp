@@ -21,9 +21,9 @@ namespace a3d{
 	}
 	
 	void Object::pos(const Vector3 &pos){
-		this->x(pos.x());
-		this->y(pos.y());
-		this->z(pos.z());
+		this->x(pos.x);
+		this->y(pos.y);
+		this->z(pos.z);
 	}
 	
 	float Object::x() const{
@@ -59,27 +59,27 @@ namespace a3d{
 	}
 
 	float Object::width() const{
-		return _size.x();
+		return _size.x;
 	}
 	
 	void Object::width(float w){
-		_size.x(w);
+		_size.x = w;
 	}
 
 	float Object::height() const{
-		return _size.y();
+		return _size.y;
 	}
 	
 	void Object::height(float h){
-		_size.y(h);
+		_size.y = h;
 	}
 
 	float Object::depth() const{
-		return _size.z();
+		return _size.z;
 	}
 	
 	void Object::depth(float d){
-		_size.z(d);
+		_size.z = d;
 	}
 	
 	void Object::move(float x, float y, float z){

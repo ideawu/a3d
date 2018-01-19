@@ -64,7 +64,7 @@ namespace a3d{
 	}
 	
 	void Matrix4::translate(const Vector3 &offset){
-		this->translate(offset.x(), offset.y(), offset.z());
+		this->translate(offset.x, offset.y, offset.z);
 	}
 
 	void Matrix4::rotateX(float degree){
@@ -80,7 +80,7 @@ namespace a3d{
 	}
 	
 	void Matrix4::rotate(float degree, const Vector3 &vec){
-		_mat = GLKMatrix4Rotate(_mat, degree_to_radian(degree), vec.x(), vec.y(), vec.z());
+		_mat = GLKMatrix4Rotate(_mat, degree_to_radian(degree), vec.x, vec.y, vec.z);
 	}
 	
 	void Matrix4::rotate(float degree, const Axis &axis){
@@ -110,7 +110,7 @@ namespace a3d{
 	}
 	
 	Vector3 Matrix4::mulVector3(const Vector3 &vec) const{
-		GLKVector3 v = GLKVector3Make(vec.x(), vec.y(), vec.z());
+		GLKVector3 v = GLKVector3Make(vec.x, vec.y, vec.z);
 		v = GLKMatrix4MultiplyVector3WithTranslation(_mat, v);
 		return Vector3(v.x, v.y, v.z);
 	}

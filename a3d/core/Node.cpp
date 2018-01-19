@@ -126,6 +126,10 @@ namespace a3d{
 		
 		pushMatrix();
 		
+		glEnable(GL_BLEND);
+		glColor4f(1, 1, 1, 1);
+		// TODO: 在这里实现 opacity，父节点的透明度应该影响子节点 alpha = parent.alpha * this.alpha
+
 		if(_subs){
 			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;

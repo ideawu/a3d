@@ -9,9 +9,6 @@
 #include <ImageIO/CGImageSource.h>
 
 namespace a3d{
-}; // end namespace
-
-namespace a3d{
 	inline static float degree_to_radian(float degrees){
 		return degrees * (M_PI / 180);
 	}

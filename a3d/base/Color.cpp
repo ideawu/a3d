@@ -5,6 +5,7 @@
 #include "Color.h"
 
 namespace a3d{
+	
 	Color::Color(){
 		r = g = b = a = 1;
 	}
