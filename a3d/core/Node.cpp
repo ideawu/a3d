@@ -27,11 +27,7 @@ namespace a3d{
 			delete _subs;
 		}
 		if(_animation){
-			std::vector<Animate*> *actions = &_animation->actions;
-			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); it++){
-				Animate *action = *it;
-				delete action;
-			}
+			removeAllAnimations();
 			delete _animation;
 		}
 	}
@@ -153,6 +149,11 @@ namespace a3d{
 	void Node::removeAllAnimations(){
 		if(!_animation){
 			return;
+		}
+		std::vector<Animate*> *actions = &_animation->actions;
+		for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); it++){
+			Animate *action = *it;
+			delete action;
 		}
 		_animation->actions.clear();
 	}
