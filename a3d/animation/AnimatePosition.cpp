@@ -31,7 +31,7 @@ namespace a3d{
 		}
 		float len = progress * offset.length();
 		offset = offset.normalize(len);
-		log_debug("offset.x: %f", offset.x);
+//		log_debug("offset.x: %f", offset.x);
 		Vector3 pos = origin->pos().add(offset);
 		current->pos(pos);
 	}

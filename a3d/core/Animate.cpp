@@ -48,6 +48,7 @@ namespace a3d{
 			_beginTime = time;
 			_currentTime = time;
 			updateState(AnimateStateBegin);
+			return false;
 		}
 		
 		if(_state != AnimateStateNone && _state != AnimateStateEnd){
@@ -60,13 +61,13 @@ namespace a3d{
 			if(_duration == 0){
 				progress = 1;
 			}else{
-				progress = (0.01 + _currentTime - _beginTime)/_duration;
+				progress = (_currentTime - _beginTime)/_duration;
 				if(progress >= 1 - __FLT_EPSILON__){
 					progress = 1;
 				}
 			}
 			// TODO: TimingFunc, example: progress = progress * progress
-			log_debug("progress: %f, begin time: %f, current time: %f", progress, _beginTime, _currentTime);
+//			log_debug("progress: %f, begin time: %f, current time: %f", progress, _beginTime, _currentTime);
 
 			updateState(AnimateStateWillUpdate);
 			update(progress, current, origin);

@@ -92,10 +92,7 @@ namespace a3d{
 			
 			// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
 			Transform trans = Transform::transformBetween(*current, *this);
-			if(trans.matrix.x() != 0){
-				origin->transform(trans);
-				log_debug("sync origin x: %f", trans.matrix.x());
-			}
+			origin->transform(trans);
 			
 			std::vector<Animate*> *actions = &_animation->actions;
 			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
@@ -114,26 +111,29 @@ namespace a3d{
 	}
 
 	void Node::renderAtTime(float time){
-		pushMatrix();
+		this->updateAnimationAtTime(time);
+
 		glEnable(GL_BLEND);
 		glColor4f(1, 1, 1, 1);
 		// TODO: 在这里实现 opacity，父节点的透明度应该影响子节点 alpha = parent.alpha * this.alpha
 
-		this->updateAnimationAtTime(time);
+		pushMatrix();
+		this->draw();
 		if(_subs){
 			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;
 				node->renderAtTime(time);
 			}
 		}
-		this->draw();
-		
 		popMatrix();
 	}
 
 	void Node::runAnimation(Animate *action){
 		if(!_animation){
 			_animation = new NodeAnimation();
+		}
+		// 如果所有的动画都未开始，则应该在开始前，设置 origin
+		if(_animation->actions.empty()){
 			_animation->origin = *this;
 			_animation->current = *this;
 		}
