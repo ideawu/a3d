@@ -73,7 +73,7 @@ namespace a3d{
 
 	void Node::pushMatrix(){
 		glPushMatrix();
-		glMultMatrixf((const GLfloat *)this->matrix());
+		glMultMatrixf((const GLfloat *)this->matrix().array());
 	}
 	
 	void Node::popMatrix(){

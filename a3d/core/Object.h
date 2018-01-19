@@ -9,16 +9,26 @@
 #include "Transform.h"
 
 namespace a3d{
-	// 不继承，而是使用 Matrix？
-	class Object : public Matrix4
+	class Object
 	{
 	public:
 		Object();
 		Object(float w, float h, float d);
 
 	public:
+		Matrix4 matrix() const;
+		
+		Vector3 pos() const;
+		void pos(const Vector3 &pos);
+		float x() const;
+		void x(float x);
+		float y() const;
+		void y(float y);
+		float z() const;
+		void z(float z);
+
 		Vector3 size() const;
-		void size(Vector3 size);
+		void size(const Vector3 &size);
 		
 		float width() const;
 		void width(float w);
@@ -29,18 +39,27 @@ namespace a3d{
 
 	public:
 		void move(float x, float y, float z);
-		void move(Vector3 offset);
+		void move(const Vector3 &offset);
+		void rotateX(float degree);
+		void rotateY(float degree);
+		void rotateZ(float degree);
+		void rotate(float degree, const Vector3 &vec);
+		// 绕自身坐标系内的任意轴旋转
+		void rotate(float degree, const Axis &axis);
+		void scale(float xyz);
+		void scale(float x, float y, float z);
 		
-		void transform(Vector3 size);
-		void transform(Matrix4 mat);
-		void transform(Transform trans);
+		void transform(const Vector3 &size);
+		void transform(const Matrix4 &mat);
+		void transform(const Transform &trans);
 
 		// 将力施加与坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
-		void force(Vector3 force, Vector3 atPoint);
-		void force(Vector3 force, Vector3 atPoint, float rotationScalar);
+		void force(const Vector3 &force, const Vector3 &atPoint);
+		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
 
 	private:
 		Vector3 _size;
+		Matrix4 _matrix;
 	};
 	
 }; // end namespace

@@ -16,7 +16,9 @@ namespace a3d{
 		ret.size = size2.sub(size1);
 		
 		// matrix 变动
-		ret.matrix = second.div(first);
+		Matrix4 mat1 = first.matrix();
+		Matrix4 mat2 = second.matrix();
+		ret.matrix = mat2.div(mat1);
 		
 		return ret;
 	}

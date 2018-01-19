@@ -14,7 +14,7 @@ namespace a3d{
 //		_mat = mat._mat;
 //	}
 
-	Matrix4::Matrix4(GLKMatrix4 mat){
+	Matrix4::Matrix4(const GLKMatrix4 &mat){
 		_mat = mat;
 	}
 	
@@ -22,18 +22,8 @@ namespace a3d{
 		return Matrix4();
 	}
 
-	const float* Matrix4::matrix() const{
+	const float* Matrix4::array() const{
 		return (const float *)&_mat;
-	}
-
-	Vector3 Matrix4::pos() const{
-		return Vector3(x(), y(), z());
-	}
-	
-	void Matrix4::pos(Vector3 pos){
-		this->x(pos.x());
-		this->y(pos.y());
-		this->z(pos.z());
 	}
 	
 	float Matrix4::x() const{
@@ -64,7 +54,7 @@ namespace a3d{
 		_mat = GLKMatrix4Translate(_mat, x, y, z);
 	}
 	
-	void Matrix4::translate(Vector3 offset){
+	void Matrix4::translate(const Vector3 &offset){
 		this->translate(offset.x(), offset.y(), offset.z());
 	}
 
@@ -80,7 +70,7 @@ namespace a3d{
 		_mat = GLKMatrix4RotateZ(_mat, GLKMathDegreesToRadians(degree));
 	}
 	
-	void Matrix4::rotate(float degree, Vector3 vec){
+	void Matrix4::rotate(float degree, const Vector3 &vec){
 		_mat = GLKMatrix4Rotate(_mat, GLKMathDegreesToRadians(degree), vec.x(), vec.y(), vec.z());
 	}
 	
@@ -102,17 +92,17 @@ namespace a3d{
 		return Matrix4(GLKMatrix4Invert(_mat, NULL));
 	}
 	
-	Matrix4 Matrix4::mul(Matrix4 mat) const{
+	Matrix4 Matrix4::mul(const Matrix4 &mat) const{
 		return Matrix4(GLKMatrix4Multiply(_mat, mat._mat));
 	}
 	
-	Matrix4 Matrix4::div(Matrix4 mat) const{
+	Matrix4 Matrix4::div(const Matrix4 &mat) const{
 		return this->mul(mat.invert());
 	}
 	
-	Vector3 Matrix4::mulVector3(Vector3 vec) const{
+	Vector3 Matrix4::mulVector3(const Vector3 &vec) const{
 		GLKVector3 v = GLKVector3Make(vec.x(), vec.y(), vec.z());
-		v = GLKMatrix4MultiplyVector3(_mat, v);
+		v = GLKMatrix4MultiplyVector3WithTranslation(_mat, v);
 		return Vector3(v.x, v.y, v.z);
 	}
 

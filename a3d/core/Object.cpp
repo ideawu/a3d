@@ -12,11 +12,49 @@ namespace a3d{
 		_size = Vector3(w, h, d);
 	}
 
+	Matrix4 Object::matrix() const{
+		return _matrix;
+	}
+
+	Vector3 Object::pos() const{
+		return Vector3(x(), y(), z());
+	}
+	
+	void Object::pos(const Vector3 &pos){
+		this->x(pos.x());
+		this->y(pos.y());
+		this->z(pos.z());
+	}
+	
+	float Object::x() const{
+		return _matrix.x();
+	}
+	
+	void Object::x(float x){
+		_matrix.x(x);
+	}
+	
+	float Object::y() const{
+		return _matrix.y();
+	}
+	
+	void Object::y(float y){
+		_matrix.y(y);
+	}
+	
+	float Object::z() const{
+		return _matrix.z();
+	}
+	
+	void Object::z(float z){
+		_matrix.z(z);
+	}
+
 	Vector3 Object::size() const{
 		return _size;
 	}
 	
-	void Object::size(Vector3 size){
+	void Object::size(const Vector3 &size){
 		_size = size;
 	}
 
@@ -45,22 +83,51 @@ namespace a3d{
 	}
 	
 	void Object::move(float x, float y, float z){
-		this->translate(x, y, z);
+		_matrix.translate(x, y, z);
 	}
 	
-	void Object::move(Vector3 offset){
-		this->translate(offset);
+	void Object::move(const Vector3 &offset){
+		_matrix.translate(offset);
 	}
 
-	void Object::transform(Vector3 size){
+	void Object::rotateX(float degree){
+		_matrix.rotateX(degree);
+	}
+	
+	void Object::rotateY(float degree){
+		_matrix.rotateY(degree);
+	}
+	
+	void Object::rotateZ(float degree){
+		_matrix.rotateZ(degree);
+	}
+	
+	void Object::rotate(float degree, const Vector3 &vec){
+		_matrix.rotate(degree, vec);
+	}
+	
+	// 绕自身坐标系内的任意轴旋转
+	void Object::rotate(float degree, const Axis &axis){
+		_matrix.rotate(degree, axis);
+	}
+	
+	void Object::scale(float xyz){
+		_matrix.scale(xyz);
+	}
+	
+	void Object::scale(float x, float y, float z){
+		_matrix.scale(x, y, z);
+	}
+	
+	void Object::transform(const Vector3 &size){
 		this->size(_size.add(size));
 	}
 
-	void Object::transform(Matrix4 mat){
-		Matrix4::operator=(this->mul(mat));
+	void Object::transform(const Matrix4 &mat){
+		_matrix = _matrix.mul(mat);
 	}
 
-	void Object::transform(Transform trans){
+	void Object::transform(const Transform &trans){
 		this->transform(trans.size);
 		this->transform(trans.matrix);
 	}

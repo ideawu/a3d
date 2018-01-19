@@ -5,8 +5,6 @@
 #ifndef Vector3_hpp
 #define Vector3_hpp
 
-#include <GLKit/GLKMath.h>
-
 namespace a3d{
 	class Vector3
 	{
@@ -33,16 +31,17 @@ namespace a3d{
 		// alias of negate
 		Vector3 invert() const;
 		
-		Vector3 add(Vector3 vec) const;
-		Vector3 sub(Vector3 vec) const;
-		float dot(Vector3 vec) const;
-		Vector3 cross(Vector3 vec) const;
-		Vector3 project(Vector3 vec) const;
+		Vector3 add(const Vector3 &vec) const;
+		Vector3 sub(const Vector3 &vec) const;
+		Vector3 mul(float scalar) const;
+		float dot(const Vector3 &vec) const;
+		Vector3 cross(const Vector3 &vec) const;
+		Vector3 project(const Vector3 &vec) const;
 
 	private:
-		GLKVector3 _vec;
-		Vector3(GLKVector3 vec);
-		
+		float _x;
+		float _y;
+		float _z;
 	};
 	
 }; // end namespace

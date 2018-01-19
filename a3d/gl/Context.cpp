@@ -49,7 +49,7 @@ namespace a3d{
 	
 	void Context::loadMatrix(const Matrix4 &mat){
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.matrix());
+		glLoadMatrixf((const GLfloat *)mat.array());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 	}

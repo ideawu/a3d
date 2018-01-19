@@ -13,7 +13,7 @@ namespace a3d{
 	
 	Matrix4 Camera::matrix3D() const{
 		// 视野中的物体，将做与相机相反的变换。
-		return _matrix3D.mul(this->invert());
+		return _matrix3D.mul(this->matrix().invert());
 	}
 	
 	Matrix4 Camera::matrix2D() const{
