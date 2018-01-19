@@ -8,6 +8,7 @@
 
 #include "MySprite.h"
 #include <GLKit/GLKit.h>
+#include "a3d/Texture.h"
 
 static void drawHead();
 static void drawBody();
@@ -23,16 +24,23 @@ static void drawBody();
 //}
 
 void MySprite::draw(){
-	static GLKTextureInfo *_texture = nil;
-	if(!_texture){
-		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(0)};
-		NSError *error = nil;
-		NSString *filename = @"/Users/ideawu/Downloads/alex.png";
-		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
-		glBindTexture(GL_TEXTURE_2D, 0); // GLKTextureLoader会自动bind
+	static a3d::Texture *texture = NULL;
+	if(!texture){
+		glEnable(GL_TEXTURE_2D);
+		texture = a3d::Texture::textureFromImageFile("/Users/ideawu/Downloads/alex.png");
 	}
-	
-	glBindTexture(GL_TEXTURE_2D, _texture.name);
+	glBindTexture(GL_TEXTURE_2D, texture->id());
+
+//	static GLKTextureInfo *_texture = nil;
+//	if(!_texture){
+//		NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(0)};
+//		NSError *error = nil;
+//		NSString *filename = @"/Users/ideawu/Downloads/alex.png";
+//		_texture = [GLKTextureLoader textureWithContentsOfFile:filename options:opts error:&error];
+//		glBindTexture(GL_TEXTURE_2D, 0); // GLKTextureLoader会自动bind
+//	}
+//	glBindTexture(GL_TEXTURE_2D, _texture.name);
+
 	glColor4f(1, 1, 1, 1); // 清除可能的tint颜色影响
 	
 	float scale = 10;

@@ -54,7 +54,7 @@ namespace a3d{
 		glLoadIdentity();
 	}
 	
-	void Context::setupCamera3D(const Matrix4 &mat){
+	void Context::setupMatrix3D(const Matrix4 &mat){
 		loadMatrix(mat);
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
@@ -66,7 +66,7 @@ namespace a3d{
 		glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
 	}
 
-	void Context::setupCamera2D(const Matrix4 &mat){
+	void Context::setupMatrix2D(const Matrix4 &mat){
 		loadMatrix(mat);
 		glDisable(GL_MULTISAMPLE);
 		glDisable(GL_CULL_FACE);

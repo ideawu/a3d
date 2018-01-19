@@ -14,7 +14,6 @@ namespace a3d{
 		static Texture* textureFromImageFile(const char *filename);
 		
 		GLuint id() const;
-		void id(GLuint i);
 		int width() const;
 		void width(int w);
 		int height() const;
@@ -28,6 +27,7 @@ namespace a3d{
 		int _width;
 		int _height;
 
+		void id(GLuint i);
 		int loadImageFile(const char *filename);
 };
 }; // end namespace

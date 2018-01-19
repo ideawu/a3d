@@ -108,6 +108,7 @@
 	delete _camera;
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
+	_camera->move(0, 0, -1);
 	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 	//
 	_objects.pop_back();
@@ -117,14 +118,15 @@
 - (void)drawRect:(NSRect)aRect {
 	// 操作前务必要切换上下文
 	[[self openGLContext] makeCurrentContext];
-	
+
 	_context->bind();
 	_context->clear(0, 0, 0, 1);
-	_context->setupCamera3D(_camera);
+	_context->setupMatrix3D(_camera->matrix3D());
 	[self draw3D];
-	_context->setupCamera2D(_camera);
+	_context->setupMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->finish();
+	_context->blit();
 
 	[[self openGLContext] flushBuffer];
 }

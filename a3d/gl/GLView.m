@@ -16,10 +16,8 @@
 	NSOpenGLPixelFormatAttribute attrs[] = {
 		NSOpenGLPFANoRecovery, // Enable automatic use of OpenGL "share" contexts.
 		NSOpenGLPFAColorSize, 24,
-		NSOpenGLPFAAlphaSize, 8,
 		NSOpenGLPFADepthSize, 16,
-//		NSOpenGLPFASampleBuffers, 1,
-//		NSOpenGLPFASamples, 4,
+//		NSOpenGLPFAAlphaSize, 8,
 		NSOpenGLPFADoubleBuffer,
 		NSOpenGLPFAAccelerated,
 		0

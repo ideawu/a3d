@@ -23,8 +23,8 @@ namespace a3d{
 		void bind();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
-		void setupCamera3D(const Matrix4 &mat);
-		void setupCamera2D(const Matrix4 &mat);
+		void setupMatrix3D(const Matrix4 &mat);
+		void setupMatrix2D(const Matrix4 &mat);
 		void finish();
 		void blit();
 

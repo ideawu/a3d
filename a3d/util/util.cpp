@@ -35,13 +35,11 @@ namespace a3d{
 		data = (char *)malloc(4 * w * h);
 		
 		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		context = CGBitmapContextCreate(data, w, h, 8, 4 * w, colorSpace,
-										kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
+		uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGImageByteOrder32Big;
+		context = CGBitmapContextCreate(data, w, h, 8, 4 * w, colorSpace, bitmapInfo);
 		CGColorSpaceRelease(colorSpace);
-		
-		// Core Graphics referential is upside-down compared to OpenGL referential
-		// Flip the Core Graphics context here
-		// An alternative is to use flipped OpenGL texture coordinates when drawing textures
+
+		// flip
 		CGContextTranslateCTM(context, 0.0, h);
 		CGContextScaleCTM(context, 1.0, -1.0);
 		// Set the blend mode to copy before drawing since the previous contents of memory aren't used.

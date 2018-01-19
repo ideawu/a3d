@@ -6,6 +6,7 @@
 #define DraftImage_hpp
 
 #include "Node.h"
+#include "Texture.h"
 
 class DraftImage : public a3d::Node
 {
@@ -17,7 +18,7 @@ public:
 	void scale(float x, float y, float z);
 private:
 	DraftImage();
-	id _texture;
+	a3d::Texture *_texture;
 };
 
 #endif /* DraftImage_hpp */
