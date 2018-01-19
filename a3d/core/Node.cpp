@@ -85,13 +85,6 @@ namespace a3d{
 			return;
 		}
 		
-		if(_subs){
-			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
-				Node *node = *it;
-				node->updateAnimationAtTime(time);
-			}
-		}
-		
 		if(_animation && _animation->actions.size() > 0){
 			Node *origin = &_animation->origin;
 			Node *current = &_animation->current;
@@ -118,18 +111,16 @@ namespace a3d{
 	}
 
 	void Node::renderAtTime(float time){
-		updateAnimationAtTime(time);
-		
 		pushMatrix();
-		
 		glEnable(GL_BLEND);
 		glColor4f(1, 1, 1, 1);
 		// TODO: 在这里实现 opacity，父节点的透明度应该影响子节点 alpha = parent.alpha * this.alpha
 
+		this->updateAnimationAtTime(time);
 		if(_subs){
 			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;
-				node->draw();
+				node->renderAtTime(time);
 			}
 		}
 		this->draw();

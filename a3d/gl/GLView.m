@@ -43,15 +43,13 @@
 
 - (void)prepareOpenGL{
 	[super prepareOpenGL];
-	
-	//	glEnable(GL_MULTISAMPLE);
-	//	glEnable(GL_LINE_SMOOTH);
-	//	glEnable(GL_BLEND);
-	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//	glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
+	/*
+	 CGLLockContext(self.openGLContext.CGLContextObj);
+	 CGLUnlockContext(self.openGLContext.CGLContextObj);
+	 */
 	[super drawRect:dirtyRect];
 }
 
