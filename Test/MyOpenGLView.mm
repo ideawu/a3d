@@ -120,11 +120,10 @@
 
 	_context->bind();
 	_context->clear(0, 0, 0, 1);
-	_context->setupMatrix3D(_camera->matrix3D());
+	_camera->view3D();
 	[self draw3D];
-	_context->setupMatrix2D(_camera->matrix2D());
+	_camera->view2D();
 	[self draw2D];
-	_context->finish();
 	_context->blit();
 
 	[[self openGLContext] flushBuffer];

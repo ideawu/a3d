@@ -47,31 +47,6 @@ namespace a3d{
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
-	void Context::loadMatrix(const Matrix4 &mat){
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.array());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-	}
-	
-	void Context::setupMatrix3D(const Matrix4 &mat){
-		loadMatrix(mat);
-		glEnable(GL_MULTISAMPLE);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, 0); // 清空纹理
-	}
-
-	void Context::setupMatrix2D(const Matrix4 &mat){
-		loadMatrix(mat);
-		glDisable(GL_MULTISAMPLE);
-		glDisable(GL_CULL_FACE);
-	}
-	
 	void Context::finish(){
 		glFinish();
 	}

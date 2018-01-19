@@ -32,7 +32,7 @@ namespace a3d{
 		// 将近裁剪面设置为与viewport同大小
 		_matrix3D = Matrix4::frustum(-width/2, width/2, -height/2, height/2, _near, _far);
 		// 将前裁剪面后移，因为视点默认在 (0,0,0)，所以默认前裁剪面在(near,0,0)，这在旋转物体时不方便
-		_matrix3D.translate(0, 0, 0 - (_near+0.01));
+		_matrix3D.translate(0, 0, 0-(_near+0.01));
 		// 将原点坐标移到屏幕右下角
 		_matrix3D.translate(-width/2, -height/2, 0);
 		// 翻转z轴，将z轴方向和人看屏幕方向相同
@@ -42,9 +42,41 @@ namespace a3d{
 		// 翻转y轴，y轴方向向下
 		_matrix2D.scale(1, -1, -1);
 		// 将原点坐标移到屏幕左上角
-		_matrix2D.translate(-width/2, -height/2, 0);
+		_matrix2D.translate(-width/2, -height/2, -0.01);
 	}
 
+	void Camera::view3D(){
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf((const GLfloat *)_matrix3D.array());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	void Camera::view2D(){
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf((const GLfloat *)_matrix2D.array());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		glDisable(GL_MULTISAMPLE);
+		glDisable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	
 }; // end namespace
 
 // - (void)moveX:(float)x y:(float)y z:(float)z{

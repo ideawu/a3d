@@ -23,8 +23,6 @@ namespace a3d{
 		void bind();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
-		void setupMatrix3D(const Matrix4 &mat);
-		void setupMatrix2D(const Matrix4 &mat);
 		void finish();
 		void blit();
 
@@ -39,7 +37,6 @@ namespace a3d{
 
 		void width(float width);
 		void height(float height);
-		void loadMatrix(const Matrix4 &mat);
 
 		float _width;
 		float _height;
