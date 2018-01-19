@@ -48,6 +48,8 @@ namespace a3d{
 		bool hasAnimations();
 	private:
 		NodeAnimation *_animation;
+		
+		void updateAnimationAtTime(float time);
 	};
 
 	
@@ -57,7 +59,6 @@ namespace a3d{
 	public:
 		Node origin;
 		Node current;
-		
 		std::vector<Animate *> actions;
 	};
 

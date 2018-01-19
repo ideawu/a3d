@@ -31,8 +31,8 @@ namespace a3d{
 		Scene& operator =(const Scene& d);
 		
 		float _time;
-		Camera _camera;
-		Node _rootNode;
+		Camera *_camera;
+		Node *_rootNode;
 	};
 }; // end namespace
 

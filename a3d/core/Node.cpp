@@ -62,7 +62,7 @@ namespace a3d{
 			return;
 		}
 		for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
-			const Node *n = *it;
+			Node *n = *it;
 			if(n == node){
 				node->_parent = NULL;
 				_subs->erase(it);
@@ -83,16 +83,27 @@ namespace a3d{
 	void Node::render(){
 		renderAtTime(-1);
 	}
-
-	void Node::renderAtTime(float time){
-		if(time >= 0 && _animation && _animation->actions.size() > 0){
+	
+	void Node::updateAnimationAtTime(float time){
+		if(time < 0){
+			return;
+		}
+		
+		if(_subs){
+			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
+				Node *node = *it;
+				node->updateAnimationAtTime(time);
+			}
+		}
+		
+		if(_animation && _animation->actions.size() > 0){
 			Node *origin = &_animation->origin;
 			Node *current = &_animation->current;
 			
 			// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
 			Transform trans = Transform::transformBetween(*current, *this);
 			origin->transform(trans);
-
+			
 			std::vector<Animate*> *actions = &_animation->actions;
 			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
 				Animate *action = *it;
@@ -108,9 +119,21 @@ namespace a3d{
 			// 动画进行时，同时更新 current 和 this
 			*this = *current;
 		}
+	}
+
+	void Node::renderAtTime(float time){
+		updateAnimationAtTime(time);
 		
 		pushMatrix();
+		
+		if(_subs){
+			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
+				Node *node = *it;
+				node->draw();
+			}
+		}
 		draw();
+		
 		popMatrix();
 	}
 
