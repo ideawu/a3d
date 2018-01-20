@@ -17,7 +17,7 @@ namespace a3d{
 	typedef float (*AnimateTimingFunc)(float progress);
 
 	inline static float AnimateTimingEaseIn(float p){
-		return p * p * p;
+		return p * p;
 	}
 	inline static float AnimateTimingEaseOut(float p){
 		return 1 - AnimateTimingEaseIn(1-p); // 通用

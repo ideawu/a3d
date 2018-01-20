@@ -11,6 +11,7 @@
 #else
 	CVDisplayLinkRef _displayLink;
 #endif
+	float _animationSpeed;
 }
 @property BOOL isOpenGLReady;
 // renderTime = second - first
@@ -42,6 +43,8 @@
 	self = [super initWithFrame:frameRect pixelFormat:format];
 	[self setWantsBestResolutionOpenGLSurface:YES];
 	_displayLink = NULL;
+	_animationSpeed = 1.0;
+	_firstRenderTick = __DBL_MAX__;
 	return self;
 }
 
@@ -163,18 +166,32 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 #endif
 
+- (float)animationSpeed{
+	return _animationSpeed;
+}
+
+- (void)setAnimationSpeed:(float)newSpeed{
+	if(_firstRenderTick != __DBL_MAX__){
+		double renderTime = _animationSpeed * (_secondRenderTick - _firstRenderTick);
+		renderTime /= newSpeed;
+		_firstRenderTick = _secondRenderTick - renderTime;
+	}
+	_animationSpeed = newSpeed;
+}
+
 - (void)callRender{
 	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
 	// 只在主线程中渲染，因为处理用户交互是在主线程中，
 	// 同步等待渲染完成，不然 main queue 可能积累太多渲染任务。
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		if(self.isOpenGLReady){
-			if(_firstRenderTick == 0){
+			if(_firstRenderTick == __DBL_MAX__){
 				_firstRenderTick = currentTime;
 				_secondRenderTick = currentTime;
 			}
 			
-			double renderTime = _secondRenderTick - _firstRenderTick;
+			double renderTime = _animationSpeed * (_secondRenderTick - _firstRenderTick);
+//			log_debug(@"%f", renderTime);
 			BOOL ret = [self renderAtTime:renderTime];
 			if(!ret){
 				_failureRenderTick = currentTime;
