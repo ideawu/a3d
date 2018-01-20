@@ -13,14 +13,16 @@
 // TODO: 如果无法渲染指定时间帧，且希望重新渲染，返回NO
 - (BOOL)renderAtTime:(double)time;
 
-// 默认为1，按正常时钟速度，指定为0.5则变慢
-@property float animationSpeed;
-
 // 激活 renderAtTime: 的调用
 - (void)startAnimation;
 // 停止 renderAtTime: 的调用
 - (void)stopAnimation;
 // 判断 renderAtTime: 的调用是否已被激活 
 - (BOOL)isAnimating;
+
+// 调试用，限制刷新率
+- (void)setMaxFPS:(float)fps;
+// 默认为1，按正常时钟速度，指定为0.5则变慢
+- (void)setTimescale:(float)scale;
 
 @end
