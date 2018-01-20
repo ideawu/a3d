@@ -29,7 +29,7 @@ namespace a3d{
 
 		void id(GLuint i);
 		int loadImageFile(const char *filename);
-};
+	};
 }; // end namespace
 
 #endif /* Texture_hpp */

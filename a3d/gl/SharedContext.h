@@ -11,7 +11,6 @@ namespace a3d{
 	class SharedContext : public Context
 	{
 	public:
-		// TODO: 获取当前OpenGL上下文的缓冲区大小
 		SharedContext(){}
 		~SharedContext(){}
 		

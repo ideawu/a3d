@@ -49,8 +49,8 @@ namespace a3d{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_CULL_FACE);
+		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -65,8 +65,8 @@ namespace a3d{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		glDisable(GL_MULTISAMPLE);
 		glDisable(GL_CULL_FACE);
+		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -76,6 +76,9 @@ namespace a3d{
 	}
 
 	void Context::bind(){
+		if(_width > 0 && _height > 0){
+			glViewport(0, 0, _width, _height);
+		}
 		if(framebuffer()){
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
 		}
@@ -105,7 +108,7 @@ namespace a3d{
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer());
 			glBlitFramebuffer(0, 0, (GLsizei)_width, (GLsizei)_height,
 							  0, 0, (GLsizei)_width, (GLsizei)_height,
-							  GL_COLOR_BUFFER_BIT, GL_LINEAR); // GL_LINEAR GL_NEAREST
+							  GL_COLOR_BUFFER_BIT, GL_NEAREST); // GL_LINEAR GL_NEAREST
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		}
 		glFinish();

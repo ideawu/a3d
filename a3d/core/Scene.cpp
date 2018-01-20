@@ -55,12 +55,10 @@ namespace a3d{
 	}
 
 	void Scene::view3D(){
-//		glViewport(0, 0, _camera->width()*2, _camera->height()*2);
 		_context->loadMatrix3D(_camera->matrix3D());
 	}
 	
 	void Scene::view2D(){
-//		glViewport(0, 0, _camera->width(), _camera->height());
 		_context->loadMatrix3D(_camera->matrix2D());
 	}
 
@@ -72,7 +70,7 @@ namespace a3d{
 		_time = time;
 		_context->bind();
 		_rootNode->renderAtTime(time);
-		_context->flush();
+		_context->finish();
 	}
 
 }; // end namespace
