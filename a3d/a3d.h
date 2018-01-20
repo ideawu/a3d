@@ -27,6 +27,7 @@ namespace a3d{
 #include "AnimatePosition.h"
 
 #include "Context.h"
+#include "Renderer.h"
 #include "Texture.h"
 
 #endif

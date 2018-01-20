@@ -7,11 +7,22 @@
 #include "BufferContext.h"
 
 namespace a3d{
-	
+	static Context *_current = NULL;
+	static Context *_shared = NULL;
+
+	Context* Context::current(){
+		if(!_current){
+			_current = Context::shared();
+		}
+		return _current;
+	}
+
 	Context* Context::shared(){
-		SharedContext *ret = new SharedContext();
-		ret->setup();
-		return ret;
+		if(!_shared){
+			_shared = new SharedContext();
+			_shared->setup();
+		}
+		return _shared;
 	}
 
 	Context* Context::bufferContext(float width, float height){
@@ -25,8 +36,23 @@ namespace a3d{
 	Context::Context(){
 		_width = 0;
 		_height = 0;
+		_renderer = new Renderer();
 	}
-	
+
+	Context::~Context(){
+		delete _renderer;
+	}
+
+	void Context::makeCurrent(){
+		_current = this;
+		if(_width > 0 && _height > 0){
+			glViewport(0, 0, _width, _height);
+		}
+		if(framebuffer()){
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
+		}
+	}
+
 	float Context::width() const{
 		return _width;
 	}
@@ -73,15 +99,6 @@ namespace a3d{
 		glEnable(GL_TEXTURE_2D);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glBindTexture(GL_TEXTURE_2D, 0);
-	}
-
-	void Context::bind(){
-		if(_width > 0 && _height > 0){
-			glViewport(0, 0, _width, _height);
-		}
-		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
-		}
 	}
 	
 	void Context::clear(){

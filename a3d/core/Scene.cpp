@@ -68,7 +68,7 @@ namespace a3d{
 
 	void Scene::renderAtTime(float time){
 		_time = time;
-		_context->bind();
+		_context->makeCurrent();
 		_rootNode->renderAtTime(time);
 		_context->finish();
 	}

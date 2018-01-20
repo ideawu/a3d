@@ -87,6 +87,9 @@
 		31DF6E98201253290078153E /* SharedContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6E96201253290078153E /* SharedContext.cpp */; };
 		31DF6E99201253290078153E /* SharedContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6E97201253290078153E /* SharedContext.h */; };
 		31DF6E9B20130C070078153E /* AnimationTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6E9A20130B9C0078153E /* AnimationTypes.h */; };
+		31DF6E9E201363610078153E /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6E9C201363610078153E /* Renderer.cpp */; };
+		31DF6E9F201363610078153E /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
+		31DF6EA020136CF90078153E /* Renderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +99,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				31DF6EA020136CF90078153E /* Renderer.h in CopyFiles */,
 				31DF6E9B20130C070078153E /* AnimationTypes.h in CopyFiles */,
 				314FE49D2011C8A00067984B /* Frame.h in CopyFiles */,
 				314FE4842010AF270067984B /* Transform.h in CopyFiles */,
@@ -210,6 +214,8 @@
 		31DF6E96201253290078153E /* SharedContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SharedContext.cpp; sourceTree = "<group>"; };
 		31DF6E97201253290078153E /* SharedContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedContext.h; sourceTree = "<group>"; };
 		31DF6E9A20130B9C0078153E /* AnimationTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationTypes.h; sourceTree = "<group>"; };
+		31DF6E9C201363610078153E /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		31DF6E9D201363610078153E /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +398,8 @@
 				31DF6E96201253290078153E /* SharedContext.cpp */,
 				31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */,
 				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
+				31DF6E9D201363610078153E /* Renderer.h */,
+				31DF6E9C201363610078153E /* Renderer.cpp */,
 				314FE463200F77740067984B /* Texture.h */,
 				314FE462200F77740067984B /* Texture.cpp */,
 				314FE3D7200CAF560067984B /* GLView.h */,
@@ -440,6 +448,7 @@
 				314FE3D9200CAF560067984B /* GLView.h in Headers */,
 				31CB9B892009EBD10068D9B7 /* Context.h in Headers */,
 				314FE49C2011C79B0067984B /* Frame.h in Headers */,
+				31DF6E9F201363610078153E /* Renderer.h in Headers */,
 				314FE48320108D570067984B /* Transform.h in Headers */,
 				31CB9BBD200A29D80068D9B7 /* DraftImage.h in Headers */,
 				314FE469200F789F0067984B /* Scene.h in Headers */,
@@ -606,6 +615,7 @@
 				314FE478201054190067984B /* AnimatePosition.cpp in Sources */,
 				314FE3DA200CAF560067984B /* GLView.m in Sources */,
 				314FE46C200F78E40067984B /* Animate.cpp in Sources */,
+				31DF6E9E201363610078153E /* Renderer.cpp in Sources */,
 				314FE49B2011C79B0067984B /* Frame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
