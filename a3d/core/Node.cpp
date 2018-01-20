@@ -83,10 +83,13 @@ namespace a3d{
 		Renderer *renderer = Renderer::current();
 		
 		this->updateAnimationAtTime(time);
+		
+		float parent_alpha = renderer->opacity();
+		float node_alpha = _opacity;
 
 		// 如果完全透明则不渲染，但仍更新动画
-		if(Renderer::current()->opacity() != 0){
-			if(_opacity != 1){
+		if(parent_alpha != 0){
+			if(node_alpha != 1){
 				renderer->pushOpacity(_opacity);
 			}
 			renderer->pushMatrix(this->matrix());
@@ -99,8 +102,8 @@ namespace a3d{
 				node->renderAtTime(time);
 			}
 		}
-		if(Renderer::current()->opacity() != 0){
-			if(_opacity != 1){
+		if(parent_alpha != 0){
+			if(node_alpha != 1){
 				renderer->popOpacity();
 			}
 			renderer->popMatrix();

@@ -6,6 +6,7 @@
 #define AnimatePosition_hpp
 
 #include "Animate.h"
+#include "Node.h"
 #include "Vector3.h"
 
 namespace a3d{

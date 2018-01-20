@@ -3,7 +3,6 @@
 //
 
 #include "AnimatePosition.h"
-#include "Node.h"
 
 namespace a3d{
 

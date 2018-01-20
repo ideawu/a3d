@@ -16,8 +16,8 @@ namespace a3d{
 	public:
 		static Transform transformBetween(const Object &first, const Object &second);
 		
-		Vector3 size;
 		Matrix4 matrix;
+		Vector3 size;
 	};
 }; // end namespace
 

@@ -43,7 +43,6 @@
 		314FE48320108D570067984B /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 314FE48120108D570067984B /* Transform.h */; };
 		314FE4842010AF270067984B /* Transform.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE48120108D570067984B /* Transform.h */; };
 		314FE4852010AF270067984B /* Animate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE46B200F78E40067984B /* Animate.h */; };
-		314FE4862010AF270067984B /* AnimatePosition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
 		314FE4872010AF270067984B /* Scene.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE467200F789F0067984B /* Scene.h */; };
 		314FE4882010AF270067984B /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE463200F77740067984B /* Texture.h */; };
 		314FE4892010AF270067984B /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9B782009C3830068D9B7 /* util.h */; };
@@ -92,6 +91,10 @@
 		31DF6EA020136CF90078153E /* Renderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
 		31DF6EA320137C4E0078153E /* NodeAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6EA120137C4E0078153E /* NodeAnimation.cpp */; };
 		31DF6EA420137C4E0078153E /* NodeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6EA220137C4E0078153E /* NodeAnimation.h */; };
+		31DF6EA7201381380078153E /* AnimateOpacity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6EA5201381380078153E /* AnimateOpacity.cpp */; };
+		31DF6EA8201381380078153E /* AnimateOpacity.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6EA6201381380078153E /* AnimateOpacity.h */; };
+		31DF6EA9201382100078153E /* AnimatePosition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
+		31DF6EAA201382100078153E /* AnimateOpacity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6EA6201381380078153E /* AnimateOpacity.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -101,12 +104,13 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				31DF6EA9201382100078153E /* AnimatePosition.h in CopyFiles */,
+				31DF6EAA201382100078153E /* AnimateOpacity.h in CopyFiles */,
 				31DF6EA020136CF90078153E /* Renderer.h in CopyFiles */,
 				31DF6E9B20130C070078153E /* AnimationTypes.h in CopyFiles */,
 				314FE49D2011C8A00067984B /* Frame.h in CopyFiles */,
 				314FE4842010AF270067984B /* Transform.h in CopyFiles */,
 				314FE4852010AF270067984B /* Animate.h in CopyFiles */,
-				314FE4862010AF270067984B /* AnimatePosition.h in CopyFiles */,
 				314FE4872010AF270067984B /* Scene.h in CopyFiles */,
 				314FE4882010AF270067984B /* Texture.h in CopyFiles */,
 				314FE4892010AF270067984B /* util.h in CopyFiles */,
@@ -220,6 +224,8 @@
 		31DF6E9D201363610078153E /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		31DF6EA120137C4E0078153E /* NodeAnimation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimation.cpp; sourceTree = "<group>"; };
 		31DF6EA220137C4E0078153E /* NodeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeAnimation.h; sourceTree = "<group>"; };
+		31DF6EA5201381380078153E /* AnimateOpacity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateOpacity.cpp; sourceTree = "<group>"; };
+		31DF6EA6201381380078153E /* AnimateOpacity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateOpacity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +374,8 @@
 			isa = PBXGroup;
 			children = (
 				31DF6E9A20130B9C0078153E /* AnimationTypes.h */,
+				31DF6EA6201381380078153E /* AnimateOpacity.h */,
+				31DF6EA5201381380078153E /* AnimateOpacity.cpp */,
 				314FE477201054190067984B /* AnimatePosition.h */,
 				314FE476201054190067984B /* AnimatePosition.cpp */,
 			);
@@ -469,6 +477,7 @@
 				3124F1432001C71D0005EDDE /* GEulerAngle.h in Headers */,
 				314FE479201054190067984B /* AnimatePosition.h in Headers */,
 				31DF6E99201253290078153E /* SharedContext.h in Headers */,
+				31DF6EA8201381380078153E /* AnimateOpacity.h in Headers */,
 				314FE46D200F78E40067984B /* Animate.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */,
@@ -623,6 +632,7 @@
 				314FE478201054190067984B /* AnimatePosition.cpp in Sources */,
 				314FE3DA200CAF560067984B /* GLView.m in Sources */,
 				314FE46C200F78E40067984B /* Animate.cpp in Sources */,
+				31DF6EA7201381380078153E /* AnimateOpacity.cpp in Sources */,
 				31DF6E9E201363610078153E /* Renderer.cpp in Sources */,
 				314FE49B2011C79B0067984B /* Frame.cpp in Sources */,
 			);

@@ -24,6 +24,7 @@ namespace a3d{
 
 #include "Animate.h"
 #include "AnimationTypes.h"
+#include "AnimateOpacity.h"
 #include "AnimatePosition.h"
 
 #include "Context.h"
