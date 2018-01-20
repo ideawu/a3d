@@ -6,6 +6,8 @@
 #define animation_h
 
 namespace a3d{
+	class Animate;
+	
 	typedef enum{
 		AnimateStateNone,
 		AnimateStateBegin,
@@ -14,6 +16,7 @@ namespace a3d{
 		AnimateStateEnd
 	}AnimateState;
 
+	typedef float (*AnimateCallback)(Animate *action, void *ctx);
 	typedef float (*AnimateTimingFunc)(float progress);
 
 	inline static float AnimateTimingLinear(float p){

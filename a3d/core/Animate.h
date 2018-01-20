@@ -27,7 +27,7 @@ namespace a3d{
 		void duration(float duration);
 		void timingFunc(AnimateTimingFunc func);
 
-		// 根据 origin 更新 current，返回节点是否发生了更新(不是动画状态是否更新)
+		// 框架方法，根据 origin 更新 current
 		void updateAtTime(float time, Node *current, const Node *origin);
 
 	protected:
@@ -38,6 +38,8 @@ namespace a3d{
 
 		AnimateState _state;
 		AnimateTimingFunc _timingFunc;
+		AnimateCallback _callback;
+		void *_callbackCtx;
 		
 		float _beginTime;
 		float _currentTime;

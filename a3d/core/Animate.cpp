@@ -8,17 +8,10 @@ namespace a3d{
 	Animate::Animate(){
 		_state = AnimateStateNone;
 		_timingFunc = NULL;
+		_callback = NULL;
 		_beginTime = -1;
 		_currentTime = -1;
 		_duration = 0;
-	}
-	
-	Animate::Animate(const Animate &a){
-		_state = a._state;
-		_timingFunc = a._timingFunc;
-		_beginTime = a._beginTime;
-		_currentTime = a._currentTime;
-		_duration = a._duration;
 	}
 	
 	Animate::~Animate(){
@@ -30,7 +23,9 @@ namespace a3d{
 
 	void Animate::updateState(AnimateState state){
 		_state = state;
-		// TODO: callback
+		if(_callback){
+			_callback(this, _callbackCtx);
+		}
 	}
 
 	float Animate::duration() const{
