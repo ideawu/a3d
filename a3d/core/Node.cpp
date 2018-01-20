@@ -42,7 +42,7 @@ namespace a3d{
 	
 	void Node::addSubNode(Node *node){
 		if(!_subs){
-			_subs = new std::vector<Node *>();
+			_subs = new std::list<Node *>();
 		}
 		if(node->_parent){
 			node->removeFromParent();
@@ -55,13 +55,9 @@ namespace a3d{
 		if(!_subs){
 			return;
 		}
-		for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
-			Node *n = *it;
-			if(n == node){
-				node->_parent = NULL;
-				_subs->erase(it);
-				return;
-			}
+		if(node->_parent == this){
+			node->_parent = NULL;
+			_subs->remove(node);
 		}
 	}
 
@@ -91,8 +87,8 @@ namespace a3d{
 			Transform trans = Transform::transformBetween(*current, *this);
 			origin->transform(trans);
 			
-			std::vector<Animate*> *actions = &_animation->actions;
-			for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
+			std::list<Animate*> *actions = &_animation->actions;
+			for(std::list<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
 				Animate *action = *it;
 				action->updateAtTime(time, current, origin);
 				if(action->state() == AnimateStateEnd){
@@ -117,7 +113,7 @@ namespace a3d{
 		pushMatrix();
 		this->draw();
 		if(_subs){
-			for(std::vector<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
+			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;
 				node->renderAtTime(time);
 			}
@@ -137,12 +133,20 @@ namespace a3d{
 		_animation->actions.push_back(action);
 	}
 	
+	void Node::removeAnimation(Animate *action){
+		if(!_animation){
+			return;
+		}
+		_animation->actions.remove(action);
+		delete action;
+	}
+
 	void Node::removeAllAnimations(){
 		if(!_animation){
 			return;
 		}
-		std::vector<Animate*> *actions = &_animation->actions;
-		for(std::vector<Animate*>::iterator it=actions->begin(); it != actions->end(); it++){
+		std::list<Animate*> *actions = &_animation->actions;
+		for(std::list<Animate*>::iterator it=actions->begin(); it != actions->end(); it++){
 			Animate *action = *it;
 			delete action;
 		}
@@ -153,7 +157,7 @@ namespace a3d{
 		if(!_animation){
 			return false;
 		}
-		return _animation->actions.size() > 0;
+		return !_animation->actions.empty();
 	}
 
 }; // end namespace

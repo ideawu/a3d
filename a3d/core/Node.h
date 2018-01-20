@@ -5,7 +5,7 @@
 #ifndef Drawable_hpp
 #define Drawable_hpp
 
-#include <vector>
+#include <list>
 #include "Object.h"
 #include "Animate.h"
 
@@ -26,11 +26,14 @@ namespace a3d{
 		void addSubNode(Node *node);
 		void removeSubNode(Node *node);
 		
-		void render(); // render(-1)
+		void render(); // renderAtTime(-1)
 		void renderAtTime(float time);
 
 		// action 内存由 Node 管理
 		void runAnimation(Animate *action);
+		// 移除指定的动画，注意：并释放其内存！
+		void removeAnimation(Animate *action);
+		// 移除所有动画，释放内存
 		void removeAllAnimations();
 		bool hasAnimations();
 
@@ -43,7 +46,7 @@ namespace a3d{
 		Node& operator =(const Node& d);
 		
 		Node *_parent;
-		std::vector<Node *> *_subs;
+		std::list<Node *> *_subs;
 		NodeAnimation *_animation;
 		
 		void updateAnimationAtTime(float time);
@@ -56,7 +59,8 @@ namespace a3d{
 	public:
 		Node origin;
 		Node current;
-		std::vector<Animate *> actions;
+		// 基于性能考虑，std::list 的节点应该保存自身的 iterator 以便快速删除，但这里不考虑
+		std::list<Animate *> actions;
 	};
 
 }; // end namespace

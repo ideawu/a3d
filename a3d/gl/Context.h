@@ -30,6 +30,7 @@ namespace a3d{
 		void clear(float r, float g, float b, float a=1);
 		void flush();
 		void finish();
+		// TODO: blit other FBO
 		void blit();
 
 	protected:
