@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Color.h"
+#include "Matrix4.h"
 
 namespace a3d{
 	class Renderer
@@ -21,7 +22,11 @@ namespace a3d{
 		// 基于当前的透明度叠加新的透明度
 		void pushOpacity(float opacity);
 		void popOpacity();
-
+		
+		// 基于当前的矩阵叠加新矩阵
+		void pushMatrix(const Matrix4 &mat);
+		void popMatrix();
+		
 	private:
 		Renderer(const Renderer &d);
 		Renderer& operator =(const Renderer& d);

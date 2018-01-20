@@ -90,6 +90,8 @@
 		31DF6E9E201363610078153E /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6E9C201363610078153E /* Renderer.cpp */; };
 		31DF6E9F201363610078153E /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
 		31DF6EA020136CF90078153E /* Renderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
+		31DF6EA320137C4E0078153E /* NodeAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6EA120137C4E0078153E /* NodeAnimation.cpp */; };
+		31DF6EA420137C4E0078153E /* NodeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6EA220137C4E0078153E /* NodeAnimation.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -216,6 +218,8 @@
 		31DF6E9A20130B9C0078153E /* AnimationTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationTypes.h; sourceTree = "<group>"; };
 		31DF6E9C201363610078153E /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		31DF6E9D201363610078153E /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		31DF6EA120137C4E0078153E /* NodeAnimation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimation.cpp; sourceTree = "<group>"; };
+		31DF6EA220137C4E0078153E /* NodeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeAnimation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +383,8 @@
 				314FE48A2010C0F90067984B /* Transform.cpp */,
 				31CB9B99200A18750068D9B7 /* Node.h */,
 				31CB9B98200A18750068D9B7 /* Node.cpp */,
+				31DF6EA220137C4E0078153E /* NodeAnimation.h */,
+				31DF6EA120137C4E0078153E /* NodeAnimation.cpp */,
 				314FE46B200F78E40067984B /* Animate.h */,
 				314FE46A200F78E40067984B /* Animate.cpp */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
@@ -449,6 +455,7 @@
 				31CB9B892009EBD10068D9B7 /* Context.h in Headers */,
 				314FE49C2011C79B0067984B /* Frame.h in Headers */,
 				31DF6E9F201363610078153E /* Renderer.h in Headers */,
+				31DF6EA420137C4E0078153E /* NodeAnimation.h in Headers */,
 				314FE48320108D570067984B /* Transform.h in Headers */,
 				31CB9BBD200A29D80068D9B7 /* DraftImage.h in Headers */,
 				314FE469200F789F0067984B /* Scene.h in Headers */,
@@ -594,6 +601,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DF6EA320137C4E0078153E /* NodeAnimation.cpp in Sources */,
 				31DF6E98201253290078153E /* SharedContext.cpp in Sources */,
 				314FE464200F77740067984B /* Texture.cpp in Sources */,
 				31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */,

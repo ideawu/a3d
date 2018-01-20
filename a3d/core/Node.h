@@ -7,9 +7,9 @@
 
 #include <list>
 #include "Object.h"
-#include "Animate.h"
 
 namespace a3d{
+	class Animate;
 	class NodeAnimation;
 	
  	class Node : public Object
@@ -21,6 +21,9 @@ namespace a3d{
 		// 子类实现此方法，但子类的使用者不直接调用此方法，而是调用 render()。
 		virtual void draw(){};
 		
+		void render(); // renderAtTime(-1)
+		void renderAtTime(float time);
+
 		float opacity() const;
 		void opacity(float opacity);
 
@@ -28,9 +31,6 @@ namespace a3d{
 		void removeFromParent();
 		void addSubNode(Node *node);
 		void removeSubNode(Node *node);
-		
-		void render(); // renderAtTime(-1)
-		void renderAtTime(float time);
 
 		// action 内存由 Node 管理
 		void runAnimation(Animate *action);
@@ -40,10 +40,6 @@ namespace a3d{
 		void removeAllAnimations();
 		bool hasAnimations();
 
-	protected:
-		void pushMatrix();
-		void popMatrix();
-		
 	private:
 		Node(const Node &d);
 		Node& operator =(const Node& d);
@@ -55,17 +51,6 @@ namespace a3d{
 		NodeAnimation *_animation;
 		
 		void updateAnimationAtTime(float time);
-	};
-
-	
-	// 辅助类
-	class NodeAnimation
-	{
-	public:
-		Node origin;
-		Node current;
-		// 基于性能考虑，std::list 的节点应该保存自身的 iterator 以便快速删除，但这里不考虑
-		std::list<Animate *> actions;
 	};
 
 }; // end namespace

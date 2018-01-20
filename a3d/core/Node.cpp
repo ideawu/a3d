@@ -3,6 +3,7 @@
 //
 
 #include "Node.h"
+#include "NodeAnimation.h"
 #include "Renderer.h"
 
 namespace a3d{
@@ -21,10 +22,7 @@ namespace a3d{
 
 	Node::~Node(){
 		delete _subs;
-		if(_animation){
-			removeAllAnimations();
-			delete _animation;
-		}
+		delete _animation;
 	}
 
 	float Node::opacity() const{
@@ -66,15 +64,6 @@ namespace a3d{
 		}
 	}
 
-	void Node::pushMatrix(){
-		glPushMatrix();
-		glMultMatrixf((const GLfloat *)this->matrix().array());
-	}
-	
-	void Node::popMatrix(){
-		glPopMatrix();
-	}
-
 	void Node::render(){
 		renderAtTime(-1);
 	}
@@ -83,40 +72,24 @@ namespace a3d{
 		if(time < 0){
 			return;
 		}
-		
-		if(_animation && _animation->actions.size() > 0){
-			Node *origin = &_animation->origin;
-			Node *current = &_animation->current;
-			
-			// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
-			Transform trans = Transform::transformBetween(*current, *this);
-			origin->transform(trans);
-			
-			std::list<Animate*> *actions = &_animation->actions;
-			for(std::list<Animate*>::iterator it=actions->begin(); it != actions->end(); /**/){
-				Animate *action = *it;
-				action->updateAtTime(time, current, origin);
-				if(action->state() == AnimateStateEnd){
-					it = actions->erase(it);
-					delete action;
-				}else{
-					it ++;
-				}
-			}
+		if(_animation && !_animation->empty()){
+			_animation->updateAtTime(time);
 			// 动画进行时，同时更新 current 和 this
-			*this = *current;
+			*this = _animation->current;
 		}
 	}
 
 	void Node::renderAtTime(float time){
+		Renderer *renderer = Renderer::current();
+		
 		this->updateAnimationAtTime(time);
 
 		// 如果完全透明则不渲染，但仍更新动画
 		if(Renderer::current()->opacity() != 0){
 			if(_opacity != 1){
-				Renderer::current()->pushOpacity(_opacity);
+				renderer->pushOpacity(_opacity);
 			}
-			pushMatrix();
+			renderer->pushMatrix(this->matrix());
 			
 			this->draw();
 		}
@@ -128,49 +101,39 @@ namespace a3d{
 		}
 		if(Renderer::current()->opacity() != 0){
 			if(_opacity != 1){
-				Renderer::current()->popOpacity();
+				renderer->popOpacity();
 			}
-			popMatrix();
+			renderer->popMatrix();
 		}
 	}
 
 	void Node::runAnimation(Animate *action){
 		if(!_animation){
 			_animation = new NodeAnimation();
+			_animation->target = this;
 		}
 		// 如果所有的动画都未开始，则应该在开始前，设置 origin
-		if(_animation->actions.empty()){
+		if(_animation->empty()){
 			_animation->origin = *this;
 			_animation->current = *this;
 		}
-		_animation->actions.push_back(action);
+		_animation->add(action);
 	}
 	
 	void Node::removeAnimation(Animate *action){
-		if(!_animation){
-			return;
+		if(_animation){
+			_animation->remove(action);
 		}
-		_animation->actions.remove(action);
-		delete action;
 	}
 
 	void Node::removeAllAnimations(){
-		if(!_animation){
-			return;
+		if(_animation){
+			_animation->removeAll();
 		}
-		std::list<Animate*> *actions = &_animation->actions;
-		for(std::list<Animate*>::iterator it=actions->begin(); it != actions->end(); it++){
-			Animate *action = *it;
-			delete action;
-		}
-		_animation->actions.clear();
 	}
 	
 	bool Node::hasAnimations(){
-		if(!_animation){
-			return false;
-		}
-		return !_animation->actions.empty();
+		return _animation && !_animation->empty();
 	}
 
 }; // end namespace

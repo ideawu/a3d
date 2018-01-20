@@ -31,5 +31,14 @@ namespace a3d{
 		glColor4f(_color.r, _color.g, _color.b, _color.a);
 	}
 
+	void Renderer::pushMatrix(const Matrix4 &mat){
+		glPushMatrix();
+		glMultMatrixf((const GLfloat *)mat.array());
+	}
+	
+	void Renderer::popMatrix(){
+		glPopMatrix();
+	}
+
 }; // end namespace
 
