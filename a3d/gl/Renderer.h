@@ -12,8 +12,13 @@ namespace a3d{
 	class Renderer
 	{
 	public:
+		// 当前 Context 上的 render
+		static Renderer* current();
+		
 		Renderer();
 
+		float opacity() const;
+		// 基于当前的透明度叠加新的透明度
 		void pushOpacity(float opacity);
 		void popOpacity();
 

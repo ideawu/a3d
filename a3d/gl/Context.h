@@ -19,6 +19,8 @@ namespace a3d{
 
 	public:
 		virtual ~Context();
+		
+		Renderer* renderer() const;
 
 		float width() const;
 		float height() const;
@@ -33,8 +35,6 @@ namespace a3d{
 		void finish();
 		// TODO: blit other FBO
 		void blit();
-		
-		Renderer* renderer() const;
 
 	protected:
 		Context();

@@ -3,22 +3,19 @@
 //
 
 #include "Node.h"
+#include "Renderer.h"
 
 namespace a3d{
 	Node::Node(){
 		_parent = NULL;
 		_subs = NULL;
 		_animation = NULL;
+		_opacity = 1;
 	}
 
-	Node::Node(const Node &d) : Object(d){
-		_parent = NULL;
-		_subs = NULL;
-		_animation = NULL;
-	}
-	
 	Node& Node::operator =(const Node& d){
 		Object::operator=(d);
+		_opacity = d._opacity;
 		return *this;
 	}
 
@@ -28,6 +25,14 @@ namespace a3d{
 			removeAllAnimations();
 			delete _animation;
 		}
+	}
+
+	float Node::opacity() const{
+		return _opacity;
+	}
+	
+	void Node::opacity(float opacity){
+		_opacity = opacity;
 	}
 
 	Node* Node::parent() const{
@@ -106,19 +111,27 @@ namespace a3d{
 	void Node::renderAtTime(float time){
 		this->updateAnimationAtTime(time);
 
-		glEnable(GL_BLEND);
-		glColor4f(1, 1, 1, 1);
-		// TODO: 在这里实现 opacity，父节点的透明度应该影响子节点 alpha = parent.alpha * this.alpha
-
-		pushMatrix();
-		this->draw();
+		// 如果完全透明则不渲染，但仍更新动画
+		if(Renderer::current()->opacity() != 0){
+			if(_opacity != 1){
+				Renderer::current()->pushOpacity(_opacity);
+			}
+			pushMatrix();
+			
+			this->draw();
+		}
 		if(_subs){
 			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;
 				node->renderAtTime(time);
 			}
 		}
-		popMatrix();
+		if(Renderer::current()->opacity() != 0){
+			if(_opacity != 1){
+				Renderer::current()->popOpacity();
+			}
+			popMatrix();
+		}
 	}
 
 	void Node::runAnimation(Animate *action){

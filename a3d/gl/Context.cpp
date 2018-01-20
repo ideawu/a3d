@@ -53,6 +53,10 @@ namespace a3d{
 		}
 	}
 
+	Renderer* Context::renderer() const{
+		return _renderer;
+	}
+
 	float Context::width() const{
 		return _width;
 	}

@@ -3,6 +3,7 @@
 //
 
 #include "Renderer.h"
+#include "Context.h"
 
 namespace a3d{
 
@@ -10,6 +11,14 @@ namespace a3d{
 		pushOpacity(1.0);
 	}
 	
+	Renderer* Renderer::current(){
+		return Context::current()->renderer();
+	}
+
+	float Renderer::opacity() const{
+		return _color.a;
+	}
+
 	void Renderer::pushOpacity(float opacity){
 		_q_opacity.push_back(_color.a);
 		_color.a *= opacity;
@@ -17,9 +26,8 @@ namespace a3d{
 	}
 	
 	void Renderer::popOpacity(){
-		float opacity = _q_opacity.back();
+		_color.a = _q_opacity.back();
 		_q_opacity.pop_back();
-		_color.a = opacity;
 		glColor4f(_color.r, _color.g, _color.b, _color.a);
 	}
 
