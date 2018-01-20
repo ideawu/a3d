@@ -9,9 +9,8 @@
 @property (readonly) CGSize viewportSize;
 @property (readonly) CGSize framebufferSize;
 
-// 如果子类同时重写 drawRect: 和 renderAtTime:，要注意两者在不同的线程中，需要 lock NSOpenGLContext。
 - (void)drawRect:(NSRect)dirtyRect;
-// 注意：在独立的线程中执行渲染。子类重写此方法，如果渲染成功，返回YES，如果渲染失败且希望再次渲染该时间对应的帧，返回NO。
+// TODO: 如果无法渲染指定时间帧，且希望重新渲染，返回NO
 - (BOOL)renderAtTime:(double)time;
 
 // 激活 renderAtTime: 的调用

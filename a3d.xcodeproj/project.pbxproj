@@ -96,6 +96,7 @@
 		31CB9BBE200A29F60068D9B7 /* DraftImage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31CB9BBB200A29D80068D9B7 /* DraftImage.h */; };
 		31DF6E98201253290078153E /* SharedContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6E96201253290078153E /* SharedContext.cpp */; };
 		31DF6E99201253290078153E /* SharedContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6E97201253290078153E /* SharedContext.h */; };
+		31DF6E9B20130C070078153E /* AnimationTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6E9A20130B9C0078153E /* AnimationTypes.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -105,6 +106,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				31DF6E9B20130C070078153E /* AnimationTypes.h in CopyFiles */,
 				314FE49D2011C8A00067984B /* Frame.h in CopyFiles */,
 				314FE4842010AF270067984B /* Transform.h in CopyFiles */,
 				314FE4852010AF270067984B /* Animate.h in CopyFiles */,
@@ -230,6 +232,7 @@
 		31CB9BBB200A29D80068D9B7 /* DraftImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DraftImage.h; sourceTree = "<group>"; };
 		31DF6E96201253290078153E /* SharedContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SharedContext.cpp; sourceTree = "<group>"; };
 		31DF6E97201253290078153E /* SharedContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedContext.h; sourceTree = "<group>"; };
+		31DF6E9A20130B9C0078153E /* AnimationTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +411,7 @@
 		314FE4912010C6AD0067984B /* animation */ = {
 			isa = PBXGroup;
 			children = (
+				31DF6E9A20130B9C0078153E /* AnimationTypes.h */,
 				314FE477201054190067984B /* AnimatePosition.h */,
 				314FE476201054190067984B /* AnimatePosition.cpp */,
 			);

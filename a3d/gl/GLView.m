@@ -13,6 +13,13 @@
 #endif
 }
 @property BOOL isOpenGLReady;
+// renderTime = second - first
+@property double firstRenderTick;
+// 如果渲染成功，second 要滑动
+@property double secondRenderTick;
+// fail 记录上一次second滑动失败的时钟，如果 pause 恢复，将 first和second 整体滑动到 pause 处，然后 second 继续滑动
+@property double failureRenderTick;
+@property double lastAbsoluteTime;
 @end
 
 @implementation GLView
@@ -145,22 +152,44 @@
 #if TARGET_OS_IPHONE
 - (void)displayLinkCallback:(CADisplayLink *)sender{
 	double time = _displayLink.timestamp;
-	[self renderAtTime:time];
+	[self invokeRender:time];
 }
 #else
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now,
 									const CVTimeStamp *outputTime, CVOptionFlags flagsIn,
 									CVOptionFlags *flagsOut, void *displayLinkContext){
-	double time = outputTime->hostTime/1000.0/1000.0/1000.0;
-	GLView *view = (__bridge GLView *)displayLinkContext;
-	if(view.isOpenGLReady){
-		BOOL ret = [view renderAtTime:time];
-		return ret? kCVReturnSuccess : kCVReturnError;
-	}else{
-		return kCVReturnSuccess;
-	}
+	[(__bridge GLView *)displayLinkContext callRender];
+	return kCVReturnSuccess;
 }
 #endif
+
+- (void)callRender{
+	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
+	// 只在主线程中渲染，因为处理用户交互是在主线程中，
+	// 同步等待渲染完成，不然 main queue 可能积累太多渲染任务。
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		if(self.isOpenGLReady){
+			if(_firstRenderTick == 0){
+				_firstRenderTick = currentTime;
+				_secondRenderTick = currentTime;
+			}
+			
+			double renderTime = _secondRenderTick - _firstRenderTick;
+			BOOL ret = [self renderAtTime:renderTime];
+			if(!ret){
+				_failureRenderTick = currentTime;
+			}else{
+				// 如果是从失败中恢复
+				if(_failureRenderTick != 0){
+					_firstRenderTick = _failureRenderTick - renderTime;
+					// 清除失败标记
+					_failureRenderTick = 0;
+				}
+				_secondRenderTick = currentTime;
+			}
+		}
+	});
+}
 
 @end
 

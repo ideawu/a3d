@@ -23,6 +23,7 @@ namespace a3d{
 #include "Scene.h"
 
 #include "Animate.h"
+#include "AnimationTypes.h"
 #include "AnimatePosition.h"
 
 #include "Context.h"

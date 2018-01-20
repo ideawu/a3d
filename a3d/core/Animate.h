@@ -5,16 +5,10 @@
 #ifndef Animation_hpp
 #define Animation_hpp
 
+#include "AnimationTypes.h"
+
 namespace a3d{
 	class Node;
-	
-	typedef enum{
-		AnimateStateNone,
-		AnimateStateBegin,
-		AnimateStateWillUpdate,
-		AnimateStateDidUpdate,
-		AnimateStateEnd
-	}AnimateState;
 	
 	class Animate
 	{
@@ -31,6 +25,7 @@ namespace a3d{
 		AnimateState state() const;
 		float duration() const;
 		void duration(float duration);
+		void timingFunc(AnimateTimingFunc func);
 
 		// 根据 origin 更新 current，返回节点是否发生了更新(不是动画状态是否更新)
 		void updateAtTime(float time, Node *current, const Node *origin);
@@ -42,6 +37,8 @@ namespace a3d{
 		Animate& operator =(const Animate& d);
 
 		AnimateState _state;
+		AnimateTimingFunc _timingFunc;
+		
 		float _beginTime;
 		float _currentTime;
 		float _duration;

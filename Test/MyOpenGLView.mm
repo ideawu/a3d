@@ -37,7 +37,7 @@
 @implementation MyOpenGLView
 
 - (void)prepareOpenGL {
-//	[super prepareOpenGL];
+	[super prepareOpenGL];
 
 	// 操作前务必要切换上下文
 	[self.openGLContext makeCurrentContext];
@@ -82,6 +82,8 @@
 	_objects.push_back(_camera);
 
 	_currentObject = _hero;
+	
+	[self startAnimation];
 }
 
 - (void)switchSprite{
