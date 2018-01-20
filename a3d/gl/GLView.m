@@ -6,18 +6,23 @@
 
 @interface GLView(){
 	NSTrackingArea *_trackingArea;
+#if TARGET_OS_IPHONE
+	CADisplayLink *_displayLink;
+#else
+	CVDisplayLinkRef _displayLink;
+#endif
 }
+@property BOOL isOpenGLReady;
 @end
 
-// 显示效果为什么比SCNView差那么多？
 @implementation GLView
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat{
 	NSOpenGLPixelFormatAttribute attrs[] = {
-		NSOpenGLPFANoRecovery, // Enable automatic use of OpenGL "share" contexts.
+		NSOpenGLPFANoRecovery,
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFADepthSize, 16,
-//		NSOpenGLPFAAlphaSize, 8,
+		NSOpenGLPFAAlphaSize, 8,
 		NSOpenGLPFADoubleBuffer,
 		NSOpenGLPFAAccelerated,
 		0
@@ -29,8 +34,19 @@
 - (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format{
 	self = [super initWithFrame:frameRect pixelFormat:format];
 	[self setWantsBestResolutionOpenGLSurface:YES];
-	//	CGSize ret = [self convertSizeToBacking:self.bounds.size];
+	_displayLink = NULL;
 	return self;
+}
+
+- (void)dealloc{
+	if(_displayLink){
+		[self freeDisplayLink];
+	}
+}
+
+- (void)prepareOpenGL{
+	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
+	_isOpenGLReady = YES;
 }
 
 - (CGSize)viewportSize{
@@ -41,17 +57,10 @@
 	return [self convertSizeToBacking:self.bounds.size];
 }
 
-- (void)prepareOpenGL{
-	[super prepareOpenGL];
-}
-
-- (void)drawRect:(NSRect)dirtyRect {
-	/*
-	 CGLLockContext(self.openGLContext.CGLContextObj);
-	 CGLUnlockContext(self.openGLContext.CGLContextObj);
-	 */
+- (void)drawRect:(NSRect)dirtyRect{
 	[super drawRect:dirtyRect];
 }
+
 
 #pragma mark - Keyboard and Mouse event handle
 
@@ -71,6 +80,87 @@
 												userInfo:nil];
 	[self addTrackingArea:_trackingArea];
 }
+
+
+#pragma mark - DisplayLink
+
+- (void)startAnimation{
+	if(!_displayLink){
+		[self setupDisplayLink];
+	}
+	if(_displayLink && !CVDisplayLinkIsRunning(_displayLink)){
+		[self startDisplayLink];
+	}
+}
+
+- (void)stopAnimation{
+	if(_displayLink && CVDisplayLinkIsRunning(_displayLink)){
+		[self stopDisplayLink];
+	}
+}
+
+- (BOOL)isAnimating{
+	return _displayLink && CVDisplayLinkIsRunning(_displayLink);
+}
+
+- (BOOL)renderAtTime:(double)time{
+	return YES;
+}
+
+
+- (void)setupDisplayLink{
+#if TARGET_OS_IPHONE
+	_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkCallback:)];
+	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[_displayLink setPaused:YES];
+#else
+	CVReturn ret;
+	ret = CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
+	ret = CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)(self));
+#endif
+}
+
+- (void)freeDisplayLink{
+	[self stopDisplayLink];
+	CVDisplayLinkRelease(_displayLink);
+	_displayLink = NULL;
+}
+
+- (void)startDisplayLink{
+#if TARGET_OS_IPHONE
+	[_displayLink setPaused:NO];
+#else
+	CVDisplayLinkStart(_displayLink);
+#endif
+}
+
+- (void)stopDisplayLink{
+#if TARGET_OS_IPHONE
+	[_displayLink setPaused:YES];
+#else
+	CVDisplayLinkStop(_displayLink);
+#endif
+}
+
+#if TARGET_OS_IPHONE
+- (void)displayLinkCallback:(CADisplayLink *)sender{
+	double time = _displayLink.timestamp;
+	[self renderAtTime:time];
+}
+#else
+static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now,
+									const CVTimeStamp *outputTime, CVOptionFlags flagsIn,
+									CVOptionFlags *flagsOut, void *displayLinkContext){
+	double time = outputTime->hostTime/1000.0/1000.0/1000.0;
+	GLView *view = (__bridge GLView *)displayLinkContext;
+	if(view.isOpenGLReady){
+		BOOL ret = [view renderAtTime:time];
+		return ret? kCVReturnSuccess : kCVReturnError;
+	}else{
+		return kCVReturnSuccess;
+	}
+}
+#endif
 
 @end
 
