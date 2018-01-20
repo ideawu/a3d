@@ -55,26 +55,25 @@ namespace a3d{
 		
 		if(_state != AnimateStateNone && _state != AnimateStateEnd){
 			float progress;
+			float timing_p;
 			if(_duration == 0){
 				// 不管时间如何，如果 duration 为零则立即执行
 				progress = 1;
+				timing_p = 1;
 			}else if(time < _beginTime){
 				return;
 			}else{
 				progress = (time - _beginTime)/_duration;
 				progress = fmin(1, progress);
-				progress = _timingFunc? _timingFunc(progress) : AnimateTimingEaseOut(progress);
-				progress = fmin(1, fabs(progress));
+				timing_p = _timingFunc? _timingFunc(progress) : AnimateTimingEaseOut(progress);
 			}
 			_currentTime = time;
-			
-//			log_debug("progress: %f, begin time: %f, current time: %f", progress, _beginTime, _currentTime);
 
 			updateState(AnimateStateWillUpdate);
-			update(progress, current, origin);
+			update(timing_p, current, origin);
 			updateState(AnimateStateDidUpdate);
 
-			if(progress == 1){
+			if(progress >= 1){
 				updateState(AnimateStateEnd);
 			}
 		}
