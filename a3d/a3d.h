@@ -14,7 +14,7 @@ namespace a3d{
 #include "Axis.h"
 #include "Vector3.h"
 #include "Color.h"
-#include "Frame.h"
+#include "Rect.h"
 
 #include "Object.h"
 #include "Transform.h"

@@ -6,20 +6,20 @@
 #define Rect_hpp
 
 namespace a3d{
-	class Frame
+	class Rect
 	{
 	public:
 		float x, y, width, height;
 		
-		Frame();
-		Frame(float x, float y, float width, float height);
+		Rect();
+		Rect(float x, float y, float width, float height);
 		
 		float centerX() const{return x+width/2;}
 		float centerY() const{return y+height/2;}
 
-		bool equals(const Frame &d) const;
+		bool equals(const Rect &d) const;
 		// 返回两者的交集区域
-		Frame intersection(const Frame &d) const;
+		Rect intersection(const Rect &d) const;
 	};
 }; // end namespace
 

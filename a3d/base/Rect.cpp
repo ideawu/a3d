@@ -2,33 +2,33 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "Frame.h"
+#include "Rect.h"
 
 namespace a3d{
 	
-	Frame::Frame(){
+	Rect::Rect(){
 		x = y = width = height = 0;
 	}
 	
-	Frame::Frame(float x, float y, float width, float height){
+	Rect::Rect(float x, float y, float width, float height){
 		this->x = x;
 		this->y = y;
 		this->width = width;
 		this->height = height;
 	}
 	
-	bool Frame::equals(const Frame &d) const{
+	bool Rect::equals(const Rect &d) const{
 		return x == d.x && y == d.y && width == d.width && height == d.height;
 	}
 
-	Frame Frame::intersection(const Frame &d) const{
+	Rect Rect::intersection(const Rect &d) const{
 		CGRect r1 = CGRectMake(x, y, width, height);
 		CGRect r2 = CGRectMake(d.x, d.y, d.width, d.height);
 		CGRect r = CGRectIntersection(r1, r2);
 		if(CGRectIsNull(r)){
-			return Frame();
+			return Rect();
 		}
-		return Frame(r.origin.x, r.origin.y, r.size.width, r.size.height);
+		return Rect(r.origin.x, r.origin.y, r.size.width, r.size.height);
 	}
 
 }; // end namespace
