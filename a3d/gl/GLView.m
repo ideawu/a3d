@@ -185,8 +185,8 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 - (void)callRender{
 	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
 	// 只在主线程中渲染，因为处理用户交互是在主线程中，
-	// 同步等待渲染完成，不然 main queue 可能积累太多渲染任务。
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	// TODO: 避免 main queue 可能积累太多渲染任务。
+	dispatch_async(dispatch_get_main_queue(), ^{
 		if(self.isOpenGLReady){
 			if(_firstRenderTick == DBL_MAX){
 				_firstRenderTick = currentTime;
