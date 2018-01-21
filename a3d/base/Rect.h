@@ -13,13 +13,11 @@ namespace a3d{
 		
 		Rect();
 		Rect(float x, float y, float width, float height);
-		
-		float centerX() const{return x+width/2;}
-		float centerY() const{return y+height/2;}
 
 		bool equals(const Rect &d) const;
+		bool empty() const;
 		// 返回两者的交集区域
-		Rect intersection(const Rect &d) const;
+		Rect intersect(const Rect &d) const;
 	};
 }; // end namespace
 

@@ -21,7 +21,11 @@ namespace a3d{
 		return x == d.x && y == d.y && width == d.width && height == d.height;
 	}
 
-	Rect Rect::intersection(const Rect &d) const{
+	bool Rect::empty() const{
+		return width == 0 || height == 0;
+	}
+
+	Rect Rect::intersect(const Rect &d) const{
 		CGRect r1 = CGRectMake(x, y, width, height);
 		CGRect r2 = CGRectMake(d.x, d.y, d.width, d.height);
 		CGRect r = CGRectIntersection(r1, r2);
