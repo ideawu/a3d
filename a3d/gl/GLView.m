@@ -11,6 +11,7 @@
 #else
 	CVDisplayLinkRef _displayLink;
 #endif
+	dispatch_queue_t _processQueue;
 	float _timescale;
 	float _limitRefreshInterval;
 }
@@ -22,6 +23,7 @@
 // fail 记录上一次second滑动失败的时钟，如果 pause 恢复，将 first和second 整体滑动到 pause 处，然后 second 继续滑动
 @property double failureRenderTick;
 @property double lastAbsoluteTime;
+@property BOOL isRendering;
 @end
 
 @implementation GLView
@@ -44,6 +46,7 @@
 	self = [super initWithFrame:frameRect pixelFormat:format];
 	[self setWantsBestResolutionOpenGLSurface:YES];
 	_displayLink = NULL;
+	_processQueue = NULL;
 	_firstRenderTick = DBL_MAX;
 	_timescale = 1.0;
 	_limitRefreshInterval = 0;
@@ -121,6 +124,7 @@
 
 
 - (void)setupDisplayLink{
+//	_processQueue = dispatch_queue_create("GLView_queue", DISPATCH_QUEUE_SERIAL);
 #if TARGET_OS_IPHONE
 	_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkCallback:)];
 	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -163,11 +167,10 @@
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now,
 									const CVTimeStamp *outputTime, CVOptionFlags flagsIn,
 									CVOptionFlags *flagsOut, void *displayLinkContext){
-	[(__bridge GLView *)displayLinkContext callRender];
+	[(__bridge GLView *)displayLinkContext displayLinkCallback];
 	return kCVReturnSuccess;
 }
 #endif
-
 
 - (void)setTimescale:(float)scale{
 	if(_firstRenderTick != DBL_MAX){
@@ -182,36 +185,52 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	_limitRefreshInterval = 1.0/fps;
 }
 
-- (void)callRender{
-	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
+- (void)displayLinkCallback{
+	@synchronized(self){
+		if(_isRendering){
+			log_debug(@"rendering, drop frame");
+			return;
+		}else{
+			_isRendering = YES;
+		}
+	}
 	// 只在主线程中渲染，因为处理用户交互是在主线程中，
-	// TODO: 避免 main queue 可能积累太多渲染任务。
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if(self.isOpenGLReady){
-			if(_firstRenderTick == DBL_MAX){
-				_firstRenderTick = currentTime;
-				_secondRenderTick = currentTime;
-			}
-			if(currentTime - _secondRenderTick < _limitRefreshInterval){
-				return;
-			}
-			
-			double renderTime = _timescale * (_secondRenderTick - _firstRenderTick);
-//			log_debug(@"%f", renderTime);
-			BOOL ret = [self renderAtTime:renderTime];
-			if(!ret){
-				_failureRenderTick = currentTime;
-			}else{
-				// 如果是从失败中恢复
-				if(_failureRenderTick != 0){
-					_firstRenderTick = _failureRenderTick - renderTime;
-					// 清除失败标记
-					_failureRenderTick = 0;
-				}
-				_secondRenderTick = currentTime;
-			}
+	// 为避免 main queue 可能积累太多渲染任务，加锁判断，确保只一个任务在运行。
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		[self executeRender];
+		@synchronized(self){
+			_isRendering = NO;
 		}
 	});
+}
+
+- (void)executeRender{
+	if(!self.isOpenGLReady){
+		return;
+	}
+	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
+	if(_firstRenderTick == DBL_MAX){
+		_firstRenderTick = currentTime;
+		_secondRenderTick = currentTime;
+	}
+	if(currentTime - _secondRenderTick < _limitRefreshInterval){
+		return;
+	}
+	
+	double renderTime = _timescale * (_secondRenderTick - _firstRenderTick);
+	//			log_debug(@"%f", renderTime);
+	BOOL ret = [self renderAtTime:renderTime];
+	if(!ret){
+		_failureRenderTick = currentTime;
+	}else{
+		// 如果是从失败中恢复
+		if(_failureRenderTick != 0){
+			_firstRenderTick = _failureRenderTick - renderTime;
+			// 清除失败标记
+			_failureRenderTick = 0;
+		}
+		_secondRenderTick = currentTime;
+	}
 }
 
 @end
