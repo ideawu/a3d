@@ -56,7 +56,7 @@ namespace a3d{
 		void transform(const Matrix4 &mat);
 		void transform(const Transform &trans);
 
-		// 将力施加与坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
+		// 将力施加于坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
 //		void force(const Vector3 &force, const Vector3 &atPoint);
 //		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
 
