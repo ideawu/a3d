@@ -23,6 +23,7 @@ namespace a3d{
 		virtual void update(float progress, Node *current, const Node *origin){}
 
 		AnimateState state() const;
+		void state(AnimateState state);
 		float duration() const;
 		void duration(float duration);
 		void timingFunc(AnimateTimingFunc func);
@@ -38,6 +39,8 @@ namespace a3d{
 
 		AnimateState _state;
 		AnimateTimingFunc _timingFunc;
+		// 指定 timingOffset 时，动画时间不是从0到1，而是从offset到offset+1
+		float _timingOffset;
 		AnimateCallback _callback;
 		void *_callbackCtx;
 		
@@ -45,7 +48,6 @@ namespace a3d{
 		float _currentTime;
 		float _duration;
 		
-		void updateState(AnimateState state);
 	};
 }; // end namespace
 

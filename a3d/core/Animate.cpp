@@ -8,6 +8,7 @@ namespace a3d{
 	Animate::Animate(){
 		_state = AnimateStateNone;
 		_timingFunc = NULL;
+		_timingOffset = 0;
 		_callback = NULL;
 		_beginTime = -1;
 		_currentTime = -1;
@@ -21,7 +22,7 @@ namespace a3d{
 		return _state;
 	}
 
-	void Animate::updateState(AnimateState state){
+	void Animate::state(AnimateState state){
 		_state = state;
 		if(_callback){
 			_callback(this, _callbackCtx);
@@ -44,7 +45,7 @@ namespace a3d{
 		if(_state == AnimateStateNone){
 			_beginTime = time;
 			_currentTime = time;
-			updateState(AnimateStateBegin);
+			this->state(AnimateStateBegin);
 			return;
 		}
 		
@@ -60,16 +61,17 @@ namespace a3d{
 			}else{
 				progress = (time - _beginTime)/_duration;
 				progress = fmin(1, progress);
-				timing_p = _timingFunc? _timingFunc(progress) : AnimateTimingEaseOut(progress);
+				AnimateTimingFunc func = _timingFunc? _timingFunc : AnimateTimingEaseOut;
+				timing_p = func(_timingOffset + progress);
 			}
 			_currentTime = time;
 
-			updateState(AnimateStateWillUpdate);
+			this->state(AnimateStateWillUpdate);
 			update(timing_p, current, origin);
-			updateState(AnimateStateDidUpdate);
+			this->state(AnimateStateDidUpdate);
 
 			if(progress >= 1){
-				updateState(AnimateStateEnd);
+				this->state(AnimateStateEnd);
 			}
 		}
 	}

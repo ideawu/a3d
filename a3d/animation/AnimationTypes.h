@@ -13,12 +13,13 @@ namespace a3d{
 		AnimateStateBegin,
 		AnimateStateWillUpdate,
 		AnimateStateDidUpdate,
-		AnimateStateEnd
+		AnimateStateEnd,
+		AnimateStateCancelled
 	}AnimateState;
 
 	typedef float (*AnimateCallback)(Animate *action, void *ctx);
 	typedef float (*AnimateTimingFunc)(float progress);
-
+	
 	inline static float AnimateTimingLinear(float p){
 		return p;
 	}
@@ -37,6 +38,11 @@ namespace a3d{
 			p = (p - 0.5) * 2;
 			return AnimateTimingEaseOut(p)/2 + 0.5;
 		}
+	}
+
+	inline static float AnimateTimingLoopSine(float p){
+		p = p * M_PI * 2 - M_PI_2;
+		return (sinf(p) + 1)/2;
 	}
 }; // end namespace
 

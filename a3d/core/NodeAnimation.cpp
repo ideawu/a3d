@@ -25,6 +25,9 @@ namespace a3d{
 	void NodeAnimation::removeAll(){
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); it++){
 			Animate *action = *it;
+			if(action->state() != AnimateStateEnd){
+				action->state(AnimateStateCancelled);
+			}
 			delete action;
 		}
 		_actions.clear();
