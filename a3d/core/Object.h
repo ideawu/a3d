@@ -50,6 +50,7 @@ namespace a3d{
 		void rotate(float degree, const Axis &axis);
 		// 同时缩放自身体积和坐标系
 		void scale(float xyz);
+		void scale(const Vector3 &scale);
 		void scale(float x, float y, float z);
 		
 		void transform(const Vector3 &size);

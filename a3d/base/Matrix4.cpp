@@ -33,7 +33,23 @@ namespace a3d{
 	const float* Matrix4::array() const{
 		return (const float *)&_mat;
 	}
+
+	Vector3 Matrix4::position() const{
+		return Vector3(x(), y(), z());
+	}
 	
+	void Matrix4::position(const Vector3 &pos){
+		this->x(pos.x);
+		this->y(pos.y);
+		this->z(pos.z);
+	}
+	
+	void Matrix4::position(float x, float y, float z){
+		this->x(x);
+		this->y(y);
+		this->z(z);
+	}
+
 	float Matrix4::x() const{
 		return _mat.m30;
 	}
@@ -56,6 +72,13 @@ namespace a3d{
 	
 	void Matrix4::z(float z){
 		_mat.m32  = z;
+	}
+	
+	Vector3 Matrix4::scale() const{
+		Vector3 vec = Vector3(1, 1, 1);
+		vec = this->mul(vec);
+		vec.sub(this->position());
+		return vec;
 	}
 
 	void Matrix4::translate(float x, float y, float z){
@@ -92,6 +115,10 @@ namespace a3d{
 		this->scale(xyz, xyz, xyz);
 	}
 
+	void Matrix4::scale(const Vector3 &scale){
+		this->scale(scale.x, scale.y, scale.z);
+	}
+
 	void Matrix4::scale(float x, float y, float z){
 		_mat = GLKMatrix4Scale(_mat, x, y, z);
 	}
@@ -107,7 +134,11 @@ namespace a3d{
 	Matrix4 Matrix4::div(const Matrix4 &mat) const{
 		return this->mul(mat.invert());
 	}
-	
+
+	Vector3 Matrix4::mul(const Vector3 &vec) const{
+		return mulVector3(vec);
+	}
+
 	Vector3 Matrix4::mulVector3(const Vector3 &vec) const{
 		GLKVector3 v = GLKVector3Make(vec.x, vec.y, vec.z);
 		v = GLKMatrix4MultiplyVector3WithTranslation(_mat, v);

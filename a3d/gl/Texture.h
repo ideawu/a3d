@@ -5,6 +5,8 @@
 #ifndef Texture_hpp
 #define Texture_hpp
 
+#include "Vector3.h"
+
 namespace a3d{
 	class Texture
 	{
@@ -14,6 +16,7 @@ namespace a3d{
 		static Texture* textureFromImageFile(const char *filename);
 		
 		GLuint id() const;
+		Vector3 size() const;
 		int width() const;
 		void width(int w);
 		int height() const;

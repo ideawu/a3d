@@ -31,7 +31,11 @@ namespace a3d{
 	void Texture::id(GLuint i){
 		_id = i;
 	}
-	
+
+	Vector3 Texture::size() const{
+		return Vector3(_width, _height, 0);
+	}
+
 	int Texture::width() const{
 		return _width;
 	}

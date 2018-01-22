@@ -17,19 +17,15 @@ namespace a3d{
 	}
 
 	Vector3 Object::position() const{
-		return Vector3(x(), y(), z());
+		return _matrix.position();
 	}
 	
 	void Object::position(const Vector3 &pos){
-		this->x(pos.x);
-		this->y(pos.y);
-		this->z(pos.z);
+		_matrix.position(pos);
 	}
 
 	void Object::position(float x, float y, float z){
-		this->x(x);
-		this->y(y);
-		this->z(z);
+		_matrix.position(x, y, z);
 	}
 
 	float Object::x() const{
@@ -120,7 +116,11 @@ namespace a3d{
 	void Object::scale(float xyz){
 		this->scale(xyz, xyz, xyz);
 	}
-	
+
+	void Object::scale(const Vector3 &scale){
+		this->scale(scale.x, scale.y, scale.z);
+	}
+
 	void Object::scale(float x, float y, float z){
 		_matrix.scale(x, y, z);
 		this->width(this->width() * x);
