@@ -5,10 +5,10 @@
 #ifndef Camera_hpp
 #define Camera_hpp
 
-#include "Object.h"
+#include "Node.h"
 
 namespace a3d{
-	class Camera : public Object
+	class Camera : public Node
 	{
 	public:
 		Camera(){}

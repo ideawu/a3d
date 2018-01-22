@@ -10,6 +10,7 @@ namespace a3d{
 		_context = NULL;
 		_camera = new Camera();
 		_rootNode = new Node();
+		_rootNode->addSubNode(_camera);
 	}
 	
 	Scene::~Scene(){
