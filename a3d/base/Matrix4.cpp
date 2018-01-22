@@ -77,7 +77,7 @@ namespace a3d{
 	Vector3 Matrix4::scale() const{
 		Vector3 vec = Vector3(1, 1, 1);
 		vec = this->mul(vec);
-		vec.sub(this->position());
+		vec = vec.sub(this->position());
 		return vec;
 	}
 

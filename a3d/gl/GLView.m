@@ -14,15 +14,13 @@
 	dispatch_queue_t _processQueue;
 	float _timescale;
 	float _limitRefreshInterval;
+	BOOL _isOpenGLReady;
+	NSMutableArray *_jobs;
 }
-@property BOOL isOpenGLReady;
 // renderTime = second - first
 @property double firstRenderTick;
-// 如果渲染成功，second 要滑动
 @property double secondRenderTick;
-// fail 记录上一次second滑动失败的时钟，如果 pause 恢复，将 first和second 整体滑动到 pause 处，然后 second 继续滑动
-@property double failureRenderTick;
-@property double lastAbsoluteTime;
+@property double pauseRenderTick;
 @property BOOL isRendering;
 @end
 
@@ -47,9 +45,10 @@
 	[self setWantsBestResolutionOpenGLSurface:YES];
 	_displayLink = NULL;
 	_processQueue = NULL;
-	_firstRenderTick = DBL_MAX;
 	_timescale = 1.0;
 	_limitRefreshInterval = 0;
+	_isOpenGLReady = NO;
+	_jobs = [[NSMutableArray alloc] init];
 	return self;
 }
 
@@ -61,7 +60,7 @@
 
 - (void)prepareOpenGL{
 	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
-	_isOpenGLReady = YES;
+	[self setIsOpenGLReady:YES];
 }
 
 - (CGSize)viewportSize{
@@ -111,6 +110,7 @@
 - (void)stopAnimation{
 	if(_displayLink && CVDisplayLinkIsRunning(_displayLink)){
 		[self stopDisplayLink];
+		_pauseRenderTick = _secondRenderTick;
 	}
 }
 
@@ -167,13 +167,14 @@
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now,
 									const CVTimeStamp *outputTime, CVOptionFlags flagsIn,
 									CVOptionFlags *flagsOut, void *displayLinkContext){
+//	log_debug(@"%f", outputTime->hostTime/1000.0/1000.0/1000.0);
 	[(__bridge GLView *)displayLinkContext displayLinkCallback];
 	return kCVReturnSuccess;
 }
 #endif
 
 - (void)setTimescale:(float)scale{
-	if(_firstRenderTick != DBL_MAX){
+	if(_firstRenderTick != 0){
 		double renderTime = _timescale * (_secondRenderTick - _firstRenderTick);
 		renderTime /= scale;
 		_firstRenderTick = _secondRenderTick - renderTime;
@@ -185,52 +186,65 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	_limitRefreshInterval = 1.0/fps;
 }
 
+- (BOOL)isOpenGLReady{
+	@synchronized(self){
+		return _isOpenGLReady;
+	}
+}
+
+- (void)setIsOpenGLReady:(BOOL)isReady{
+	@synchronized(self){
+		_isOpenGLReady = isReady;
+	}
+}
+
 - (void)displayLinkCallback{
+	if(!self.isOpenGLReady){
+		return;
+	}
+
+	BOOL isBlocked = NO;
 	@synchronized(self){
 		if(_isRendering){
-			log_debug(@"rendering, drop frame");
-			return;
-		}else{
-			_isRendering = YES;
+			isBlocked = YES;
 		}
 	}
+
+	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
+
 	// 只在主线程中渲染，因为处理用户交互是在主线程中，
-	// 为避免 main queue 可能积累太多渲染任务，加锁判断，确保只一个任务在运行。
-	dispatch_sync(dispatch_get_main_queue(), ^{
-		[self executeRender];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		// 只在主线程中修改这些变量
+		if(_firstRenderTick == 0){
+			_firstRenderTick = currentTime;
+			_secondRenderTick = currentTime;
+		}else{
+			// 刷新频率限制
+			if(currentTime - _secondRenderTick < _limitRefreshInterval){
+				return;
+			}
+			
+			if(_pauseRenderTick != 0){
+				_firstRenderTick += (currentTime - _pauseRenderTick);
+				_pauseRenderTick = 0;
+			}
+			_secondRenderTick = currentTime;
+		}
+		
+		double frameTime = _timescale * (_secondRenderTick - _firstRenderTick);
+		if(isBlocked){
+			log_debug(@"drop frame at %.3f", frameTime);
+			return;
+		}
+		
+		@synchronized(self){
+			_isRendering = YES;
+		}
+		[self renderAtTime:frameTime];
 		@synchronized(self){
 			_isRendering = NO;
 		}
 	});
-}
-
-- (void)executeRender{
-	if(!self.isOpenGLReady){
-		return;
-	}
-	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
-	if(_firstRenderTick == DBL_MAX){
-		_firstRenderTick = currentTime;
-		_secondRenderTick = currentTime;
-	}
-	if(currentTime - _secondRenderTick < _limitRefreshInterval){
-		return;
-	}
-	
-	double renderTime = _timescale * (_secondRenderTick - _firstRenderTick);
-	//			log_debug(@"%f", renderTime);
-	BOOL ret = [self renderAtTime:renderTime];
-	if(!ret){
-		_failureRenderTick = currentTime;
-	}else{
-		// 如果是从失败中恢复
-		if(_failureRenderTick != 0){
-			_firstRenderTick = _failureRenderTick - renderTime;
-			// 清除失败标记
-			_failureRenderTick = 0;
-		}
-		_secondRenderTick = currentTime;
-	}
 }
 
 @end
