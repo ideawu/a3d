@@ -31,7 +31,8 @@ namespace a3d{
 
 		Vector3 size() const;
 		void size(const Vector3 &size);
-		
+		void size(float w, float h, float d);
+
 		float width() const;
 		void width(float w);
 		float height() const;

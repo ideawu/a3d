@@ -60,6 +60,10 @@ namespace a3d{
 		_size = size;
 	}
 
+	void Object::size(float w, float h, float d){
+		_size = Vector3(w, h, d);
+	}
+
 	float Object::width() const{
 		return _size.x;
 	}
