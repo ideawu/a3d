@@ -233,7 +233,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		
 		double frameTime = _timescale * (_secondRenderTick - _firstRenderTick);
 		if(isBlocked){
-			log_debug(@"drop frame at %.3f", frameTime);
+//			log_debug(@"drop frame at %.3f", frameTime);
 			return;
 		}
 		
