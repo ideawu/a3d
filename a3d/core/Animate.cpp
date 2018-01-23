@@ -7,11 +7,11 @@
 namespace a3d{
 	Animate::Animate(){
 		_state = AnimateStateNone;
-		_timingFunc = NULL;
-		_timingOffset = 0;
+		_easingFunc = AnimateTimingEaseOut;
+		_bounceFunc = AnimateTimingLinear;
+		_accelateFunc = AnimateTimingNone;
 		_callback = NULL;
 		_beginTime = -1;
-		_currentTime = -1;
 		_duration = 0;
 	}
 	
@@ -36,35 +36,84 @@ namespace a3d{
 	void Animate::duration(float duration){
 		_duration = duration;
 	}
+	
+	void Animate::bounce(float count){
+		_bounce = count;
+	}
+	
+	void Animate::easingFunc(AnimateTimingFunc func){
+		_easingFunc = func;
+	}
+	
+	void Animate::bounceFunc(AnimateTimingFunc func){
+		_bounceFunc = func;
+	}
+	
+	void Animate::accelateFunc(AnimateTimingFunc func){
+		_accelateFunc = func;
+	}
+	
+	static float reverse_timing_func(AnimateTimingFunc func, float val){
+		float s = 0;
+		float e = 1.0;
+		float t = (e-s)/2;
+		float epsilon = 0.00001;
+		while(1){
+			float v = func(t);
+			if(fabs(v-val) < epsilon || fabs(t-e) < epsilon || fabs(t-s) < epsilon){
+				return t;
+			}
+			if(v > val){
+				e = t;
+			}else{
+				s = t;
+			}
+			t = s + (e-s)/2;
+		}
+	}
 
-	void Animate::timingFunc(AnimateTimingFunc func){
-		_timingFunc = func;
+	float Animate::timing(float p) const{
+		float step_s = 0;
+		float step_e = 0;
+		if(_bounce != 0){
+			float bounce_ratio = reverse_timing_func(_bounceFunc, p);
+			step_s = floor(bounce_ratio * _bounce/2) * 2; // 向下取偶
+			step_e = step_s+2;
+			float time_s = _bounceFunc(step_s/_bounce);
+			float time_e = _bounceFunc(step_e/_bounce);
+			
+			p = (p - time_s)/(time_e - time_s);
+			p = (p < 0.5)? 2 * p : 2 * (1-p);
+		}
+		
+		float y = _easingFunc(p);
+		
+		if(_bounce != 0){
+			float total_steps = ceil(_bounce/2) * 2; // 向上取偶
+			y *= _accelateFunc(step_e/total_steps);
+		}
+		return y;
 	}
 
 	void Animate::updateAtTime(float time, Node *current, const Node *origin){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
-			_currentTime = time;
 			this->state(AnimateStateBegin);
-			return;
 		}
 		
 		if(_state != AnimateStateNone && _state != AnimateStateEnd){
 			float progress;
 			float timing_p;
-			if(_duration == 0){
-				// 不管时间如何，如果 duration 为零则立即执行
+			if(time < _beginTime){
 				progress = 1;
 				timing_p = 1;
-			}else if(time < _beginTime){
+			}else if(_duration == 0){
 				return;
 			}else{
 				progress = (time - _beginTime)/_duration;
 				progress = fmin(1, progress);
-				AnimateTimingFunc func = _timingFunc? _timingFunc : AnimateTimingEaseOut;
-				timing_p = func(_timingOffset + progress);
+				timing_p = this->timing(progress);
 			}
-			_currentTime = time;
 
 			this->state(AnimateStateWillUpdate);
 			update(timing_p, current, origin);

@@ -16,10 +16,15 @@ namespace a3d{
 		AnimateStateEnd,
 		AnimateStateCancelled
 	}AnimateState;
+	
+	// TODO: bounceBack, bounceTo
 
 	typedef float (*AnimateCallback)(Animate *action, void *ctx);
 	typedef float (*AnimateTimingFunc)(float progress);
 	
+	inline static float AnimateTimingNone(float p){
+		return 1;
+	}
 	inline static float AnimateTimingLinear(float p){
 		return p;
 	}

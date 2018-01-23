@@ -66,6 +66,7 @@ namespace a3d{
 	}
 	
 	void Context::width(float width){
+		// ceil(width/2) * 2
 		_width = (int)((double)width/2 + 0.5) * 2;
 	}
 	
