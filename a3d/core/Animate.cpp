@@ -76,9 +76,12 @@ namespace a3d{
 		float step_s = 0;
 		float step_e = 0;
 		if(_bounce != 0){
+			// 通过反函数计算当前时间是第几跳
 			float bounce_ratio = reverse_timing_func(_bounceFunc, p);
+			// 相邻的两次组成一次周期
 			step_s = floor(bounce_ratio * _bounce/2) * 2; // 向下取偶
 			step_e = step_s+2;
+			// 周期的开始和结束时间
 			float time_s = _bounceFunc(step_s/_bounce);
 			float time_e = _bounceFunc(step_e/_bounce);
 			
