@@ -117,19 +117,8 @@
 	_objects.push_back(_camera);
 }
 
-- (void)drawRect:(NSRect)aRect {
-	// 操作前务必要切换上下文
-	[[self openGLContext] makeCurrentContext];
-
-	_context->makeCurrent();
-	_context->clear(0, 0, 0, 1);
-	_context->loadMatrix3D(_camera->matrix3D());
-	[self draw3D];
-	_context->loadMatrix2D(_camera->matrix2D());
-	[self draw2D];
-	_context->blit();
-
-	[[self openGLContext] flushBuffer];
+- (void)drawRect:(NSRect)dirtyRect{
+	[self renderAtTime:0];
 }
 
 - (void)renderAtTime:(double)time{
@@ -140,11 +129,11 @@
 	_context->clear(0, 0, 0, 1);
 	_context->loadMatrix3D(_camera->matrix3D());
 	[self draw3D];
+	_hero->renderAtTime(time);
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->blit();
 	
-	_hero->renderAtTime(time);
 	
 	[[self openGLContext] flushBuffer];
 }
@@ -154,7 +143,7 @@
 	_flag->render();
 	_img1->render();
 	_img2->render();
-	_hero->render();
+//	_hero->render();
 }
 
 - (void)draw2D{
@@ -256,11 +245,14 @@
 		case ' ':{
 			// 切换被控制角色
 			[self switchSprite];
+//			[self setTimescale:0.1];
 			
-			a3d::Animate *action = a3d::AnimatePosition::move(a3d::Vector3(200,50,0));
+			a3d::Animate *action = a3d::AnimatePosition::move(a3d::Vector3(300,50,0));
 //			action->easingFunc(a3d::AnimateTimingEaseInOut);
+//			action->bounceFunc(a3d::AnimateTimingEaseIn);
+			action->accelateFunc(a3d::AnimateTimingLinear);
 			action->duration(4);
-			action->bounce(20);
+			action->bounce(12);
 			_hero->runAnimation(action);
 			break;
 		}
@@ -337,8 +329,6 @@
 
 //	[GEulerAngle angleWithMatrix:_currentObject];
 //	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);
-	
-	[self setNeedsDisplay:YES];
 }
 @end
 
