@@ -132,6 +132,23 @@
 	[[self openGLContext] flushBuffer];
 }
 
+- (void)renderAtTime:(double)time{
+//	log_debug(@"");
+	[[self openGLContext] makeCurrentContext];
+	
+	_context->makeCurrent();
+	_context->clear(0, 0, 0, 1);
+	_context->loadMatrix3D(_camera->matrix3D());
+	[self draw3D];
+	_context->loadMatrix2D(_camera->matrix2D());
+	[self draw2D];
+	_context->blit();
+	
+	_hero->renderAtTime(time);
+	
+	[[self openGLContext] flushBuffer];
+}
+
 - (void)draw3D{
 	_scene->render();
 	_flag->render();
@@ -239,6 +256,12 @@
 		case ' ':{
 			// 切换被控制角色
 			[self switchSprite];
+			
+			a3d::Animate *action = a3d::AnimatePosition::move(a3d::Vector3(200,50,0));
+//			action->easingFunc(a3d::AnimateTimingEaseInOut);
+			action->duration(4);
+			action->bounce(20);
+			_hero->runAnimation(action);
 			break;
 		}
 		case '[':{

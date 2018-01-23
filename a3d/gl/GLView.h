@@ -10,8 +10,7 @@
 @property (readonly) CGSize framebufferSize;
 
 - (void)drawRect:(NSRect)dirtyRect;
-// TODO: 如果无法渲染指定时间帧，且希望重新渲染，返回NO
-- (BOOL)renderAtTime:(double)time;
+- (void)renderAtTime:(double)time;
 
 // 激活 renderAtTime: 的调用
 - (void)startAnimation;

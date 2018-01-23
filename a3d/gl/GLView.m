@@ -118,8 +118,7 @@
 	return _displayLink && CVDisplayLinkIsRunning(_displayLink);
 }
 
-- (BOOL)renderAtTime:(double)time{
-	return YES;
+- (void)renderAtTime:(double)time{
 }
 
 
