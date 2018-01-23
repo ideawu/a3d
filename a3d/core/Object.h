@@ -41,7 +41,7 @@ namespace a3d{
 		void depth(float d);
 
 	public:
-		void move(float x, float y, float z);
+		void move(float dx, float dy, float dz);
 		void move(const Vector3 &offset);
 		void rotateX(float degree);
 		void rotateY(float degree);

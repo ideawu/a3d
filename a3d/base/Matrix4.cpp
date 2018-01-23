@@ -76,8 +76,7 @@ namespace a3d{
 	
 	Vector3 Matrix4::scale() const{
 		Vector3 vec = Vector3(1, 1, 1);
-		vec = this->mul(vec);
-		vec = vec.sub(this->position());
+		vec = this->mul(vec, false);
 		return vec;
 	}
 
@@ -135,13 +134,13 @@ namespace a3d{
 		return this->mul(mat.invert());
 	}
 
-	Vector3 Matrix4::mul(const Vector3 &vec) const{
-		return mulVector3(vec);
-	}
-
-	Vector3 Matrix4::mulVector3(const Vector3 &vec) const{
+	Vector3 Matrix4::mul(const Vector3 &vec, bool withTranslation) const{
 		GLKVector3 v = GLKVector3Make(vec.x, vec.y, vec.z);
-		v = GLKMatrix4MultiplyVector3WithTranslation(_mat, v);
+		if(withTranslation){
+			v = GLKMatrix4MultiplyVector3WithTranslation(_mat, v);
+		}else{
+			v = GLKMatrix4MultiplyVector3(_mat, v);
+		}
 		return Vector3(v.x, v.y, v.z);
 	}
 

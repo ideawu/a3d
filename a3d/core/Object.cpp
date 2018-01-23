@@ -87,7 +87,7 @@ namespace a3d{
 	void Object::depth(float d){
 		_size.z = d;
 	}
-	
+
 	void Object::move(float x, float y, float z){
 		_matrix.translate(x, y, z);
 	}

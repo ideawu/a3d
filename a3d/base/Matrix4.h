@@ -60,8 +60,7 @@ namespace a3d{
 		// 返回目标矩阵距离当前矩阵需要做的变换
 		Matrix4 div(const Matrix4 &mat) const;
 		
-		Vector3 mul(const Vector3 &vec) const;
-		Vector3 mulVector3(const Vector3 &vec) const;
+		Vector3 mul(const Vector3 &vec, bool withTranslation) const;
 
 	private:
 		GLKMatrix4 _mat;
