@@ -75,6 +75,7 @@ namespace a3d{
 		if(_animation && !_animation->empty()){
 			_animation->updateAtTime(time);
 			// 动画进行时，同时更新 current 和 this
+//			log_debug("%f %f %f", this->width(), _animation->origin.width(), _animation->current.width());
 			*this = _animation->current;
 		}
 	}

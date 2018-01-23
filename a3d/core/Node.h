@@ -41,6 +41,8 @@ namespace a3d{
 		bool hasAnimations();
 
 	private:
+		friend class NodeAnimation;
+		
 		Node(const Node &d);
 		Node& operator =(const Node& d);
 		

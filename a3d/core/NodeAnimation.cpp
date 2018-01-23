@@ -38,9 +38,11 @@ namespace a3d{
 	}
 	
 	void NodeAnimation::updateAtTime(float time){
-		// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
+		// 动画进行前，检查 current 和 this，将 diff 更新到 origin和current 中，因为动画进行过程中，this 可能被更新
 		Transform trans = Transform::transformBetween(current, *target);
+//		log_debug("origin: %.2f, dw: %.2f", origin.width(), trans.size.x);
 		origin.transform(trans);
+		current = origin;
 		
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){
 			Animate *action = *it;
