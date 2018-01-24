@@ -11,11 +11,11 @@
 
 namespace a3d{
 	// 辅助类
-	class NodeAnimation
+	class NodeAnimateHelper
 	{
 	public:
-		NodeAnimation();
-		~NodeAnimation();
+		NodeAnimateHelper();
+		~NodeAnimateHelper();
 		
 		void add(Animate *action);
 		void remove(Animate *action);

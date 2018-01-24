@@ -3,8 +3,23 @@
 //
 
 #include "Animate.h"
+#include "AnimatePosition.h"
+#include "AnimateOpacity.h"
 
 namespace a3d{
+	
+	Animate* Animate::move(Vector3 pos){
+		return AnimatePosition::moveTo(pos);
+	}
+	
+	Animate* Animate::moveTo(Vector3 pos){
+		return AnimatePosition::moveTo(pos);
+	}
+	
+	Animate* Animate::fadeTo(float opacity){
+		return AnimateOpacity::fadeTo(opacity);
+	}
+
 	Animate::Animate(){
 		_state = AnimateStateNone;
 		_easingFunc = AnimateTimingEaseOut;

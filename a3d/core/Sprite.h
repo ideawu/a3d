@@ -5,7 +5,7 @@
 #ifndef SpriteTexture_hpp
 #define SpriteTexture_hpp
 
-#include "Node.h"
+#include "Vector3.h"
 
 namespace a3d{
 	class Sprite

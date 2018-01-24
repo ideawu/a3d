@@ -2,27 +2,27 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "NodeAnimation.h"
+#include "NodeAnimateHelper.h"
 
 namespace a3d{
 
-	NodeAnimation::NodeAnimation(){
+	NodeAnimateHelper::NodeAnimateHelper(){
 	}
 	
-	NodeAnimation::~NodeAnimation(){
+	NodeAnimateHelper::~NodeAnimateHelper(){
 		removeAll();
 	}
 
-	void NodeAnimation::add(Animate *action){
+	void NodeAnimateHelper::add(Animate *action){
 		_actions.push_back(action);
 	}
 	
-	void NodeAnimation::remove(Animate *action){
+	void NodeAnimateHelper::remove(Animate *action){
 		_actions.remove(action);
 		delete action;
 	}
 	
-	void NodeAnimation::removeAll(){
+	void NodeAnimateHelper::removeAll(){
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); it++){
 			Animate *action = *it;
 			if(action->state() != AnimateStateEnd){
@@ -33,11 +33,11 @@ namespace a3d{
 		_actions.clear();
 	}
 
-	bool NodeAnimation::empty() const{
+	bool NodeAnimateHelper::empty() const{
 		return _actions.empty();
 	}
 	
-	void NodeAnimation::updateAtTime(float time){
+	void NodeAnimateHelper::updateAtTime(float time){
 		// 动画进行前，检查 current 和 this，将 diff 更新到 origin和current 中，因为动画进行过程中，this 可能被更新
 		Transform trans = Transform::transformBetween(current, *target);
 //		log_debug("origin: %.2f, dw: %.2f", origin.width(), trans.size.x);

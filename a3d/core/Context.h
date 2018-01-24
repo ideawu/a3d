@@ -6,9 +6,10 @@
 #define GLContext_hpp
 
 #include "Matrix4.h"
-#include "Renderer.h"
 
 namespace a3d{
+	class Renderer;
+	
 	class Context
 	{
 	public:
@@ -33,7 +34,7 @@ namespace a3d{
 		void clear(float r, float g, float b, float a=1);
 		void flush();
 		void finish();
-		// TODO: blit other FBO
+		// TODO: blit to other FBO
 		void blit();
 
 	protected:

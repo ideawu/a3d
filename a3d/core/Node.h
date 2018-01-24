@@ -10,7 +10,7 @@
 
 namespace a3d{
 	class Animate;
-	class NodeAnimation;
+	class NodeAnimateHelper;
 	
  	class Node : public Object
 	{
@@ -42,7 +42,7 @@ namespace a3d{
 		bool hasAnimations();
 
 	private:
-		friend class NodeAnimation;
+		friend class NodeAnimateHelper;
 		
 		Node(const Node &d);
 		Node& operator =(const Node& d);
@@ -51,7 +51,7 @@ namespace a3d{
 		
 		Node *_parent;
 		std::list<Node *> *_subs;
-		NodeAnimation *_animation;
+		NodeAnimateHelper *_animation;
 		
 		void updateAnimationAtTime(float time);
 	};

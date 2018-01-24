@@ -8,6 +8,7 @@
 #include "Node.h"
 
 namespace a3d{
+
 	class Camera : public Node
 	{
 	public:

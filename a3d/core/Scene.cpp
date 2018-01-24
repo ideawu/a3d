@@ -3,6 +3,9 @@
 //
 
 #include "Scene.h"
+#include "Camera.h"
+#include "Node.h"
+#include "Context.h"
 
 namespace a3d{
 	

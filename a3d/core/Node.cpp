@@ -3,7 +3,7 @@
 //
 
 #include "Node.h"
-#include "NodeAnimation.h"
+#include "NodeAnimateHelper.h"
 #include "Renderer.h"
 
 namespace a3d{
@@ -113,7 +113,7 @@ namespace a3d{
 
 	void Node::runAnimation(Animate *action){
 		if(!_animation){
-			_animation = new NodeAnimation();
+			_animation = new NodeAnimateHelper();
 			_animation->target = this;
 		}
 		// 如果所有的动画都未开始，则应该在开始前，设置 origin

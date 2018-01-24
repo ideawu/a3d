@@ -5,6 +5,7 @@
 #include "Context.h"
 #include "SharedContext.h"
 #include "BufferContext.h"
+#include "Renderer.h"
 
 namespace a3d{
 	static Context *_current = NULL;

@@ -6,6 +6,7 @@
 #define Animation_hpp
 
 #include "AnimationTypes.h"
+#include "Vector3.h"
 
 namespace a3d{
 	class Node;
@@ -13,14 +14,15 @@ namespace a3d{
 	class Animate
 	{
 	public:
-//		static Animate* move(Vector3 offset);
-//		static Animate* moveTo(Vector3 pos);
+		static Animate* move(Vector3 offset);
+		static Animate* moveTo(Vector3 pos);
+		static Animate* fadeTo(float opacity);
 
 	public:
 		virtual ~Animate();
 
 		// 子类方法
-		virtual void update(float progress, Node *current, const Node *origin){}
+		virtual void update(float progress, Node *current, const Node *origin) = 0;
 
 		AnimateState state() const;
 		void state(AnimateState state);
@@ -42,6 +44,7 @@ namespace a3d{
 
 	protected:
 		Animate();
+	
 	private:
 		Animate(const Animate &a);
 		Animate& operator =(const Animate& d);

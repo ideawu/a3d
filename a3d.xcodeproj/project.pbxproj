@@ -88,8 +88,8 @@
 		31DF6E9E201363610078153E /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6E9C201363610078153E /* Renderer.cpp */; };
 		31DF6E9F201363610078153E /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
 		31DF6EA020136CF90078153E /* Renderer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31DF6E9D201363610078153E /* Renderer.h */; };
-		31DF6EA320137C4E0078153E /* NodeAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6EA120137C4E0078153E /* NodeAnimation.cpp */; };
-		31DF6EA420137C4E0078153E /* NodeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6EA220137C4E0078153E /* NodeAnimation.h */; };
+		31DF6EA320137C4E0078153E /* NodeAnimateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6EA120137C4E0078153E /* NodeAnimateHelper.cpp */; };
+		31DF6EA420137C4E0078153E /* NodeAnimateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6EA220137C4E0078153E /* NodeAnimateHelper.h */; };
 		31DF6EA7201381380078153E /* AnimateOpacity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DF6EA5201381380078153E /* AnimateOpacity.cpp */; };
 		31DF6EA8201381380078153E /* AnimateOpacity.h in Headers */ = {isa = PBXBuildFile; fileRef = 31DF6EA6201381380078153E /* AnimateOpacity.h */; };
 		31DF6EA9201382100078153E /* AnimatePosition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 314FE477201054190067984B /* AnimatePosition.h */; };
@@ -220,8 +220,8 @@
 		31DF6E9A20130B9C0078153E /* AnimationTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationTypes.h; sourceTree = "<group>"; };
 		31DF6E9C201363610078153E /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		31DF6E9D201363610078153E /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
-		31DF6EA120137C4E0078153E /* NodeAnimation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimation.cpp; sourceTree = "<group>"; };
-		31DF6EA220137C4E0078153E /* NodeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeAnimation.h; sourceTree = "<group>"; };
+		31DF6EA120137C4E0078153E /* NodeAnimateHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimateHelper.cpp; sourceTree = "<group>"; };
+		31DF6EA220137C4E0078153E /* NodeAnimateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeAnimateHelper.h; sourceTree = "<group>"; };
 		31DF6EA5201381380078153E /* AnimateOpacity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateOpacity.cpp; sourceTree = "<group>"; };
 		31DF6EA6201381380078153E /* AnimateOpacity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateOpacity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -281,8 +281,8 @@
 				31CB9B93200A14DD0068D9B7 /* util */,
 				31CB9B9C200A1F550068D9B7 /* base */,
 				31CB9B6D2009B4C20068D9B7 /* core */,
-				314FE4912010C6AD0067984B /* animation */,
-				31CB9B852009EA4A0068D9B7 /* gl */,
+				314FE4912010C6AD0067984B /* implement */,
+				31CB9B852009EA4A0068D9B7 /* ui */,
 				3124F1221FFCAB9E0005EDDE /* draft */,
 				3124F0C61FFB37F40005EDDE /* a3d.h */,
 				3124F1412001C71D0005EDDE /* GEulerAngle.h */,
@@ -366,16 +366,24 @@
 			path = Cli;
 			sourceTree = "<group>";
 		};
-		314FE4912010C6AD0067984B /* animation */ = {
+		314FE4912010C6AD0067984B /* implement */ = {
 			isa = PBXGroup;
 			children = (
 				31DF6E9A20130B9C0078153E /* AnimationTypes.h */,
+				31DF6EA220137C4E0078153E /* NodeAnimateHelper.h */,
+				31DF6EA120137C4E0078153E /* NodeAnimateHelper.cpp */,
 				31DF6EA6201381380078153E /* AnimateOpacity.h */,
 				31DF6EA5201381380078153E /* AnimateOpacity.cpp */,
 				314FE477201054190067984B /* AnimatePosition.h */,
 				314FE476201054190067984B /* AnimatePosition.cpp */,
+				3160D15720185D0C0045E588 /* ImageSprite.h */,
+				3160D15420185D0B0045E588 /* ImageSprite.cpp */,
+				31DF6E97201253290078153E /* SharedContext.h */,
+				31DF6E96201253290078153E /* SharedContext.cpp */,
+				31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */,
+				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
 			);
-			path = animation;
+			path = implement;
 			sourceTree = "<group>";
 		};
 		31CB9B6D2009B4C20068D9B7 /* core */ = {
@@ -387,8 +395,6 @@
 				314FE48A2010C0F90067984B /* Transform.cpp */,
 				31CB9B99200A18750068D9B7 /* Node.h */,
 				31CB9B98200A18750068D9B7 /* Node.cpp */,
-				31DF6EA220137C4E0078153E /* NodeAnimation.h */,
-				31DF6EA120137C4E0078153E /* NodeAnimation.cpp */,
 				314FE46B200F78E40067984B /* Animate.h */,
 				314FE46A200F78E40067984B /* Animate.cpp */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
@@ -397,27 +403,21 @@
 				314FE466200F789F0067984B /* Scene.cpp */,
 				3160D15620185D0C0045E588 /* Sprite.h */,
 				3160D15520185D0B0045E588 /* Sprite.cpp */,
-				3160D15720185D0C0045E588 /* ImageSprite.h */,
-				3160D15420185D0B0045E588 /* ImageSprite.cpp */,
+				31CB9B872009EBD10068D9B7 /* Context.h */,
+				31CB9B862009EBD10068D9B7 /* Context.cpp */,
+				31DF6E9D201363610078153E /* Renderer.h */,
+				31DF6E9C201363610078153E /* Renderer.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
 		};
-		31CB9B852009EA4A0068D9B7 /* gl */ = {
+		31CB9B852009EA4A0068D9B7 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				31CB9B872009EBD10068D9B7 /* Context.h */,
-				31CB9B862009EBD10068D9B7 /* Context.cpp */,
-				31DF6E97201253290078153E /* SharedContext.h */,
-				31DF6E96201253290078153E /* SharedContext.cpp */,
-				31CB9B8B2009F5DA0068D9B7 /* BufferContext.h */,
-				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
-				31DF6E9D201363610078153E /* Renderer.h */,
-				31DF6E9C201363610078153E /* Renderer.cpp */,
 				314FE3D7200CAF560067984B /* GLView.h */,
 				314FE3D8200CAF560067984B /* GLView.m */,
 			);
-			path = gl;
+			path = ui;
 			sourceTree = "<group>";
 		};
 		31CB9B93200A14DD0068D9B7 /* util */ = {
@@ -463,7 +463,7 @@
 				314FE49C2011C79B0067984B /* Rect.h in Headers */,
 				31DF6E9F201363610078153E /* Renderer.h in Headers */,
 				3160D15B20185D0C0045E588 /* ImageSprite.h in Headers */,
-				31DF6EA420137C4E0078153E /* NodeAnimation.h in Headers */,
+				31DF6EA420137C4E0078153E /* NodeAnimateHelper.h in Headers */,
 				314FE48320108D570067984B /* Transform.h in Headers */,
 				314FE469200F789F0067984B /* Scene.h in Headers */,
 				31CB9BA8200A1F6D0068D9B7 /* Vector3.h in Headers */,
@@ -608,7 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31DF6EA320137C4E0078153E /* NodeAnimation.cpp in Sources */,
+				31DF6EA320137C4E0078153E /* NodeAnimateHelper.cpp in Sources */,
 				31DF6E98201253290078153E /* SharedContext.cpp in Sources */,
 				31CB9BA3200A1F6D0068D9B7 /* Axis.cpp in Sources */,
 				31CB9B882009EBD10068D9B7 /* Context.cpp in Sources */,
