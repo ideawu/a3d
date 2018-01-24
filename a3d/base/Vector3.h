@@ -9,7 +9,21 @@ namespace a3d{
 	class Vector3
 	{
 	public:
-		float x, y, z;
+		union{
+			float x;
+			float w;
+			float width;
+		};
+		union{
+			float y;
+			float h;
+			float height;
+		};
+		union{
+			float z;
+			float d;
+			float depth;
+		};
 
 		Vector3();
 		Vector3(float x, float y, float z);
