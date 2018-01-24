@@ -66,44 +66,43 @@ namespace a3d{
 	}
 	
 	void Context::width(float width){
-		// ceil(width/2) * 2
-		_width = (int)((double)width/2 + 0.5) * 2;
+		_width = ceil(width/2) * 2;
+//		_width = (int)((double)width/2 + 0.5) * 2;
 	}
 	
 	void Context::height(float height){
-		_height = (int)((double)height/2 + 0.5) * 2;
+		_height = ceil(height/2) * 2;
+//		_height = (int)((double)height/2 + 0.5) * 2;
+	}
+
+	void Context::loadMatrix(const Matrix4 &mat){
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf((const GLfloat *)mat.array());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	}
 
 	void Context::loadMatrix3D(const Matrix4 &mat){
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.array());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		
+		loadMatrix(mat);
 		glEnable(GL_CULL_FACE);
-		glEnable(GL_MULTISAMPLE);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	
 	void Context::loadMatrix2D(const Matrix4 &mat){
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat *)mat.array());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		
+		loadMatrix(mat);
 		glDisable(GL_CULL_FACE);
-		glEnable(GL_MULTISAMPLE);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	
 	void Context::clear(){

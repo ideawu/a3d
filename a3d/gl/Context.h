@@ -45,6 +45,8 @@ namespace a3d{
 		Context(const Context &d);
 		Context& operator =(const Context& d);
 
+		void loadMatrix(const Matrix4 &mat);
+
 		void width(float width);
 		void height(float height);
 

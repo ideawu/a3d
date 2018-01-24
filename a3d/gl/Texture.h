@@ -12,7 +12,7 @@ namespace a3d{
 	{
 	public:
 		Texture();
-		~Texture();
+		virtual ~Texture();
 		static Texture* textureFromImageFile(const char *filename);
 		
 		GLuint id() const;
