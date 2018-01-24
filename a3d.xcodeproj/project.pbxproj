@@ -369,7 +369,6 @@
 		314FE4912010C6AD0067984B /* implement */ = {
 			isa = PBXGroup;
 			children = (
-				31DF6E9A20130B9C0078153E /* AnimationTypes.h */,
 				31DF6EA220137C4E0078153E /* NodeAnimateHelper.h */,
 				31DF6EA120137C4E0078153E /* NodeAnimateHelper.cpp */,
 				31DF6EA6201381380078153E /* AnimateOpacity.h */,
@@ -395,6 +394,7 @@
 				314FE48A2010C0F90067984B /* Transform.cpp */,
 				31CB9B99200A18750068D9B7 /* Node.h */,
 				31CB9B98200A18750068D9B7 /* Node.cpp */,
+				31DF6E9A20130B9C0078153E /* AnimationTypes.h */,
 				314FE46B200F78E40067984B /* Animate.h */,
 				314FE46A200F78E40067984B /* Animate.cpp */,
 				31CB9B822009D99F0068D9B7 /* Camera.h */,
