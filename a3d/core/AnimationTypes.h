@@ -16,8 +16,6 @@ namespace a3d{
 		AnimateStateEnd,
 		AnimateStateCancelled
 	}AnimateState;
-	
-	// TODO: bounceBack, bounceTo
 
 	typedef float (*AnimateCallback)(Animate *action, void *ctx);
 	typedef float (*AnimateTimingFunc)(float progress);
