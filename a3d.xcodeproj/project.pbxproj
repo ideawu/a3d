@@ -395,6 +395,10 @@
 				31CB9B812009D99F0068D9B7 /* Camera.cpp */,
 				314FE467200F789F0067984B /* Scene.h */,
 				314FE466200F789F0067984B /* Scene.cpp */,
+				3160D15620185D0C0045E588 /* Sprite.h */,
+				3160D15520185D0B0045E588 /* Sprite.cpp */,
+				3160D15720185D0C0045E588 /* ImageSprite.h */,
+				3160D15420185D0B0045E588 /* ImageSprite.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -410,10 +414,6 @@
 				31CB9B8A2009F5DA0068D9B7 /* BufferContext.cpp */,
 				31DF6E9D201363610078153E /* Renderer.h */,
 				31DF6E9C201363610078153E /* Renderer.cpp */,
-				3160D15620185D0C0045E588 /* Sprite.h */,
-				3160D15520185D0B0045E588 /* Sprite.cpp */,
-				3160D15720185D0C0045E588 /* ImageSprite.h */,
-				3160D15420185D0B0045E588 /* ImageSprite.cpp */,
 				314FE3D7200CAF560067984B /* GLView.h */,
 				314FE3D8200CAF560067984B /* GLView.m */,
 			);

@@ -5,22 +5,15 @@
 #ifndef SpriteTexture_hpp
 #define SpriteTexture_hpp
 
-#include "Vector3.h"
+#include "Node.h"
 
 namespace a3d{
-	class Sprite
+	class Sprite : public Node
 	{
 	public:
 		static Sprite* imageSprite(const char *filename);
 		
 		virtual ~Sprite(){}
-
-		GLuint id() const;
-		Vector3 size() const;
-		int width() const;
-		void width(int w);
-		int height() const;
-		void height(int h);
 
 		int frames() const;
 		float duration() const;

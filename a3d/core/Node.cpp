@@ -95,7 +95,7 @@ namespace a3d{
 			}
 			renderer->pushMatrix(this->matrix());
 			
-			this->draw();
+			this->drawAtTime(time);
 		}
 		if(_subs){
 			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){

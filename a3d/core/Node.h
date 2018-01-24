@@ -18,9 +18,10 @@ namespace a3d{
 		Node();
 		virtual ~Node();
 
-		// 子类实现此方法，但子类的使用者不直接调用此方法，而是调用 render()。
+		// 子类实现两个方法中的一个即可。
 		virtual void draw(){};
-		
+		virtual void drawAtTime(float time){draw();};
+
 		void render(); // renderAtTime(-1)
 		void renderAtTime(float time);
 

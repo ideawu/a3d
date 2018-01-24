@@ -66,6 +66,8 @@ namespace a3d{
 		ret->_frames = frames;
 		ret->_duration = total_duration;
 		ret->_texIdAtFrame.resize(frames, -1);
+		// 加载第1张图片，生成width,height
+		ret->textureAtFrame(0, NULL);
 		return ret;
 	}
 
@@ -102,9 +104,12 @@ namespace a3d{
 			}
 			GLuint tid = bindImageData(data, w, h);
 			_texIdAtFrame[frame] = tid;
-	//		log_debug(@"bind image to texture: %d", tid);
+			log_debug("bind image to texture: %d", tid);
 			
 			free(data);
+			
+			this->width(w);
+			this->height(h);
 		}
 		if(duration){
 			*duration = _durations[frame];

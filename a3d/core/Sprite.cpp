@@ -32,26 +32,6 @@ namespace a3d{
 		_duration = duration;
 	}
 
-	Vector3 Sprite::size() const{
-		return Vector3(_width, _height, 0);
-	}
-
-	int Sprite::width() const{
-		return _width;
-	}
-
-	void Sprite::width(int w){
-		_width = w;
-	}
-
-	int Sprite::height() const{
-		return _height;
-	}
-
-	void Sprite::height(int h){
-		_height = h;
-	}
-
 	GLuint Sprite::texture(){
 		return textureAtFrame(0, NULL);
 	}
