@@ -202,6 +202,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		return;
 	}
 
+	// 此变量是每个任务相关的，不同的任务得到的此变量的值可能不一样。queue的工作原理是拷贝上下文变量
 	BOOL isBlocked = NO;
 	@synchronized(self){
 		if(_isRendering){
@@ -213,6 +214,11 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 	// 只在主线程中渲染，因为处理用户交互是在主线程中，
 	dispatch_async(dispatch_get_main_queue(), ^{
+		// 定时器可能已经停止了，但任务还在积压，忽略这些任务
+		if(!CVDisplayLinkIsRunning(_displayLink)){
+			return;
+		}
+		
 		// 只在主线程中修改这些变量
 		if(_firstRenderTick == 0){
 			_firstRenderTick = currentTime;
@@ -231,8 +237,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		}
 		
 		double frameTime = _timescale * (_secondRenderTick - _firstRenderTick);
+		
 		if(isBlocked){
-//			log_debug(@"drop frame at %.3f", frameTime);
+			// log_debug(@"drop frame at %.3f", frameTime);
 			return;
 		}
 		
