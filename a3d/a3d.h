@@ -29,6 +29,6 @@ namespace a3d{
 
 #include "Context.h"
 #include "Renderer.h"
-#include "Texture.h"
+#include "Sprite.h"
 
 #endif

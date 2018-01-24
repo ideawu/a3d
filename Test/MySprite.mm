@@ -8,7 +8,7 @@
 
 #include "MySprite.h"
 #include <GLKit/GLKit.h>
-#include "a3d/Texture.h"
+#include "Sprite.h"
 
 static void drawHead();
 static void drawBody();
@@ -24,12 +24,12 @@ static void drawBody();
 //}
 
 void MySprite::draw(){
-	static a3d::Texture *texture = NULL;
+	static a3d::Sprite *texture = NULL;
 	if(!texture){
 		glEnable(GL_TEXTURE_2D);
-		texture = a3d::Texture::textureFromImageFile("/Users/ideawu/Downloads/alex.png");
+		texture = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/alex.png");
 	}
-	glBindTexture(GL_TEXTURE_2D, texture->id());
+	glBindTexture(GL_TEXTURE_2D, texture->texture());
 
 //	static GLKTextureInfo *_texture = nil;
 //	if(!_texture){

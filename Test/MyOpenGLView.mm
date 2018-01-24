@@ -3,12 +3,8 @@
 #import "MySprite.h"
 
 #include <vector>
-#include "a3d/Context.h"
-#include "a3d/Camera.h"
 #include "a3d/DraftScene.h"
 #include "a3d/DraftSprite.h"
-#include "a3d/DraftImage.h"
-#include "a3d/AnimatePosition.h"
 #include "a3d/a3d.h"
 
 @interface MyOpenGLView(){
@@ -23,8 +19,8 @@
 	DraftScene *_scene;
 	DraftSprite *_flag;
 	DraftSprite *_camera_hero;
-	DraftImage *_img1;
-	DraftImage *_img2;
+//	a3d::Sprite *_img1;
+//	a3d::Sprite *_img2;
 
 	MySprite *_hero;
 
@@ -55,17 +51,17 @@
 	
 //	[_scene moveX:200 y:200 z:5];
 
-	{
-		_img1 = new DraftImage("/Users/ideawu/Downloads/imgs/1.jpg");
-		_img1->scale(0.5);
-		_img1->move(_img1->width()/2, _img1->height()/2, 0);
-		_img1->move(400, 0, 500);
-	}
-	{
-		_img2 = new DraftImage("/Users/ideawu/Downloads/imgs/9.jpg");
-		_img2->move(_img2->width()/2, _img2->height()/2, 0);
-		_img2->move(100, 0, 4000);
-	}
+//	{
+//		_img1 = new DraftImage("/Users/ideawu/Downloads/imgs/1.jpg");
+//		_img1->scale(0.5);
+//		_img1->move(_img1->width()/2, _img1->height()/2, 0);
+//		_img1->move(400, 0, 500);
+//	}
+//	{
+//		_img2 = new DraftImage("/Users/ideawu/Downloads/imgs/9.jpg");
+//		_img2->move(_img2->width()/2, _img2->height()/2, 0);
+//		_img2->move(100, 0, 4000);
+//	}
 	
 	_flag = new DraftSprite();
 	_flag->width(100);
@@ -141,8 +137,8 @@
 - (void)draw3D{
 	_scene->render();
 	_flag->render();
-	_img1->render();
-	_img2->render();
+//	_img1->render();
+//	_img2->render();
 //	_hero->render();
 }
 
