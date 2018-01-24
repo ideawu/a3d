@@ -16,6 +16,27 @@ namespace a3d{
 		_duration = 0;
 	}
 
+	Vector3 Sprite::size() const{
+		return _size;
+	}
+	
+	float Sprite::width() const{
+		return _size.x;
+	}
+	
+	void Sprite::width(float w){
+		_size.x = w;
+	}
+	
+	float Sprite::height() const{
+		return _size.y;
+	}
+	
+	void Sprite::height(float h){
+		_size.y = h;
+	}
+
+	
 	int Sprite::frames() const{
 		return _frames;
 	}
@@ -32,6 +53,7 @@ namespace a3d{
 		_duration = duration;
 	}
 
+	
 	GLuint Sprite::texture(){
 		return textureAtFrame(0, NULL);
 	}

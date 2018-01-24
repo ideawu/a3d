@@ -8,7 +8,7 @@
 #include "Node.h"
 
 namespace a3d{
-	class Sprite : public Node
+	class Sprite
 	{
 	public:
 		static Sprite* imageSprite(const char *filename);
@@ -17,6 +17,9 @@ namespace a3d{
 
 		int frames() const;
 		float duration() const;
+		Vector3 size() const;
+		float width() const;
+		float height() const;
 
 		GLuint texture();
 		GLuint textureAtFrame(int frame);
@@ -30,6 +33,8 @@ namespace a3d{
 		int _frames;
 		float _duration;
 		
+		void width(float w);
+		void height(float h);
 		void frames(int frames);
 		void duration(float duration);
 
@@ -37,8 +42,7 @@ namespace a3d{
 		Sprite(const Sprite &d);
 		Sprite& operator =(const Sprite& d);
 
-		int _width;
-		int _height;
+		Vector3 _size;
 	};
 }; // end namespace
 

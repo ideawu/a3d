@@ -89,7 +89,7 @@ namespace a3d{
 			return 0;
 		}
 		if(_texIdAtFrame[frame] == -1){
-			CGImageRef image = CGImageSourceCreateImageAtIndex(_cgimgSrc, 0, NULL);
+			CGImageRef image = CGImageSourceCreateImageAtIndex(_cgimgSrc, frame, NULL);
 			if(!image){
 				_texIdAtFrame[frame] = 0;
 				return 0;
@@ -104,7 +104,7 @@ namespace a3d{
 			}
 			GLuint tid = bindImageData(data, w, h);
 			_texIdAtFrame[frame] = tid;
-			log_debug("bind image to texture: %d", tid);
+//			log_debug("bind image to texture: %d, w: %d, h: %d", tid, w, h);
 			
 			free(data);
 			
