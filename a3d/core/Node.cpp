@@ -72,10 +72,43 @@ namespace a3d{
 		return mat;
 	}
 
-	void Node::render(){
-		renderAtTime(-1);
+	Vector3 Node::convertToWorld(const Vector3 &vec) const{
+		return this->worldMatrix().mul(vec);
+	}
+	
+	Point3 Node::convertToWorld(const Point3 &pos) const{
+		return this->worldMatrix().mul(pos);
+	}
+	
+	Vector3 Node::convertWorld(const Vector3 &vec) const{
+		return this->worldMatrix().invert().mul(vec);
+	}
+	
+	Point3 Node::convertWorld(const Point3 &pos) const{
+		return this->worldMatrix().invert().mul(pos);
 	}
 
+	Vector3 Node::convertToParent(const Vector3 &vec) const{
+		return this->matrix().mul(vec);
+	}
+	
+	Point3 Node::convertToParent(const Point3 &pos) const{
+		return this->matrix().mul(pos);
+	}
+	
+	Vector3 Node::convertParent(const Vector3 &vec) const{
+		return this->matrix().invert().mul(vec);
+	}
+	
+	Point3 Node::convertParent(const Point3 &pos) const{
+		return this->matrix().invert().mul(pos);
+	}
+
+
+	void Node::render(){
+		renderAtTime(0);
+	}
+	
 	void Node::renderAtTime(float time){
 		if(time > 0 && _animation && !_animation->empty()){
 			_animation->updateAtTime(time);

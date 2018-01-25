@@ -66,10 +66,6 @@ namespace a3d{
 		_context->loadMatrix3D(_camera->matrix2D());
 	}
 
-	void Scene::render(){
-		renderAtTime(_time);
-	}
-
 	void Scene::renderAtTime(float time){
 		_time = time;
 		_context->makeCurrent();
