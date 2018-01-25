@@ -67,24 +67,16 @@ namespace a3d{
 	void Node::render(){
 		renderAtTime(-1);
 	}
-	
-	void Node::updateAnimationAtTime(float time){
-		if(time < 0){
-			return;
-		}
-		if(_animation && !_animation->empty()){
-			_animation->updateAtTime(time);
-			// 动画进行时，同时更新 current 和 this
-//			log_debug("%f %f %f", this->width(), _animation->origin.width(), _animation->current.width());
-			*this = _animation->current;
-		}
-	}
 
 	void Node::renderAtTime(float time){
+		if(time > 0 && _animation && !_animation->empty()){
+			_animation->updateAtTime(time);
+			// 动画进行时，同时更新 current 和 this
+			//log_debug("%f %f %f", this->width(), _animation->origin.width(), _animation->current.width());
+			*this = _animation->current;
+		}
+		
 		Renderer *renderer = Renderer::current();
-		
-		this->updateAnimationAtTime(time);
-		
 		float parent_alpha = renderer->opacity();
 		float node_alpha = _opacity;
 

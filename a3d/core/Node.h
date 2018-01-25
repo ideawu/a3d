@@ -52,8 +52,6 @@ namespace a3d{
 		Node *_parent;
 		std::list<Node *> *_subs;
 		NodeAnimateHelper *_animation;
-		
-		void updateAnimationAtTime(float time);
 	};
 
 }; // end namespace
