@@ -30,7 +30,7 @@ namespace a3d{
 		void view3D();
 		void view2D();
 
-		void render();
+		void render(); // render at current time
 		void renderAtTime(float time);
 
 	private:
