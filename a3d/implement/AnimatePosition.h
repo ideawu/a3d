@@ -13,8 +13,8 @@ namespace a3d{
 	class AnimatePosition : public Animate
 	{
 	public:
-		static AnimatePosition* move(Vector3 offset);
-		static AnimatePosition* moveTo(Vector3 pos);
+		static AnimatePosition* move(const Vector3 &vec);
+		static AnimatePosition* moveTo(const Vector3 &pos);
 
 		virtual void update(float progress, Node *current, const Node *origin);
 	private:
@@ -22,7 +22,7 @@ namespace a3d{
 		
 		typedef enum{
 			MoveTypeOffset,
-			MoveTypeDestination
+			MoveTypePosition
 		}MoveType;
 		
 		MoveType _type;

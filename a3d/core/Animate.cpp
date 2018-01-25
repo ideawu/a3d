@@ -8,11 +8,11 @@
 
 namespace a3d{
 	
-	Animate* Animate::move(Vector3 pos){
-		return AnimatePosition::moveTo(pos);
+	Animate* Animate::move(const Vector3 &vec){
+		return AnimatePosition::move(vec);
 	}
 	
-	Animate* Animate::moveTo(Vector3 pos){
+	Animate* Animate::moveTo(const Vector3 &pos){
 		return AnimatePosition::moveTo(pos);
 	}
 	

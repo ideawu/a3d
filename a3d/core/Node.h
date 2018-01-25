@@ -32,6 +32,13 @@ namespace a3d{
 		void removeFromParent();
 		void addSubNode(Node *node);
 		void removeSubNode(Node *node);
+		
+		// 当前节点在世界（即根节点上一级）坐标系中的矩阵
+		Matrix4 worldMatrix() const;
+		Vector3 convertLocal(const Vector3 &vec) const;
+		Point3 convertLocal(const Point3 &pos) const;
+		Vector3 convertWorld(const Vector3 &vec) const;
+		Point3 convertWorld(const Point3 &pos) const;
 
 		// action 内存由 Node 管理
 		void runAnimation(Animate *action);

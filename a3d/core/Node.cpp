@@ -64,6 +64,14 @@ namespace a3d{
 		}
 	}
 
+	Matrix4 Node::worldMatrix() const{
+		Matrix4 mat = this->matrix();
+		if(_parent){
+			mat = _parent->worldMatrix().mul(mat);
+		}
+		return mat;
+	}
+
 	void Node::render(){
 		renderAtTime(-1);
 	}

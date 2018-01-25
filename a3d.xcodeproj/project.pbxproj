@@ -53,6 +53,9 @@
 		3160D15B20185D0C0045E588 /* ImageSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3160D15720185D0C0045E588 /* ImageSprite.h */; };
 		3160D15C20185EB70045E588 /* Sprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3160D15620185D0C0045E588 /* Sprite.h */; };
 		3160D15E2018607B0045E588 /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3124F0C31FFB37F40005EDDE /* liba3d.a */; };
+		317DA87C20198C0700830784 /* Point3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 317DA87A20198C0700830784 /* Point3.cpp */; };
+		317DA87D20198C0700830784 /* Point3.h in Headers */ = {isa = PBXBuildFile; fileRef = 317DA87B20198C0700830784 /* Point3.h */; };
+		317DA87E20198E3000830784 /* Point3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 317DA87B20198C0700830784 /* Point3.h */; };
 		31CB9B7B2009C5C00068D9B7 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B792009C5C00068D9B7 /* Object.cpp */; };
 		31CB9B7C2009C5C00068D9B7 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 31CB9B7A2009C5C00068D9B7 /* Object.h */; };
 		31CB9B832009D99F0068D9B7 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CB9B812009D99F0068D9B7 /* Camera.cpp */; };
@@ -103,6 +106,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				317DA87E20198E3000830784 /* Point3.h in CopyFiles */,
 				3160D15C20185EB70045E588 /* Sprite.h in CopyFiles */,
 				31DF6EA9201382100078153E /* AnimatePosition.h in CopyFiles */,
 				31DF6EAA201382100078153E /* AnimateOpacity.h in CopyFiles */,
@@ -193,6 +197,8 @@
 		3160D15520185D0B0045E588 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		3160D15620185D0C0045E588 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		3160D15720185D0C0045E588 /* ImageSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSprite.h; sourceTree = "<group>"; };
+		317DA87A20198C0700830784 /* Point3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Point3.cpp; sourceTree = "<group>"; };
+		317DA87B20198C0700830784 /* Point3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point3.h; sourceTree = "<group>"; };
 		31CB9B732009B9C70068D9B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31CB9B782009C3830068D9B7 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		31CB9B792009C5C00068D9B7 /* Object.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
@@ -436,10 +442,12 @@
 			children = (
 				31CB9B9E200A1F6D0068D9B7 /* Axis.h */,
 				31CB9B9D200A1F6D0068D9B7 /* Axis.cpp */,
-				31CB9BA0200A1F6D0068D9B7 /* Matrix4.h */,
-				31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */,
 				31CB9BA2200A1F6D0068D9B7 /* Vector3.h */,
 				31CB9BA1200A1F6D0068D9B7 /* Vector3.cpp */,
+				317DA87B20198C0700830784 /* Point3.h */,
+				317DA87A20198C0700830784 /* Point3.cpp */,
+				31CB9BA0200A1F6D0068D9B7 /* Matrix4.h */,
+				31CB9B9F200A1F6D0068D9B7 /* Matrix4.cpp */,
 				31CB9BB6200A25360068D9B7 /* Color.h */,
 				31CB9BB5200A25360068D9B7 /* Color.cpp */,
 				314FE49A2011C79B0067984B /* Rect.h */,
@@ -476,6 +484,7 @@
 				314FE479201054190067984B /* AnimatePosition.h in Headers */,
 				31DF6E99201253290078153E /* SharedContext.h in Headers */,
 				31DF6EA8201381380078153E /* AnimateOpacity.h in Headers */,
+				317DA87D20198C0700830784 /* Point3.h in Headers */,
 				314FE46D200F78E40067984B /* Animate.h in Headers */,
 				3124F0ED1FFB3C160005EDDE /* PrefixHeader.pch in Headers */,
 				31CB9B8D2009F5DA0068D9B7 /* BufferContext.h in Headers */,
@@ -630,6 +639,7 @@
 				314FE3DA200CAF560067984B /* GLView.m in Sources */,
 				314FE46C200F78E40067984B /* Animate.cpp in Sources */,
 				31DF6EA7201381380078153E /* AnimateOpacity.cpp in Sources */,
+				317DA87C20198C0700830784 /* Point3.cpp in Sources */,
 				31DF6E9E201363610078153E /* Renderer.cpp in Sources */,
 				314FE49B2011C79B0067984B /* Rect.cpp in Sources */,
 				3160D15920185D0C0045E588 /* Sprite.cpp in Sources */,

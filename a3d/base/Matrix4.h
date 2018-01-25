@@ -7,6 +7,7 @@
 
 #include <GLKit/GLKMath.h>
 #include "Vector3.h"
+#include "Point3.h"
 #include "Axis.h"
 
 namespace a3d{
@@ -25,7 +26,6 @@ namespace a3d{
 		/// 属性
 		const float* array() const;
 		
-		// decompose position
 		Vector3 position() const;
 		void position(const Vector3 &pos);
 		void position(float x, float y, float z);
@@ -36,7 +36,6 @@ namespace a3d{
 		float z() const;
 		void z(float z);
 		
-		// decompose scale
 		Vector3 scale() const;
 		// TODO: decompose rotation, Quaternion?
 //		Vector3 rotation() const;
@@ -60,7 +59,8 @@ namespace a3d{
 		// 返回目标矩阵距离当前矩阵需要做的变换
 		Matrix4 div(const Matrix4 &mat) const;
 		
-		Vector3 mul(const Vector3 &vec, bool withTranslation) const;
+		Vector3 mul(const Vector3 &vec) const;
+		Point3 mul(const Point3 &pos) const;
 
 	private:
 		GLKMatrix4 _mat;
