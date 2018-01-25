@@ -36,14 +36,14 @@ namespace a3d{
 		// ### 坐标和向量转换
 		// 当前节点在世界（即根节点上一级）坐标系中的矩阵
 		Matrix4 worldMatrix() const;
-		Vector3 convertToWorld(const Vector3 &vec) const;
-		Point3 convertToWorld(const Point3 &pos) const;
-		Vector3 convertWorld(const Vector3 &vec) const;
-		Point3 convertWorld(const Point3 &pos) const;
-		Vector3 convertToParent(const Vector3 &vec) const;
-		Point3 convertToParent(const Point3 &pos) const;
-		Vector3 convertParent(const Vector3 &vec) const;
-		Point3 convertParent(const Point3 &pos) const;
+		Vector3 convertVectorToWorld(const Vector3 &vec) const;
+		Vector3 convertVectorFromWorld(const Vector3 &vec) const;
+		Vector3 convertVectorToParent(const Vector3 &vec) const;
+		Vector3 convertVectorFromParent(const Vector3 &vec) const;
+		Point3 convertPointToWorld(const Point3 &pos) const;
+		Point3 convertPointFromWorld(const Point3 &pos) const;
+		Point3 convertPointToParent(const Point3 &pos) const;
+		Point3 convertPointFromParent(const Point3 &pos) const;
 
 		// ### 动画管理
 		// action 内存由 Node 管理

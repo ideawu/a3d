@@ -72,35 +72,35 @@ namespace a3d{
 		return mat;
 	}
 
-	Vector3 Node::convertToWorld(const Vector3 &vec) const{
+	Vector3 Node::convertVectorToWorld(const Vector3 &vec) const{
 		return this->worldMatrix().mul(vec);
 	}
 	
-	Point3 Node::convertToWorld(const Point3 &pos) const{
+	Point3 Node::convertPointToWorld(const Point3 &pos) const{
 		return this->worldMatrix().mul(pos);
 	}
 	
-	Vector3 Node::convertWorld(const Vector3 &vec) const{
+	Vector3 Node::convertVectorFromWorld(const Vector3 &vec) const{
 		return this->worldMatrix().invert().mul(vec);
 	}
 	
-	Point3 Node::convertWorld(const Point3 &pos) const{
+	Point3 Node::convertPointFromWorld(const Point3 &pos) const{
 		return this->worldMatrix().invert().mul(pos);
 	}
 
-	Vector3 Node::convertToParent(const Vector3 &vec) const{
+	Vector3 Node::convertVectorToParent(const Vector3 &vec) const{
 		return this->matrix().mul(vec);
 	}
 	
-	Point3 Node::convertToParent(const Point3 &pos) const{
+	Point3 Node::convertPointToParent(const Point3 &pos) const{
 		return this->matrix().mul(pos);
 	}
 	
-	Vector3 Node::convertParent(const Vector3 &vec) const{
+	Vector3 Node::convertVectorFromParent(const Vector3 &vec) const{
 		return this->matrix().invert().mul(vec);
 	}
 	
-	Point3 Node::convertParent(const Point3 &pos) const{
+	Point3 Node::convertPointFromParent(const Point3 &pos) const{
 		return this->matrix().invert().mul(pos);
 	}
 
