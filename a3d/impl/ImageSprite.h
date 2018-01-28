@@ -23,7 +23,7 @@ namespace a3d{
 	private:
 		ImageSprite();
 		ImageSprite(const ImageSprite &d);
-		ImageSprite& operator =(const ImageSprite& d);
+		ImageSprite& operator =(const ImageSprite &d);
 		
 		GLuint bindImageData(const char *data, int width, int height);
 		

@@ -6,15 +6,15 @@
 #define __a3d__SpriteNode__
 
 #include "Node.h"
+#include "Sprite.h"
 #include "Clock.h"
 
 namespace a3d{
-	class Sprite;
-
 	class SpriteNode : public Node
 	{
 	public:
 		SpriteNode();
+		virtual ~SpriteNode();
 
 		virtual void drawAtTime(float time);
 
@@ -22,18 +22,18 @@ namespace a3d{
 		Sprite* sprite() const;
 		void sprite(Sprite *sprite);
 
+		// 是否是不可丢帧的
+		void isFrameLossless(bool isLossless);
+		// 是否循环播放
+		void isLooping(bool looping);
+
 		void play();
 		void pause();
 		void stop();
 
-		// 是否是不可丢帧的
-		void isFrameLossless(bool isLossless);
-		// 是否循环播放
-		void isLooping(bool looping);;
-
 	private:
 		SpriteNode(const SpriteNode &d);
-		SpriteNode& operator =(const SpriteNode& d);
+		SpriteNode& operator =(const SpriteNode &d);
 
 		Node *_contentNode;
 		Sprite *_sprite;

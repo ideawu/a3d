@@ -49,7 +49,7 @@ namespace a3d{
 	
 	private:
 		Animate(const Animate &a);
-		Animate& operator =(const Animate& d);
+		Animate& operator =(const Animate &d);
 
 		AnimateState _state;
 		float _bounce;

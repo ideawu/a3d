@@ -29,7 +29,7 @@ namespace a3d{
 		
 	private:
 		Renderer(const Renderer &d);
-		Renderer& operator =(const Renderer& d);
+		Renderer& operator =(const Renderer &d);
 
 		Color _color;
 		std::vector<float> _q_opacity;

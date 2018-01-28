@@ -41,7 +41,7 @@ namespace a3d{
 	private:
 		Scene();
 		Scene(const Scene &d);
-		Scene& operator =(const Scene& d);
+		Scene& operator =(const Scene &d);
 		
 		float _time;
 		Context *_context;

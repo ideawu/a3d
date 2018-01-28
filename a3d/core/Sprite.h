@@ -44,7 +44,7 @@ namespace a3d{
 
 	private:
 		Sprite(const Sprite &d);
-		Sprite& operator =(const Sprite& d);
+		Sprite& operator =(const Sprite &d);
 
 		Vector3 _size;
 	};

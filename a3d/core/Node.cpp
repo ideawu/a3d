@@ -14,7 +14,7 @@ namespace a3d{
 		_opacity = 1;
 	}
 
-	Node& Node::operator =(const Node& d){
+	Node& Node::operator =(const Node &d){
 		Object::operator=(d);
 		_opacity = d._opacity;
 		return *this;

@@ -46,7 +46,7 @@ namespace a3d{
 		virtual void setup() = 0;
 	private:
 		Context(const Context &d);
-		Context& operator =(const Context& d);
+		Context& operator =(const Context &d);
 
 		void loadMatrix(const Matrix4 &mat);
 

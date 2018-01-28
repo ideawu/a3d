@@ -58,7 +58,7 @@ namespace a3d{
 		friend class NodeAnimateHelper;
 		
 		Node(const Node &d);
-		Node& operator =(const Node& d);
+		Node& operator =(const Node &d);
 		
 		float _opacity;
 		

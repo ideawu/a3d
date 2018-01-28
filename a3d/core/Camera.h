@@ -25,7 +25,7 @@ namespace a3d{
 
 	private:
 		Camera(const Camera &d);
-		Camera& operator =(const Camera& d);
+		Camera& operator =(const Camera &d);
 
 		float _fovy;
 		float _near;
