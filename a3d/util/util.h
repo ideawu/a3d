@@ -6,7 +6,7 @@
 #define util_h
 
 #include <math.h>
-#include <ImageIO/CGImageSource.h>
+#include <ImageIO/ImageIO.h>
 
 namespace a3d{
 	inline static float degree_to_radian(float degrees){

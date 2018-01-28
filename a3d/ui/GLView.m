@@ -3,6 +3,7 @@
 //
 
 #import "GLView.h"
+#include <mach/mach_time.h>
 
 @interface GLView(){
 	NSTrackingArea *_trackingArea;

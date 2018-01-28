@@ -148,7 +148,7 @@ static char* load_data_from_CGImage(CGImageRef image, int *width, int *height){
 	data = (char *)malloc(4 * w * h);
 	
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGImageByteOrder32Big;
+	uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
 	context = CGBitmapContextCreate(data, w, h, 8, 4 * w, colorSpace, bitmapInfo);
 	CGColorSpaceRelease(colorSpace);
 	

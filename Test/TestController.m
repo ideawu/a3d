@@ -8,21 +8,22 @@
 @interface TestController ()<NSWindowDelegate>{
 	double offset;
 }
+@property NSWindow *window;
 @property MyOpenGLView *videoView;
 @end
 
 @implementation TestController
 
 - (void)windowDidLoad {
-    [super windowDidLoad];
+	[super windowDidLoad];
 
-	
+
 	CGRect frame = self.window.frame;
 	frame.size.width = 900;
 	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
-	
-	_videoView = [[MyOpenGLView alloc] initWithFrame:self.window.contentView.frame];
+
+	_videoView = [[MyOpenGLView alloc] initWithFrame:((NSView *)self.window.contentView).frame];
 	[self.window.contentView addSubview:_videoView];
 	[self.window makeFirstResponder:_videoView];
 }
@@ -32,7 +33,7 @@
 }
 
 - (void)windowDidResize:(NSNotification *)notification{
-	_videoView.frame = self.window.contentView.frame;
+	_videoView.frame = ((NSView *)self.window.contentView).frame;
 }
 
 @end

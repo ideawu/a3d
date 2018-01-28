@@ -17,6 +17,8 @@ namespace a3d{
 		static ImageSprite* create(const char *filename);
 		
 		virtual ~ImageSprite();
+		// TODO
+		virtual int frameAtTime(float time, float *duration){return 0;}
 		virtual GLuint textureAtFrame(int frame, float *duration);
 		virtual GLuint textureAtTime(float time, float *duration);
 

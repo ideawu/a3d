@@ -2,8 +2,8 @@
 //  main.m
 //  Test
 //
-//  Created by ideawu on 02/01/2018.
-//  Copyright © 2018 ideawu. All rights reserved.
+//  Created by ideawu on 18-1-28.
+//  Copyright (c) 2018年 ideawu. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
