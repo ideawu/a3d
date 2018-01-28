@@ -27,7 +27,7 @@ namespace a3d{
 		void stop();
 
 		// 是否是不可丢帧的
-		void isFrameLossless(bool lossless);
+		void isFrameLossless(bool isLossless);
 		// 是否循环播放
 		void isLooping(bool looping);;
 
