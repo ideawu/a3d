@@ -23,12 +23,12 @@ namespace a3d{
 #include "Node.h"
 #include "Camera.h"
 #include "Scene.h"
+#include "Sprite.h"
 
 #include "Animate.h"
 #include "AnimationTypes.h"
 
 #include "Context.h"
 #include "Renderer.h"
-#include "Sprite.h"
 
 #endif

@@ -96,6 +96,8 @@
 		08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */; };
 		08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
+		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
+		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -211,6 +213,8 @@
 		08B4CBDA201DEDB700EEC0C5 /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
 		08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		08B4CBDF201DF38D00EEC0C5 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
+		08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
+		08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +318,8 @@
 				08B4CB2C201DE4AF00EEC0C5 /* Scene.cpp */,
 				08B4CB2F201DE4AF00EEC0C5 /* Sprite.h */,
 				08B4CB2E201DE4AF00EEC0C5 /* Sprite.cpp */,
+				08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */,
+				08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -416,6 +422,7 @@
 				08B4CB58201DE4AF00EEC0C5 /* Node.h in Headers */,
 				08B4CB51201DE4AF00EEC0C5 /* Animate.h in Headers */,
 				08B4CB1D201DE49900EEC0C5 /* PrefixHeader.pch in Headers */,
+				08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */,
 				08B4CB6E201DE4AF00EEC0C5 /* AnimatePosition.h in Headers */,
 				08B4CB1C201DE49900EEC0C5 /* Vector3.h in Headers */,
 				08B4CB18201DE49900EEC0C5 /* Point3.h in Headers */,
@@ -551,6 +558,7 @@
 				08B4CB6B201DE4AF00EEC0C5 /* AnimateOpacity.cpp in Sources */,
 				08B4CB59201DE4AF00EEC0C5 /* Object.cpp in Sources */,
 				08B4CB11201DE49900EEC0C5 /* Axis.cpp in Sources */,
+				08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */,
 				08B4CB55201DE4AF00EEC0C5 /* Context.cpp in Sources */,
 				08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */,
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,

@@ -1,5 +1,4 @@
 #import "MyOpenGLView.h"
-#import <GLKit/GLKit.h>
 #import "MySprite.h"
 
 #include <vector>

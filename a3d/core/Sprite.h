@@ -23,13 +23,13 @@ namespace a3d{
 
 		GLuint texture();
 		// 如果无对应帧，返回0
-		GLuint textureAtFrame(int frame);
 		GLuint textureAtTime(float time);
+		GLuint textureAtFrame(int frame);
 		// 如果指定时间无对应帧，返回-1
 		virtual int frameAtTime(float time, float *duration) = 0;
 		// 如果无对应帧，返回0
-		virtual GLuint textureAtFrame(int frame, float *duration) = 0;
 		virtual GLuint textureAtTime(float time, float *duration) = 0;
+		virtual GLuint textureAtFrame(int frame, float *duration) = 0;
 
 	protected:
 		Sprite();

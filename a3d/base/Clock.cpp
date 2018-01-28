@@ -19,7 +19,7 @@ namespace a3d{
 	}
 
 	void Clock::update(float tick){
-		if(isStopped()){
+		if(isPaused()){
 			_pauseTick = tick;
 		}else{
 			if(_firstTick == 0){
@@ -29,18 +29,16 @@ namespace a3d{
 		}
 	}
 
-	void Clock::start(){
-		if(isStopped()){
+	void Clock::pause(){
+		_pauseTick = _secondTick;
+	}
+
+	void Clock::resume(){
+		if(isPaused()){
 			float time = this->time();
 			_secondTick = _pauseTick;
 			this->time(time);
 			_pauseTick = 0;
-		}
-	}
-
-	void Clock::stop(){
-		if(isStarted()){
-			_pauseTick = _secondTick;
 		}
 	}
 
@@ -51,11 +49,7 @@ namespace a3d{
 		_speed = 1;
 	}
 
-	bool Clock::isStarted() const{
-		return _pauseTick == 0;
-	}
-
-	bool Clock::isStopped() const{
+	bool Clock::isPaused() const{
 		return _pauseTick != 0;
 	}
 

@@ -103,7 +103,7 @@ using namespace a3d;
 	if(_displayLink && !CVDisplayLinkIsRunning(_displayLink)){
 		[self startDisplayLink];
 		_clock.update(a3d::absolute_time());
-		_clock.start();
+		_clock.resume();
 	}
 }
 
@@ -111,7 +111,7 @@ using namespace a3d;
 	if(_displayLink && CVDisplayLinkIsRunning(_displayLink)){
 		[self stopDisplayLink];
 		_clock.update(a3d::absolute_time());
-		_clock.stop();
+		_clock.pause();
 	}
 }
 

@@ -84,8 +84,26 @@ namespace a3d{
 		return tid;
 	}
 
+	int ImageSprite::frameAtTime(float time, float *duration){
+		for(int i=0; i<_durations.size(); i++){
+			time -= _durations[i];
+			if(time < 0){
+				if(duration){
+					*duration = _durations[i];
+				}
+				return 9;
+			}
+		}
+		return -1;
+	}
+
+	GLuint ImageSprite::textureAtTime(float time, float *duration){
+		int frame = frameAtTime(time, duration);
+		return textureAtFrame(frame, NULL);
+	}
+
 	GLuint ImageSprite::textureAtFrame(int frame, float *duration){
-		if(frame >= _frames){
+		if(frame < 0 || frame >= _frames){
 			return 0;
 		}
 		if(_texIdAtFrame[frame] == -1){
@@ -104,7 +122,6 @@ namespace a3d{
 			}
 			GLuint tid = bindImageData(data, w, h);
 			_texIdAtFrame[frame] = tid;
-//			log_debug("bind image to texture: %d, w: %d, h: %d", tid, w, h);
 			
 			free(data);
 			
@@ -117,16 +134,6 @@ namespace a3d{
 		return _texIdAtFrame[frame];
 	}
 
-	GLuint ImageSprite::textureAtTime(float time, float *duration){
-		for(int i=0; i<_durations.size(); i++){
-			time -= _durations[i];
-			if(time < 0){
-				return textureAtFrame(i, duration);
-			}
-		}
-		return 0;
-	}
-	
 }; // end namespace
 
 static CGImageSourceRef load_CGImageSource(const char *filename){

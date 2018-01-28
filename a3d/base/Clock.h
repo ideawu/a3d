@@ -18,12 +18,11 @@ namespace a3d{
 
 		void update(float tick);
 
-		void start();
-		void stop();
+		void pause();
+		void resume();
 		void reset();
 
-		bool isStarted() const;
-		bool isStopped() const;
+		bool isPaused() const;
 
 		float secondTick() const;
 

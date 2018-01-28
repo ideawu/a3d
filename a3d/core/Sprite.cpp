@@ -58,12 +58,12 @@ namespace a3d{
 		return textureAtFrame(0, NULL);
 	}
 
+	GLuint Sprite::textureAtTime(float time){
+		return textureAtTime(time, NULL);
+	}
+
 	GLuint Sprite::textureAtFrame(int frame){
 		return textureAtFrame(frame, NULL);
 	}
 
-	GLuint Sprite::textureAtTime(float time){
-		return textureAtTime(time, NULL);
-	}
-	
 }; // end namespace

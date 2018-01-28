@@ -6,7 +6,6 @@
 #define ImageSprite_hpp
 
 #include "Sprite.h"
-//#include <ImageIO/CGImageSource.h>
 #include <ImageIO/ImageIO.h>
 #include <vector>
 
@@ -17,10 +16,9 @@ namespace a3d{
 		static ImageSprite* create(const char *filename);
 		
 		virtual ~ImageSprite();
-		// TODO
-		virtual int frameAtTime(float time, float *duration){return 0;}
-		virtual GLuint textureAtFrame(int frame, float *duration);
+		virtual int frameAtTime(float time, float *duration);
 		virtual GLuint textureAtTime(float time, float *duration);
+		virtual GLuint textureAtFrame(int frame, float *duration);
 
 	private:
 		ImageSprite();
