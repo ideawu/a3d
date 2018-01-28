@@ -10,7 +10,7 @@
 @property (readonly) CGSize framebufferSize;
 
 - (void)drawRect:(NSRect)dirtyRect;
-- (void)renderAtTime:(double)time;
+- (void)renderAtTime:(float)time;
 
 // 激活 renderAtTime: 的调用
 - (void)startAnimation;

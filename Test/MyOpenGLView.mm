@@ -117,7 +117,7 @@
 	[self renderAtTime:0];
 }
 
-- (void)renderAtTime:(double)time{
+- (void)renderAtTime:(float)time{
 //	log_debug(@"");
 	[[self openGLContext] makeCurrentContext];
 	
@@ -125,7 +125,7 @@
 	_context->clear(0, 0, 0, 1);
 	_context->loadMatrix3D(_camera->matrix3D());
 	[self draw3D];
-	_hero->renderAtTime(time);
+//	_hero->renderAtTime(time);
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->blit();
@@ -238,6 +238,14 @@
 	float dy = 0;
 	float dz = 0;
 	switch(c){
+		case '3':{
+			[self stopAnimation];
+			break;
+		}
+		case '4':{
+			[self startAnimation];
+			break;
+		}
 		case ' ':{
 			// 切换被控制角色
 			[self switchSprite];

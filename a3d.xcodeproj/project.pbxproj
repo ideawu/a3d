@@ -61,7 +61,7 @@
 		08B4CB7A201DE4AF00EEC0C5 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB4D201DE4AF00EEC0C5 /* log.h */; };
 		08B4CB7B201DE4AF00EEC0C5 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4E201DE4AF00EEC0C5 /* util.cpp */; };
 		08B4CB7C201DE4AF00EEC0C5 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
-		08B4CB7E201DE6B100EEC0C5 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4A201DE4AF00EEC0C5 /* GLView.m */; };
+		08B4CB7E201DE6B100EEC0C5 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */; };
 		08B4CB94201DE8B000EEC0C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB93201DE8B000EEC0C5 /* AppDelegate.m */; };
 		08B4CB96201DE8B000EEC0C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB95201DE8B000EEC0C5 /* main.m */; };
 		08B4CB98201DE8B000EEC0C5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08B4CB97201DE8B000EEC0C5 /* Images.xcassets */; };
@@ -93,6 +93,9 @@
 		08B4CBD5201DEC7800EEC0C5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CBD4201DEC7800EEC0C5 /* GLKit.framework */; };
 		08B4CBDB201DEDB700EEC0C5 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBD9201DEDB700EEC0C5 /* TestController.m */; };
 		08B4CBDC201DEDB700EEC0C5 /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B4CBDA201DEDB700EEC0C5 /* TestController.xib */; };
+		08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */; };
+		08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
+		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -102,6 +105,7 @@
 			dstPath = a3d;
 			dstSubfolderSpec = 7;
 			files = (
+				08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */,
 				08B4CBD2201DEC3B00EEC0C5 /* a3d.h in CopyFiles */,
 				08B4CBD0201DEC3200EEC0C5 /* DraftScene.h in CopyFiles */,
 				08B4CBD1201DEC3200EEC0C5 /* DraftSprite.h in CopyFiles */,
@@ -183,7 +187,7 @@
 		08B4CB46201DE4AF00EEC0C5 /* SharedContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedContext.cpp; sourceTree = "<group>"; };
 		08B4CB47201DE4AF00EEC0C5 /* SharedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedContext.h; sourceTree = "<group>"; };
 		08B4CB49201DE4AF00EEC0C5 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
-		08B4CB4A201DE4AF00EEC0C5 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
+		08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		08B4CB4C201DE4AF00EEC0C5 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		08B4CB4D201DE4AF00EEC0C5 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		08B4CB4E201DE4AF00EEC0C5 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 		08B4CBD8201DEDB700EEC0C5 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		08B4CBD9201DEDB700EEC0C5 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
 		08B4CBDA201DEDB700EEC0C5 /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
+		08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
+		08B4CBDF201DF38D00EEC0C5 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +286,8 @@
 				08B4CB0C201DE49900EEC0C5 /* Rect.cpp */,
 				08B4CB0F201DE49900EEC0C5 /* Vector3.h */,
 				08B4CB0E201DE49900EEC0C5 /* Vector3.cpp */,
+				08B4CBDF201DF38D00EEC0C5 /* Clock.h */,
+				08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -324,18 +332,18 @@
 		08B4CB3B201DE4AF00EEC0C5 /* impl */ = {
 			isa = PBXGroup;
 			children = (
+				08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */,
+				08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */,
 				08B4CB3D201DE4AF00EEC0C5 /* AnimateOpacity.h */,
 				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
 				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
 				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
+				08B4CB47201DE4AF00EEC0C5 /* SharedContext.h */,
+				08B4CB46201DE4AF00EEC0C5 /* SharedContext.cpp */,
 				08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */,
 				08B4CB40201DE4AF00EEC0C5 /* BufferContext.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
 				08B4CB42201DE4AF00EEC0C5 /* ImageSprite.cpp */,
-				08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */,
-				08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */,
-				08B4CB47201DE4AF00EEC0C5 /* SharedContext.h */,
-				08B4CB46201DE4AF00EEC0C5 /* SharedContext.cpp */,
 			);
 			path = impl;
 			sourceTree = "<group>";
@@ -344,7 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				08B4CB49201DE4AF00EEC0C5 /* GLView.h */,
-				08B4CB4A201DE4AF00EEC0C5 /* GLView.m */,
+				08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -414,6 +422,7 @@
 				08B4CB56201DE4AF00EEC0C5 /* Context.h in Headers */,
 				08B4CB16201DE49900EEC0C5 /* Matrix4.h in Headers */,
 				08B4CB70201DE4AF00EEC0C5 /* BufferContext.h in Headers */,
+				08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */,
 				08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */,
 				08B4CB52201DE4AF00EEC0C5 /* AnimationTypes.h in Headers */,
 				08B4CB60201DE4AF00EEC0C5 /* Sprite.h in Headers */,
@@ -531,7 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */,
-				08B4CB7E201DE6B100EEC0C5 /* GLView.m in Sources */,
+				08B4CB7E201DE6B100EEC0C5 /* GLView.mm in Sources */,
 				08B4CB61201DE4AF00EEC0C5 /* Transform.cpp in Sources */,
 				08B4CB5B201DE4AF00EEC0C5 /* Renderer.cpp in Sources */,
 				08B4CB5D201DE4AF00EEC0C5 /* Scene.cpp in Sources */,
@@ -546,6 +555,7 @@
 				08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */,
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,
 				08B4CB53201DE4AF00EEC0C5 /* Camera.cpp in Sources */,
+				08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */,
 				08B4CB13201DE49900EEC0C5 /* Color.cpp in Sources */,
 				08B4CB1B201DE49900EEC0C5 /* Vector3.cpp in Sources */,
 				08B4CB6F201DE4AF00EEC0C5 /* BufferContext.cpp in Sources */,

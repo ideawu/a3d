@@ -6,9 +6,14 @@
 #define util_h
 
 #include <math.h>
+#include <mach/mach_time.h>
 #include <ImageIO/ImageIO.h>
 
 namespace a3d{
+	inline static float absolute_time(){
+		return mach_absolute_time()/1000.0/1000.0/1000.0;
+	}
+
 	inline static float degree_to_radian(float degrees){
 		return degrees * (M_PI / 180);
 	}

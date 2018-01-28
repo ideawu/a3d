@@ -3,7 +3,9 @@
 //
 
 #import "GLView.h"
-#include <mach/mach_time.h>
+#include "Clock.h"
+
+using namespace a3d;
 
 @interface GLView(){
 	NSTrackingArea *_trackingArea;
@@ -12,16 +14,13 @@
 #else
 	CVDisplayLinkRef _displayLink;
 #endif
-	dispatch_queue_t _processQueue;
-	float _timescale;
+//	dispatch_queue_t _processQueue;
+
+	Clock _clock;
+
 	float _limitRefreshInterval;
 	BOOL _isOpenGLReady;
-	NSMutableArray *_jobs;
 }
-// renderTime = second - first
-@property double firstRenderTick;
-@property double secondRenderTick;
-@property double pauseRenderTick;
 @property BOOL isRendering;
 @end
 
@@ -45,11 +44,9 @@
 	self = [super initWithFrame:frameRect pixelFormat:format];
 	[self setWantsBestResolutionOpenGLSurface:YES];
 	_displayLink = NULL;
-	_processQueue = NULL;
-	_timescale = 1.0;
+//	_processQueue = NULL;
 	_limitRefreshInterval = 0;
 	_isOpenGLReady = NO;
-	_jobs = [[NSMutableArray alloc] init];
 	return self;
 }
 
@@ -105,13 +102,16 @@
 	}
 	if(_displayLink && !CVDisplayLinkIsRunning(_displayLink)){
 		[self startDisplayLink];
+		_clock.update(a3d::absolute_time());
+		_clock.start();
 	}
 }
 
 - (void)stopAnimation{
 	if(_displayLink && CVDisplayLinkIsRunning(_displayLink)){
 		[self stopDisplayLink];
-		_pauseRenderTick = _secondRenderTick;
+		_clock.update(a3d::absolute_time());
+		_clock.stop();
 	}
 }
 
@@ -119,7 +119,7 @@
 	return _displayLink && CVDisplayLinkIsRunning(_displayLink);
 }
 
-- (void)renderAtTime:(double)time{
+- (void)renderAtTime:(float)time{
 }
 
 
@@ -174,12 +174,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 #endif
 
 - (void)setTimescale:(float)scale{
-	if(_firstRenderTick != 0){
-		double renderTime = _timescale * (_secondRenderTick - _firstRenderTick);
-		renderTime /= scale;
-		_firstRenderTick = _secondRenderTick - renderTime;
-	}
-	_timescale = scale;
+	_clock.speed(scale);
 }
 
 - (void)setMaxFPS:(float)fps{
@@ -204,6 +199,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	}
 
 	// 此变量是每个任务相关的，不同的任务得到的此变量的值可能不一样。queue的工作原理是拷贝上下文变量
+	// 要在主线程中更新时钟，所以这里不直接丢弃任务，而是在主线程中再丢弃任务
 	BOOL isBlocked = NO;
 	@synchronized(self){
 		if(_isRendering){
@@ -211,43 +207,29 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		}
 	}
 
-	double currentTime = mach_absolute_time()/1000.0/1000.0/1000.0;
-
 	// 只在主线程中渲染，因为处理用户交互是在主线程中，
 	dispatch_async(dispatch_get_main_queue(), ^{
 		// 定时器可能已经停止了，但任务还在积压，忽略这些任务
 		if(!CVDisplayLinkIsRunning(_displayLink)){
 			return;
 		}
-		
-		// 只在主线程中修改这些变量
-		if(_firstRenderTick == 0){
-			_firstRenderTick = currentTime;
-			_secondRenderTick = currentTime;
-		}else{
-			// 刷新频率限制
-			if(currentTime - _secondRenderTick < _limitRefreshInterval){
-				return;
-			}
-			
-			if(_pauseRenderTick != 0){
-				_firstRenderTick += (currentTime - _pauseRenderTick);
-				_pauseRenderTick = 0;
-			}
-			_secondRenderTick = currentTime;
+
+		float tick = a3d::absolute_time();
+		// 刷新频率限制
+		if(tick - _clock.secondTick() < _limitRefreshInterval){
+			return;
 		}
-		
-		double frameTime = _timescale * (_secondRenderTick - _firstRenderTick);
-		
+		_clock.update(tick);
+
 		if(isBlocked){
-			// log_debug(@"drop frame at %.3f", frameTime);
+			// log_debug(@"drop frame at %.3f", _clock.time());
 			return;
 		}
 		
 		@synchronized(self){
 			_isRendering = YES;
 		}
-		[self renderAtTime:frameTime];
+		[self renderAtTime:_clock.time()];
 		@synchronized(self){
 			_isRendering = NO;
 		}

@@ -16,6 +16,7 @@ namespace a3d{
 #include "Point3.h"
 #include "Color.h"
 #include "Rect.h"
+#include "Clock.h"
 
 #include "Object.h"
 #include "Transform.h"
