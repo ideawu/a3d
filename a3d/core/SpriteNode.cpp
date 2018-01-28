@@ -5,6 +5,12 @@
 #include "SpriteNode.h"
 
 namespace a3d{
+	enum{
+		SpritePlaying,
+		SpritePaused,
+		SpriteStopped
+	};
+
 
 	SpriteNode::SpriteNode(){
 		_sprite = NULL;
@@ -12,6 +18,7 @@ namespace a3d{
 		this->addSubNode(_contentNode);
 		_isFrameLossless = true;
 		_isLooping = true;
+		_state = SpritePlaying;
 	}
 
 	SpriteNode::~SpriteNode(){
@@ -41,5 +48,38 @@ namespace a3d{
 	void SpriteNode::isLooping(bool looping){
 		_isLooping = looping;
 	}
-	
+
+	bool SpriteNode::isPlaying() const{
+		return _state == SpritePlaying;
+	}
+
+	bool SpriteNode::isPaused() const{
+		return _state == SpritePaused;
+	}
+
+	bool SpriteNode::isStopped() const{
+		return _state == SpriteStopped;
+	}
+
+	void SpriteNode::play(){
+		if(isPlaying()){
+			return;
+		}
+		_clock.resume();
+	}
+
+	void SpriteNode::pause(){
+		if(!isPlaying()){
+			return;
+		}
+		_clock.pause();
+	}
+
+	void SpriteNode::stop(){
+		if(isStopped()){
+			return;
+		}
+		_clock.reset();
+	}
+
 }; // end namespace

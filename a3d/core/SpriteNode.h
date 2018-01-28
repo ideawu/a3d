@@ -27,6 +27,10 @@ namespace a3d{
 		// 是否循环播放
 		void isLooping(bool looping);
 
+		bool isPlaying() const;
+		bool isPaused() const;
+		bool isStopped() const;
+
 		void play();
 		void pause();
 		void stop();
@@ -38,6 +42,7 @@ namespace a3d{
 		Node *_contentNode;
 		Sprite *_sprite;
 
+		int _state;
 		Clock _clock;
 		bool _isFrameLossless;
 		bool _isLooping;
