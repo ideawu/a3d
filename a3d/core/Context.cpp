@@ -44,16 +44,6 @@ namespace a3d{
 		delete _renderer;
 	}
 
-	void Context::makeCurrent(){
-		_current = this;
-		if(_width > 0 && _height > 0){
-			glViewport(0, 0, _width, _height);
-		}
-		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
-		}
-	}
-
 	Renderer* Context::renderer() const{
 		return _renderer;
 	}
@@ -105,14 +95,32 @@ namespace a3d{
 		loadMatrix(mat);
 		glDisable(GL_CULL_FACE);
 	}
+
+	void Context::begin(){
+		_current = this;
+		if(_width > 0 && _height > 0){
+			glViewport(0, 0, _width, _height);
+		}
+		if(framebuffer()){
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
+		}
+	}
 	
 	void Context::clear(){
 		clear(0, 0, 0, 1);
 	}
 	
 	void Context::clear(float r, float g, float b, float a){
+		clearColor(r, g, b, a);
+		clearDepth();
+	}
+
+	void Context::clearColor(float r, float g, float b, float a=1){
 		glClearColor(r, g, b, a);
 		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+	void Context::clearDepth(){
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	

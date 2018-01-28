@@ -48,7 +48,11 @@ namespace a3d{
 			_subs = new std::list<Node *>();
 		}
 		if(node->_parent){
-			node->removeFromParent();
+			if(node->_parent == this){
+				return;
+			}else{
+				node->removeFromParent();
+			}
 		}
 		node->_parent = this;
 		_subs->push_back(node);

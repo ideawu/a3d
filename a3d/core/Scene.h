@@ -5,6 +5,8 @@
 #ifndef Scene_hpp
 #define Scene_hpp
 
+#include <map>
+
 namespace a3d{
 	class Node;
 	class Camera;
@@ -22,6 +24,9 @@ namespace a3d{
 		
 		float time() const;
 		void time(float time);
+		
+		// 使用指定层开始绘图
+		void layer(int index);
 
 		// node 内存不由 Scene 管理
 		void addNode(Node *node);
@@ -42,6 +47,7 @@ namespace a3d{
 		Context *_context;
 		Camera *_camera;
 		Node *_rootNode;
+		std::map<int, Node*> _layers;
 	};
 }; // end namespace
 

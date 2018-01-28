@@ -11,15 +11,18 @@ namespace a3d{
 	
 	Scene::Scene(){
 		_context = NULL;
+		_rootNode = NULL;
 		_camera = new Camera();
-		_rootNode = new Node();
-		_rootNode->addSubNode(_camera);
+		layer(0);
 	}
 	
 	Scene::~Scene(){
 		delete _context;
 		delete _camera;
-		delete _rootNode;
+		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
+			Node *node = it->second;
+			delete node;
+		}
 	}
 	
 	Scene* Scene::create(){
@@ -49,6 +52,14 @@ namespace a3d{
 	void Scene::time(float time){
 		_time = time;
 	}
+	
+	void Scene::layer(int index){
+		_rootNode = _layers[index];
+		if(!_rootNode){
+			_rootNode = new Node();
+			_layers[index] = _rootNode;
+		}
+	}
 
 	void Scene::addNode(Node *node){
 		_rootNode->addSubNode(node);
@@ -72,8 +83,14 @@ namespace a3d{
 
 	void Scene::renderAtTime(float time){
 		_time = time;
-		_context->makeCurrent();
-		_rootNode->renderAtTime(time);
+		
+		_context->begin();
+		_context->clearColor(0, 0, 0);
+		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
+			_context->clearDepth();
+			Node *node = it->second;
+			node->renderAtTime(time);
+		}
 		_context->finish();
 	}
 

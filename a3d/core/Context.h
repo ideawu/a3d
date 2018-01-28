@@ -29,9 +29,11 @@ namespace a3d{
 		void loadMatrix3D(const Matrix4 &mat);
 		void loadMatrix2D(const Matrix4 &mat);
 
-		void makeCurrent();
+		void begin();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
+		void clearColor(float r, float g, float b, float a=1);
+		void clearDepth();
 		void flush();
 		void finish();
 		// TODO: blit to other FBO
