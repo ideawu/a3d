@@ -325,7 +325,7 @@
 		default:
 			return;
 	}
-	float speed = 50;
+	float speed = 5;
 	dx *= speed;
 	dz *= speed;
 	dy *= speed;
