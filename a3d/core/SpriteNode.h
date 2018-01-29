@@ -20,16 +20,12 @@ namespace a3d{
 
 		Node* contentNode() const;
 		Sprite* sprite() const;
+		// 内存由 SpriteNode 管理
 		void sprite(Sprite *sprite);
 
 		Vector3 originSize() const;
 		float originWidth() const;
 		float originHeight() const;
-
-		// 是否是不可丢帧的
-		void isFrameLossless(bool isLossless);
-		// 是否循环播放
-		void isLooping(bool looping);
 
 		bool isPlaying() const;
 		bool isPaused() const;
@@ -38,6 +34,11 @@ namespace a3d{
 		void play();
 		void pause();
 		void stop();
+
+		// 是否是不可丢帧的
+		void isFrameLossless(bool isLossless);
+		// 是否循环播放
+		void isLooping(bool looping);
 
 	private:
 		SpriteNode(const SpriteNode &d);
