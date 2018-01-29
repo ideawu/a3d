@@ -18,6 +18,7 @@
 - (void)startAnimation;
 // 停止 renderAtTime: 的调用
 - (void)stopAnimation;
+- (void)toggleAnimation;
 // 判断 renderAtTime: 的调用是否已被激活 
 - (BOOL)isAnimating;
 

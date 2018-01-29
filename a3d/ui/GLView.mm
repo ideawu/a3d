@@ -115,6 +115,14 @@ using namespace a3d;
 	}
 }
 
+- (void)toggleAnimation{
+	if(self.isAnimating){
+		[self stopAnimation];
+	}else{
+		[self startAnimation];
+	}
+}
+
 - (BOOL)isAnimating{
 	return _displayLink && CVDisplayLinkIsRunning(_displayLink);
 }
