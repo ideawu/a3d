@@ -10,19 +10,9 @@ namespace a3d{
 	{
 	public:
 		union{
-			float x;
-			float w;
-			float width;
-		};
-		union{
-			float y;
-			float h;
-			float height;
-		};
-		union{
-			float z;
-			float d;
-			float depth;
+			struct{float x, y, z;};
+			struct{float w, h, d;};
+			struct{float width, height, depth;};
 		};
 
 		Vector3();
