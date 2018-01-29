@@ -24,6 +24,7 @@ namespace a3d{
 #include "Camera.h"
 #include "Scene.h"
 #include "Sprite.h"
+#include "SpriteNode.h"
 
 #include "Animate.h"
 #include "AnimationTypes.h"

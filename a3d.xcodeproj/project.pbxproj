@@ -99,6 +99,8 @@
 		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
 		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
+		314A2011201ED3D30093D902 /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
+		314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -108,6 +110,8 @@
 			dstPath = a3d;
 			dstSubfolderSpec = 7;
 			files = (
+				314A2011201ED3D30093D902 /* util.h in CopyFiles */,
+				314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */,
 				08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */,
 				08B4CBD2201DEC3B00EEC0C5 /* a3d.h in CopyFiles */,
 				08B4CBD0201DEC3200EEC0C5 /* DraftScene.h in CopyFiles */,
