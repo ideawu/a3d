@@ -105,9 +105,9 @@
 	delete _camera;
 	delete _context;
 	_camera = a3d::Camera::create(60, width, height, depth);
+	_camera->position(width/2, height/2, 0);
 	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 
-	//
 	_objects.pop_back();
 	_objects.push_back(_camera);
 }
@@ -116,7 +116,7 @@
 	[self renderAtTime:0];
 }
 
-- (void)renderAtTime:(float)time{
+- (void)renderAtTime:(double)time{
 //	log_debug(@"");
 	[[self openGLContext] makeCurrentContext];
 	
