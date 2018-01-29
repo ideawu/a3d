@@ -54,8 +54,8 @@
 		08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */; };
 		08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */; };
 		08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */; };
-		08B4CB75201DE4AF00EEC0C5 /* EmptyContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB46201DE4AF00EEC0C5 /* EmptyContext.cpp */; };
-		08B4CB76201DE4AF00EEC0C5 /* EmptyContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB47201DE4AF00EEC0C5 /* EmptyContext.h */; };
+		08B4CB75201DE4AF00EEC0C5 /* BlankContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */; };
+		08B4CB76201DE4AF00EEC0C5 /* BlankContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */; };
 		08B4CB77201DE4AF00EEC0C5 /* GLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB49201DE4AF00EEC0C5 /* GLView.h */; };
 		08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4C201DE4AF00EEC0C5 /* log.cpp */; };
 		08B4CB7A201DE4AF00EEC0C5 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB4D201DE4AF00EEC0C5 /* log.h */; };
@@ -191,8 +191,8 @@
 		08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSprite.h; sourceTree = "<group>"; };
 		08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimateHelper.cpp; sourceTree = "<group>"; };
 		08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAnimateHelper.h; sourceTree = "<group>"; };
-		08B4CB46201DE4AF00EEC0C5 /* EmptyContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmptyContext.cpp; sourceTree = "<group>"; };
-		08B4CB47201DE4AF00EEC0C5 /* EmptyContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyContext.h; sourceTree = "<group>"; };
+		08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlankContext.cpp; sourceTree = "<group>"; };
+		08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlankContext.h; sourceTree = "<group>"; };
 		08B4CB49201DE4AF00EEC0C5 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		08B4CB4C201DE4AF00EEC0C5 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
@@ -350,8 +350,8 @@
 				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
 				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
 				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
-				08B4CB47201DE4AF00EEC0C5 /* EmptyContext.h */,
-				08B4CB46201DE4AF00EEC0C5 /* EmptyContext.cpp */,
+				08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */,
+				08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */,
 				08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */,
 				08B4CB40201DE4AF00EEC0C5 /* BufferContext.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
@@ -453,7 +453,7 @@
 				08B4CB5C201DE4AF00EEC0C5 /* Renderer.h in Headers */,
 				08B4CB12201DE49900EEC0C5 /* Axis.h in Headers */,
 				08B4CB6C201DE4AF00EEC0C5 /* AnimateOpacity.h in Headers */,
-				08B4CB76201DE4AF00EEC0C5 /* EmptyContext.h in Headers */,
+				08B4CB76201DE4AF00EEC0C5 /* BlankContext.h in Headers */,
 				08B4CB7A201DE4AF00EEC0C5 /* log.h in Headers */,
 				08B4CB63201DE4AF00EEC0C5 /* DraftScene.h in Headers */,
 				08B4CB65201DE4AF00EEC0C5 /* DraftSprite.h in Headers */,
@@ -562,7 +562,7 @@
 				08B4CB17201DE49900EEC0C5 /* Point3.cpp in Sources */,
 				08B4CB64201DE4AF00EEC0C5 /* DraftScene.mm in Sources */,
 				08B4CB15201DE49900EEC0C5 /* Matrix4.cpp in Sources */,
-				08B4CB75201DE4AF00EEC0C5 /* EmptyContext.cpp in Sources */,
+				08B4CB75201DE4AF00EEC0C5 /* BlankContext.cpp in Sources */,
 				08B4CB6B201DE4AF00EEC0C5 /* AnimateOpacity.cpp in Sources */,
 				08B4CB59201DE4AF00EEC0C5 /* Object.cpp in Sources */,
 				08B4CB11201DE49900EEC0C5 /* Axis.cpp in Sources */,

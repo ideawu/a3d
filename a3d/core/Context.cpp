@@ -3,7 +3,7 @@
 //
 
 #include "Context.h"
-#include "EmptyContext.h"
+#include "BlankContext.h"
 #include "BufferContext.h"
 #include "Renderer.h"
 
@@ -13,14 +13,14 @@ namespace a3d{
 
 	Context* Context::current(){
 		if(!_current){
-			_shared = Context::emptyContext();
+			_shared = Context::blankContext();
 			_current = _shared;
 		}
 		return _current;
 	}
 
-	Context* Context::emptyContext(){
-		return new EmptyContext();
+	Context* Context::blankContext(){
+		return new BlankContext();
 	}
 
 	Context* Context::bufferContext(float width, float height){
