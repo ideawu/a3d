@@ -102,10 +102,14 @@
 	float height = self.viewportSize.height;
 	float depth = width * 20;
 
-	delete _camera;
+	if(!_camera){
+		_camera = a3d::Camera::create(60, width, height, depth);
+		_camera->position(width/2, height/2, 0);
+	}else{
+		_camera->setup(60, width, height, depth);
+	}
+
 	delete _context;
-	_camera = a3d::Camera::create(60, width, height, depth);
-	_camera->position(width/2, height/2, 0);
 	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 
 	_objects.pop_back();
