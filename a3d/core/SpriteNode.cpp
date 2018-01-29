@@ -46,6 +46,9 @@ namespace a3d{
 			_originSize = Vector3();
 		}
 		_contentNode->size(_originSize);
+		if(this->size().empty()){
+			this->size(_originSize);
+		}
 	}
 
 	Vector3 SpriteNode::originSize() const{

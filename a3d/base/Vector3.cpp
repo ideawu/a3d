@@ -16,6 +16,10 @@ namespace a3d{
 		this->z = z;
 	}
 
+	bool Vector3::empty() const{
+		return x == 0 && y == 0 && z == 0;
+	}
+
 	float Vector3::length() const{
 		return sqrt(x*x + y*y + z*z);
 	}

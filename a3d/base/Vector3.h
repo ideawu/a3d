@@ -29,6 +29,7 @@ namespace a3d{
 		Vector3(float x, float y, float z);
 		
 	public:
+		bool empty() const;
 		float length() const;
 
 		Vector3 normalize() const;

@@ -222,7 +222,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		_clock.update(tick);
 
 		if(isBlocked){
-			// log_debug(@"drop frame at %.3f", _clock.time());
+//			 log_debug(@"drop frame at %.3f", _clock.time());
 			return;
 		}
 		

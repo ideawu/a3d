@@ -31,6 +31,7 @@ namespace a3d{
 		offset = offset.normalize(len);
 		Vector3 pos = origin->position().add(offset);
 		target->position(pos);
+//		log_debug("x %f", target->x());
 	}
 
 }; // end namespace
