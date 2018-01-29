@@ -27,7 +27,7 @@ namespace a3d{
 	
 	Scene* Scene::create(){
 		Scene *ret = new Scene();
-		ret->_context = Context::shared();
+		ret->_context = Context::emptyContext();
 		return ret;
 	}
 

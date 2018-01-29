@@ -193,10 +193,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	}
 }
 
-double _absolute_time(){
-	return mach_absolute_time()/1000.0/1000.0/1000.0;
-}
-
 - (void)displayLinkCallback{
 	if(!self.isOpenGLReady){
 		return;

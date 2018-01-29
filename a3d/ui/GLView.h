@@ -4,6 +4,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+// 注意！在进行OpenGL资源创建时，如glGenTextures()，要先[self.openGLContext makeCurrentContext];
+
 @interface GLView : NSOpenGLView
 
 @property (readonly) CGSize viewportSize;

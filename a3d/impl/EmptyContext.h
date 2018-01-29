@@ -8,11 +8,11 @@
 #include "Context.h"
 
 namespace a3d{
-	class SharedContext : public Context
+	class EmptyContext : public Context
 	{
 	public:
-		SharedContext(){}
-		~SharedContext(){}
+		EmptyContext(){}
+		~EmptyContext(){}
 		
 		virtual GLuint framebuffer(){return 0;}
 		virtual void setup(){}

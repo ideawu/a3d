@@ -14,7 +14,7 @@ namespace a3d{
 	{
 	public:
 		static Context* current();
-		static Context* shared();
+		static Context* emptyContext();
 		// 创建一个FBO，如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
 		static Context* bufferContext(float width, float height);
 

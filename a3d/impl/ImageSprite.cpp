@@ -20,6 +20,7 @@ namespace a3d{
 		for(int i=0; i<_texIdAtFrame.size(); i++){
 			GLuint tid = _texIdAtFrame[i];
 			if(tid > 0){
+//				log_debug("del tid %d", tid);
 				glDeleteTextures(1, &tid);
 			}
 		}
@@ -57,7 +58,7 @@ namespace a3d{
 			}
 			durations.push_back(duration);
 			total_duration += duration;
-	//		log_debug(@"frame: %d, duration: %.3f", i, duration);
+//			log_debug("frame: %d, duration: %.3f", i, duration);
 		}
 
 		ImageSprite *ret = new ImageSprite();
@@ -74,6 +75,7 @@ namespace a3d{
 	GLuint ImageSprite::bindImageData(const char *data, int width, int height){
 		GLuint tid;
 		glGenTextures(1, &tid);
+//		log_debug("gen tid %d", tid);
 		glBindTexture(GL_TEXTURE_2D, tid);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

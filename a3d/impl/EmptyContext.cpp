@@ -2,7 +2,7 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "SharedContext.h"
+#include "EmptyContext.h"
 
 namespace a3d{
 }; // end namespace
