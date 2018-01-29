@@ -45,7 +45,9 @@ namespace a3d{
 		}else{
 			_originSize = Vector3();
 		}
+		
 		_contentNode->size(_originSize);
+		
 		if(this->size().empty()){
 			this->size(_originSize);
 		}
@@ -164,8 +166,8 @@ namespace a3d{
 		if(texRect.empty()){
 			return;
 		}
-		//	log_debug("viewRect: %.2f %.2f %.2f %.2f", viewRect.x, viewRect.y, viewRect.width, viewRect.height);
-		//	log_debug("texRect: %.2f %.2f %.2f %.2f", texRect.x, texRect.y, texRect.width, texRect.height);
+//			log_debug("viewRect: %.2f %.2f %.2f %.2f", viewRect.x, viewRect.y, viewRect.width, viewRect.height);
+//			log_debug("texRect: %.2f %.2f %.2f %.2f", texRect.x, texRect.y, texRect.width, texRect.height);
 		
 		// 显示区域的中点
 		viewRect.x -= this->width()/2;

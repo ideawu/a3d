@@ -126,7 +126,6 @@ namespace a3d{
 	}
 
 	void Object::scale(float x, float y, float z){
-		_matrix.scale(x, y, z);
 		this->width(this->width() * x);
 		this->height(this->height() * y);
 		this->depth(this->depth() * z);
