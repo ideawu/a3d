@@ -250,11 +250,10 @@
 			[self switchSprite];
 //			[self setTimescale:0.1];
 			
-			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(300,50,0));
+			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(300,50,0), 4);
 //			action->easingFunc(a3d::AnimateTimingEaseInOut);
 //			action->bounceFunc(a3d::AnimateTimingEaseIn);
 			action->accelateFunc(a3d::AnimateTimingLinear);
-			action->duration(4);
 			action->bounce(12);
 			_hero->runAnimation(action);
 			break;
@@ -309,8 +308,7 @@
 			break;
 		}
 		case '1':{
-			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0));
-			action->duration(1);
+			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
 			_hero->runAnimation(action);
 			break;
 		}

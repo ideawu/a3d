@@ -85,13 +85,17 @@ namespace a3d{
 	}
 
 	int ImageSprite::frameAtTime(float time, float *duration){
+		// 静态图片
+		if(_durations.empty()){
+			return 0;
+		}
 		for(int i=0; i<_durations.size(); i++){
 			time -= _durations[i];
 			if(time < 0){
 				if(duration){
 					*duration = _durations[i];
 				}
-				return 9;
+				return i;
 			}
 		}
 		return -1;

@@ -8,16 +8,30 @@
 
 namespace a3d{
 	
-	Animate* Animate::move(const Vector3 &vec){
-		return AnimatePosition::move(vec);
+	Animate* Animate::move(const Vector3 &vec, float duration){
+		Animate *ret = AnimatePosition::move(vec);
+		ret->duration(duration);
+		return ret;
 	}
 	
-	Animate* Animate::moveTo(const Vector3 &pos){
-		return AnimatePosition::moveTo(pos);
+	Animate* Animate::moveTo(const Vector3 &pos, float duration){
+		Animate *ret = AnimatePosition::moveTo(pos);
+		ret->duration(duration);
+		return ret;
 	}
 	
-	Animate* Animate::fadeTo(float opacity){
-		return AnimateOpacity::fadeTo(opacity);
+	Animate* Animate::fadeTo(float opacity, float duration){
+		Animate *ret = AnimateOpacity::fadeTo(opacity);
+		ret->duration(duration);
+		return ret;
+	}
+
+	Animate* Animate::show(float duration){
+		return Animate::fadeTo(1, duration);
+	}
+	
+	Animate* Animate::hide(float duration){
+		return Animate::fadeTo(0, duration);
 	}
 
 	Animate::Animate(){

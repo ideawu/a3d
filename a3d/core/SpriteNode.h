@@ -22,6 +22,10 @@ namespace a3d{
 		Sprite* sprite() const;
 		void sprite(Sprite *sprite);
 
+		Vector3 originSize() const;
+		float originWidth() const;
+		float originHeight() const;
+
 		// 是否是不可丢帧的
 		void isFrameLossless(bool isLossless);
 		// 是否循环播放
@@ -39,6 +43,7 @@ namespace a3d{
 		SpriteNode(const SpriteNode &d);
 		SpriteNode& operator =(const SpriteNode &d);
 
+		Vector3 _originSize;
 		Node *_contentNode;
 		Sprite *_sprite;
 
@@ -46,6 +51,8 @@ namespace a3d{
 		Clock _clock;
 		bool _isFrameLossless;
 		bool _isLooping;
+		
+		void updateClock(float time);
 	};
 }; // end namespace
 

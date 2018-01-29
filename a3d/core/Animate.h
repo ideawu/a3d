@@ -14,11 +14,11 @@ namespace a3d{
 	class Animate
 	{
 	public:
-		static Animate* move(const Vector3 &vec);
-		static Animate* moveTo(const Vector3 &pos);
-		static Animate* fadeTo(float opacity);
-//		static Animate* show(float duration);
-//		static Animate* hide(float duration);
+		static Animate* move(const Vector3 &vec, float duration);
+		static Animate* moveTo(const Vector3 &pos, float duration);
+		static Animate* fadeTo(float opacity, float duration);
+		static Animate* show(float duration);
+		static Animate* hide(float duration);
 
 	public:
 		virtual ~Animate();

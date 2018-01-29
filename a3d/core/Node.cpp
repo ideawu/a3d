@@ -33,6 +33,19 @@ namespace a3d{
 		_opacity = opacity;
 	}
 
+	void Node::show(){
+		_opacity = 1;
+	}
+	
+	void Node::hide(){
+		_opacity = 0;
+	}
+	
+	bool Node::visible() const{
+		return _opacity != 0 && Renderer::current()->opacity() != 0;
+	}
+	
+	
 	Node* Node::parent() const{
 		return _parent;
 	}
@@ -121,17 +134,12 @@ namespace a3d{
 			*this = _animation->current;
 		}
 		
-		Renderer *renderer = Renderer::current();
-		float parent_alpha = renderer->opacity();
-		float node_alpha = _opacity;
+		bool visible = this->visible(); // 先保存状态，避免操作中状态改变导致出错的情况
 
 		// 如果完全透明则不渲染，但仍更新动画
-		if(parent_alpha != 0){
-			if(node_alpha != 1){
-				renderer->pushOpacity(_opacity);
-			}
-			renderer->pushMatrix(this->matrix());
-			
+		if(visible){
+			Renderer::current()->pushOpacity(_opacity);
+			Renderer::current()->pushMatrix(this->matrix());
 			this->drawAtTime(time);
 		}
 		if(_subs){
@@ -140,11 +148,9 @@ namespace a3d{
 				node->renderAtTime(time);
 			}
 		}
-		if(parent_alpha != 0){
-			if(node_alpha != 1){
-				renderer->popOpacity();
-			}
-			renderer->popMatrix();
+		if(visible){
+			Renderer::current()->popOpacity();
+			Renderer::current()->popMatrix();
 		}
 	}
 
