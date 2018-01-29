@@ -22,7 +22,7 @@ namespace a3d{
 		void removeAll();
 		bool empty() const;
 
-		void updateAtTime(float time);
+		void updateAtTime(double time);
 
 	public:
 		Node *target;

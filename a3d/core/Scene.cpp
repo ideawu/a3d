@@ -45,11 +45,11 @@ namespace a3d{
 		return _camera;
 	}
 
-	float Scene::time() const{
+	double Scene::time() const{
 		return _time;
 	}
 	
-	void Scene::time(float time){
+	void Scene::time(double time){
 		_time = time;
 	}
 	
@@ -81,7 +81,7 @@ namespace a3d{
 		renderAtTime(_time);
 	}
 
-	void Scene::renderAtTime(float time){
+	void Scene::renderAtTime(double time){
 		_time = time;
 		
 		_context->begin();

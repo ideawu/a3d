@@ -20,10 +20,10 @@ namespace a3d{
 
 		// 子类方法
 		virtual void draw(){};
-		virtual void drawAtTime(float time){draw();};
+		virtual void drawAtTime(double time){draw();};
 
 		void render(); // renderAtTime(0);
-		void renderAtTime(float time);
+		void renderAtTime(double time);
 
 		float opacity() const;
 		void opacity(float opacity);

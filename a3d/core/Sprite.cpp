@@ -45,11 +45,11 @@ namespace a3d{
 		_frames = frames;
 	}
 
-	float Sprite::duration() const{
+	double Sprite::duration() const{
 		return _duration;
 	}
 
-	void Sprite::duration(float duration){
+	void Sprite::duration(double duration){
 		_duration = duration;
 	}
 
@@ -58,7 +58,7 @@ namespace a3d{
 		return textureAtFrame(0, NULL);
 	}
 
-	GLuint Sprite::textureAtTime(float time){
+	GLuint Sprite::textureAtTime(double time){
 		return textureAtTime(time, NULL);
 	}
 

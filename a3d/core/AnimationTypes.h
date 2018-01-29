@@ -18,21 +18,21 @@ namespace a3d{
 	}AnimateState;
 
 	typedef void (*AnimateCallback)(Animate *action, void *ctx);
-	typedef float (*AnimateTimingFunc)(float progress);
+	typedef double (*AnimateTimingFunc)(double progress);
 	
-	inline static float AnimateTimingNone(float p){
+	inline static double AnimateTimingNone(double p){
 		return 1;
 	}
-	inline static float AnimateTimingLinear(float p){
+	inline static double AnimateTimingLinear(double p){
 		return p;
 	}
-	inline static float AnimateTimingEaseIn(float p){
+	inline static double AnimateTimingEaseIn(double p){
 		return p * p;
 	}
-	inline static float AnimateTimingEaseOut(float p){
+	inline static double AnimateTimingEaseOut(double p){
 		return 1 - AnimateTimingEaseIn(1-p); // 通用
 	}
-	inline static float AnimateTimingEaseInOut(float p){
+	inline static double AnimateTimingEaseInOut(double p){
 		// 通用，只需要替换 in 和 out，即可组合任意的 inout
 		if(p < 0.5){
 			p = p * 2;
@@ -43,7 +43,7 @@ namespace a3d{
 		}
 	}
 
-	inline static float AnimateTimingLoopSine(float p){
+	inline static double AnimateTimingLoopSine(double p){
 		p = p * M_PI * 2 - M_PI_2;
 		return (sinf(p) + 1)/2;
 	}

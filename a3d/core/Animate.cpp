@@ -8,29 +8,29 @@
 
 namespace a3d{
 	
-	Animate* Animate::move(const Vector3 &vec, float duration){
+	Animate* Animate::move(const Vector3 &vec, double duration){
 		Animate *ret = AnimatePosition::move(vec);
 		ret->duration(duration);
 		return ret;
 	}
 	
-	Animate* Animate::moveTo(const Vector3 &pos, float duration){
+	Animate* Animate::moveTo(const Vector3 &pos, double duration){
 		Animate *ret = AnimatePosition::moveTo(pos);
 		ret->duration(duration);
 		return ret;
 	}
 	
-	Animate* Animate::fadeTo(float opacity, float duration){
+	Animate* Animate::fadeTo(double opacity, double duration){
 		Animate *ret = AnimateOpacity::fadeTo(opacity);
 		ret->duration(duration);
 		return ret;
 	}
 
-	Animate* Animate::show(float duration){
+	Animate* Animate::show(double duration){
 		return Animate::fadeTo(1, duration);
 	}
 	
-	Animate* Animate::hide(float duration){
+	Animate* Animate::hide(double duration){
 		return Animate::fadeTo(0, duration);
 	}
 
@@ -58,11 +58,11 @@ namespace a3d{
 		}
 	}
 
-	float Animate::duration() const{
+	double Animate::duration() const{
 		return _duration;
 	}
 	
-	void Animate::duration(float duration){
+	void Animate::duration(double duration){
 		_duration = duration;
 	}
 
@@ -88,13 +88,13 @@ namespace a3d{
 		_accelateFunc = func;
 	}
 	
-	static float reverse_timing_func(AnimateTimingFunc func, float val){
-		float s = 0;
-		float e = 1.0;
-		float t = (e-s)/2;
-		float epsilon = 0.00001;
+	static double reverse_timing_func(AnimateTimingFunc func, double val){
+		double s = 0;
+		double e = 1.0;
+		double t = (e-s)/2;
+		double epsilon = 0.00001;
 		while(1){
-			float v = func(t);
+			double v = func(t);
 			if(fabs(v-val) < epsilon || fabs(t-e) < epsilon || fabs(t-s) < epsilon){
 				return t;
 			}
@@ -107,41 +107,41 @@ namespace a3d{
 		}
 	}
 
-	float Animate::timing(float p) const{
-		float step_s = 0;
-		float step_e = 0;
+	double Animate::timing(double p) const{
+		double step_s = 0;
+		double step_e = 0;
 		if(_bounce != 0){
 			// 通过反函数计算当前时间是第几跳
-			float bounce_ratio = reverse_timing_func(_bounceFunc, p);
+			double bounce_ratio = reverse_timing_func(_bounceFunc, p);
 			// 相邻的两次组成一次周期
 			step_s = floor(bounce_ratio * _bounce/2) * 2; // 向下取偶
 			step_e = step_s+2;
 			// 周期的开始和结束时间
-			float time_s = _bounceFunc(step_s/_bounce);
-			float time_e = _bounceFunc(step_e/_bounce);
+			double time_s = _bounceFunc(step_s/_bounce);
+			double time_e = _bounceFunc(step_e/_bounce);
 			
 			p = (p - time_s)/(time_e - time_s);
 			p = (p < 0.5)? 2 * p : 2 * (1-p);
 		}
 		
-		float y = _easingFunc(p);
+		double y = _easingFunc(p);
 		
 		if(_bounce != 0){
-			float total_steps = ceil(_bounce/2) * 2; // 向上取偶
+			double total_steps = ceil(_bounce/2) * 2; // 向上取偶
 			y *= _accelateFunc(step_e/total_steps);
 		}
 		return y;
 	}
 
-	void Animate::updateAtTime(float time, Node *current, const Node *origin){
+	void Animate::updateAtTime(double time, Node *current, const Node *origin){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
 			this->state(AnimateStateBegin);
 		}
 		
 		if(_state != AnimateStateNone && _state != AnimateStateEnd){
-			float progress;
-			float timing_p;
+			double progress;
+			double timing_p;
 			if(time < _beginTime){
 				return;
 			}else if(_duration == 0){

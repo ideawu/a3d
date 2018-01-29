@@ -6,14 +6,14 @@
 
 namespace a3d{
 	
-	AnimateOpacity* AnimateOpacity::fadeTo(float opacity){
+	AnimateOpacity* AnimateOpacity::fadeTo(double opacity){
 		AnimateOpacity *ret = new AnimateOpacity();
 		ret->_opacity = opacity;
 		return ret;
 	}
 	
-	void AnimateOpacity::update(float progress, Node *target, const Node *origin){
-		float df = progress * (_opacity - origin->opacity());
+	void AnimateOpacity::update(double progress, Node *target, const Node *origin){
+		double df = progress * (_opacity - origin->opacity());
 		target->opacity(origin->opacity() + df);
 	}
 

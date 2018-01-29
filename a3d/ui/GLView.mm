@@ -18,7 +18,7 @@ using namespace a3d;
 
 	Clock _clock;
 
-	float _limitRefreshInterval;
+	double _limitRefreshInterval;
 	BOOL _isOpenGLReady;
 }
 @property BOOL isRendering;
@@ -119,7 +119,7 @@ using namespace a3d;
 	return _displayLink && CVDisplayLinkIsRunning(_displayLink);
 }
 
-- (void)renderAtTime:(float)time{
+- (void)renderAtTime:(double)time{
 }
 
 
@@ -173,11 +173,11 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 #endif
 
-- (void)setTimescale:(float)scale{
+- (void)setTimescale:(double)scale{
 	_clock.speed(scale);
 }
 
-- (void)setMaxFPS:(float)fps{
+- (void)setMaxFPS:(double)fps{
 	_limitRefreshInterval = 1.0/fps;
 }
 
@@ -191,6 +191,10 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	@synchronized(self){
 		_isOpenGLReady = isReady;
 	}
+}
+
+double _absolute_time(){
+	return mach_absolute_time()/1000.0/1000.0/1000.0;
 }
 
 - (void)displayLinkCallback{
@@ -214,7 +218,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			return;
 		}
 
-		float tick = a3d::absolute_time();
+		double tick = a3d::absolute_time();
 		// 刷新频率限制
 		if(tick - _clock.secondTick() < _limitRefreshInterval){
 			return;

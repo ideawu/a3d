@@ -16,31 +16,31 @@ namespace a3d{
 		virtual ~Sprite(){}
 
 		int frames() const;
-		float duration() const;
+		double duration() const;
 		Vector3 size() const;
 		float width() const;
 		float height() const;
 
 		GLuint texture();
 		// 如果无对应帧，返回0
-		GLuint textureAtTime(float time);
+		GLuint textureAtTime(double time);
 		GLuint textureAtFrame(int frame);
 		// 如果指定时间无对应帧，返回-1
-		virtual int frameAtTime(float time, float *duration) = 0;
+		virtual int frameAtTime(double time, double *duration) = 0;
 		// 如果无对应帧，返回0
-		virtual GLuint textureAtTime(float time, float *duration) = 0;
-		virtual GLuint textureAtFrame(int frame, float *duration) = 0;
+		virtual GLuint textureAtTime(double time, double *duration) = 0;
+		virtual GLuint textureAtFrame(int frame, double *duration) = 0;
 
 	protected:
 		Sprite();
 
 		int _frames;
-		float _duration;
+		double _duration;
 		
 		void width(float w);
 		void height(float h);
 		void frames(int frames);
-		void duration(float duration);
+		void duration(double duration);
 
 	private:
 		Sprite(const Sprite &d);

@@ -5,18 +5,20 @@
 #ifndef __a3d__Clock__
 #define __a3d__Clock__
 
+// 注意！时间要用双精度！
+
 namespace a3d{
 	class Clock
 	{
 	public:
 		Clock();
 
-		float time() const;
-		void time(float time);
+		double time() const;
+		void time(double time);
+		void update(double tick);
+		
 		float speed() const;
 		void speed(float speed);
-
-		void update(float tick);
 
 		void pause();
 		void resume();
@@ -24,12 +26,12 @@ namespace a3d{
 
 		bool isPaused() const;
 
-		float secondTick() const;
+		double secondTick() const;
 
 	private:
-		float _firstTick;
-		float _secondTick;
-		float _pauseTick;
+		double _firstTick;
+		double _secondTick;
+		double _pauseTick;
 		float _speed;
 	};
 }; // end namespace

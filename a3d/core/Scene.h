@@ -22,8 +22,8 @@ namespace a3d{
 		Context* context() const;
 		Camera* camera() const;
 		
-		float time() const;
-		void time(float time);
+		double time() const;
+		void time(double time);
 		
 		// 使用指定层开始绘图
 		void layer(int index);
@@ -36,14 +36,14 @@ namespace a3d{
 		void view2D();
 
 		void render(); // render at current time
-		void renderAtTime(float time);
+		void renderAtTime(double time);
 
 	private:
 		Scene();
 		Scene(const Scene &d);
 		Scene& operator =(const Scene &d);
 		
-		float _time;
+		double _time;
 		Context *_context;
 		Camera *_camera;
 		Node *_rootNode;

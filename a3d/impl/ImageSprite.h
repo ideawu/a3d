@@ -16,9 +16,9 @@ namespace a3d{
 		static ImageSprite* create(const char *filename);
 		
 		virtual ~ImageSprite();
-		virtual int frameAtTime(float time, float *duration);
-		virtual GLuint textureAtTime(float time, float *duration);
-		virtual GLuint textureAtFrame(int frame, float *duration);
+		virtual int frameAtTime(double time, double *duration);
+		virtual GLuint textureAtTime(double time, double *duration);
+		virtual GLuint textureAtFrame(int frame, double *duration);
 
 	private:
 		ImageSprite();
@@ -28,7 +28,7 @@ namespace a3d{
 		GLuint bindImageData(const char *data, int width, int height);
 		
 		std::vector<GLuint> _texIdAtFrame;
-		std::vector<float> _durations;
+		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 	};
 }; // end namespace

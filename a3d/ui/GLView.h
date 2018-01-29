@@ -10,7 +10,7 @@
 @property (readonly) CGSize framebufferSize;
 
 - (void)drawRect:(NSRect)dirtyRect;
-- (void)renderAtTime:(float)time;
+- (void)renderAtTime:(double)time;
 
 // 激活 renderAtTime: 的调用
 - (void)startAnimation;
@@ -20,8 +20,8 @@
 - (BOOL)isAnimating;
 
 // 调试用，限制刷新率
-- (void)setMaxFPS:(float)fps;
+- (void)setMaxFPS:(double)fps;
 // 默认为1，按正常时钟速度，指定为0.5则变慢
-- (void)setTimescale:(float)scale;
+- (void)setTimescale:(double)scale;
 
 @end

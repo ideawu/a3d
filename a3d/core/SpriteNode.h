@@ -16,7 +16,7 @@ namespace a3d{
 		SpriteNode();
 		virtual ~SpriteNode();
 
-		virtual void drawAtTime(float time);
+		virtual void drawAtTime(double time);
 
 		Node* contentNode() const;
 		Sprite* sprite() const;
@@ -52,7 +52,7 @@ namespace a3d{
 		bool _isFrameLossless;
 		bool _isLooping;
 		
-		void updateClock(float time);
+		void updateClock(double time);
 	};
 }; // end namespace
 

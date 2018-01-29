@@ -10,15 +10,15 @@ namespace a3d{
 		reset();
 	}
 
-	float Clock::time() const{
+	double Clock::time() const{
 		return _speed * (_secondTick - _firstTick);
 	}
 
-	void Clock::time(float time){
+	void Clock::time(double time){
 		_firstTick = _secondTick - time/_speed;
 	}
 
-	void Clock::update(float tick){
+	void Clock::update(double tick){
 		if(isPaused()){
 			_pauseTick = tick;
 		}else{
@@ -35,7 +35,7 @@ namespace a3d{
 
 	void Clock::resume(){
 		if(isPaused()){
-			float time = this->time();
+			double time = this->time();
 			_secondTick = _pauseTick;
 			this->time(time);
 			_pauseTick = 0;
@@ -58,12 +58,12 @@ namespace a3d{
 	}
 
 	void Clock::speed(float speed){
-		float time = this->time();
+		double time = this->time();
 		_speed = speed;
 		this->time(time);
 	}
 
-	float Clock::secondTick() const{
+	double Clock::secondTick() const{
 		return _secondTick;
 	}
 

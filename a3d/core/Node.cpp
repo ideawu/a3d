@@ -126,7 +126,7 @@ namespace a3d{
 		renderAtTime(0);
 	}
 	
-	void Node::renderAtTime(float time){
+	void Node::renderAtTime(double time){
 		if(time > 0 && _animation && !_animation->empty()){
 			_animation->updateAtTime(time);
 		}

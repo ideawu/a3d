@@ -10,7 +10,7 @@
 #include <ImageIO/ImageIO.h>
 
 namespace a3d{
-	inline static float absolute_time(){
+	inline static double absolute_time(){
 		return mach_absolute_time()/1000.0/1000.0/1000.0;
 	}
 

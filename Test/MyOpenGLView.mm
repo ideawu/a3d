@@ -313,7 +313,7 @@
 			break;
 		}
 		case '2':{
-			static float time = 0;
+			static double time = 0;
 			time += 0.1;
 			_hero->renderAtTime(time);
 			[self setNeedsDisplay:YES];

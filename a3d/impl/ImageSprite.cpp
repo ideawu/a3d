@@ -31,12 +31,12 @@ namespace a3d{
 			return NULL;
 		}
 		
-		std::vector<float> durations;
-		float total_duration = 0;
+		std::vector<double> durations;
+		double total_duration = 0;
 		int frames = (int)CGImageSourceGetCount(src);
 		
 		for(int i=0; i<frames; i++){
-			float duration = 0;
+			double duration = 0;
 			CFDictionaryRef properties = CGImageSourceCopyPropertiesAtIndex(src, i, NULL);
 			if (properties) {
 				CFDictionaryRef gifProperties = (CFDictionaryRef)CFDictionaryGetValue(properties, kCGImagePropertyGIFDictionary);
@@ -44,12 +44,12 @@ namespace a3d{
 					CFTypeRef val;
 					val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFUnclampedDelayTime);
 					if (val) {
-						CFNumberGetValue((CFNumberRef)val, kCFNumberFloatType, (void *)&duration);
+						CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
 					}
 					if(duration == 0){
 						val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFDelayTime);
 						if(val){
-							CFNumberGetValue((CFNumberRef)val, kCFNumberFloatType, (void *)&duration);
+							CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
 						}
 					}
 				}
@@ -84,7 +84,7 @@ namespace a3d{
 		return tid;
 	}
 
-	int ImageSprite::frameAtTime(float time, float *duration){
+	int ImageSprite::frameAtTime(double time, double *duration){
 		// 静态图片
 		if(_duration == 0){
 			return 0;
@@ -101,12 +101,12 @@ namespace a3d{
 		return -1;
 	}
 
-	GLuint ImageSprite::textureAtTime(float time, float *duration){
+	GLuint ImageSprite::textureAtTime(double time, double *duration){
 		int frame = frameAtTime(time, duration);
 		return textureAtFrame(frame, NULL);
 	}
 
-	GLuint ImageSprite::textureAtFrame(int frame, float *duration){
+	GLuint ImageSprite::textureAtFrame(int frame, double *duration){
 		if(frame < 0 || frame >= _frames){
 			return 0;
 		}

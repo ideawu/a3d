@@ -107,15 +107,15 @@ namespace a3d{
 		_clock.reset();
 	}
 
-	void SpriteNode::updateClock(float time){
-		float lastRenderTime = _clock.time();
+	void SpriteNode::updateClock(double time){
+		double lastRenderTime = _clock.time();
 		_clock.update(time);
 		if(_clock.isPaused()){
 			return;
 		}
-		float thisRenderTime = _clock.time();
+		double thisRenderTime = _clock.time();
 		
-		float lastDuration = 0;
+		double lastDuration = 0;
 		int lastFrame = _sprite->frameAtTime(lastRenderTime, &lastDuration);
 		if(lastFrame == -1){
 			lastFrame = 0;
@@ -123,23 +123,25 @@ namespace a3d{
 		
 		// 不丢帧
 		if(_isFrameLossless && _sprite->duration() > 0){
-			float nextRenderTime = lastRenderTime + lastDuration;
+			double nextRenderTime = lastRenderTime + lastDuration;
 			if(thisRenderTime > nextRenderTime){
 				thisRenderTime = nextRenderTime;
 				_clock.time(thisRenderTime);
+//				log_debug("%f %f", _clock.time(), time);
 			}
 		}
 		
 		// 重复播放
 		if(_isLooping && _sprite->duration() > 0){
-			int loops;
-			loops = (int)(thisRenderTime/_sprite->duration());
-			thisRenderTime -= loops * _sprite->duration();
-			_clock.time(thisRenderTime);
+			if(thisRenderTime >= _sprite->duration()){
+				thisRenderTime = 0;
+				_clock.time(thisRenderTime);
+//				log_debug("%f %f", _clock.time(), time);
+			}
 		}
 	}
 
-	void SpriteNode::drawAtTime(float time){
+	void SpriteNode::drawAtTime(double time){
 		if(!_sprite){
 			return;
 		}

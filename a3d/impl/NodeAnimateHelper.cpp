@@ -37,7 +37,7 @@ namespace a3d{
 		return _actions.empty();
 	}
 	
-	void NodeAnimateHelper::updateAtTime(float time){
+	void NodeAnimateHelper::updateAtTime(double time){
 		// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
 		Transform trans = Transform::transformBetween(current, *target);
 //		log_debug("origin: %.2f, dw: %.2f", origin.width(), trans.size.x);

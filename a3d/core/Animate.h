@@ -14,22 +14,22 @@ namespace a3d{
 	class Animate
 	{
 	public:
-		static Animate* move(const Vector3 &vec, float duration);
-		static Animate* moveTo(const Vector3 &pos, float duration);
-		static Animate* fadeTo(float opacity, float duration);
-		static Animate* show(float duration);
-		static Animate* hide(float duration);
+		static Animate* move(const Vector3 &vec, double duration);
+		static Animate* moveTo(const Vector3 &pos, double duration);
+		static Animate* fadeTo(double opacity, double duration);
+		static Animate* show(double duration);
+		static Animate* hide(double duration);
 
 	public:
 		virtual ~Animate();
 
 		// 子类方法
-		virtual void update(float progress, Node *target, const Node *origin) = 0;
+		virtual void update(double progress, Node *target, const Node *origin) = 0;
 
 		AnimateState state() const;
 		void state(AnimateState state);
-		float duration() const;
-		void duration(float duration);
+		double duration() const;
+		void duration(double duration);
 		
 		void callback(AnimateCallback func, void *ctx);
 		
@@ -44,7 +44,7 @@ namespace a3d{
 		void accelateFunc(AnimateTimingFunc func);
 
 		// 框架方法，根据 origin 更新 current
-		void updateAtTime(float time, Node *current, const Node *origin);
+		void updateAtTime(double time, Node *current, const Node *origin);
 
 	protected:
 		Animate();
@@ -54,7 +54,6 @@ namespace a3d{
 		Animate& operator =(const Animate &d);
 
 		AnimateState _state;
-		float _bounce;
 		AnimateTimingFunc _easingFunc;
 		AnimateTimingFunc _bounceFunc;
 		AnimateTimingFunc _accelateFunc;
@@ -62,10 +61,11 @@ namespace a3d{
 		AnimateCallback _callback;
 		void *_callbackCtx;
 		
-		float _beginTime;
-		float _duration;
+		float _bounce;
+		double _beginTime;
+		double _duration;
 		
-		float timing(float p) const;
+		double timing(double p) const;
 	};
 }; // end namespace
 

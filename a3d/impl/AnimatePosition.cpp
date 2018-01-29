@@ -20,7 +20,7 @@ namespace a3d{
 		return ret;
 	}
 	
-	void AnimatePosition::update(float progress, Node *target, const Node *origin){
+	void AnimatePosition::update(double progress, Node *target, const Node *origin){
 		Vector3 offset;
 		if(_type == MoveTypeOffset){
 			offset = _vec;
