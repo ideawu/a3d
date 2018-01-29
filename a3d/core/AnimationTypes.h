@@ -17,7 +17,7 @@ namespace a3d{
 		AnimateStateCancelled
 	}AnimateState;
 
-	typedef float (*AnimateCallback)(Animate *action, void *ctx);
+	typedef void (*AnimateCallback)(Animate *action, void *ctx);
 	typedef float (*AnimateTimingFunc)(float progress);
 	
 	inline static float AnimateTimingNone(float p){

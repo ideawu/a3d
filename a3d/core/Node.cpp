@@ -129,9 +129,6 @@ namespace a3d{
 	void Node::renderAtTime(float time){
 		if(time > 0 && _animation && !_animation->empty()){
 			_animation->updateAtTime(time);
-			// 动画进行时，同时更新 current 和 this
-			//log_debug("%f %f %f", this->width(), _animation->origin.width(), _animation->current.width());
-			*this = _animation->current;
 		}
 		
 		bool visible = this->visible(); // 先保存状态，避免操作中状态改变导致出错的情况

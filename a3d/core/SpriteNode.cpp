@@ -84,6 +84,7 @@ namespace a3d{
 		if(isPlaying()){
 			return;
 		}
+		_state = SpritePlaying;
 		_clock.resume();
 	}
 
@@ -91,6 +92,7 @@ namespace a3d{
 		if(!isPlaying()){
 			return;
 		}
+		_state = SpritePaused;
 		_clock.pause();
 	}
 
@@ -98,6 +100,7 @@ namespace a3d{
 		if(isStopped()){
 			return;
 		}
+		_state = SpriteStopped;
 		_clock.reset();
 	}
 

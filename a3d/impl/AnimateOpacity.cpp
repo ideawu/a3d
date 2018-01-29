@@ -12,9 +12,9 @@ namespace a3d{
 		return ret;
 	}
 	
-	void AnimateOpacity::update(float progress, Node *current, const Node *origin){
+	void AnimateOpacity::update(float progress, Node *target, const Node *origin){
 		float df = progress * (_opacity - origin->opacity());
-		current->opacity(origin->opacity() + df);
+		target->opacity(origin->opacity() + df);
 	}
 
 }; // end namespace

@@ -24,12 +24,14 @@ namespace a3d{
 		virtual ~Animate();
 
 		// 子类方法
-		virtual void update(float progress, Node *current, const Node *origin) = 0;
+		virtual void update(float progress, Node *target, const Node *origin) = 0;
 
 		AnimateState state() const;
 		void state(AnimateState state);
 		float duration() const;
 		void duration(float duration);
+		
+		void callback(AnimateCallback func, void *ctx);
 		
 		// 设置弹跳次数，默认是1次，如果指定2次，动画完毕后返回原点，可指定非整数次
 		void bounce(float count);

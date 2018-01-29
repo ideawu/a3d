@@ -65,7 +65,13 @@ namespace a3d{
 	void Animate::duration(float duration){
 		_duration = duration;
 	}
+
+	void Animate::callback(AnimateCallback func, void *ctx){
+		_callback = func;
+		_callbackCtx = ctx;
+	}
 	
+
 	void Animate::bounce(float count){
 		_bounce = count;
 	}

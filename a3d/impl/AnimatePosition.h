@@ -16,7 +16,7 @@ namespace a3d{
 		static AnimatePosition* move(const Vector3 &vec);
 		static AnimatePosition* moveTo(const Vector3 &pos);
 
-		virtual void update(float progress, Node *current, const Node *origin);
+		virtual void update(float progress, Node *target, const Node *origin);
 	private:
 		Vector3 _vec;
 		
