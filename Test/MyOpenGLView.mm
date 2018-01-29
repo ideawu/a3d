@@ -124,7 +124,7 @@
 	_context->clear(0, 0, 0, 1);
 	_context->loadMatrix3D(_camera->matrix3D());
 	[self draw3D];
-//	_hero->renderAtTime(time);
+	_hero->renderAtTime(time);
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->blit();
@@ -138,7 +138,7 @@
 	_flag->render();
 //	_img1->render();
 //	_img2->render();
-//	_hero->render();
+	_hero->render();
 }
 
 - (void)draw2D{
@@ -328,7 +328,7 @@
 	dz *= speed;
 	dy *= speed;
 	_currentObject->move(dx, dy, dz);
-	log_debug(@"%f %f %f", _currentObject->x(), _currentObject->y(), _currentObject->z());
+//	log_debug(@"%f %f %f", _currentObject->x(), _currentObject->y(), _currentObject->z());
 
 //	[GEulerAngle angleWithMatrix:_currentObject];
 //	log_debug(@"%@", [GEulerAngle angleWithMatrix:_currentObject]);

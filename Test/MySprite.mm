@@ -7,7 +7,6 @@
 //
 
 #include "MySprite.h"
-#include <GLKit/GLKit.h>
 #include "Sprite.h"
 
 static void drawHead();
@@ -26,8 +25,9 @@ static void drawBody();
 void MySprite::draw(){
 	static a3d::Sprite *texture = NULL;
 	if(!texture){
-		glEnable(GL_TEXTURE_2D);
-		texture = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/alex.png");
+		NSBundle* myBundle = [NSBundle mainBundle];
+		NSString* myImage = [myBundle pathForResource:@"alex" ofType:@"png"];
+		texture = a3d::Sprite::imageSprite(myImage.UTF8String);
 	}
 	glBindTexture(GL_TEXTURE_2D, texture->texture());
 

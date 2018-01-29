@@ -98,6 +98,7 @@
 		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
 		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
+		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -215,6 +216,7 @@
 		08B4CBDF201DF38D00EEC0C5 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
 		08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
+		314A200F201EBDC50093D902 /* alex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alex.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +397,7 @@
 		08B4CB90201DE8B000EEC0C5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				314A200F201EBDC50093D902 /* alex.png */,
 				08B4CB97201DE8B000EEC0C5 /* Images.xcassets */,
 				08B4CB99201DE8B000EEC0C5 /* MainMenu.xib */,
 				08B4CB91201DE8B000EEC0C5 /* Info.plist */,
@@ -533,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B4CB98201DE8B000EEC0C5 /* Images.xcassets in Resources */,
+				314A2010201EBDC50093D902 /* alex.png in Resources */,
 				08B4CBBA201DE93E00EEC0C5 /* Test.entitlements in Resources */,
 				08B4CB9B201DE8B100EEC0C5 /* MainMenu.xib in Resources */,
 				08B4CBDC201DEDB700EEC0C5 /* TestController.xib in Resources */,
@@ -637,10 +641,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_ROOT)";
 			};
 			name = Debug;
@@ -674,9 +678,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_ROOT)";
 			};
 			name = Release;
@@ -757,6 +761,7 @@
 				08B4CBAA201DE8B100EEC0C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
