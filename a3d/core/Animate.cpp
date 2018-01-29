@@ -143,10 +143,10 @@ namespace a3d{
 			float progress;
 			float timing_p;
 			if(time < _beginTime){
+				return;
+			}else if(_duration == 0){
 				progress = 1;
 				timing_p = 1;
-			}else if(_duration == 0){
-				return;
 			}else{
 				progress = (time - _beginTime)/_duration;
 				progress = fmin(1, progress);
