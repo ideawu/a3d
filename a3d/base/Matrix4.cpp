@@ -98,6 +98,7 @@ namespace a3d{
 	
 	void Matrix4::translate(float x, float y, float z){
 		// macOS < 10.13, GLKMatrix4Translate does not work correctly!
+		//_mat = GLKMatrix4Translate(_mat, x, y, z);
 		_mat = {
 			_mat.m[0], _mat.m[1], _mat.m[2],  _mat.m[3],
 			_mat.m[4], _mat.m[5], _mat.m[6],  _mat.m[7],

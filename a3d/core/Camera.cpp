@@ -19,17 +19,17 @@ namespace a3d{
 		this->height(height);
 		this->depth(depth);
 		
+		float offset = 0.01;
+		
 		// 将近裁剪面设置为与viewport同大小
 		_matrix3D = Matrix4::frustum(-width/2, width/2, -height/2, height/2, _near, _far);
-		// 将视点后移，这样前裁剪面z=0(只显示z>0的物体)
-		_matrix3D.translate(0, 0, -_near);
-		// -0.0001，这样也显示z=0的物体
-		_matrix3D.translate(0, 0, -0.0001);
+		// 将视点后移，这样前裁剪面z=0(只显示z>0的物体)，加上一点偏移，这样也显示z=0的物体
+		_matrix3D.translate(0, 0, -(_near + offset));
 		// 翻转z轴，将z轴方向和人看屏幕方向相同
 		_matrix3D.scale(1, 1, -1);
 
 		_matrix2D = Matrix4::ortho(-width/2, width/2, -height/2, height/2, -_far, _far);
-		_matrix3D.translate(0, 0, -0.0001);
+		_matrix2D.translate(0, 0, -(_near + offset));
 		// 翻转y,z轴，y轴方向向下
 		_matrix2D.scale(1, -1, -1);
 		// 将原点坐标移到屏幕左上角
