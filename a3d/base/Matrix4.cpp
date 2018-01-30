@@ -30,6 +30,22 @@ namespace a3d{
 		return Matrix4(GLKMatrix4MakeOrtho(left, right, bottom, top, nearZ, farZ));
 	}
 
+	std::string Matrix4::str() const{
+		std::string s;
+		char buf[32];
+		const float *m = this->array();
+		for(int i=0; i<16; i++){
+			sprintf(buf, "%8.2f", m[i]);
+			s.append(buf);
+			if(i % 4 == 3){
+				s.push_back('\n');
+			}else{
+				s.push_back(' ');
+			}
+		}
+		return s;
+	}
+
 	const float* Matrix4::array() const{
 		return (const float *)&_mat;
 	}

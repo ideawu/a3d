@@ -5,6 +5,7 @@
 #ifndef Matrix4_hpp
 #define Matrix4_hpp
 
+#include <string>
 #include <GLKit/GLKMath.h>
 #include "Vector3.h"
 #include "Point3.h"
@@ -24,6 +25,7 @@ namespace a3d{
 
 	public:
 		/// 属性
+		std::string str() const;
 		const float* array() const;
 		
 		Vector3 position() const;
