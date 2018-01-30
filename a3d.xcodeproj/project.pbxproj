@@ -56,12 +56,12 @@
 		08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */; };
 		08B4CB75201DE4AF00EEC0C5 /* BlankContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */; };
 		08B4CB76201DE4AF00EEC0C5 /* BlankContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */; };
-		08B4CB77201DE4AF00EEC0C5 /* GLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB49201DE4AF00EEC0C5 /* GLView.h */; };
+		08B4CB77201DE4AF00EEC0C5 /* A3DView.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB49201DE4AF00EEC0C5 /* A3DView.h */; };
 		08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4C201DE4AF00EEC0C5 /* log.cpp */; };
 		08B4CB7A201DE4AF00EEC0C5 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB4D201DE4AF00EEC0C5 /* log.h */; };
 		08B4CB7B201DE4AF00EEC0C5 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4E201DE4AF00EEC0C5 /* util.cpp */; };
 		08B4CB7C201DE4AF00EEC0C5 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
-		08B4CB7E201DE6B100EEC0C5 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */; };
+		08B4CB7E201DE6B100EEC0C5 /* A3DView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB4A201DE4AF00EEC0C5 /* A3DView.mm */; };
 		08B4CB94201DE8B000EEC0C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB93201DE8B000EEC0C5 /* AppDelegate.m */; };
 		08B4CB96201DE8B000EEC0C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB95201DE8B000EEC0C5 /* main.m */; };
 		08B4CB98201DE8B000EEC0C5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08B4CB97201DE8B000EEC0C5 /* Images.xcassets */; };
@@ -85,7 +85,7 @@
 		08B4CBCC201DEA6500EEC0C5 /* Scene.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB2D201DE4AF00EEC0C5 /* Scene.h */; };
 		08B4CBCD201DEA6500EEC0C5 /* Sprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB2F201DE4AF00EEC0C5 /* Sprite.h */; };
 		08B4CBCE201DEA6500EEC0C5 /* Transform.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB31201DE4AF00EEC0C5 /* Transform.h */; };
-		08B4CBCF201DEA6500EEC0C5 /* GLView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB49201DE4AF00EEC0C5 /* GLView.h */; };
+		08B4CBCF201DEA6500EEC0C5 /* A3DView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB49201DE4AF00EEC0C5 /* A3DView.h */; };
 		08B4CBD0201DEC3200EEC0C5 /* DraftScene.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB33201DE4AF00EEC0C5 /* DraftScene.h */; };
 		08B4CBD1201DEC3200EEC0C5 /* DraftSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB35201DE4AF00EEC0C5 /* DraftSprite.h */; };
 		08B4CBD2201DEC3B00EEC0C5 /* a3d.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CAEC201DE3E300EEC0C5 /* a3d.h */; };
@@ -131,7 +131,7 @@
 				08B4CBCC201DEA6500EEC0C5 /* Scene.h in CopyFiles */,
 				08B4CBCD201DEA6500EEC0C5 /* Sprite.h in CopyFiles */,
 				08B4CBCE201DEA6500EEC0C5 /* Transform.h in CopyFiles */,
-				08B4CBCF201DEA6500EEC0C5 /* GLView.h in CopyFiles */,
+				08B4CBCF201DEA6500EEC0C5 /* A3DView.h in CopyFiles */,
 				08B4CBBF201DEA3200EEC0C5 /* Axis.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,8 +193,8 @@
 		08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAnimateHelper.h; sourceTree = "<group>"; };
 		08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlankContext.cpp; sourceTree = "<group>"; };
 		08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlankContext.h; sourceTree = "<group>"; };
-		08B4CB49201DE4AF00EEC0C5 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
-		08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		08B4CB49201DE4AF00EEC0C5 /* A3DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A3DView.h; sourceTree = "<group>"; };
+		08B4CB4A201DE4AF00EEC0C5 /* A3DView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = A3DView.mm; sourceTree = "<group>"; };
 		08B4CB4C201DE4AF00EEC0C5 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		08B4CB4D201DE4AF00EEC0C5 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		08B4CB4E201DE4AF00EEC0C5 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
@@ -363,8 +363,8 @@
 		08B4CB48201DE4AF00EEC0C5 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				08B4CB49201DE4AF00EEC0C5 /* GLView.h */,
-				08B4CB4A201DE4AF00EEC0C5 /* GLView.mm */,
+				08B4CB49201DE4AF00EEC0C5 /* A3DView.h */,
+				08B4CB4A201DE4AF00EEC0C5 /* A3DView.mm */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -445,7 +445,7 @@
 				08B4CB5A201DE4AF00EEC0C5 /* Object.h in Headers */,
 				08B4CB14201DE49900EEC0C5 /* Color.h in Headers */,
 				08B4CB5E201DE4AF00EEC0C5 /* Scene.h in Headers */,
-				08B4CB77201DE4AF00EEC0C5 /* GLView.h in Headers */,
+				08B4CB77201DE4AF00EEC0C5 /* A3DView.h in Headers */,
 				08B4CB54201DE4AF00EEC0C5 /* Camera.h in Headers */,
 				08B4CAED201DE3E300EEC0C5 /* a3d.h in Headers */,
 				08B4CB62201DE4AF00EEC0C5 /* Transform.h in Headers */,
@@ -555,7 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */,
-				08B4CB7E201DE6B100EEC0C5 /* GLView.mm in Sources */,
+				08B4CB7E201DE6B100EEC0C5 /* A3DView.mm in Sources */,
 				08B4CB61201DE4AF00EEC0C5 /* Transform.cpp in Sources */,
 				08B4CB5B201DE4AF00EEC0C5 /* Renderer.cpp in Sources */,
 				08B4CB5D201DE4AF00EEC0C5 /* Scene.cpp in Sources */,

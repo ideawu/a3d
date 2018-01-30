@@ -2,12 +2,12 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import "GLView.h"
+#import "A3DView.h"
 #include "Clock.h"
 
 using namespace a3d;
 
-@interface GLView(){
+@interface A3DView(){
 	NSTrackingArea *_trackingArea;
 #if TARGET_OS_IPHONE
 	CADisplayLink *_displayLink;
@@ -24,7 +24,7 @@ using namespace a3d;
 @property BOOL isRendering;
 @end
 
-@implementation GLView
+@implementation A3DView
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat{
 	NSOpenGLPixelFormatAttribute attrs[] = {
@@ -176,7 +176,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 									const CVTimeStamp *outputTime, CVOptionFlags flagsIn,
 									CVOptionFlags *flagsOut, void *displayLinkContext){
 //	log_debug(@"%f", outputTime->hostTime/1000.0/1000.0/1000.0);
-	[(__bridge GLView *)displayLinkContext displayLinkCallback];
+	[(__bridge A3DView *)displayLinkContext displayLinkCallback];
 	return kCVReturnSuccess;
 }
 #endif
