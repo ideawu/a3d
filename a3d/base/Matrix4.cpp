@@ -95,9 +95,18 @@ namespace a3d{
 		vec = this->mul(vec);
 		return vec;
 	}
-
+	
 	void Matrix4::translate(float x, float y, float z){
-		_mat = GLKMatrix4Translate(_mat, x, y, z);
+		// macOS < 10.13, GLKMatrix4Translate does not work correctly!
+		_mat = {
+			_mat.m[0], _mat.m[1], _mat.m[2],  _mat.m[3],
+			_mat.m[4], _mat.m[5], _mat.m[6],  _mat.m[7],
+			_mat.m[8], _mat.m[9], _mat.m[10], _mat.m[11],
+			_mat.m[0] * x + _mat.m[4] * y + _mat.m[8]  * z + _mat.m[12],
+			_mat.m[1] * x + _mat.m[5] * y + _mat.m[9]  * z + _mat.m[13],
+			_mat.m[2] * x + _mat.m[6] * y + _mat.m[10] * z + _mat.m[14],
+			_mat.m[3] * x + _mat.m[7] * y + _mat.m[11] * z + _mat.m[15]
+		};
 	}
 	
 	void Matrix4::translate(const Vector3 &offset){

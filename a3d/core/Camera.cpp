@@ -21,20 +21,19 @@ namespace a3d{
 		
 		// 将近裁剪面设置为与viewport同大小
 		_matrix3D = Matrix4::frustum(-width/2, width/2, -height/2, height/2, _near, _far);
-		// 将前裁剪面后移，因为视点默认在 (0,0,0)，所以默认前裁剪面在(near,0,0)，这在旋转物体时不方便
-		log_debug("\n%s", _matrix3D.str().c_str());
-		_matrix3D.translate(0, 0, 0-(_near+0.0001));
-		log_debug("\n%s", _matrix3D.str().c_str());
+		// 将视点后移，这样前裁剪面z=0(只显示z>0的物体)
+		_matrix3D.translate(0, 0, -_near);
+		// -0.0001，这样也显示z=0的物体
+		_matrix3D.translate(0, 0, -0.0001);
 		// 翻转z轴，将z轴方向和人看屏幕方向相同
 		_matrix3D.scale(1, 1, -1);
-		// 将原点坐标移到屏幕右下角
-//		_matrix3D.translate(-width/2, -height/2, 0);
 
 		_matrix2D = Matrix4::ortho(-width/2, width/2, -height/2, height/2, -_far, _far);
-		// 翻转y轴，y轴方向向下
+		_matrix3D.translate(0, 0, -0.0001);
+		// 翻转y,z轴，y轴方向向下
 		_matrix2D.scale(1, -1, -1);
 		// 将原点坐标移到屏幕左上角
-//		_matrix2D.translate(-width/2, -height/2, -0.0001);
+		_matrix2D.translate(-width/2, -height/2, 0);
 	}
 
 	Matrix4 Camera::matrix3D() const{
