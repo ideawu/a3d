@@ -110,11 +110,15 @@ namespace a3d{
 	}
 
 	void SpriteNode::updateClock(double time){
-		double lastRenderTime = _clock.time();
-		_clock.update(time);
-		if(_clock.isPaused()){
+		if(isStopped()){
 			return;
 		}
+		double lastRenderTime = _clock.time();
+		_clock.update(time);
+		if(isPaused()){
+			return;
+		}
+		
 		double thisRenderTime = _clock.time();
 		
 		double lastDuration = 0;
