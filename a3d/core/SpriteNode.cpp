@@ -42,14 +42,11 @@ namespace a3d{
 		_sprite = sprite;
 		if(_sprite){
 			_originSize = _sprite->size();
-		}else{
-			_originSize = Vector3();
-		}
-		
-		_contentNode->size(_originSize);
-		
-		if(this->size().empty()){
-			this->size(_originSize);
+			
+			if(this->size().empty()){
+				_contentNode->size(_originSize);
+				this->size(_originSize);
+			}
 		}
 	}
 
