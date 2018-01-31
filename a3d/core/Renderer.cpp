@@ -8,7 +8,6 @@
 namespace a3d{
 
 	Renderer::Renderer(){
-		pushOpacity(1.0);
 	}
 	
 	Renderer* Renderer::current(){
