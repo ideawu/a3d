@@ -22,7 +22,7 @@
 // 判断 renderAtTime: 的调用是否已被激活 
 - (BOOL)isAnimating;
 
-// 调试用，限制刷新率
+// 限制刷新率，性能相关
 - (void)setMaxFPS:(double)fps;
 // 默认为1，按正常时钟速度，指定为0.5则变慢
 - (void)setTimescale:(double)scale;

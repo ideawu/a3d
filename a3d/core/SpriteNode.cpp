@@ -12,12 +12,11 @@ namespace a3d{
 		SpriteStopped
 	};
 
-
 	SpriteNode::SpriteNode(){
 		_sprite = NULL;
 		_contentNode = new Node();
 		this->addSubnode(_contentNode);
-		_isFrameLossless = true;
+		_isFrameLossless = false;
 		_isLooping = true;
 		_state = SpritePlaying;
 	}
