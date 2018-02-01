@@ -16,7 +16,7 @@ namespace a3d{
 	SpriteNode::SpriteNode(){
 		_sprite = NULL;
 		_contentNode = new Node();
-		this->addSubNode(_contentNode);
+		this->addSubnode(_contentNode);
 		_isFrameLossless = true;
 		_isLooping = true;
 		_state = SpritePlaying;

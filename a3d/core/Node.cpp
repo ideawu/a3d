@@ -52,15 +52,15 @@ namespace a3d{
 	
 	void Node::removeFromParent(){
 		if(_parent){
-			_parent->removeSubNode(this);
+			_parent->removeSubnode(this);
 		}
 	}
 	
-	void Node::addSubNode(Node *node){
-		addSubNode(node, false);
+	void Node::addSubnode(Node *node){
+		addSubnode(node, false);
 	}
 	
-	void Node::addSubNode(Node *node, bool isFront){
+	void Node::addSubnode(Node *node, bool isFront){
 		if(!_subs){
 			_subs = new std::list<Node *>();
 		}
@@ -79,7 +79,7 @@ namespace a3d{
 		}
 	}
 	
-	void Node::removeSubNode(Node *node){
+	void Node::removeSubnode(Node *node){
 		if(!_subs){
 			return;
 		}
@@ -89,14 +89,14 @@ namespace a3d{
 		}
 	}
 
-	void Node::bringSubNodeToBack(Node *node){
-		removeSubNode(node);
-		addSubNode(node, false);
+	void Node::bringSubnodeToBack(Node *node){
+		removeSubnode(node);
+		addSubnode(node, false);
 	}
 	
-	void Node::bringSubNodeToFront(Node *node){
-		removeSubNode(node);
-		addSubNode(node, true);
+	void Node::bringSubnodeToFront(Node *node){
+		removeSubnode(node);
+		addSubnode(node, true);
 	}
 
 	Matrix4 Node::worldMatrix() const{

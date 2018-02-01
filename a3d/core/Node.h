@@ -33,10 +33,10 @@ namespace a3d{
 
 		Node* parent() const;
 		void removeFromParent();
-		void addSubNode(Node *node);
-		void removeSubNode(Node *node);
-		void bringSubNodeToBack(Node *node);
-		void bringSubNodeToFront(Node *node);
+		void addSubnode(Node *node);
+		void removeSubnode(Node *node);
+		void bringSubnodeToBack(Node *node);
+		void bringSubnodeToFront(Node *node);
 
 		// ### 坐标和向量转换
 		// 当前节点在世界（即根节点上一级）坐标系中的矩阵
@@ -71,7 +71,7 @@ namespace a3d{
 		std::list<Node *> *_subs;
 		NodeAnimateHelper *_animation;
 
-		void addSubNode(Node *node, bool isFront);
+		void addSubnode(Node *node, bool isFront);
 	};
 
 }; // end namespace

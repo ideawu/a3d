@@ -62,11 +62,11 @@ namespace a3d{
 	}
 
 	void Scene::addNode(Node *node){
-		_rootNode->addSubNode(node);
+		_rootNode->addSubnode(node);
 	}
 	
 	void Scene::removeNode(Node *node){
-		_rootNode->removeSubNode(node);
+		_rootNode->removeSubnode(node);
 	}
 
 	void Scene::view3D(){
