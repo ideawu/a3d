@@ -81,7 +81,7 @@ using namespace a3d;
 }
 
 - (void)updateTrackingAreas{
-	if(!_trackingArea){
+	if(_trackingArea){
 		[self removeTrackingArea:_trackingArea];
 	}
 	NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect |
