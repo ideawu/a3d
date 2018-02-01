@@ -73,9 +73,9 @@ namespace a3d{
 		}
 		node->_parent = this;
 		if(isFront){
-			_subs->push_front(node);
-		}else{
 			_subs->push_back(node);
+		}else{
+			_subs->push_front(node);
 		}
 	}
 	
@@ -158,8 +158,7 @@ namespace a3d{
 			this->drawAtTime(time);
 		}
 		if(_subs){
-			// 倒序，以便和list的front/back对应
-			for(std::list<Node*>::reverse_iterator it=_subs->rbegin(); it != _subs->rend(); it++){
+			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;
 				node->renderAtTime(time);
 			}
