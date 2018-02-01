@@ -18,8 +18,8 @@
 	DraftScene *_scene;
 	DraftSprite *_flag;
 	DraftSprite *_camera_hero;
-//	a3d::Sprite *_img1;
-//	a3d::Sprite *_img2;
+	a3d::SpriteNode *_img1;
+	a3d::SpriteNode *_img2;
 
 	MySprite *_hero;
 
@@ -50,17 +50,22 @@
 	
 //	[_scene moveX:200 y:200 z:5];
 
-//	{
-//		_img1 = new DraftImage("/Users/ideawu/Downloads/imgs/1.jpg");
-//		_img1->scale(0.5);
-//		_img1->move(_img1->width()/2, _img1->height()/2, 0);
-//		_img1->move(400, 0, 500);
-//	}
-//	{
-//		_img2 = new DraftImage("/Users/ideawu/Downloads/imgs/9.jpg");
-//		_img2->move(_img2->width()/2, _img2->height()/2, 0);
-//		_img2->move(100, 0, 4000);
-//	}
+	{
+		_img1 = new a3d::SpriteNode();
+		a3d::Sprite *sprite = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+		_img1->sprite(sprite);
+		_img1->move(_img1->width()/2, _img1->height()/2, 0);
+		_img1->move(200, 0, 300);
+		_img1->opacity(0.8);
+	}
+	{
+		_img2 = new a3d::SpriteNode();
+		a3d::Sprite *sprite = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
+		_img2->sprite(sprite);
+		_img2->move(_img2->width()/2, _img2->height()/2, 0);
+		_img2->move(200, 0, 300);
+		_img2->opacity(0.7);
+	}
 	
 	_flag = new DraftSprite();
 	_flag->width(100);
@@ -140,8 +145,8 @@
 - (void)draw3D{
 	_scene->render();
 	_flag->render();
-//	_img1->render();
-//	_img2->render();
+	_img1->render();
+	_img2->render();
 	_hero->render();
 }
 

@@ -35,7 +35,9 @@ namespace a3d{
 		void removeFromParent();
 		void addSubNode(Node *node);
 		void removeSubNode(Node *node);
-		
+		void bringSubNodeToBack(Node *node);
+		void bringSubNodeToFront(Node *node);
+
 		// ### 坐标和向量转换
 		// 当前节点在世界（即根节点上一级）坐标系中的矩阵
 		Matrix4 worldMatrix() const;
@@ -68,6 +70,8 @@ namespace a3d{
 		Node *_parent;
 		std::list<Node *> *_subs;
 		NodeAnimateHelper *_animation;
+
+		void addSubNode(Node *node, bool isFront);
 	};
 
 }; // end namespace

@@ -57,6 +57,10 @@ namespace a3d{
 	}
 	
 	void Node::addSubNode(Node *node){
+		addSubNode(node, false);
+	}
+	
+	void Node::addSubNode(Node *node, bool isFront){
 		if(!_subs){
 			_subs = new std::list<Node *>();
 		}
@@ -68,7 +72,11 @@ namespace a3d{
 			}
 		}
 		node->_parent = this;
-		_subs->push_back(node);
+		if(isFront){
+			_subs->push_front(node);
+		}else{
+			_subs->push_back(node);
+		}
 	}
 	
 	void Node::removeSubNode(Node *node){
@@ -79,6 +87,16 @@ namespace a3d{
 			node->_parent = NULL;
 			_subs->remove(node);
 		}
+	}
+
+	void Node::bringSubNodeToBack(Node *node){
+		removeSubNode(node);
+		addSubNode(node, false);
+	}
+	
+	void Node::bringSubNodeToFront(Node *node){
+		removeSubNode(node);
+		addSubNode(node, true);
 	}
 
 	Matrix4 Node::worldMatrix() const{
@@ -140,7 +158,8 @@ namespace a3d{
 			this->drawAtTime(time);
 		}
 		if(_subs){
-			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
+			// 倒序，以便和list的front/back对应
+			for(std::list<Node*>::reverse_iterator it=_subs->rbegin(); it != _subs->rend(); it++){
 				Node *node = *it;
 				node->renderAtTime(time);
 			}

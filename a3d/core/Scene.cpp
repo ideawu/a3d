@@ -86,7 +86,7 @@ namespace a3d{
 		
 		_context->begin();
 		_context->clearColor(0, 0, 0);
-		
+
 		_camera->renderAtTime(time);
 		
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
