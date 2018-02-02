@@ -6,8 +6,6 @@
 #define AnimatePosition_hpp
 
 #include "Animate.h"
-#include "Node.h"
-#include "Vector3.h"
 
 namespace a3d{
 	class AnimatePosition : public Animate
@@ -18,14 +16,13 @@ namespace a3d{
 
 		virtual void update(double progress, Node *target, const Node *origin);
 	private:
-		Vector3 _vec;
-		
 		typedef enum{
-			MoveTypeOffset,
-			MoveTypePosition
-		}MoveType;
+			TypeOffset,
+			TypePosition
+		}AnimateType;
 		
-		MoveType _type;
+		AnimateType _type;
+		Vector3 _vec;
 	};
 }; // end namespace
 

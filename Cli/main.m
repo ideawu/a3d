@@ -1,41 +1,16 @@
+//  Created by ideawu on 02/02/2018.
+//  Copyright © 2018 ideawu. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
-#import "GMatrix4.h"
-#import "GEulerAngle.h"
+#import <GLKit/GLKit.h>
 
 int main(int argc, const char * argv[]) {
-	GMatrix4 *mat = [GMatrix4 make];
-
-//	[mat rotateY:45];
-//	[mat rotateX:45];
-
-	for(int i=0; i<8; i++){
-		[mat rotateZ:45];
-		log_debug(@"%@", [GEulerAngle angleOfMatrix:mat]);
-	}
-	log_debug(@"");
-
-	for(int i=0; i<8; i++){
-		[mat rotateX:45];
-		log_debug(@"%@", [GEulerAngle angleOfMatrix:mat]);
-	}
-	log_debug(@"");
-
-	for(int i=0; i<8; i++){
-		[mat rotateY:45];
-		log_debug(@"%@", [GEulerAngle angleOfMatrix:mat]);
-	}
-	log_debug(@"");
-
-//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
-//	[mat rotateZ:90];
-//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
-//	[mat rotateX:-1];
-//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
-//	[mat rotateX:+2];
-//	log_debug(@"roll: %.2f, pitch: %.2f, yaw: %.2f", mat.rollAngle, mat.pitchAngle, mat.yawAngle);
-//	log_debug(@"");
-
-
+	GLKMatrix4 mat = GLKMatrix4Identity;
+	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(181+100));
+	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(mat);
+	GLKVector3 axis = GLKQuaternionAxis(quat);
+	float angle = GLKQuaternionAngle(quat);
+	log_debug(@"%.2f %.2f %.2f %.2f", axis.x, axis.y, axis.z, GLKMathRadiansToDegrees(angle));
 	return 0;
 }

@@ -5,6 +5,9 @@
 #include "Axis.h"
 
 namespace a3d{
+	Axis::Axis(){
+	}
+	
 	Axis::Axis(const Vector3 &origin, const Vector3 &direction){
 		this->origin = origin;
 		this->direction = direction.normalize();

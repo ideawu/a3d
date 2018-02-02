@@ -3,8 +3,9 @@
 //
 
 #include "Animate.h"
-#include "AnimatePosition.h"
 #include "AnimateOpacity.h"
+#include "AnimatePosition.h"
+#include "AnimateRotation.h"
 
 namespace a3d{
 	
@@ -33,6 +34,16 @@ namespace a3d{
 	Animate* Animate::hide(double duration){
 		return Animate::fadeTo(0, duration);
 	}
+	
+	Animate* Animate::rotate(float degree, const Vector3 &vec){
+		Animate *ret = AnimateRotation::rotate(degree, vec);
+		return ret;
+	}
+	
+	Animate* Animate::rotate(float degree, const Axis &axis){
+		Animate *ret = AnimateRotation::rotate(degree, axis);
+		return ret;
+	}
 
 	Animate::Animate(){
 		_state = AnimateStateNone;
@@ -42,6 +53,7 @@ namespace a3d{
 		_callback = NULL;
 		_beginTime = -1;
 		_duration = 0;
+		_bounce = 1;
 	}
 	
 	Animate::~Animate(){
@@ -71,6 +83,9 @@ namespace a3d{
 		_callbackCtx = ctx;
 	}
 	
+	float Animate::bounce() const{
+		return _bounce;
+	}
 
 	void Animate::bounce(float count){
 		_bounce = count;
@@ -110,7 +125,7 @@ namespace a3d{
 	double Animate::timing(double p) const{
 		double step_s = 0;
 		double step_e = 0;
-		if(_bounce != 0){
+		if(_bounce != 1){
 			// 通过反函数计算当前时间是第几跳
 			double bounce_ratio = reverse_timing_func(_bounceFunc, p);
 			// 相邻的两次组成一次周期
@@ -126,7 +141,7 @@ namespace a3d{
 		
 		double y = _easingFunc(p);
 		
-		if(_bounce != 0){
+		if(_bounce != 1){
 			double total_steps = ceil(_bounce/2) * 2; // 向上取偶
 			y *= _accelateFunc(step_e/total_steps);
 		}

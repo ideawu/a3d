@@ -6,7 +6,6 @@
 #define AnimateOpacity_hpp
 
 #include "Animate.h"
-#include "Node.h"
 
 namespace a3d{
 	class AnimateOpacity : public Animate

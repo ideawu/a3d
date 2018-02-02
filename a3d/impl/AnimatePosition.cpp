@@ -8,30 +8,26 @@ namespace a3d{
 
 	AnimatePosition* AnimatePosition::move(const Vector3 &vec){
 		AnimatePosition *ret = new AnimatePosition();
-		ret->_type = MoveTypeOffset;
+		ret->_type = TypeOffset;
 		ret->_vec = vec;
 		return ret;
 	}
 	
 	AnimatePosition* AnimatePosition::moveTo(const Vector3 &pos){
 		AnimatePosition *ret = new AnimatePosition();
-		ret->_type = MoveTypePosition;
+		ret->_type = TypePosition;
 		ret->_vec = pos;
 		return ret;
 	}
 	
 	void AnimatePosition::update(double progress, Node *target, const Node *origin){
 		Vector3 offset;
-		if(_type == MoveTypeOffset){
-			offset = _vec;
+		if(_type == TypeOffset){
+			offset = Vector3::slerp(Vector3(), _vec, progress);
 		}else{
-			offset = _vec.sub(origin->position());
+			offset = Vector3::slerp(origin->position(), _vec, progress);
 		}
-		float len = progress * offset.length();
-		offset = offset.normalize(len);
-		Vector3 pos = origin->position().add(offset);
-		target->position(pos);
-//		log_debug("x %f", target->x());
+		target->move(offset);
 	}
 
 }; // end namespace

@@ -6,6 +6,13 @@
 
 namespace a3d{
 	
+	Vector3 Vector3::slerp(const Vector3 &origin, const Vector3 &target, float progress){
+		Vector3 offset = target.sub(origin);
+		float len = progress * offset.length();
+		offset = offset.normalize(len);
+		return offset;
+	}
+	
 	Vector3::Vector3(){
 		x = y = z = 0;
 	}

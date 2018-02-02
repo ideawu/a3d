@@ -14,6 +14,8 @@ namespace a3d{
 			struct{float w, h, d;};
 			struct{float width, height, depth;};
 		};
+		
+		static Vector3 slerp(const Vector3 &origin, const Vector3 &target, float progress);
 
 		Vector3();
 		Vector3(float x, float y, float z);

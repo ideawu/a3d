@@ -6,7 +6,9 @@
 #define Animation_hpp
 
 #include "AnimationTypes.h"
+#include "Node.h"
 #include "Vector3.h"
+#include "Axis.h"
 
 namespace a3d{
 	class Node;
@@ -16,9 +18,13 @@ namespace a3d{
 	public:
 		static Animate* move(const Vector3 &vec, double duration);
 		static Animate* moveTo(const Vector3 &pos, double duration);
+		
 		static Animate* fadeTo(double opacity, double duration);
 		static Animate* show(double duration);
 		static Animate* hide(double duration);
+
+		static Animate* rotate(float degree, const Vector3 &vec);
+		static Animate* rotate(float degree, const Axis &axis);
 
 	public:
 		virtual ~Animate();
@@ -34,6 +40,8 @@ namespace a3d{
 		void callback(AnimateCallback func, void *ctx);
 		
 		// 设置弹跳次数，默认是1次，如果指定2次，动画完毕后返回原点，可指定非整数次
+		// bounce 是偶数且 boundFunc 为 Linear(默认)，则作用同 repeat+autoreverse
+		float bounce() const;
 		void bounce(float count);
 		
 		// 运动位移相对时间的曲线控制

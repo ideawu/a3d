@@ -55,7 +55,7 @@
 		a3d::Sprite *sprite = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
 		_img1->sprite(sprite);
 		_img1->move(_img1->width()/2, _img1->height()/2, 0);
-		_img1->move(200, 0, 300);
+		_img1->move(100, 0, 300);
 		_img1->opacity(0.8);
 	}
 	{
@@ -63,7 +63,7 @@
 		a3d::Sprite *sprite = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
 		_img2->sprite(sprite);
 		_img2->move(_img2->width()/2, _img2->height()/2, 0);
-		_img2->move(200, 0, 300);
+		_img2->move(100, 0, 300);
 		_img2->opacity(0.7);
 	}
 	
@@ -256,14 +256,14 @@
 		}
 		case ' ':{
 			// 切换被控制角色
-			[self switchSprite];
-//			[self setTimescale:0.1];
+//			[self switchSprite];
 			
-			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(300,50,0), 4);
-//			action->easingFunc(a3d::AnimateTimingEaseInOut);
-//			action->bounceFunc(a3d::AnimateTimingEaseIn);
+			a3d::Animate *action = a3d::Animate::rotate(170, a3d::Vector3(0,1,0));
+			action->easingFunc(a3d::AnimateTimingEaseIn);
+			action->bounceFunc(a3d::AnimateTimingLinear);
 			action->accelateFunc(a3d::AnimateTimingLinear);
-			action->bounce(12);
+//			action->bounce(12);
+			action->duration(0.5 * action->bounce());
 			_hero->runAnimation(action);
 			break;
 		}

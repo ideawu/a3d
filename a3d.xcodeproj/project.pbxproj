@@ -101,6 +101,9 @@
 		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
 		314A2011201ED3D30093D902 /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
 		314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
+		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
+		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
+		31C6789320247C90000BF908 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -135,6 +138,15 @@
 				08B4CBBF201DEA3200EEC0C5 /* Axis.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31C6788E20247C90000BF908 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -221,6 +233,10 @@
 		08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 		314A200F201EBDC50093D902 /* alex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alex.png; sourceTree = "<group>"; };
+		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
+		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
+		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
+		31C6789220247C90000BF908 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +256,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31C6788D20247C90000BF908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -248,6 +271,7 @@
 			children = (
 				08B4CAEB201DE3E300EEC0C5 /* a3d */,
 				08B4CB8F201DE8B000EEC0C5 /* Test */,
+				31C6789120247C90000BF908 /* Cli */,
 				08B4CAEA201DE3E300EEC0C5 /* Products */,
 				08B4CBDD201DEE6D00EEC0C5 /* Frameworks */,
 			);
@@ -258,6 +282,7 @@
 			children = (
 				08B4CAE9201DE3E300EEC0C5 /* liba3d.a */,
 				08B4CB8E201DE8B000EEC0C5 /* Test.app */,
+				31C6789020247C90000BF908 /* Cli */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +375,8 @@
 				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
 				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
 				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
+				31C67889202471D7000BF908 /* AnimateRotation.h */,
+				31C67888202471D7000BF908 /* AnimateRotation.cpp */,
 				08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */,
 				08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */,
 				08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */,
@@ -419,6 +446,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		31C6789120247C90000BF908 /* Cli */ = {
+			isa = PBXGroup;
+			children = (
+				31C6789220247C90000BF908 /* main.m */,
+			);
+			path = Cli;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -450,6 +485,7 @@
 				08B4CAED201DE3E300EEC0C5 /* a3d.h in Headers */,
 				08B4CB62201DE4AF00EEC0C5 /* Transform.h in Headers */,
 				08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */,
+				31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */,
 				08B4CB5C201DE4AF00EEC0C5 /* Renderer.h in Headers */,
 				08B4CB12201DE49900EEC0C5 /* Axis.h in Headers */,
 				08B4CB6C201DE4AF00EEC0C5 /* AnimateOpacity.h in Headers */,
@@ -498,6 +534,23 @@
 			productReference = 08B4CB8E201DE8B000EEC0C5 /* Test.app */;
 			productType = "com.apple.product-type.application";
 		};
+		31C6788F20247C90000BF908 /* Cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31C6789420247C90000BF908 /* Build configuration list for PBXNativeTarget "Cli" */;
+			buildPhases = (
+				31C6788C20247C90000BF908 /* Sources */,
+				31C6788D20247C90000BF908 /* Frameworks */,
+				31C6788E20247C90000BF908 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cli;
+			productName = Cli;
+			productReference = 31C6789020247C90000BF908 /* Cli */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -512,6 +565,10 @@
 					};
 					08B4CB8D201DE8B000EEC0C5 = {
 						CreatedOnToolsVersion = 6.1.1;
+					};
+					31C6788F20247C90000BF908 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -530,6 +587,7 @@
 			targets = (
 				08B4CAE8201DE3E300EEC0C5 /* a3d */,
 				08B4CB8D201DE8B000EEC0C5 /* Test */,
+				31C6788F20247C90000BF908 /* Cli */,
 			);
 		};
 /* End PBXProject section */
@@ -574,6 +632,7 @@
 				08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */,
 				08B4CB13201DE49900EEC0C5 /* Color.cpp in Sources */,
 				08B4CB1B201DE49900EEC0C5 /* Vector3.cpp in Sources */,
+				31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */,
 				08B4CB6F201DE4AF00EEC0C5 /* BufferContext.cpp in Sources */,
 				08B4CB19201DE49900EEC0C5 /* Rect.cpp in Sources */,
 				08B4CB5F201DE4AF00EEC0C5 /* Sprite.cpp in Sources */,
@@ -594,6 +653,14 @@
 				08B4CB96201DE8B000EEC0C5 /* main.m in Sources */,
 				08B4CB94201DE8B000EEC0C5 /* AppDelegate.m in Sources */,
 				08B4CBDB201DEDB700EEC0C5 /* TestController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31C6788C20247C90000BF908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31C6789320247C90000BF908 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +804,59 @@
 			};
 			name = Release;
 		};
+		31C6789520247C90000BF908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		31C6789620247C90000BF908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -763,6 +883,15 @@
 			buildConfigurations = (
 				08B4CBA9201DE8B100EEC0C5 /* Debug */,
 				08B4CBAA201DE8B100EEC0C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31C6789420247C90000BF908 /* Build configuration list for PBXNativeTarget "Cli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31C6789520247C90000BF908 /* Debug */,
+				31C6789620247C90000BF908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

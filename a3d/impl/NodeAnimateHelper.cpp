@@ -38,11 +38,13 @@ namespace a3d{
 	}
 	
 	void NodeAnimateHelper::updateAtTime(double time){
-		// 动画进行前，检查 current 和 this，将 diff 更新到 origin 中，因为动画进行过程中，this 可能被更新
+		// 动画进行前，检查 current 和 target，获得动画之外的变更，将 diff 更新到 origin 中
 		Transform trans = Transform::transformBetween(current, *target);
 //		log_debug("origin: %.2f, dw: %.2f", origin.width(), trans.size.x);
 		origin.transform(trans);
 		
+		// 重置 target
+		*target = origin;
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){
 			Animate *action = *it;
 			// 注意，实时更新 target，最后再把 current 设置为 target
@@ -54,7 +56,7 @@ namespace a3d{
 				it ++;
 			}
 		}
-		
+		// 保存 target 动画后的状态
 		current = *target;
 	}
 
