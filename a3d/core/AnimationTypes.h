@@ -43,9 +43,12 @@ namespace a3d{
 		}
 	}
 
-	inline static double AnimateTimingLoopSine(double p){
-		p = p * M_PI * 2 - M_PI_2;
-		return (sinf(p) + 1)/2;
+	inline static double AnimateTimingSwing(double p){
+		return sinf(p * M_PI * 2);
+	}
+
+	inline static double AnimateTimingLoop(double p){
+		return sinf(p * M_PI);
 	}
 }; // end namespace
 

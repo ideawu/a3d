@@ -258,12 +258,12 @@
 			// 切换被控制角色
 //			[self switchSprite];
 			
-			a3d::Animate *action = a3d::Animate::rotate(170, a3d::Vector3(0,1,0));
-			action->easingFunc(a3d::AnimateTimingEaseIn);
+			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
+			action->easingFunc(a3d::AnimateTimingLoop);
 			action->bounceFunc(a3d::AnimateTimingLinear);
 			action->accelateFunc(a3d::AnimateTimingLinear);
 //			action->bounce(12);
-			action->duration(0.5 * action->bounce());
+			action->duration(2.5 * action->bounce());
 			_hero->runAnimation(action);
 			break;
 		}
