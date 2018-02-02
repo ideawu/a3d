@@ -259,11 +259,12 @@
 //			[self switchSprite];
 			
 			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
-			action->easingFunc(a3d::AnimateTimingLoop);
-			action->bounceFunc(a3d::AnimateTimingLinear);
-			action->accelateFunc(a3d::AnimateTimingLinear);
-//			action->bounce(12);
-			action->duration(2.5 * action->bounce());
+//			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
+			action->easingFunc(a3d::TimingFuncLoop);
+			action->bounceFunc(a3d::TimingFuncLinear);
+			action->accelateFunc(a3d::TimingFuncLinear);
+			action->bounce(1);
+			action->duration(1 * action->bounce());
 			_hero->runAnimation(action);
 			break;
 		}

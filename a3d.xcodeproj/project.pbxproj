@@ -98,6 +98,7 @@
 		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
 		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
+		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
 		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
 		314A2011201ED3D30093D902 /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
 		314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
@@ -232,6 +233,7 @@
 		08B4CBDF201DF38D00EEC0C5 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
 		08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
+		312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTypes.cpp; sourceTree = "<group>"; };
 		314A200F201EBDC50093D902 /* alex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alex.png; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				08B4CB20201DE4AF00EEC0C5 /* Animate.h */,
 				08B4CB1F201DE4AF00EEC0C5 /* Animate.cpp */,
 				08B4CB21201DE4AF00EEC0C5 /* AnimationTypes.h */,
+				312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */,
 				08B4CB23201DE4AF00EEC0C5 /* Camera.h */,
 				08B4CB22201DE4AF00EEC0C5 /* Camera.cpp */,
 				08B4CB25201DE4AF00EEC0C5 /* Context.h */,
@@ -634,6 +637,7 @@
 				08B4CB1B201DE49900EEC0C5 /* Vector3.cpp in Sources */,
 				31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */,
 				08B4CB6F201DE4AF00EEC0C5 /* BufferContext.cpp in Sources */,
+				312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */,
 				08B4CB19201DE49900EEC0C5 /* Rect.cpp in Sources */,
 				08B4CB5F201DE4AF00EEC0C5 /* Sprite.cpp in Sources */,
 				08B4CB57201DE4AF00EEC0C5 /* Node.cpp in Sources */,

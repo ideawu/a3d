@@ -45,11 +45,11 @@ namespace a3d{
 		void bounce(float count);
 		
 		// 运动位移相对时间的曲线控制
-		void easingFunc(AnimateTimingFunc func);
+		void easingFunc(TimingFunc func);
 		// 用于弹跳频率控制
-		void bounceFunc(AnimateTimingFunc func);
+		void bounceFunc(TimingFunc func);
 		// 用于弹跳力度控制
-		void accelateFunc(AnimateTimingFunc func);
+		void accelateFunc(TimingFunc func);
 
 		// 框架方法，根据 origin 更新 current
 		void updateAtTime(double time, Node *current, const Node *origin);
@@ -62,9 +62,9 @@ namespace a3d{
 		Animate& operator =(const Animate &d);
 
 		AnimateState _state;
-		AnimateTimingFunc _easingFunc;
-		AnimateTimingFunc _bounceFunc;
-		AnimateTimingFunc _accelateFunc;
+		TimingFunc _easingFunc;
+		TimingFunc _bounceFunc;
+		TimingFunc _accelateFunc;
 
 		AnimateCallback _callback;
 		void *_callbackCtx;

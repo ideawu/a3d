@@ -47,9 +47,9 @@ namespace a3d{
 
 	Animate::Animate(){
 		_state = AnimateStateNone;
-		_easingFunc = AnimateTimingEaseOut;
-		_bounceFunc = AnimateTimingLinear;
-		_accelateFunc = AnimateTimingNone;
+		_easingFunc = TimingFuncEaseOut;
+		_bounceFunc = TimingFuncLinear;
+		_accelateFunc = TimingFuncNone;
 		_callback = NULL;
 		_beginTime = -1;
 		_duration = 0;
@@ -91,19 +91,19 @@ namespace a3d{
 		_bounce = count;
 	}
 	
-	void Animate::easingFunc(AnimateTimingFunc func){
+	void Animate::easingFunc(TimingFunc func){
 		_easingFunc = func;
 	}
 	
-	void Animate::bounceFunc(AnimateTimingFunc func){
+	void Animate::bounceFunc(TimingFunc func){
 		_bounceFunc = func;
 	}
 	
-	void Animate::accelateFunc(AnimateTimingFunc func){
+	void Animate::accelateFunc(TimingFunc func){
 		_accelateFunc = func;
 	}
 	
-	static double reverse_timing_func(AnimateTimingFunc func, double val){
+	static double reverse_timing_func(TimingFunc func, double val){
 		double s = 0;
 		double e = 1.0;
 		double t = (e-s)/2;
