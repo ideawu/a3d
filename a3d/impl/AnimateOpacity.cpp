@@ -13,8 +13,13 @@ namespace a3d{
 	}
 	
 	void AnimateOpacity::update(double progress, Node *target, const Node *origin){
-		double df = progress * (_opacity - origin->opacity());
-		target->opacity(origin->opacity() + df);
+		// 避免计算误差
+		if(progress == 1){
+			target->opacity(_opacity);
+		}else{
+			double df = progress * (_opacity - origin->opacity());
+			target->opacity(origin->opacity() + df);
+		}
 	}
 
 }; // end namespace

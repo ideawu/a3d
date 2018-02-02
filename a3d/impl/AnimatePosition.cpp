@@ -24,10 +24,16 @@ namespace a3d{
 		Vector3 offset;
 		if(_type == TypeOffset){
 			offset = Vector3::slerp(Vector3(), _vec, progress);
+			target->move(offset);
 		}else{
-			offset = Vector3::slerp(origin->position(), _vec, progress);
+			// 避免计算误差
+			if(progress == 1){
+				target->position(_vec);
+			}else{
+				offset = Vector3::slerp(origin->position(), _vec, progress);
+				target->move(offset);
+			}
 		}
-		target->move(offset);
 	}
 
 }; // end namespace
