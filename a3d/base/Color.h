@@ -9,7 +9,10 @@ namespace a3d{
 	class Color
 	{
 	public:
-		float r, g, b, a;
+		union{
+			struct{float r, g, b, a;};
+			float m[4];
+		};
 
 		Color();
 		Color(float r, float g, float b, float a=1);

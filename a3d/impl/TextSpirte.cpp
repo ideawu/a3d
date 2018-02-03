@@ -10,7 +10,16 @@
 namespace a3d{
 
 	TextSprite* TextSprite::create(const char *str){
+		return TextSprite::create(str, 0, Color::white());
+	}
+
+	TextSprite* TextSprite::create(const char *str, float fontSize, const Color &fontColor){
 		Text text(str);
+		if(fontSize > 0){
+			text.fontSize(fontSize);
+		}
+		text.fontColor(fontColor);
+		
 		Bitmap *bitmap = text.drawToBitmap();
 		if(!bitmap){
 			return NULL;
@@ -25,7 +34,7 @@ namespace a3d{
 		ret->_texture = texture;
 		ret->width(bitmap->width());
 		ret->height(bitmap->height());
-
+		
 		delete bitmap;
 		return ret;
 	}

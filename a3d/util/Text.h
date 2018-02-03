@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Bitmap.h"
+#include "Color.h"
 
 namespace a3d{
 	class Text
@@ -20,6 +21,7 @@ namespace a3d{
 		void maxHeight(int maxHeight);
 		void font(const char *name, float size);
 		void fontSize(float size);
+		void fontColor(const Color &color);
 		void text(const char *text);
 		
 		void calculateSize(int *width, int *height);
@@ -33,6 +35,8 @@ namespace a3d{
 		int _maxHeight;
 		std::string _fontName;
 		float _fontSize;
+		Color _fontColor;
+		
 		std::string _text;
 
 		void* createAttributedString();

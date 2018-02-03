@@ -6,13 +6,15 @@
 #define TextSpirte_hpp
 
 #include "Sprite.h"
+#include "Color.h"
 
 namespace a3d{
 	class TextSprite : public Sprite
 	{
 	public:
 		static TextSprite* create(const char *str);
-		
+		static TextSprite* create(const char *str, float fontSize, const Color &fontColor);
+
 		virtual ~TextSprite();
 		virtual int frameAtTime(double time, double *duration);
 		virtual Texture* textureAtTime(double time, double *duration);

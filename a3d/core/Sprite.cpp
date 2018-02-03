@@ -16,6 +16,10 @@ namespace a3d{
 		return TextSprite::create(str);
 	}
 
+	Sprite* Sprite::textSprite(const char *str, float fontSize, const Color &fontColor){
+		return TextSprite::create(str, fontSize, fontColor);
+	}
+
 	Sprite::Sprite(){
 		_frames = 0;
 		_duration = 0;

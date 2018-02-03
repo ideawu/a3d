@@ -13,6 +13,7 @@ namespace a3d{
 	Text::Text(){
 		_fontName = "Helvetica";
 		_fontSize = 40;
+		_fontColor = Color::white();
 		_maxWidth = 10000;
 		_maxHeight = _maxWidth;
 	}
@@ -41,14 +42,17 @@ namespace a3d{
 		_fontSize = size;
 	}
 
+	void Text::fontColor(const Color &color){
+		_fontColor = color;
+	}
+
 	void Text::text(const char *text){
 		_text = text;
 	}
 	
 	void* Text::createAttributedString(){
 		CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-		CGFloat components[] = { 1.0, 1.0, 0.0, 1};
-		CGColorRef color = CGColorCreate(rgbColorSpace, components);
+		CGColorRef color = CGColorCreate(rgbColorSpace, (const CGFloat *)_fontColor.m);
 		CGColorSpaceRelease(rgbColorSpace);
 
 		CFStringRef fontFamily = CFStringCreateWithCStringNoCopy(NULL, _fontName.c_str(), charset, kCFAllocatorNull);
@@ -85,7 +89,7 @@ namespace a3d{
 			CFRelease(attrString);
 			return NULL;
 		}
-		log_debug("%d %d", w, h);
+//		log_debug("%d %d", w, h);
 		
 		Bitmap *bitmap = Bitmap::create(w, h);
 	
