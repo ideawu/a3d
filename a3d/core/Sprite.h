@@ -6,8 +6,11 @@
 #define SpriteTexture_hpp
 
 #include "Vector3.h"
+#include "Texture.h"
 
 namespace a3d{
+	class Texture;
+	
 	class Sprite
 	{
 	public:
@@ -21,15 +24,15 @@ namespace a3d{
 		float width() const;
 		float height() const;
 
-		GLuint texture();
-		// 如果无对应帧，返回0
-		GLuint textureAtTime(double time);
-		GLuint textureAtFrame(int frame);
+		Texture* texture();
+		// 如果无对应帧，返回NULL
+		Texture* textureAtTime(double time);
+		Texture* textureAtFrame(int frame);
 		// 如果指定时间无对应帧，返回-1
 		virtual int frameAtTime(double time, double *duration) = 0;
 		// 如果无对应帧，返回0
-		virtual GLuint textureAtTime(double time, double *duration) = 0;
-		virtual GLuint textureAtFrame(int frame, double *duration) = 0;
+		virtual Texture* textureAtTime(double time, double *duration) = 0;
+		virtual Texture* textureAtFrame(int frame, double *duration) = 0;
 
 	protected:
 		Sprite();

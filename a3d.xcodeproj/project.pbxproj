@@ -114,6 +114,8 @@
 		31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		31543EF22025C649002AC387 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF02025C649002AC387 /* Text.cpp */; };
 		31543EF32025C649002AC387 /* Text.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
+		31543EF72025E691002AC387 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF52025E691002AC387 /* Texture.cpp */; };
+		31543EF82025E691002AC387 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
 		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
@@ -257,6 +259,8 @@
 		31543EED2025BE4B002AC387 /* Bitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
 		31543EF02025C649002AC387 /* Text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Text.cpp; sourceTree = "<group>"; };
 		31543EF12025C649002AC387 /* Text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
+		31543EF52025E691002AC387 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		31543EF62025E691002AC387 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
 		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +328,7 @@
 				08B4CB03201DE49900EEC0C5 /* base */,
 				08B4CB1E201DE4AF00EEC0C5 /* core */,
 				08B4CB3B201DE4AF00EEC0C5 /* impl */,
+				31543EF42025E670002AC387 /* gl */,
 				08B4CB48201DE4AF00EEC0C5 /* ui */,
 				08B4CB32201DE4AF00EEC0C5 /* draft */,
 				08B4CAEC201DE3E300EEC0C5 /* a3d.h */,
@@ -372,10 +377,6 @@
 				312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */,
 				08B4CB23201DE4AF00EEC0C5 /* Camera.h */,
 				08B4CB22201DE4AF00EEC0C5 /* Camera.cpp */,
-				08B4CB25201DE4AF00EEC0C5 /* Context.h */,
-				08B4CB24201DE4AF00EEC0C5 /* Context.cpp */,
-				08B4CB2B201DE4AF00EEC0C5 /* Renderer.h */,
-				08B4CB2A201DE4AF00EEC0C5 /* Renderer.cpp */,
 				08B4CB2D201DE4AF00EEC0C5 /* Scene.h */,
 				08B4CB2C201DE4AF00EEC0C5 /* Scene.cpp */,
 				08B4CB2F201DE4AF00EEC0C5 /* Sprite.h */,
@@ -408,10 +409,6 @@
 				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
 				31C67889202471D7000BF908 /* AnimateRotation.h */,
 				31C67888202471D7000BF908 /* AnimateRotation.cpp */,
-				08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */,
-				08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */,
-				08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */,
-				08B4CB40201DE4AF00EEC0C5 /* BufferContext.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
 				08B4CB42201DE4AF00EEC0C5 /* ImageSprite.cpp */,
 				312CD37E20257852008FE758 /* TextSpirte.h */,
@@ -487,6 +484,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		31543EF42025E670002AC387 /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				31543EF62025E691002AC387 /* Texture.h */,
+				31543EF52025E691002AC387 /* Texture.cpp */,
+				08B4CB25201DE4AF00EEC0C5 /* Context.h */,
+				08B4CB24201DE4AF00EEC0C5 /* Context.cpp */,
+				08B4CB2B201DE4AF00EEC0C5 /* Renderer.h */,
+				08B4CB2A201DE4AF00EEC0C5 /* Renderer.cpp */,
+				08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */,
+				08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */,
+				08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */,
+				08B4CB40201DE4AF00EEC0C5 /* BufferContext.cpp */,
+			);
+			path = gl;
+			sourceTree = "<group>";
+		};
 		31C6789120247C90000BF908 /* Cli */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +522,7 @@
 				08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */,
 				08B4CB6E201DE4AF00EEC0C5 /* AnimatePosition.h in Headers */,
 				08B4CB1C201DE49900EEC0C5 /* Vector3.h in Headers */,
+				31543EF82025E691002AC387 /* Texture.h in Headers */,
 				08B4CB18201DE49900EEC0C5 /* Point3.h in Headers */,
 				08B4CB56201DE4AF00EEC0C5 /* Context.h in Headers */,
 				08B4CB16201DE49900EEC0C5 /* Matrix4.h in Headers */,
@@ -663,6 +678,7 @@
 				08B4CB5D201DE4AF00EEC0C5 /* Scene.cpp in Sources */,
 				08B4CB17201DE49900EEC0C5 /* Point3.cpp in Sources */,
 				08B4CB64201DE4AF00EEC0C5 /* DraftScene.mm in Sources */,
+				31543EF72025E691002AC387 /* Texture.cpp in Sources */,
 				08B4CB15201DE49900EEC0C5 /* Matrix4.cpp in Sources */,
 				08B4CB75201DE4AF00EEC0C5 /* BlankContext.cpp in Sources */,
 				08B4CB6B201DE4AF00EEC0C5 /* AnimateOpacity.cpp in Sources */,

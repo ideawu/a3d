@@ -6,7 +6,6 @@
 #define TextSpirte_hpp
 
 #include "Sprite.h"
-#include <vector>
 
 namespace a3d{
 	class TextSprite : public Sprite
@@ -16,15 +15,15 @@ namespace a3d{
 		
 		virtual ~TextSprite();
 		virtual int frameAtTime(double time, double *duration);
-		virtual GLuint textureAtTime(double time, double *duration);
-		virtual GLuint textureAtFrame(int frame, double *duration);
+		virtual Texture* textureAtTime(double time, double *duration);
+		virtual Texture* textureAtFrame(int frame, double *duration);
 		
 	private:
 		TextSprite();
 		TextSprite(const TextSprite &d);
 		TextSprite& operator =(const TextSprite &d);
 		
-		GLuint _tid;
+		Texture *_texture;
 	};
 }; // end namespace
 

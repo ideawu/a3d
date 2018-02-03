@@ -18,12 +18,8 @@ namespace a3d{
 		if(_cgimgSrc){
 			CFRelease(_cgimgSrc);
 		}
-		for(int i=0; i<_texIdAtFrame.size(); i++){
-			GLuint tid = _texIdAtFrame[i];
-			if(tid > 0){
-//				log_debug("del tid %d", tid);
-				glDeleteTextures(1, &tid);
-			}
+		for(int i=0; i<_textures.size(); i++){
+			delete _textures[i];
 		}
 	}
 
@@ -67,7 +63,7 @@ namespace a3d{
 		ret->_durations = durations;
 		ret->_frames = frames;
 		ret->_duration = total_duration;
-		ret->_texIdAtFrame.resize(frames, -1);
+		ret->_textures.resize(frames, NULL);
 		// 加载第1张图片，生成width,height
 		ret->textureAtFrame(0, NULL);
 		return ret;
@@ -90,38 +86,32 @@ namespace a3d{
 		return -1;
 	}
 
-	GLuint ImageSprite::textureAtTime(double time, double *duration){
+	Texture* ImageSprite::textureAtTime(double time, double *duration){
 		int frame = frameAtTime(time, duration);
 		return textureAtFrame(frame, NULL);
 	}
 
-	GLuint ImageSprite::textureAtFrame(int frame, double *duration){
+	Texture* ImageSprite::textureAtFrame(int frame, double *duration){
 		if(frame < 0 || frame >= _frames){
-			return 0;
+			return NULL;
 		}
-		if(_texIdAtFrame[frame] == -1){
-			CGImageRef image = CGImageSourceCreateImageAtIndex(_cgimgSrc, frame, NULL);
-			if(!image){
-				_texIdAtFrame[frame] = 0;
-				return 0;
-			}
+		if(_textures[frame] == NULL){
+			Texture *texture = new Texture();
+			_textures[frame] = texture;
 			
-			Bitmap *bitmap = Bitmap::createWithCGImage(image);
+			Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
 			if(!bitmap){
-				_texIdAtFrame[frame] = 0;
-				return 0;
+				return NULL;
 			}
-			GLint tid = Renderer::current()->createTexture(bitmap->pixels(), bitmap->width(), bitmap->height());
-			_texIdAtFrame[frame] = tid;
-			
 			this->width(bitmap->width());
 			this->height(bitmap->height());
+			texture->loadBitmap(*bitmap);
 			delete bitmap;
 		}
 		if(duration){
 			*duration = _durations[frame];
 		}
-		return _texIdAtFrame[frame];
+		return _textures[frame];
 	}
 
 }; // end namespace

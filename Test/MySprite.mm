@@ -23,13 +23,13 @@ static void drawBody();
 //}
 
 void MySprite::draw(){
-	static a3d::Sprite *texture = NULL;
-	if(!texture){
+	static a3d::Sprite *sprite = NULL;
+	if(!sprite){
 		NSBundle* myBundle = [NSBundle mainBundle];
 		NSString* myImage = [myBundle pathForResource:@"alex" ofType:@"png"];
-		texture = a3d::Sprite::imageSprite(myImage.UTF8String);
+		sprite = a3d::Sprite::imageSprite(myImage.UTF8String);
 	}
-	glBindTexture(GL_TEXTURE_2D, texture->texture());
+	sprite->texture()->bind();
 
 //	static GLKTextureInfo *_texture = nil;
 //	if(!_texture){

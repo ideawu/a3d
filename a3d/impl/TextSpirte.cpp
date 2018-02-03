@@ -15,31 +15,39 @@ namespace a3d{
 		if(!bitmap){
 			return NULL;
 		}
-		GLint tid = Renderer::current()->createTexture(bitmap->pixels(), bitmap->width(), bitmap->height());
+		Texture *texture = Texture::createFromBitmap(*bitmap);
+		if(!texture){
+			delete bitmap;
+			return NULL;
+		}
+		
 		TextSprite *ret = new TextSprite();
-		ret->_tid = tid;
+		ret->_texture = texture;
+
+		delete bitmap;
 		return ret;
 	}
 
 	TextSprite::TextSprite(){
 		frames(0);
 		duration(0);
-		_tid = 0;
+		_texture = NULL;
 	}
 	
 	TextSprite::~TextSprite(){
+		delete _texture;
 	}
 
 	int TextSprite::frameAtTime(double time, double *duration){
 		return 0;
 	}
 	
-	GLuint TextSprite::textureAtTime(double time, double *duration){
-		return _tid;
+	Texture* TextSprite::textureAtTime(double time, double *duration){
+		return _texture;
 	}
 	
-	GLuint TextSprite::textureAtFrame(int frame, double *duration){
-		return _tid;
+	Texture* TextSprite::textureAtFrame(int frame, double *duration){
+		return _texture;
 	}
 
 }; // end namespace

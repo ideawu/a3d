@@ -53,16 +53,15 @@ namespace a3d{
 		_duration = duration;
 	}
 
-	
-	GLuint Sprite::texture(){
+	Texture* Sprite::texture(){
 		return textureAtFrame(0, NULL);
 	}
 
-	GLuint Sprite::textureAtTime(double time){
+	Texture* Sprite::textureAtTime(double time){
 		return textureAtTime(time, NULL);
 	}
 
-	GLuint Sprite::textureAtFrame(int frame){
+	Texture* Sprite::textureAtFrame(int frame){
 		return textureAtFrame(frame, NULL);
 	}
 

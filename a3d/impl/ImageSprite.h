@@ -5,9 +5,9 @@
 #ifndef ImageSprite_hpp
 #define ImageSprite_hpp
 
-#include "Sprite.h"
 #include <ImageIO/ImageIO.h>
 #include <vector>
+#include "Sprite.h"
 
 namespace a3d{
 	class ImageSprite : public Sprite
@@ -17,17 +17,15 @@ namespace a3d{
 		
 		virtual ~ImageSprite();
 		virtual int frameAtTime(double time, double *duration);
-		virtual GLuint textureAtTime(double time, double *duration);
-		virtual GLuint textureAtFrame(int frame, double *duration);
+		virtual Texture* textureAtTime(double time, double *duration);
+		virtual Texture* textureAtFrame(int frame, double *duration);
 
 	private:
 		ImageSprite();
 		ImageSprite(const ImageSprite &d);
 		ImageSprite& operator =(const ImageSprite &d);
 		
-		GLuint bindImageData(const char *data, int width, int height);
-		
-		std::vector<GLuint> _texIdAtFrame;
+		std::vector<Texture *> _textures;
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 	};

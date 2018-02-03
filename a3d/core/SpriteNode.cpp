@@ -3,6 +3,7 @@
 //
 
 #include "SpriteNode.h"
+#include "Texture.h"
 #include "Rect.h"
 
 namespace a3d{
@@ -183,32 +184,9 @@ namespace a3d{
 		texRect.height = -texRect.height;
 		//	log_debug(@"texRect: %.2f,%.2f,%.2f,%.2f", texRect.x, texRect.y, texRect.width, texRect.height);
 		
-		float tx0 = texRect.x;
-		float ty0 = texRect.y;
-		float tx1 = texRect.x + texRect.width;
-		float ty1 = texRect.y + texRect.height;
-		
-		float vx0 = viewRect.x;
-		float vy0 = viewRect.y;
-		float vx1 = viewRect.x + viewRect.width;
-		float vy1 = viewRect.y + viewRect.height;
-		float z = 0;
-		
-		
-		GLuint tid = _sprite->textureAtTime(_clock.time());
-		if(tid > 0){
-			glBindTexture(GL_TEXTURE_2D, tid);
-			glDisable(GL_CULL_FACE);
-			glBegin(GL_POLYGON);
-			{
-				glTexCoord2f(tx0, ty0); glVertex3f(vx0, vy0, z);
-				glTexCoord2f(tx1, ty0); glVertex3f(vx1, vy0, z);
-				glTexCoord2f(tx1, ty1); glVertex3f(vx1, vy1, z);
-				glTexCoord2f(tx0, ty1); glVertex3f(vx0, vy1, z);
-			}
-			glEnd();
-			glEnable(GL_CULL_FACE);
-			glBindTexture(GL_TEXTURE_2D, 0);
+		Texture *texture = _sprite->textureAtTime(_clock.time());
+		if(texture){
+			texture->draw(texRect, viewRect);
 		}
 	}
 

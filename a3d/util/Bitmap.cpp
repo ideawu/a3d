@@ -20,25 +20,39 @@ namespace a3d{
 		return ret;
 	}
 
-	Bitmap* Bitmap::createWithCGImage(CGImageRef imageRef){
-		size_t w = CGImageGetWidth(imageRef);
-		size_t h = CGImageGetHeight(imageRef);
+	Bitmap* Bitmap::createFromCGImage(const CGImageRef image){
+		size_t w = CGImageGetWidth(image);
+		size_t h = CGImageGetHeight(image);
 		char *pixels = (char *)malloc(4 * w * h);
 		
 		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 		uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
 		CGContextRef context = CGBitmapContextCreate(pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
 		CGColorSpaceRelease(colorSpace);
+		if(!context){
+			delete pixels;
+			return NULL;
+		}
 		// flip
 		//		CGContextTranslateCTM(context, 0.0, h);
 		//		CGContextScaleCTM(context, 1.0, -1.0);
 		// Set the blend mode to copy before drawing since the previous contents of memory aren't used.
 		// This avoids unnecessary blending.
 		CGContextSetBlendMode(context, kCGBlendModeCopy);
-		CGContextDrawImage(context, CGRectMake(0, 0, w, h), imageRef);
+		CGContextDrawImage(context, CGRectMake(0, 0, w, h), image);
 		CGContextRelease(context);
 		
 		return Bitmap::createWithPixels(pixels, (int)w, (int)h);
+	}
+
+	Bitmap* Bitmap::createFromCGImageSourceAtIndex(const CGImageSourceRef imageSource, int index){
+		CGImageRef image = CGImageSourceCreateImageAtIndex(imageSource, index, NULL);
+		if(!image){
+			return NULL;
+		}
+		Bitmap *ret = Bitmap::createFromCGImage(image);
+		CGImageRelease(image);
+		return ret;
 	}
 
 	Bitmap::Bitmap(){
@@ -81,19 +95,19 @@ namespace a3d{
 		
 		url = CFURLCreateFromFileSystemRepresentation(NULL, (const UInt8 *)filename, strlen(filename), false);
 		if(!url){
-			goto ret;
+			goto end;
 		}
 		dest = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, NULL);
 		if(!dest){
-			goto ret;
+			goto end;
 		}
 		imageRef = createCGImage();
 		CGImageDestinationAddImage(dest, imageRef, nil);
 		if(!CGImageDestinationFinalize(dest)){
-			goto ret;
+			goto end;
 		}
 		ret = true;
-	ret:
+	end:
 		CFRelease(url);
 		CFRelease(dest);
 		CGImageRelease(imageRef);
