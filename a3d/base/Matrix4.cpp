@@ -17,7 +17,23 @@ namespace a3d{
 	Matrix4::Matrix4(const GLKMatrix4 &mat){
 		_mat = mat;
 	}
-	
+
+	std::string Matrix4::str() const{
+		std::string s;
+		char buf[32];
+		const float *m = this->array();
+		for(int i=0; i<16; i++){
+			snprintf(buf, sizeof(buf), "%8.2f", m[i]);
+			s.append(buf);
+			if(i % 4 == 3){
+				s.push_back('\n');
+			}else{
+				s.push_back(' ');
+			}
+		}
+		return s;
+	}
+
 	Matrix4 Matrix4::identity(){
 		return Matrix4();
 	}
@@ -28,22 +44,6 @@ namespace a3d{
 	
 	Matrix4 Matrix4::ortho(float left, float right, float bottom, float top, float nearZ, float farZ){
 		return Matrix4(GLKMatrix4MakeOrtho(left, right, bottom, top, nearZ, farZ));
-	}
-
-	std::string Matrix4::str() const{
-		std::string s;
-		char buf[32];
-		const float *m = this->array();
-		for(int i=0; i<16; i++){
-			sprintf(buf, "%8.2f", m[i]);
-			s.append(buf);
-			if(i % 4 == 3){
-				s.push_back('\n');
-			}else{
-				s.push_back(' ');
-			}
-		}
-		return s;
 	}
 
 	const float* Matrix4::array() const{
@@ -132,9 +132,6 @@ namespace a3d{
 	
 	void Matrix4::rotate(float degree, const Axis &axis){
 		this->translate(axis.origin);
-//		log_debug("%.2f %.2f", x(), y());
-//		log_debug("%.2f %.2f %.2f", axis.origin.x, axis.origin.y, axis.origin.z);
-//		log_debug("%.2f %.2f %.2f", axis.direction.x, axis.direction.y, axis.direction.z);
 		this->Matrix4::rotate(degree, axis.direction);
 		this->translate(axis.origin.invert());
 	}

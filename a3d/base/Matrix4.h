@@ -17,7 +17,8 @@ namespace a3d{
 	public:
 		// 创建一个单位向量
 		Matrix4();
-		
+		std::string str() const;
+
 		/// 静态方法
 		static Matrix4 identity();
 		static Matrix4 frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
@@ -25,7 +26,6 @@ namespace a3d{
 
 	public:
 		/// 属性
-		std::string str() const;
 		const float* array() const;
 		
 		Vector3 position() const;

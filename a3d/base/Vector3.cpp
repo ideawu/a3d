@@ -23,6 +23,19 @@ namespace a3d{
 		this->z = z;
 	}
 
+	std::string Vector3::str() const{
+		std::string s;
+		char buf[32];
+		for(int i=0; i<3; i++){
+			snprintf(buf, sizeof(buf), "%8.2f", m[i]);
+			s.append(buf);
+			if(i != 2){
+				s.push_back(',');
+			}
+		}
+		return s;
+	}
+
 	bool Vector3::empty() const{
 		return x == 0 && y == 0 && z == 0;
 	}
