@@ -10,8 +10,6 @@
 #include "Color.h"
 
 namespace a3d{
-	class Texture;
-	
 	class Sprite
 	{
 	public:

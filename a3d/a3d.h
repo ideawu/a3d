@@ -29,6 +29,7 @@ namespace a3d{
 #include "Animate.h"
 #include "AnimationTypes.h"
 
+#include "Texture.h"
 #include "Context.h"
 #include "Renderer.h"
 
