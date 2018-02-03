@@ -26,6 +26,8 @@ found in the LICENSE file.
 #include <pthread.h>
 #include <string>
 
+namespace a3d{
+
 class Logger{
 	public:
 		static const int LEVEL_NONE		= (-1);
@@ -125,5 +127,7 @@ inline static const char* log_basename__(const char *file){
 	#define log_error(fmt, args...) do{}while(0)
 	#define log_fatal(fmt, args...) do{}while(0)
 #endif
+
+}; // end namespace
 
 #endif

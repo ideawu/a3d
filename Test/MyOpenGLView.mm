@@ -1,7 +1,6 @@
 #import "MyOpenGLView.h"
 #import "MySprite.h"
 
-#include <vector>
 #include "a3d/DraftScene.h"
 #include "a3d/DraftSprite.h"
 #include "a3d/a3d.h"

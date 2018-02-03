@@ -6,6 +6,8 @@ found in the LICENSE file.
 #include "log.h"
 #include <algorithm>
 
+namespace a3d{
+
 static Logger logger;
 
 int log_open(const char *filename, int level, bool is_threadsafe, uint64_t rotate_size){
@@ -325,3 +327,5 @@ int Logger::fatal(const char *fmt, ...){
 	va_end(ap);
 	return ret;
 }
+
+}; // end namespace
