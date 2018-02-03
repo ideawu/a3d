@@ -13,6 +13,7 @@ namespace a3d{
 	public:
 		~Bitmap();
 
+		static Bitmap* create(int width, int height);
 		static Bitmap* createWithPixels(char *pixels, int width, int height);
 		static Bitmap* createWithCGImage(CGImageRef imageRef);
 		

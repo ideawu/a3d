@@ -112,6 +112,8 @@
 		314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 		31543EEE2025BE4B002AC387 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EEC2025BE4B002AC387 /* Bitmap.cpp */; };
 		31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
+		31543EF22025C649002AC387 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF02025C649002AC387 /* Text.cpp */; };
+		31543EF32025C649002AC387 /* Text.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
 		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
@@ -253,6 +255,8 @@
 		314A200F201EBDC50093D902 /* alex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alex.png; sourceTree = "<group>"; };
 		31543EEC2025BE4B002AC387 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		31543EED2025BE4B002AC387 /* Bitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
+		31543EF02025C649002AC387 /* Text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Text.cpp; sourceTree = "<group>"; };
+		31543EF12025C649002AC387 /* Text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
 		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -432,6 +436,8 @@
 				08B4CB4C201DE4AF00EEC0C5 /* log.cpp */,
 				08B4CB4F201DE4AF00EEC0C5 /* util.h */,
 				08B4CB4E201DE4AF00EEC0C5 /* util.cpp */,
+				31543EF12025C649002AC387 /* Text.h */,
+				31543EF02025C649002AC387 /* Text.cpp */,
 				31543EED2025BE4B002AC387 /* Bitmap.h */,
 				31543EEC2025BE4B002AC387 /* Bitmap.cpp */,
 			);
@@ -530,6 +536,7 @@
 				08B4CB7A201DE4AF00EEC0C5 /* log.h in Headers */,
 				08B4CB63201DE4AF00EEC0C5 /* DraftScene.h in Headers */,
 				08B4CB65201DE4AF00EEC0C5 /* DraftSprite.h in Headers */,
+				31543EF32025C649002AC387 /* Text.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +671,7 @@
 				08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */,
 				08B4CB55201DE4AF00EEC0C5 /* Context.cpp in Sources */,
 				08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */,
+				31543EF22025C649002AC387 /* Text.cpp in Sources */,
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,
 				08B4CB53201DE4AF00EEC0C5 /* Camera.cpp in Sources */,
 				312CD37F20257852008FE758 /* TextSpirte.cpp in Sources */,

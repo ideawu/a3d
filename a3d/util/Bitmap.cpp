@@ -7,6 +7,11 @@
 
 namespace a3d{
 
+	Bitmap* Bitmap::create(int width, int height){
+		char *pixels = (char *)malloc(4 * width * height);
+		return Bitmap::createWithPixels(pixels, width, height);
+	}
+
 	Bitmap* Bitmap::createWithPixels(char *pixels, int width, int height){
 		Bitmap *ret = new Bitmap();
 		ret->_pixels = pixels;

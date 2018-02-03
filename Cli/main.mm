@@ -20,52 +20,11 @@
 //#import <CoreGraphics/CoreGraphics.h>
 #include "TextSpirte.h"
 #include "Bitmap.h"
+#include "Text.h"
 
 using namespace a3d;
 
-static void sizeForAttributedString(CFAttributedStringRef attrString, int maxWidth,  int maxHeight, int *outWidth, int *outHeight){
-	CGMutablePathRef path = CGPathCreateMutable();
-	CGRect bounds = CGRectMake(0, 0, maxWidth, maxHeight);
-	CGPathAddRect(path, NULL, bounds);
-	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrString);
-	CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-	
-	CFArrayRef lineArray = CTFrameGetLines(frame);
-	CFIndex lineCount = CFArrayGetCount(lineArray);
-	double width = 0;
-	double height = 0;
-	
-	for(CFIndex i=0; i<lineCount; i++){
-		CTLineRef line = (CTLineRef)CFArrayGetValueAtIndex(lineArray, i);
-		CGFloat ascent, descent, leading;
-		CGPoint origin;
-		CTFrameGetLineOrigins(frame, CFRangeMake(i, 1), &origin);
-		double w = CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-//		double h = ascent + descent + leading;
-//		log_debug(@"%.2f %.2f %.2f, %.2f %.2f", ascent, descent, leading, w, h);
-		width = fmax(width, w);
-		if(i == lineCount - 1){
-			CGPoint origin;
-			CTFrameGetLineOrigins(frame, CFRangeMake(i, 1), &origin);
-			height = maxHeight - origin.y + descent;
-		}
-	}
-	CFRelease(frame);
-	CFRelease(path);
-	CFRelease(framesetter);
-
-	size_t w = ceil(width);
-	size_t h = ceil(height);
-	
-	if(outWidth){
-		*outWidth = (int)w;
-	}
-	if(outHeight){
-		*outHeight = (int)h;
-	}
-}
-
-static char* textToImage(const char *text, int maxWidth, int *outWidth, int *outHeight){
+static char* textToImage(const char *str, int maxWidth, int *outWidth, int *outHeight){
 	int maxHeight = 10000;
 	float fontSize = 40;
 	CFStringRef fontFamily = CFSTR("Helvetica Light");
@@ -79,13 +38,19 @@ static char* textToImage(const char *text, int maxWidth, int *outWidth, int *out
 													&kCFTypeDictionaryKeyCallBacks,
 													&kCFTypeDictionaryValueCallBacks);
 	
-	CFStringRef string = CFStringCreateWithCStringNoCopy(NULL, text, kCFStringEncodingUTF8, kCFAllocatorNull);
+	CFStringRef string = CFStringCreateWithCStringNoCopy(NULL, str, kCFStringEncodingUTF8, kCFAllocatorNull);
 //	CFStringRef string = CFStringCreateWithCString(NULL, text, kCFStringEncodingUTF8);
 	CFAttributedStringRef attrString = CFAttributedStringCreate(kCFAllocatorDefault, string, attributes);
 	
 	int w = 0;
 	int h = 0;
-	sizeForAttributedString(attrString, maxWidth, maxHeight, &w, &h);
+	
+	Text text(str);
+	text.maxWidth(maxWidth);
+	text.maxHeight(maxHeight);
+	text.calculateSize(&w, &h);
+	
+//	sizeForAttributedString(attrString, maxWidth, maxHeight, &w, &h);
 	if(w == 0 || h == 0){
 		return NULL;
 	}
@@ -129,10 +94,13 @@ static char* textToImage(const char *text, int maxWidth, int *outWidth, int *out
 
 int main(int argc, const char * argv[])
 {
-	int w, h;
-	char *pixels = textToImage("你好!\nHello World!", 300, &w, &h);
-	Bitmap *bitmap = Bitmap::createWithPixels(pixels, w, h);
-	bitmap->savePNGFile("c.png");
+	Text text("你好!\nHello World!");
+	Bitmap *bitmap = text.drawToBitmap();
+	if(!bitmap){
+		log_debug(@"error");
+		return 0;
+	}
+	bitmap->savePNGFile("a.png");
 	delete bitmap;
 
 
