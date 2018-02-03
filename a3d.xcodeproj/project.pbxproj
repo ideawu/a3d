@@ -90,7 +90,6 @@
 		08B4CBD1201DEC3200EEC0C5 /* DraftSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB35201DE4AF00EEC0C5 /* DraftSprite.h */; };
 		08B4CBD2201DEC3B00EEC0C5 /* a3d.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CAEC201DE3E300EEC0C5 /* a3d.h */; };
 		08B4CBD3201DEC6100EEC0C5 /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CAE9201DE3E300EEC0C5 /* liba3d.a */; };
-		08B4CBD5201DEC7800EEC0C5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CBD4201DEC7800EEC0C5 /* GLKit.framework */; };
 		08B4CBDB201DEDB700EEC0C5 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBD9201DEDB700EEC0C5 /* TestController.m */; };
 		08B4CBDC201DEDB700EEC0C5 /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B4CBDA201DEDB700EEC0C5 /* TestController.xib */; };
 		08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */; };
@@ -99,12 +98,23 @@
 		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
 		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
+		312CD37F20257852008FE758 /* TextSpirte.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37D20257852008FE758 /* TextSpirte.cpp */; };
+		312CD38020257852008FE758 /* TextSpirte.h in Headers */ = {isa = PBXBuildFile; fileRef = 312CD37E20257852008FE758 /* TextSpirte.h */; };
+		312CD38120259386008FE758 /* liba3d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CAE9201DE3E300EEC0C5 /* liba3d.a */; };
+		312CD38320259462008FE758 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD38220259462008FE758 /* CoreGraphics.framework */; };
+		312CD3852025946D008FE758 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD3842025946D008FE758 /* CoreText.framework */; };
+		312CD387202594AA008FE758 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD386202594AA008FE758 /* GLKit.framework */; };
+		312CD388202594BD008FE758 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD38220259462008FE758 /* CoreGraphics.framework */; };
+		312CD389202594C2008FE758 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD3842025946D008FE758 /* CoreText.framework */; };
+		312CD38B2025974A008FE758 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD38A20259749008FE758 /* AppKit.framework */; };
 		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
 		314A2011201ED3D30093D902 /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
 		314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
+		31543EEE2025BE4B002AC387 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EEC2025BE4B002AC387 /* Bitmap.cpp */; };
+		31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
-		31C6789320247C90000BF908 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.m */; };
+		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -234,11 +244,19 @@
 		08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 		312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTypes.cpp; sourceTree = "<group>"; };
+		312CD37D20257852008FE758 /* TextSpirte.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextSpirte.cpp; sourceTree = "<group>"; };
+		312CD37E20257852008FE758 /* TextSpirte.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSpirte.h; sourceTree = "<group>"; };
+		312CD38220259462008FE758 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		312CD3842025946D008FE758 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		312CD386202594AA008FE758 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		312CD38A20259749008FE758 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		314A200F201EBDC50093D902 /* alex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alex.png; sourceTree = "<group>"; };
+		31543EEC2025BE4B002AC387 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		31543EED2025BE4B002AC387 /* Bitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
 		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
-		31C6789220247C90000BF908 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		31C6789220247C90000BF908 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +271,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B4CBD5201DEC7800EEC0C5 /* GLKit.framework in Frameworks */,
+				312CD389202594C2008FE758 /* CoreText.framework in Frameworks */,
+				312CD388202594BD008FE758 /* CoreGraphics.framework in Frameworks */,
+				312CD387202594AA008FE758 /* GLKit.framework in Frameworks */,
 				08B4CBD3201DEC6100EEC0C5 /* liba3d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +282,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				312CD38B2025974A008FE758 /* AppKit.framework in Frameworks */,
+				312CD3852025946D008FE758 /* CoreText.framework in Frameworks */,
+				312CD38320259462008FE758 /* CoreGraphics.framework in Frameworks */,
+				312CD38120259386008FE758 /* liba3d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +410,8 @@
 				08B4CB40201DE4AF00EEC0C5 /* BufferContext.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
 				08B4CB42201DE4AF00EEC0C5 /* ImageSprite.cpp */,
+				312CD37E20257852008FE758 /* TextSpirte.h */,
+				312CD37D20257852008FE758 /* TextSpirte.cpp */,
 			);
 			path = impl;
 			sourceTree = "<group>";
@@ -406,6 +432,8 @@
 				08B4CB4C201DE4AF00EEC0C5 /* log.cpp */,
 				08B4CB4F201DE4AF00EEC0C5 /* util.h */,
 				08B4CB4E201DE4AF00EEC0C5 /* util.cpp */,
+				31543EED2025BE4B002AC387 /* Bitmap.h */,
+				31543EEC2025BE4B002AC387 /* Bitmap.cpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -444,6 +472,10 @@
 		08B4CBDD201DEE6D00EEC0C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				312CD38A20259749008FE758 /* AppKit.framework */,
+				312CD386202594AA008FE758 /* GLKit.framework */,
+				312CD3842025946D008FE758 /* CoreText.framework */,
+				312CD38220259462008FE758 /* CoreGraphics.framework */,
 				08B4CBD4201DEC7800EEC0C5 /* GLKit.framework */,
 			);
 			name = Frameworks;
@@ -452,7 +484,7 @@
 		31C6789120247C90000BF908 /* Cli */ = {
 			isa = PBXGroup;
 			children = (
-				31C6789220247C90000BF908 /* main.m */,
+				31C6789220247C90000BF908 /* main.mm */,
 			);
 			path = Cli;
 			sourceTree = "<group>";
@@ -478,6 +510,7 @@
 				08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */,
 				08B4CB52201DE4AF00EEC0C5 /* AnimationTypes.h in Headers */,
 				08B4CB60201DE4AF00EEC0C5 /* Sprite.h in Headers */,
+				312CD38020257852008FE758 /* TextSpirte.h in Headers */,
 				08B4CB7C201DE4AF00EEC0C5 /* util.h in Headers */,
 				08B4CB1A201DE49900EEC0C5 /* Rect.h in Headers */,
 				08B4CB5A201DE4AF00EEC0C5 /* Object.h in Headers */,
@@ -490,6 +523,7 @@
 				08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */,
 				31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */,
 				08B4CB5C201DE4AF00EEC0C5 /* Renderer.h in Headers */,
+				31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */,
 				08B4CB12201DE49900EEC0C5 /* Axis.h in Headers */,
 				08B4CB6C201DE4AF00EEC0C5 /* AnimateOpacity.h in Headers */,
 				08B4CB76201DE4AF00EEC0C5 /* BlankContext.h in Headers */,
@@ -632,12 +666,14 @@
 				08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */,
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,
 				08B4CB53201DE4AF00EEC0C5 /* Camera.cpp in Sources */,
+				312CD37F20257852008FE758 /* TextSpirte.cpp in Sources */,
 				08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */,
 				08B4CB13201DE49900EEC0C5 /* Color.cpp in Sources */,
 				08B4CB1B201DE49900EEC0C5 /* Vector3.cpp in Sources */,
 				31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */,
 				08B4CB6F201DE4AF00EEC0C5 /* BufferContext.cpp in Sources */,
 				312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */,
+				31543EEE2025BE4B002AC387 /* Bitmap.cpp in Sources */,
 				08B4CB19201DE49900EEC0C5 /* Rect.cpp in Sources */,
 				08B4CB5F201DE4AF00EEC0C5 /* Sprite.cpp in Sources */,
 				08B4CB57201DE4AF00EEC0C5 /* Node.cpp in Sources */,
@@ -664,7 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31C6789320247C90000BF908 /* main.m in Sources */,
+				31C6789320247C90000BF908 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,9 +823,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Test/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
 			};
 			name = Debug;
@@ -801,9 +835,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Test/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
 			};
 			name = Release;
@@ -832,6 +864,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
 			};
 			name = Debug;
 		};
@@ -858,6 +891,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
 			};
 			name = Release;
 		};

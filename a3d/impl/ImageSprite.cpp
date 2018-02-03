@@ -5,7 +5,7 @@
 #include "ImageSprite.h"
 
 static CGImageSourceRef load_CGImageSource(const char *filename);
-static char* load_data_from_CGImage(CGImageRef image, int *width, int *height);
+static char* load_pixels_from_CGImage(CGImageRef image, int *width, int *height);
 
 namespace a3d{
 
@@ -119,7 +119,7 @@ namespace a3d{
 				return 0;
 			}
 			int w, h;
-			char *data = load_data_from_CGImage(image, &w, &h);
+			char *data = load_pixels_from_CGImage(image, &w, &h);
 			CGImageRelease(image);
 			
 			if(!data){
@@ -152,17 +152,14 @@ static CGImageSourceRef load_CGImageSource(const char *filename){
 	return src;
 }
 
-static char* load_data_from_CGImage(CGImageRef image, int *width, int *height){
-	char *data = NULL;
-	CGContextRef context = NULL;
-
+static char* load_pixels_from_CGImage(CGImageRef image, int *width, int *height){
 	size_t w = CGImageGetWidth(image);
 	size_t h = CGImageGetHeight(image);
-	data = (char *)malloc(4 * w * h);
+	char *pixels = (char *)malloc(4 * w * h);
 	
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 	uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
-	context = CGBitmapContextCreate(data, w, h, 8, 4 * w, colorSpace, bitmapInfo);
+	CGContextRef context = CGBitmapContextCreate(pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
 	CGColorSpaceRelease(colorSpace);
 	
 	// flip
@@ -180,5 +177,5 @@ static char* load_data_from_CGImage(CGImageRef image, int *width, int *height){
 	if(height){
 		*height = (int)h;
 	}
-	return data;
+	return pixels;
 }
