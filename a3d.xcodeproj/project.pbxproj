@@ -97,6 +97,8 @@
 		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
 		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
+		3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
+		3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
 		312CD37F20257852008FE758 /* TextSpirte.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37D20257852008FE758 /* TextSpirte.cpp */; };
 		312CD38020257852008FE758 /* TextSpirte.h in Headers */ = {isa = PBXBuildFile; fileRef = 312CD37E20257852008FE758 /* TextSpirte.h */; };
@@ -128,6 +130,8 @@
 			dstPath = a3d;
 			dstSubfolderSpec = 7;
 			files = (
+				3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */,
+				3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */,
 				314A2011201ED3D30093D902 /* util.h in CopyFiles */,
 				314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */,
 				08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */,

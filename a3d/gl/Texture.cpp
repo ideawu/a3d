@@ -47,12 +47,12 @@ namespace a3d{
 		int height = bitmap.height();
 		const char *pixels = bitmap.pixels();
 		
-		GLuint tid;
-		glGenTextures(1, &tid);
-		if(!tid){
+		glGenTextures(1, &_tid);
+//		log_debug("%d", tid);
+		if(!_tid){
 			return;
 		}
-		glBindTexture(GL_TEXTURE_2D, tid);
+		glBindTexture(GL_TEXTURE_2D, _tid);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
