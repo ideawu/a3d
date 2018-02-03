@@ -122,24 +122,20 @@ namespace a3d{
 	Point3 Node::convertPointFromWorld(const Point3 &pos) const{
 		return this->worldMatrix().invert().mul(pos);
 	}
-
-	Vector3 Node::convertVectorToParent(const Vector3 &vec) const{
-		return this->matrix().mul(vec);
+	
+	Axis Node::convertAxisToWorld(const Axis &axis) const{
+		Point3 p = convertPointToWorld(axis.origin);
+		Vector3 v = convertVectorToWorld(axis.direction);
+		return Axis(p, v);
 	}
 	
-	Point3 Node::convertPointToParent(const Point3 &pos) const{
-		return this->matrix().mul(pos);
-	}
-	
-	Vector3 Node::convertVectorFromParent(const Vector3 &vec) const{
-		return this->matrix().invert().mul(vec);
-	}
-	
-	Point3 Node::convertPointFromParent(const Point3 &pos) const{
-		return this->matrix().invert().mul(pos);
+	Axis Node::convertAxisFromWorld(const Axis &axis) const{
+		Point3 p = convertPointFromWorld(axis.origin);
+		Vector3 v = convertVectorFromWorld(axis.direction);
+		return Axis(p, v);
 	}
 
-
+	
 	void Node::render(){
 		renderAtTime(0);
 	}

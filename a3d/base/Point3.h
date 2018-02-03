@@ -15,7 +15,7 @@ namespace a3d{
 	public:
 		Point3(){}
 		Point3(float x, float y, float z);
-//		Point3(const Vector3 &vec);
+		Point3(const Vector3 &vec);
 	};
 
 }; // end namespace

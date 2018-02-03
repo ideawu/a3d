@@ -145,8 +145,18 @@
 - (void)draw3D{
 	_scene->render();
 	_flag->render();
-	_img1->render();
-	_img2->render();
+//	_img1->render();
+//	_img2->render();
+	
+	//	a3d::Axis axis = a3d::Axis(a3d::Vector3(10, 100, 100), a3d::Vector3(10,100,50));
+	glLineWidth(1);
+	glBegin(GL_LINES);
+	{
+		glVertex3f(500, 0, 800);
+		glVertex3f(500, 400, 800);
+	}
+	glEnd();
+	
 	_hero->render();
 }
 
@@ -172,7 +182,6 @@
 		glVertex3f(width/2, y1, 0);
 	}
 	glEnd();
-	glDisable(GL_LINE_STIPPLE);
 }
 
 - (void)mouseUp:(NSEvent *)event{
@@ -258,12 +267,15 @@
 			// 切换被控制角色
 //			[self switchSprite];
 			
-			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
+			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
+			axis = _hero->convertAxisFromWorld(axis);
+			a3d::Animate *action = a3d::Animate::rotate(90, axis);
+//			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
 //			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
 			action->easingFunc(a3d::TimingFuncLoop);
 			action->bounceFunc(a3d::TimingFuncLinear);
 			action->accelateFunc(a3d::TimingFuncLinear);
-			action->bounce(1);
+			action->bounce(10);
 			action->duration(1 * action->bounce());
 			_hero->runAnimation(action);
 			break;

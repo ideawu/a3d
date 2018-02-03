@@ -144,6 +144,34 @@ namespace a3d{
 		this->transform(trans.matrix);
 	}
 
+	Vector3 Object::convertVectorToParent(const Vector3 &vec) const{
+		return this->matrix().mul(vec);
+	}
+	
+	Point3 Object::convertPointToParent(const Point3 &pos) const{
+		return this->matrix().mul(pos);
+	}
+	
+	Vector3 Object::convertVectorFromParent(const Vector3 &vec) const{
+		return this->matrix().invert().mul(vec);
+	}
+	
+	Point3 Object::convertPointFromParent(const Point3 &pos) const{
+		return this->matrix().invert().mul(pos);
+	}
+
+	Axis Object::convertAxisToParent(const Axis &axis) const{
+		Point3 p = convertPointToParent(axis.origin);
+		Vector3 v = convertVectorToParent(axis.direction);
+		return Axis(p, v);
+	}
+	
+	Axis Object::convertAxisFromParent(const Axis &axis) const{
+		Point3 p = convertPointFromParent(axis.origin);
+		Vector3 v = convertVectorFromParent(axis.direction);
+		return Axis(p, v);
+	}
+
 }; // end namespace
 
 

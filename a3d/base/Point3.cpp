@@ -9,7 +9,7 @@ namespace a3d{
 	Point3::Point3(float x, float y, float z) : Vector3(x,y,z){
 	}
 
-//	Point3::Point3(const Vector3 &vec) : Vector3(vec){
-//	}
+	Point3::Point3(const Vector3 &vec) : Vector3(vec){
+	}
 
 }; // end namespace

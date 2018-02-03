@@ -38,17 +38,15 @@ namespace a3d{
 		void bringSubnodeToBack(Node *node);
 		void bringSubnodeToFront(Node *node);
 
-		// ### 坐标和向量转换
 		// 当前节点在世界（即根节点上一级）坐标系中的矩阵
 		Matrix4 worldMatrix() const;
+		// ### 与世界坐标系的转换
 		Vector3 convertVectorToWorld(const Vector3 &vec) const;
 		Vector3 convertVectorFromWorld(const Vector3 &vec) const;
-		Vector3 convertVectorToParent(const Vector3 &vec) const;
-		Vector3 convertVectorFromParent(const Vector3 &vec) const;
 		Point3 convertPointToWorld(const Point3 &pos) const;
 		Point3 convertPointFromWorld(const Point3 &pos) const;
-		Point3 convertPointToParent(const Point3 &pos) const;
-		Point3 convertPointFromParent(const Point3 &pos) const;
+		Axis convertAxisToWorld(const Axis &axis) const;
+		Axis convertAxisFromWorld(const Axis &axis) const;
 
 		// ### 动画管理
 		// action 内存由 Node 管理

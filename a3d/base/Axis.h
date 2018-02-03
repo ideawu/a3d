@@ -5,6 +5,7 @@
 #ifndef Axis_hpp
 #define Axis_hpp
 
+#include "Point3.h"
 #include "Vector3.h"
 
 namespace a3d{
@@ -12,13 +13,14 @@ namespace a3d{
 	{
 	public:
 		Axis();
-		Axis(const Vector3 &origin, const Vector3 &direction);
-		
+		Axis(const Point3 &origin, const Point3 &target);
+		Axis(const Point3 &origin, const Vector3 &direction);
+
 	public:
-		Vector3 origin;
+		Point3 origin;
 		Vector3 direction;
 		
-		Vector3 nearestPointTo(const Vector3 &target) const;
+		Point3 nearestPointTo(const Point3 &target) const;
 	};
 	
 }; // end namespace

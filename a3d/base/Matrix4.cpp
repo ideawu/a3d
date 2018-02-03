@@ -132,6 +132,9 @@ namespace a3d{
 	
 	void Matrix4::rotate(float degree, const Axis &axis){
 		this->translate(axis.origin);
+//		log_debug("%.2f %.2f", x(), y());
+//		log_debug("%.2f %.2f %.2f", axis.origin.x, axis.origin.y, axis.origin.z);
+//		log_debug("%.2f %.2f %.2f", axis.direction.x, axis.direction.y, axis.direction.z);
 		this->Matrix4::rotate(degree, axis.direction);
 		this->translate(axis.origin.invert());
 	}

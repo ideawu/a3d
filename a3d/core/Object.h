@@ -58,6 +58,14 @@ namespace a3d{
 		void transform(const Matrix4 &mat);
 		void transform(const Transform &trans);
 
+		// ### 与父坐标系之间的坐标转换
+		Vector3 convertVectorToParent(const Vector3 &vec) const;
+		Vector3 convertVectorFromParent(const Vector3 &vec) const;
+		Point3 convertPointToParent(const Point3 &pos) const;
+		Point3 convertPointFromParent(const Point3 &pos) const;
+		Axis convertAxisToParent(const Axis &axis) const;
+		Axis convertAxisFromParent(const Axis &axis) const;
+
 		// 将力施加于坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
 //		void force(const Vector3 &force, const Vector3 &atPoint);
 //		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
