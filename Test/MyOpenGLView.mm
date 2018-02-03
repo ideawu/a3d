@@ -6,20 +6,23 @@
 #include "a3d/DraftSprite.h"
 #include "a3d/a3d.h"
 
+using namespace a3d;
+
 @interface MyOpenGLView(){
 	float _rotateX;
 	float _rotateY;
 	int _auto_rotate_x;
 	int _auto_rotate_y;
 	
-	a3d::Camera *_camera;
-	a3d::Context *_context;
+	Camera *_camera;
+	Context *_context;
 	
 	DraftScene *_scene;
 	DraftSprite *_flag;
 	DraftSprite *_camera_hero;
-	a3d::SpriteNode *_img1;
-	a3d::SpriteNode *_img2;
+	SpriteNode *_img1;
+	SpriteNode *_img2;
+	SpriteNode *_img3;
 
 	MySprite *_hero;
 
@@ -50,21 +53,33 @@
 	
 //	[_scene moveX:200 y:200 z:5];
 
+	SpriteNode *node;
 	{
-		_img1 = new a3d::SpriteNode();
-		a3d::Sprite *sprite = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
-		_img1->sprite(sprite);
-		_img1->move(_img1->width()/2, _img1->height()/2, 0);
-		_img1->move(100, 0, 300);
-		_img1->opacity(0.8);
+		node = new SpriteNode();
+		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+		node->sprite(sprite);
+		node->move(node->width()/2, node->height()/2, 0);
+		node->move(100, 0, 300);
+		node->opacity(0.8);
+		_img1 = node;
 	}
 	{
-		_img2 = new a3d::SpriteNode();
-		a3d::Sprite *sprite = a3d::Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
-		_img2->sprite(sprite);
-		_img2->move(_img2->width()/2, _img2->height()/2, 0);
-		_img2->move(100, 0, 300);
-		_img2->opacity(0.7);
+		node = new SpriteNode();
+		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
+		node->sprite(sprite);
+		node->move(node->width()/2, node->height()/2, 0);
+		node->move(100, 0, 300);
+		node->opacity(0.7);
+		_img2 = node;
+	}
+	{
+		node = new SpriteNode();
+		Sprite *sprite = Sprite::textSprite("Hello World! 你好！");
+		node->sprite(sprite);
+		node->move(node->width()/2, node->height()/2, 0);
+		node->move(300, 0, 600);
+		node->opacity(0.7);
+		_img3 = node;
 	}
 	
 	_flag = new DraftSprite();
@@ -133,7 +148,14 @@
 	_context->clear(0, 0, 0, 1);
 	_context->loadMatrix3D(_camera->matrix3D());
 	[self draw3D];
+	
 	_hero->renderAtTime(time);
+	_scene->render();
+	_flag->render();
+	//	_img1->render();
+	//	_img2->render();
+	_img3->renderAtTime(time);
+
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->blit();
@@ -143,10 +165,6 @@
 }
 
 - (void)draw3D{
-	_scene->render();
-	_flag->render();
-//	_img1->render();
-//	_img2->render();
 	
 	//	a3d::Axis axis = a3d::Axis(a3d::Vector3(10, 100, 100), a3d::Vector3(10,100,50));
 	glLineWidth(1);
@@ -267,17 +285,24 @@
 			// 切换被控制角色
 //			[self switchSprite];
 			
+			Node *node = _img3;
+			
 			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
-			axis = _hero->convertAxisFromWorld(axis);
-			a3d::Animate *action = a3d::Animate::rotate(90, axis);
+			axis = node->convertAxisFromWorld(axis);
+			a3d::Animate *action = a3d::Animate::rotate(1360, axis);
 //			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
 //			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
 			action->easingFunc(a3d::TimingFuncLoop);
 			action->bounceFunc(a3d::TimingFuncLinear);
 			action->accelateFunc(a3d::TimingFuncLinear);
-			action->bounce(10);
-			action->duration(1 * action->bounce());
-			_hero->runAnimation(action);
+			action->bounce(1);
+			action->duration(13 * action->bounce());
+			node->runAnimation(action);
+			{
+				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
+				action->duration(6 * action->bounce());
+				node->runAnimation(action);
+			}
 			break;
 		}
 		case '[':{

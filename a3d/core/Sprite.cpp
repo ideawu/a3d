@@ -4,11 +4,16 @@
 
 #include "Sprite.h"
 #include "ImageSprite.h"
+#include "TextSpirte.h"
 
 namespace a3d{
 
 	Sprite* Sprite::imageSprite(const char *filename){
 		return ImageSprite::create(filename);
+	}
+
+	Sprite* Sprite::textSprite(const char *str){
+		return TextSprite::create(str);
 	}
 
 	Sprite::Sprite(){

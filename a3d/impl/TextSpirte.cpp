@@ -23,6 +23,8 @@ namespace a3d{
 		
 		TextSprite *ret = new TextSprite();
 		ret->_texture = texture;
+		ret->width(bitmap->width());
+		ret->height(bitmap->height());
 
 		delete bitmap;
 		return ret;

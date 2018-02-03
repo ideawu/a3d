@@ -15,7 +15,8 @@ namespace a3d{
 	{
 	public:
 		static Sprite* imageSprite(const char *filename);
-		
+		static Sprite* textSprite(const char *str);
+
 		virtual ~Sprite(){}
 
 		int frames() const;
