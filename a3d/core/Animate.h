@@ -7,12 +7,8 @@
 
 #include "AnimationTypes.h"
 #include "Node.h"
-#include "Vector3.h"
-#include "Axis.h"
 
 namespace a3d{
-	class Node;
-	
 	class Animate
 	{
 	public:
