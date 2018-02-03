@@ -52,7 +52,8 @@ namespace a3d{
 	
 	void* Text::createAttributedString(){
 		CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-		CGColorRef color = CGColorCreate(rgbColorSpace, (const CGFloat *)_fontColor.m);
+		CGFloat rgba[] = {_fontColor.r, _fontColor.g, _fontColor.b, _fontColor.a};
+		CGColorRef color = CGColorCreate(rgbColorSpace, rgba);
 		CGColorSpaceRelease(rgbColorSpace);
 
 		CFStringRef fontFamily = CFStringCreateWithCStringNoCopy(NULL, _fontName.c_str(), charset, kCFAllocatorNull);
@@ -104,6 +105,7 @@ namespace a3d{
 			CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrString);
 			CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
 			
+			CGContextClearRect(context, bounds);
 			CTFrameDraw(frame, context);
 			
 			CFRelease(frame);

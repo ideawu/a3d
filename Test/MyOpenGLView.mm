@@ -74,7 +74,7 @@ using namespace a3d;
 	}
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::textSprite("Hello World! 你好！");
+		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 150, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
 		node->move(300, 0, 600);
