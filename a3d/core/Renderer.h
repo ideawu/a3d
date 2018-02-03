@@ -26,7 +26,9 @@ namespace a3d{
 		// 基于当前的矩阵叠加新矩阵
 		void pushMatrix(const Matrix4 &mat);
 		void popMatrix();
-		
+
+		GLuint createTexture(const char *pixels, int width, int height);
+
 	private:
 		Renderer(const Renderer &d);
 		Renderer& operator =(const Renderer &d);

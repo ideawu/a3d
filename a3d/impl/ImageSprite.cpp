@@ -3,9 +3,10 @@
 //
 
 #include "ImageSprite.h"
+#include "Renderer.h"
+#include "Bitmap.h"
 
 static CGImageSourceRef load_CGImageSource(const char *filename);
-static char* load_pixels_from_CGImage(CGImageRef image, int *width, int *height);
 
 namespace a3d{
 
@@ -72,20 +73,6 @@ namespace a3d{
 		return ret;
 	}
 
-	GLuint ImageSprite::bindImageData(const char *data, int width, int height){
-		GLuint tid;
-		glGenTextures(1, &tid);
-//		log_debug("gen tid %d", tid);
-		glBindTexture(GL_TEXTURE_2D, tid);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		return tid;
-	}
-
 	int ImageSprite::frameAtTime(double time, double *duration){
 		// 静态图片
 		if(_duration == 0){
@@ -118,21 +105,18 @@ namespace a3d{
 				_texIdAtFrame[frame] = 0;
 				return 0;
 			}
-			int w, h;
-			char *data = load_pixels_from_CGImage(image, &w, &h);
-			CGImageRelease(image);
 			
-			if(!data){
+			Bitmap *bitmap = Bitmap::createWithCGImage(image);
+			if(!bitmap){
 				_texIdAtFrame[frame] = 0;
 				return 0;
 			}
-			GLuint tid = bindImageData(data, w, h);
+			GLint tid = Renderer::current()->createTexture(bitmap->pixels(), bitmap->width(), bitmap->height());
 			_texIdAtFrame[frame] = tid;
 			
-			free(data);
-			
-			this->width(w);
-			this->height(h);
+			this->width(bitmap->width());
+			this->height(bitmap->height());
+			delete bitmap;
 		}
 		if(duration){
 			*duration = _durations[frame];
@@ -152,30 +136,3 @@ static CGImageSourceRef load_CGImageSource(const char *filename){
 	return src;
 }
 
-static char* load_pixels_from_CGImage(CGImageRef image, int *width, int *height){
-	size_t w = CGImageGetWidth(image);
-	size_t h = CGImageGetHeight(image);
-	char *pixels = (char *)malloc(4 * w * h);
-	
-	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
-	CGContextRef context = CGBitmapContextCreate(pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
-	CGColorSpaceRelease(colorSpace);
-	
-	// flip
-	//		CGContextTranslateCTM(context, 0.0, h);
-	//		CGContextScaleCTM(context, 1.0, -1.0);
-	// Set the blend mode to copy before drawing since the previous contents of memory aren't used.
-	// This avoids unnecessary blending.
-	CGContextSetBlendMode(context, kCGBlendModeCopy);
-	CGContextDrawImage(context, CGRectMake(0, 0, w, h), image);
-	
-	CGContextRelease(context);
-	if(width){
-		*width = (int)w;
-	}
-	if(height){
-		*height = (int)h;
-	}
-	return pixels;
-}

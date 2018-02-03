@@ -12,7 +12,7 @@ namespace a3d{
 	class TextSprite : public Sprite
 	{
 	public:
-		static TextSprite* create(const char *text);
+		static TextSprite* create(const char *str);
 		
 		virtual ~TextSprite();
 		virtual int frameAtTime(double time, double *duration);
@@ -23,6 +23,8 @@ namespace a3d{
 		TextSprite();
 		TextSprite(const TextSprite &d);
 		TextSprite& operator =(const TextSprite &d);
+		
+		GLuint _tid;
 	};
 }; // end namespace
 
