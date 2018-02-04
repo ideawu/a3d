@@ -8,13 +8,16 @@
 #include <ImageIO/ImageIO.h>
 #include <vector>
 #include "Sprite.h"
+#include "Bitmap.h"
+#include "Texture.h"
 
 namespace a3d{
 	class ImageSprite : public Sprite
 	{
 	public:
-		static ImageSprite* create(const char *filename);
-		
+		static ImageSprite* createFromFile(const char *filename);
+		static ImageSprite* createFromBitmap(const Bitmap &bitmap);
+
 		virtual ~ImageSprite();
 		virtual int frameAtTime(double time, double *duration);
 		virtual Texture* textureAtTime(double time, double *duration);
@@ -28,6 +31,8 @@ namespace a3d{
 		std::vector<Texture *> _textures;
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
+		
+		void loadFromFile(const char *filename);
 	};
 }; // end namespace
 

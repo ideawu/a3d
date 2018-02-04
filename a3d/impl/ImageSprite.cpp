@@ -9,6 +9,30 @@
 static CGImageSourceRef load_CGImageSource(const char *filename);
 
 namespace a3d{
+	ImageSprite* ImageSprite::createFromBitmap(const Bitmap &bitmap){
+		Texture *texture = Texture::createFromBitmap(bitmap);
+		if(!texture){
+			return NULL;
+		}
+		ImageSprite *ret = new ImageSprite();
+		ret->_frames = 1;
+		ret->_duration = 0;
+		ret->_durations.push_back(0);
+		ret->_textures.push_back(texture);
+		ret->width(bitmap.width());
+		ret->height(bitmap.height());
+		return ret;
+	}
+
+	ImageSprite* ImageSprite::createFromFile(const char *filename){
+		ImageSprite *ret = new ImageSprite();
+		ret->loadFromFile(filename);
+		if(ret->_textures.empty()){
+			delete ret;
+			return NULL;
+		}
+		return ret;
+	}
 
 	ImageSprite::ImageSprite(){
 		_cgimgSrc = NULL;
@@ -22,11 +46,11 @@ namespace a3d{
 			delete _textures[i];
 		}
 	}
-
-	ImageSprite* ImageSprite::create(const char *filename){
+	
+	void ImageSprite::loadFromFile(const char *filename){
 		CGImageSourceRef src = load_CGImageSource(filename);
 		if(!src){
-			return NULL;
+			return;
 		}
 		
 		std::vector<double> durations;
@@ -58,15 +82,13 @@ namespace a3d{
 //			log_debug("frame: %d, duration: %.3f", i, duration);
 		}
 
-		ImageSprite *ret = new ImageSprite();
-		ret->_cgimgSrc = src;
-		ret->_durations = durations;
-		ret->_frames = frames;
-		ret->_duration = total_duration;
-		ret->_textures.resize(frames, NULL);
+		_cgimgSrc = src;
+		_frames = frames;
+		_duration = total_duration;
+		_durations = durations;
+		_textures.resize(frames, NULL);
 		// 加载第1张图片，生成width,height
-		ret->textureAtFrame(0, NULL);
-		return ret;
+		textureAtFrame(0, NULL);
 	}
 
 	int ImageSprite::frameAtTime(double time, double *duration){

@@ -9,7 +9,11 @@
 namespace a3d{
 
 	Sprite* Sprite::imageSprite(const char *filename){
-		return ImageSprite::create(filename);
+		return ImageSprite::createFromFile(filename);
+	}
+
+	Sprite* Sprite::bitmapSprite(const Bitmap &bitmap){
+		return ImageSprite::createFromBitmap(bitmap);
 	}
 
 	Sprite* Sprite::textSprite(const char *str){

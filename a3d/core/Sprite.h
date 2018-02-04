@@ -7,6 +7,7 @@
 
 #include "Vector3.h"
 #include "Texture.h"
+#include "Bitmap.h"
 #include "Color.h"
 
 namespace a3d{
@@ -14,6 +15,7 @@ namespace a3d{
 	{
 	public:
 		static Sprite* imageSprite(const char *filename);
+		static Sprite* bitmapSprite(const Bitmap &bitmap);
 		static Sprite* textSprite(const char *str);
 		static Sprite* textSprite(const char *str, float fontSize, const Color &fontColor);
 

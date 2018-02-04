@@ -24,6 +24,8 @@ namespace a3d{
 		
 		void draw(const Rect &texRect, const Rect vertRect);
 		
+		// TODO: retain, release
+		
 	private:
 		Texture(const Texture &d);
 		Texture& operator =(const Texture &d);
