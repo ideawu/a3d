@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef NodeAnimation_hpp
-#define NodeAnimation_hpp
+#ifndef a3d_NodeAnimation_hpp
+#define a3d_NodeAnimation_hpp
 
 #include <list>
 #include "Node.h"

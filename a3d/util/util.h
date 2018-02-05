@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef util_h
-#define util_h
+#ifndef a3d_util_h
+#define a3d_util_h
 
 #include <math.h>
 #include <mach/mach_time.h>

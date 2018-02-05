@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef AnimatePosition_hpp
-#define AnimatePosition_hpp
+#ifndef a3d_AnimatePosition_hpp
+#define a3d_AnimatePosition_hpp
 
 #include "Animate.h"
 

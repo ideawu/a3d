@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Scene_hpp
-#define Scene_hpp
+#ifndef a3d_Scene_hpp
+#define a3d_Scene_hpp
 
 #include <map>
 

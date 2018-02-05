@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Camera_hpp
-#define Camera_hpp
+#ifndef a3d_Camera_hpp
+#define a3d_Camera_hpp
 
 #include "Node.h"
 

@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef AnimateOpacity_hpp
-#define AnimateOpacity_hpp
+#ifndef a3d_AnimateOpacity_hpp
+#define a3d_AnimateOpacity_hpp
 
 #include "Animate.h"
 

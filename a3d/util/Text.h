@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Text_hpp
-#define Text_hpp
+#ifndef a3d_Text_hpp
+#define a3d_Text_hpp
 
 #include <string>
 #include "Bitmap.h"

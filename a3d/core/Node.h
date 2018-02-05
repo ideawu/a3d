@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Drawable_hpp
-#define Drawable_hpp
+#ifndef a3d_Node_hpp
+#define a3d_Node_hpp
 
 #include <list>
 #include "Object.h"

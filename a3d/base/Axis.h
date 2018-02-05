@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Axis_hpp
-#define Axis_hpp
+#ifndef a3d_Axis_hpp
+#define a3d_Axis_hpp
 
 #include "Point3.h"
 #include "Vector3.h"

@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Bitmap_hpp
-#define Bitmap_hpp
+#ifndef a3d_Bitmap_hpp
+#define a3d_Bitmap_hpp
 
 #include <ImageIO/ImageIO.h>
 

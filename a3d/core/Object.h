@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Object_hpp
-#define Object_hpp
+#ifndef a3d_Object_hpp
+#define a3d_Object_hpp
 
 #include "Matrix4.h"
 #include "Transform.h"

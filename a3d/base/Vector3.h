@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Vector3_hpp
-#define Vector3_hpp
+#ifndef a3d_Vector3_hpp
+#define a3d_Vector3_hpp
 
 #include <string>
 

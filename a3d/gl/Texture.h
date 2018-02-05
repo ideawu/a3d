@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Texture_hpp
-#define Texture_hpp
+#ifndef a3d_Texture_hpp
+#define a3d_Texture_hpp
 
 #include "Bitmap.h"
 #include "Rect.h"

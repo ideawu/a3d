@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Color_hpp
-#define Color_hpp
+#ifndef a3d_Color_hpp
+#define a3d_Color_hpp
 
 namespace a3d{
 	class Color

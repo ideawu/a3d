@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Renderer_hpp
-#define Renderer_hpp
+#ifndef a3d_Renderer_hpp
+#define a3d_Renderer_hpp
 
 #include <vector>
 #include "Color.h"

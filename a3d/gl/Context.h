@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef GLContext_hpp
-#define GLContext_hpp
+#ifndef a3d_Context_hpp
+#define a3d_Context_hpp
 
 #include "Matrix4.h"
 

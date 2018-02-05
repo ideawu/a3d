@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef SpriteTexture_hpp
-#define SpriteTexture_hpp
+#ifndef a3d_SpriteTexture_hpp
+#define a3d_SpriteTexture_hpp
 
 #include "Vector3.h"
 #include "Texture.h"

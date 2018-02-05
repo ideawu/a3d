@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef __a3d__Clock__
-#define __a3d__Clock__
+#ifndef a3d__Clock__h
+#define a3d__Clock__h
 
 // 注意！时间要用双精度！
 

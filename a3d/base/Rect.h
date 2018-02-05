@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Rect_hpp
-#define Rect_hpp
+#ifndef a3d_Rect_hpp
+#define a3d_Rect_hpp
 
 namespace a3d{
 	class Rect

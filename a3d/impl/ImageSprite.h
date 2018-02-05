@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef ImageSprite_hpp
-#define ImageSprite_hpp
+#ifndef a3d_ImageSprite_hpp
+#define a3d_ImageSprite_hpp
 
 #include <ImageIO/ImageIO.h>
 #include <vector>

@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef AnimateRotation_hpp
-#define AnimateRotation_hpp
+#ifndef a3d_AnimateRotation_hpp
+#define a3d_AnimateRotation_hpp
 
 #include "Animate.h"
 

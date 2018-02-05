@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef animation_h
-#define animation_h
+#ifndef a3d_AnimationTypes_h
+#define a3d_AnimationTypes_h
 
 namespace a3d{
 	class Animate;

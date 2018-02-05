@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef SharedContext_hpp
-#define SharedContext_hpp
+#ifndef a3d_BlankContext_hpp
+#define a3d_BlankContext_hpp
 
 #include "Context.h"
 

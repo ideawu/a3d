@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef BufferContext_hpp
-#define BufferContext_hpp
+#ifndef a3d_BufferContext_hpp
+#define a3d_BufferContext_hpp
 
 #include "Context.h"
 

@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Point3_hpp
-#define Point3_hpp
+#ifndef a3d_Point3_hpp
+#define a3d_Point3_hpp
 
 #include "Vector3.h"
 

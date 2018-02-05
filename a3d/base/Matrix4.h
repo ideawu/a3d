@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef Matrix4_hpp
-#define Matrix4_hpp
+#ifndef a3d_Matrix4_hpp
+#define a3d_Matrix4_hpp
 
 #include <string>
 #include <GLKit/GLKMath.h>

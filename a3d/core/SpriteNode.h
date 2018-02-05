@@ -2,8 +2,8 @@
 //  Copyright (c) 2018年 ideawu. All rights reserved.
 //
 
-#ifndef __a3d__SpriteNode__
-#define __a3d__SpriteNode__
+#ifndef a3d_SpriteNode_h
+#define a3d_SpriteNode_h
 
 #include "Node.h"
 #include "Sprite.h"

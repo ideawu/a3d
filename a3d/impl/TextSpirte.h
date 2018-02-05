@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef TextSpirte_hpp
-#define TextSpirte_hpp
+#ifndef a3d_TextSpirte_hpp
+#define a3d_TextSpirte_hpp
 
 #include "Sprite.h"
 #include "Color.h"
