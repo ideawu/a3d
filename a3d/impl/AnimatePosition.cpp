@@ -31,6 +31,7 @@ namespace a3d{
 				target->position(_vec);
 			}else{
 				offset = Vector3::slerp(origin->position(), _vec, progress);
+//				log_debug("%.2f", offset.x);
 				target->move(offset);
 			}
 		}
