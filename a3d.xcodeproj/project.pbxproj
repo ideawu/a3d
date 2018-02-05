@@ -118,6 +118,12 @@
 		31543EF32025C649002AC387 /* Text.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
 		31543EF72025E691002AC387 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF52025E691002AC387 /* Texture.cpp */; };
 		31543EF82025E691002AC387 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
+		315964A52026AC8A00FB0679 /* libcocoaui-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A42026AC8A00FB0679 /* libcocoaui-mac.a */; };
+		315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
+		315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A82026E62700FB0679 /* Cocoa.framework */; };
+		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
+		315964AC2026E68B00FB0679 /* libcocoaui-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A42026AC8A00FB0679 /* libcocoaui-mac.a */; };
+		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
 		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
@@ -265,6 +271,10 @@
 		31543EF12025C649002AC387 /* Text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Text.h; sourceTree = "<group>"; };
 		31543EF52025E691002AC387 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		31543EF62025E691002AC387 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		315964A42026AC8A00FB0679 /* libcocoaui-mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocoaui-mac.a"; path = "../cocoaui-mac/build/Debug/libcocoaui-mac.a"; sourceTree = "<group>"; };
+		315964A62026AC9500FB0679 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		315964A82026E62700FB0679 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		315964AA2026E65300FB0679 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
 		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,6 +293,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */,
+				315964A52026AC8A00FB0679 /* libcocoaui-mac.a in Frameworks */,
 				312CD389202594C2008FE758 /* CoreText.framework in Frameworks */,
 				312CD388202594BD008FE758 /* CoreGraphics.framework in Frameworks */,
 				312CD387202594AA008FE758 /* GLKit.framework in Frameworks */,
@@ -294,6 +306,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */,
+				315964AC2026E68B00FB0679 /* libcocoaui-mac.a in Frameworks */,
+				315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */,
+				315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */,
 				312CD38B2025974A008FE758 /* AppKit.framework in Frameworks */,
 				312CD3852025946D008FE758 /* CoreText.framework in Frameworks */,
 				312CD38320259462008FE758 /* CoreGraphics.framework in Frameworks */,
@@ -479,6 +495,10 @@
 		08B4CBDD201DEE6D00EEC0C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				315964AA2026E65300FB0679 /* QuartzCore.framework */,
+				315964A82026E62700FB0679 /* Cocoa.framework */,
+				315964A62026AC9500FB0679 /* libxml2.tbd */,
+				315964A42026AC8A00FB0679 /* libcocoaui-mac.a */,
 				312CD38A20259749008FE758 /* AppKit.framework */,
 				312CD386202594AA008FE758 /* GLKit.framework */,
 				312CD3842025946D008FE758 /* CoreText.framework */,
@@ -851,8 +871,9 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Test/Info.plist;
+				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
+				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Debug;
 		};
@@ -863,8 +884,9 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Test/Info.plist;
+				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
+				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Release;
 		};
@@ -890,9 +912,10 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
+				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Debug;
 		};
@@ -917,9 +940,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION}";
+				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Release;
 		};

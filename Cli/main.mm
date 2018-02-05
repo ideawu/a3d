@@ -21,20 +21,38 @@
 #include "TextSpirte.h"
 #include "Bitmap.h"
 #include "Text.h"
+#include "IKit/IKit.h"
 
 using namespace a3d;
 
 int main(int argc, const char * argv[])
 {
-	Text text("你好!\nHello World!");
-	Bitmap *bitmap = text.drawToBitmap();
-	if(!bitmap){
-		log_debug(@"error");
-		return 0;
-	}
-	bitmap->savePNGFile("a.png");
-	delete bitmap;
+	NSView *view = [[NSView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+	view.wantsLayer = YES;
+	view.layer = [[CALayer alloc] init];
+	view.layer.frame = CGRectMake(0,0,200,200);
+	view.layer.backgroundColor = [NSColor blueColor].CGColor;
+	
+	ILabel *iv = (ILabel *)[IView viewFromXml:@"<a style=\"color: #fff; font-size: 50\">123</a>"];
+	[view addSubview:iv];
+	[iv layout];
+	iv.label.layer = [[CALayer alloc] init];
+	iv.label.layer.frame = iv.bounds;
+//	iv.label.layer.backgroundColor = [NSColor yellowColor].CGColor;
 
+	NSImage *image = [[NSImage alloc] initWithSize:view.bounds.size];
+	[image lockFocus];
+	CGContextRef ctx = (CGContextRef)[NSGraphicsContext currentContext].graphicsPort;
+//	[view layout];
+//	[view display];
+//	[view.layer renderInContext:ctx];
+	[iv.layer renderInContext:ctx];
+	[image unlockFocus];
+	
+	log_debug(@"%@ %f", iv, iv.frame.size.width);
+	[[iv dataWithPDFInsideRect:iv.bounds] writeToFile:@"a.pdf" atomically:YES];
+
+	[[image TIFFRepresentation] writeToFile:@"a.png" atomically:YES];
 
 //	@autoreleasepool {
 //		NSString *string = @"Hello, World!";

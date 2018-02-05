@@ -5,6 +5,8 @@
 #include "a3d/DraftSprite.h"
 #include "a3d/a3d.h"
 
+#import "IKit/IKit.h"
+
 using namespace a3d;
 
 @interface MyOpenGLView(){
@@ -24,6 +26,9 @@ using namespace a3d;
 	SpriteNode *_img3;
 
 	MySprite *_hero;
+	
+	IView *_helpView;
+	SpriteNode *_helpNode;
 
 	std::vector<a3d::Object *> _objects;
 }
@@ -154,6 +159,7 @@ using namespace a3d;
 	//	_img1->render();
 	//	_img2->render();
 	_img3->renderAtTime(time);
+	_helpNode->renderAtTime(time);
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
