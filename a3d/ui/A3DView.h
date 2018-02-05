@@ -10,6 +10,7 @@
 
 @property (readonly) CGSize viewportSize;
 @property (readonly) CGSize framebufferSize;
+@property (readonly) float fps;
 
 - (void)drawRect:(NSRect)dirtyRect;
 - (void)renderAtTime:(double)time;

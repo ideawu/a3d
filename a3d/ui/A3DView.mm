@@ -25,7 +25,6 @@ typedef struct{
 
 	Clock _clock;
 
-	double _limitRefreshInterval;
 	float _maxFPS;
 	BOOL _isOpenGLReady;
 }
@@ -54,13 +53,13 @@ typedef struct{
 	[self setWantsBestResolutionOpenGLSurface:YES];
 	_displayLink = NULL;
 //	_processQueue = NULL;
-	_limitRefreshInterval = 0;
 	_isOpenGLReady = NO;
 	
 	_refreshRate.fps = 0;
 	_refreshRate.beginTime = 0;
 	_refreshRate.count = 0;
 	_maxFPS = 100;
+	
 	return self;
 }
 
@@ -195,6 +194,10 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 #endif
 
+- (float)fps{
+	return _refreshRate.fps;
+}
+
 - (void)setMaxFPS:(float)fps{
 	if(fps <= 0){
 		return;
@@ -263,8 +266,15 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			_refreshRate.count = 0;
 		}
 
+		// 设备理想刷新周期
+		double idealInterval = 0.016;
+		CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
+		if(ct.timeScale > 0){
+			idealInterval = (double)ct.timeValue/ct.timeScale;
+		}
+
 		// 时间平滑
-		double bestInterval = 1.0/_maxFPS;
+		double bestInterval = fmax(1.0/_maxFPS, idealInterval);
 		double realInterval = _clock.time() - _refreshRate.lastTime;
 		if(realInterval < 0){
 //			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
