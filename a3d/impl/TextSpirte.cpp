@@ -32,6 +32,7 @@ namespace a3d{
 		
 		TextSprite *ret = new TextSprite();
 		ret->_texture = texture;
+		ret->frames(1);
 		ret->width(bitmap->width());
 		ret->height(bitmap->height());
 		
@@ -50,14 +51,23 @@ namespace a3d{
 	}
 
 	int TextSprite::frameAtTime(double time, double *duration){
+		if(duration){
+			*duration = 0;
+		}
 		return 0;
 	}
 	
 	Texture* TextSprite::textureAtTime(double time, double *duration){
+		if(duration){
+			*duration = 0;
+		}
 		return _texture;
 	}
 	
 	Texture* TextSprite::textureAtFrame(int frame, double *duration){
+		if(duration){
+			*duration = 0;
+		}
 		return _texture;
 	}
 

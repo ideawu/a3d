@@ -84,6 +84,7 @@ namespace a3d{
 		CGContextRef context = CGBitmapContextCreate(_pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
 		CGColorSpaceRelease(colorSpace);
 		CGImageRef imageRef = CGBitmapContextCreateImage(context);
+		CGContextRelease(context);
 		return imageRef;
 	}
 

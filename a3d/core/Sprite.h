@@ -33,7 +33,7 @@ namespace a3d{
 		Texture* textureAtFrame(int frame);
 		// 如果指定时间无对应帧，返回-1
 		virtual int frameAtTime(double time, double *duration) = 0;
-		// 如果无对应帧，返回0
+		// 如果无对应帧，返回NULL
 		virtual Texture* textureAtTime(double time, double *duration) = 0;
 		virtual Texture* textureAtFrame(int frame, double *duration) = 0;
 
