@@ -43,8 +43,8 @@ namespace a3d{
 			glDeleteTextures(1, &_tid);
 		}
 		
-		int width = bitmap.width();
-		int height = bitmap.height();
+		GLsizei width = bitmap.width();
+		GLsizei height = bitmap.height();
 		const char *pixels = bitmap.pixels();
 		
 		glGenTextures(1, &_tid);
@@ -57,7 +57,9 @@ namespace a3d{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		// see https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_texturedata/opengl_texturedata.html#//apple_ref/doc/uid/TP40001987-CH407-SW22
+		//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
