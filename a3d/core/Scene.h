@@ -30,6 +30,7 @@ namespace a3d{
 
 		// node 内存不由 Scene 管理
 		void addNode(Node *node);
+		void addNodeAtIndex(Node *node, int index);
 		void removeNode(Node *node);
 
 		void view3D();

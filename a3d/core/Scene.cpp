@@ -65,6 +65,10 @@ namespace a3d{
 		_rootNode->addSubnode(node);
 	}
 	
+	void Scene::addNodeAtIndex(Node *node, int index){
+		_rootNode->addSubnodeAtIndex(node, index);
+	}
+	
 	void Scene::removeNode(Node *node){
 		_rootNode->removeSubnode(node);
 	}

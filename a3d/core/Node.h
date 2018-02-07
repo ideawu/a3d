@@ -35,6 +35,7 @@ namespace a3d{
 		Node* parent() const;
 		void removeFromParent();
 		void addSubnode(Node *node);
+		void addSubnodeAtIndex(Node *node, int index);
 		void removeSubnode(Node *node);
 		void bringSubnodeToBack(Node *node);
 		void bringSubnodeToFront(Node *node);

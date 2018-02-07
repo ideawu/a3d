@@ -68,6 +68,17 @@ namespace a3d{
 		if(!_subs){
 			_subs = new std::list<Node *>();
 		}
+		if(isFront){
+			this->addSubnodeAtIndex(node, (int)_subs->size());
+		}else{
+			this->addSubnodeAtIndex(node, 0);
+		}
+	}
+
+	void Node::addSubnodeAtIndex(Node *node, int index){
+		if(!_subs){
+			_subs = new std::list<Node *>();
+		}
 		if(node->_parent){
 			if(node->_parent == this){
 				return;
@@ -76,13 +87,20 @@ namespace a3d{
 			}
 		}
 		node->_parent = this;
-		if(isFront){
+
+		if(index >= _subs->size()){
 			_subs->push_back(node);
 		}else{
-			_subs->push_front(node);
+			int subIndex = 0;
+			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
+				if(index <= subIndex || it == _subs->end()){
+					_subs->insert(it, node);
+				}
+				subIndex ++;
+			}
 		}
 	}
-	
+
 	void Node::removeSubnode(Node *node){
 		if(!_subs){
 			return;
