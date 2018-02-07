@@ -29,6 +29,7 @@ namespace a3d{
 		void opacity(float opacity);
 		void show();
 		void hide();
+		bool hidden() const;
 		bool visible() const; // 结合父节点判断是否可见
 
 		Node* parent() const;

@@ -41,6 +41,10 @@ namespace a3d{
 		_opacity = 0;
 	}
 	
+	bool Node::hidden() const{
+		return _opacity == 0;
+	}
+
 	bool Node::visible() const{
 		return _opacity != 0 && Renderer::current()->opacity() != 0;
 	}
