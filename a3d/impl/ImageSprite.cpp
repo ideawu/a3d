@@ -7,6 +7,7 @@
 #include "Bitmap.h"
 
 static CGImageSourceRef load_CGImageSource(const char *filename);
+static double get_duration(CGImageSourceRef src, int index);
 
 namespace a3d{
 	ImageSprite* ImageSprite::createFromBitmap(const Bitmap &bitmap){
@@ -15,10 +16,10 @@ namespace a3d{
 			return NULL;
 		}
 		ImageSprite *ret = new ImageSprite();
-		ret->_frames = 1;
-		ret->_duration = 0;
+		ret->_texture = texture;
 		ret->_durations.push_back(0);
-		ret->_textures.push_back(texture);
+		ret->frames(1);
+		ret->duration(0);
 		ret->width(bitmap.width());
 		ret->height(bitmap.height());
 		return ret;
@@ -27,7 +28,7 @@ namespace a3d{
 	ImageSprite* ImageSprite::createFromFile(const char *filename){
 		ImageSprite *ret = new ImageSprite();
 		ret->loadFromFile(filename);
-		if(ret->_textures.empty()){
+		if(ret->frames() == 0){
 			delete ret;
 			return NULL;
 		}
@@ -35,60 +36,40 @@ namespace a3d{
 	}
 
 	ImageSprite::ImageSprite(){
+		_texture = NULL;
 		_cgimgSrc = NULL;
+		_duration = 0;
 	}
 
 	ImageSprite::~ImageSprite(){
 		if(_cgimgSrc){
 			CFRelease(_cgimgSrc);
 		}
-		for(int i=0; i<_textures.size(); i++){
-			delete _textures[i];
-		}
+		delete _texture;
 	}
 	
 	void ImageSprite::loadFromFile(const char *filename){
-		CGImageSourceRef src = load_CGImageSource(filename);
-		if(!src){
+		this->_cgimgSrc = load_CGImageSource(filename);
+		if(!this->_cgimgSrc){
+			return;
+		}
+		int frames = (int)CGImageSourceGetCount(this->_cgimgSrc);
+		if(frames == 0){
 			return;
 		}
 		
-		std::vector<double> durations;
 		double total_duration = 0;
-		int frames = (int)CGImageSourceGetCount(src);
-		
 		for(int i=0; i<frames; i++){
-			double duration = 0;
-			CFDictionaryRef properties = CGImageSourceCopyPropertiesAtIndex(src, i, NULL);
-			if (properties) {
-				CFDictionaryRef gifProperties = (CFDictionaryRef)CFDictionaryGetValue(properties, kCGImagePropertyGIFDictionary);
-				if (gifProperties) {
-					CFTypeRef val;
-					val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFUnclampedDelayTime);
-					if (val) {
-						CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
-					}
-					if(duration == 0){
-						val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFDelayTime);
-						if(val){
-							CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
-						}
-					}
-				}
-				CFRelease(properties);
-			}
-			durations.push_back(duration);
+			double duration = get_duration(this->_cgimgSrc, i);
+			this->_durations.push_back(duration);
 			total_duration += duration;
 //			log_debug("frame: %d, duration: %.3f", i, duration);
 		}
 
-		_cgimgSrc = src;
-		_frames = frames;
-		_duration = total_duration;
-		_durations = durations;
-		_textures.resize(frames, NULL);
+		this->frames(frames);
+		this->duration(total_duration);
 		// 加载第1张图片，生成width,height
-		textureAtFrame(0, NULL);
+		this->textureAtFrame(0, NULL);
 	}
 
 	int ImageSprite::frameAtTime(double time, double *duration){
@@ -117,23 +98,22 @@ namespace a3d{
 		if(frame < 0 || frame >= _frames){
 			return NULL;
 		}
-		if(_textures[frame] == NULL){
-			Texture *texture = new Texture();
-			_textures[frame] = texture;
-			
-			Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
-			if(!bitmap){
-				return NULL;
-			}
+		
+		Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
+		if(!bitmap){
+			return NULL;
+		}
+		if(!_texture){
+			_texture = new Texture();
 			this->width(bitmap->width());
 			this->height(bitmap->height());
-			texture->loadBitmap(*bitmap);
-			delete bitmap;
 		}
+		_texture->loadBitmap(*bitmap);
+		delete bitmap;
 		if(duration){
 			*duration = _durations[frame];
 		}
-		return _textures[frame];
+		return _texture;
 	}
 
 }; // end namespace
@@ -146,5 +126,28 @@ static CGImageSourceRef load_CGImageSource(const char *filename){
 	CGImageSourceRef src = CGImageSourceCreateWithURL((CFURLRef)url, NULL);
 	CFRelease(url);
 	return src;
+}
+
+static double get_duration(CGImageSourceRef src, int index){
+	double duration = 0;
+	CFDictionaryRef properties = CGImageSourceCopyPropertiesAtIndex(src, index, NULL);
+	if (properties) {
+		CFDictionaryRef gifProperties = (CFDictionaryRef)CFDictionaryGetValue(properties, kCGImagePropertyGIFDictionary);
+		if (gifProperties) {
+			CFTypeRef val;
+			val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFUnclampedDelayTime);
+			if (val) {
+				CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
+			}
+			if(duration == 0){
+				val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFDelayTime);
+				if(val){
+					CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
+				}
+			}
+		}
+		CFRelease(properties);
+	}
+	return duration;
 }
 

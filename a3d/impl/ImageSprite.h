@@ -28,7 +28,7 @@ namespace a3d{
 		ImageSprite(const ImageSprite &d);
 		ImageSprite& operator =(const ImageSprite &d);
 		
-		std::vector<Texture *> _textures;
+		Texture *_texture;
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 		

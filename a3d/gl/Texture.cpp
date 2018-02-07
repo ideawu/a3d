@@ -39,18 +39,17 @@ namespace a3d{
 	}
 
 	void Texture::loadBitmap(const Bitmap &bitmap){
-		if(_tid){
-			glDeleteTextures(1, &_tid);
-		}
+		bool isNew = (_tid == 0);
 		
 		GLsizei width = bitmap.width();
 		GLsizei height = bitmap.height();
 		const char *pixels = bitmap.pixels();
 		
-		glGenTextures(1, &_tid);
-//		log_debug("%d", tid);
-		if(!_tid){
-			return;
+		if(isNew){
+			glGenTextures(1, &_tid);
+			if(!_tid){
+				return;
+			}
 		}
 		glBindTexture(GL_TEXTURE_2D, _tid);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
@@ -59,7 +58,11 @@ namespace a3d{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		// see https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_texturedata/opengl_texturedata.html#//apple_ref/doc/uid/TP40001987-CH407-SW22
 		//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
+		if(isNew){
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
+		}else{
+			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
+		}
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

@@ -8,6 +8,10 @@
 #include "Context.h"
 
 namespace a3d{
+	// FBO
+	// TextureBuffer/TextureFBO: render to texture
+	// ColorBuffer/ColorFBO: render to color storage
+	
  	class BufferContext : public Context
 	{
 	public:
