@@ -75,7 +75,9 @@ namespace a3d{
 //		glEnable(GL_ALPHA_TEST);
 //		glAlphaFunc(GL_GREATER, 0.1f);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		// premultiplied alpha
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glBindTexture(GL_TEXTURE_2D, 0);

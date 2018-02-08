@@ -31,7 +31,7 @@ namespace a3d{
 		Renderer(const Renderer &d);
 		Renderer& operator =(const Renderer &d);
 
-		Color _color;
+		float _opacity;
 		std::vector<float> _q_opacity;
 	};
 }; // end namespace

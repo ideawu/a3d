@@ -82,7 +82,7 @@ using namespace a3d;
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
 		node->move(300, 0, 600);
-		node->opacity(0.7);
+		node->opacity(0.5);
 		_img3 = node;
 	}
 	
