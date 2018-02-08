@@ -1,60 +1,52 @@
-//  Created by ideawu on 18-1-28.
-//  Copyright (c) 2018年 ideawu. All rights reserved.
+//  Created by ideawu on 08/02/2018.
+//  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef a3d_SpriteNode_h
-#define a3d_SpriteNode_h
+#ifndef AnimationNode_hpp
+#define AnimationNode_hpp
 
 #include "Node.h"
-#include "Sprite.h"
 #include "Clock.h"
+#include "Sprite.h"
 
 namespace a3d{
-	class TextureNode;
-	
 	class SpriteNode : public Node
 	{
 	public:
 		SpriteNode();
 		virtual ~SpriteNode();
 		virtual void drawAtTime(double time);
-
-		Node* contentNode() const;
-		Sprite* sprite() const;
-		// 内存由 SpriteNode 管理
-		void sprite(Sprite *sprite);
-
-		Vector3 originSize() const;
-		float originWidth() const;
-		float originHeight() const;
-
-		bool isPlaying() const;
-		bool isPaused() const;
-		bool isStopped() const;
-
+		
 		void play();
 		void pause();
 		void stop();
 
-		// 是否是不可丢帧的
+		Sprite* sprite() const;
+		// 内存由 SpriteNode 管理
+		void sprite(Sprite *sprite);
+
+		bool isPlaying() const;
+		bool isPaused() const;
+		bool isStopped() const;
+		
+		// 是否不可丢帧
 		void isFrameLossless(bool isLossless);
 		// 是否循环播放
 		void isLooping(bool looping);
-
+		
 	private:
 		SpriteNode(const SpriteNode &d);
 		SpriteNode& operator =(const SpriteNode &d);
-
-		TextureNode *_contentNode;
-		Sprite *_sprite;
-
+		
 		int _state;
-		Clock _clock;
 		bool _isFrameLossless;
 		bool _isLooping;
+		Clock _clock;
 		
+		Sprite *_sprite;
+
 		void updateClock(double time);
 	};
 }; // end namespace
 
-#endif /* defined(__a3d__SpriteNode__) */
+#endif /* AnimationNode_hpp */

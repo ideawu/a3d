@@ -19,6 +19,7 @@ namespace a3d{
 			delete _texture;
 		}
 		_texture = texture;
+		this->frames(1);
 		this->width(texture->width());
 		this->height(texture->height());
 	}

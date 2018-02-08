@@ -24,9 +24,12 @@ namespace a3d{
 
 		int frames() const;
 		double duration() const;
+		
 		Vector3 size() const;
 		float width() const;
+		void width(float w);
 		float height() const;
+		void height(float h);
 
 		// 如果无对应帧，返回NULL
 		Texture* texture();
@@ -45,8 +48,6 @@ namespace a3d{
 		int _frames;
 		double _duration;
 		
-		void width(float w);
-		void height(float h);
 		void frames(int frames);
 		void duration(double duration);
 

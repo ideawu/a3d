@@ -95,8 +95,6 @@
 		08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */; };
 		08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
-		08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */; };
-		08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 		3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
 		3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
@@ -111,7 +109,6 @@
 		312CD38B2025974A008FE758 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD38A20259749008FE758 /* AppKit.framework */; };
 		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
 		314A2011201ED3D30093D902 /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
-		314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */; };
 		31543EEE2025BE4B002AC387 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EEC2025BE4B002AC387 /* Bitmap.cpp */; };
 		31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		31543EF22025C649002AC387 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF02025C649002AC387 /* Text.cpp */; };
@@ -128,6 +125,15 @@
 		319A808E202BF69E00DF1175 /* TextureNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A808C202BF69E00DF1175 /* TextureNode.h */; };
 		319A8098202C3F6A00DF1175 /* TextureSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A8096202C3F6A00DF1175 /* TextureSprite.cpp */; };
 		319A8099202C3F6A00DF1175 /* TextureSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A8097202C3F6A00DF1175 /* TextureSprite.h */; };
+		319A809A202C54F700DF1175 /* TextureNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A808C202BF69E00DF1175 /* TextureNode.h */; };
+		319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A809B202C581C00DF1175 /* SpriteNode.cpp */; };
+		319A809E202C581C00DF1175 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
+		319A809F202C59B200DF1175 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
+		319A80A0202C61E500DF1175 /* Text.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
+		319A80A1202C61E500DF1175 /* TextureSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A8097202C3F6A00DF1175 /* TextureSprite.h */; };
+		319A80A2202C61E500DF1175 /* TextSpirte.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 312CD37E20257852008FE758 /* TextSpirte.h */; };
+		319A80A3202C61E500DF1175 /* BlankContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */; };
+		319A80A4202C61E500DF1175 /* BufferContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
 		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
@@ -140,10 +146,16 @@
 			dstPath = a3d;
 			dstSubfolderSpec = 7;
 			files = (
+				319A80A0202C61E500DF1175 /* Text.h in CopyFiles */,
+				319A80A1202C61E500DF1175 /* TextureSprite.h in CopyFiles */,
+				319A80A2202C61E500DF1175 /* TextSpirte.h in CopyFiles */,
+				319A80A3202C61E500DF1175 /* BlankContext.h in CopyFiles */,
+				319A80A4202C61E500DF1175 /* BufferContext.h in CopyFiles */,
+				319A809F202C59B200DF1175 /* SpriteNode.h in CopyFiles */,
+				319A809A202C54F700DF1175 /* TextureNode.h in CopyFiles */,
 				3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */,
 				3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */,
 				314A2011201ED3D30093D902 /* util.h in CopyFiles */,
-				314A2012201ED3D30093D902 /* SpriteNode.h in CopyFiles */,
 				08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */,
 				08B4CBD2201DEC3B00EEC0C5 /* a3d.h in CopyFiles */,
 				08B4CBD0201DEC3200EEC0C5 /* DraftScene.h in CopyFiles */,
@@ -259,8 +271,6 @@
 		08B4CBDA201DEDB700EEC0C5 /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
 		08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		08B4CBDF201DF38D00EEC0C5 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
-		08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
-		08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 		312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTypes.cpp; sourceTree = "<group>"; };
 		312CD37D20257852008FE758 /* TextSpirte.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextSpirte.cpp; sourceTree = "<group>"; };
 		312CD37E20257852008FE758 /* TextSpirte.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSpirte.h; sourceTree = "<group>"; };
@@ -283,6 +293,8 @@
 		319A808C202BF69E00DF1175 /* TextureNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureNode.h; sourceTree = "<group>"; };
 		319A8096202C3F6A00DF1175 /* TextureSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureSprite.cpp; sourceTree = "<group>"; };
 		319A8097202C3F6A00DF1175 /* TextureSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureSprite.h; sourceTree = "<group>"; };
+		319A809B202C581C00DF1175 /* SpriteNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
+		319A809C202C581C00DF1175 /* SpriteNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
 		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -409,8 +421,8 @@
 				08B4CB2C201DE4AF00EEC0C5 /* Scene.cpp */,
 				08B4CB2F201DE4AF00EEC0C5 /* Sprite.h */,
 				08B4CB2E201DE4AF00EEC0C5 /* Sprite.cpp */,
-				08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */,
-				08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */,
+				319A809C202C581C00DF1175 /* SpriteNode.h */,
+				319A809B202C581C00DF1175 /* SpriteNode.cpp */,
 				319A808C202BF69E00DF1175 /* TextureNode.h */,
 				319A808B202BF69E00DF1175 /* TextureNode.cpp */,
 			);
@@ -555,7 +567,6 @@
 				08B4CB58201DE4AF00EEC0C5 /* Node.h in Headers */,
 				08B4CB51201DE4AF00EEC0C5 /* Animate.h in Headers */,
 				08B4CB1D201DE49900EEC0C5 /* PrefixHeader.pch in Headers */,
-				08B4CBE6201E06C400EEC0C5 /* SpriteNode.h in Headers */,
 				08B4CB6E201DE4AF00EEC0C5 /* AnimatePosition.h in Headers */,
 				08B4CB1C201DE49900EEC0C5 /* Vector3.h in Headers */,
 				31543EF82025E691002AC387 /* Texture.h in Headers */,
@@ -565,6 +576,7 @@
 				08B4CB70201DE4AF00EEC0C5 /* BufferContext.h in Headers */,
 				08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */,
 				08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */,
+				319A809E202C581C00DF1175 /* SpriteNode.h in Headers */,
 				08B4CB52201DE4AF00EEC0C5 /* AnimationTypes.h in Headers */,
 				319A808E202BF69E00DF1175 /* TextureNode.h in Headers */,
 				08B4CB60201DE4AF00EEC0C5 /* Sprite.h in Headers */,
@@ -724,7 +736,7 @@
 				08B4CB59201DE4AF00EEC0C5 /* Object.cpp in Sources */,
 				08B4CB11201DE49900EEC0C5 /* Axis.cpp in Sources */,
 				319A8098202C3F6A00DF1175 /* TextureSprite.cpp in Sources */,
-				08B4CBE5201E06C400EEC0C5 /* SpriteNode.cpp in Sources */,
+				319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */,
 				08B4CB55201DE4AF00EEC0C5 /* Context.cpp in Sources */,
 				08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */,
 				31543EF22025C649002AC387 /* Text.cpp in Sources */,

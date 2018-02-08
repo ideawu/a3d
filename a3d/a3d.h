@@ -25,6 +25,8 @@ namespace a3d{
 #include "Scene.h"
 #include "Sprite.h"
 #include "SpriteNode.h"
+#include "TextureNode.h"
+#include "TextureSprite.h"
 
 #include "Animate.h"
 #include "AnimationTypes.h"
