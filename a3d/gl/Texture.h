@@ -18,11 +18,11 @@ namespace a3d{
 		static Texture* createFromBitmap(const Bitmap &bitmap);
 		
 		GLuint name() const;
-		void bind();
-		void unbind();
+		void bind() const;
+		void unbind() const;
 		void loadBitmap(const Bitmap &bitmap);
 		
-		void draw(const Rect &texRect, const Rect vertRect);
+		void draw(const Rect &texRect, const Rect vertRect) const;
 		
 		// TODO: retain, release
 		

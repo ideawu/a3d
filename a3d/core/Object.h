@@ -7,6 +7,9 @@
 
 #include "Matrix4.h"
 #include "Transform.h"
+#include "Vector3.h"
+#include "Point3.h"
+#include "Axis.h"
 
 namespace a3d{
 	class Object

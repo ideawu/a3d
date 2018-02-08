@@ -124,6 +124,8 @@
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
 		315964AC2026E68B00FB0679 /* libcocoaui-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A42026AC8A00FB0679 /* libcocoaui-mac.a */; };
 		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
+		319A808D202BF69E00DF1175 /* TextureNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A808B202BF69E00DF1175 /* TextureNode.cpp */; };
+		319A808E202BF69E00DF1175 /* TextureNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A808C202BF69E00DF1175 /* TextureNode.h */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
 		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
@@ -275,6 +277,8 @@
 		315964A62026AC9500FB0679 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		315964A82026E62700FB0679 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		315964AA2026E65300FB0679 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		319A808B202BF69E00DF1175 /* TextureNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureNode.cpp; sourceTree = "<group>"; };
+		319A808C202BF69E00DF1175 /* TextureNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureNode.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
 		31C67889202471D7000BF908 /* AnimateRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimateRotation.h; sourceTree = "<group>"; };
 		31C6789020247C90000BF908 /* Cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cli; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,6 +407,8 @@
 				08B4CB2E201DE4AF00EEC0C5 /* Sprite.cpp */,
 				08B4CBE4201E06C400EEC0C5 /* SpriteNode.h */,
 				08B4CBE3201E06C400EEC0C5 /* SpriteNode.cpp */,
+				319A808C202BF69E00DF1175 /* TextureNode.h */,
+				319A808B202BF69E00DF1175 /* TextureNode.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -554,6 +560,7 @@
 				08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */,
 				08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */,
 				08B4CB52201DE4AF00EEC0C5 /* AnimationTypes.h in Headers */,
+				319A808E202BF69E00DF1175 /* TextureNode.h in Headers */,
 				08B4CB60201DE4AF00EEC0C5 /* Sprite.h in Headers */,
 				312CD38020257852008FE758 /* TextSpirte.h in Headers */,
 				08B4CB7C201DE4AF00EEC0C5 /* util.h in Headers */,
@@ -695,6 +702,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				319A808D202BF69E00DF1175 /* TextureNode.cpp in Sources */,
 				08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */,
 				08B4CB7E201DE6B100EEC0C5 /* A3DView.mm in Sources */,
 				08B4CB61201DE4AF00EEC0C5 /* Transform.cpp in Sources */,

@@ -5,6 +5,7 @@
 #include "SpriteNode.h"
 #include "Texture.h"
 #include "Rect.h"
+#include "TextureNode.h"
 
 namespace a3d{
 	enum{
@@ -15,7 +16,7 @@ namespace a3d{
 
 	SpriteNode::SpriteNode(){
 		_sprite = NULL;
-		_contentNode = new Node();
+		_contentNode = new TextureNode();
 		this->addSubnode(_contentNode);
 		_isFrameLossless = false;
 		_isLooping = true;
@@ -149,45 +150,50 @@ namespace a3d{
 			return;
 		}
 		this->updateClock(time);
-		
-		float dx = (this->width() - _contentNode->width())/2 + _contentNode->x();
-		float dy = (this->height() - _contentNode->height())/2 + _contentNode->y();
-		
-		Rect base, test;
-		base = Rect(0, 0, this->width(), this->height());
-		test = Rect(dx, dy, _contentNode->width(), _contentNode->height());
-		Rect viewRect = base.intersect(test);
-		if(viewRect.empty()){
-			return;
-		}
-		
-		base = Rect(0, 0, _contentNode->width(), _contentNode->height());
-		test = Rect(-dx, -dy, this->width(), this->height());
-		Rect texRect = base.intersect(test);
-		if(texRect.empty()){
-			return;
-		}
-//			log_debug("viewRect: %.2f %.2f %.2f %.2f", viewRect.x, viewRect.y, viewRect.width, viewRect.height);
-//			log_debug("texRect: %.2f %.2f %.2f %.2f", texRect.x, texRect.y, texRect.width, texRect.height);
-		
-		// 显示区域的中点
-		viewRect.x -= this->width()/2;
-		viewRect.y -= this->height()/2;
-		
-		// 转成纹理归一化坐标
-		texRect.x /= _contentNode->width();
-		texRect.y /= _contentNode->height();
-		texRect.width /= _contentNode->width();
-		texRect.height /= _contentNode->height();
-		// flip image
-		texRect.y = 1 - texRect.y;
-		texRect.height = -texRect.height;
-		//	log_debug(@"texRect: %.2f,%.2f,%.2f,%.2f", texRect.x, texRect.y, texRect.width, texRect.height);
-		
+
 		Texture *texture = _sprite->textureAtTime(_clock.time());
 		if(texture){
-			texture->draw(texRect, viewRect);
+			_contentNode->texture(texture);
 		}
+
+//		float dx = (this->width() - _contentNode->width())/2 + _contentNode->x();
+//		float dy = (this->height() - _contentNode->height())/2 + _contentNode->y();
+//
+//		Rect base, test;
+//		base = Rect(0, 0, this->width(), this->height());
+//		test = Rect(dx, dy, _contentNode->width(), _contentNode->height());
+//		Rect viewRect = base.intersect(test);
+//		if(viewRect.empty()){
+//			return;
+//		}
+//
+//		base = Rect(0, 0, _contentNode->width(), _contentNode->height());
+//		test = Rect(-dx, -dy, this->width(), this->height());
+//		Rect texRect = base.intersect(test);
+//		if(texRect.empty()){
+//			return;
+//		}
+////			log_debug("viewRect: %.2f %.2f %.2f %.2f", viewRect.x, viewRect.y, viewRect.width, viewRect.height);
+////			log_debug("texRect: %.2f %.2f %.2f %.2f", texRect.x, texRect.y, texRect.width, texRect.height);
+//
+//		// 显示区域的中点
+//		viewRect.x -= this->width()/2;
+//		viewRect.y -= this->height()/2;
+//
+//		// 转成纹理归一化坐标
+//		texRect.x /= _contentNode->width();
+//		texRect.y /= _contentNode->height();
+//		texRect.width /= _contentNode->width();
+//		texRect.height /= _contentNode->height();
+//		// flip image
+//		texRect.y = 1 - texRect.y;
+//		texRect.height = -texRect.height;
+//		//	log_debug(@"texRect: %.2f,%.2f,%.2f,%.2f", texRect.x, texRect.y, texRect.width, texRect.height);
+//
+//		Texture *texture = _sprite->textureAtTime(_clock.time());
+//		if(texture){
+//			texture->draw(texRect, viewRect);
+//		}
 	}
 
 }; // end namespace

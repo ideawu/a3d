@@ -10,12 +10,13 @@
 #include "Clock.h"
 
 namespace a3d{
+	class TextureNode;
+	
 	class SpriteNode : public Node
 	{
 	public:
 		SpriteNode();
 		virtual ~SpriteNode();
-
 		virtual void drawAtTime(double time);
 
 		Node* contentNode() const;
@@ -45,7 +46,7 @@ namespace a3d{
 		SpriteNode& operator =(const SpriteNode &d);
 
 		Vector3 _originSize;
-		Node *_contentNode;
+		TextureNode *_contentNode;
 		Sprite *_sprite;
 
 		int _state;

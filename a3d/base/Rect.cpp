@@ -16,7 +16,23 @@ namespace a3d{
 		this->width = width;
 		this->height = height;
 	}
+
+	float Rect::x0() const{
+		return x;
+	}
 	
+	float Rect::y0() const{
+		return y;
+	}
+	
+	float Rect::x1() const{
+		return x + width;
+	}
+	
+	float Rect::y1() const{
+		return y + height;
+	}
+
 	bool Rect::equals(const Rect &d) const{
 		return x == d.x && y == d.y && width == d.width && height == d.height;
 	}

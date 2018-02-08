@@ -30,11 +30,11 @@ namespace a3d{
 		return _tid;
 	}
 	
-	void Texture::bind(){
+	void Texture::bind() const{
 		glBindTexture(GL_TEXTURE_2D, _tid);
 	}
 	
-	void Texture::unbind(){
+	void Texture::unbind() const{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -66,20 +66,21 @@ namespace a3d{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::draw(const Rect &texRect, const Rect vertRect){
+	void Texture::draw(const Rect &texRect, const Rect vertRect) const{
 		if(!name()){
 			return;
 		}
-		
+
 		float tx0 = texRect.x;
 		float ty0 = texRect.y;
-		float tx1 = texRect.x + texRect.width;
-		float ty1 = texRect.y + texRect.height;
+		float tx1 = tx0 + texRect.width;
+		float ty1 = ty0 + texRect.height;
 		
 		float vx0 = vertRect.x;
-		float vy0 = vertRect.y;
-		float vx1 = vertRect.x + vertRect.width;
-		float vy1 = vertRect.y + vertRect.height;
+		// flip y
+		float vy0 = vertRect.y + vertRect.height;
+		float vx1 = vx0 + vertRect.width;
+		float vy1 = vy0 - vertRect.height;
 		float z = 0;
 
 		bind();
