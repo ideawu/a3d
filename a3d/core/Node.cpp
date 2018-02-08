@@ -167,11 +167,14 @@ namespace a3d{
 			_animation->updateAtTime(time);
 		}
 		
-		Renderer::current()->pushOpacity(_opacity);
-		bool visible = Renderer::current()->opacity() > 0; // 先保存状态，避免操作中状态改变导致出错的情况
+		bool parentVisible = Renderer::current()->opacity() > 0;
+		if(parentVisible){
+			Renderer::current()->pushOpacity(_opacity);
+		}
 
 		// 如果完全透明则不渲染，但仍调用子节点renderAtTime()更新动画
-		if(visible){
+		bool currentVisible = Renderer::current()->opacity() > 0;
+		if(currentVisible){
 			Renderer::current()->pushMatrix(this->matrix());
 			this->drawAtTime(time);
 		}
@@ -181,11 +184,13 @@ namespace a3d{
 				node->renderAtTime(time);
 			}
 		}
-		if(visible){
+		if(currentVisible){
 			Renderer::current()->popMatrix();
 		}
 		
-		Renderer::current()->popOpacity();
+		if(parentVisible){
+			Renderer::current()->popOpacity();
+		}
 	}
 
 	void Node::runAnimation(Animate *action){
