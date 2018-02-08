@@ -45,7 +45,6 @@ namespace a3d{
 		SpriteNode(const SpriteNode &d);
 		SpriteNode& operator =(const SpriteNode &d);
 
-		Vector3 _originSize;
 		TextureNode *_contentNode;
 		Sprite *_sprite;
 

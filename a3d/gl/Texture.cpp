@@ -25,6 +25,18 @@ namespace a3d{
 			glDeleteTextures(1, &_tid);
 		}
 	}
+	
+	Vector3 Texture::size() const{
+		return _size;
+	}
+	
+	float Texture::width() const{
+		return _size.w;
+	}
+	
+	float Texture::height() const{
+		return _size.h;
+	}
 
 	GLuint Texture::name() const{
 		return _tid;
@@ -40,17 +52,18 @@ namespace a3d{
 
 	void Texture::loadBitmap(const Bitmap &bitmap){
 		bool isNew = (_tid == 0);
-		
-		GLsizei width = bitmap.width();
-		GLsizei height = bitmap.height();
-		const char *pixels = bitmap.pixels();
-		
 		if(isNew){
 			glGenTextures(1, &_tid);
 			if(!_tid){
 				return;
 			}
 		}
+		_size = Vector3(bitmap.width(), bitmap.height(), 0);
+
+		GLsizei width = bitmap.width();
+		GLsizei height = bitmap.height();
+		const char *pixels = bitmap.pixels();
+		
 		glBindTexture(GL_TEXTURE_2D, _tid);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

@@ -14,6 +14,7 @@ namespace a3d{
 	class Sprite
 	{
 	public:
+		static Sprite* emptySprite();
 		static Sprite* imageSprite(const char *filename);
 		static Sprite* bitmapSprite(const Bitmap &bitmap);
 		static Sprite* textSprite(const char *str);
@@ -27,10 +28,11 @@ namespace a3d{
 		float width() const;
 		float height() const;
 
-		Texture* texture();
 		// 如果无对应帧，返回NULL
+		Texture* texture();
 		Texture* textureAtTime(double time);
 		Texture* textureAtFrame(int frame);
+		
 		// 如果指定时间无对应帧，返回-1
 		virtual int frameAtTime(double time, double *duration) = 0;
 		// 如果无对应帧，返回NULL

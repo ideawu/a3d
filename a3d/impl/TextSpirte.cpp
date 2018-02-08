@@ -40,9 +40,7 @@ namespace a3d{
 		return ret;
 	}
 
-	TextSprite::TextSprite(){
-		frames(0);
-		duration(0);
+	TextSprite::TextSprite():Sprite(){
 		_texture = NULL;
 	}
 	

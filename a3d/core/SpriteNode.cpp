@@ -42,25 +42,21 @@ namespace a3d{
 		}
 		_sprite = sprite;
 		if(_sprite){
-			_originSize = _sprite->size();
-			
-			if(this->size().empty()){
-				_contentNode->size(_originSize);
-				this->size(_originSize);
-			}
+			_contentNode->size(_sprite->size());
+			this->size(_sprite->size());
 		}
 	}
 
 	Vector3 SpriteNode::originSize() const{
-		return _originSize;
+		return _sprite? _sprite->size() : Vector3();
 	}
 	
 	float SpriteNode::originWidth() const{
-		return _originSize.w;
+		return originSize().width;
 	}
 	
 	float SpriteNode::originHeight() const{
-		return _originSize.h;
+		return originSize().height;
 	}
 
 	void SpriteNode::isFrameLossless(bool isLossless){

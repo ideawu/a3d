@@ -35,10 +35,9 @@ namespace a3d{
 		return ret;
 	}
 
-	ImageSprite::ImageSprite(){
+	ImageSprite::ImageSprite():Sprite(){
 		_texture = NULL;
 		_cgimgSrc = NULL;
-		_duration = 0;
 	}
 
 	ImageSprite::~ImageSprite(){

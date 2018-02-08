@@ -7,6 +7,7 @@
 
 #include "Bitmap.h"
 #include "Rect.h"
+#include "Vector3.h"
 
 namespace a3d{
 	class Texture
@@ -16,7 +17,11 @@ namespace a3d{
 		~Texture();
 
 		static Texture* createFromBitmap(const Bitmap &bitmap);
-		
+
+		Vector3 size() const;
+		float width() const;
+		float height() const;
+
 		GLuint name() const;
 		void bind() const;
 		void unbind() const;
@@ -31,6 +36,7 @@ namespace a3d{
 		Texture& operator =(const Texture &d);
 
 		GLuint _tid;
+		Vector3 _size;
 	};
 }; // end namespace
 
