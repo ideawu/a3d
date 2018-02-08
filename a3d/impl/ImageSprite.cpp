@@ -16,7 +16,6 @@ namespace a3d{
 			return NULL;
 		}
 		ImageSprite *ret = new ImageSprite();
-		ret->_texture = texture;
 		ret->_durations.push_back(0);
 		ret->frames(1);
 		ret->duration(0);
@@ -36,7 +35,6 @@ namespace a3d{
 	}
 
 	ImageSprite::ImageSprite():Sprite(){
-		_texture = NULL;
 		_cgimgSrc = NULL;
 	}
 
@@ -44,7 +42,10 @@ namespace a3d{
 		if(_cgimgSrc){
 			CFRelease(_cgimgSrc);
 		}
-		delete _texture;
+		for(std::vector<Texture *>::iterator it=_textures.begin(); it!=_textures.end(); it++){
+			Texture *texture = *it;
+			delete texture;
+		}
 	}
 	
 	void ImageSprite::loadFromFile(const char *filename){
@@ -65,6 +66,7 @@ namespace a3d{
 //			log_debug("frame: %d, duration: %.3f", i, duration);
 		}
 
+		this->_textures.resize(frames, NULL);
 		this->frames(frames);
 		this->duration(total_duration);
 		// 加载第1张图片，生成width,height
@@ -97,22 +99,21 @@ namespace a3d{
 		if(frame < 0 || frame >= _frames){
 			return NULL;
 		}
-		
-		Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
-		if(!bitmap){
-			return NULL;
-		}
-		if(!_texture){
-			_texture = new Texture();
+		if(!_textures[frame]){
+			Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
+			if(!bitmap){
+				return NULL;
+			}
 			this->width(bitmap->width());
 			this->height(bitmap->height());
+			Texture *texture = Texture::createFromBitmap(*bitmap);
+			_textures[frame] = texture;
+			delete bitmap;
 		}
-		_texture->loadBitmap(*bitmap);
-		delete bitmap;
 		if(duration){
 			*duration = _durations[frame];
 		}
-		return _texture;
+		return _textures[frame];
 	}
 
 }; // end namespace

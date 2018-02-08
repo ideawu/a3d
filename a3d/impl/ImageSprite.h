@@ -28,7 +28,8 @@ namespace a3d{
 		ImageSprite(const ImageSprite &d);
 		ImageSprite& operator =(const ImageSprite &d);
 		
-		Texture *_texture;
+		// 不要重复利用 texture，因为解码GIF耗CPU，用VRAM换CPU
+		std::vector<Texture *> _textures;
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 		
