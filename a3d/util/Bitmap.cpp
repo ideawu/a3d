@@ -26,7 +26,7 @@ namespace a3d{
 		char *pixels = (char *)malloc(4 * w * h);
 		
 		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
+		uint32_t bitmapInfo = kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host;
 		CGContextRef context = CGBitmapContextCreate(pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
 		CGColorSpaceRelease(colorSpace);
 		if(!context){
