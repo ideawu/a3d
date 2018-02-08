@@ -27,8 +27,6 @@ namespace a3d{
 		void pushMatrix(const Matrix4 &mat);
 		void popMatrix();
 
-		GLuint createTexture(const char *pixels, int width, int height);
-
 	private:
 		Renderer(const Renderer &d);
 		Renderer& operator =(const Renderer &d);
