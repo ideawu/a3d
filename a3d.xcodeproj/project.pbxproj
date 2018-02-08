@@ -368,6 +368,7 @@
 				08B4CB03201DE49900EEC0C5 /* base */,
 				08B4CB1E201DE4AF00EEC0C5 /* core */,
 				08B4CB3B201DE4AF00EEC0C5 /* impl */,
+				319A80A5202C691B00DF1175 /* animation */,
 				31543EF42025E670002AC387 /* gl */,
 				08B4CB48201DE4AF00EEC0C5 /* ui */,
 				08B4CB32201DE4AF00EEC0C5 /* draft */,
@@ -413,18 +414,12 @@
 				08B4CB26201DE4AF00EEC0C5 /* Node.cpp */,
 				08B4CB20201DE4AF00EEC0C5 /* Animate.h */,
 				08B4CB1F201DE4AF00EEC0C5 /* Animate.cpp */,
-				08B4CB21201DE4AF00EEC0C5 /* AnimationTypes.h */,
-				312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */,
 				08B4CB23201DE4AF00EEC0C5 /* Camera.h */,
 				08B4CB22201DE4AF00EEC0C5 /* Camera.cpp */,
 				08B4CB2D201DE4AF00EEC0C5 /* Scene.h */,
 				08B4CB2C201DE4AF00EEC0C5 /* Scene.cpp */,
 				08B4CB2F201DE4AF00EEC0C5 /* Sprite.h */,
 				08B4CB2E201DE4AF00EEC0C5 /* Sprite.cpp */,
-				319A809C202C581C00DF1175 /* SpriteNode.h */,
-				319A809B202C581C00DF1175 /* SpriteNode.cpp */,
-				319A808C202BF69E00DF1175 /* TextureNode.h */,
-				319A808B202BF69E00DF1175 /* TextureNode.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -443,14 +438,10 @@
 		08B4CB3B201DE4AF00EEC0C5 /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */,
-				08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */,
-				08B4CB3D201DE4AF00EEC0C5 /* AnimateOpacity.h */,
-				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
-				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
-				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
-				31C67889202471D7000BF908 /* AnimateRotation.h */,
-				31C67888202471D7000BF908 /* AnimateRotation.cpp */,
+				319A809C202C581C00DF1175 /* SpriteNode.h */,
+				319A809B202C581C00DF1175 /* SpriteNode.cpp */,
+				319A808C202BF69E00DF1175 /* TextureNode.h */,
+				319A808B202BF69E00DF1175 /* TextureNode.cpp */,
 				319A8097202C3F6A00DF1175 /* TextureSprite.h */,
 				319A8096202C3F6A00DF1175 /* TextureSprite.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
@@ -547,6 +538,23 @@
 				08B4CB40201DE4AF00EEC0C5 /* BufferContext.cpp */,
 			);
 			path = gl;
+			sourceTree = "<group>";
+		};
+		319A80A5202C691B00DF1175 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				08B4CB21201DE4AF00EEC0C5 /* AnimationTypes.h */,
+				312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */,
+				08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */,
+				08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */,
+				08B4CB3D201DE4AF00EEC0C5 /* AnimateOpacity.h */,
+				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
+				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
+				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
+				31C67889202471D7000BF908 /* AnimateRotation.h */,
+				31C67888202471D7000BF908 /* AnimateRotation.cpp */,
+			);
+			path = animation;
 			sourceTree = "<group>";
 		};
 		31C6789120247C90000BF908 /* Cli */ = {
