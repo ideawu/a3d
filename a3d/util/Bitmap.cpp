@@ -21,16 +21,12 @@ namespace a3d{
 	}
 
 	Bitmap* Bitmap::createFromCGImage(const CGImageRef image){
-		size_t w = CGImageGetWidth(image);
-		size_t h = CGImageGetHeight(image);
-		char *pixels = (char *)malloc(4 * w * h);
-		
-		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		uint32_t bitmapInfo = kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host;
-		CGContextRef context = CGBitmapContextCreate(pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
-		CGColorSpaceRelease(colorSpace);
+		int w = (int)CGImageGetWidth(image);
+		int h = (int)CGImageGetHeight(image);
+		Bitmap *ret = Bitmap::create(w, h);
+		CGContextRef context = ret->CGContext();
 		if(!context){
-			delete pixels;
+			delete ret;
 			return NULL;
 		}
 		// flip
@@ -40,9 +36,7 @@ namespace a3d{
 		// This avoids unnecessary blending.
 		CGContextSetBlendMode(context, kCGBlendModeCopy);
 		CGContextDrawImage(context, CGRectMake(0, 0, w, h), image);
-		CGContextRelease(context);
-		
-		return Bitmap::createWithPixels(pixels, (int)w, (int)h);
+		return ret;
 	}
 
 	Bitmap* Bitmap::createFromCGImageSourceAtIndex(const CGImageSourceRef imageSource, int index){
@@ -57,10 +51,14 @@ namespace a3d{
 
 	Bitmap::Bitmap(){
 		_pixels = NULL;
+		_CGImage = NULL;
+		_CGContext = NULL;
 	}
 
 	Bitmap::~Bitmap(){
 		free(_pixels);
+		CGImageRelease(_CGImage);
+		CGContextRelease(_CGContext);
 	}
 
 	int Bitmap::width() const{
@@ -75,17 +73,26 @@ namespace a3d{
 		return _pixels;
 	}
 	
-	CGImageRef Bitmap::createCGImage(){
-		size_t w = _width;
-		size_t h = _height;
-		
-		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
-		CGContextRef context = CGBitmapContextCreate(_pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
-		CGColorSpaceRelease(colorSpace);
-		CGImageRef imageRef = CGBitmapContextCreateImage(context);
-		CGContextRelease(context);
-		return imageRef;
+	CGContextRef Bitmap::CGContext(){
+		if(!_CGContext){
+			size_t w = _width;
+			size_t h = _height;
+			CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+			uint32_t bitmapInfo = kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host;
+			_CGContext = CGBitmapContextCreate(_pixels, w, h, 8, 4 * w, colorSpace, bitmapInfo);
+			CGColorSpaceRelease(colorSpace);
+		}
+		return _CGContext;
+	}
+
+	CGImageRef Bitmap::CGImage(){
+		if(!_CGImage){
+			CGContextRef context = this->CGContext();
+			if(context){
+				_CGImage = CGBitmapContextCreateImage(context);
+			}
+		}
+		return _CGImage;
 	}
 
 	bool Bitmap::savePNGFile(const char *filename){
@@ -93,7 +100,9 @@ namespace a3d{
 		CFURLRef url = NULL;
 		CGImageDestinationRef dest = NULL;
 		CGImageRef imageRef = NULL;
-		
+		if(!imageRef){
+			goto end;
+		}
 		url = CFURLCreateFromFileSystemRepresentation(NULL, (const UInt8 *)filename, strlen(filename), false);
 		if(!url){
 			goto end;
@@ -102,15 +111,15 @@ namespace a3d{
 		if(!dest){
 			goto end;
 		}
-		imageRef = createCGImage();
+		imageRef = this->CGImage();
 		CGImageDestinationAddImage(dest, imageRef, nil);
 		if(!CGImageDestinationFinalize(dest)){
 			goto end;
 		}
 		ret = true;
 	end:
-		CFRelease(url);
-		CFRelease(dest);
+		if(url){CFRelease(url);}
+		if(dest){CFRelease(dest);}
 		CGImageRelease(imageRef);
 		return ret;
 	}

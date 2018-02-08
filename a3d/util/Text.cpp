@@ -93,11 +93,7 @@ namespace a3d{
 //		log_debug("%d %d", w, h);
 		
 		Bitmap *bitmap = Bitmap::create(w, h);
-	
-		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		uint32_t bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
-		CGContextRef context = CGBitmapContextCreate(bitmap->pixels(), w, h, 8, 4 * w, colorSpace, bitmapInfo);
-		CGColorSpaceRelease(colorSpace);
+		CGContextRef context = bitmap->CGContext();
 		{
 			CGMutablePathRef path = CGPathCreateMutable();
 			CGRect bounds = CGRectMake(0, 0, w, h);
@@ -112,7 +108,6 @@ namespace a3d{
 			CFRelease(path);
 			CFRelease(framesetter);
 		}
-		CGContextRelease(context);
 		CFRelease(attrString);
 		
 		return bitmap;

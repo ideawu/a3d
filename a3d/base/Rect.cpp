@@ -3,6 +3,7 @@
 //
 
 #include "Rect.h"
+#include <CoreGraphics/CGGeometry.h>
 
 namespace a3d{
 	

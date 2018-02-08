@@ -7,7 +7,6 @@
 
 #include <math.h>
 #include <mach/mach_time.h>
-#include <ImageIO/ImageIO.h>
 
 namespace a3d{
 	inline static double absolute_time(){
@@ -23,11 +22,8 @@ namespace a3d{
 	}
 
 	inline static float trimf(float f){
-		return fabs(f)<FLT_EPSILON*10? 0 : f;
+		return fabs(f)<__FLT_EPSILON__*10? 0 : f;
 	}
-	
-	CGImageRef load_cgimage(const char *filename);
-	char *load_image_data(const char *filename, int *width, int *height);
 
 }; // end namespace
 

@@ -22,7 +22,8 @@ namespace a3d{
 		int height() const;
 		char* pixels() const;
 		
-		CGImageRef createCGImage();
+		CGContextRef CGContext();
+		CGImageRef CGImage();
 		bool savePNGFile(const char *filename);
 		
 	private:
@@ -33,6 +34,9 @@ namespace a3d{
 		char *_pixels;
 		int _width;
 		int _height;
+		
+		CGContextRef _CGContext;
+		CGImageRef _CGImage;
 	};
 }; // end namespace
 
