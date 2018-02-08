@@ -46,7 +46,7 @@ namespace a3d{
 	}
 
 	bool Node::visible() const{
-		return _opacity != 0 && Renderer::current()->opacity() != 0;
+		return _opacity != 0 && (!_parent || _parent->visible());
 	}
 	
 	
