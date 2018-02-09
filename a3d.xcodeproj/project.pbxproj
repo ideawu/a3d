@@ -115,7 +115,6 @@
 		31543EF32025C649002AC387 /* Text.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
 		31543EF72025E691002AC387 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF52025E691002AC387 /* Texture.cpp */; };
 		31543EF82025E691002AC387 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
-		315964A52026AC8A00FB0679 /* libcocoaui-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A42026AC8A00FB0679 /* libcocoaui-mac.a */; };
 		315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
 		315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A82026E62700FB0679 /* Cocoa.framework */; };
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
@@ -314,7 +313,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */,
-				315964A52026AC8A00FB0679 /* libcocoaui-mac.a in Frameworks */,
 				312CD389202594C2008FE758 /* CoreText.framework in Frameworks */,
 				312CD388202594BD008FE758 /* CoreGraphics.framework in Frameworks */,
 				312CD387202594AA008FE758 /* GLKit.framework in Frameworks */,

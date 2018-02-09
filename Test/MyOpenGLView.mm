@@ -5,8 +5,6 @@
 #include "a3d/DraftSprite.h"
 #include "a3d/a3d.h"
 
-#import "IKit/IKit.h"
-
 using namespace a3d;
 
 @interface MyOpenGLView(){
@@ -27,7 +25,6 @@ using namespace a3d;
 
 	MySprite *_hero;
 	
-	IView *_helpView;
 	SpriteNode *_helpNode;
 
 	std::vector<a3d::Object *> _objects;
