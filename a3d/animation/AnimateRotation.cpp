@@ -22,12 +22,28 @@ namespace a3d{
 		return ret;
 	}
 
+	AnimateRotation* AnimateRotation::rotateTo(const Quaternion &quat){
+		AnimateRotation *ret = new AnimateRotation();
+		ret->_type = TypeQuaternion;
+		ret->_quat = quat;
+		return ret;
+	}
+
 	void AnimateRotation::update(double progress, Node *target, const Node *origin){
 		float angle = _degree * progress;
 		if(_type == TypeVector){
 			target->rotate(angle, _vec);
-		}else{
+		}else if(_type == TypeAxis){
 			target->rotate(angle, _axis);
+		}else if(_type == TypeQuaternion){
+			// 避免计算误差
+			if(progress == 1){
+				target->rotateTo(_quat);
+			}else{
+				Quaternion q0 = origin->matrix().quaternion();
+				Quaternion q = Quaternion::slerp(q0, _quat, progress);
+				target->rotateTo(q);
+			}
 		}
 	}
 }; // end namespace

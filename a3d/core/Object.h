@@ -52,6 +52,7 @@ namespace a3d{
 		void rotate(float degree, const Vector3 &vec);
 		// 绕自身坐标系内的任意轴旋转
 		void rotate(float degree, const Axis &axis);
+		void rotateTo(const Quaternion &quat);
 		// 同时缩放自身体积和坐标系
 		void scale(float xyz);
 		void scale(const Vector3 &scale);

@@ -35,4 +35,9 @@ namespace a3d{
 #include "Context.h"
 #include "Renderer.h"
 
+
+#ifdef __OBJC__
+#include "A3DView.h"
+#endif
+
 #endif

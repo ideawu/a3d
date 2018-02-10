@@ -5,24 +5,25 @@
 #ifndef a3d_Matrix4_hpp
 #define a3d_Matrix4_hpp
 
-#include <string>
 #include <GLKit/GLKMath.h>
+#include <string>
 #include "Vector3.h"
 #include "Point3.h"
 #include "Axis.h"
+#include "Quaternion.h"
 
 namespace a3d{
 	class Matrix4
 	{
 	public:
-		// 创建一个单位向量
-		Matrix4();
-		std::string str() const;
-
 		/// 静态方法
 		static Matrix4 identity();
 		static Matrix4 frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
 		static Matrix4 ortho(float left, float right, float bottom, float top, float nearZ, float farZ);
+
+		// 创建一个单位向量
+		Matrix4();
+		std::string str() const;
 
 	public:
 		/// 属性
@@ -39,8 +40,8 @@ namespace a3d{
 		void z(float z);
 		
 		Vector3 scale() const;
-		// TODO: decompose rotation, Quaternion?
-//		Vector3 rotation() const;
+		Quaternion quaternion() const;
+		void quaternion(const Quaternion &quat);
 
 	public:
 		/// 方法

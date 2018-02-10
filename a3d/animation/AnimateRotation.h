@@ -13,19 +13,22 @@ namespace a3d{
 	public:
 		static AnimateRotation* rotate(float degree, const Vector3 &vec);
 		static AnimateRotation* rotate(float degree, const Axis &axis);
-		
+		static AnimateRotation* rotateTo(const Quaternion &quat);
+
 		virtual void update(double progress, Node *target, const Node *origin);
 
 	private:
 		typedef enum{
 			TypeVector,
-			TypeAxis
+			TypeAxis,
+			TypeQuaternion,
 		}AnimateType;
 		
 		AnimateType _type;
 		float _degree;
 		Vector3 _vec;
 		Axis _axis;
+		Quaternion _quat;
 	};
 }; // end namespace
 

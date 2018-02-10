@@ -95,7 +95,12 @@ namespace a3d{
 		vec = this->mul(vec);
 		return vec;
 	}
-	
+
+	Quaternion Matrix4::quaternion() const{
+		GLKQuaternion q = GLKQuaternionMakeWithMatrix4(_mat);
+		return Quaternion(q.x, q.y, q.z, q.w);
+	}
+
 	void Matrix4::translate(float x, float y, float z){
 		// macOS < 10.13, GLKMatrix4Translate does not work correctly!
 		//_mat = GLKMatrix4Translate(_mat, x, y, z);

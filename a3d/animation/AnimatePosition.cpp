@@ -6,10 +6,10 @@
 
 namespace a3d{
 
-	AnimatePosition* AnimatePosition::move(const Vector3 &vec){
+	AnimatePosition* AnimatePosition::move(const Vector3 &offset){
 		AnimatePosition *ret = new AnimatePosition();
 		ret->_type = TypeOffset;
-		ret->_vec = vec;
+		ret->_vec = offset;
 		return ret;
 	}
 	
@@ -21,18 +21,16 @@ namespace a3d{
 	}
 	
 	void AnimatePosition::update(double progress, Node *target, const Node *origin){
-		Vector3 offset;
 		if(_type == TypeOffset){
-			offset = Vector3::slerp(Vector3(), _vec, progress);
+			Vector3 offset = Vector3::slerp(Vector3(), _vec, progress);
 			target->move(offset);
-		}else{
+		}else if(_type == TypePosition){
 			// 避免计算误差
 			if(progress == 1){
 				target->position(_vec);
 			}else{
-				offset = Vector3::slerp(origin->position(), _vec, progress);
-//				log_debug("%.2f", offset.x);
-				target->move(offset);
+				Vector3 pos = Vector3::slerp(origin->position(), _vec, progress);
+				target->position(pos);
 			}
 		}
 	}

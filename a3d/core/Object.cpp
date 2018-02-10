@@ -116,7 +116,13 @@ namespace a3d{
 	void Object::rotate(float degree, const Axis &axis){
 		_matrix.rotate(degree, axis);
 	}
-	
+
+	void Object::rotateTo(const Quaternion &quat){
+		Quaternion q = _matrix.quaternion();
+		_matrix.rotate(-q.angle(), q.vector());
+		_matrix.rotate(quat.angle(), quat.vector());
+	}
+
 	void Object::scale(float xyz){
 		this->scale(xyz, xyz, xyz);
 	}

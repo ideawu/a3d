@@ -21,56 +21,17 @@
 #include "TextSpirte.h"
 #include "Bitmap.h"
 #include "Text.h"
-#include "IKit/IKit.h"
 
 using namespace a3d;
 
 int main(int argc, const char * argv[])
 {
-	NSView *view = [[NSView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-	view.wantsLayer = YES;
-	view.layer = [[CALayer alloc] init];
-	view.layer.frame = CGRectMake(0,0,200,200);
-	view.layer.backgroundColor = [NSColor blueColor].CGColor;
-	
-	ILabel *iv = (ILabel *)[IView viewFromXml:@"<a style=\"color: #fff; font-size: 50\">123</a>"];
-	[view addSubview:iv];
-	[iv layout];
-	iv.label.layer = [[CALayer alloc] init];
-	iv.label.layer.frame = iv.bounds;
-//	iv.label.layer.backgroundColor = [NSColor yellowColor].CGColor;
-
-	NSImage *image = [[NSImage alloc] initWithSize:view.bounds.size];
-	[image lockFocus];
-	CGContextRef ctx = (CGContextRef)[NSGraphicsContext currentContext].graphicsPort;
-//	[view layout];
-//	[view display];
-//	[view.layer renderInContext:ctx];
-	[iv.layer renderInContext:ctx];
-	[image unlockFocus];
-	
-	log_debug(@"%@ %f", iv, iv.frame.size.width);
-	[[iv dataWithPDFInsideRect:iv.bounds] writeToFile:@"a.pdf" atomically:YES];
-
-	[[image TIFFRepresentation] writeToFile:@"a.png" atomically:YES];
-
-//	@autoreleasepool {
-//		NSString *string = @"Hello, World!";
-//		NSString *path = [[[NSProcessInfo processInfo] arguments] objectAtIndex:1];
-//
-//		NSDictionary *attributes =
-//		@{ NSFontAttributeName : [NSFont fontWithName:@"Helvetica" size:40.0],
-//		   NSForegroundColorAttributeName : NSColor.blackColor};
-//
-//		NSImage *image = [[NSImage alloc] initWithSize:[string sizeWithAttributes:attributes]];
-//		[image lockFocus];
-//		[string drawAtPoint:NSZeroPoint withAttributes:attributes];
-//		[image unlockFocus];
-//
-//		NSData *imageData = [image TIFFRepresentation];
-//		NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
-//
-////		[[image TIFFRepresentation] writeToFile:path atomically:YES];
-//	}
+	GLKQuaternion q = GLKQuaternionMakeWithAngleAndAxis(GLKMathDegreesToRadians(45), 0, 0, 1);
+	q = GLKQuaternionInvert(q);
+	GLKVector3 axis = GLKQuaternionAxis(q);
+	float angle = GLKQuaternionAngle(q);
+	log_debug(@"%f %f %f %f", q.x, q.y, q.z, q.w);
+	log_debug(@"%f %f %f", axis.x, axis.y, axis.z);
+	log_debug(@"%f", GLKMathRadiansToDegrees(angle));
 	return 0;
 }

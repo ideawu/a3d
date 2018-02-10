@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		084619C4202F2D4100741AF2 /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 084619C2202F2D4100741AF2 /* Quaternion.cpp */; };
+		084619C5202F2D4100741AF2 /* Quaternion.h in Headers */ = {isa = PBXBuildFile; fileRef = 084619C3202F2D4100741AF2 /* Quaternion.h */; };
+		084619C6202F2EC500741AF2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CBD4201DEC7800EEC0C5 /* GLKit.framework */; };
 		08B4CAED201DE3E300EEC0C5 /* a3d.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CAEC201DE3E300EEC0C5 /* a3d.h */; };
 		08B4CB11201DE49900EEC0C5 /* Axis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB04201DE49900EEC0C5 /* Axis.cpp */; };
 		08B4CB12201DE49900EEC0C5 /* Axis.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB05201DE49900EEC0C5 /* Axis.h */; };
@@ -118,7 +121,6 @@
 		315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
 		315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A82026E62700FB0679 /* Cocoa.framework */; };
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
-		315964AC2026E68B00FB0679 /* libcocoaui-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A42026AC8A00FB0679 /* libcocoaui-mac.a */; };
 		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
 		319A808D202BF69E00DF1175 /* TextureNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A808B202BF69E00DF1175 /* TextureNode.cpp */; };
 		319A808E202BF69E00DF1175 /* TextureNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A808C202BF69E00DF1175 /* TextureNode.h */; };
@@ -191,6 +193,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		084619C2202F2D4100741AF2 /* Quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quaternion.cpp; sourceTree = "<group>"; };
+		084619C3202F2D4100741AF2 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
 		08B4CAE9201DE3E300EEC0C5 /* liba3d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liba3d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		08B4CAEC201DE3E300EEC0C5 /* a3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = a3d.h; sourceTree = "<group>"; };
 		08B4CB04201DE49900EEC0C5 /* Axis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Axis.cpp; sourceTree = "<group>"; };
@@ -324,8 +328,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				084619C6202F2EC500741AF2 /* GLKit.framework in Frameworks */,
 				315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */,
-				315964AC2026E68B00FB0679 /* libcocoaui-mac.a in Frameworks */,
 				315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */,
 				315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */,
 				312CD38B2025974A008FE758 /* AppKit.framework in Frameworks */,
@@ -395,6 +399,8 @@
 				08B4CB0C201DE49900EEC0C5 /* Rect.cpp */,
 				08B4CB0F201DE49900EEC0C5 /* Vector3.h */,
 				08B4CB0E201DE49900EEC0C5 /* Vector3.cpp */,
+				084619C3202F2D4100741AF2 /* Quaternion.h */,
+				084619C2202F2D4100741AF2 /* Quaternion.cpp */,
 				08B4CBDF201DF38D00EEC0C5 /* Clock.h */,
 				08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */,
 			);
@@ -575,6 +581,7 @@
 				08B4CB1D201DE49900EEC0C5 /* PrefixHeader.pch in Headers */,
 				08B4CB6E201DE4AF00EEC0C5 /* AnimatePosition.h in Headers */,
 				08B4CB1C201DE49900EEC0C5 /* Vector3.h in Headers */,
+				084619C5202F2D4100741AF2 /* Quaternion.h in Headers */,
 				31543EF82025E691002AC387 /* Texture.h in Headers */,
 				08B4CB18201DE49900EEC0C5 /* Point3.h in Headers */,
 				08B4CB56201DE4AF00EEC0C5 /* Context.h in Headers */,
@@ -762,6 +769,7 @@
 				08B4CB7B201DE4AF00EEC0C5 /* util.cpp in Sources */,
 				08B4CB66201DE4AF00EEC0C5 /* DraftSprite.mm in Sources */,
 				08B4CB6D201DE4AF00EEC0C5 /* AnimatePosition.cpp in Sources */,
+				084619C4202F2D4100741AF2 /* Quaternion.cpp in Sources */,
 				08B4CB71201DE4AF00EEC0C5 /* ImageSprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -947,8 +955,9 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Debug;
@@ -975,8 +984,9 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Release;
