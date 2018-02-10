@@ -273,18 +273,18 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			idealInterval = (double)ct.timeValue/ct.timeScale;
 		}
 
-		// 时间平滑
 		double bestInterval = fmax(1.0/_maxFPS, idealInterval);
 		double realInterval = _clock.time() - _refreshRate.lastTime;
 		if(realInterval < 0){
 //			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
 			return;
-		}else if(realInterval > bestInterval * 4){
-			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-			// 已无平滑的必要，跳到指定时间
-		}else if(realInterval > bestInterval * 1.5){
-			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-			realInterval = bestInterval * 1.2;
+			// 在慢机器上时间平滑反而影响效果
+//		}else if(realInterval > bestInterval * 4){
+//			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
+//			// 已无平滑的必要，跳到指定时间
+//		}else if(realInterval > bestInterval * 1){
+//			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
+//			realInterval =  0.6 * (realInterval - bestInterval) + bestInterval;
 		}else{
 			realInterval = bestInterval;
 		}
