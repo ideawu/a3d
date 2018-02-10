@@ -21,6 +21,7 @@ namespace a3d{
 
 		static Animate* rotate(float degree, const Vector3 &vec);
 		static Animate* rotate(float degree, const Axis &axis);
+		static Animate* rotateTo(const Quaternion &quat);
 
 	public:
 		virtual ~Animate();

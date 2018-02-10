@@ -42,7 +42,7 @@ namespace a3d{
 		Transform trans = Transform::transformBetween(current, *target);
 //		log_debug("origin: %.2f, dw: %.2f", origin.width(), trans.size.x);
 		origin.transform(trans);
-		
+
 		// 重置 target
 		*target = origin;
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){

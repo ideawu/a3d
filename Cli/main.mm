@@ -26,9 +26,17 @@ using namespace a3d;
 
 int main(int argc, const char * argv[])
 {
+	GLKQuaternion quat = GLKQuaternionMakeWithAngleAndAxis(1.0, 0, 0, 1);
+	GLKVector3 v = GLKQuaternionAxis(quat);
+	log_debug(@"%f %f %f", v.x, v.y, v.z);
+	log_debug(@"%f %f %f %f", quat.x, quat.y, quat.z, quat.w);
+
 	GLKMatrix4 mat = GLKMatrix4Identity;
-	Vector3 vec = Vector3(0, 0, 0);
-	mat = GLKMatrix4Rotate(mat, degree_to_radian(0.00001), vec.x, vec.y, vec.z);
+	mat = GLKMatrix4Translate(mat, 800, 0, 800);
+	Vector3 vec = Vector3(0, 0, 1);
+	mat = GLKMatrix4Rotate(mat, degree_to_radian(90), vec.x, vec.y, vec.z);
+	log_debug(@"%@", NSStringFromGLKMatrix4(mat));
+	mat = GLKMatrix4Rotate(mat, degree_to_radian(90), vec.x, vec.y, vec.z);
 	log_debug(@"%@", NSStringFromGLKMatrix4(mat));
 	return 0;
 }

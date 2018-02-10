@@ -45,6 +45,11 @@ namespace a3d{
 		return ret;
 	}
 
+	Animate* Animate::rotateTo(const Quaternion &quat){
+		Animate *ret = AnimateRotation::rotateTo(quat);
+		return ret;
+	}
+
 	Animate::Animate(){
 		_state = AnimateStateNone;
 		_easingFunc = TimingFuncEaseOut;

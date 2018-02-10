@@ -78,7 +78,7 @@ using namespace a3d;
 		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 150, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
-		node->move(300, 0, 600);
+		node->move(100, 0, 600);
 		node->opacity(0.5);
 		_img3 = node;
 	}
@@ -287,27 +287,30 @@ using namespace a3d;
 			// 切换被控制角色
 //			[self switchSprite];
 			
-			Node *node = _hero;
-			node->rotateX(80);
+			Node *node = _img3;
 
-			Quaternion q = Quaternion(30, Vector3(0, 0, 1));
-			node->rotateTo(q);
-			log_debug(@"%f %f %f", node->x(), node->y(), node->z());
-			
-//			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
-//			axis = node->convertAxisFromWorld(axis);
-//			a3d::Animate *action = a3d::Animate::rotate(1360, axis);
-////			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
-////			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
+			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
+			axis = node->convertAxisFromWorld(axis);
+			node->rotate(1, axis);
+
+
+			a3d::Animate *action = a3d::Animate::rotate(60, axis);
 //			action->easingFunc(a3d::TimingFuncLoop);
-//			action->bounceFunc(a3d::TimingFuncLinear);
+			action->bounceFunc(a3d::TimingFuncLinear);
 //			action->accelateFunc(a3d::TimingFuncLinear);
 //			action->bounce(1);
-//			action->duration(13 * action->bounce());
-//			node->runAnimation(action);
-//			{
+			action->duration(1 * action->bounce());
+			node->runAnimation(action);
+
+			//			{
 //				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
 //				action->duration(6 * action->bounce());
+//				node->runAnimation(action);
+//			}
+//			{
+//				Quaternion q = Quaternion(120, Vector3(0, 0, 1));
+//				a3d::Animate *action = a3d::Animate::rotateTo(q);
+//				action->duration(1);
 //				node->runAnimation(action);
 //			}
 			break;
