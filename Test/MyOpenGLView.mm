@@ -287,24 +287,29 @@ using namespace a3d;
 			// 切换被控制角色
 //			[self switchSprite];
 			
-			Node *node = _img3;
+			Node *node = _hero;
+			node->rotateX(80);
+
+			Quaternion q = Quaternion(30, Vector3(0, 0, 1));
+			node->rotateTo(q);
+			log_debug(@"%f %f %f", node->x(), node->y(), node->z());
 			
-			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
-			axis = node->convertAxisFromWorld(axis);
-			a3d::Animate *action = a3d::Animate::rotate(1360, axis);
-//			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
-//			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
-			action->easingFunc(a3d::TimingFuncLoop);
-			action->bounceFunc(a3d::TimingFuncLinear);
-			action->accelateFunc(a3d::TimingFuncLinear);
-			action->bounce(1);
-			action->duration(13 * action->bounce());
-			node->runAnimation(action);
-			{
-				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
-				action->duration(6 * action->bounce());
-				node->runAnimation(action);
-			}
+//			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
+//			axis = node->convertAxisFromWorld(axis);
+//			a3d::Animate *action = a3d::Animate::rotate(1360, axis);
+////			a3d::Animate *action = a3d::Animate::rotate(90, a3d::Vector3(0,1,0));
+////			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
+//			action->easingFunc(a3d::TimingFuncLoop);
+//			action->bounceFunc(a3d::TimingFuncLinear);
+//			action->accelateFunc(a3d::TimingFuncLinear);
+//			action->bounce(1);
+//			action->duration(13 * action->bounce());
+//			node->runAnimation(action);
+//			{
+//				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
+//				action->duration(6 * action->bounce());
+//				node->runAnimation(action);
+//			}
 			break;
 		}
 		case '[':{

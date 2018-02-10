@@ -26,12 +26,10 @@ using namespace a3d;
 
 int main(int argc, const char * argv[])
 {
-	GLKQuaternion q = GLKQuaternionMakeWithAngleAndAxis(GLKMathDegreesToRadians(45), 0, 0, 1);
-	q = GLKQuaternionInvert(q);
-	GLKVector3 axis = GLKQuaternionAxis(q);
-	float angle = GLKQuaternionAngle(q);
-	log_debug(@"%f %f %f %f", q.x, q.y, q.z, q.w);
-	log_debug(@"%f %f %f", axis.x, axis.y, axis.z);
-	log_debug(@"%f", GLKMathRadiansToDegrees(angle));
+	GLKMatrix4 mat = GLKMatrix4Identity;
+	Vector3 vec = Vector3(0, 0, 0);
+	mat = GLKMatrix4Rotate(mat, degree_to_radian(0.00001), vec.x, vec.y, vec.z);
+	log_debug(@"%@", NSStringFromGLKMatrix4(mat));
 	return 0;
 }
+

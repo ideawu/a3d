@@ -132,10 +132,16 @@ namespace a3d{
 	}
 	
 	void Matrix4::rotate(float degree, const Vector3 &vec){
+		if(vec.empty()){
+			return;
+		}
 		_mat = GLKMatrix4Rotate(_mat, degree_to_radian(degree), vec.x, vec.y, vec.z);
 	}
 	
 	void Matrix4::rotate(float degree, const Axis &axis){
+		if(axis.direction.empty()){
+			return;
+		}
 		this->translate(axis.origin);
 		this->Matrix4::rotate(degree, axis.direction);
 		this->translate(axis.origin.invert());

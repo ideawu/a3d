@@ -13,6 +13,7 @@ namespace a3d{
 #include "Matrix4.h"
 #include "Axis.h"
 #include "Vector3.h"
+#include "Quaternion.h"
 #include "Point3.h"
 #include "Color.h"
 #include "Rect.h"

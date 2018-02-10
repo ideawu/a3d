@@ -10,6 +10,7 @@
 		084619C4202F2D4100741AF2 /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 084619C2202F2D4100741AF2 /* Quaternion.cpp */; };
 		084619C5202F2D4100741AF2 /* Quaternion.h in Headers */ = {isa = PBXBuildFile; fileRef = 084619C3202F2D4100741AF2 /* Quaternion.h */; };
 		084619C6202F2EC500741AF2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CBD4201DEC7800EEC0C5 /* GLKit.framework */; };
+		084619C7202F427200741AF2 /* Quaternion.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 084619C3202F2D4100741AF2 /* Quaternion.h */; };
 		08B4CAED201DE3E300EEC0C5 /* a3d.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CAEC201DE3E300EEC0C5 /* a3d.h */; };
 		08B4CB11201DE49900EEC0C5 /* Axis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB04201DE49900EEC0C5 /* Axis.cpp */; };
 		08B4CB12201DE49900EEC0C5 /* Axis.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB05201DE49900EEC0C5 /* Axis.h */; };
@@ -147,6 +148,7 @@
 			dstPath = a3d;
 			dstSubfolderSpec = 7;
 			files = (
+				084619C7202F427200741AF2 /* Quaternion.h in CopyFiles */,
 				319A80A0202C61E500DF1175 /* Text.h in CopyFiles */,
 				319A80A1202C61E500DF1175 /* TextureSprite.h in CopyFiles */,
 				319A80A2202C61E500DF1175 /* TextSpirte.h in CopyFiles */,
