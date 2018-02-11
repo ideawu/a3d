@@ -60,7 +60,8 @@ namespace a3d{
 		void scale(float xyz);
 		void scale(const Vector3 &scale);
 		void scale(float x, float y, float z);
-		
+		void scaleTo(const Vector3 &scale);
+
 		void transform(const Vector3 &size);
 		void transform(const Matrix4 &mat);
 		void transform(const Transform &trans);

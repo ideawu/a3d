@@ -141,7 +141,13 @@ namespace a3d{
 	void Object::scale(float x, float y, float z){
 		_matrix.scale(x, y, z);
 	}
-	
+
+	// TODO: 直接修改 _matrix.m00...?
+	void Object::scaleTo(const Vector3 &scale){
+		Vector3 st = this->scale();
+		this->scale(scale.x * 1/st.x, scale.y * 1/st.y, scale.z * 1/st.z);
+	}
+
 	void Object::transform(const Vector3 &size){
 		this->size(_size.add(size));
 	}
