@@ -4,17 +4,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-// TODO: 显示 statistics
 // 注意！在进行OpenGL资源创建时，如glGenTextures()，要先[self.openGLContext makeCurrentContext];
 
+// TODO: 不继承 NSOpenGLView
 @interface A3DView : NSOpenGLView
 
 @property (readonly) CGSize viewportSize;
 @property (readonly) CGSize framebufferSize;
 @property (readonly) float fps;
 
-- (void)drawRect:(NSRect)dirtyRect;
+- (void)setup;
 - (void)renderAtTime:(double)time;
+//- (void)drawRect:(NSRect)dirtyRect;
 
 // 激活 renderAtTime: 的调用
 - (void)startAnimation;
@@ -28,5 +29,9 @@
 - (void)setMaxFPS:(float)fps;
 // 默认为1，按正常时钟速度，指定为0.5则变慢
 - (void)setTimescale:(double)scale;
+
+
+- (void)showStatistics;
+- (void)hideStatistics;
 
 @end

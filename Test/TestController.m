@@ -16,7 +16,7 @@
 
 - (void)windowDidLoad {
 	[super windowDidLoad];
-
+	[(NSView *)self.window.contentView setWantsLayer:YES];
 
 	CGRect frame = self.window.frame;
 	frame.size.width = 900;
@@ -26,6 +26,12 @@
 	_videoView = [[MyOpenGLView alloc] initWithFrame:((NSView *)self.window.contentView).frame];
 	[self.window.contentView addSubview:_videoView];
 	[self.window makeFirstResponder:_videoView];
+
+	{
+		NSImageView *view = [[NSImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+		view.image = [NSImage imageNamed:@"alex.png"];
+		[self.window.contentView addSubview:view];
+	}
 }
 
 - (void)keyDown:(NSEvent *)event{

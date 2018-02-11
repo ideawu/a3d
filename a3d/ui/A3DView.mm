@@ -30,6 +30,8 @@ typedef struct{
 }
 @property BOOL isRendering;
 @property RefreshRate refreshRate;
+@property NSTimer *statisicsTimer;
+@property NSTextField *statisticsLabel;
 @end
 
 @implementation A3DView
@@ -50,9 +52,10 @@ typedef struct{
 
 - (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format{
 	self = [super initWithFrame:frameRect pixelFormat:format];
+	[self setWantsLayer:YES];
 	[self setWantsBestResolutionOpenGLSurface:YES];
+
 	_displayLink = NULL;
-//	_processQueue = NULL;
 	_isOpenGLReady = NO;
 	
 	_refreshRate.fps = 0;
@@ -69,10 +72,18 @@ typedef struct{
 	}
 }
 
+- (void)setup{
+}
+
 - (void)prepareOpenGL{
+	// 操作前务必要切换上下文
+	[self.openGLContext makeCurrentContext];
+
+	[self setup];
 	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
 	[self setIsOpenGLReady:YES];
 	[self startAnimation];
+	[self showStatistics];
 }
 
 - (CGSize)viewportSize{
@@ -81,10 +92,6 @@ typedef struct{
 
 - (CGSize)framebufferSize{
 	return [self convertSizeToBacking:self.bounds.size];
-}
-
-- (void)drawRect:(NSRect)dirtyRect{
-	[super drawRect:dirtyRect];
 }
 
 
@@ -141,9 +148,6 @@ typedef struct{
 	return _displayLink && CVDisplayLinkIsRunning(_displayLink);
 }
 
-- (void)renderAtTime:(double)time{
-}
-
 
 - (void)setupDisplayLink{
 //	_processQueue = dispatch_queue_create("GLView_queue", DISPATCH_QUEUE_SERIAL);
@@ -194,6 +198,39 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	return kCVReturnSuccess;
 }
 #endif
+
+- (void)showStatistics{
+	if(!_statisicsTimer){
+		_statisicsTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+														   target:self
+														 selector:@selector(updateStatisticsLabel)
+														 userInfo:nil
+														  repeats:YES];
+		_statisticsLabel = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, 80, 18)];
+		_statisticsLabel.bordered = NO;
+		_statisticsLabel.selectable = NO;
+		_statisticsLabel.editable = NO;
+		_statisticsLabel.bezeled = NO;
+		_statisticsLabel.textColor = [NSColor whiteColor];
+		_statisticsLabel.drawsBackground = YES;
+		_statisticsLabel.backgroundColor = [NSColor grayColor];
+		[self addSubview:_statisticsLabel];
+	}
+}
+
+- (void)hideStatistics{
+	if(_statisicsTimer){
+		[_statisicsTimer invalidate];
+		_statisicsTimer = nil;
+
+		[_statisticsLabel removeFromSuperview];
+		_statisticsLabel = nil;
+	}
+}
+
+- (void)updateStatisticsLabel{
+	_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
+}
 
 - (float)fps{
 	return _refreshRate.fps;
@@ -301,14 +338,34 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		@synchronized(self){
 			_isRendering = YES;
 		}
-		[[self openGLContext] makeCurrentContext];
-		[self renderAtTime:_refreshRate.lastTime];
-		[[self openGLContext] flushBuffer];
+		// 在10.13之前，layer-backed只能在drawRect中渲染
+		if(NSFoundationVersionNumber <= 1056.13 && self.layer != nil){
+			[self setNeedsDisplay:YES];
+		}else{
+			[self doRender];
+		}
 		@synchronized(self){
 			_isRendering = NO;
 		}
 	});
 }
+
+- (void)doRender{
+	CGLLockContext([[self openGLContext] CGLContextObj]);
+	[[self openGLContext] makeCurrentContext];
+	[self renderAtTime:_refreshRate.lastTime];
+	[[self openGLContext] flushBuffer];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
+}
+
+- (void)drawRect:(NSRect)dirtyRect{
+	[super drawRect:dirtyRect];
+	[self doRender];
+}
+
+- (void)renderAtTime:(double)time{
+}
+
 
 @end
 

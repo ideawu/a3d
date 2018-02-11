@@ -35,12 +35,7 @@ using namespace a3d;
 
 @implementation MyOpenGLView
 
-- (void)prepareOpenGL {
-	[super prepareOpenGL];
-
-	// 操作前务必要切换上下文
-	[self.openGLContext makeCurrentContext];
-	
+- (void)setup{
 	_camera = NULL;
 	_context = NULL;
 	
@@ -129,44 +124,33 @@ using namespace a3d;
 	}
 
 	delete _context;
-	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
+	_context = a3d::Context::blankContext();
 
 	_objects.pop_back();
 	_objects.push_back(_camera);
 }
 
-- (void)drawRect:(NSRect)dirtyRect{
-	[self renderAtTime:0];
-}
-
 - (void)renderAtTime:(double)time{
-//	log_debug(@"");
-	[[self openGLContext] makeCurrentContext];
-	
 	_context->begin();
 	_context->clear(0, 0, 0, 1);
 	_context->loadMatrix3D(_camera->matrix3D());
-	[self draw3D];
-	
-	_hero->renderAtTime(time);
+
 	_scene->render();
+	_hero->renderAtTime(time);
 	_flag->render();
 	//	_img1->render();
 	//	_img2->render();
 	_img3->renderAtTime(time);
-//	_helpNode->renderAtTime(time);
+
+	[self draw3D];
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 	_context->blit();
-	
-	
-	[[self openGLContext] flushBuffer];
 }
 
 - (void)draw3D{
-	
-	//	a3d::Axis axis = a3d::Axis(a3d::Vector3(10, 100, 100), a3d::Vector3(10,100,50));
+	glColor4f(0, 1, 0, 1);
 	glLineWidth(1);
 	glBegin(GL_LINES);
 	{
@@ -174,8 +158,6 @@ using namespace a3d;
 		glVertex3f(500, 400, 800);
 	}
 	glEnd();
-	
-	_hero->render();
 }
 
 - (void)draw2D{
