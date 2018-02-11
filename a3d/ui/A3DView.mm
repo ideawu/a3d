@@ -260,34 +260,39 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		// 更新 fps 统计
 		double interval = _clock.time() - _refreshRate.beginTime;
 		_refreshRate.fps = interval==0? 0 : (_refreshRate.count/interval);
-		_refreshRate.fps = fmax(_maxFPS, _refreshRate.fps);
 		if(interval > 1){ // 每秒重新统计
 			_refreshRate.beginTime = _clock.time();
 			_refreshRate.count = 0;
 		}
 
-		// 设备理想刷新周期
-		double idealInterval = 0.016;
-		CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
-		if(ct.timeScale > 0){
-			idealInterval = (double)ct.timeValue/ct.timeScale;
-		}
-
-		double bestInterval = fmax(1.0/_maxFPS, idealInterval);
-		double realInterval = _clock.time() - _refreshRate.lastTime;
-		if(realInterval < 0){
+		if(_refreshRate.fps > _maxFPS){
 //			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
 			return;
-			// 在慢机器上时间平滑反而影响效果
+		}
+//		log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
+
+		double realInterval = _clock.time() - _refreshRate.lastTime;
+
+		// 在慢机器上时间平滑反而影响效果
+//		// 设备理想刷新周期
+//		double idealInterval = 0.016713;
+//		CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
+//		if(ct.timeScale > 0){
+//			idealInterval = (double)ct.timeValue/ct.timeScale;
+//		}
+//		double bestInterval = fmax(1.0/_maxFPS, idealInterval);
+//		if(realInterval < 0){
+//			return;
 //		}else if(realInterval > bestInterval * 4){
 //			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
 //			// 已无平滑的必要，跳到指定时间
 //		}else if(realInterval > bestInterval * 1){
 //			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
 //			realInterval =  0.6 * (realInterval - bestInterval) + bestInterval;
-		}else{
-			realInterval = bestInterval;
-		}
+//		}else if(realInterval < bestInterval){
+//			log_debug(@"realInterval: %.6f bestInterval: %.6f", realInterval, bestInterval);
+//			realInterval = bestInterval;
+//		}
 
 		_refreshRate.count ++;
 		_refreshRate.lastTime += realInterval;

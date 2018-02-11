@@ -4,6 +4,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+// TODO: 显示 statistics
 // 注意！在进行OpenGL资源创建时，如glGenTextures()，要先[self.openGLContext makeCurrentContext];
 
 @interface A3DView : NSOpenGLView

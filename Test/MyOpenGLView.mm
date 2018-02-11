@@ -294,12 +294,12 @@ using namespace a3d;
 			node->rotate(1, axis);
 
 
-			a3d::Animate *action = a3d::Animate::rotate(60, axis);
-//			action->easingFunc(a3d::TimingFuncLoop);
-			action->bounceFunc(a3d::TimingFuncLinear);
+			a3d::Animate *action = a3d::Animate::rotate(160, axis);
+			action->easingFunc(a3d::TimingFuncLinear);
+//			action->bounceFunc(a3d::TimingFuncLinear);
 //			action->accelateFunc(a3d::TimingFuncLinear);
 //			action->bounce(1);
-			action->duration(1 * action->bounce());
+			action->duration(5 * action->bounce());
 			node->runAnimation(action);
 
 			//			{

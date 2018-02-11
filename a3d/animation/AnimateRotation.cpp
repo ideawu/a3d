@@ -34,6 +34,7 @@ namespace a3d{
 		if(_type == TypeVector){
 			target->rotate(angle, _vec);
 		}else if(_type == TypeAxis){
+//			log_debug("%f", angle);
 			target->rotate(angle, _axis);
 		}else if(_type == TypeQuaternion){
 			// 避免计算误差
