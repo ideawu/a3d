@@ -34,6 +34,8 @@ using namespace a3d;
 @implementation MyOpenGLView
 
 - (void)setup{
+	[self showStatistics];
+
 	_camera = NULL;
 	_context = NULL;
 	

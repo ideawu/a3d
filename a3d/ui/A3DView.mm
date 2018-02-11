@@ -80,10 +80,9 @@ typedef struct{
 	[self.openGLContext makeCurrentContext];
 
 	[self setup];
+	[self startAnimation];
 	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
 	[self setIsOpenGLReady:YES];
-	[self startAnimation];
-	[self showStatistics];
 }
 
 - (void)resize{
