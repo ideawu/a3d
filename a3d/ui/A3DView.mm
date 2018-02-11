@@ -86,6 +86,15 @@ typedef struct{
 	[self showStatistics];
 }
 
+- (void)resize{
+}
+
+- (void)reshape{
+	// 操作前务必要切换上下文
+	[[self openGLContext] makeCurrentContext];
+	[self resize];
+}
+
 - (CGSize)viewportSize{
 	return self.bounds.size;
 }

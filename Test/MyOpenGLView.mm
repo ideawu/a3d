@@ -24,8 +24,6 @@ using namespace a3d;
 	SpriteNode *_img3;
 
 	MySprite *_hero;
-	
-	SpriteNode *_helpNode;
 
 	std::vector<a3d::Object *> _objects;
 }
@@ -95,23 +93,7 @@ using namespace a3d;
 	_currentObject = _hero;
 }
 
-- (void)switchSprite{
-	int next = 0;
-	for(int i=0; i<_objects.size(); i++){
-		a3d::Object *obj = _objects[i];
-		if(obj == _currentObject){
-			next = (i + 1) % _objects.size();
-			break;
-		}
-	}
-	_currentObject = _objects[next];
-//	[self resetMousePoint];
-}
-
-- (void)reshape {
-	// 操作前务必要切换上下文
-	[[self openGLContext] makeCurrentContext];
-	
+- (void)resize{
 	float width = self.viewportSize.width;
 	float height = self.viewportSize.height;
 	float depth = width * 20;
@@ -243,6 +225,19 @@ using namespace a3d;
 //	[_currentObject rotateY:_rotateY];
 //	[_currentObject rotateX:_rotateX];
 //	[self setNeedsDisplay:YES];
+}
+
+- (void)switchSprite{
+	int next = 0;
+	for(int i=0; i<_objects.size(); i++){
+		a3d::Object *obj = _objects[i];
+		if(obj == _currentObject){
+			next = (i + 1) % _objects.size();
+			break;
+		}
+	}
+	_currentObject = _objects[next];
+	//	[self resetMousePoint];
 }
 
 - (void)keyDown:(NSEvent *)event{

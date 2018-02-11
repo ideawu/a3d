@@ -14,6 +14,7 @@
 @property (readonly) float fps;
 
 - (void)setup;
+- (void)resize;
 - (void)renderAtTime:(double)time;
 //- (void)drawRect:(NSRect)dirtyRect;
 
