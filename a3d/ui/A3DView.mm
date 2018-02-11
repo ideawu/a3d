@@ -301,7 +301,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		@synchronized(self){
 			_isRendering = YES;
 		}
+		[[self openGLContext] makeCurrentContext];
 		[self renderAtTime:_refreshRate.lastTime];
+		[[self openGLContext] flushBuffer];
 		@synchronized(self){
 			_isRendering = NO;
 		}
