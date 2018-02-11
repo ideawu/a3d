@@ -88,6 +88,19 @@ namespace a3d{
 		_size.z = d;
 	}
 
+	Vector3 Object::scale() const{
+		return _matrix.scale();
+	}
+
+	Quaternion Object::quaternion() const{
+		return _matrix.quaternion();
+	}
+
+	void Object::quaternion(const Quaternion &quat){
+		_matrix.quaternion(quat);
+	}
+
+
 	void Object::move(float x, float y, float z){
 		_matrix.translate(x, y, z);
 	}
@@ -117,12 +130,6 @@ namespace a3d{
 		_matrix.rotate(degree, axis);
 	}
 
-	void Object::rotateTo(const Quaternion &quat){
-		Quaternion q = _matrix.quaternion();
-		_matrix.rotate(-q.angle(), q.vector());
-		_matrix.rotate(quat.angle(), quat.vector());
-	}
-
 	void Object::scale(float xyz){
 		this->scale(xyz, xyz, xyz);
 	}
@@ -132,9 +139,7 @@ namespace a3d{
 	}
 
 	void Object::scale(float x, float y, float z){
-		this->width(this->width() * x);
-		this->height(this->height() * y);
-		this->depth(this->depth() * z);
+		_matrix.scale(x, y, z);
 	}
 	
 	void Object::transform(const Vector3 &size){

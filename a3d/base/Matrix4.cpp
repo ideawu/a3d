@@ -89,7 +89,8 @@ namespace a3d{
 	void Matrix4::z(float z){
 		_mat.m32  = z;
 	}
-	
+
+	// TODO: 直接取 m00, m11, m22?
 	Vector3 Matrix4::scale() const{
 		Vector3 vec = Vector3(1, 1, 1);
 		vec = this->mul(vec);
@@ -99,6 +100,12 @@ namespace a3d{
 	Quaternion Matrix4::quaternion() const{
 		GLKQuaternion q = GLKQuaternionMakeWithMatrix4(_mat);
 		return Quaternion(q.x, q.y, q.z, q.w);
+	}
+
+	void Matrix4::quaternion(const Quaternion &quat){
+		Quaternion q = this->quaternion();
+		this->rotate(-q.angle(), q.vector());
+		this->rotate(quat.angle(), quat.vector());
 	}
 
 	void Matrix4::translate(float x, float y, float z){

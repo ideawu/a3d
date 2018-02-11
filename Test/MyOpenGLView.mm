@@ -18,12 +18,12 @@ using namespace a3d;
 	
 	DraftScene *_scene;
 	DraftSprite *_flag;
-	DraftSprite *_camera_hero;
+	DraftSprite *_camera_alex;
 	SpriteNode *_img1;
 	SpriteNode *_img2;
 	SpriteNode *_img3;
 
-	MySprite *_hero;
+	MySprite *_alex;
 
 	std::vector<a3d::Object *> _objects;
 }
@@ -52,11 +52,12 @@ using namespace a3d;
 	SpriteNode *node;
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/bg1.png");
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
 		node->move(100, 0, 300);
 		node->opacity(0.8);
+		node->scale(0.5);
 		_img1 = node;
 	}
 	{
@@ -86,13 +87,13 @@ using namespace a3d;
 //	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
 //	[_flag moveX:200 y:_flag.height/2 z:200];
 
-	_hero = new MySprite();
-	_hero->move(800, 0, 800);
+	_alex = new MySprite();
+	_alex->move(800, 0, 800);
 
-	_objects.push_back(_hero);
+	_objects.push_back(_alex);
 	_objects.push_back(_camera);
 
-	_currentObject = _hero;
+	_currentObject = _alex;
 }
 
 - (void)resize{
@@ -120,10 +121,10 @@ using namespace a3d;
 	_context->loadMatrix3D(_camera->matrix3D());
 
 	_scene->render();
-	_hero->renderAtTime(time);
-	_flag->render();
-	//	_img1->render();
-	//	_img2->render();
+	_alex->renderAtTime(time);
+	_flag->renderAtTime(time);
+	_img1->renderAtTime(time);
+	//	_img2->renderAtTime(time);
 	_img3->renderAtTime(time);
 
 	[self draw3D];
@@ -169,7 +170,7 @@ using namespace a3d;
 }
 
 - (void)mouseUp:(NSEvent *)event{
-//	GObject *target = _hero;
+//	GObject *target = _alex;
 //	GRay *ray = [_world.camera rayFromScreenPointX:self.mousePoint.x y:self.mousePoint.y];
 //	GLKVector3 pos = [ray nearestPointTo:target.pos];
 //	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
@@ -200,7 +201,7 @@ using namespace a3d;
 ////	_currentObject.angle.pitch = ax;
 ////	log_debug(@"%@", _currentObject.angle);
 //
-////	if(_currentObject == _camera_hero){
+////	if(_currentObject == _camera_alex){
 //		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;
 //		_rotateY = (fabs(ay) < 70)? 0 : ay/fabs(ay) * 1;
 //		static NSTimer *_rotateDetectTimer = nil;
@@ -265,21 +266,21 @@ using namespace a3d;
 //			[self switchSprite];
 			
 			Node *node = _img3;
+//			Node *node = _alex;
 
 			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
 			axis = node->convertAxisFromWorld(axis);
-			node->rotate(1, axis);
 
 
-			a3d::Animate *action = a3d::Animate::rotate(160, axis);
-			action->easingFunc(a3d::TimingFuncLinear);
-//			action->bounceFunc(a3d::TimingFuncLinear);
-//			action->accelateFunc(a3d::TimingFuncLinear);
-//			action->bounce(1);
-			action->duration(5 * action->bounce());
-			node->runAnimation(action);
+//			a3d::Animate *action = a3d::Animate::rotate(160, axis);
+//			action->easingFunc(a3d::TimingFuncLinear);
+////			action->bounceFunc(a3d::TimingFuncLinear);
+////			action->accelateFunc(a3d::TimingFuncLinear);
+////			action->bounce(1);
+//			action->duration(5 * action->bounce());
+//			node->runAnimation(action);
 
-			//			{
+//			{
 //				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
 //				action->duration(6 * action->bounce());
 //				node->runAnimation(action);
@@ -290,6 +291,13 @@ using namespace a3d;
 //				action->duration(1);
 //				node->runAnimation(action);
 //			}
+			{
+//				a3d::Animate *action = a3d::Animate::size(node->size().mul(2));
+				a3d::Animate *action = a3d::Animate::scale(2);
+				action->bounce(1);
+				action->duration(1 * action->bounce());
+				node->runAnimation(action);
+			}
 			break;
 		}
 		case '[':{
@@ -337,19 +345,19 @@ using namespace a3d;
 //				[_world.camera unfollow];
 //			}else{
 //				log_debug(@"follow");
-//				[_world.camera follow:_hero];
+//				[_world.camera follow:_alex];
 //			}
 			break;
 		}
 		case '1':{
 			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
-			_hero->runAnimation(action);
+			_alex->runAnimation(action);
 			break;
 		}
 		case '2':{
 			static double time = 0;
 			time += 0.1;
-			_hero->renderAtTime(time);
+			_alex->renderAtTime(time);
 			[self setNeedsDisplay:YES];
 		}
 		default:

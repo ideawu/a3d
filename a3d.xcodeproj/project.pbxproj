@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083EF87120306E60009960EC /* AnimateSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083EF86F20306E60009960EC /* AnimateSize.cpp */; };
+		083EF87220306E60009960EC /* AnimateSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 083EF87020306E60009960EC /* AnimateSize.h */; };
+		083EF875203073DF009960EC /* AnimateScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083EF873203073DF009960EC /* AnimateScale.cpp */; };
+		083EF876203073DF009960EC /* AnimateScale.h in Headers */ = {isa = PBXBuildFile; fileRef = 083EF874203073DF009960EC /* AnimateScale.h */; };
 		084619C4202F2D4100741AF2 /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 084619C2202F2D4100741AF2 /* Quaternion.cpp */; };
 		084619C5202F2D4100741AF2 /* Quaternion.h in Headers */ = {isa = PBXBuildFile; fileRef = 084619C3202F2D4100741AF2 /* Quaternion.h */; };
 		084619C6202F2EC500741AF2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B4CBD4201DEC7800EEC0C5 /* GLKit.framework */; };
@@ -195,6 +199,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		083EF86F20306E60009960EC /* AnimateSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateSize.cpp; sourceTree = "<group>"; };
+		083EF87020306E60009960EC /* AnimateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimateSize.h; sourceTree = "<group>"; };
+		083EF873203073DF009960EC /* AnimateScale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateScale.cpp; sourceTree = "<group>"; };
+		083EF874203073DF009960EC /* AnimateScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimateScale.h; sourceTree = "<group>"; };
 		084619C2202F2D4100741AF2 /* Quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quaternion.cpp; sourceTree = "<group>"; };
 		084619C3202F2D4100741AF2 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
 		08B4CAE9201DE3E300EEC0C5 /* liba3d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liba3d.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -559,6 +567,10 @@
 				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
 				31C67889202471D7000BF908 /* AnimateRotation.h */,
 				31C67888202471D7000BF908 /* AnimateRotation.cpp */,
+				083EF874203073DF009960EC /* AnimateScale.h */,
+				083EF873203073DF009960EC /* AnimateScale.cpp */,
+				083EF87020306E60009960EC /* AnimateSize.h */,
+				083EF86F20306E60009960EC /* AnimateSize.cpp */,
 			);
 			path = animation;
 			sourceTree = "<group>";
@@ -609,12 +621,14 @@
 				08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */,
 				31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */,
 				08B4CB5C201DE4AF00EEC0C5 /* Renderer.h in Headers */,
+				083EF876203073DF009960EC /* AnimateScale.h in Headers */,
 				31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */,
 				08B4CB12201DE49900EEC0C5 /* Axis.h in Headers */,
 				08B4CB6C201DE4AF00EEC0C5 /* AnimateOpacity.h in Headers */,
 				08B4CB76201DE4AF00EEC0C5 /* BlankContext.h in Headers */,
 				08B4CB7A201DE4AF00EEC0C5 /* log.h in Headers */,
 				08B4CB63201DE4AF00EEC0C5 /* DraftScene.h in Headers */,
+				083EF87220306E60009960EC /* AnimateSize.h in Headers */,
 				08B4CB65201DE4AF00EEC0C5 /* DraftSprite.h in Headers */,
 				31543EF32025C649002AC387 /* Text.h in Headers */,
 			);
@@ -736,6 +750,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083EF87120306E60009960EC /* AnimateSize.cpp in Sources */,
+				083EF875203073DF009960EC /* AnimateScale.cpp in Sources */,
 				319A808D202BF69E00DF1175 /* TextureNode.cpp in Sources */,
 				08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */,
 				08B4CB7E201DE6B100EEC0C5 /* A3DView.mm in Sources */,

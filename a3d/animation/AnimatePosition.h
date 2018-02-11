@@ -11,8 +11,8 @@ namespace a3d{
 	class AnimatePosition : public Animate
 	{
 	public:
-		static AnimatePosition* move(const Vector3 &offset);
-		static AnimatePosition* moveTo(const Vector3 &pos);
+		static AnimatePosition* move(const Vector3 &offset, double duration);
+		static AnimatePosition* moveTo(const Vector3 &pos, double duration);
 
 		virtual void update(double progress, Node *target, const Node *origin);
 	private:

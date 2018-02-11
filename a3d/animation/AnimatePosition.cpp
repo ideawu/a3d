@@ -6,15 +6,17 @@
 
 namespace a3d{
 
-	AnimatePosition* AnimatePosition::move(const Vector3 &offset){
+	AnimatePosition* AnimatePosition::move(const Vector3 &offset, double duration){
 		AnimatePosition *ret = new AnimatePosition();
+		ret->duration(duration);
 		ret->_type = TypeOffset;
 		ret->_vec = offset;
 		return ret;
 	}
 	
-	AnimatePosition* AnimatePosition::moveTo(const Vector3 &pos){
+	AnimatePosition* AnimatePosition::moveTo(const Vector3 &pos, double duration){
 		AnimatePosition *ret = new AnimatePosition();
+		ret->duration(duration);
 		ret->_type = TypePosition;
 		ret->_vec = pos;
 		return ret;

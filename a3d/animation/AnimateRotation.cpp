@@ -39,12 +39,13 @@ namespace a3d{
 		}else if(_type == TypeQuaternion){
 			// 避免计算误差
 			if(progress == 1){
-				target->rotateTo(_quat);
+				target->quaternion(_quat);
 			}else{
 				Quaternion q0 = origin->matrix().quaternion();
 				Quaternion q = Quaternion::slerp(q0, _quat, progress);
-				target->rotateTo(q);
+				target->quaternion(q);
 			}
 		}
 	}
+	
 }; // end namespace

@@ -12,16 +12,25 @@ namespace a3d{
 	class Animate
 	{
 	public:
-		static Animate* move(const Vector3 &vec, double duration);
-		static Animate* moveTo(const Vector3 &pos, double duration);
-		
-		static Animate* fadeTo(double opacity, double duration);
-		static Animate* show(double duration);
-		static Animate* hide(double duration);
+		static Animate* move(float x, float y, float z, double duration=0);
+		static Animate* move(const Vector3 &vec, double duration=0);
+		static Animate* moveTo(float x, float y, float z, double duration=0);
+		static Animate* moveTo(const Vector3 &pos, double duration=0);
 
 		static Animate* rotate(float degree, const Vector3 &vec);
 		static Animate* rotate(float degree, const Axis &axis);
 		static Animate* rotateTo(const Quaternion &quat);
+
+		static Animate* scale(float xyz);
+		static Animate* scale(float x, float y, float z);
+		static Animate* scale(const Vector3 &s);
+
+		static Animate* fadeTo(double opacity, double duration=0);
+		static Animate* show(double duration=0);
+		static Animate* hide(double duration=0);
+
+		static Animate* size(float w, float h, float d);
+		static Animate* size(const Vector3 &size);
 
 	public:
 		virtual ~Animate();

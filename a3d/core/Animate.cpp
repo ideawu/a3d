@@ -3,52 +3,74 @@
 //
 
 #include "Animate.h"
-#include "AnimateOpacity.h"
 #include "AnimatePosition.h"
 #include "AnimateRotation.h"
+#include "AnimateScale.h"
+#include "AnimateOpacity.h"
+#include "AnimateSize.h"
 
 namespace a3d{
 	
+	Animate* Animate::move(float x, float y, float z, double duration){
+		return AnimatePosition::move(Vector3(x, y, z), duration);
+	}
+
 	Animate* Animate::move(const Vector3 &vec, double duration){
-		Animate *ret = AnimatePosition::move(vec);
-		ret->duration(duration);
-		return ret;
+		return AnimatePosition::move(vec, duration);
 	}
-	
+
+	Animate* Animate::moveTo(float x, float y, float z, double duration){
+		return AnimatePosition::moveTo(Vector3(x, y, z), duration);
+	}
+
 	Animate* Animate::moveTo(const Vector3 &pos, double duration){
-		Animate *ret = AnimatePosition::moveTo(pos);
-		ret->duration(duration);
-		return ret;
+		return AnimatePosition::moveTo(pos, duration);
+	}
+
+	Animate* Animate::rotate(float degree, const Vector3 &vec){
+		return AnimateRotation::rotate(degree, vec);
 	}
 	
+	Animate* Animate::rotate(float degree, const Axis &axis){
+		return AnimateRotation::rotate(degree, axis);
+	}
+
+	Animate* Animate::rotateTo(const Quaternion &quat){
+		return AnimateRotation::rotateTo(quat);
+	}
+
+	Animate* Animate::scale(float xyz){
+		return AnimateScale::scale(Vector3(xyz, xyz, xyz));
+	}
+
+	Animate* Animate::scale(float x, float y, float z){
+		return AnimateScale::scale(Vector3(x, y, z));
+	}
+
+	Animate* Animate::scale(const Vector3 &s){
+		return AnimateScale::scale(s);
+	}
+
 	Animate* Animate::fadeTo(double opacity, double duration){
-		Animate *ret = AnimateOpacity::fadeTo(opacity);
-		ret->duration(duration);
-		return ret;
+		return AnimateOpacity::fadeTo(opacity, duration);
 	}
 
 	Animate* Animate::show(double duration){
 		return Animate::fadeTo(1, duration);
 	}
-	
+
 	Animate* Animate::hide(double duration){
 		return Animate::fadeTo(0, duration);
 	}
-	
-	Animate* Animate::rotate(float degree, const Vector3 &vec){
-		Animate *ret = AnimateRotation::rotate(degree, vec);
-		return ret;
-	}
-	
-	Animate* Animate::rotate(float degree, const Axis &axis){
-		Animate *ret = AnimateRotation::rotate(degree, axis);
-		return ret;
+
+	Animate* Animate::size(float w, float h, float d){
+		return AnimateSize::size(Vector3(w, h, d));
 	}
 
-	Animate* Animate::rotateTo(const Quaternion &quat){
-		Animate *ret = AnimateRotation::rotateTo(quat);
-		return ret;
+	Animate* Animate::size(const Vector3 &size){
+		return AnimateSize::size(size);
 	}
+
 
 	Animate::Animate(){
 		_state = AnimateStateNone;

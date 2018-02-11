@@ -43,6 +43,10 @@ namespace a3d{
 		float depth() const;
 		void depth(float d);
 
+		Vector3 scale() const;
+		Quaternion quaternion() const;
+		void quaternion(const Quaternion &quat);
+
 	public:
 		void move(float dx, float dy, float dz);
 		void move(const Vector3 &offset);
@@ -52,8 +56,7 @@ namespace a3d{
 		void rotate(float degree, const Vector3 &vec);
 		// 绕自身坐标系内的任意轴旋转
 		void rotate(float degree, const Axis &axis);
-		void rotateTo(const Quaternion &quat);
-		// 同时缩放自身体积和坐标系
+		// 仅缩放坐标系，不缩放自身体积
 		void scale(float xyz);
 		void scale(const Vector3 &scale);
 		void scale(float x, float y, float z);
