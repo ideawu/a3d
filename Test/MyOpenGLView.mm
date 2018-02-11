@@ -98,8 +98,6 @@ using namespace a3d;
 	_objects.push_back(_camera);
 
 	_currentObject = _hero;
-	
-	[self startAnimation];
 }
 
 - (void)switchSprite{

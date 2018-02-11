@@ -72,6 +72,7 @@ typedef struct{
 - (void)prepareOpenGL{
 	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
 	[self setIsOpenGLReady:YES];
+	[self startAnimation];
 }
 
 - (CGSize)viewportSize{
