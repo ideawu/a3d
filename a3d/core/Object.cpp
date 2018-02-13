@@ -142,7 +142,6 @@ namespace a3d{
 		_matrix.scale(x, y, z);
 	}
 
-	// TODO: 直接修改 _matrix.m00...?
 	void Object::scaleTo(const Vector3 &scale){
 		Vector3 st = this->scale();
 		this->scale(scale.x * 1/st.x, scale.y * 1/st.y, scale.z * 1/st.z);

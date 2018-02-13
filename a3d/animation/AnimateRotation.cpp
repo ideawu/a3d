@@ -30,11 +30,11 @@ namespace a3d{
 	}
 
 	void AnimateRotation::update(double progress, Node *target){
-		float angle = _degree * progress;
 		if(_type == TypeVector){
+			float angle = _degree * progress;
 			target->rotate(angle, _vec);
 		}else if(_type == TypeAxis){
-//			log_debug("%f", angle);
+			float angle = _degree * progress;
 			target->rotate(angle, _axis);
 		}else if(_type == TypeQuaternion){
 			// 避免计算误差

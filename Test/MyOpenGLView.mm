@@ -285,20 +285,27 @@ using namespace a3d;
 //				action->duration(6 * action->bounce());
 //				node->runAnimation(action);
 //			}
-			{
-				Quaternion q = Quaternion(120, Vector3(0, 0, 1));
-				log_debug(@"%f", q.angle());
-				a3d::Animate *action = a3d::Animate::rotateTo(q);
-				action->duration(0.5);
-				node->runAnimation(action);
-			}
-			{
-//				a3d::Animate *action = a3d::Animate::size(node->size().mul(2));
-				a3d::Animate *action = a3d::Animate::scale(1.5);
-				action->bounce(1);
-				action->duration(1 * action->bounce());
-				node->runAnimation(action);
-			}
+//			{
+//				Quaternion q = node->quaternion();
+//				float angle = q.angle();
+//				if(fabs(1 + q.vector().z) < 0.01){
+//					angle = 360 - angle;
+//				}
+//				angle += 80;
+//
+//				Vector3 vec = Vector3(0, 0, 1);
+//				q = Quaternion(angle, vec);
+//				a3d::Animate *action = a3d::Animate::rotateTo(q);
+//				action->duration(0.5);
+//				node->runAnimation(action);
+//			}
+//			{
+////				a3d::Animate *action = a3d::Animate::size(node->size().mul(2));
+//				a3d::Animate *action = a3d::Animate::scale(1.5);
+//				action->bounce(1);
+//				action->duration(1 * action->bounce());
+//				node->runAnimation(action);
+//			}
 //			[self setMaxFPS:5];
 			break;
 		}
