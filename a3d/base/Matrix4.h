@@ -56,6 +56,7 @@ namespace a3d{
 		void scale(float xyz);
 		void scale(const Vector3 &scale);
 		void scale(float x, float y, float z);
+		void resetScale();
 
 		Matrix4 invert() const;
 		Matrix4 mul(const Matrix4 &mat) const;

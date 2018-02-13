@@ -5,14 +5,10 @@
 #include "Matrix4.h"
 
 namespace a3d{
-	
+
 	Matrix4::Matrix4(){
 		_mat = GLKMatrix4Identity;
 	}
-
-//	Matrix4::Matrix4(const Matrix4 &mat){
-//		_mat = mat._mat;
-//	}
 
 	Matrix4::Matrix4(const GLKMatrix4 &mat){
 		_mat = mat;
@@ -90,21 +86,38 @@ namespace a3d{
 		_mat.m32  = z;
 	}
 
-	// TODO: 直接取 m00, m11, m22?
 	Vector3 Matrix4::scale() const{
-		Vector3 vec = Vector3(1, 1, 1);
-		vec = this->mul(vec);
-		return vec;
+		float x = this->mul(Vector3(1, 0, 0)).length();
+		float y = this->mul(Vector3(0, 1, 0)).length();
+		float z = this->mul(Vector3(0, 0, 1)).length();
+		return Vector3(x, y, z);
 	}
 
 	Quaternion Matrix4::quaternion() const{
-		GLKQuaternion q = GLKQuaternionMakeWithMatrix4(_mat);
+//		Matrix4 mat = *this;
+//		Vector3 s = mat.scale();
+//		mat.scale(1/s.x, 1/s.y, 1/s.z);
+//		GLKMatrix4 _mat = mat._mat;
+//		// http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
+//		float w = sqrt( fmax( 0, 1 + _mat.m00 + _mat.m11 + _mat.m22 ) ) / 2;
+//		float x = sqrt( fmax( 0, 1 + _mat.m00 - _mat.m11 - _mat.m22 ) ) / 2;
+//		float y = sqrt( fmax( 0, 1 - _mat.m00 + _mat.m11 - _mat.m22 ) ) / 2;
+//		float z = sqrt( fmax( 0, 1 - _mat.m00 - _mat.m11 + _mat.m22 ) ) / 2;
+//		x = copysignf(x, _mat.m21 - _mat.m12);
+//		y = copysignf(y, _mat.m02 - _mat.m20);
+//		z = copysignf(z, _mat.m10 - _mat.m01);
+//		return Quaternion(x, y, z, w);
+
+		Matrix4 mat = *this;
+		mat.resetScale();
+		// 注意！GLKQuaternionMakeWithMatrix4 的参数不能包含缩放！FUCK！
+		GLKQuaternion q = GLKQuaternionMakeWithMatrix4(mat._mat);
 		return Quaternion(q.x, q.y, q.z, q.w);
 	}
 
 	void Matrix4::quaternion(const Quaternion &quat){
 		Quaternion q = this->quaternion();
-		this->rotate(q.angle(), q.vector().invert());
+		this->rotate(-q.angle(), q.vector());
 		this->rotate(quat.angle(), quat.vector());
 	}
 
@@ -160,6 +173,11 @@ namespace a3d{
 
 	void Matrix4::scale(const Vector3 &scale){
 		this->scale(scale.x, scale.y, scale.z);
+	}
+
+	void Matrix4::resetScale(){
+		Vector3 s = this->scale();
+		this->scale(1/s.x, 1/s.y, 1/s.z);
 	}
 
 	void Matrix4::scale(float x, float y, float z){
