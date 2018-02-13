@@ -30,11 +30,22 @@ int main(int argc, const char * argv[])
 	Vector3 vec = Vector3(0, 0, 1);
 	Matrix4 mat;
 
-	// 10.10 有 bug！
+	// 10.10 有 bug！ FUCK!
 	mat.quaternion(Quaternion(120, vec));
 	log_debug(@"%f", mat.quaternion().angle());
 	mat.scale(1.41);
 	log_debug(@"%f", mat.quaternion().angle());
+
+	{
+		GLKQuaternion q = GLKQuaternionMakeWithAngleAndAxis(GLKMathDegreesToRadians(120), 0, 0, 1);
+		GLKMatrix4 mat = GLKMatrix4MakeWithQuaternion(q);
+		q = GLKQuaternionMakeWithMatrix4(mat);
+		log_debug(@"%f %@", GLKMathRadiansToDegrees(GLKQuaternionAngle(q)), NSStringFromGLKVector3(GLKQuaternionAxis(q)));
+		mat = GLKMatrix4Scale(mat, 1.41, 1.41, 1.41);
+		q = GLKQuaternionMakeWithMatrix4(mat);
+		log_debug(@"%f %@", GLKMathRadiansToDegrees(GLKQuaternionAngle(q)), NSStringFromGLKVector3(GLKQuaternionAxis(q)));
+	}
+
 	return 0;
 }
 
