@@ -15,8 +15,7 @@ namespace a3d{
 		static AnimateRotation* rotate(float degree, const Axis &axis);
 		static AnimateRotation* rotateTo(const Quaternion &quat);
 
-		virtual void update(double progress, Node *target, const Node *origin);
-
+		virtual void update(double progress, Node *target);
 	private:
 		typedef enum{
 			TypeVector,

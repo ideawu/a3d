@@ -12,12 +12,12 @@ namespace a3d{
 		return ret;
 	}
 
-	void AnimateSize::update(double progress, Node *target, const Node *origin){
+	void AnimateSize::update(double progress, Node *target){
 		// 避免计算误差
 		if(progress == 1){
 			target->size(_size);
 		}else{
-			Vector3 size = Vector3::slerp(origin->size(), _size, progress);
+			Vector3 size = Vector3::slerp(target->size(), _size, progress);
 			target->size(size);
 		}
 	}

@@ -13,8 +13,7 @@ namespace a3d{
 	public:
 		static AnimateSize* size(const Vector3 &size);
 
-		virtual void update(double progress, Node *target, const Node *origin);
-
+		virtual void update(double progress, Node *target);
 	private:
 		Vector3 _size;
 	};

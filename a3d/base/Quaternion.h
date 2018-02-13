@@ -23,8 +23,8 @@ namespace a3d{
 
 		Quaternion invert() const;
 
-	private:
 		GLKQuaternion _quat;
+	private:
 
 		Quaternion(const GLKQuaternion &q);
 	};

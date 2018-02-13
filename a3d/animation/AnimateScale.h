@@ -13,7 +13,7 @@ namespace a3d{
 	public:
 		static AnimateScale* scale(const Vector3 &s);
 
-		virtual void update(double progress, Node *target, const Node *origin);
+		virtual void update(double progress, Node *target);
 	private:
 		Vector3 _scale;
 	};

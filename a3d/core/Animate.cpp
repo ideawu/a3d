@@ -175,7 +175,7 @@ namespace a3d{
 		return y;
 	}
 
-	void Animate::updateAtTime(double time, Node *current, const Node *origin){
+	void Animate::updateAtTime(double time, Node *target){
 		if(_state == AnimateStateNone){
 			_beginTime = time;
 			this->state(AnimateStateBegin);
@@ -196,7 +196,7 @@ namespace a3d{
 			}
 
 			this->state(AnimateStateWillUpdate);
-			update(timing_p, current, origin);
+			update(timing_p, target);
 			this->state(AnimateStateDidUpdate);
 
 			if(progress >= 1){

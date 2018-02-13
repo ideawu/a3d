@@ -22,7 +22,7 @@ namespace a3d{
 		return ret;
 	}
 	
-	void AnimatePosition::update(double progress, Node *target, const Node *origin){
+	void AnimatePosition::update(double progress, Node *target){
 		if(_type == TypeOffset){
 			Vector3 offset = Vector3::slerp(Vector3(), _vec, progress);
 			target->move(offset);
@@ -31,7 +31,7 @@ namespace a3d{
 			if(progress == 1){
 				target->position(_vec);
 			}else{
-				Vector3 pos = Vector3::slerp(origin->position(), _vec, progress);
+				Vector3 pos = Vector3::slerp(target->position(), _vec, progress);
 				target->position(pos);
 			}
 		}

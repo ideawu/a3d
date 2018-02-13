@@ -36,7 +36,7 @@ namespace a3d{
 		virtual ~Animate();
 
 		// 子类方法
-		virtual void update(double progress, Node *target, const Node *origin) = 0;
+		virtual void update(double progress, Node *target) = 0;
 
 		AnimateState state() const;
 		void state(AnimateState state);
@@ -57,8 +57,8 @@ namespace a3d{
 		// 用于弹跳力度控制
 		void accelateFunc(TimingFunc func);
 
-		// 框架方法，根据 origin 更新 current
-		void updateAtTime(double time, Node *current, const Node *origin);
+		// 框架方法
+		void updateAtTime(double time, Node *target);
 
 	protected:
 		Animate();

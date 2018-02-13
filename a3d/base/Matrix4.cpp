@@ -103,9 +103,21 @@ namespace a3d{
 	}
 
 	void Matrix4::quaternion(const Quaternion &quat){
-		Quaternion q = this->quaternion();
-		this->rotate(-q.angle(), q.vector());
-		this->rotate(quat.angle(), quat.vector());
+		GLKQuaternion q = GLKQuaternionMakeWithMatrix4(_mat);
+		q = GLKQuaternionInvert(q);
+		GLKMatrix4 mat = GLKMatrix4MakeWithQuaternion(q);
+//		mat = GLKMatrix4Invert(mat, NULL);
+		log_debug("%f %s", this->quaternion().angle(), this->quaternion().vector().str().c_str());
+		_mat = GLKMatrix4Multiply(_mat, mat);
+		log_debug("%f %s", this->quaternion().angle(), this->quaternion().vector().str().c_str());
+		_mat = GLKMatrix4Multiply(_mat, GLKMatrix4MakeWithQuaternion(quat._quat));
+		log_debug("== %f %s %f", this->quaternion().angle(), this->quaternion().vector().str().c_str(), quat.angle());
+
+//		Quaternion q = this->quaternion();
+//		log_debug("%f %s", this->quaternion().angle(), this->quaternion().vector().str().c_str());
+//		this->rotate(q.angle(), q.vector().invert());
+//		log_debug("%f %s", this->quaternion().angle(), this->quaternion().vector().str().c_str());
+//		this->rotate(quat.angle(), quat.vector());
 	}
 
 	void Matrix4::translate(float x, float y, float z){

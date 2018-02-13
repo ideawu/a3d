@@ -8,6 +8,8 @@
 #include <list>
 #include "Object.h"
 
+// TODO: Animator 类，用于控制动画执行的接口
+
 namespace a3d{
 	class Animate;
 	class NodeAnimateHelper;

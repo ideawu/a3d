@@ -38,7 +38,8 @@ namespace a3d{
 	}
 
 	Quaternion Quaternion::invert() const{
-		return Quaternion(-angle(), vector());
+		return Quaternion(GLKQuaternionInvert(_quat));
+//		return Quaternion(-angle(), vector());
 	}
 
 }; // end namespace

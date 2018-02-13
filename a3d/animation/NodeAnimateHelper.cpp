@@ -47,9 +47,10 @@ namespace a3d{
 		*target = origin;
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){
 			Animate *action = *it;
-			// 注意，实时更新 target，最后再把 current 设置为 target
-			action->updateAtTime(time, target, &origin);
+			action->updateAtTime(time, target);
 			if(action->state() == AnimateStateEnd){
+				// 将已结束的动画真正地更新原对象
+				action->update(1, &origin);
 				it = _actions.erase(it);
 				delete action;
 			}else{

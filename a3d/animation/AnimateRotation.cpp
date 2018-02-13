@@ -29,7 +29,7 @@ namespace a3d{
 		return ret;
 	}
 
-	void AnimateRotation::update(double progress, Node *target, const Node *origin){
+	void AnimateRotation::update(double progress, Node *target){
 		float angle = _degree * progress;
 		if(_type == TypeVector){
 			target->rotate(angle, _vec);
@@ -41,11 +41,16 @@ namespace a3d{
 			if(progress == 1){
 				target->quaternion(_quat);
 			}else{
-				Quaternion q0 = origin->matrix().quaternion();
+				Quaternion q0 = target->matrix().quaternion();
 				Quaternion q = Quaternion::slerp(q0, _quat, progress);
 				target->quaternion(q);
+//				log_debug("%f %s", q0.angle(), q0.vector().str().c_str());
+//				log_debug("%f", progress);
+//				log_debug("%f %s", q.angle(), q.vector().str().c_str());
+//				log_debug("%f %s", target->quaternion().angle(), target->quaternion().vector().str().c_str());
 			}
 		}
+//		log_debug("%f", target->quaternion().angle());
 	}
 	
 }; // end namespace

@@ -13,7 +13,7 @@ namespace a3d{
 	public:
 		static AnimateOpacity* fadeTo(double opacity, double duration);
 		
-		virtual void update(double progress, Node *target, const Node *origin);
+		virtual void update(double progress, Node *target);
 	private:
 		float _opacity;
 	};

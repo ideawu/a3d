@@ -14,7 +14,7 @@ namespace a3d{
 		static AnimatePosition* move(const Vector3 &offset, double duration);
 		static AnimatePosition* moveTo(const Vector3 &pos, double duration);
 
-		virtual void update(double progress, Node *target, const Node *origin);
+		virtual void update(double progress, Node *target);
 	private:
 		typedef enum{
 			TypeOffset,

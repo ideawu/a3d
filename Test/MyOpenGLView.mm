@@ -71,7 +71,7 @@ using namespace a3d;
 	}
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 150, Color::yellow());
+		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
 		node->move(100, 0, 600);
@@ -285,19 +285,20 @@ using namespace a3d;
 //				action->duration(6 * action->bounce());
 //				node->runAnimation(action);
 //			}
-//			{
-//				Quaternion q = Quaternion(120, Vector3(0, 0, 1));
-//				a3d::Animate *action = a3d::Animate::rotateTo(q);
-//				action->duration(1);
-//				node->runAnimation(action);
-//			}
+			{
+				Quaternion q = Quaternion(120, Vector3(0, 0, 1));
+				a3d::Animate *action = a3d::Animate::rotateTo(q);
+				action->duration(0.5);
+				node->runAnimation(action);
+			}
 			{
 //				a3d::Animate *action = a3d::Animate::size(node->size().mul(2));
-				a3d::Animate *action = a3d::Animate::scale(2);
+				a3d::Animate *action = a3d::Animate::scale(1.5);
 				action->bounce(1);
 				action->duration(1 * action->bounce());
 				node->runAnimation(action);
 			}
+			[self setMaxFPS:5];
 			break;
 		}
 		case '[':{

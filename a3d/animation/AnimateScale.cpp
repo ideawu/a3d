@@ -12,10 +12,7 @@ namespace a3d{
 		return ret;
 	}
 
-	void AnimateScale::update(double progress, Node *target, const Node *origin){
-		// 将 target 的 scale 恢复为 origin
-		target->scaleTo(origin->scale());
-
+	void AnimateScale::update(double progress, Node *target){
 		// 避免计算误差
 		if(progress == 1){
 			target->scale(_scale);

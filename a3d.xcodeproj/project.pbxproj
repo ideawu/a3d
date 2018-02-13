@@ -123,7 +123,6 @@
 		31543EF32025C649002AC387 /* Text.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
 		31543EF72025E691002AC387 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF52025E691002AC387 /* Texture.cpp */; };
 		31543EF82025E691002AC387 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
-		315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
 		315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A82026E62700FB0679 /* Cocoa.framework */; };
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
 		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
@@ -326,7 +325,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				315964A72026AC9500FB0679 /* libxml2.tbd in Frameworks */,
 				312CD389202594C2008FE758 /* CoreText.framework in Frameworks */,
 				312CD388202594BD008FE758 /* CoreGraphics.framework in Frameworks */,
 				312CD387202594AA008FE758 /* GLKit.framework in Frameworks */,
@@ -931,7 +929,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Test/Info.plist;
-				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
@@ -944,7 +942,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Test/Info.plist;
-				LIBRARY_SEARCH_PATHS = "/Users/ideawu/Works/cocoaui-mac/build/Debug";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
