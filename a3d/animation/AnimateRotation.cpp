@@ -44,10 +44,6 @@ namespace a3d{
 				Quaternion q0 = target->matrix().quaternion();
 				Quaternion q = Quaternion::slerp(q0, _quat, progress);
 				target->quaternion(q);
-//				log_debug("%f %s", q0.angle(), q0.vector().str().c_str());
-//				log_debug("%f", progress);
-//				log_debug("%f %s", q.angle(), q.vector().str().c_str());
-//				log_debug("%f %s", target->quaternion().angle(), target->quaternion().vector().str().c_str());
 			}
 		}
 //		log_debug("%f", target->quaternion().angle());

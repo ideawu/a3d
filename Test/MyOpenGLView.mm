@@ -287,6 +287,7 @@ using namespace a3d;
 //			}
 			{
 				Quaternion q = Quaternion(120, Vector3(0, 0, 1));
+				log_debug(@"%f", q.angle());
 				a3d::Animate *action = a3d::Animate::rotateTo(q);
 				action->duration(0.5);
 				node->runAnimation(action);
@@ -298,7 +299,7 @@ using namespace a3d;
 				action->duration(1 * action->bounce());
 				node->runAnimation(action);
 			}
-			[self setMaxFPS:5];
+//			[self setMaxFPS:5];
 			break;
 		}
 		case '[':{

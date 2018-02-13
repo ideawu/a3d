@@ -29,9 +29,12 @@ int main(int argc, const char * argv[])
 {
 	Vector3 vec = Vector3(0, 0, 1);
 	Matrix4 mat;
-	for(int i=0; i<360; i++){
-		mat.quaternion(Quaternion(119.999993, vec));
-	}
+
+	// 10.10 有 bug！
+	mat.quaternion(Quaternion(120, vec));
+	log_debug(@"%f", mat.quaternion().angle());
+	mat.scale(1.41);
+	log_debug(@"%f", mat.quaternion().angle());
 	return 0;
 }
 
