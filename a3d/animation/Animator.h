@@ -22,6 +22,7 @@ namespace a3d{
 		bool hasAnimations() const;
 
 		void updateAtTime(double time);
+		void updateAtTime(double time, bool removeEnded);
 
 	private:
 		Animator();

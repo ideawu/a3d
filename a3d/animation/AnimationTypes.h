@@ -10,14 +10,14 @@ namespace a3d{
 	
 	typedef enum{
 		AnimateStateNone,
-		AnimateStateBegin,
+		AnimateStateBegan,
 		AnimateStateWillUpdate,
 		AnimateStateDidUpdate,
-		AnimateStateEnd,
-		AnimateStateCancelled
+		AnimateStateCancelled,
+		AnimateStateEnded,
 	}AnimateState;
 
-	typedef void (*AnimateCallback)(Animate *action, void *ctx);
+	typedef void (*AnimateCallback)(const Animate *action, void *ctx);
 	typedef double (*TimingFunc)(double progress);
 	
 	// 为了编辑器自动提示友好，使用函数指针变量

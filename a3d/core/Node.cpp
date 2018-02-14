@@ -163,17 +163,16 @@ namespace a3d{
 		}
 		
 		bool parentVisible = Renderer::current()->opacity() > 0;
+		bool currentVisible = parentVisible && _opacity > 0;
 		if(parentVisible){
 			Renderer::current()->pushOpacity(_opacity);
 		}
-
-		// 如果完全透明则不渲染，但仍调用子节点renderAtTime()更新动画
-		bool currentVisible = Renderer::current()->opacity() > 0;
 		if(currentVisible){
 			Renderer::current()->pushMatrix(this->matrix());
 			this->drawAtTime(time);
 		}
 		if(_subs){
+			// 如果完全透明则不渲染，但仍调用子节点renderAtTime()更新动画
 			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				Node *node = *it;
 				node->renderAtTime(time);

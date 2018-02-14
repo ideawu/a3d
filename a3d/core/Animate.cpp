@@ -176,17 +176,27 @@ namespace a3d{
 	}
 
 	void Animate::updateAtTime(double time, Node *target){
-		if(_state == AnimateStateNone){
-			_beginTime = time;
-			this->state(AnimateStateBegin);
+		if(time < _beginTime){
+			return;
 		}
-		
-		if(_state != AnimateStateNone && _state != AnimateStateEnd){
+
+		if(_state == AnimateStateNone){
+			if(_beginTime == -1){
+				// auto start
+				_beginTime = time;
+			}
+			if(time >= _beginTime){
+				this->state(AnimateStateBegan);
+			}
+		}
+		if(_state == AnimateStateEnded){
+			// restart ended action
+			this->state(AnimateStateBegan);
+		}
+		if(_state == AnimateStateBegan || _state == AnimateStateDidUpdate){
 			double progress;
 			double timing_p;
-			if(time < _beginTime){
-				return;
-			}else if(_duration == 0){
+			if(time >= _beginTime + _duration){
 				progress = 1;
 				timing_p = 1;
 			}else{
@@ -200,7 +210,7 @@ namespace a3d{
 			this->state(AnimateStateDidUpdate);
 
 			if(progress >= 1){
-				this->state(AnimateStateEnd);
+				this->state(AnimateStateEnded);
 			}
 		}
 	}
