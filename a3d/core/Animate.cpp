@@ -105,6 +105,14 @@ namespace a3d{
 		_duration = duration;
 	}
 
+	double Animate::beginTime() const{
+		return _beginTime;
+	}
+
+	void Animate::beginTime(double beginTime){
+		_beginTime = beginTime;
+	}
+
 	void Animate::callback(AnimateCallback func, void *ctx){
 		_callback = func;
 		_callbackCtx = ctx;

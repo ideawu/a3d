@@ -42,7 +42,9 @@ namespace a3d{
 		void state(AnimateState state);
 		double duration() const;
 		void duration(double duration);
-		
+		double beginTime() const;
+		void beginTime(double beginTime);
+
 		void callback(AnimateCallback func, void *ctx);
 		
 		// 设置弹跳次数，默认是1次，如果指定2次，动画完毕后返回原点，可指定非整数次

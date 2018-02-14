@@ -3,15 +3,10 @@
 //
 
 #include "Sprite.h"
-#include "TextureSprite.h"
 #include "ImageSprite.h"
 #include "TextSpirte.h"
 
 namespace a3d{
-
-	Sprite* Sprite::emptySprite(){
-		return new TextureSprite();
-	}
 
 	Sprite* Sprite::imageSprite(const char *filename){
 		return ImageSprite::createFromFile(filename);

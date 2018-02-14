@@ -23,7 +23,6 @@ namespace a3d{
 #include "Transform.h"
 #include "Node.h"
 #include "SpriteNode.h"
-#include "TextureNode.h"
 #include "Sprite.h"
 #include "TextureSprite.h"
 #include "Camera.h"
