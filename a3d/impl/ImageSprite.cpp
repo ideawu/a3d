@@ -72,9 +72,9 @@ namespace a3d{
 //			log_debug("frame: %d, duration: %.3f", i, duration);
 		}
 
-		this->_textures.resize(frames, NULL);
 		this->frames(frames);
 		this->duration(total_duration);
+		this->_textures.resize(frames, NULL);
 		// 加载第1张图片，生成width,height
 		this->textureAtFrame(0, NULL);
 	}
