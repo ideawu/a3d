@@ -115,7 +115,6 @@
 		312CD389202594C2008FE758 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD3842025946D008FE758 /* CoreText.framework */; };
 		312CD38B2025974A008FE758 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312CD38A20259749008FE758 /* AppKit.framework */; };
 		314A2010201EBDC50093D902 /* alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A200F201EBDC50093D902 /* alex.png */; };
-		314A2011201ED3D30093D902 /* util.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB4F201DE4AF00EEC0C5 /* util.h */; };
 		31543EEE2025BE4B002AC387 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EEC2025BE4B002AC387 /* Bitmap.cpp */; };
 		31543EEF2025BE4B002AC387 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		31543EF22025C649002AC387 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31543EF02025C649002AC387 /* Text.cpp */; };
@@ -125,13 +124,10 @@
 		315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A82026E62700FB0679 /* Cocoa.framework */; };
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
 		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
-		319A8098202C3F6A00DF1175 /* TextureSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A8096202C3F6A00DF1175 /* TextureSprite.cpp */; };
-		319A8099202C3F6A00DF1175 /* TextureSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A8097202C3F6A00DF1175 /* TextureSprite.h */; };
 		319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A809B202C581C00DF1175 /* SpriteNode.cpp */; };
 		319A809E202C581C00DF1175 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
 		319A809F202C59B200DF1175 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
 		319A80A0202C61E500DF1175 /* Text.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF12025C649002AC387 /* Text.h */; };
-		319A80A1202C61E500DF1175 /* TextureSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A8097202C3F6A00DF1175 /* TextureSprite.h */; };
 		31C6788A202471D7000BF908 /* AnimateRotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C67888202471D7000BF908 /* AnimateRotation.cpp */; };
 		31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C67889202471D7000BF908 /* AnimateRotation.h */; };
 		31C6789320247C90000BF908 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31C6789220247C90000BF908 /* main.mm */; };
@@ -147,11 +143,9 @@
 				083EF8772034684C009960EC /* Animator.h in CopyFiles */,
 				084619C7202F427200741AF2 /* Quaternion.h in CopyFiles */,
 				319A80A0202C61E500DF1175 /* Text.h in CopyFiles */,
-				319A80A1202C61E500DF1175 /* TextureSprite.h in CopyFiles */,
 				319A809F202C59B200DF1175 /* SpriteNode.h in CopyFiles */,
 				3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */,
 				3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */,
-				314A2011201ED3D30093D902 /* util.h in CopyFiles */,
 				08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */,
 				08B4CBD2201DEC3B00EEC0C5 /* a3d.h in CopyFiles */,
 				08B4CBC0201DEA6500EEC0C5 /* Color.h in CopyFiles */,
@@ -289,8 +283,6 @@
 		315964A62026AC9500FB0679 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		315964A82026E62700FB0679 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		315964AA2026E65300FB0679 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		319A8096202C3F6A00DF1175 /* TextureSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureSprite.cpp; sourceTree = "<group>"; };
-		319A8097202C3F6A00DF1175 /* TextureSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureSprite.h; sourceTree = "<group>"; };
 		319A809B202C581C00DF1175 /* SpriteNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		319A809C202C581C00DF1175 /* SpriteNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
@@ -440,8 +432,6 @@
 			children = (
 				319A809C202C581C00DF1175 /* SpriteNode.h */,
 				319A809B202C581C00DF1175 /* SpriteNode.cpp */,
-				319A8097202C3F6A00DF1175 /* TextureSprite.h */,
-				319A8096202C3F6A00DF1175 /* TextureSprite.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
 				08B4CB42201DE4AF00EEC0C5 /* ImageSprite.cpp */,
 				312CD37E20257852008FE758 /* TextSpirte.h */,
@@ -597,7 +587,6 @@
 				08B4CB77201DE4AF00EEC0C5 /* A3DView.h in Headers */,
 				08B4CB54201DE4AF00EEC0C5 /* Camera.h in Headers */,
 				08B4CAED201DE3E300EEC0C5 /* a3d.h in Headers */,
-				319A8099202C3F6A00DF1175 /* TextureSprite.h in Headers */,
 				08B4CB62201DE4AF00EEC0C5 /* Transform.h in Headers */,
 				08B4CB74201DE4AF00EEC0C5 /* Animator.h in Headers */,
 				31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */,
@@ -746,7 +735,6 @@
 				08B4CB6B201DE4AF00EEC0C5 /* AnimateOpacity.cpp in Sources */,
 				08B4CB59201DE4AF00EEC0C5 /* Object.cpp in Sources */,
 				08B4CB11201DE49900EEC0C5 /* Axis.cpp in Sources */,
-				319A8098202C3F6A00DF1175 /* TextureSprite.cpp in Sources */,
 				319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */,
 				08B4CB55201DE4AF00EEC0C5 /* Context.cpp in Sources */,
 				08B4CB73201DE4AF00EEC0C5 /* Animator.cpp in Sources */,

@@ -14,8 +14,9 @@ namespace a3d{
 	class Sprite
 	{
 	public:
+		static Sprite* imageSprite();
 		static Sprite* imageSprite(const char *filename);
-		static Sprite* bitmapSprite(const Bitmap &bitmap);
+		static Sprite* imageSprite(const Bitmap &bitmap);
 		static Sprite* textSprite(const char *str);
 		static Sprite* textSprite(const char *str, float fontSize, const Color &fontColor);
 

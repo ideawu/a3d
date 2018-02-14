@@ -10,18 +10,18 @@ static CGImageSourceRef load_CGImageSource(const char *filename);
 static double get_duration(CGImageSourceRef src, int index);
 
 namespace a3d{
+
+	ImageSprite* ImageSprite::create(){
+		ImageSprite *ret = new ImageSprite();
+		return ret;
+	}
+
 	ImageSprite* ImageSprite::createFromBitmap(const Bitmap &bitmap){
 		Texture *texture = Texture::createFromBitmap(bitmap);
 		if(!texture){
 			return NULL;
 		}
-		ImageSprite *ret = new ImageSprite();
-		ret->_durations.push_back(0);
-		ret->frames(1);
-		ret->duration(0);
-		ret->width(bitmap.width());
-		ret->height(bitmap.height());
-		return ret;
+		return createWithTexture(texture);
 	}
 
 	ImageSprite* ImageSprite::createFromFile(const char *filename){
@@ -31,6 +31,12 @@ namespace a3d{
 			delete ret;
 			return NULL;
 		}
+		return ret;
+	}
+
+	ImageSprite* ImageSprite::createWithTexture(Texture *texture){
+		ImageSprite *ret = new ImageSprite();
+		ret->addTexture(texture, 0);
 		return ret;
 	}
 
@@ -114,6 +120,15 @@ namespace a3d{
 			*duration = _durations[frame];
 		}
 		return _textures[frame];
+	}
+
+	void ImageSprite::addTexture(Texture *texture, double duration){
+		_frames += 1;
+		_duration += duration;
+		_durations.push_back(duration);
+		_textures.push_back(texture);
+		this->width(texture->width());
+		this->height(texture->height());
 	}
 
 }; // end namespace

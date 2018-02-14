@@ -15,21 +15,25 @@ namespace a3d{
 	class ImageSprite : public Sprite
 	{
 	public:
+		static ImageSprite* create();
 		static ImageSprite* createFromFile(const char *filename);
 		static ImageSprite* createFromBitmap(const Bitmap &bitmap);
+		static ImageSprite* createWithTexture(Texture *texture);
 
 		virtual ~ImageSprite();
 		virtual int frameAtTime(double time, double *duration);
 		virtual Texture* textureAtTime(double time, double *duration);
 		virtual Texture* textureAtFrame(int frame, double *duration);
 
+		void addTexture(Texture *texture, double duration);
+		
 	private:
 		ImageSprite();
 		ImageSprite(const ImageSprite &d);
 		ImageSprite& operator =(const ImageSprite &d);
 		
 		// 不要重复利用 texture，因为解码GIF耗CPU，用VRAM换CPU
-		std::vector<Texture *> _textures;
+		std::vector<Texture*> _textures;
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 		
