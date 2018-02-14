@@ -159,7 +159,7 @@ namespace a3d{
 	
 	void Node::renderAtTime(double time){
 		if(time > 0 && hasAnimations()){
-			_animator->updateAtTime(time);
+			_animator->updateAtTime(time, true);
 		}
 		
 		bool parentVisible = Renderer::current()->opacity() > 0;

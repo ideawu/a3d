@@ -93,7 +93,7 @@ namespace a3d{
 	void Animate::state(AnimateState state){
 		_state = state;
 		if(_callback){
-			_callback(this, _callbackCtx);
+			_callback(*this, _callbackCtx);
 		}
 	}
 

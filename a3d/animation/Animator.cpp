@@ -50,10 +50,6 @@ namespace a3d{
 		return _actions.empty();
 	}
 	
-	void Animator::updateAtTime(double time){
-		updateAtTime(time, true);
-	}
-
 	void Animator::updateAtTime(double time, bool removeEnded){
 		// 动画进行前，检查 current 和 target，获得动画之外的变更，将 diff 更新到 origin 中
 		Transform trans = Transform::transformBetween(*_current, *_target);
