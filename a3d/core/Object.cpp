@@ -6,9 +6,11 @@
 
 namespace a3d{
 	Object::Object(){
+		_opacity = 1;
 	}
 
 	Object::Object(float w, float h, float d){
+		Object();
 		_size = Vector3(w, h, d);
 	}
 
@@ -88,6 +90,14 @@ namespace a3d{
 		_size.z = d;
 	}
 
+	float Object::opacity() const{
+		return _opacity;
+	}
+
+	void Object::opacity(float opacity){
+		_opacity = opacity;
+	}
+
 	Vector3 Object::scale() const{
 		return _matrix.scale();
 	}
@@ -147,8 +157,12 @@ namespace a3d{
 		this->scale(scale.x * 1/st.x, scale.y * 1/st.y, scale.z * 1/st.z);
 	}
 
+	void Object::transform(float opacity){
+		_opacity += opacity;
+	}
+
 	void Object::transform(const Vector3 &size){
-		this->size(_size.add(size));
+		_size = _size.add(size);
 	}
 
 	void Object::transform(const Matrix4 &mat){
@@ -156,6 +170,7 @@ namespace a3d{
 	}
 
 	void Object::transform(const Transform &trans){
+		this->transform(trans.opacity);
 		this->transform(trans.size);
 		this->transform(trans.matrix);
 	}

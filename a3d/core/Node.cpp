@@ -11,30 +11,21 @@ namespace a3d{
 		_parent = NULL;
 		_subs = NULL;
 		_animator = NULL;
-		_opacity = 1;
 	}
 
 	Node::Node(const Node &d){
+		Node();
 		*this = d;
 	}
 
 	Node& Node::operator =(const Node &d){
 		Object::operator=(d);
-		_opacity = d._opacity;
 		return *this;
 	}
 
 	Node::~Node(){
 		delete _subs;
 		delete _animator;
-	}
-
-	float Node::opacity() const{
-		return _opacity;
-	}
-	
-	void Node::opacity(float opacity){
-		_opacity = opacity;
 	}
 
 	void Node::show(){

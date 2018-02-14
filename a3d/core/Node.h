@@ -25,8 +25,6 @@ namespace a3d{
 		void render(); // renderAtTime(0);
 		void renderAtTime(double time);
 
-		float opacity() const;
-		void opacity(float opacity);
 		void show();
 		void hide();
 		bool hidden() const;
@@ -65,8 +63,6 @@ namespace a3d{
 		
 		Node(const Node &d);
 		Node& operator =(const Node &d);
-		
-		float _opacity;
 		
 		Node *_parent;
 		std::list<Node*> *_subs;

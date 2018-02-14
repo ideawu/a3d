@@ -9,6 +9,9 @@ namespace a3d{
 
 	Transform Transform::transformBetween(const Object &first, const Object &second){
 		Transform ret;
+
+		// opacity 变动
+		ret.opacity = second.opacity() - first.opacity();
 		
 		// size 变动
 		Vector3 size1 = first.size();

@@ -18,7 +18,7 @@ namespace a3d{
 		
 		Matrix4 matrix;
 		Vector3 size;
-		// TODO: opacity
+		float opacity;
 	};
 }; // end namespace
 

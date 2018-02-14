@@ -43,6 +43,9 @@ namespace a3d{
 		float depth() const;
 		void depth(float d);
 
+		float opacity() const;
+		void opacity(float opacity);
+
 		Vector3 scale() const;
 		Quaternion quaternion() const;
 		void quaternion(const Quaternion &quat);
@@ -62,6 +65,7 @@ namespace a3d{
 		void scale(float x, float y, float z);
 		void scaleTo(const Vector3 &scale);
 
+		void transform(float opacity);
 		void transform(const Vector3 &size);
 		void transform(const Matrix4 &mat);
 		void transform(const Transform &trans);
@@ -78,9 +82,10 @@ namespace a3d{
 //		void force(const Vector3 &force, const Vector3 &atPoint);
 //		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
 
-	private:
+	protected:
 		Matrix4 _matrix;
 		Vector3 _size;
+		float _opacity;
 	};
 	
 }; // end namespace
