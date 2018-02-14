@@ -3,15 +3,19 @@
 //
 
 #include "Node.h"
-#include "NodeAnimateHelper.h"
+#include "Animator.h"
 #include "Renderer.h"
 
 namespace a3d{
 	Node::Node(){
 		_parent = NULL;
 		_subs = NULL;
-		_animation = NULL;
+		_animator = NULL;
 		_opacity = 1;
+	}
+
+	Node::Node(const Node &d){
+		*this = d;
 	}
 
 	Node& Node::operator =(const Node &d){
@@ -22,7 +26,7 @@ namespace a3d{
 
 	Node::~Node(){
 		delete _subs;
-		delete _animation;
+		delete _animator;
 	}
 
 	float Node::opacity() const{
@@ -163,8 +167,8 @@ namespace a3d{
 	}
 	
 	void Node::renderAtTime(double time){
-		if(time > 0 && _animation && !_animation->empty()){
-			_animation->updateAtTime(time);
+		if(time > 0 && hasAnimations()){
+			_animator->updateAtTime(time);
 		}
 		
 		bool parentVisible = Renderer::current()->opacity() > 0;
@@ -194,32 +198,26 @@ namespace a3d{
 	}
 
 	void Node::runAnimation(Animate *action){
-		if(!_animation){
-			_animation = new NodeAnimateHelper();
-			_animation->target = this;
+		if(!_animator){
+			_animator = Animator::create(this);
 		}
-		// 如果所有的动画都未开始，则应该在开始前，设置 origin
-		if(_animation->empty()){
-			_animation->origin = *this;
-			_animation->current = *this;
-		}
-		_animation->add(action);
+		_animator->runAnimation(action);
 	}
 	
 	void Node::removeAnimation(Animate *action){
-		if(_animation){
-			_animation->remove(action);
+		if(_animator){
+			_animator->removeAnimation(action);
 		}
 	}
 
 	void Node::removeAllAnimations(){
-		if(_animation){
-			_animation->removeAll();
+		if(_animator){
+			_animator->removeAllAnimations();
 		}
 	}
 	
-	bool Node::hasAnimations(){
-		return _animation && !_animation->empty();
+	bool Node::hasAnimations() const{
+		return _animator && !_animator->hasAnimations();
 	}
 
 }; // end namespace

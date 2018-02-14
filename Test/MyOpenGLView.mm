@@ -280,11 +280,11 @@ using namespace a3d;
 //			action->duration(5 * action->bounce());
 //			node->runAnimation(action);
 
-//			{
-//				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
-//				action->duration(6 * action->bounce());
-//				node->runAnimation(action);
-//			}
+			{
+				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
+				action->duration(6 * action->bounce());
+				node->runAnimation(action);
+			}
 //			{
 //				Quaternion q = node->quaternion();
 //				float angle = q.angle();

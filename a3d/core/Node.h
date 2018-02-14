@@ -8,11 +8,9 @@
 #include <list>
 #include "Object.h"
 
-// TODO: Animator 类，用于控制动画执行的接口
-
 namespace a3d{
 	class Animate;
-	class NodeAnimateHelper;
+	class Animator;
 	
  	class Node : public Object
 	{
@@ -60,10 +58,10 @@ namespace a3d{
 		void removeAnimation(Animate *action);
 		// 移除所有动画，释放内存
 		void removeAllAnimations();
-		bool hasAnimations();
+		bool hasAnimations() const;
 
 	private:
-		friend class NodeAnimateHelper;
+		friend class Animator;
 		
 		Node(const Node &d);
 		Node& operator =(const Node &d);
@@ -71,8 +69,8 @@ namespace a3d{
 		float _opacity;
 		
 		Node *_parent;
-		std::list<Node *> *_subs;
-		NodeAnimateHelper *_animation;
+		std::list<Node*> *_subs;
+		Animator *_animator;
 
 		void addSubnode(Node *node, bool isFront);
 	};

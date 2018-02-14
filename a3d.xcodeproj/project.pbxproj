@@ -60,8 +60,8 @@
 		08B4CB70201DE4AF00EEC0C5 /* BufferContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */; };
 		08B4CB71201DE4AF00EEC0C5 /* ImageSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB42201DE4AF00EEC0C5 /* ImageSprite.cpp */; };
 		08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */; };
-		08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */; };
-		08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */; };
+		08B4CB73201DE4AF00EEC0C5 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB44201DE4AF00EEC0C5 /* Animator.cpp */; };
+		08B4CB74201DE4AF00EEC0C5 /* Animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB45201DE4AF00EEC0C5 /* Animator.h */; };
 		08B4CB75201DE4AF00EEC0C5 /* BlankContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */; };
 		08B4CB76201DE4AF00EEC0C5 /* BlankContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */; };
 		08B4CB77201DE4AF00EEC0C5 /* A3DView.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB49201DE4AF00EEC0C5 /* A3DView.h */; };
@@ -254,8 +254,8 @@
 		08B4CB41201DE4AF00EEC0C5 /* BufferContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferContext.h; sourceTree = "<group>"; };
 		08B4CB42201DE4AF00EEC0C5 /* ImageSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageSprite.cpp; sourceTree = "<group>"; };
 		08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSprite.h; sourceTree = "<group>"; };
-		08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeAnimateHelper.cpp; sourceTree = "<group>"; };
-		08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeAnimateHelper.h; sourceTree = "<group>"; };
+		08B4CB44201DE4AF00EEC0C5 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animator.cpp; sourceTree = "<group>"; };
+		08B4CB45201DE4AF00EEC0C5 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
 		08B4CB46201DE4AF00EEC0C5 /* BlankContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlankContext.cpp; sourceTree = "<group>"; };
 		08B4CB47201DE4AF00EEC0C5 /* BlankContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlankContext.h; sourceTree = "<group>"; };
 		08B4CB49201DE4AF00EEC0C5 /* A3DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A3DView.h; sourceTree = "<group>"; };
@@ -557,8 +557,8 @@
 			children = (
 				08B4CB21201DE4AF00EEC0C5 /* AnimationTypes.h */,
 				312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */,
-				08B4CB45201DE4AF00EEC0C5 /* NodeAnimateHelper.h */,
-				08B4CB44201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp */,
+				08B4CB45201DE4AF00EEC0C5 /* Animator.h */,
+				08B4CB44201DE4AF00EEC0C5 /* Animator.cpp */,
 				08B4CB3D201DE4AF00EEC0C5 /* AnimateOpacity.h */,
 				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
 				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
@@ -616,7 +616,7 @@
 				08B4CAED201DE3E300EEC0C5 /* a3d.h in Headers */,
 				319A8099202C3F6A00DF1175 /* TextureSprite.h in Headers */,
 				08B4CB62201DE4AF00EEC0C5 /* Transform.h in Headers */,
-				08B4CB74201DE4AF00EEC0C5 /* NodeAnimateHelper.h in Headers */,
+				08B4CB74201DE4AF00EEC0C5 /* Animator.h in Headers */,
 				31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */,
 				08B4CB5C201DE4AF00EEC0C5 /* Renderer.h in Headers */,
 				083EF876203073DF009960EC /* AnimateScale.h in Headers */,
@@ -767,7 +767,7 @@
 				319A8098202C3F6A00DF1175 /* TextureSprite.cpp in Sources */,
 				319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */,
 				08B4CB55201DE4AF00EEC0C5 /* Context.cpp in Sources */,
-				08B4CB73201DE4AF00EEC0C5 /* NodeAnimateHelper.cpp in Sources */,
+				08B4CB73201DE4AF00EEC0C5 /* Animator.cpp in Sources */,
 				31543EF22025C649002AC387 /* Text.cpp in Sources */,
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,
 				08B4CB53201DE4AF00EEC0C5 /* Camera.cpp in Sources */,

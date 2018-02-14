@@ -22,14 +22,15 @@ namespace a3d{
 #include "Object.h"
 #include "Transform.h"
 #include "Node.h"
-#include "Camera.h"
-#include "Scene.h"
-#include "Sprite.h"
 #include "SpriteNode.h"
 #include "TextureNode.h"
+#include "Sprite.h"
 #include "TextureSprite.h"
+#include "Camera.h"
+#include "Scene.h"
 
 #include "Animate.h"
+#include "Animator.h"
 #include "AnimationTypes.h"
 
 #include "Texture.h"
