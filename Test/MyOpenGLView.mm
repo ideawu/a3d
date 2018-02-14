@@ -25,10 +25,10 @@ using namespace a3d;
 
 	MySprite *_alex;
 
-	std::vector<a3d::Object *> _objects;
+	std::vector<a3d::Node*> _objects;
 }
 // 当前被控制的对象
-@property a3d::Object *currentObject;
+@property a3d::Node *currentObject;
 @end
 
 @implementation MyOpenGLView
@@ -318,11 +318,15 @@ using namespace a3d;
 			break;
 		}
 		case NSLeftArrowFunctionKey:{
-			_currentObject->rotateY(-10);
+			a3d::Animate *action = a3d::Animate::rotate(90, Vector3(0, 0, 1));
+			action->duration(1 * action->bounce());
+			_currentObject->runAnimation(action);
 			break;
 		}
 		case NSRightArrowFunctionKey:{
-			_currentObject->rotateY(10);
+			a3d::Animate *action = a3d::Animate::rotate(-90, Vector3(0, 0, 1));
+			action->duration(1 * action->bounce());
+			_currentObject->runAnimation(action);
 			break;
 		}
 		case NSUpArrowFunctionKey:
