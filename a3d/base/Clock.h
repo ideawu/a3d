@@ -20,19 +20,21 @@ namespace a3d{
 		float speed() const;
 		void speed(float speed);
 
-		void pause();
-		void resume();
-		void reset();
-
+		bool isRunning() const;
 		bool isPaused() const;
+		bool isStopped() const;
 
-		double secondTick() const;
+		void start();
+		void pause();
+		void stop();
 
 	private:
 		double _firstTick;
 		double _secondTick;
 		double _pauseTick;
 		float _speed;
+
+		double secondTick() const;
 	};
 }; // end namespace
 

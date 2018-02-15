@@ -281,8 +281,9 @@ using namespace a3d;
 //			node->runAnimation(action);
 
 			{
-				a3d::Animate *action = a3d::Animate::rotate(360*5, Vector3(0, 1, 0));
-				action->duration(6 * action->bounce());
+				a3d::Animate *action = a3d::Animate::rotate(90*1, Vector3(0, 1, 0));
+				action->easingFunc(a3d::TimingFuncLinear);
+				action->duration(2 * action->bounce());
 				node->runAnimation(action);
 			}
 //			{

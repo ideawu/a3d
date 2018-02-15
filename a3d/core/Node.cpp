@@ -158,7 +158,7 @@ namespace a3d{
 	}
 	
 	void Node::renderAtTime(double time){
-		if(time > 0 && hasAnimations()){
+		if(time > 0 && _animator){
 			_animator->updateAtTime(time, true);
 		}
 		
@@ -187,6 +187,23 @@ namespace a3d{
 		}
 	}
 
+
+	bool Node::isAnimating() const{
+		return _animator && _animator->isAnimating();
+	}
+
+	void Node::startAnimation(){
+		if(_animator){
+			_animator->startAnimation();
+		}
+	}
+
+	void Node::stopAnimation(){
+		if(_animator){
+			_animator->stopAnimation();
+		}
+	}
+
 	void Node::runAnimation(Animate *action){
 		if(!_animator){
 			_animator = Animator::create(this);
@@ -207,7 +224,7 @@ namespace a3d{
 	}
 	
 	bool Node::hasAnimations() const{
-		return _animator && !_animator->hasAnimations();
+		return _animator && _animator->hasAnimations();
 	}
 
 }; // end namespace

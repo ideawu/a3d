@@ -50,6 +50,9 @@ namespace a3d{
 		Axis convertAxisFromWorld(const Axis &axis) const;
 
 		// ### 动画管理
+		bool isAnimating() const;
+		void startAnimation();
+		void stopAnimation();
 		// action 内存由 Node 管理
 		void runAnimation(Animate *action);
 		// 移除指定的动画，注意：并释放其内存！

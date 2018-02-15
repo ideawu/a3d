@@ -5,17 +5,11 @@
 #include "SpriteNode.h"
 
 namespace a3d{
-	enum{
-		SpritePlaying,
-		SpritePaused,
-		SpriteStopped
-	};
 	
 	SpriteNode::SpriteNode(){
 		_sprite = NULL;
 		_isFrameLossless = false;
 		_isLooping = true;
-		_state = SpritePlaying;
 	}
 	
 	SpriteNode::~SpriteNode(){
@@ -37,39 +31,27 @@ namespace a3d{
 	}
 
 	void SpriteNode::play(){
-		if(isPlaying()){
-			return;
-		}
-		_state = SpritePlaying;
-		_clock.resume();
+		_clock.start();
 	}
 	
 	void SpriteNode::pause(){
-		if(!isPlaying()){
-			return;
-		}
-		_state = SpritePaused;
 		_clock.pause();
 	}
 	
 	void SpriteNode::stop(){
-		if(isStopped()){
-			return;
-		}
-		_state = SpriteStopped;
-		_clock.reset();
+		_clock.stop();
 	}
 	
 	bool SpriteNode::isPlaying() const{
-		return _state == SpritePlaying;
+		return _clock.isRunning();
 	}
 	
 	bool SpriteNode::isPaused() const{
-		return _state == SpritePaused;
+		return _clock.isPaused();
 	}
 	
 	bool SpriteNode::isStopped() const{
-		return _state == SpriteStopped;
+		return _clock.isStopped();
 	}
 
 	void SpriteNode::isFrameLossless(bool isLossless){
@@ -91,30 +73,25 @@ namespace a3d{
 		}
 		
 		double thisRenderTime = _clock.time();
-		
-		double lastDuration = 0;
-		int lastFrame = sprite()->frameAtTime(lastRenderTime, &lastDuration);
-		if(lastFrame == -1){
-			lastFrame = 0;
-		}
-		
+
 		// 不丢帧
 		if(_isFrameLossless && sprite()->duration() > 0){
+			double lastDuration = 0;
+			int lastFrame = sprite()->frameAtTime(lastRenderTime, &lastDuration);
+			if(lastFrame == -1){
+				lastFrame = 0;
+			}
+
 			double nextRenderTime = lastRenderTime + lastDuration;
 			if(thisRenderTime > nextRenderTime){
-				thisRenderTime = nextRenderTime;
-				_clock.time(thisRenderTime);
-				//				log_debug("%f %f", _clock.time(), time);
+				_clock.time(nextRenderTime);
+				//log_debug("%f %f", _clock.time(), time);
 			}
 		}
 		
 		// 重复播放
-		if(_isLooping && sprite()->duration() > 0){
-			if(thisRenderTime >= sprite()->duration()){
-				thisRenderTime = 0;
-				_clock.time(thisRenderTime);
-				//				log_debug("%f %f", _clock.time(), time);
-			}
+		if(_isLooping && thisRenderTime >= sprite()->duration()){
+			_clock.time(0);
 		}
 	}
 	

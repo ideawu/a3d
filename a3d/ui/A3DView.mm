@@ -132,7 +132,7 @@ typedef struct{
 	if(_displayLink && !CVDisplayLinkIsRunning(_displayLink)){
 		[self startDisplayLink];
 		_clock.update(a3d::absolute_time());
-		_clock.resume();
+		_clock.start();
 	}
 }
 

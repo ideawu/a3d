@@ -7,6 +7,7 @@
 
 #include <list>
 #include "Animate.h"
+#include "Clock.h"
 
 namespace a3d{
 	class Animator
@@ -15,6 +16,10 @@ namespace a3d{
 		static Animator* create(Node *target);
 
 		~Animator();
+
+		bool isAnimating() const;
+		void startAnimation();
+		void stopAnimation();
 
 		void runAnimation(Animate *action);
 		void removeAnimation(Animate *action);
@@ -27,6 +32,8 @@ namespace a3d{
 		Animator();
 		Animator(const Animator &d);
 		Animator& operator =(const Animator &d);
+
+		Clock _clock;
 
 		Node *_target;
 		Node *_origin;

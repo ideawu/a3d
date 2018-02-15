@@ -38,7 +38,6 @@ namespace a3d{
 		SpriteNode(const SpriteNode &d);
 		SpriteNode& operator =(const SpriteNode &d);
 		
-		int _state;
 		bool _isFrameLossless;
 		bool _isLooping;
 		Clock _clock;
