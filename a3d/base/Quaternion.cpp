@@ -37,6 +37,30 @@ namespace a3d{
 		return Vector3(v.x, v.y, v.z);
 	}
 
+	float Quaternion::x() const{
+		return _quat.x;
+	}
+
+	float Quaternion::y() const{
+		return _quat.y;
+	}
+
+	float Quaternion::z() const{
+		return _quat.z;
+	}
+
+	float Quaternion::w() const{
+		return _quat.w;
+	}
+
+	Quaternion Quaternion::add(const Quaternion &q) const{
+		return Quaternion(GLKQuaternionAdd(_quat, q._quat));
+	}
+
+	Quaternion Quaternion::sub(const Quaternion &q) const{
+		return Quaternion(GLKQuaternionSubtract(_quat, q._quat));
+	}
+
 	Quaternion Quaternion::invert() const{
 		return Quaternion(GLKQuaternionInvert(_quat));
 //		return Quaternion(-angle(), vector());

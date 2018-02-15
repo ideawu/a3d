@@ -23,6 +23,7 @@ namespace a3d{
 
 		// 创建一个单位向量
 		Matrix4();
+		Matrix4(const Quaternion &quat);
 		std::string str() const;
 
 	public:
@@ -40,6 +41,7 @@ namespace a3d{
 		void z(float z);
 		
 		Vector3 scale() const;
+		Vector3 rotation() const;
 		Quaternion quaternion() const;
 		void quaternion(const Quaternion &quat);
 
@@ -50,6 +52,8 @@ namespace a3d{
 		void rotateX(float degree);
 		void rotateY(float degree);
 		void rotateZ(float degree);
+		// TODO: 先后顺序有影响
+		void rotate(const Vector3 &rotation);
 		void rotate(float degree, const Vector3 &vec);
 		// 绕自身坐标系内的任意轴旋转
 		void rotate(float degree, const Axis &axis);
@@ -60,9 +64,9 @@ namespace a3d{
 
 		Matrix4 invert() const;
 		Matrix4 mul(const Matrix4 &mat) const;
-		// 返回目标矩阵距离当前矩阵需要做的变换
-		Matrix4 div(const Matrix4 &mat) const;
-		
+//		// 返回目标矩阵距离当前矩阵需要做的变换
+//		Matrix4 div(const Matrix4 &mat) const;
+
 		Vector3 mul(const Vector3 &vec) const;
 		Point3 mul(const Point3 &pos) const;
 

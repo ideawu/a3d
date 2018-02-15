@@ -21,10 +21,17 @@ namespace a3d{
 		float angle() const;
 		Vector3 vector() const;
 
+		float x() const;
+		float y() const;
+		float z() const;
+		float w() const;
+
+		Quaternion add(const Quaternion &q) const;
+		Quaternion sub(const Quaternion &q) const;
 		Quaternion invert() const;
 
-		GLKQuaternion _quat;
 	private:
+		GLKQuaternion _quat;
 
 		Quaternion(const GLKQuaternion &q);
 	};

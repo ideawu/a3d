@@ -79,7 +79,7 @@ namespace a3d{
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){
 			Animate *action = *it;
 			action->updateAtTime(_clock.time(), _target);
-			// 如果不 removeEned，那么就不更新 origin，因为 Ened 的动画会重新执行一遍(progress=1)。
+			// 如果不 removeEnded，那么就不更新 origin，因为 Ended 的动画会重新执行一遍(progress=1)。
 			// 如果更新了 origin，那么时间轴回退动画重新执行时，origin又会被错误地更新一次。
 			if(removeEnded && action->state() == AnimateStateEnded){
 				// 将已结束的动画真正地更新原对象

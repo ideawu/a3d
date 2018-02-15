@@ -281,6 +281,7 @@ using namespace a3d;
 //			node->runAnimation(action);
 
 			{
+				[self setMaxFPS:3];
 				a3d::Animate *action = a3d::Animate::rotate(90*1, Vector3(0, 1, 0));
 				action->easingFunc(a3d::TimingFuncLinear);
 				action->duration(2 * action->bounce());
@@ -320,21 +321,25 @@ using namespace a3d;
 		}
 		case NSLeftArrowFunctionKey:{
 			a3d::Animate *action = a3d::Animate::rotate(90, Vector3(0, 0, 1));
-			action->duration(1 * action->bounce());
+			action->duration(3 * action->bounce());
 			_currentObject->runAnimation(action);
 			break;
 		}
 		case NSRightArrowFunctionKey:{
 			a3d::Animate *action = a3d::Animate::rotate(-90, Vector3(0, 0, 1));
-			action->duration(1 * action->bounce());
+			action->duration(3 * action->bounce());
 			_currentObject->runAnimation(action);
 			break;
 		}
 		case NSUpArrowFunctionKey:
-			_currentObject->rotateX(10);
+			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
+			_currentObject->rotateX(30);
+			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
 			break;
 		case NSDownArrowFunctionKey:
-			_currentObject->rotateX(-10);
+			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
+			_currentObject->rotateX(-30);
+			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
 			break;
 		case 'a':
 		case 'A':

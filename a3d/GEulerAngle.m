@@ -149,7 +149,6 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 	float r, p, y, w;
 	float sinr, cosr, sinp, siny, cosy;
 	float qs[3] = {q.x, q.y, q.z};
-//	log_debug(@"quat: %.2f %.2f %.2f w: %.2f", q.x, q.y, q.z, q.w);
 	// 各轴顺序
 	int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
 	r = qs[idx[0]];
@@ -174,10 +173,7 @@ static void quat_to_euler(GLKQuaternion q, float *roll, float *pitch, float *yaw
 		p = asin(sinp);
 	}
 	y = atan2(siny, cosy);
-	
-	//	log_debug(@"%f %f %f", r, p, y);
-	//	log_debug(@"%f %f (%f) %f %f", sinr, cosr, sinp, siny, cosy);
-	
+
 	*roll = r;
 	*pitch = p;
 	*yaw = y;
