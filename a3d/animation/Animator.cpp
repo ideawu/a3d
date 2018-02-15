@@ -43,22 +43,17 @@ namespace a3d{
 	}
 	
 	void Animator::removeAnimation(Animate *action){
+		_actions.remove(action);
 		if(action->state() != AnimateStateEnded){
 			action->state(AnimateStateCancelled);
 		}
-		_actions.remove(action);
 		delete action;
 	}
 	
 	void Animator::removeAllAnimations(){
-		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); it++){
-			Animate *action = *it;
-			if(action->state() != AnimateStateEnded){
-				action->state(AnimateStateCancelled);
-			}
-			delete action;
+		while(!_actions.empty()){
+			_actions.front();
 		}
-		_actions.clear();
 	}
 
 	bool Animator::hasAnimations() const{
@@ -89,8 +84,9 @@ namespace a3d{
 			if(removeEnded && action->state() == AnimateStateEnded){
 				// 将已结束的动画真正地更新原对象
 				action->update(1, _origin);
-				it = _actions.erase(it);
+
 				delete action;
+				it = _actions.erase(it);
 			}else{
 				it ++;
 			}
