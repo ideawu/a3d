@@ -97,6 +97,10 @@ namespace a3d{
 		}
 	}
 
+	bool Animate::isEnded() const{
+		return _state == AnimateStateEnded;
+	}
+
 	double Animate::duration() const{
 		return _duration;
 	}

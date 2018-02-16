@@ -42,7 +42,7 @@ namespace a3d{
 	
 	void Animator::removeAnimation(Animate *action){
 		_actions.remove(action);
-		if(action->state() != AnimateStateEnded){
+		if(!action->isEnded()){
 			action->state(AnimateStateCancelled);
 		}
 		delete action;
@@ -79,7 +79,7 @@ namespace a3d{
 			_current = *_target;
 			action->updateAtTime(_clock.time(), _target);
 
-			if(action->state() == AnimateStateEnded){
+			if(action->isEnded()){
 				// 在 current 空间里变换 origin
 				Transform trans = Transform::transformBetween(_current, *_target);
 				_origin.transform(trans);

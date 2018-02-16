@@ -40,6 +40,8 @@ namespace a3d{
 
 		AnimateState state() const;
 		void state(AnimateState state);
+		bool isEnded() const;
+		
 		double duration() const;
 		void duration(double duration);
 		double beginTime() const;
