@@ -249,9 +249,10 @@ namespace a3d{
 		return Matrix4(GLKMatrix4Multiply(_mat, mat._mat));
 	}
 	
-//	Matrix4 Matrix4::div(const Matrix4 &mat) const{
-//		return this->mul(mat.invert());
-//	}
+	Matrix4 Matrix4::div(const Matrix4 &mat) const{
+		return this->mul(mat.invert());
+//		return this->invert().mul(mat);
+	}
 
 	Vector3 Matrix4::mul(const Vector3 &vec) const{
 		GLKVector3 v = GLKVector3Make(vec.x, vec.y, vec.z);

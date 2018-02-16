@@ -80,7 +80,7 @@ namespace a3d{
 		_callback = NULL;
 		_beginTime = -1;
 		_duration = 0;
-		_bounce = 1;
+		_bounces = 1;
 	}
 	
 	Animate::~Animate(){
@@ -118,12 +118,12 @@ namespace a3d{
 		_callbackCtx = ctx;
 	}
 	
-	float Animate::bounce() const{
-		return _bounce;
+	float Animate::bounces() const{
+		return _bounces;
 	}
 
-	void Animate::bounce(float count){
-		_bounce = count;
+	void Animate::bounces(float count){
+		_bounces = count;
 	}
 	
 	void Animate::easingFunc(TimingFunc func){
@@ -160,15 +160,15 @@ namespace a3d{
 	double Animate::timing(double p) const{
 		double step_s = 0;
 		double step_e = 0;
-		if(_bounce != 1){
+		if(_bounces != 1){
 			// 通过反函数计算当前时间是第几跳
 			double bounce_ratio = reverse_timing_func(_bounceFunc, p);
 			// 相邻的两次组成一次周期
-			step_s = floor(bounce_ratio * _bounce/2) * 2; // 向下取偶
+			step_s = floor(bounce_ratio * _bounces/2) * 2; // 向下取偶
 			step_e = step_s+2;
 			// 周期的开始和结束时间
-			double time_s = _bounceFunc(step_s/_bounce);
-			double time_e = _bounceFunc(step_e/_bounce);
+			double time_s = _bounceFunc(step_s/_bounces);
+			double time_e = _bounceFunc(step_e/_bounces);
 			
 			p = (p - time_s)/(time_e - time_s);
 			p = (p < 0.5)? 2 * p : 2 * (1-p);
@@ -176,8 +176,8 @@ namespace a3d{
 		
 		double y = _easingFunc(p);
 		
-		if(_bounce != 1){
-			double total_steps = ceil(_bounce/2) * 2; // 向上取偶
+		if(_bounces != 1){
+			double total_steps = ceil(_bounces/2) * 2; // 向上取偶
 			y *= _accelateFunc(step_e/total_steps);
 		}
 		return y;

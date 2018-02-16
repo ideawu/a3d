@@ -49,8 +49,8 @@ namespace a3d{
 		
 		// 设置弹跳次数，默认是1次，如果指定2次，动画完毕后返回原点，可指定非整数次
 		// bounce 是偶数且 boundFunc 为 Linear(默认)，则作用同 repeat+autoreverse
-		float bounce() const;
-		void bounce(float count);
+		float bounces() const;
+		void bounces(float count);
 		
 		// 运动位移相对时间的曲线控制
 		void easingFunc(TimingFunc func);
@@ -77,7 +77,8 @@ namespace a3d{
 		AnimateCallback _callback;
 		void *_callbackCtx;
 		
-		float _bounce;
+		float _bounces;
+		// int _repeats;
 		double _beginTime;
 		double _duration;
 		

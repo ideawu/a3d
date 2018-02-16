@@ -63,9 +63,10 @@ namespace a3d{
 		void resetScale();
 
 		Matrix4 invert() const;
+		// mat 做当前矩阵的变换
 		Matrix4 mul(const Matrix4 &mat) const;
-//		// 返回目标矩阵距离当前矩阵需要做的变换
-//		Matrix4 div(const Matrix4 &mat) const;
+		// 返回目标矩阵距离当前矩阵需要做的变换
+		Matrix4 div(const Matrix4 &mat) const;
 
 		Vector3 mul(const Vector3 &vec) const;
 		Point3 mul(const Point3 &pos) const;

@@ -3,64 +3,70 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GLKit/GLKit.h>
-
-//int main(int argc, const char * argv[]) {
-//	GLKMatrix4 mat = GLKMatrix4Identity;
-//	mat = GLKMatrix4RotateY(mat, GLKMathDegreesToRadians(181+100));
-//	GLKQuaternion quat = GLKQuaternionMakeWithMatrix4(mat);
-//	GLKVector3 axis = GLKQuaternionAxis(quat);
-//	float angle = GLKQuaternionAngle(quat);
-//	log_debug(@"%.2f %.2f %.2f %.2f", axis.x, axis.y, axis.z, GLKMathRadiansToDegrees(angle));
-//	return 0;
-//}
-
 #import <Cocoa/Cocoa.h>
-//#import <ImageIO/ImageIO.h>
-//#import <CoreGraphics/CoreGraphics.h>
-#include "TextSpirte.h"
-#include "Bitmap.h"
-#include "Text.h"
 #include "a3d.h"
 
 using namespace a3d;
 
 int main(int argc, const char * argv[])
 {
-	Vector3 vec = Vector3(0, 0, 1);
-	Quaternion q;
+	Matrix4 origin, target, current;
 
-	for(int i=1; i<20; i++){
-		Matrix4 mat;
-		mat.quaternion(Quaternion(i, vec));
-//		log_debug(@"%@", NSStringFromGLKQuaternion(mat.quaternion()._quat));
-//		log_debug(@"%f %s", mat.quaternion().angle(), mat.quaternion().vector().str().c_str());
-//		log_debug(@"\n%s", mat.str().c_str());
-		mat.scale(2);
-//		log_debug(@"\n%s", mat.str().c_str());
-		q = mat.quaternion();
-		log_debug(@"%@", NSStringFromGLKQuaternion(q._quat));
-		log_debug(@"in: %d out: %f, %s", i, q.angle(), q.vector().str().c_str());
-		log_debug(@"");
+	// origin
+	origin.translate(100, 100, 100);
+	origin.rotateY(45);
+	log_debug("origin:\n%s", origin.str().c_str());
+
+	{
+		// animate target
+		target = origin;
+		target.rotateX(30);
+
+		// sync current
+		current = target;
+		log_debug("current & target:\n%s", current.str().c_str());
 	}
 
-	log_debug(@"");
+	// manually transform target
+	target.rotateX(10);
 
-//	{
-//		GLKQuaternion q = GLKQuaternionMakeWithAngleAndAxis(GLKMathDegreesToRadians(120), 0, 0, 1);
-//		GLKMatrix4 mat = GLKMatrix4MakeWithQuaternion(q);
-//		q = GLKQuaternionMakeWithMatrix4(mat);
-//		log_debug(@"%@", NSStringFromGLKQuaternion(q));
-//		log_debug(@"%f %@", GLKMathRadiansToDegrees(GLKQuaternionAngle(q)), NSStringFromGLKVector3(GLKQuaternionAxis(q)));
-//		mat = GLKMatrix4Scale(mat, 1.41, 1.41, 1.41);
-//		q = GLKQuaternionMakeWithMatrix4(mat);
-////		log_debug(@"%f", 2 * GLKMathRadiansToDegrees(acos(q.w)));
-////		log_debug(@"%@", NSStringFromGLKQuaternion(q));
-////		q = GLKQuaternionNormalize(q);
-////		log_debug(@"%f", 2 * GLKMathRadiansToDegrees(acos(q.w)));
-//		log_debug(@"%@", NSStringFromGLKQuaternion(q));
-//		log_debug(@"%f %@", GLKMathRadiansToDegrees(GLKQuaternionAngle(q)), NSStringFromGLKVector3(GLKQuaternionAxis(q)));
-//	}
+
+	// q0, q1
+	// rotateTo(q1).rotate(q0.invert())
+	{
+		Matrix4 mat;
+		mat.rotateY(45);
+		Quaternion q1 = mat.quaternion();
+		log_debug(@"%.2f %s", q1.angle(), q1.vector().str().c_str());
+		mat.rotateX(45);
+		Quaternion q2 = mat.quaternion();
+		log_debug(@"%.2f %s", q2.angle(), q2.vector().str().c_str());
+
+		Quaternion q3 = q2.div(q1);
+		log_debug(@"%.2f %s", q3.angle(), q3.vector().str().c_str());
+		q3 = q1.mul(q3);
+		log_debug(@"%.2f %s", q3.angle(), q3.vector().str().c_str());
+	}
+
+	{
+		Matrix4 mat1, mat2;
+
+		mat1.rotateY(45);
+
+		mat2.rotateY(45);
+		mat2.rotateX(45);
+
+		log_debug("mat2:\n%s", mat2.str().c_str());
+//		log_debug("mat1:\n%s", mat1.str().c_str());
+
+		Matrix4 df = mat2.div(mat1);
+		Quaternion q2 = df.quaternion();
+		log_debug(@"%.2f %s", q2.angle(), q2.vector().str().c_str());
+
+		Matrix4 mat = df.mul(mat1);
+		log_debug("(mat2/mat1) * mat1=:\n%s", mat.str().c_str());
+
+	}
 
 	return 0;
 }

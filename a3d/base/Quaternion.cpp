@@ -53,6 +53,11 @@ namespace a3d{
 		return _quat.w;
 	}
 
+	Quaternion Quaternion::invert() const{
+		return Quaternion(GLKQuaternionInvert(_quat));
+		//return Quaternion(GLKQuaternionConjugate(_quat));
+	}
+
 	Quaternion Quaternion::add(const Quaternion &q) const{
 		return Quaternion(GLKQuaternionAdd(_quat, q._quat));
 	}
@@ -61,9 +66,12 @@ namespace a3d{
 		return Quaternion(GLKQuaternionSubtract(_quat, q._quat));
 	}
 
-	Quaternion Quaternion::invert() const{
-		return Quaternion(GLKQuaternionInvert(_quat));
-//		return Quaternion(-angle(), vector());
+	Quaternion Quaternion::mul(const Quaternion &q) const{
+		return Quaternion(GLKQuaternionMultiply(_quat, q._quat));
+	}
+
+	Quaternion Quaternion::div(const Quaternion &q) const{
+		return q.invert().mul(*this);
 	}
 
 }; // end namespace

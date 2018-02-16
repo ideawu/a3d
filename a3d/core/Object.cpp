@@ -166,7 +166,8 @@ namespace a3d{
 	}
 
 	void Object::transform(const Matrix4 &mat){
-		_matrix = _matrix.mul(mat);
+		// 注意顺序
+		_matrix = mat.mul(_matrix);
 	}
 
 	void Object::transform(const Transform &trans){

@@ -28,6 +28,8 @@ namespace a3d{
 
 		Quaternion add(const Quaternion &q) const;
 		Quaternion sub(const Quaternion &q) const;
+		Quaternion mul(const Quaternion &q) const;
+		Quaternion div(const Quaternion &q) const;
 		Quaternion invert() const;
 
 	private:

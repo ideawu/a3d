@@ -537,12 +537,12 @@
 				08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */,
 				08B4CB3F201DE4AF00EEC0C5 /* AnimatePosition.h */,
 				08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */,
+				083EF87020306E60009960EC /* AnimateSize.h */,
+				083EF86F20306E60009960EC /* AnimateSize.cpp */,
 				31C67889202471D7000BF908 /* AnimateRotation.h */,
 				31C67888202471D7000BF908 /* AnimateRotation.cpp */,
 				083EF874203073DF009960EC /* AnimateScale.h */,
 				083EF873203073DF009960EC /* AnimateScale.cpp */,
-				083EF87020306E60009960EC /* AnimateSize.h */,
-				083EF86F20306E60009960EC /* AnimateSize.cpp */,
 			);
 			path = animation;
 			sourceTree = "<group>";

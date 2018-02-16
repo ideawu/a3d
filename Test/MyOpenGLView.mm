@@ -266,6 +266,7 @@ using namespace a3d;
 //			[self switchSprite];
 			
 			Node *node = _img3;
+			node = _currentObject;
 //			Node *node = _alex;
 
 			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
@@ -276,15 +277,15 @@ using namespace a3d;
 //			action->easingFunc(a3d::TimingFuncLinear);
 ////			action->bounceFunc(a3d::TimingFuncLinear);
 ////			action->accelateFunc(a3d::TimingFuncLinear);
-////			action->bounce(1);
-//			action->duration(5 * action->bounce());
+////			action->bounces(1);
+//			action->duration(5 * action->bounces());
 //			node->runAnimation(action);
 
 			{
-				[self setMaxFPS:3];
-				a3d::Animate *action = a3d::Animate::rotate(90*1, Vector3(0, 1, 0));
+				[self setMaxFPS:15];
+				a3d::Animate *action = a3d::Animate::rotate(360*1000, Vector3(0, 1, 0));
 				action->easingFunc(a3d::TimingFuncLinear);
-				action->duration(2 * action->bounce());
+				action->duration(3 * 1000 * action->bounces());
 				node->runAnimation(action);
 			}
 //			{
@@ -304,8 +305,8 @@ using namespace a3d;
 //			{
 ////				a3d::Animate *action = a3d::Animate::size(node->size().mul(2));
 //				a3d::Animate *action = a3d::Animate::scale(1.5);
-//				action->bounce(1);
-//				action->duration(1 * action->bounce());
+//				action->bounces(1);
+//				action->duration(1 * action->bounces());
 //				node->runAnimation(action);
 //			}
 //			[self setMaxFPS:5];
@@ -321,13 +322,13 @@ using namespace a3d;
 		}
 		case NSLeftArrowFunctionKey:{
 			a3d::Animate *action = a3d::Animate::rotate(90, Vector3(0, 0, 1));
-			action->duration(3 * action->bounce());
+			action->duration(3 * action->bounces());
 			_currentObject->runAnimation(action);
 			break;
 		}
 		case NSRightArrowFunctionKey:{
 			a3d::Animate *action = a3d::Animate::rotate(-90, Vector3(0, 0, 1));
-			action->duration(3 * action->bounce());
+			action->duration(3 * action->bounces());
 			_currentObject->runAnimation(action);
 			break;
 		}
