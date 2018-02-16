@@ -98,6 +98,18 @@ namespace a3d{
 		_opacity = opacity;
 	}
 
+	void Object::show(){
+		_opacity = 1;
+	}
+
+	void Object::hide(){
+		_opacity = 0;
+	}
+
+	bool Object::hidden() const{
+		return _opacity == 0;
+	}
+
 	Vector3 Object::scale() const{
 		return _matrix.scale();
 	}

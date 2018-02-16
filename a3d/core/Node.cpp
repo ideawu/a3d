@@ -7,6 +7,7 @@
 #include "Renderer.h"
 
 namespace a3d{
+
 	Node::Node(){
 		_parent = NULL;
 		_subs = NULL;
@@ -28,20 +29,8 @@ namespace a3d{
 		delete _animator;
 	}
 
-	void Node::show(){
-		_opacity = 1;
-	}
-	
-	void Node::hide(){
-		_opacity = 0;
-	}
-	
-	bool Node::hidden() const{
-		return _opacity == 0;
-	}
-
 	bool Node::visible() const{
-		return _opacity != 0 && (!_parent || _parent->visible());
+		return !hidden() && (!_parent || _parent->visible());
 	}
 	
 	
@@ -163,10 +152,10 @@ namespace a3d{
 		}
 		
 		bool parentVisible = Renderer::current()->opacity() > 0;
-		bool currentVisible = parentVisible && _opacity > 0;
 		if(parentVisible){
-			Renderer::current()->pushOpacity(_opacity);
+			Renderer::current()->pushOpacity(this->opacity());
 		}
+		bool currentVisible = Renderer::current()->opacity() > 0;
 		if(currentVisible){
 			Renderer::current()->pushMatrix(this->matrix());
 			this->drawAtTime(time);
@@ -181,7 +170,6 @@ namespace a3d{
 		if(currentVisible){
 			Renderer::current()->popMatrix();
 		}
-		
 		if(parentVisible){
 			Renderer::current()->popOpacity();
 		}
@@ -201,6 +189,12 @@ namespace a3d{
 	void Node::stopAnimation(){
 		if(_animator){
 			_animator->stopAnimation();
+		}
+	}
+
+	void Node::toggleAnimation(){
+		if(_animator){
+			_animator->toggleAnimation();
 		}
 	}
 

@@ -45,6 +45,9 @@ namespace a3d{
 
 		float opacity() const;
 		void opacity(float opacity);
+		void show();
+		void hide();
+		bool hidden() const;
 
 		Vector3 scale() const;
 		Quaternion quaternion() const;
@@ -82,7 +85,7 @@ namespace a3d{
 //		void force(const Vector3 &force, const Vector3 &atPoint);
 //		void force(const Vector3 &force, const Vector3 &atPoint, float rotationScalar);
 
-	protected:
+	private:
 		Matrix4 _matrix;
 		Vector3 _size;
 		float _opacity;

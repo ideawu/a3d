@@ -20,6 +20,7 @@ namespace a3d{
 		bool isAnimating() const;
 		void startAnimation();
 		void stopAnimation();
+		void toggleAnimation();
 
 		void runAnimation(Animate *action);
 		void removeAnimation(Animate *action);

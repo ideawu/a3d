@@ -32,6 +32,14 @@ namespace a3d{
 		_clock.pause(); // 不是 stop
 	}
 
+	void Animator::toggleAnimation(){
+		if(isAnimating()){
+			stopAnimation();
+		}else{
+			startAnimation();
+		}
+	}
+
 	void Animator::runAnimation(Animate *action){
 		if(!hasAnimations()){
 			_origin = *_target;

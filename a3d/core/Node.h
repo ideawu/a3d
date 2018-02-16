@@ -25,9 +25,6 @@ namespace a3d{
 		void render(); // renderAtTime(0);
 		void renderAtTime(double time);
 
-		void show();
-		void hide();
-		bool hidden() const;
 		bool visible() const; // 结合父节点判断是否可见
 
 		Node* parent() const;
@@ -53,6 +50,7 @@ namespace a3d{
 		bool isAnimating() const;
 		void startAnimation();
 		void stopAnimation();
+		void toggleAnimation();
 		// action 内存由 Node 管理
 		void runAnimation(Animate *action);
 		// 移除指定的动画，注意：并释放其内存！
