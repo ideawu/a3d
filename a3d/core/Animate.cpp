@@ -81,6 +81,7 @@ namespace a3d{
 		_beginTime = -1;
 		_duration = 0;
 		_bounces = 1;
+		_repeats = 1;
 	}
 	
 	Animate::~Animate(){
@@ -129,7 +130,19 @@ namespace a3d{
 	void Animate::bounces(float count){
 		_bounces = count;
 	}
-	
+
+	int Animate::repeats() const{
+		return _repeats;
+	}
+
+	void Animate::repeats(int count){
+		_repeats = count;
+	}
+
+	void Animate::repeat(bool enable){
+		_repeats = enable? -1 : 1;
+	}
+
 	void Animate::easingFunc(TimingFunc func){
 		_easingFunc = func;
 	}
@@ -218,7 +231,12 @@ namespace a3d{
 			this->state(AnimateStateDidUpdate);
 
 			if(progress >= 1){
-				this->state(AnimateStateEnded);
+				_repeats --;
+				if(_repeats == 0){
+					this->state(AnimateStateEnded);
+				}else{
+					_beginTime = time;
+				}
 			}
 		}
 	}

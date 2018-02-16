@@ -283,9 +283,10 @@ using namespace a3d;
 
 			{
 //				[self setMaxFPS:15];
-				a3d::Animate *action = a3d::Animate::rotate(360*1000, Vector3(0, 1, 0));
+				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
 				action->easingFunc(a3d::TimingFuncLinear);
-				action->duration(3 * 5000 * action->bounces());
+				action->repeat(true);
+				action->duration(2 * action->bounces());
 				node->runAnimation(action);
 			}
 //			{

@@ -2,8 +2,8 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#ifndef a3d_SpriteTexture_hpp
-#define a3d_SpriteTexture_hpp
+#ifndef a3d_Sprite_hpp
+#define a3d_Sprite_hpp
 
 #include "Vector3.h"
 #include "Texture.h"
@@ -59,4 +59,4 @@ namespace a3d{
 	};
 }; // end namespace
 
-#endif /* SpriteTexture_hpp */
+#endif

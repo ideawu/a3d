@@ -35,25 +35,27 @@ namespace a3d{
 	public:
 		virtual ~Animate();
 
-		// 子类方法，注意，TimingFunc可能使progress大于1，但结束时progress必为1
+		// 子类方法，注意，TimingFunc可能使progress大于1或小于0，但结束时progress必为1
 		virtual void update(double progress, Node *target) = 0;
 
 		AnimateState state() const;
 		void state(AnimateState state);
 		bool isEnded() const;
-		
+
 		double duration() const;
 		void duration(double duration);
 		double beginTime() const;
 		void beginTime(double beginTime);
-
-		void callback(AnimateCallback func, void *ctx);
-		
+		int repeats() const;
+		void repeats(int count);
+		void repeat(bool enable);
 		// 设置弹跳次数，默认是1次，如果指定2次，动画完毕后返回原点，可指定非整数次
 		// bounce 是偶数且 boundFunc 为 Linear(默认)，则作用同 repeat+autoreverse
 		float bounces() const;
 		void bounces(float count);
-		
+
+		void callback(AnimateCallback func, void *ctx);
+
 		// 运动位移相对时间的曲线控制
 		void easingFunc(TimingFunc func);
 		// 用于弹跳频率控制
@@ -66,7 +68,7 @@ namespace a3d{
 
 	protected:
 		Animate();
-	
+
 	private:
 		Animate(const Animate &a);
 		Animate& operator =(const Animate &d);
@@ -79,8 +81,8 @@ namespace a3d{
 		AnimateCallback _callback;
 		void *_callbackCtx;
 		
+		int _repeats;
 		float _bounces;
-		// int _repeats;
 		double _beginTime;
 		double _duration;
 		

@@ -22,7 +22,6 @@ namespace a3d{
 		
 		Point3 nearestPointTo(const Point3 &target) const;
 	};
-	
 }; // end namespace
 
 #endif /* Axis_hpp */

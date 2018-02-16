@@ -2,8 +2,8 @@
 //  Copyright (c) 2018年 ideawu. All rights reserved.
 //
 
-#ifndef __a3d__Quaternion__
-#define __a3d__Quaternion__
+#ifndef a3d_Quaternion_
+#define a3d_Quaternion_
 
 #include <GLKit/GLKMath.h>
 #include "Vector3.h"
