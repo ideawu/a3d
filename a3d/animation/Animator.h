@@ -36,8 +36,8 @@ namespace a3d{
 		Clock _clock;
 
 		Node *_target;
-		Node *_origin;
-		Node *_current;
+		Node _origin;
+		Node _current;
 		
 		// 基于性能考虑，std::list 的节点应该保存自身的 iterator 以便快速删除，但这里不考虑
 		std::list<Animate*> _actions;

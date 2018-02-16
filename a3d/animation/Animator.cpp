@@ -9,20 +9,14 @@ namespace a3d{
 	Animator* Animator::create(Node *target){
 		Animator *ret = new Animator();
 		ret->_target = target;
-		ret->_origin = new Node(*target);
-		ret->_current = new Node(*target);
 		return ret;
 	}
 
 	Animator::Animator(){
 		_target = NULL;
-		_origin = NULL;
-		_current = NULL;
 	}
 	
 	Animator::~Animator(){
-		delete _origin;
-		delete _current;
 		removeAllAnimations();
 	}
 
@@ -39,6 +33,10 @@ namespace a3d{
 	}
 
 	void Animator::runAnimation(Animate *action){
+		if(!hasAnimations()){
+			_origin = *_target;
+			_current = *_target;
+		}
 		_actions.push_back(action);
 	}
 	
@@ -70,21 +68,21 @@ namespace a3d{
 		}
 
 		// 动画进行前，检查 current 和 target，获得动画之外的变更，将 diff 更新到 origin 中
-		Transform trans = Transform::transformBetween(*_current, *_target);
-		_origin->transform(trans);
+		Transform trans = Transform::transformBetween(_current, *_target);
+		_origin.transform(trans);
 
 		// 重置 target
-		*_target = *_origin;
+		*_target = _origin;
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){
 			Animate *action = *it;
 
-			*_current = *_target;
+			_current = *_target;
 			action->updateAtTime(_clock.time(), _target);
 
 			if(action->state() == AnimateStateEnded){
 				// 在 current 空间里变换 origin
-				Transform trans = Transform::transformBetween(*_current, *_target);
-				_origin->transform(trans);
+				Transform trans = Transform::transformBetween(_current, *_target);
+				_origin.transform(trans);
 
 				delete action;
 				it = _actions.erase(it);
@@ -93,7 +91,7 @@ namespace a3d{
 			}
 		}
 		// 保存 target 动画后的状态
-		*_current = *_target;
+		_current = *_target;
 	}
 
 }; // end namespace
