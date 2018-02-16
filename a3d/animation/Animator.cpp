@@ -60,7 +60,7 @@ namespace a3d{
 		return !_actions.empty();
 	}
 	
-	void Animator::updateAtTime(double time, bool removeEnded){
+	void Animator::updateAtTime(double time){
 		_clock.update(time);
 		if(!isAnimating()){
 			return;
@@ -71,19 +71,20 @@ namespace a3d{
 
 		// 动画进行前，检查 current 和 target，获得动画之外的变更，将 diff 更新到 origin 中
 		Transform trans = Transform::transformBetween(*_current, *_target);
-		//log_debug("origin: %.2f, dw: %.2f", origin.width(), trans.size.x);
 		_origin->transform(trans);
 
 		// 重置 target
 		*_target = *_origin;
 		for(std::list<Animate*>::iterator it=_actions.begin(); it != _actions.end(); /**/){
 			Animate *action = *it;
+
+			*_current = *_target;
 			action->updateAtTime(_clock.time(), _target);
-			// 如果不 removeEnded，那么就不更新 origin，因为 Ended 的动画会重新执行一遍(progress=1)。
-			// 如果更新了 origin，那么时间轴回退动画重新执行时，origin又会被错误地更新一次。
-			if(removeEnded && action->state() == AnimateStateEnded){
-				// 将已结束的动画真正地更新原对象
-				action->update(1, _origin);
+
+			if(action->state() == AnimateStateEnded){
+				// 在 current 空间里变换 origin
+				Transform trans = Transform::transformBetween(*_current, *_target);
+				_origin->transform(trans);
 
 				delete action;
 				it = _actions.erase(it);

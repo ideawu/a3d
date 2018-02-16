@@ -197,10 +197,6 @@ namespace a3d{
 				this->state(AnimateStateBegan);
 			}
 		}
-		if(_state == AnimateStateEnded){
-			// restart ended action
-			this->state(AnimateStateBegan);
-		}
 		if(_state == AnimateStateBegan || _state == AnimateStateDidUpdate){
 			double progress;
 			double timing_p;
