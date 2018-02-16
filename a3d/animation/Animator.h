@@ -27,6 +27,8 @@ namespace a3d{
 		void removeAllAnimations();
 		bool hasAnimations() const;
 
+		double time() const;
+		
 		void updateAtTime(double time);
 
 	private:

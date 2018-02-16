@@ -65,7 +65,11 @@ namespace a3d{
 	bool Animator::hasAnimations() const{
 		return !_actions.empty();
 	}
-	
+
+	double Animator::time() const{
+		return _clock.time();
+	}
+
 	void Animator::updateAtTime(double time){
 		_clock.update(time);
 		if(!isAnimating()){
