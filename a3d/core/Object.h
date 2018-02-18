@@ -21,6 +21,7 @@ namespace a3d{
 
 	public:
 		Matrix4 matrix() const;
+		void matrix(const Matrix4 &mat);
 		
 		Vector3 position() const;
 		void position(const Vector3 &pos);
@@ -31,6 +32,12 @@ namespace a3d{
 		void y(float y);
 		float z() const;
 		void z(float z);
+
+		Vector3 scale() const;
+		void scaleTo(const Vector3 &scale);
+
+		Quaternion quaternion() const;
+		void quaternion(const Quaternion &quat);
 
 		Vector3 size() const;
 		void size(const Vector3 &size);
@@ -49,10 +56,6 @@ namespace a3d{
 		void hide();
 		bool hidden() const;
 
-		Vector3 scale() const;
-		Quaternion quaternion() const;
-		void quaternion(const Quaternion &quat);
-
 	public:
 		void move(float dx, float dy, float dz);
 		void move(const Vector3 &offset);
@@ -66,7 +69,6 @@ namespace a3d{
 		void scale(float xyz);
 		void scale(const Vector3 &scale);
 		void scale(float x, float y, float z);
-		void scaleTo(const Vector3 &scale);
 
 		void transform(float opacity);
 		void transform(const Vector3 &size);

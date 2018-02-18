@@ -101,48 +101,53 @@ namespace a3d{
 		return Vector3(x, y, z);
 	}
 
-	static void quat_to_euler(const Quaternion &q, float *roll, float *pitch, float *yaw, const char *mode){
-		float r, p, y, w;
-		float sinr, cosr, sinp, siny, cosy;
-		float qs[3] = {q.x(), q.y(), q.z()};
-		w = q.w();
-		// 各轴顺序
-		int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
-		r = qs[idx[0]];
-		p = qs[idx[1]];
-		y = qs[idx[2]];
-		sinr = 2 * (w * r + p * y);
-		cosr = 1 - 2 * (r * r + p * p);
-		sinp = 2 * (w * p - r * y);
-		siny = 2 * (w * y + r * p);
-		cosy = 1 - 2 * (p * p + y * y);
-		sinr = trimf(sinr);
-		cosr = trimf(cosr);
-		sinp = trimf(sinp);
-		siny = trimf(siny);
-		cosy = trimf(cosy);
-
-		r = atan2(sinr, cosr);
-		if (fabs(sinp) >= 1){
-			p = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
-		}else{
-			p = asin(sinp);
-		}
-		y = atan2(siny, cosy);
-
-		*roll = r;
-		*pitch = p;
-		*yaw = y;
+	void Matrix4::scaleTo(const Vector3 &scale){
+		Vector3 st = this->scale();
+		this->scale(scale.x * 1/st.x, scale.y * 1/st.y, scale.z * 1/st.z);
 	}
 
-	Vector3 Matrix4::rotation() const{
-		Vector3 r;
-		quat_to_euler(quaternion(), &r.x, &r.y, &r.z, "XYZ");
-		r.x = radian_to_degree(r.x);
-		r.y = radian_to_degree(r.y);
-		r.z = radian_to_degree(r.z);
-		return r;
-	}
+//	static void quat_to_euler(const Quaternion &q, float *roll, float *pitch, float *yaw, const char *mode){
+//		float r, p, y, w;
+//		float sinr, cosr, sinp, siny, cosy;
+//		float qs[3] = {q.x(), q.y(), q.z()};
+//		w = q.w();
+//		// 各轴顺序
+//		int idx[3] = {mode[0]-'X', mode[1]-'X', mode[2]-'X'};
+//		r = qs[idx[0]];
+//		p = qs[idx[1]];
+//		y = qs[idx[2]];
+//		sinr = 2 * (w * r + p * y);
+//		cosr = 1 - 2 * (r * r + p * p);
+//		sinp = 2 * (w * p - r * y);
+//		siny = 2 * (w * y + r * p);
+//		cosy = 1 - 2 * (p * p + y * y);
+//		sinr = trimf(sinr);
+//		cosr = trimf(cosr);
+//		sinp = trimf(sinp);
+//		siny = trimf(siny);
+//		cosy = trimf(cosy);
+//
+//		r = atan2(sinr, cosr);
+//		if (fabs(sinp) >= 1){
+//			p = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+//		}else{
+//			p = asin(sinp);
+//		}
+//		y = atan2(siny, cosy);
+//
+//		*roll = r;
+//		*pitch = p;
+//		*yaw = y;
+//	}
+//
+//	Vector3 Matrix4::rotation() const{
+//		Vector3 r;
+//		quat_to_euler(quaternion(), &r.x, &r.y, &r.z, "XYZ");
+//		r.x = radian_to_degree(r.x);
+//		r.y = radian_to_degree(r.y);
+//		r.z = radian_to_degree(r.z);
+//		return r;
+//	}
 
 	Quaternion Matrix4::quaternion() const{
 //		Matrix4 mat = *this;
@@ -200,12 +205,6 @@ namespace a3d{
 	
 	void Matrix4::rotateZ(float degree){
 		_mat = GLKMatrix4RotateZ(_mat, degree_to_radian(degree));
-	}
-
-	void Matrix4::rotate(const Vector3 &rotation){
-		rotateX(rotation.x);
-		rotateY(rotation.y);
-		rotateZ(rotation.z);
 	}
 
 	void Matrix4::rotate(float degree, const Vector3 &vec){

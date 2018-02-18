@@ -18,6 +18,10 @@ namespace a3d{
 		return _matrix;
 	}
 
+	void Object::matrix(const Matrix4 &mat){
+		_matrix = mat;
+	}
+
 	Vector3 Object::position() const{
 		return _matrix.position();
 	}
@@ -52,6 +56,22 @@ namespace a3d{
 	
 	void Object::z(float z){
 		_matrix.z(z);
+	}
+
+	Vector3 Object::scale() const{
+		return _matrix.scale();
+	}
+
+	void Object::scaleTo(const Vector3 &scale){
+		_matrix.scaleTo(scale);
+	}
+
+	Quaternion Object::quaternion() const{
+		return _matrix.quaternion();
+	}
+
+	void Object::quaternion(const Quaternion &quat){
+		_matrix.quaternion(quat);
 	}
 
 	Vector3 Object::size() const{
@@ -110,18 +130,6 @@ namespace a3d{
 		return _opacity == 0;
 	}
 
-	Vector3 Object::scale() const{
-		return _matrix.scale();
-	}
-
-	Quaternion Object::quaternion() const{
-		return _matrix.quaternion();
-	}
-
-	void Object::quaternion(const Quaternion &quat){
-		_matrix.quaternion(quat);
-	}
-
 
 	void Object::move(float x, float y, float z){
 		_matrix.translate(x, y, z);
@@ -162,11 +170,6 @@ namespace a3d{
 
 	void Object::scale(float x, float y, float z){
 		_matrix.scale(x, y, z);
-	}
-
-	void Object::scaleTo(const Vector3 &scale){
-		Vector3 st = this->scale();
-		this->scale(scale.x * 1/st.x, scale.y * 1/st.y, scale.z * 1/st.z);
 	}
 
 	void Object::transform(float opacity){

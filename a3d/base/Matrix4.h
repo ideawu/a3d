@@ -41,7 +41,8 @@ namespace a3d{
 		void z(float z);
 		
 		Vector3 scale() const;
-		Vector3 rotation() const;
+		void scaleTo(const Vector3 &scale);
+
 		Quaternion quaternion() const;
 		void quaternion(const Quaternion &quat);
 
@@ -52,8 +53,6 @@ namespace a3d{
 		void rotateX(float degree);
 		void rotateY(float degree);
 		void rotateZ(float degree);
-		// TODO: 先后顺序有影响
-		void rotate(const Vector3 &rotation);
 		void rotate(float degree, const Vector3 &vec);
 		// 绕自身坐标系内的任意轴旋转
 		void rotate(float degree, const Axis &axis);

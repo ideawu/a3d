@@ -336,14 +336,10 @@ using namespace a3d;
 			break;
 		}
 		case NSUpArrowFunctionKey:
-			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
 			_currentObject->rotateX(30);
-			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
 			break;
 		case NSDownArrowFunctionKey:
-			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
 			_currentObject->rotateX(-30);
-			log_debug(@"%s", _currentObject->matrix().rotation().str().c_str());
 			break;
 		case 'a':
 		case 'A':
