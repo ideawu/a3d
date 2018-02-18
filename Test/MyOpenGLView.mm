@@ -110,6 +110,7 @@ using namespace a3d;
 
 	delete _context;
 	_context = a3d::Context::blankContext();
+//	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 
 	_objects.pop_back();
 	_objects.push_back(_camera);
@@ -131,6 +132,7 @@ using namespace a3d;
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
+
 	_context->blit();
 }
 

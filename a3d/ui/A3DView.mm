@@ -39,11 +39,14 @@ typedef struct{
 + (NSOpenGLPixelFormat*)defaultPixelFormat{
 	NSOpenGLPixelFormatAttribute attrs[] = {
 		NSOpenGLPFANoRecovery,
+		NSOpenGLPFADoubleBuffer,
+		NSOpenGLPFAAccelerated,
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFADepthSize, 16,
 		NSOpenGLPFAAlphaSize, 8,
-		NSOpenGLPFADoubleBuffer,
-		NSOpenGLPFAAccelerated,
+		NSOpenGLPFAMultisample,
+		NSOpenGLPFASampleBuffers, 1,
+		NSOpenGLPFASamples, 4,
 		0
 	};
 	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
@@ -51,7 +54,11 @@ typedef struct{
 }
 
 - (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format{
+	if(!format){
+		format = A3DView.defaultPixelFormat;
+	}
 	self = [super initWithFrame:frameRect pixelFormat:format];
+	
 	[self setWantsLayer:YES];
 	[self setWantsBestResolutionOpenGLSurface:YES];
 
