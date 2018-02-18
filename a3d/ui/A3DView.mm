@@ -84,12 +84,14 @@ typedef struct{
 
 - (void)prepareOpenGL{
 	// 操作前务必要切换上下文
+	CGLLockContext([[self openGLContext] CGLContextObj]);
 	[self.openGLContext makeCurrentContext];
 
 	[self setup];
 	[self startAnimation];
 	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
 	[self setIsOpenGLReady:YES];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }
 
 - (void)resize{
@@ -97,8 +99,10 @@ typedef struct{
 
 - (void)reshape{
 	// 操作前务必要切换上下文
+	CGLLockContext([[self openGLContext] CGLContextObj]);
 	[[self openGLContext] makeCurrentContext];
 	[self resize];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }
 
 - (CGSize)viewportSize{
