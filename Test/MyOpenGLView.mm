@@ -118,7 +118,7 @@ using namespace a3d;
 
 - (void)renderAtTime:(double)time{
 	_context->begin();
-	_context->clear(0, 0, 0, 1);
+	_context->clear();
 	_context->loadMatrix3D(_camera->matrix3D());
 
 	_scene->render();

@@ -23,7 +23,7 @@ namespace a3d{
 		return new BlankContext();
 	}
 
-	Context* Context::bufferContext(float width, float height){
+	Context* Context::bufferContext(int width, int height){
 		BufferContext *impl = new BufferContext();
 		impl->width(width);
 		impl->height(height);
@@ -45,21 +45,21 @@ namespace a3d{
 		return _renderer;
 	}
 
-	float Context::width() const{
+	int Context::width() const{
 		return _width;
 	}
 	
-	float Context::height() const{
+	int Context::height() const{
 		return _height;
 	}
 	
-	void Context::width(float width){
-		_width = ceil(width/2) * 2;
+	void Context::width(int width){
+		_width = ceil(width/2.0) * 2;
 //		_width = (int)((double)width/2 + 0.5) * 2;
 	}
 	
-	void Context::height(float height){
-		_height = ceil(height/2) * 2;
+	void Context::height(int height){
+		_height = ceil(height/2.0) * 2;
 //		_height = (int)((double)height/2 + 0.5) * 2;
 	}
 
@@ -109,7 +109,7 @@ namespace a3d{
 	}
 	
 	void Context::clear(){
-		clear(0, 0, 0, 1);
+		clear(0, 0, 0, 0);
 	}
 	
 	void Context::clear(float r, float g, float b, float a){

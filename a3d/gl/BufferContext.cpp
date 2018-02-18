@@ -29,18 +29,18 @@ namespace a3d{
 	}
 
 	void BufferContext::setup(){
-		float width = this->width();
-		float height = this->height();
+		int width = this->width();
+		int height = this->height();
 
 		glGenRenderbuffers(1, &_colorbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, _colorbuffer);
-//			glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, (GLsizei)width, (GLsizei)height);
-		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA, (GLsizei)width, (GLsizei)height);
+		//glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, width, height);
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA, width, height);
 		
 		glGenRenderbuffers(1, &_depthbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, _depthbuffer);
-//			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, (GLsizei)width, (GLsizei)height);
-		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT, (GLsizei)width, (GLsizei)height);
+		//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT, width, height);
 		
 		glGenFramebuffers(1, &_framebuffer);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, _framebuffer);
@@ -59,8 +59,8 @@ namespace a3d{
 		 unsigned char *image = new unsigned char[image_bytes];
 		 
 		 // copy pixels to memory from the single-sampled frame bffer
-		 glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);    // set up to read from the single-sampled FBO
-		 glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);                  // do not copy into any server side buffer object
+		 glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer); // set up to read from the single-sampled FBO
+		 glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);               // do not copy into any server side buffer object
 		 glReadBuffer(GL_COLOR_ATTACHMENT0);
 		 glPixelStorei(GL_PACK_ALIGNMENT, BMP_ROW_ALIGN);
 		 glGetError();

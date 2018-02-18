@@ -16,15 +16,15 @@ namespace a3d{
 		static Context* current();
 		static Context* blankContext();
 		// 创建一个FBO，如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
-		static Context* bufferContext(float width, float height);
+		static Context* bufferContext(int width, int height);
 
 	public:
 		virtual ~Context();
 		
 		Renderer* renderer() const;
 
-		float width() const;
-		float height() const;
+		int width() const;
+		int height() const;
 		
 		void loadMatrix3D(const Matrix4 &mat);
 		void loadMatrix2D(const Matrix4 &mat);
@@ -50,11 +50,11 @@ namespace a3d{
 
 		void loadMatrix(const Matrix4 &mat);
 
-		void width(float width);
-		void height(float height);
+		void width(int width);
+		void height(int height);
 
-		float _width;
-		float _height;
+		int _width;
+		int _height;
 		
 		Renderer *_renderer;
 	};
