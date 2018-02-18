@@ -50,23 +50,42 @@ int main(int argc, const char * argv[])
 
 	{
 		Matrix4 mat1, mat2;
+		Quaternion q;
+		Matrix4 df;
+		Matrix4 mat;
 
+		mat1.translate(100, 0, 0);
 		mat1.rotateY(45);
 
-		mat2.rotateY(45);
+		mat2 = mat1;
 		mat2.rotateX(45);
 
 		log_debug("mat2:\n%s", mat2.str().c_str());
 //		log_debug("mat1:\n%s", mat1.str().c_str());
 
-		Matrix4 df = mat2.div(mat1);
-		Quaternion q2 = df.quaternion();
-		log_debug(@"%.2f %s", q2.angle(), q2.vector().str().c_str());
-
-		Matrix4 mat = df.mul(mat1);
+		df = mat2.mul(mat1.invert());
+		q = df.quaternion();
+		log_debug(@"%.2f %s", q.angle(), q.vector().str().c_str());
+		mat = df.mul(mat1);
 		log_debug("(mat2/mat1) * mat1=:\n%s", mat.str().c_str());
 
+		df = mat1.invert().mul(mat2);
+		q = df.quaternion();
+		log_debug(@"%.2f %s", q.angle(), q.vector().str().c_str());
+		mat = mat1.mul(df);
+		log_debug("mat1 * (mat2 in mat1)=:\n%s", mat.str().c_str());
+
 	}
+
+//	{
+//		Matrix4 mat1, mat2;
+//		mat1.translate(100, 0, 0);
+//		mat2.rotateY(30);
+//		log_debug("mat1:\n%s", mat1.str().c_str());
+//		log_debug("mat2:\n%s", mat2.str().c_str());
+//		log_debug("mat2 enter mat1:\n%s", mat1.invert().mul(mat2).str().c_str());
+//		log_debug("mat2 leave mat1:\n%s", mat1.mul(mat2).str().c_str());
+//	}
 
 	return 0;
 }

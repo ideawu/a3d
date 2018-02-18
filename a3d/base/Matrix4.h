@@ -12,6 +12,11 @@
 #include "Axis.h"
 #include "Quaternion.h"
 
+// 矩阵乘法的含义：
+// mat1 x mat2: mat1 在自己的坐标系内做 mat2 变换，或者说 mat2 在父坐标系内做 mat1 变换
+// 矩阵除法的含义：
+// mat2 / mat1: mat1 为了与 mat2 重合，需要在父坐标系内做的变换
+
 namespace a3d{
 	class Matrix4
 	{
@@ -62,9 +67,7 @@ namespace a3d{
 		void resetScale();
 
 		Matrix4 invert() const;
-		// mat 做当前矩阵的变换
 		Matrix4 mul(const Matrix4 &mat) const;
-		// 返回目标矩阵距离当前矩阵需要做的变换
 		Matrix4 div(const Matrix4 &mat) const;
 
 		Vector3 mul(const Vector3 &vec) const;

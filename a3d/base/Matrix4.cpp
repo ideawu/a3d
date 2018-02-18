@@ -250,7 +250,6 @@ namespace a3d{
 	
 	Matrix4 Matrix4::div(const Matrix4 &mat) const{
 		return this->mul(mat.invert());
-//		return this->invert().mul(mat);
 	}
 
 	Vector3 Matrix4::mul(const Vector3 &vec) const{

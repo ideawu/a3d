@@ -72,6 +72,7 @@ namespace a3d{
 
 		void transform(float opacity);
 		void transform(const Vector3 &size);
+		// 在父坐标系内做mat变换，而不是在自己的坐标系内做mat变换
 		void transform(const Matrix4 &mat);
 		void transform(const Transform &trans);
 
@@ -82,6 +83,8 @@ namespace a3d{
 		Point3 convertPointFromParent(const Point3 &pos) const;
 		Axis convertAxisToParent(const Axis &axis) const;
 		Axis convertAxisFromParent(const Axis &axis) const;
+		Matrix4 convertMatrixToParent(const Matrix4 &mat) const;
+		Matrix4 convertMatrixFromParent(const Matrix4 &mat) const;
 
 		// 将力施加于坐标系的某一位置，当作用于标准球表面时，每一单位的力将产生一单位的位移和一单位(默认1角度)的旋转
 //		void force(const Vector3 &force, const Vector3 &atPoint);

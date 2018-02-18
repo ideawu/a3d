@@ -192,19 +192,19 @@ namespace a3d{
 	}
 
 	Vector3 Object::convertVectorToParent(const Vector3 &vec) const{
-		return this->matrix().mul(vec);
+		return _matrix.mul(vec);
 	}
-	
-	Point3 Object::convertPointToParent(const Point3 &pos) const{
-		return this->matrix().mul(pos);
-	}
-	
+
 	Vector3 Object::convertVectorFromParent(const Vector3 &vec) const{
-		return this->matrix().invert().mul(vec);
+		return _matrix.invert().mul(vec);
 	}
-	
+
+	Point3 Object::convertPointToParent(const Point3 &pos) const{
+		return _matrix.mul(pos);
+	}
+
 	Point3 Object::convertPointFromParent(const Point3 &pos) const{
-		return this->matrix().invert().mul(pos);
+		return _matrix.invert().mul(pos);
 	}
 
 	Axis Object::convertAxisToParent(const Axis &axis) const{
@@ -217,6 +217,14 @@ namespace a3d{
 		Point3 p = convertPointFromParent(axis.origin);
 		Vector3 v = convertVectorFromParent(axis.direction);
 		return Axis(p, v);
+	}
+
+	Matrix4 Object::convertMatrixToParent(const Matrix4 &mat) const{
+		return _matrix.mul(mat);
+	}
+
+	Matrix4 Object::convertMatrixFromParent(const Matrix4 &mat) const{
+		return _matrix.invert().mul(mat);
 	}
 
 }; // end namespace
