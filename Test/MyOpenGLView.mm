@@ -74,7 +74,7 @@ using namespace a3d;
 		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
-		node->move(100, 0, 600);
+		node->move(150, 150, 500);
 		node->opacity(0.5);
 		_img3 = node;
 	}
@@ -120,15 +120,13 @@ using namespace a3d;
 	_context->begin();
 	_context->clear();
 	_context->loadMatrix3D(_camera->matrix3D());
+	[self draw3D];
 
 	_scene->render();
 	_alex->renderAtTime(time);
 	_flag->renderAtTime(time);
 	_img1->renderAtTime(time);
-	//	_img2->renderAtTime(time);
 	_img3->renderAtTime(time);
-
-	[self draw3D];
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
