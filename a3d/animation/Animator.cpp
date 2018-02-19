@@ -96,11 +96,14 @@ namespace a3d{
 				Transform trans = Transform::transformBetween(_current, *_target);
 				_origin.transform(trans);
 
-				delete action;
-				it = _actions.erase(it);
-			}else{
-				it ++;
+				if(action->repeats() == 0){
+					delete action;
+					it = _actions.erase(it);
+					continue;
+				}
 			}
+
+			it ++;
 		}
 		// 保存 target 动画后的状态
 		_current = *_target;

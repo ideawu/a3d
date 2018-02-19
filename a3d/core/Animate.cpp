@@ -205,7 +205,7 @@ namespace a3d{
 			return;
 		}
 
-		if(_state == AnimateStateNone){
+		if(_state == AnimateStateNone || _state == AnimateStateEnded){
 			if(_beginTime == -1){
 				// auto start
 				_beginTime = time;
@@ -232,11 +232,8 @@ namespace a3d{
 
 			if(progress >= 1){
 				_repeats --;
-				if(_repeats == 0){
-					this->state(AnimateStateEnded);
-				}else{
-					_beginTime = time;
-				}
+				_beginTime = time;
+				this->state(AnimateStateEnded);
 			}
 		}
 	}

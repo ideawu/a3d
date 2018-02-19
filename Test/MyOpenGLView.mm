@@ -268,7 +268,7 @@ using namespace a3d;
 //			[self switchSprite];
 			
 			Node *node = _img3;
-			node = _currentObject;
+//			node = _currentObject;
 //			Node *node = _alex;
 
 			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
