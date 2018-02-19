@@ -13,9 +13,9 @@
 #include "Quaternion.h"
 
 // 矩阵乘法的含义：
-// mat1 x mat2: mat1 在自己的坐标系内做 mat2 变换，或者说 mat2 在父坐标系内做 mat1 变换
+// mat1 * mat2: mat1 在自己的坐标系内做 mat2 变换，或者说 mat2 在父坐标系内做 mat1 变换
 // 矩阵除法的含义：
-// mat2 / mat1: mat1 为了与 mat2 重合，需要在父坐标系内做的变换
+// mat2 / mat1: mat1 为了与 mat2 重合，需要在父坐标系内做的变换(D=m2/m1, D*m1=m2)
 
 namespace a3d{
 	class Matrix4
