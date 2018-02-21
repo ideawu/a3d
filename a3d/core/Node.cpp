@@ -25,6 +25,9 @@ namespace a3d{
 	}
 
 	Node::~Node(){
+		if(_parent){
+			removeFromParent();
+		}
 		delete _subs;
 		delete _animator;
 	}
