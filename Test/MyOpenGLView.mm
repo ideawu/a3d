@@ -57,7 +57,7 @@ using namespace a3d;
 //		node->move(node->width()/2, node->height()/2, 0);
 		node->move(self.viewportSize.width/2, self.viewportSize.height/2, 0);
 		node->scale(0.2);
-		node->rotateY(50);
+//		node->rotateY(50);
 		_img1 = node;
 	}
 	{
@@ -266,7 +266,7 @@ using namespace a3d;
 			// 切换被控制角色
 //			[self switchSprite];
 			
-			Node *node = _img3;
+			Node *node = _img1;
 //			node = _currentObject;
 //			Node *node = _alex;
 
@@ -284,7 +284,7 @@ using namespace a3d;
 
 			{
 //				[self setMaxFPS:15];
-				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
+				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 0, 1));
 				action->easingFunc(a3d::TimingFuncLinear);
 				action->repeat(true);
 				action->duration(2 * action->bounces());

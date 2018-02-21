@@ -32,6 +32,7 @@ namespace a3d{
 	void AnimateRotation::update(double progress, Node *target){
 		if(_type == TypeVector){
 			float angle = _degree * progress;
+//			log_debug("%.2f", angle);
 			target->rotate(angle, _vec);
 		}else if(_type == TypeAxis){
 			float angle = _degree * progress;
