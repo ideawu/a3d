@@ -57,6 +57,9 @@ namespace a3d{
 		bool hidden() const;
 
 	public:
+		void moveX(float dx);
+		void moveY(float dy);
+		void moveZ(float dz);
 		void move(float dx, float dy, float dz);
 		void move(const Vector3 &offset);
 		void rotateX(float degree);

@@ -130,9 +130,20 @@ namespace a3d{
 		return _opacity == 0;
 	}
 
+	void Object::moveX(float dx){
+		_matrix.translate(dx, 0, 0);
+	}
+	
+	void Object::moveY(float dy){
+		_matrix.translate(0, dy, 0);
+	}
+	
+	void Object::moveZ(float dz){
+		_matrix.translate(0, 0, dz);
+	}
 
-	void Object::move(float x, float y, float z){
-		_matrix.translate(x, y, z);
+	void Object::move(float dx, float dy, float dz){
+		_matrix.translate(dx, dy, dz);
 	}
 	
 	void Object::move(const Vector3 &offset){

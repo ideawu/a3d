@@ -53,7 +53,7 @@ namespace a3d{
 
 	public:
 		/// 方法
-		void translate(float x, float y, float z);
+		void translate(float dx, float dy, float dz);
 		void translate(const Vector3 &offset);
 		void rotateX(float degree);
 		void rotateY(float degree);
