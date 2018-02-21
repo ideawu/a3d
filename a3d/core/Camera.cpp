@@ -29,6 +29,9 @@ namespace a3d{
 		_fovy = fovy;
 		_near = (fmax(width, height)/2) / tanFovy2;
 		if(eyeZ != 0){
+			if(eyeZ < -_near){
+				eyeZ = -_near + 1;
+			}
 			_near += eyeZ;
 			float aspect = height/width;
 			if(width > height){
