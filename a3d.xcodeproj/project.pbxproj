@@ -124,6 +124,7 @@
 		315964A92026E62700FB0679 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A82026E62700FB0679 /* Cocoa.framework */; };
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
 		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
+		3169B74B203D361400D70259 /* ImageSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */; };
 		319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A809B202C581C00DF1175 /* SpriteNode.cpp */; };
 		319A809E202C581C00DF1175 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
 		319A809F202C59B200DF1175 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
@@ -140,6 +141,7 @@
 			dstPath = a3d;
 			dstSubfolderSpec = 7;
 			files = (
+				3169B74B203D361400D70259 /* ImageSprite.h in CopyFiles */,
 				083EF8772034684C009960EC /* Animator.h in CopyFiles */,
 				084619C7202F427200741AF2 /* Quaternion.h in CopyFiles */,
 				319A80A0202C61E500DF1175 /* Text.h in CopyFiles */,

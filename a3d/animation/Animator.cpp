@@ -58,7 +58,7 @@ namespace a3d{
 	
 	void Animator::removeAllAnimations(){
 		while(!_actions.empty()){
-			_actions.front();
+			removeAnimation(_actions.front());
 		}
 	}
 
