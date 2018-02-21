@@ -46,6 +46,7 @@ namespace a3d{
 		void z(float z);
 		
 		Vector3 scale() const;
+		void scaleTo(float xyz);
 		void scaleTo(const Vector3 &scale);
 
 		Quaternion quaternion() const;

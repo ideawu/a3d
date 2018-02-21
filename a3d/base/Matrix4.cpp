@@ -101,6 +101,10 @@ namespace a3d{
 		return Vector3(x, y, z);
 	}
 
+	void Matrix4::scaleTo(float xyz){
+		scaleTo(Vector3(xyz, xyz, xyz));
+	}
+
 	void Matrix4::scaleTo(const Vector3 &scale){
 		Vector3 st = this->scale();
 		this->scale(scale.x * 1/st.x, scale.y * 1/st.y, scale.z * 1/st.z);

@@ -62,6 +62,10 @@ namespace a3d{
 		return _matrix.scale();
 	}
 
+	void Object::scaleTo(float xyz){
+		_matrix.scaleTo(xyz);
+	}
+
 	void Object::scaleTo(const Vector3 &scale){
 		_matrix.scaleTo(scale);
 	}
