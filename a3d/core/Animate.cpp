@@ -219,12 +219,11 @@ namespace a3d{
 			double timing_p;
 			if(time >= _beginTime + _duration){
 				progress = 1;
-				timing_p = 1;
 			}else{
 				progress = (time - _beginTime)/_duration;
 				progress = fmin(1, progress);
-				timing_p = this->timing(progress);
 			}
+			timing_p = this->timing(progress);
 
 			this->state(AnimateStateWillUpdate);
 			update(timing_p, target);

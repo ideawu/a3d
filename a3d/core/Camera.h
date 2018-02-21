@@ -15,10 +15,10 @@ namespace a3d{
 		Camera(){}
 		
 		// in points, not in pixels
-		static Camera* create(float fovy, float width, float height, float depth);
+		static Camera* create(float fovy, float width, float height, float depth, float eyeZ=0);
 		
 		// in points, not in pixels
-		void setup(float fovy, float width, float height, float depth);
+		void setup(float fovy, float width, float height, float depth, float eyeZ=0);
 		
 		Matrix4 matrix3D() const;
 		Matrix4 matrix2D() const;

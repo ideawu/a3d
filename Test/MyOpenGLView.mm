@@ -52,12 +52,12 @@ using namespace a3d;
 	SpriteNode *node;
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/bg1.png");
+		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/camera.jpg");
 		node->sprite(sprite);
-		node->move(node->width()/2, node->height()/2, 0);
-		node->move(100, 0, 300);
-		node->opacity(0.8);
-		node->scale(0.5);
+//		node->move(node->width()/2, node->height()/2, 0);
+		node->move(self.viewportSize.width/2, self.viewportSize.height/2, 0);
+		node->scale(0.2);
+		node->rotateY(50);
 		_img1 = node;
 	}
 	{
@@ -105,8 +105,8 @@ using namespace a3d;
 		_camera = a3d::Camera::create(60, width, height, depth);
 		_camera->position(width/2, height/2, 0);
 	}else{
-		_camera->setup(60, width, height, depth);
 	}
+	_camera->setup(60, width, height, depth, -50);
 
 	delete _context;
 	_context = a3d::Context::blankContext();
@@ -114,6 +114,7 @@ using namespace a3d;
 
 	_objects.pop_back();
 	_objects.push_back(_camera);
+//	_currentObject = _camera;
 }
 
 - (void)renderAtTime:(double)time{

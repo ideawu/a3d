@@ -379,9 +379,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 - (void)drawRect:(NSRect)dirtyRect{
 	[super drawRect:dirtyRect];
-	if(NSFoundationVersionNumber <= 1056.13 && self.layer != nil){
-		[self doRender];
-	}
+	[self doRender];
 }
 
 - (void)renderAtTime:(double)time{

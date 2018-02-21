@@ -101,7 +101,7 @@ namespace a3d{
 	void Context::begin(){
 		_current = this;
 		if(_width > 0 && _height > 0){
-			glViewport(0, 0, _width, _height);
+//			glViewport(0, 0, _width, _height);
 		}
 		if(framebuffer()){
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());

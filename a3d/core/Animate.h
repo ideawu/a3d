@@ -35,7 +35,7 @@ namespace a3d{
 	public:
 		virtual ~Animate();
 
-		// 子类方法，注意，TimingFunc可能使progress大于1或小于0，但结束时progress必为1
+		// 子类方法，注意，TimingFunc可能使progress大于1或小于0
 		virtual void update(double progress, Node *target) = 0;
 
 		AnimateState state() const;
