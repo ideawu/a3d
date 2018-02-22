@@ -45,20 +45,26 @@ namespace a3d{
 	void Renderer::popMatrix(){
 		glPopMatrix();
 	}
-	
+
+	void Renderer::clearStencil(){
+		glEnable(GL_STENCIL_TEST);
+		glStencilMask(0xff);
+		glClearStencil(0);
+		glClear(GL_STENCIL_BUFFER_BIT);
+		_stencilRef = 0;
+	}
+
 	void Renderer::pushStencil(){
-		if(_stencilRef == 0){
-			glEnable(GL_STENCIL_TEST);
-			glClearStencil(0);
-			glClear(GL_STENCIL_BUFFER_BIT);
-		}
 		glStencilFunc(GL_EQUAL, _stencilRef, 0xff);
 		glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
 		_stencilRef ++;
 	}
-	
+
+	static void _decrStencil(int ref);
+
 	void Renderer::popStencil(){
-		// TODO: clear stencil buffer with value=_stencilRef
+		_decrStencil(_stencilRef);
+
 		_stencilRef --;
 		if(_stencilRef == 0){
 			glDisable(GL_STENCIL_TEST);
@@ -66,6 +72,47 @@ namespace a3d{
 			glStencilFunc(GL_EQUAL, _stencilRef, 0xff);
 			glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
 		}
+	}
+	
+	static void _decrStencil(int ref){
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+		
+		glDisable(GL_DEPTH_TEST);
+		glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+		{
+			glStencilFunc(GL_EQUAL, ref, 0xff);
+			glStencilOp(GL_KEEP, GL_KEEP, GL_DECR);
+
+			glColor3f(1, 1, 1);
+			glBegin(GL_POLYGON);
+			{
+				glVertex2i(-1, -1);
+				glVertex2i(1, -1);
+				glVertex2i(1, 1);
+				glVertex2i(-1, 1);
+			}
+			glEnd();
+			glBegin(GL_POLYGON);
+			{
+				glVertex2i(-1, -1);
+				glVertex2i(-1, 1);
+				glVertex2i(1, 1);
+				glVertex2i(1, -1);
+			}
+			glEnd();
+		}
+		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+		glEnable(GL_DEPTH_TEST);
+		
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
 	}
 
 }; // end namespace

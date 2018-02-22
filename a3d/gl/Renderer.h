@@ -27,7 +27,7 @@ namespace a3d{
 		void pushMatrix(const Matrix4 &mat);
 		void popMatrix();
 
-		// TODO:
+		void clearStencil();
 		void pushStencil();
 		void popStencil();
 

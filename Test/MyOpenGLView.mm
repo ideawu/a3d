@@ -125,11 +125,14 @@ using namespace a3d;
 
 	_scene->render();
 	
+	_context->renderer()->clearStencil();
 	_context->renderer()->pushStencil();
 	_alex->renderAtTime(time);
-	_context->renderer()->pushStencil();
-	_text->renderAtTime(time);
-	_context->renderer()->popStencil();
+	{
+		_context->renderer()->pushStencil();
+		_text->renderAtTime(time);
+		_context->renderer()->popStencil();
+	}
 	_context->renderer()->popStencil();
 
 	_flag->renderAtTime(time);
