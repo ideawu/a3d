@@ -12,9 +12,16 @@ namespace a3d{
 	{
 	public:
 		static AnimateScale* scale(const Vector3 &s);
+		static AnimateScale* scaleTo(const Vector3 &s);
 
 		virtual void update(double progress, Node *target);
 	private:
+		typedef enum{
+			TypeOffset,
+			TypeTarget
+		}AnimateType;
+
+		AnimateType _type;
 		Vector3 _scale;
 	};
 }; // end namespace

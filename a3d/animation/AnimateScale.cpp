@@ -8,19 +8,25 @@ namespace a3d{
 
 	AnimateScale* AnimateScale::scale(const Vector3 &s){
 		AnimateScale *ret = new AnimateScale();
+		ret->_type = TypeOffset;
+		ret->_scale = s;
+		return ret;
+	}
+
+	AnimateScale* AnimateScale::scaleTo(const Vector3 &s){
+		AnimateScale *ret = new AnimateScale();
+		ret->_type = TypeTarget;
 		ret->_scale = s;
 		return ret;
 	}
 
 	void AnimateScale::update(double progress, Node *target){
-		// 避免计算误差
-		if(progress == 1){
-			target->scale(_scale);
-//			log_debug("%f", target->scale().x);
-		}else{
+		if(_type == TypeOffset){
 			Vector3 s = Vector3::slerp(Vector3(1, 1, 1), _scale, progress);
 			target->scale(s);
-//			log_debug("%f", target->scale().x);
+		}else if(_type == TypeTarget){
+			Vector3 s = Vector3::slerp(target->scale(), _scale, progress);
+			target->scaleTo(s);
 		}
 	}
 

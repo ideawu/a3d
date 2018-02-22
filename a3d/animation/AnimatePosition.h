@@ -18,7 +18,7 @@ namespace a3d{
 	private:
 		typedef enum{
 			TypeOffset,
-			TypePosition
+			TypeTarget
 		}AnimateType;
 		
 		AnimateType _type;

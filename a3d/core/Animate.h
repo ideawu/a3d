@@ -24,6 +24,7 @@ namespace a3d{
 		static Animate* scale(float xyz);
 		static Animate* scale(float x, float y, float z);
 		static Animate* scale(const Vector3 &s);
+		static Animate* scaleTo(const Vector3 &s);
 
 		static Animate* fadeTo(double opacity, double duration=0);
 		static Animate* show(double duration=0);

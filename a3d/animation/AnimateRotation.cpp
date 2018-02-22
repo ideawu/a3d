@@ -38,14 +38,9 @@ namespace a3d{
 			float angle = _degree * progress;
 			target->rotate(angle, _axis);
 		}else if(_type == TypeQuaternion){
-			// 避免计算误差
-			if(progress == 1){
-				target->quaternion(_quat);
-			}else{
-				Quaternion q0 = target->matrix().quaternion();
-				Quaternion q = Quaternion::slerp(q0, _quat, progress);
-				target->quaternion(q);
-			}
+			Quaternion q0 = target->matrix().quaternion();
+			Quaternion q = Quaternion::slerp(q0, _quat, progress);
+			target->quaternion(q);
 		}
 //		log_debug("%f", target->quaternion().angle());
 	}

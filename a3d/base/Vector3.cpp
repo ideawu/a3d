@@ -7,6 +7,10 @@
 namespace a3d{
 	
 	Vector3 Vector3::slerp(const Vector3 &origin, const Vector3 &target, float progress){
+		// 避免计算误差
+		if(progress == 1){
+			return target;
+		}
 		return origin.add(target.sub(origin).mul(progress));
 	}
 	

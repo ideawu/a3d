@@ -51,6 +51,10 @@ namespace a3d{
 		return AnimateScale::scale(s);
 	}
 
+	Animate* Animate::scaleTo(const Vector3 &s){
+		return AnimateScale::scaleTo(s);
+	}
+
 	Animate* Animate::fadeTo(double opacity, double duration){
 		return AnimateOpacity::fadeTo(opacity, duration);
 	}
