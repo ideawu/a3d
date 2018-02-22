@@ -5,11 +5,14 @@
 #include "Clock.h"
 
 namespace a3d{
+	static const double INIT_TICK = 0.00001;
+	static const double STOP_TICK = -1;
+	static const double RUNNING_TICK = -2;
 
 	Clock::Clock(){
-		_firstTick = 0;
-		_secondTick = 0;
-		_pauseTick = 0;
+		_firstTick = INIT_TICK;
+		_secondTick = INIT_TICK;
+		_pauseTick = RUNNING_TICK;
 		_speed = 1;
 	}
 
@@ -27,7 +30,7 @@ namespace a3d{
 		}else if(isPaused()){
 			_pauseTick = tick;
 		}else{
-			if(_firstTick == 0){
+			if(_firstTick == INIT_TICK){
 				_firstTick = tick;
 			}
 			_secondTick = tick;
@@ -35,15 +38,15 @@ namespace a3d{
 	}
 
 	bool Clock::isRunning() const{
-		return _pauseTick == 0;
+		return _pauseTick == RUNNING_TICK;
 	}
 
 	bool Clock::isPaused() const{
-		return _pauseTick > 0;
+		return _pauseTick >= INIT_TICK;
 	}
 
 	bool Clock::isStopped() const{
-		return _pauseTick == -1;
+		return _pauseTick == STOP_TICK;
 	}
 
 	void Clock::start(){
@@ -52,7 +55,7 @@ namespace a3d{
 			_secondTick = _pauseTick;
 			this->time(time);
 		}
-		_pauseTick = 0;
+		_pauseTick = RUNNING_TICK;
 	}
 
 	void Clock::pause(){
@@ -60,9 +63,9 @@ namespace a3d{
 	}
 
 	void Clock::stop(){
-		_firstTick = 0;
-		_secondTick = 0;
-		_pauseTick = -1;
+		_firstTick = INIT_TICK;
+		_secondTick = INIT_TICK;
+		_pauseTick = STOP_TICK;
 	}
 
 	float Clock::speed() const{
