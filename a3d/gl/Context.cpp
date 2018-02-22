@@ -55,12 +55,10 @@ namespace a3d{
 	
 	void Context::width(int width){
 		_width = ceil(width/2.0) * 2;
-//		_width = (int)((double)width/2 + 0.5) * 2;
 	}
 	
 	void Context::height(int height){
 		_height = ceil(height/2.0) * 2;
-//		_height = (int)((double)height/2 + 0.5) * 2;
 	}
 
 	void Context::loadMatrix(const Matrix4 &mat){
@@ -68,24 +66,6 @@ namespace a3d{
 		glLoadMatrixf((const GLfloat *)mat.array());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		
-		glEnable(GL_MULTISAMPLE);
-		glEnable(GL_DEPTH_TEST);
-//		glDepthMask(GL_TRUE);
-//		glEnable(GL_ALPHA_TEST);
-//		glAlphaFunc(GL_GREATER, 0.1f);
-		glEnable(GL_BLEND);
-		// premultiplied alpha
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	}
 
 	void Context::loadMatrix3D(const Matrix4 &mat){
@@ -106,6 +86,21 @@ namespace a3d{
 		if(framebuffer()){
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
 		}
+		
+		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		// premultiplied alpha
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	}
 	
 	void Context::clear(){
@@ -125,7 +120,7 @@ namespace a3d{
 	void Context::clearDepth(){
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
-	
+
 	void Context::flush(){
 		glFlush();
 	}

@@ -27,12 +27,18 @@ namespace a3d{
 		void pushMatrix(const Matrix4 &mat);
 		void popMatrix();
 
+		// TODO:
+		void pushStencil();
+		void popStencil();
+
 	private:
 		Renderer(const Renderer &d);
 		Renderer& operator =(const Renderer &d);
 
 		float _opacity;
-		std::vector<float> _q_opacity;
+		std::vector<float> _opacity_list;
+		
+		int _stencilRef;
 	};
 }; // end namespace
 

@@ -21,7 +21,7 @@ using namespace a3d;
 	DraftSprite *_camera_alex;
 	SpriteNode *_img1;
 	SpriteNode *_img2;
-	SpriteNode *_img3;
+	SpriteNode *_text;
 
 	MySprite *_alex;
 
@@ -55,7 +55,7 @@ using namespace a3d;
 		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/camera.jpg");
 		node->sprite(sprite);
 //		node->move(node->width()/2, node->height()/2, 0);
-		node->move(self.viewportSize.width/2, self.viewportSize.height/2, 0);
+		node->move(self.viewportSize.width/4, self.viewportSize.height/2, 0);
 		node->scale(0.2);
 //		node->rotateY(50);
 		_img1 = node;
@@ -74,9 +74,9 @@ using namespace a3d;
 		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
-		node->move(150, 150, 500);
-		node->opacity(0.5);
-		_img3 = node;
+		node->move(450, 150, 500);
+		node->opacity(0.9);
+		_text = node;
 	}
 	
 	_flag = new DraftSprite();
@@ -124,10 +124,16 @@ using namespace a3d;
 	[self draw3D];
 
 	_scene->render();
+	
+	_context->renderer()->pushStencil();
 	_alex->renderAtTime(time);
+	_context->renderer()->pushStencil();
+	_text->renderAtTime(time);
+	_context->renderer()->popStencil();
+	_context->renderer()->popStencil();
+
 	_flag->renderAtTime(time);
 	_img1->renderAtTime(time);
-	_img3->renderAtTime(time);
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
@@ -266,7 +272,7 @@ using namespace a3d;
 			// 切换被控制角色
 //			[self switchSprite];
 			
-			Node *node = _img1;
+			Node *node = _text;
 //			node = _currentObject;
 //			Node *node = _alex;
 
