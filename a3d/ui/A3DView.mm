@@ -373,7 +373,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 - (void)doRender{
 	CGLLockContext([[self openGLContext] CGLContextObj]);
 	[[self openGLContext] makeCurrentContext];
+//	log_debug(@"begin");
 	[self renderAtTime:_refreshRate.lastTime];
+//	log_debug(@"end");
 	[[self openGLContext] flushBuffer];
 	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }

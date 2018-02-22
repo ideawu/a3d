@@ -82,6 +82,7 @@ namespace a3d{
 			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
 				if(index <= subIndex || it == _subs->end()){
 					_subs->insert(it, node);
+					break;
 				}
 				subIndex ++;
 			}
@@ -150,6 +151,25 @@ namespace a3d{
 	}
 	
 	void Node::renderAtTime(double time){
+#if 0
+		{
+			int level = 0;
+			Node *p = this;
+			while(p->parent()){
+				p = p->parent();
+				level ++;
+			}
+			char buf[256];
+			int w = 2;
+			for(int i=0; i<level*w; i+=w){
+				buf[i] = ' ';
+				buf[i+1] = ' ';
+			}
+			buf[level*w] = '\0';
+			int subs = _subs? (int)_subs->size() : 0;
+			log_debug("%s %d, subs: %d", buf, this, subs);
+		}
+#endif
 		if(time > 0 && _animator){
 			_animator->updateAtTime(time);
 		}

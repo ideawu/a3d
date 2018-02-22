@@ -100,7 +100,7 @@ namespace a3d{
 			return;
 		}
 		this->updateClock(time);
-		
+
 		Texture *texture = sprite()->textureAtTime(_clock.time());
 		if(texture){
 			Rect texRect = Rect(0, 0, 1, 1);
