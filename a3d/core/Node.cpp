@@ -77,15 +77,14 @@ namespace a3d{
 
 		if(index >= _subs->size()){
 			_subs->push_back(node);
+		}else if(index <= 0){
+			_subs->push_front(node);
 		}else{
-			int subIndex = 0;
-			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
-				if(index <= subIndex || it == _subs->end()){
-					_subs->insert(it, node);
-					break;
-				}
-				subIndex ++;
+			std::list<Node*>::iterator it=_subs->begin();
+			for(int i=0; i<index; i++){
+				it ++;
 			}
+			_subs->insert(it, node);
 		}
 	}
 
@@ -151,25 +150,6 @@ namespace a3d{
 	}
 	
 	void Node::renderAtTime(double time){
-#if 0
-		{
-			int level = 0;
-			Node *p = this;
-			while(p->parent()){
-				p = p->parent();
-				level ++;
-			}
-			char buf[256];
-			int w = 2;
-			for(int i=0; i<level*w; i+=w){
-				buf[i] = ' ';
-				buf[i+1] = ' ';
-			}
-			buf[level*w] = '\0';
-			int subs = _subs? (int)_subs->size() : 0;
-			log_debug("%s %d, subs: %d", buf, this, subs);
-		}
-#endif
 		if(time > 0 && _animator){
 			_animator->updateAtTime(time);
 		}
@@ -181,6 +161,25 @@ namespace a3d{
 		bool currentVisible = Renderer::current()->opacity() > 0;
 		if(currentVisible){
 			Renderer::current()->pushMatrix(this->matrix());
+#if 0
+			{
+				int level = 0;
+				Node *p = this;
+				while(p->parent()){
+					p = p->parent();
+					level ++;
+				}
+				char buf[256];
+				int w = 2;
+				for(int i=0; i<level*w; i+=w){
+					buf[i] = ' ';
+					buf[i+1] = ' ';
+				}
+				buf[level*w] = '\0';
+				int subs = _subs? (int)_subs->size() : 0;
+				log_debug("%s %d, subs: %d", buf, this, subs);
+			}
+#endif
 			this->drawAtTime(time);
 		}
 		if(_subs){
