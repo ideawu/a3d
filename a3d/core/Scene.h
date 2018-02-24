@@ -28,9 +28,10 @@ namespace a3d{
 		// 使用指定层开始绘图
 		void layer(int index);
 
+		// 返回当前 layer 的 rootNode
+		Node* rootNode();
 		// node 内存不由 Scene 管理
 		void addNode(Node *node);
-		void addNodeAtIndex(Node *node, int index);
 		void removeNode(Node *node);
 
 		void view3D();

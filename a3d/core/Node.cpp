@@ -56,13 +56,13 @@ namespace a3d{
 			_subs = new std::list<Node *>();
 		}
 		if(isFront){
-			this->addSubnodeAtIndex(node, (int)_subs->size());
+			this->insertSubnodeAtIndex(node, (int)_subs->size());
 		}else{
-			this->addSubnodeAtIndex(node, 0);
+			this->insertSubnodeAtIndex(node, 0);
 		}
 	}
 
-	void Node::addSubnodeAtIndex(Node *node, int index){
+	void Node::insertSubnodeAtIndex(Node *node, int index){
 		if(!_subs){
 			_subs = new std::list<Node *>();
 		}

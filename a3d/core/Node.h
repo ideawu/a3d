@@ -30,8 +30,8 @@ namespace a3d{
 		Node* parent() const;
 		void removeFromParent();
 		void addSubnode(Node *node);
-		// index 0 is back
-		void addSubnodeAtIndex(Node *node, int index);
+		// 如果 index 位置在 subnodes 队列之外，node 将被插入到队首或队尾
+		void insertSubnodeAtIndex(Node *node, int index);
 		void removeSubnode(Node *node);
 		void bringSubnodeToBack(Node *node);
 		void bringSubnodeToFront(Node *node);
@@ -53,9 +53,9 @@ namespace a3d{
 		void toggleAnimation();
 		// action 内存由 Node 管理
 		void runAnimation(Animate *action);
-		// 移除指定的动画，注意：并释放其内存！
+		// 移除指定的动画，注意：此方法调用后，action的内存已被释放
 		void removeAnimation(Animate *action);
-		// 移除所有动画，释放内存
+		// 移除所有动画
 		void removeAllAnimations();
 		bool hasAnimations() const;
 
