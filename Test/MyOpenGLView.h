@@ -4,6 +4,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "a3d/A3DView.h"
+#import "A3DView2.h"
 
 @interface MyOpenGLView : A3DView
 

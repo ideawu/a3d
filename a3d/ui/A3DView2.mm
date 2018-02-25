@@ -2,8 +2,7 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#import "A3DView.h"
-#import "A3DLayer.h"
+#import "A3DView2.h"
 #include "Clock.h"
 
 using namespace a3d;
@@ -15,18 +14,19 @@ typedef struct{
 	int count;
 }RefreshRate;
 
-@interface A3DView(){
+@interface A3DView2(){
 	NSTrackingArea *_trackingArea;
 #if TARGET_OS_IPHONE
 	CADisplayLink *_displayLink;
 #else
 	CVDisplayLinkRef _displayLink;
 #endif
-//	dispatch_queue_t _processQueue;
+	//	dispatch_queue_t _processQueue;
 
 	Clock _clock;
 
 	float _maxFPS;
+	BOOL _isOpenGLReady;
 }
 @property BOOL isRendering;
 @property RefreshRate refreshRate;
@@ -34,7 +34,7 @@ typedef struct{
 @property NSTextField *statisticsLabel;
 @end
 
-@implementation A3DView
+@implementation A3DView2
 
 + (NSOpenGLPixelFormat*)defaultPixelFormat{
 	NSOpenGLPixelFormatAttribute attrs[] = {
@@ -50,104 +50,90 @@ typedef struct{
 		NSOpenGLPFASamples, 4,
 		0
 	};
-	NSOpenGLPixelFormat* pixelFormat = nil;
-	pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	return pixelFormat;
 }
 
-+ (NSOpenGLContext*)defaultOpenGLContext{
-	static NSOpenGLContext *context = nil;
-	@synchronized(context){
-		if(context == nil){
-			NSOpenGLPixelFormat* pixelFormat = [A3DView defaultPixelFormat];
-			context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
-		}
+- (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format{
+	if(!format){
+		format = A3DView2.defaultPixelFormat;
 	}
-	return context;
-}
+	self = [super initWithFrame:frameRect pixelFormat:format];
 
-- (id)initWithFrame:(NSRect)frameRect{
-	self = [super initWithFrame:frameRect];
-	_pixelFormat = [A3DView defaultPixelFormat];
-	_openGLContext = [[NSOpenGLContext alloc] initWithFormat:_pixelFormat
-												shareContext:[A3DView defaultOpenGLContext]];
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
+
+	[self setWantsLayer:YES];
+	NSOpenGLLayer *layer = (NSOpenGLLayer *)self.layer;
+	log_debug(@"%@", layer);
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	[self setWantsBestResolutionOpenGLSurface:YES];
 
 	_displayLink = NULL;
+	_isOpenGLReady = NO;
+
 	_refreshRate.fps = 0;
 	_refreshRate.beginTime = 0;
 	_refreshRate.count = 0;
 	_maxFPS = 100;
 
-//	[self setWantsLayer:YES];
-	[self setWantsBestResolutionOpenGLSurface:YES];
-
-	[self setupOpenGL];
-
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(onReshape)
-												 name:NSViewFrameDidChangeNotification
-											   object:self];
-	// 在 superview.wantsLayer 的情况下，NSViewGlobalFrameDidChangeNotification 不可用！FUCK Apple!
-
 	return self;
 }
 
 - (void)dealloc{
-//	log_debug(@"%s", __func__);
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:NSViewFrameDidChangeNotification
-												  object:self];
-}
-
-- (void)viewDidMoveToSuperview{
-	if(self.superview){
-		[self onReshape];
-	}else{
-		if(_statisicsTimer){
-			[_statisicsTimer invalidate];
-		}
-		if(_displayLink){
-			[self freeDisplayLink];
-		}
+	if(_displayLink){
+		[self freeDisplayLink];
 	}
 }
 
-- (void)setupOpenGL{
-//	log_debug(@"%s", __func__);
-	[self.openGLContext makeCurrentContext];
+- (void)setup{
+}
 
-	// Synchronize buffer swaps with vertical refresh rate
-//	GLint swapInt = 1;
-//	[self.openGLContext setValues:&swapInt forParameter:NSOpenGLCPSwapInterval];
+- (void)prepareOpenGL{
+	log_debug(@"%s", __func__);
+	log_debug(@"%@", self.layer);
+	[super prepareOpenGL];
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
+	// 操作前务必要切换上下文
+	CGLLockContext([[self openGLContext] CGLContextObj]);
+	[self.openGLContext makeCurrentContext];
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
 
 	[self setup];
 	[self startAnimation];
+	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
+	[self setIsOpenGLReady:YES];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }
 
-- (void)onReshape{
-//	log_debug(@"%s", __func__);
+- (void)resize{
+}
+
+- (void)reshape{
 	// 操作前务必要切换上下文
-	CGLLockContext([self.openGLContext CGLContextObj]);
-	[self.openGLContext makeCurrentContext];
-	glViewport(0, 0, self.framebufferSize.width, self.framebufferSize.height);
-	[self reshape];
-	[self.openGLContext update];
-	CGLUnlockContext([self.openGLContext CGLContextObj]);
-
-	if(self.layer){
-		[(A3DLayer*)self.layer setCanDraw:YES];
-	}
-}
-
-- (CALayer *)makeBackingLayer{
-		log_debug(@"%s", __func__);
-	A3DLayer *layer = [[A3DLayer alloc] init];
-	layer.openGLPixelFormat = self.pixelFormat;
-	layer.openGLContext = self.openGLContext;
-	[layer setAsynchronous:YES];
-	[layer setNeedsDisplayOnBoundsChange:YES];
-	return layer;
+	CGLLockContext([[self openGLContext] CGLContextObj]);
+	[[self openGLContext] makeCurrentContext];
+	[self resize];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }
 
 - (CGSize)viewportSize{
@@ -156,16 +142,6 @@ typedef struct{
 
 - (CGSize)framebufferSize{
 	return [self convertSizeToBacking:self.bounds.size];
-}
-
-- (void)setup{
-}
-
-- (void)resize{
-}
-
-- (void)reshape{
-	[self resize];
 }
 
 
@@ -224,7 +200,7 @@ typedef struct{
 
 
 - (void)setupDisplayLink{
-//	_processQueue = dispatch_queue_create("GLView_queue", DISPATCH_QUEUE_SERIAL);
+	//	_processQueue = dispatch_queue_create("GLView_queue", DISPATCH_QUEUE_SERIAL);
 #if TARGET_OS_IPHONE
 	_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkCallback:)];
 	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -267,16 +243,14 @@ typedef struct{
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now,
 									const CVTimeStamp *outputTime, CVOptionFlags flagsIn,
 									CVOptionFlags *flagsOut, void *displayLinkContext){
-//	log_debug(@"%f", outputTime->hostTime/1000.0/1000.0/1000.0);
-	[(__bridge A3DView *)displayLinkContext displayLinkCallback];
+	//	log_debug(@"%f", outputTime->hostTime/1000.0/1000.0/1000.0);
+	[(__bridge A3DView2 *)displayLinkContext displayLinkCallback];
 	return kCVReturnSuccess;
 }
 #endif
 
 - (void)showStatistics{
 	if(!_statisicsTimer){
-		[self setWantsLayer:YES];
-
 		_statisicsTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
 														   target:self
 														 selector:@selector(updateStatisticsLabel)
@@ -305,9 +279,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 
 - (void)updateStatisticsLabel{
-	if(_statisticsLabel){
-		_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
-	}
+	_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
 }
 
 - (float)fps{
@@ -325,7 +297,23 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	_clock.speed(scale);
 }
 
+- (BOOL)isOpenGLReady{
+	@synchronized(self){
+		return _isOpenGLReady;
+	}
+}
+
+- (void)setIsOpenGLReady:(BOOL)isReady{
+	@synchronized(self){
+		_isOpenGLReady = isReady;
+	}
+}
+
 - (void)displayLinkCallback{
+	if(!self.isOpenGLReady){
+		return;
+	}
+
 	// 此变量是每个任务相关的，不同的任务得到的此变量的值可能不一样。queue的工作原理是拷贝上下文变量
 	// 要在主线程中更新时钟，所以这里不直接丢弃任务，而是在主线程中再丢弃任务
 	BOOL isBlocked = NO;
@@ -346,7 +334,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		_clock.update(tick);
 
 		if(isBlocked){
-//			log_debug(@"drop frame at %.3f", _clock.time());
+			log_debug(@"drop frame at %.3f", _clock.time());
 			return;
 		}
 
@@ -366,74 +354,65 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		}
 
 		if(_refreshRate.fps > _maxFPS){
-//			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
+			//			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
 			return;
 		}
-		//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
+		//		log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
 
 		double realInterval = _clock.time() - _refreshRate.lastTime;
 
-//		if(!self.layer){
-//			// 在慢机器上时间平滑反而影响效果
-//			// 设备理想刷新周期
-//			double idealInterval = 0.016713;
-//			CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
-//			if(ct.timeScale > 0){
-//				idealInterval = (double)ct.timeValue/ct.timeScale;
-//			}
-//			double bestInterval = fmax(1.0/_maxFPS, idealInterval);
-//			if(realInterval < 0){
-//				return;
-//			}else if(realInterval > bestInterval * 4){
-//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-//				// 已无平滑的必要，跳到指定时间
-//			}else if(realInterval > bestInterval * 1.2){
-//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-//				realInterval =  0.5 * (realInterval - bestInterval) + bestInterval;
-//			}else if(realInterval < bestInterval * 0.8){
-//				log_debug(@"realInterval: %.6f bestInterval: %.6f", realInterval, bestInterval);
-//				realInterval = bestInterval;
-//			}
-//		}
+		// 在慢机器上时间平滑反而影响效果
+		//		// 设备理想刷新周期
+		//		double idealInterval = 0.016713;
+		//		CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
+		//		if(ct.timeScale > 0){
+		//			idealInterval = (double)ct.timeValue/ct.timeScale;
+		//		}
+		//		double bestInterval = fmax(1.0/_maxFPS, idealInterval);
+		//		if(realInterval < 0){
+		//			return;
+		//		}else if(realInterval > bestInterval * 4){
+		//			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
+		//			// 已无平滑的必要，跳到指定时间
+		//		}else if(realInterval > bestInterval * 1){
+		//			log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
+		//			realInterval =  0.6 * (realInterval - bestInterval) + bestInterval;
+		//		}else if(realInterval < bestInterval){
+		//			log_debug(@"realInterval: %.6f bestInterval: %.6f", realInterval, bestInterval);
+		//			realInterval = bestInterval;
+		//		}
 
 		_refreshRate.lastTime += realInterval;
 
-		if(self.layer){
-			[(A3DLayer*)self.layer setCanDraw:YES];
+		@synchronized(self){
+			_isRendering = YES;
+		}
+		// 在10.13之前，layer-backed只能在drawRect中渲染
+		if(NSFoundationVersionNumber <= 1056.13 && self.layer != nil){
+			[self setNeedsDisplay:YES];
 		}else{
-			@synchronized(self){
-				_isRendering = YES;
-			}
 			[self doRender];
-			@synchronized(self){
-				_isRendering = NO;
-			}
+		}
+		@synchronized(self){
+			_isRendering = NO;
 		}
 	});
 }
 
-// 必须在主线程中
 - (void)doRender{
 	_refreshRate.count ++;
-
-	CGLLockContext([self.openGLContext CGLContextObj]);
-	[self.openGLContext makeCurrentContext];
-//	log_debug(@"begin %.3f", _refreshRate.lastTime);
+	CGLLockContext([[self openGLContext] CGLContextObj]);
+	[[self openGLContext] makeCurrentContext];
+	//	log_debug(@"begin");
 	[self renderAtTime:_refreshRate.lastTime];
-//	log_debug(@"end");
-	[self.openGLContext flushBuffer];
-	CGLUnlockContext([self.openGLContext CGLContextObj]);
+	//	log_debug(@"end");
+	[[self openGLContext] flushBuffer];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }
 
 - (void)drawRect:(NSRect)dirtyRect{
+	[super drawRect:dirtyRect];
 	[self doRender];
-}
-
-- (void)lockFocus{
-	[super lockFocus];
-	if(self.openGLContext.view != self){
-		self.openGLContext.view = self;
-	}
 }
 
 - (void)renderAtTime:(double)time{

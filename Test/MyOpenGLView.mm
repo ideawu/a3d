@@ -122,21 +122,21 @@ using namespace a3d;
 
 - (void)renderAtTime:(double)time{
 	_context->begin();
-	_context->clear();
+	_context->clear(0, 0, 0);
 	_context->loadMatrix3D(_camera->matrix3D());
 	[self draw3D];
 
 	_scene->render();
 	
-	_context->renderer()->clearStencil();
-	_context->renderer()->pushStencil();
+//	_context->renderer()->clearStencil();
+//	_context->renderer()->pushStencil();
 	_alex->renderAtTime(time);
 	{
-		_context->renderer()->pushStencil();
+//		_context->renderer()->pushStencil();
 		_text->renderAtTime(time);
-		_context->renderer()->popStencil();
+//		_context->renderer()->popStencil();
 	}
-	_context->renderer()->popStencil();
+//	_context->renderer()->popStencil();
 
 	_flag->renderAtTime(time);
 	_img1->renderAtTime(time);
@@ -335,14 +335,16 @@ using namespace a3d;
 			break;
 		}
 		case NSLeftArrowFunctionKey:{
-			a3d::Animate *action = a3d::Animate::rotate(30, Vector3(0, 0, 1));
+//			log_debug(@"");
+			a3d::Animate *action = a3d::Animate::rotate(60, Vector3(0, 0, 1));
 			action->easingFunc(a3d::TimingFuncLinear);
 			action->duration(1 * action->bounces());
 			_currentObject->runAnimation(action);
 			break;
 		}
 		case NSRightArrowFunctionKey:{
-			a3d::Animate *action = a3d::Animate::rotate(-30, Vector3(0, 0, 1));
+//			log_debug(@"");
+			a3d::Animate *action = a3d::Animate::rotate(-60, Vector3(0, 0, 1));
 			action->easingFunc(a3d::TimingFuncLinear);
 			action->duration(1 * action->bounces());
 			_currentObject->runAnimation(action);

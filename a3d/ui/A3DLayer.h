@@ -6,4 +6,6 @@
 
 @interface A3DLayer : NSOpenGLLayer
 
+@property BOOL canDraw;
+
 @end

@@ -5,22 +5,16 @@
 #import <Cocoa/Cocoa.h>
 
 // 注意！在进行OpenGL资源创建时，如glGenTextures()，要先[self.openGLContext makeCurrentContext];
-// https://stackoverflow.com/questions/7610117/layer-backed-openglview-redraws-only-if-window-is-resized/11213382
 
-@interface A3DView : NSView
-
-+ (NSOpenGLPixelFormat*)defaultPixelFormat;
-+ (NSOpenGLContext*)defaultOpenGLContext;
-
-@property (readonly) NSOpenGLContext *openGLContext;
-@property (readonly) NSOpenGLPixelFormat *pixelFormat;
+// TODO: 不继承 NSOpenGLView
+@interface A3DView2 : NSOpenGLView
 
 @property (readonly) CGSize viewportSize;
 @property (readonly) CGSize framebufferSize;
 @property (readonly) float fps;
 
 - (void)setup;
-- (void)reshape;
+- (void)resize;
 - (void)renderAtTime:(double)time;
 //- (void)drawRect:(NSRect)dirtyRect;
 
@@ -29,7 +23,7 @@
 // 停止 renderAtTime: 的调用
 - (void)stopAnimation;
 - (void)toggleAnimation;
-// 判断 renderAtTime: 的调用是否已被激活 
+// 判断 renderAtTime: 的调用是否已被激活
 - (BOOL)isAnimating;
 
 // 限制刷新率，性能相关，必须大于0。注意，设置此值小于100，可能使动画不流畅。

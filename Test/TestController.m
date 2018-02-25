@@ -20,7 +20,7 @@
 
 - (void)windowDidLoad {
 	[super windowDidLoad];
-//	[(NSView *)self.window.contentView setWantsLayer:YES];
+	[(NSView *)self.window.contentView setWantsLayer:YES];
 
 	CGRect frame = self.window.frame;
 	frame.size.width = 900;
@@ -50,6 +50,8 @@
 - (void)windowWillClose:(NSNotification *)notification{
 //	log_debug(@"%s", __func__);
 	[_appDelegate windowWillClose:self];
+	[_videoView removeFromSuperview];
+	_videoView = nil;
 }
 
 @end
