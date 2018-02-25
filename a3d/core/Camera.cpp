@@ -31,25 +31,26 @@ namespace a3d{
 		// 将原点坐标移到屏幕左上角
 		_matrix2D.translate(-width/2, -height/2, 0);
 
+
 		float tanFovy2 = tan(degree_to_radian(fovy/2));
 		_fovy = fovy;
+		_aspect = width / height;
 		_near = (fmax(width, height)/2) / tanFovy2;
 		if(eyeZ != 0){
 			if(eyeZ < -_near){
 				eyeZ = -_near + 1;
 			}
 			_near += eyeZ;
-			float aspect = height/width;
 			if(width > height){
 				width = width + eyeZ * tanFovy2 * 2;
-				height = width * aspect;
+				height = width / _aspect;
 			}else{
 				height = height + eyeZ * tanFovy2 * 2;
-				width = height / aspect;
+				width = height * _aspect;
 			}
 		}
 		_far = _near + depth;
-		
+
 		// 将近裁剪面设置为与viewport同大小
 		_matrix3D = Matrix4::frustum(-width/2, width/2, -height/2, height/2, _near, _far);
 		// 将视点后移，这样前裁剪面z=0(只显示z>0的物体)，加上一点偏移，这样也显示z=0的物体
@@ -67,7 +68,7 @@ namespace a3d{
 	Matrix4 Camera::matrix2D() const{
 		return _matrix2D;
 	}
-	
+
 }; // end namespace
 
 // - (void)moveX:(float)x y:(float)y z:(float)z{

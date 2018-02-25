@@ -29,8 +29,10 @@ namespace a3d{
 		Camera& operator =(const Camera &d);
 
 		float _fovy;
+		float _aspect;
 		float _near;
 		float _far;
+
 		Matrix4 _matrix3D;
 		Matrix4 _matrix2D;
 	};

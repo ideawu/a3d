@@ -42,10 +42,15 @@ namespace a3d{
 		return Matrix4();
 	}
 
+	Matrix4 Matrix4::perspective(float fovy, float aspect, float nearZ, float farZ){
+		fovy = degree_to_radian(fovy);
+		return Matrix4(GLKMatrix4MakePerspective(fovy, aspect, nearZ, farZ));
+	}
+
 	Matrix4 Matrix4::frustum(float left, float right, float bottom, float top, float nearZ, float farZ){
 		return Matrix4(GLKMatrix4MakeFrustum(left, right, bottom, top, nearZ, farZ));
 	}
-	
+
 	Matrix4 Matrix4::ortho(float left, float right, float bottom, float top, float nearZ, float farZ){
 		return Matrix4(GLKMatrix4MakeOrtho(left, right, bottom, top, nearZ, farZ));
 	}

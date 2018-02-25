@@ -69,11 +69,10 @@ using namespace a3d;
 	}
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
+		Sprite *sprite = Sprite::imageSprite("/Users/wuzuyang/Downloads/bg1.png");
 		node->sprite(sprite);
-		node->move(node->width()/2, node->height()/2, 0);
-		node->move(100, 0, 300);
-		node->opacity(0.7);
+//		node->move(node->width()/2, node->height()/2, 0);
+		node->move(0, 0, 1);
 		_img2 = node;
 	}
 	{
@@ -91,11 +90,8 @@ using namespace a3d;
 	_flag->height(100);
 	_flag->depth(100);
 
-//	_flag.color = GLKVector4Make(0.8, 0.8, 0.4, 1);
-//	[_flag moveX:200 y:_flag.height/2 z:200];
-
 	_alex = new MySprite();
-	_alex->move(800, 0, 800);
+	_alex->move(800, 0, 00);
 
 	_objects.push_back(_alex);
 	_objects.push_back(_camera);
@@ -104,30 +100,43 @@ using namespace a3d;
 }
 
 - (void)resize{
-	float width = self.viewportSize.width;
-	float height = self.viewportSize.height;
-	float depth = width * 20;
-
-	_camera->position(width/2, height/2, 0);
-	_camera->setup(60, width, height, depth, -50);
-
 	delete _context;
 	_context = a3d::Context::blankContext();
-//	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
+	//	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 
-	_objects.pop_back();
-	_objects.push_back(_camera);
-//	_currentObject = _camera;
+	CGSize size = [NSScreen mainScreen].frame.size;
+	float width = size.width;
+	float height = size.height;
+	float depth = width * 10;
+
+	_camera->setup(60, width, height, depth, -200);
+	_camera->position(width/2, height/2, 0);
 }
 
 - (void)renderAtTime:(double)time{
 	_context->begin();
-	_context->clear(0, 0, 0);
+	_context->clear(0.1, 0.1, 0.1);
+
+	{
+		CGSize size = CGSizeMake(_camera->width(), _camera->height());
+		size = [self convertSizeToBacking:size];
+		glViewport(0, 0, size.width, size.height);
+	}
+	{
+		CGSize size = self.frame.size;
+		size = [self convertSizeToBacking:size];
+		glEnable(GL_SCISSOR_TEST);
+		glScissor(0, 0, size.width, size.height);
+	}
+
 	_context->loadMatrix3D(_camera->matrix3D());
+
 	[self draw3D];
 
+
 	_scene->render();
-	
+	_camera->renderAtTime(time);
+
 //	_context->renderer()->clearStencil();
 //	_context->renderer()->pushStencil();
 	_alex->renderAtTime(time);
@@ -140,6 +149,7 @@ using namespace a3d;
 
 	_flag->renderAtTime(time);
 	_img1->renderAtTime(time);
+//	_img2->renderAtTime(time);
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
@@ -149,18 +159,24 @@ using namespace a3d;
 
 - (void)draw3D{
 	glColor4f(0, 1, 0, 1);
-	glLineWidth(1);
+	glLineWidth(5);
 	glBegin(GL_LINES);
 	{
-		glVertex3f(500, 0, 800);
-		glVertex3f(500, 400, 800);
+		glVertex3f(0, 0, 0);
+		glVertex3f(500, 0, 0);
+	}
+	glEnd();
+	glBegin(GL_LINES);
+	{
+		glVertex3f(300, 300, -200);
+		glVertex3f(300, 300, 200);
 	}
 	glEnd();
 }
 
 - (void)draw2D{
-	float width = self.bounds.size.width;
-	float height = self.bounds.size.height;
+	float width = self.viewportSize.width;
+	float height = self.viewportSize.height;
 	float len = 10;
 	float x0 = width/2 - len;
 	float y0 = height/2 - len;
@@ -180,67 +196,6 @@ using namespace a3d;
 		glVertex3f(width/2, y1, 0);
 	}
 	glEnd();
-}
-
-- (void)mouseUp:(NSEvent *)event{
-//	GObject *target = _alex;
-//	GRay *ray = [_world.camera rayFromScreenPointX:self.mousePoint.x y:self.mousePoint.y];
-//	GLKVector3 pos = [ray nearestPointTo:target.pos];
-//	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
-//	pos = mat4_mul_vec3(mat4_invert(target.matrix), pos);
-//	log_debug(@"%.2f %.2f %.2f", pos.x, pos.y, pos.z);
-	
-	
-//	GLKVector3 force = GLKVector3Make(0, 0, 1);
-//	force = GLKMatrix4MultiplyVector3(GLKMatrix4Invert(target.matrix, NULL), force);
-//	force = GLKVector3MultiplyScalar(force, 10);
-//	// 将力转成被控对象坐标系内
-//	[target force:force atPoint:pos rotationScalar:1];
-	[self setNeedsDisplay:YES];
-}
-
-- (void)mouseMoved:(NSEvent *)event{
-	[super mouseMoved:event];
-//	log_debug(@"ignore mouse");
-	return;
-	
-//	float dx = 90 * self.mouseTranslate.x/(self.bounds.size.width/2);
-//	float dy = 90 * self.mouseTranslate.y/(self.bounds.size.height/2);
-//	float ax = -dy;
-//	float ay = dx;
-//	log_debug(@"%.2f %.2f", ax, ay);
-//
-////	_currentObject.angle.yaw = ay;
-////	_currentObject.angle.pitch = ax;
-////	log_debug(@"%@", _currentObject.angle);
-//
-////	if(_currentObject == _camera_alex){
-//		_rotateX = (fabs(ax) < 70)? 0 : ax/fabs(ax) * 1;
-//		_rotateY = (fabs(ay) < 70)? 0 : ay/fabs(ay) * 1;
-//		static NSTimer *_rotateDetectTimer = nil;
-//		if(_rotateX || _rotateY){
-//			if(!_rotateDetectTimer){
-//				_rotateDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 repeats:YES block:^(NSTimer * _Nonnull timer) {
-//					[self rotate];
-//				}];
-//			}
-//			[_rotateDetectTimer setFireDate:[NSDate date]];
-//		}else{
-//			[_rotateDetectTimer setFireDate:[NSDate distantFuture]];
-//		}
-////	}
-//
-//	[self setNeedsDisplay:YES];
-	
-//	log_debug(@"%f %f", dx, dy);
-}
-
-- (void)rotate{
-//	log_debug(@"auto rotate %.2f, %.2f", _rotateX, _rotateY);
-//	// 注意先后顺序
-//	[_currentObject rotateY:_rotateY];
-//	[_currentObject rotateX:_rotateX];
-//	[self setNeedsDisplay:YES];
 }
 
 - (void)switchSprite{
@@ -277,7 +232,7 @@ using namespace a3d;
 		case ' ':{
 			// 切换被控制角色
 //			[self switchSprite];
-			
+
 			Node *node = _text;
 //			node = _currentObject;
 //			Node *node = _alex;
@@ -401,7 +356,7 @@ using namespace a3d;
 	dx *= speed;
 	dz *= speed;
 	dy *= speed;
-	_currentObject->move(dx, dy, dz);
+	_camera->move(dx, dy, dz);
 //	log_debug(@"%f %f %f", _currentObject->x(), _currentObject->y(), _currentObject->z());
 
 //	[GEulerAngle angleWithMatrix:_currentObject];
