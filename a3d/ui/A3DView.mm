@@ -130,7 +130,6 @@ typedef struct{
 	// 操作前务必要切换上下文
 	CGLLockContext([self.openGLContext CGLContextObj]);
 	[self.openGLContext makeCurrentContext];
-	glViewport(0, 0, self.framebufferSize.width, self.framebufferSize.height);
 	[self reshape];
 	[self.openGLContext update];
 	CGLUnlockContext([self.openGLContext CGLContextObj]);
@@ -141,7 +140,7 @@ typedef struct{
 }
 
 - (CALayer *)makeBackingLayer{
-		log_debug(@"%s", __func__);
+//	log_debug(@"%s", __func__);
 	A3DLayer *layer = [[A3DLayer alloc] init];
 	layer.openGLPixelFormat = self.pixelFormat;
 	layer.openGLContext = self.openGLContext;
