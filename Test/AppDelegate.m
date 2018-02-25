@@ -6,17 +6,32 @@
 #import "TestController.h"
 
 @interface AppDelegate (){
-	id _test;
+	TestController *_test;
+	TestController *_test2;
 }
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+//	_test2 = [[TestController alloc] initWithWindowNibName:@"TestController"];
+//	_test2.appDelegate = self;
+//	[_test2 showWindow:self];
+
 	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
+	_test.appDelegate = self;
 	[_test showWindow:self];
 }
 
+- (void)windowWillClose:(NSWindowController *)controller{
+//	log_debug(@"%s", __func__);
+	if(controller == _test){
+		_test = nil;
+	}
+	if(controller == _test2){
+		_test2 = nil;
+	}
+}
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 	// Insert code here to tear down your application

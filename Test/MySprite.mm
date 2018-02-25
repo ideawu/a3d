@@ -23,7 +23,6 @@ static void drawBody();
 //}
 
 void MySprite::draw(){
-	static a3d::Sprite *sprite = NULL;
 	if(!sprite){
 		NSBundle* myBundle = [NSBundle mainBundle];
 		NSString* myImage = [myBundle pathForResource:@"alex" ofType:@"png"];

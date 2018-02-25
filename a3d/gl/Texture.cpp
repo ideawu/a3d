@@ -23,6 +23,7 @@ namespace a3d{
 	Texture::~Texture(){
 		if(_tid){
 			glDeleteTextures(1, &_tid);
+//			log_debug("del tid: %d", _tid);
 		}
 	}
 	
@@ -54,6 +55,7 @@ namespace a3d{
 		bool isNew = (_tid == 0);
 		if(isNew){
 			glGenTextures(1, &_tid);
+//			log_debug("gen tid: %d", _tid);
 			if(!_tid){
 				return;
 			}

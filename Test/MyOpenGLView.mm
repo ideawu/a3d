@@ -33,12 +33,19 @@ using namespace a3d;
 
 @implementation MyOpenGLView
 
+- (void)dealloc{
+	log_debug(@"%s", __func__);
+}
+
 - (void)setup{
+	log_debug(@"%s", __func__);
 	[self showStatistics];
 
-	_camera = NULL;
-	_context = NULL;
-	
+	_camera = a3d::Camera::create();
+
+
+	_context = a3d::Context::blankContext();
+
 	_rotateX = 0;
 	_rotateY = 0;
 
@@ -101,11 +108,7 @@ using namespace a3d;
 	float height = self.viewportSize.height;
 	float depth = width * 20;
 
-	if(!_camera){
-		_camera = a3d::Camera::create(60, width, height, depth);
-		_camera->position(width/2, height/2, 0);
-	}else{
-	}
+	_camera->position(width/2, height/2, 0);
 	_camera->setup(60, width, height, depth, -50);
 
 	delete _context;

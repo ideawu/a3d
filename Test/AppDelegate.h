@@ -6,6 +6,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+- (void)windowWillClose:(NSWindowController *)controller;
 
 @end
 

@@ -3,7 +3,6 @@
 //
 
 #import "A3DView.h"
-#import "A3DLayer.h"
 #include "Clock.h"
 
 using namespace a3d;
@@ -27,6 +26,7 @@ typedef struct{
 	Clock _clock;
 
 	float _maxFPS;
+	BOOL _isOpenGLReady;
 }
 @property BOOL isRendering;
 @property RefreshRate refreshRate;
@@ -50,102 +50,89 @@ typedef struct{
 		NSOpenGLPFASamples, 4,
 		0
 	};
-	static NSOpenGLPixelFormat* pixelFormat = nil;
-	@synchronized(pixelFormat){
-		if(pixelFormat == nil){
-			pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-		}
-	}
+	NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	return pixelFormat;
 }
 
-+ (NSOpenGLContext*)defaultOpenGLContext{
-	static NSOpenGLContext *context = nil;
-	@synchronized(context){
-		if(context == nil){
-			NSOpenGLPixelFormat* pixelFormat = [A3DView defaultPixelFormat];
-			context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
-		}
+- (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format{
+	if(!format){
+		format = A3DView.defaultPixelFormat;
 	}
-	return context;
-}
-
-- (id)initWithFrame:(NSRect)frameRect{
-	self = [super initWithFrame:frameRect];
-	_pixelFormat = [A3DView defaultPixelFormat];
-	_openGLContext = [[NSOpenGLContext alloc] initWithFormat:_pixelFormat
-												shareContext:[A3DView defaultOpenGLContext]];
-
-	_displayLink = NULL;
-	_refreshRate.fps = 0;
-	_refreshRate.beginTime = 0;
-	_refreshRate.count = 0;
-	_maxFPS = 100;
-
-	[self setupOpenGL];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(onReshape)
-												 name:NSViewGlobalFrameDidChangeNotification
-											   object:self];
-
-	return self;
-}
-
-- (void)dealloc{
-	log_debug(@"%s", __func__);
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:NSViewGlobalFrameDidChangeNotification
-												  object:self];
-}
-
-- (void)viewDidMoveToSuperview{
-	if(self.superview){
-		[self onReshape];
-	}else{
-		if(_statisicsTimer){
-			[_statisicsTimer invalidate];
-		}
-		if(_displayLink){
-			[self freeDisplayLink];
-		}
-	}
-}
-
-- (void)setupOpenGL{
-	log_debug(@"%s", __func__);
-	[self.openGLContext makeCurrentContext];
-
-	[self setWantsBestResolutionOpenGLSurface:YES];
-	[self setWantsLayer:YES];
-	{
-		A3DLayer *layer = [[A3DLayer alloc] init];
-		layer.openGLPixelFormat = self.pixelFormat;
-		layer.openGLContext = self.openGLContext;
-		self.layer = layer;
-	}
-
-	// Synchronize buffer swaps with vertical refresh rate
-	GLint swapInt = 1;
-	[[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval];
+	self = [super initWithFrame:frameRect pixelFormat:format];
 
 	{
 		GLuint tid;
 		glGenTextures(1, &tid);
 		log_debug(@"%d", tid);
 	}
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
 
-	[self setup];
-//	[self startAnimation];
+	[self setWantsLayer:YES];
+	NSOpenGLLayer *layer = (NSOpenGLLayer *)self.layer;
+	log_debug(@"%@", layer);
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	[self setWantsBestResolutionOpenGLSurface:YES];
+
+	_displayLink = NULL;
+	_isOpenGLReady = NO;
+	
+	_refreshRate.fps = 0;
+	_refreshRate.beginTime = 0;
+	_refreshRate.count = 0;
+	_maxFPS = 100;
+
+	return self;
 }
 
-- (void)onReshape{
+- (void)dealloc{
+	if(_displayLink){
+		[self freeDisplayLink];
+	}
+}
+
+- (void)setup{
+}
+
+- (void)prepareOpenGL{
 	log_debug(@"%s", __func__);
+	log_debug(@"%@", self.layer);
+	[super prepareOpenGL];
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
+	// 操作前务必要切换上下文
+	CGLLockContext([[self openGLContext] CGLContextObj]);
+	[self.openGLContext makeCurrentContext];
+	{
+		GLuint tid;
+		glGenTextures(1, &tid);
+		log_debug(@"%d", tid);
+	}
+	log_debug(@"%@ %@", self.openGLContext, [NSOpenGLContext currentContext]);
+
+	[self setup];
+	[self startAnimation];
+	// 如果 OpenGL 没有 ready 就执行动画线程，会出错
+	[self setIsOpenGLReady:YES];
+	CGLUnlockContext([[self openGLContext] CGLContextObj]);
+}
+
+- (void)resize{
+}
+
+- (void)reshape{
 	// 操作前务必要切换上下文
 	CGLLockContext([[self openGLContext] CGLContextObj]);
 	[[self openGLContext] makeCurrentContext];
 	[self resize];
-	[[self openGLContext] update];
 	CGLUnlockContext([[self openGLContext] CGLContextObj]);
 }
 
@@ -155,12 +142,6 @@ typedef struct{
 
 - (CGSize)framebufferSize{
 	return [self convertSizeToBacking:self.bounds.size];
-}
-
-- (void)setup{
-}
-
-- (void)resize{
 }
 
 
@@ -298,9 +279,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 
 - (void)updateStatisticsLabel{
-	if(_statisticsLabel){
-		_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
-	}
+	_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
 }
 
 - (float)fps{
@@ -318,7 +297,23 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	_clock.speed(scale);
 }
 
+- (BOOL)isOpenGLReady{
+	@synchronized(self){
+		return _isOpenGLReady;
+	}
+}
+
+- (void)setIsOpenGLReady:(BOOL)isReady{
+	@synchronized(self){
+		_isOpenGLReady = isReady;
+	}
+}
+
 - (void)displayLinkCallback{
+	if(!self.isOpenGLReady){
+		return;
+	}
+
 	// 此变量是每个任务相关的，不同的任务得到的此变量的值可能不一样。queue的工作原理是拷贝上下文变量
 	// 要在主线程中更新时钟，所以这里不直接丢弃任务，而是在主线程中再丢弃任务
 	BOOL isBlocked = NO;
@@ -406,7 +401,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 
 - (void)doRender{
-//	return;
 	CGLLockContext([[self openGLContext] CGLContextObj]);
 	[[self openGLContext] makeCurrentContext];
 //	log_debug(@"begin");
@@ -414,13 +408,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 //	log_debug(@"end");
 	[[self openGLContext] flushBuffer];
 	CGLUnlockContext([[self openGLContext] CGLContextObj]);
-}
-
-- (void)lockFocus{
-	[super lockFocus];
-	if(self.openGLContext.view != self){
-		self.openGLContext.view = self;
-	}
 }
 
 - (void)drawRect:(NSRect)dirtyRect{

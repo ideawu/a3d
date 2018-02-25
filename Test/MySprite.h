@@ -6,11 +6,13 @@
 //  Copyright © 2018 ideawu. All rights reserved.
 //
 
-#include "a3d/Node.h"
+#include "a3d/a3d.h"
 
 class MySprite : public a3d::Node
 {
 public:
+	MySprite(){sprite = NULL;}
 	virtual void draw();
+	a3d::Sprite *sprite;
 };
 

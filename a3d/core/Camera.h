@@ -13,7 +13,8 @@ namespace a3d{
 	{
 	public:
 		Camera(){}
-		
+
+		static Camera* create();
 		// in points, not in pixels
 		static Camera* create(float fovy, float width, float height, float depth, float eyeZ=0);
 		

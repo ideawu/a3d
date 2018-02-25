@@ -7,7 +7,13 @@
 // 注意！在进行OpenGL资源创建时，如glGenTextures()，要先[self.openGLContext makeCurrentContext];
 
 // TODO: 不继承 NSOpenGLView
-@interface A3DView : NSOpenGLView
+@interface A3DView : NSView
+
++ (NSOpenGLPixelFormat*)defaultPixelFormat;
++ (NSOpenGLContext*)defaultOpenGLContext;
+
+@property (readonly) NSOpenGLContext *openGLContext;
+@property (readonly) NSOpenGLPixelFormat *pixelFormat;
 
 @property (readonly) CGSize viewportSize;
 @property (readonly) CGSize framebufferSize;

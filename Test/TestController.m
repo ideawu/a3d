@@ -14,9 +14,13 @@
 
 @implementation TestController
 
+- (void)dealloc{
+	log_debug(@"%s", __func__);
+}
+
 - (void)windowDidLoad {
 	[super windowDidLoad];
-	[(NSView *)self.window.contentView setWantsLayer:YES];
+//	[(NSView *)self.window.contentView setWantsLayer:YES];
 
 	CGRect frame = self.window.frame;
 	frame.size.width = 900;
@@ -24,6 +28,7 @@
 	[self.window setFrame:frame display:YES animate:NO];
 
 	_videoView = [[MyOpenGLView alloc] initWithFrame:((NSView *)self.window.contentView).frame];
+	log_debug(@"%@", _videoView.openGLContext);
 	[self.window.contentView addSubview:_videoView];
 	[self.window makeFirstResponder:_videoView];
 
@@ -40,6 +45,11 @@
 
 - (void)windowDidResize:(NSNotification *)notification{
 	_videoView.frame = ((NSView *)self.window.contentView).frame;
+}
+
+- (void)windowWillClose:(NSNotification *)notification{
+//	log_debug(@"%s", __func__);
+	[_appDelegate windowWillClose:self];
 }
 
 @end

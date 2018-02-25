@@ -5,6 +5,12 @@
 #include "Camera.h"
 
 namespace a3d{
+
+	Camera* Camera::create(){
+		Camera *ret = new Camera();
+		return ret;
+	}
+
 	Camera* Camera::create(float fovy, float width, float height, float depth, float eyeZ){
 		Camera *ret = new Camera();
 		ret->setup(fovy, width, height, depth, eyeZ);

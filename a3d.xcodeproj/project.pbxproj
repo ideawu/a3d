@@ -102,6 +102,8 @@
 		08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */; };
 		08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
 		08B4CBE2201DFA5300EEC0C5 /* Clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CBDF201DF38D00EEC0C5 /* Clock.h */; };
+		08FAAE242042583E00D831E6 /* A3DLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 08FAAE222042583E00D831E6 /* A3DLayer.h */; };
+		08FAAE252042583E00D831E6 /* A3DLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FAAE232042583E00D831E6 /* A3DLayer.m */; };
 		3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
 		3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
@@ -267,6 +269,8 @@
 		08B4CBDA201DEDB700EEC0C5 /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
 		08B4CBDE201DF38D00EEC0C5 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		08B4CBDF201DF38D00EEC0C5 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
+		08FAAE222042583E00D831E6 /* A3DLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A3DLayer.h; sourceTree = "<group>"; };
+		08FAAE232042583E00D831E6 /* A3DLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A3DLayer.m; sourceTree = "<group>"; };
 		312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTypes.cpp; sourceTree = "<group>"; };
 		312CD37D20257852008FE758 /* TextSpirte.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextSpirte.cpp; sourceTree = "<group>"; };
 		312CD37E20257852008FE758 /* TextSpirte.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSpirte.h; sourceTree = "<group>"; };
@@ -447,6 +451,8 @@
 			children = (
 				08B4CB49201DE4AF00EEC0C5 /* A3DView.h */,
 				08B4CB4A201DE4AF00EEC0C5 /* A3DView.mm */,
+				08FAAE222042583E00D831E6 /* A3DLayer.h */,
+				08FAAE232042583E00D831E6 /* A3DLayer.m */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -577,6 +583,7 @@
 				08B4CB70201DE4AF00EEC0C5 /* BufferContext.h in Headers */,
 				08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */,
 				08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */,
+				08FAAE242042583E00D831E6 /* A3DLayer.h in Headers */,
 				319A809E202C581C00DF1175 /* SpriteNode.h in Headers */,
 				08B4CB52201DE4AF00EEC0C5 /* AnimationTypes.h in Headers */,
 				08B4CB60201DE4AF00EEC0C5 /* Sprite.h in Headers */,
@@ -744,6 +751,7 @@
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,
 				08B4CB53201DE4AF00EEC0C5 /* Camera.cpp in Sources */,
 				312CD37F20257852008FE758 /* TextSpirte.cpp in Sources */,
+				08FAAE252042583E00D831E6 /* A3DLayer.m in Sources */,
 				08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */,
 				08B4CB13201DE49900EEC0C5 /* Color.cpp in Sources */,
 				08B4CB1B201DE49900EEC0C5 /* Vector3.cpp in Sources */,
