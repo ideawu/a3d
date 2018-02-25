@@ -105,9 +105,11 @@ using namespace a3d;
 	//	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
 
 	CGSize size = [NSScreen mainScreen].frame.size;
-	float width = size.width;
-	float height = size.height;
-	float depth = width * 10;
+	size = self.viewportSize;
+	float width = size.width/1;
+	float height = size.height/1;
+	float depth = fmax(width, height) * 10;
+//	log_debug(@"%.0f %.0f", width, height);
 
 	_camera->setup(60, width, height, depth, -200);
 	_camera->position(width/2, height/2, 0);
@@ -159,25 +161,29 @@ using namespace a3d;
 
 - (void)draw3D{
 	glColor4f(0, 1, 0, 1);
-	glLineWidth(5);
+	glLineWidth(2);
 	glBegin(GL_LINES);
 	{
 		glVertex3f(0, 0, 0);
 		glVertex3f(500, 0, 0);
 	}
 	glEnd();
+	for(int i=0; i<1200; i+=100){
 	glBegin(GL_LINES);
 	{
-		glVertex3f(300, 300, -200);
-		glVertex3f(300, 300, 200);
+		glVertex3f(i, 500, -00);
+		glVertex3f(i, 500, 20000);
 	}
 	glEnd();
+	}
 }
 
 - (void)draw2D{
 	float width = self.viewportSize.width;
 	float height = self.viewportSize.height;
 	float len = 10;
+//	width = 50;
+//	height = 50;
 	float x0 = width/2 - len;
 	float y0 = height/2 - len;
 	float x1 = width/2 + len;
@@ -229,10 +235,12 @@ using namespace a3d;
 			[self startAnimation];
 			break;
 		}
-		case ' ':{
+		case 'c':{
 			// 切换被控制角色
-//			[self switchSprite];
-
+			[self switchSprite];
+			break;
+		}
+		case ' ':{
 			Node *node = _text;
 //			node = _currentObject;
 //			Node *node = _alex;
