@@ -230,10 +230,6 @@
 		08B4CB34201DE4AF00EEC0C5 /* DraftScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DraftScene.mm; sourceTree = "<group>"; };
 		08B4CB35201DE4AF00EEC0C5 /* DraftSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftSprite.h; sourceTree = "<group>"; };
 		08B4CB36201DE4AF00EEC0C5 /* DraftSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DraftSprite.mm; sourceTree = "<group>"; };
-		08B4CB37201DE4AF00EEC0C5 /* GCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCamera.h; sourceTree = "<group>"; };
-		08B4CB38201DE4AF00EEC0C5 /* GCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCamera.m; sourceTree = "<group>"; };
-		08B4CB39201DE4AF00EEC0C5 /* GEulerAngle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GEulerAngle.h; sourceTree = "<group>"; };
-		08B4CB3A201DE4AF00EEC0C5 /* GEulerAngle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GEulerAngle.m; sourceTree = "<group>"; };
 		08B4CB3C201DE4AF00EEC0C5 /* AnimateOpacity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateOpacity.cpp; sourceTree = "<group>"; };
 		08B4CB3D201DE4AF00EEC0C5 /* AnimateOpacity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimateOpacity.h; sourceTree = "<group>"; };
 		08B4CB3E201DE4AF00EEC0C5 /* AnimatePosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatePosition.cpp; sourceTree = "<group>"; };
@@ -371,10 +367,6 @@
 				08B4CB48201DE4AF00EEC0C5 /* ui */,
 				08B4CB32201DE4AF00EEC0C5 /* draft */,
 				08B4CAEC201DE3E300EEC0C5 /* a3d.h */,
-				08B4CB37201DE4AF00EEC0C5 /* GCamera.h */,
-				08B4CB38201DE4AF00EEC0C5 /* GCamera.m */,
-				08B4CB39201DE4AF00EEC0C5 /* GEulerAngle.h */,
-				08B4CB3A201DE4AF00EEC0C5 /* GEulerAngle.m */,
 				08B4CB10201DE49900EEC0C5 /* PrefixHeader.pch */,
 			);
 			path = a3d;
