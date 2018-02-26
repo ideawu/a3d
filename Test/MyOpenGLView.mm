@@ -157,7 +157,7 @@ using namespace a3d;
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
 
-	_context->blit();
+//	_context->blit();
 }
 
 - (void)draw3D{

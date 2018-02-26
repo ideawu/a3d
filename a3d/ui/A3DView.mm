@@ -44,10 +44,11 @@ typedef struct{
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFADepthSize, 16,
 		NSOpenGLPFAAlphaSize, 8,
-		NSOpenGLPFAStencilSize, 8,
-		NSOpenGLPFAMultisample,
-		NSOpenGLPFASampleBuffers, 1,
-		NSOpenGLPFASamples, 4,
+		// 非常影响性能
+//		NSOpenGLPFAStencilSize, 8,
+//		NSOpenGLPFAMultisample,
+//		NSOpenGLPFASampleBuffers, 1,
+//		NSOpenGLPFASamples, 4,
 		0
 	};
 	NSOpenGLPixelFormat* pixelFormat = nil;
@@ -154,7 +155,7 @@ typedef struct{
 	layer.openGLPixelFormat = self.pixelFormat;
 	layer.openGLContext = self.openGLContext;
 	[layer setAsynchronous:YES];
-//	[layer setNeedsDisplayOnBoundsChange:YES];
+	[layer setNeedsDisplayOnBoundsChange:YES];
 	return layer;
 }
 
@@ -352,7 +353,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			return;
 		}
 		if(isBlocked){
-			log_debug(@"drop frame at %.3f", _clock.time());
+//			log_debug(@"drop frame at %.3f", _clock.time());
 			return;
 		}
 
@@ -393,14 +394,16 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	}
 	
 //	static double last_time = a3d::absolute_time();
-//	log_debug(@"render interval: %.3f, %.3f", interval, a3d::absolute_time() - last_time);
+//	if(a3d::absolute_time() - last_time > 0.050){
+//		log_debug(@"render interval: %.3f, %.3f", interval, a3d::absolute_time() - last_time);
+//	}
 //	last_time = a3d::absolute_time();
 
 	_refreshRate.count ++;
 //	_refreshRate.lastTime = _clock.time();
 	_refreshRate.lastTime += interval;
 	//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
-
+	
 //	log_debug(@"begin %.3f", _refreshRate.lastTime);
 	CGLLockContext([self.openGLContext CGLContextObj]);
 	[self.openGLContext makeCurrentContext];
@@ -425,13 +428,14 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	[super setNeedsDisplay:needsDisplay];
 }
 
-- (BOOL)preservesContentDuringLiveResize{
-	return YES;
-}
+//- (BOOL)preservesContentDuringLiveResize{
+//	return YES;
+//}
 
 - (void)setFrameSize:(NSSize)newSize{
 	[super setFrameSize:newSize];
 	if(self.inLiveResize){
+		// 在低版本 live resize 会阻塞 main queue，所以这里更新 clock
 		[self updateClock];
 		if(_clock.time() - _refreshRate.lastTime < 1.0/_maxFPS){
 			return;
