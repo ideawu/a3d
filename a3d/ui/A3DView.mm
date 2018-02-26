@@ -98,8 +98,12 @@ typedef struct{
 												   object:self];
 		// 在 superview.wantsLayer 的情况下，NSViewGlobalFrameDidChangeNotification 不可用！FUCK Apple!
 	}else{
+		CGLLockContext([self.openGLContext CGLContextObj]);
 		[self.openGLContext makeCurrentContext];
 		[self clean];
+		[self.openGLContext update];
+		CGLUnlockContext([self.openGLContext CGLContextObj]);
+		
 		if(_statisicsTimer){
 			[_statisicsTimer invalidate];
 		}
@@ -150,7 +154,7 @@ typedef struct{
 	layer.openGLPixelFormat = self.pixelFormat;
 	layer.openGLContext = self.openGLContext;
 	[layer setAsynchronous:YES];
-	[layer setNeedsDisplayOnBoundsChange:YES];
+//	[layer setNeedsDisplayOnBoundsChange:YES];
 	return layer;
 }
 
@@ -348,7 +352,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			return;
 		}
 		if(isBlocked){
-//			log_debug(@"drop frame at %.3f", _clock.time());
+			log_debug(@"drop frame at %.3f", _clock.time());
 			return;
 		}
 
@@ -356,13 +360,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			_isRendering = YES;
 		}
 		if(self.layer){
-			// 一旦 A3DLayer.canDraw=YES，layer自动被清空。
-			// 那么必须执行OpenGL更新整个layer，否则AppKit将用空白的layer来渲染界面，用户会看到空白一闪。
 			[self updateClock];
-			if(_refreshRate.fps > _maxFPS){
-				//log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
-			}else{
-				[(A3DLayer*)self.layer setCanDraw:YES];
+			if(_clock.time() - _refreshRate.lastTime > 1.0/_maxFPS){
+				[self setNeedsDisplay:YES];
 			}
 		}else{
 			[self updateClock];
@@ -376,6 +376,75 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			_isRendering = NO;
 		}
 	});
+}
+
+// 必须在主线程中
+- (void)doRender{
+	double idealInterval = 0.016713;
+	CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
+	if(ct.timeScale > 0){
+		idealInterval = (double)ct.timeValue/ct.timeScale;
+	}
+	double bestInterval = fmax(1.0/_maxFPS, idealInterval * 2);
+	
+	double interval = _clock.time() - _refreshRate.lastTime;
+	if(interval > bestInterval){
+		interval = bestInterval;
+	}
+	
+//	static double last_time = a3d::absolute_time();
+//	log_debug(@"render interval: %.3f, %.3f", interval, a3d::absolute_time() - last_time);
+//	last_time = a3d::absolute_time();
+
+	_refreshRate.count ++;
+//	_refreshRate.lastTime = _clock.time();
+	_refreshRate.lastTime += interval;
+	//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
+
+//	log_debug(@"begin %.3f", _refreshRate.lastTime);
+	CGLLockContext([self.openGLContext CGLContextObj]);
+	[self.openGLContext makeCurrentContext];
+	[self renderAtTime:_refreshRate.lastTime];
+	[self.openGLContext flushBuffer];
+	CGLUnlockContext([self.openGLContext CGLContextObj]);
+//	log_debug(@"end");
+}
+
+- (void)drawRect:(NSRect)dirtyRect{
+	[self doRender];
+}
+
+// 一旦 A3DLayer.canDraw=YES，layer自动被清空。
+// 那么必须执行OpenGL更新整个layer，否则AppKit将用空白的layer来渲染界面，用户会看到空白一闪。
+- (void)setNeedsDisplay:(BOOL)needsDisplay{
+	if(needsDisplay){
+		if(self.layer){
+			[(A3DLayer*)self.layer setCanDraw:YES];
+		}
+	}
+	[super setNeedsDisplay:needsDisplay];
+}
+
+- (BOOL)preservesContentDuringLiveResize{
+	return YES;
+}
+
+- (void)setFrameSize:(NSSize)newSize{
+	[super setFrameSize:newSize];
+	if(self.inLiveResize){
+		[self updateClock];
+		if(_clock.time() - _refreshRate.lastTime < 1.0/_maxFPS){
+			return;
+		}
+	}
+	[self setNeedsDisplay:YES];
+}
+
+- (void)lockFocus{
+	[super lockFocus];
+	if(self.openGLContext.view != self){
+		self.openGLContext.view = self;
+	}
 }
 
 - (void)updateClock{
@@ -395,70 +464,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	if(interval > 1){ // 每秒重新统计
 		_refreshRate.beginTime = _clock.time();
 		_refreshRate.count = 0;
-	}
-	
-	double realInterval = _clock.time() - _refreshRate.lastTime;
-	
-	//		if(!self.layer){
-	//			// 在慢机器上时间平滑反而影响效果
-	//			// 设备理想刷新周期
-	//			double idealInterval = 0.016713;
-	//			CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
-	//			if(ct.timeScale > 0){
-	//				idealInterval = (double)ct.timeValue/ct.timeScale;
-	//			}
-	//			double bestInterval = fmax(1.0/_maxFPS, idealInterval);
-	//			if(realInterval < 0){
-	//				return;
-	//			}else if(realInterval > bestInterval * 4){
-	//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-	//				// 已无平滑的必要，跳到指定时间
-	//			}else if(realInterval > bestInterval * 1.2){
-	//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-	//				realInterval =  0.5 * (realInterval - bestInterval) + bestInterval;
-	//			}else if(realInterval < bestInterval * 0.8){
-	//				log_debug(@"realInterval: %.6f bestInterval: %.6f", realInterval, bestInterval);
-	//				realInterval = bestInterval;
-	//			}
-	//		}
-	
-	_refreshRate.lastTime += realInterval;
-}
-
-// 必须在主线程中
-- (void)doRender{
-	_refreshRate.count ++;
-	//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
-
-//	log_debug(@"begin %.3f", _refreshRate.lastTime);
-	CGLLockContext([self.openGLContext CGLContextObj]);
-	[self.openGLContext makeCurrentContext];
-	[self renderAtTime:_refreshRate.lastTime];
-	[self.openGLContext flushBuffer];
-	CGLUnlockContext([self.openGLContext CGLContextObj]);
-//	log_debug(@"end");
-}
-
-- (void)drawRect:(NSRect)dirtyRect{
-	[self doRender];
-}
-
-- (void)setNeedsDisplay:(BOOL)needsDisplay{
-	[super setNeedsDisplay:needsDisplay];
-	if(needsDisplay){
-		// 在 liveresize 过程中，发现 10.9 版本会导致 main_queue 阻塞，clock 无法更新
-		// 所以在这里进行更新
-		[self updateClock];
-		if(self.layer){
-			[(A3DLayer*)self.layer setCanDraw:YES];
-		}
-	}
-}
-
-- (void)lockFocus{
-	[super lockFocus];
-	if(self.openGLContext.view != self){
-		self.openGLContext.view = self;
 	}
 }
 
