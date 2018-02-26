@@ -228,12 +228,8 @@ using namespace a3d;
 	float dy = 0;
 	float dz = 0;
 	switch(c){
-		case '3':{
-			[self stopAnimation];
-			break;
-		}
-		case '4':{
-			[self startAnimation];
+		case 'f':{
+			[self.window zoom:nil];
 			break;
 		}
 		case 'c':{
@@ -336,28 +332,6 @@ using namespace a3d;
 		case 'S':
 			dz = -1;
 			break;
-		case 'f':
-		case 'F':{
-//			if(_world.camera.follow){
-//				log_debug(@"unfollow");
-//				[_world.camera unfollow];
-//			}else{
-//				log_debug(@"follow");
-//				[_world.camera follow:_alex];
-//			}
-			break;
-		}
-		case '1':{
-			a3d::Animate *action = a3d::Animate::move(a3d::Vector3(100, 0, 0), 1);
-			_alex->runAnimation(action);
-			break;
-		}
-		case '2':{
-			static double time = 0;
-			time += 0.1;
-			_alex->renderAtTime(time);
-			[self setNeedsDisplay:YES];
-		}
 		default:
 			return;
 	}
