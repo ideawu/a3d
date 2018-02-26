@@ -59,8 +59,8 @@ using namespace a3d;
 	SpriteNode *node;
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/camera.jpg");
-		node->sprite(sprite);
+//		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/camera.jpg");
+//		node->sprite(sprite);
 //		node->move(node->width()/2, node->height()/2, 0);
 		node->move(self.viewportSize.width/4, self.viewportSize.height/2, 0);
 		node->scale(0.2);
@@ -124,11 +124,12 @@ using namespace a3d;
 		size = [self convertSizeToBacking:size];
 		glViewport(0, 0, size.width, size.height);
 	}
-	{
-		CGSize size = self.frame.size;
-		size = [self convertSizeToBacking:size];
-		glEnable(GL_SCISSOR_TEST);
-		glScissor(0, 0, size.width, size.height);
+	{ // 在 10.13 会有导致在窗口resize时 view 更新即时
+//		CGSize size = self.frame.size;
+//		size = [self convertSizeToBacking:size];
+//		log_debug(@"%.2f %.2f", size.width/2, size.height/2);
+//		glEnable(GL_SCISSOR_TEST);
+//		glScissor(0, 0, size.width, size.height);
 	}
 
 	_context->loadMatrix3D(_camera->matrix3D());

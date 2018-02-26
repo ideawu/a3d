@@ -71,6 +71,7 @@ typedef struct{
 	_pixelFormat = [A3DView defaultPixelFormat];
 	_openGLContext = [[NSOpenGLContext alloc] initWithFormat:_pixelFormat
 												shareContext:[A3DView defaultOpenGLContext]];
+	[self.openGLContext makeCurrentContext];
 
 	_displayLink = NULL;
 	_refreshRate.fps = 0;
@@ -78,11 +79,7 @@ typedef struct{
 	_refreshRate.count = 0;
 	_maxFPS = 100;
 
-//	[self setWantsLayer:YES];
-	[self setWantsBestResolutionOpenGLSurface:YES];
-
 	[self setupOpenGL];
-
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(onReshape)
@@ -115,11 +112,12 @@ typedef struct{
 
 - (void)setupOpenGL{
 //	log_debug(@"%s", __func__);
-	[self.openGLContext makeCurrentContext];
-
 	// Synchronize buffer swaps with vertical refresh rate
 //	GLint swapInt = 1;
 //	[self.openGLContext setValues:&swapInt forParameter:NSOpenGLCPSwapInterval];
+	
+	[self setWantsLayer:YES];
+	[self setWantsBestResolutionOpenGLSurface:YES];
 
 	[self setup];
 	[self startAnimation];
@@ -133,10 +131,17 @@ typedef struct{
 	[self reshape];
 	[self.openGLContext update];
 	CGLUnlockContext([self.openGLContext CGLContextObj]);
-
 	if(self.layer){
 		[(A3DLayer*)self.layer setCanDraw:YES];
 	}
+}
+
+- (void)viewWillStartLiveResize{
+	[(A3DLayer*)self.layer setAsynchronous:NO];
+}
+
+- (void)viewDidEndLiveResize{
+	[(A3DLayer*)self.layer setAsynchronous:YES];
 }
 
 - (CALayer *)makeBackingLayer{
@@ -274,8 +279,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 - (void)showStatistics{
 	if(!_statisicsTimer){
-		[self setWantsLayer:YES];
-
 		_statisicsTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
 														   target:self
 														 selector:@selector(updateStatisticsLabel)
