@@ -19,7 +19,10 @@
 @property (readonly) CGSize framebufferSize;
 @property (readonly) float fps;
 
+// do not call this method, it is called automatically
 - (void)setup;
+// do not call this method, it is called automatically
+- (void)clean;
 - (void)reshape;
 - (void)renderAtTime:(double)time;
 //- (void)drawRect:(NSRect)dirtyRect;

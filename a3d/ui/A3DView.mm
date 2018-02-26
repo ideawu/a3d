@@ -98,6 +98,8 @@ typedef struct{
 												   object:self];
 		// 在 superview.wantsLayer 的情况下，NSViewGlobalFrameDidChangeNotification 不可用！FUCK Apple!
 	}else{
+		[self.openGLContext makeCurrentContext];
+		[self clean];
 		if(_statisicsTimer){
 			[_statisicsTimer invalidate];
 		}
@@ -164,6 +166,9 @@ typedef struct{
 }
 
 - (void)setup{
+}
+
+- (void)clean{
 }
 
 - (void)resize{
