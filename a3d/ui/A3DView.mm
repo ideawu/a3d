@@ -77,29 +77,26 @@ typedef struct{
 	_refreshRate.fps = 0;
 	_refreshRate.beginTime = 0;
 	_refreshRate.count = 0;
-	_maxFPS = 100;
+	_maxFPS = 20;
 
 	[self setupOpenGL];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(onReshape)
-												 name:NSViewFrameDidChangeNotification
-											   object:self];
-	// 在 superview.wantsLayer 的情况下，NSViewGlobalFrameDidChangeNotification 不可用！FUCK Apple!
 
 	return self;
 }
 
 - (void)dealloc{
 //	log_debug(@"%s", __func__);
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:NSViewFrameDidChangeNotification
-												  object:self];
 }
 
 - (void)viewDidMoveToSuperview{
 	if(self.superview){
 		[self onReshape];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(onReshape)
+													 name:NSViewFrameDidChangeNotification
+												   object:self];
+		// 在 superview.wantsLayer 的情况下，NSViewGlobalFrameDidChangeNotification 不可用！FUCK Apple!
 	}else{
 		if(_statisicsTimer){
 			[_statisicsTimer invalidate];
@@ -107,6 +104,9 @@ typedef struct{
 		if(_displayLink){
 			[self freeDisplayLink];
 		}
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:NSViewFrameDidChangeNotification
+													  object:self];
 	}
 }
 
@@ -134,13 +134,20 @@ typedef struct{
 	if(self.layer){
 		[(A3DLayer*)self.layer setCanDraw:YES];
 	}
+	log_debug(@"%d", self.inLiveResize);
 }
 
 - (void)viewWillStartLiveResize{
+	log_debug(@"");
 	[(A3DLayer*)self.layer setAsynchronous:NO];
 }
 
+- (void)liveResize{
+	log_debug(@"");
+}
+
 - (void)viewDidEndLiveResize{
+	log_debug(@"");
 	[(A3DLayer*)self.layer setAsynchronous:YES];
 }
 
@@ -343,80 +350,89 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		if(!CVDisplayLinkIsRunning(_displayLink)){
 			return;
 		}
-
-		double tick = a3d::absolute_time();
-		_clock.update(tick);
-
 		if(isBlocked){
 //			log_debug(@"drop frame at %.3f", _clock.time());
 			return;
 		}
 
-		// 初始化
-		if(_refreshRate.beginTime == 0){
-			_refreshRate.fps = 0;
-			_refreshRate.beginTime = _clock.time();
-			_refreshRate.lastTime = _refreshRate.beginTime;
-			_refreshRate.count = 0;
+		@synchronized(self){
+			_isRendering = YES;
 		}
-		// 更新 fps 统计
-		double interval = _clock.time() - _refreshRate.beginTime;
-		_refreshRate.fps = interval==0? 0 : (_refreshRate.count/interval);
-		if(interval > 1){ // 每秒重新统计
-			_refreshRate.beginTime = _clock.time();
-			_refreshRate.count = 0;
-		}
-
-		if(_refreshRate.fps > _maxFPS){
-//			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
-			return;
-		}
-		//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
-
-		double realInterval = _clock.time() - _refreshRate.lastTime;
-
-//		if(!self.layer){
-//			// 在慢机器上时间平滑反而影响效果
-//			// 设备理想刷新周期
-//			double idealInterval = 0.016713;
-//			CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
-//			if(ct.timeScale > 0){
-//				idealInterval = (double)ct.timeValue/ct.timeScale;
-//			}
-//			double bestInterval = fmax(1.0/_maxFPS, idealInterval);
-//			if(realInterval < 0){
-//				return;
-//			}else if(realInterval > bestInterval * 4){
-//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-//				// 已无平滑的必要，跳到指定时间
-//			}else if(realInterval > bestInterval * 1.2){
-//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
-//				realInterval =  0.5 * (realInterval - bestInterval) + bestInterval;
-//			}else if(realInterval < bestInterval * 0.8){
-//				log_debug(@"realInterval: %.6f bestInterval: %.6f", realInterval, bestInterval);
-//				realInterval = bestInterval;
-//			}
-//		}
-
-		_refreshRate.lastTime += realInterval;
-
 		if(self.layer){
-			[(A3DLayer*)self.layer setCanDraw:YES];
+			[self updateClock];
+			if(_refreshRate.fps > _maxFPS){
+				log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
+			}else{
+				[(A3DLayer*)self.layer setCanDraw:YES];
+				if(self.inLiveResize){
+					[self.layer display];
+				}
+			}
 		}else{
-			@synchronized(self){
-				_isRendering = YES;
+			[self updateClock];
+			if(_refreshRate.fps > _maxFPS){
+				log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
+			}else{
+				[self doRender];
 			}
-			[self doRender];
-			@synchronized(self){
-				_isRendering = NO;
-			}
+		}
+		@synchronized(self){
+			_isRendering = NO;
 		}
 	});
+}
+
+- (void)updateClock{
+	double tick = a3d::absolute_time();
+	_clock.update(tick);
+	
+	// 初始化
+	if(_refreshRate.beginTime == 0){
+		_refreshRate.fps = 0;
+		_refreshRate.beginTime = _clock.time();
+		_refreshRate.lastTime = _refreshRate.beginTime;
+		_refreshRate.count = 0;
+	}
+	// 更新 fps 统计
+	double interval = _clock.time() - _refreshRate.beginTime;
+	_refreshRate.fps = interval==0? 0 : (_refreshRate.count/interval);
+	if(interval > 1){ // 每秒重新统计
+		_refreshRate.beginTime = _clock.time();
+		_refreshRate.count = 0;
+	}
+	
+	double realInterval = _clock.time() - _refreshRate.lastTime;
+	
+	//		if(!self.layer){
+	//			// 在慢机器上时间平滑反而影响效果
+	//			// 设备理想刷新周期
+	//			double idealInterval = 0.016713;
+	//			CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
+	//			if(ct.timeScale > 0){
+	//				idealInterval = (double)ct.timeValue/ct.timeScale;
+	//			}
+	//			double bestInterval = fmax(1.0/_maxFPS, idealInterval);
+	//			if(realInterval < 0){
+	//				return;
+	//			}else if(realInterval > bestInterval * 4){
+	//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
+	//				// 已无平滑的必要，跳到指定时间
+	//			}else if(realInterval > bestInterval * 1.2){
+	//				log_debug(@"realInterval: %.3f bestInterval: %.3f", realInterval, bestInterval);
+	//				realInterval =  0.5 * (realInterval - bestInterval) + bestInterval;
+	//			}else if(realInterval < bestInterval * 0.8){
+	//				log_debug(@"realInterval: %.6f bestInterval: %.6f", realInterval, bestInterval);
+	//				realInterval = bestInterval;
+	//			}
+	//		}
+	
+	_refreshRate.lastTime += realInterval;
 }
 
 // 必须在主线程中
 - (void)doRender{
 	_refreshRate.count ++;
+	//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
 
 	CGLLockContext([self.openGLContext CGLContextObj]);
 	[self.openGLContext makeCurrentContext];
@@ -428,6 +444,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 
 - (void)drawRect:(NSRect)dirtyRect{
+	log_debug(@"");
 	[self doRender];
 }
 
