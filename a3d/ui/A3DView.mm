@@ -44,10 +44,10 @@ typedef struct{
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFADepthSize, 16,
 		NSOpenGLPFAAlphaSize, 8,
-		NSOpenGLPFAStencilSize, 8,
-		NSOpenGLPFAMultisample,
-		NSOpenGLPFASampleBuffers, 1,
-		NSOpenGLPFASamples, 4,
+//		NSOpenGLPFAStencilSize, 8,
+//		NSOpenGLPFAMultisample,
+//		NSOpenGLPFASampleBuffers, 1,
+//		NSOpenGLPFASamples, 4,
 		0
 	};
 	NSOpenGLPixelFormat* pixelFormat = nil;
