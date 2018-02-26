@@ -133,9 +133,6 @@ typedef struct{
 	[self reshape];
 	[self.openGLContext update];
 	CGLUnlockContext([self.openGLContext CGLContextObj]);
-	if(self.layer){
-		[(A3DLayer*)self.layer setCanDraw:YES];
-	}
 }
 
 - (void)viewWillStartLiveResize{
@@ -452,6 +449,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		// 在 liveresize 过程中，发现 10.9 版本会导致 main_queue 阻塞，clock 无法更新
 		// 所以在这里进行更新
 		[self updateClock];
+		if(self.layer){
+			[(A3DLayer*)self.layer setCanDraw:YES];
+		}
 	}
 }
 
