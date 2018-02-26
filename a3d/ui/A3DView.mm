@@ -134,20 +134,14 @@ typedef struct{
 	if(self.layer){
 		[(A3DLayer*)self.layer setCanDraw:YES];
 	}
-	log_debug(@"%d", self.inLiveResize);
 }
 
 - (void)viewWillStartLiveResize{
-	log_debug(@"");
+	// avoid choppy while live resizing
 	[(A3DLayer*)self.layer setAsynchronous:NO];
 }
 
-- (void)liveResize{
-	log_debug(@"");
-}
-
 - (void)viewDidEndLiveResize{
-	log_debug(@"");
 	[(A3DLayer*)self.layer setAsynchronous:YES];
 }
 
@@ -179,6 +173,57 @@ typedef struct{
 	[self resize];
 }
 
+- (float)fps{
+	return _refreshRate.fps;
+}
+
+- (void)setMaxFPS:(float)fps{
+	if(fps <= 0){
+		return;
+	}
+	_maxFPS = fps;
+}
+
+- (void)setTimescale:(double)scale{
+	_clock.speed(scale);
+}
+
+#pragma mark - Statistics label
+
+- (void)showStatistics{
+	if(!_statisicsTimer){
+		_statisicsTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+														   target:self
+														 selector:@selector(updateStatisticsLabel)
+														 userInfo:nil
+														  repeats:YES];
+		_statisticsLabel = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, 80, 18)];
+		_statisticsLabel.bordered = NO;
+		_statisticsLabel.selectable = NO;
+		_statisticsLabel.editable = NO;
+		_statisticsLabel.bezeled = NO;
+		_statisticsLabel.textColor = [NSColor whiteColor];
+		_statisticsLabel.drawsBackground = YES;
+		_statisticsLabel.backgroundColor = [NSColor grayColor];
+		[self addSubview:_statisticsLabel];
+	}
+}
+
+- (void)hideStatistics{
+	if(_statisicsTimer){
+		[_statisicsTimer invalidate];
+		_statisicsTimer = nil;
+		
+		[_statisticsLabel removeFromSuperview];
+		_statisticsLabel = nil;
+	}
+}
+
+- (void)updateStatisticsLabel{
+	if(_statisticsLabel){
+		_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
+	}
+}
 
 #pragma mark - Keyboard and Mouse event handle
 
@@ -284,56 +329,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 #endif
 
-- (void)showStatistics{
-	if(!_statisicsTimer){
-		_statisicsTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
-														   target:self
-														 selector:@selector(updateStatisticsLabel)
-														 userInfo:nil
-														  repeats:YES];
-		_statisticsLabel = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, 80, 18)];
-		_statisticsLabel.bordered = NO;
-		_statisticsLabel.selectable = NO;
-		_statisticsLabel.editable = NO;
-		_statisticsLabel.bezeled = NO;
-		_statisticsLabel.textColor = [NSColor whiteColor];
-		_statisticsLabel.drawsBackground = YES;
-		_statisticsLabel.backgroundColor = [NSColor grayColor];
-		[self addSubview:_statisticsLabel];
-	}
-}
-
-- (void)hideStatistics{
-	if(_statisicsTimer){
-		[_statisicsTimer invalidate];
-		_statisicsTimer = nil;
-
-		[_statisticsLabel removeFromSuperview];
-		_statisticsLabel = nil;
-	}
-}
-
-- (void)updateStatisticsLabel{
-	if(_statisticsLabel){
-		_statisticsLabel.stringValue = [NSString stringWithFormat:@"fps: %.2f", _refreshRate.fps];
-	}
-}
-
-- (float)fps{
-	return _refreshRate.fps;
-}
-
-- (void)setMaxFPS:(float)fps{
-	if(fps <= 0){
-		return;
-	}
-	_maxFPS = fps;
-}
-
-- (void)setTimescale:(double)scale{
-	_clock.speed(scale);
-}
-
 - (void)displayLinkCallback{
 	// 此变量是每个任务相关的，不同的任务得到的此变量的值可能不一样。queue的工作原理是拷贝上下文变量
 	// 要在主线程中更新时钟，所以这里不直接丢弃任务，而是在主线程中再丢弃任务
@@ -359,19 +354,18 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			_isRendering = YES;
 		}
 		if(self.layer){
+			// 一旦 A3DLayer.canDraw=YES，layer自动被清空。
+			// 那么必须执行OpenGL更新整个layer，否则AppKit将用空白的layer来渲染界面，用户会看到空白一闪。
 			[self updateClock];
 			if(_refreshRate.fps > _maxFPS){
-				log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
+				//log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
 			}else{
 				[(A3DLayer*)self.layer setCanDraw:YES];
-				if(self.inLiveResize){
-					[self.layer display];
-				}
 			}
 		}else{
 			[self updateClock];
 			if(_refreshRate.fps > _maxFPS){
-				log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
+				//log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
 			}else{
 				[self doRender];
 			}
@@ -434,18 +428,26 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	_refreshRate.count ++;
 	//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
 
+//	log_debug(@"begin %.3f", _refreshRate.lastTime);
 	CGLLockContext([self.openGLContext CGLContextObj]);
 	[self.openGLContext makeCurrentContext];
-//	log_debug(@"begin %.3f", _refreshRate.lastTime);
 	[self renderAtTime:_refreshRate.lastTime];
-//	log_debug(@"end");
 	[self.openGLContext flushBuffer];
 	CGLUnlockContext([self.openGLContext CGLContextObj]);
+//	log_debug(@"end");
 }
 
 - (void)drawRect:(NSRect)dirtyRect{
-	log_debug(@"");
 	[self doRender];
+}
+
+- (void)setNeedsDisplay:(BOOL)needsDisplay{
+	[super setNeedsDisplay:needsDisplay];
+	if(needsDisplay){
+		// 在 liveresize 过程中，发现 10.9 版本会导致 main_queue 阻塞，clock 无法更新
+		// 所以在这里进行更新
+		[self updateClock];
+	}
 }
 
 - (void)lockFocus{
@@ -457,7 +459,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 - (void)renderAtTime:(double)time{
 }
-
 
 @end
 
