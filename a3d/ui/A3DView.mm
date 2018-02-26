@@ -77,7 +77,7 @@ typedef struct{
 	_refreshRate.fps = 0;
 	_refreshRate.beginTime = 0;
 	_refreshRate.count = 0;
-	_maxFPS = 20;
+	_maxFPS = 100;
 
 	[self setupOpenGL];
 
