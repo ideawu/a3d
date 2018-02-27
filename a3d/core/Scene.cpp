@@ -89,7 +89,7 @@ namespace a3d{
 		_time = time;
 		
 		_context->begin();
-		_context->clearColor(0, 0, 0);
+		_context->clearColor(0, 0, 0, 0);
 
 		_camera->renderAtTime(time);
 		
