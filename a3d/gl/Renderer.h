@@ -28,6 +28,10 @@ namespace a3d{
 		void popMatrix();
 
 		void clearStencil();
+		// 只在 stencil buffer 上作画，忽略 color 和 depth
+		void beginStencil();
+		// 结束只在 stencil buffer 上作画
+		void endStencil();
 		void pushStencil();
 		void popStencil();
 
