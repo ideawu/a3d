@@ -137,6 +137,8 @@ typedef struct{
 	[self reshape];
 	[self.openGLContext update];
 	CGLUnlockContext([self.openGLContext CGLContextObj]);
+
+	[(A3DLayer*)self.layer setCanDraw:YES];
 }
 
 - (void)viewWillStartLiveResize{
