@@ -35,7 +35,15 @@ namespace a3d{
 	bool Node::visible() const{
 		return !hidden() && (!_parent || _parent->visible());
 	}
+
+	bool Node::clipBounds() const{
+		return _clipBounds;
+	}
 	
+	void Node::clipBounds(bool clip){
+		_clipBounds = clip;
+	}
+
 	
 	Node* Node::parent() const{
 		return _parent;
@@ -180,7 +188,13 @@ namespace a3d{
 				log_debug("%s %d, subs: %d", buf, this, subs);
 			}
 #endif
+			if(_clipBounds){
+				Renderer::current()->pushStencil();
+			}
 			this->drawAtTime(time);
+			if(_clipBounds){
+				Renderer::current()->bindStencil();
+			}
 		}
 		if(_subs){
 			// 如果完全透明则不渲染，但仍调用子节点renderAtTime()更新动画
@@ -190,6 +204,9 @@ namespace a3d{
 			}
 		}
 		if(currentVisible){
+			if(_clipBounds){
+				Renderer::current()->popStencil();
+			}
 			Renderer::current()->popMatrix();
 		}
 		if(parentVisible){

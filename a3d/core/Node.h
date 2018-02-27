@@ -26,6 +26,9 @@ namespace a3d{
 		void renderAtTime(double time);
 
 		bool visible() const; // 结合父节点判断是否可见
+		
+		bool clipBounds() const;
+		void clipBounds(bool clip);
 
 		Node* parent() const;
 		void removeFromParent();
@@ -64,6 +67,8 @@ namespace a3d{
 		
 		Node(const Node &d);
 		Node& operator =(const Node &d);
+		
+		bool _clipBounds;
 		
 		Node *_parent;
 		std::list<Node*> *_subs;

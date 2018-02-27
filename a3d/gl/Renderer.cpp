@@ -55,19 +55,17 @@ namespace a3d{
 	}
 
 	void Renderer::pushStencil(){
+		if(_stencilRef == 0){
+			clearStencil();
+		}
 		glStencilFunc(GL_EQUAL, _stencilRef, 0xff);
 		glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
 		_stencilRef ++;
 	}
 
-	void Renderer::beginStencil(){
-		glDisable(GL_DEPTH_TEST);
-		glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-	}
-
-	void Renderer::endStencil(){
-		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-		glEnable(GL_DEPTH_TEST);
+	void Renderer::bindStencil(){
+		glStencilFunc(GL_EQUAL, _stencilRef, 0xff);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	}
 
 	static void _decrStencil(int ref);
@@ -85,7 +83,17 @@ namespace a3d{
 			glStencilOp(GL_KEEP, GL_KEEP, GL_INCR);
 		}
 	}
+
+	void Renderer::beginStencil(){
+		glDisable(GL_DEPTH_TEST);
+		glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+	}
 	
+	void Renderer::endStencil(){
+		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+		glEnable(GL_DEPTH_TEST);
+	}
+
 	static void _decrStencil(int ref){
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();

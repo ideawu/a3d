@@ -56,6 +56,9 @@ using namespace a3d;
 	
 //	[_scene moveX:200 y:200 z:5];
 
+	_alex = new MySprite();
+	_alex->move(500, 0, 200);
+
 	SpriteNode *node;
 	{
 		node = new SpriteNode();
@@ -80,19 +83,21 @@ using namespace a3d;
 		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
-		node->move(450, 150, 500);
 		node->opacity(0.9);
 		_text = node;
+
+		_text->move(450, 150, 50);
+		
+//		_text->move(-50, 0, -20);
+//		_alex->addSubnode(_text);
+//		_alex->clipBounds(YES);
 	}
 	
 	_flag = new DraftSprite();
 	_flag->width(100);
 	_flag->height(100);
 	_flag->depth(100);
-
-	_alex = new MySprite();
-	_alex->move(800, 0, 00);
-
+	
 	_objects.push_back(_alex);
 	_objects.push_back(_camera);
 
@@ -140,15 +145,10 @@ using namespace a3d;
 	_scene->render();
 	_camera->renderAtTime(time);
 
-//	_context->renderer()->clearStencil();
-//	_context->renderer()->pushStencil();
 	_alex->renderAtTime(time);
-	{
-//		_context->renderer()->pushStencil();
+	if(!_text->parent()){
 		_text->renderAtTime(time);
-//		_context->renderer()->popStencil();
 	}
-//	_context->renderer()->popStencil();
 
 	_flag->renderAtTime(time);
 	_img1->renderAtTime(time);
