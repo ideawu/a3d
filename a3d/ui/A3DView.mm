@@ -44,7 +44,6 @@ typedef struct{
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFADepthSize, 16,
 		NSOpenGLPFAAlphaSize, 8,
-		// 非常影响性能
 //		NSOpenGLPFAStencilSize, 8,
 //		NSOpenGLPFAMultisample,
 //		NSOpenGLPFASampleBuffers, 1,
@@ -155,7 +154,7 @@ typedef struct{
 	layer.openGLPixelFormat = self.pixelFormat;
 	layer.openGLContext = self.openGLContext;
 	[layer setAsynchronous:YES];
-	[layer setNeedsDisplayOnBoundsChange:YES];
+//	[layer setNeedsDisplayOnBoundsChange:YES];
 	return layer;
 }
 
@@ -353,7 +352,12 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			return;
 		}
 		if(isBlocked){
-//			log_debug(@"drop frame at %.3f", _clock.time());
+			log_debug(@"drop frame at %.3f", _clock.time());
+			return;
+		}
+		[self updateClock];
+		if(_refreshRate.fps > _maxFPS){
+//			log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
 			return;
 		}
 
@@ -361,17 +365,14 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 			_isRendering = YES;
 		}
 		if(self.layer){
-			[self updateClock];
-			if(_clock.time() - _refreshRate.lastTime > 1.0/_maxFPS){
+			[(A3DLayer*)self.layer setCanDraw:YES];
+			if(self.inLiveResize){
+				// live resizing 过程，如果 frameSize 未发生变动，则 view 不会重绘，
+				// 所以这里强制要求 view 重绘。否则，等 layer 被 AppKit 询问是否重绘(canDraw)。
 				[self setNeedsDisplay:YES];
 			}
 		}else{
-			[self updateClock];
-			if(_refreshRate.fps > _maxFPS){
-				//log_debug(@"limit fps: %.1f, max: %.1f", _refreshRate.fps, _maxFPS);
-			}else{
-				[self doRender];
-			}
+			[self doRender];
 		}
 		@synchronized(self){
 			_isRendering = NO;
@@ -381,20 +382,19 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 // 必须在主线程中
 - (void)doRender{
-	double idealInterval = 0.016713;
-	CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
-	if(ct.timeScale > 0){
-		idealInterval = (double)ct.timeValue/ct.timeScale;
-	}
-	double bestInterval = fmax(1.0/_maxFPS, idealInterval * 2);
-	
+//	double idealInterval = 0.016713;
+//	CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
+//	if(ct.timeScale > 0){
+//		idealInterval = (double)ct.timeValue/ct.timeScale;
+//	}
+	double maxInterval = fmax(1.0/_maxFPS, 0.050);
 	double interval = _clock.time() - _refreshRate.lastTime;
-	if(interval > bestInterval){
-		interval = bestInterval;
+	if(interval > maxInterval){
+		interval = maxInterval;
 	}
 	
 //	static double last_time = a3d::absolute_time();
-//	if(a3d::absolute_time() - last_time > 0.050){
+//	if(interval == maxInterval){
 //		log_debug(@"render interval: %.3f, %.3f", interval, a3d::absolute_time() - last_time);
 //	}
 //	last_time = a3d::absolute_time();
@@ -402,8 +402,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	_refreshRate.count ++;
 //	_refreshRate.lastTime = _clock.time();
 	_refreshRate.lastTime += interval;
-	//log_debug(@"%.3f, %.3f %d", _refreshRate.fps, _refreshRate.beginTime, _refreshRate.count);
-	
+
 //	log_debug(@"begin %.3f", _refreshRate.lastTime);
 	CGLLockContext([self.openGLContext CGLContextObj]);
 	[self.openGLContext makeCurrentContext];
@@ -417,17 +416,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	[self doRender];
 }
 
-// 一旦 A3DLayer.canDraw=YES，layer自动被清空。
-// 那么必须执行OpenGL更新整个layer，否则AppKit将用空白的layer来渲染界面，用户会看到空白一闪。
-- (void)setNeedsDisplay:(BOOL)needsDisplay{
-	if(needsDisplay){
-		if(self.layer){
-			[(A3DLayer*)self.layer setCanDraw:YES];
-		}
-	}
-	[super setNeedsDisplay:needsDisplay];
-}
-
 //- (BOOL)preservesContentDuringLiveResize{
 //	return YES;
 //}
@@ -435,13 +423,15 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 - (void)setFrameSize:(NSSize)newSize{
 	[super setFrameSize:newSize];
 	if(self.inLiveResize){
-		// 在低版本 live resize 会阻塞 main queue，所以这里更新 clock
+		// 在 10.9 等低版本，live resizing 过程 main queue 会阻塞，
+		// 导致时钟无法更新，所以要在这里更新
 		[self updateClock];
-		if(_clock.time() - _refreshRate.lastTime < 1.0/_maxFPS){
+		if(_refreshRate.fps > _maxFPS){
 			return;
 		}
 	}
 	[self setNeedsDisplay:YES];
+	[(A3DLayer*)self.layer setCanDraw:YES];
 }
 
 - (void)lockFocus{
