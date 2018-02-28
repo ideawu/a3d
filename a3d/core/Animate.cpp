@@ -147,6 +147,10 @@ namespace a3d{
 		_repeats = enable? -1 : 1;
 	}
 
+	void Animate::timingFunc(TimingFunc func){
+		easingFunc(func);
+	}
+
 	void Animate::easingFunc(TimingFunc func){
 		_easingFunc = func;
 	}

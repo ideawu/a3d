@@ -58,6 +58,7 @@ namespace a3d{
 		void callback(AnimateCallback func, void *ctx);
 
 		// 运动位移相对时间的曲线控制
+		void timingFunc(TimingFunc func); // alias of easingFunc
 		void easingFunc(TimingFunc func);
 		// 用于弹跳频率控制
 		void bounceFunc(TimingFunc func);
