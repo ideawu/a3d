@@ -14,19 +14,19 @@ namespace a3d{
 	public:
 		static Animate* move(float x, float y, float z, double duration=0);
 		static Animate* move(const Vector3 &vec, double duration=0);
-		static Animate* moveTo(float x, float y, float z, double duration=0);
-		static Animate* moveTo(const Vector3 &pos, double duration=0);
+		static Animate* position(float x, float y, float z, double duration=0);
+		static Animate* position(const Vector3 &pos, double duration=0);
 
 		static Animate* rotate(float degree, const Vector3 &vec);
 		static Animate* rotate(float degree, const Axis &axis);
-		static Animate* rotateTo(const Quaternion &quat);
+		static Animate* rotation(const Quaternion &quat);
 
 		static Animate* scale(float xyz);
 		static Animate* scale(float x, float y, float z);
 		static Animate* scale(const Vector3 &s);
 		static Animate* scaleTo(const Vector3 &s);
 
-		static Animate* fadeTo(double opacity, double duration=0);
+		static Animate* opacity(double opacity, double duration=0);
 		static Animate* show(double duration=0);
 		static Animate* hide(double duration=0);
 

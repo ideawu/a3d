@@ -19,12 +19,12 @@ namespace a3d{
 		return AnimatePosition::move(vec, duration);
 	}
 
-	Animate* Animate::moveTo(float x, float y, float z, double duration){
-		return AnimatePosition::moveTo(Vector3(x, y, z), duration);
+	Animate* Animate::position(float x, float y, float z, double duration){
+		return AnimatePosition::position(Vector3(x, y, z), duration);
 	}
 
-	Animate* Animate::moveTo(const Vector3 &pos, double duration){
-		return AnimatePosition::moveTo(pos, duration);
+	Animate* Animate::position(const Vector3 &pos, double duration){
+		return AnimatePosition::position(pos, duration);
 	}
 
 	Animate* Animate::rotate(float degree, const Vector3 &vec){
@@ -35,8 +35,8 @@ namespace a3d{
 		return AnimateRotation::rotate(degree, axis);
 	}
 
-	Animate* Animate::rotateTo(const Quaternion &quat){
-		return AnimateRotation::rotateTo(quat);
+	Animate* Animate::rotation(const Quaternion &quat){
+		return AnimateRotation::rotation(quat);
 	}
 
 	Animate* Animate::scale(float xyz){
@@ -55,16 +55,16 @@ namespace a3d{
 		return AnimateScale::scaleTo(s);
 	}
 
-	Animate* Animate::fadeTo(double opacity, double duration){
-		return AnimateOpacity::fadeTo(opacity, duration);
+	Animate* Animate::opacity(double opacity, double duration){
+		return AnimateOpacity::opacity(opacity, duration);
 	}
 
 	Animate* Animate::show(double duration){
-		return Animate::fadeTo(1, duration);
+		return Animate::opacity(1, duration);
 	}
 
 	Animate* Animate::hide(double duration){
-		return Animate::fadeTo(0, duration);
+		return Animate::opacity(0, duration);
 	}
 
 	Animate* Animate::size(float w, float h, float d){

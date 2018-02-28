@@ -32,7 +32,7 @@ int main(int argc, const char * argv[])
 
 
 	// q0, q1
-	// rotateTo(q1).rotate(q0.invert())
+	// rotation(q1).rotate(q0.invert())
 	{
 		Matrix4 mat;
 		mat.rotateY(45);

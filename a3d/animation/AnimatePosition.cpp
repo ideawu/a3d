@@ -14,7 +14,7 @@ namespace a3d{
 		return ret;
 	}
 	
-	AnimatePosition* AnimatePosition::moveTo(const Vector3 &pos, double duration){
+	AnimatePosition* AnimatePosition::position(const Vector3 &pos, double duration){
 		AnimatePosition *ret = new AnimatePosition();
 		ret->duration(duration);
 		ret->_type = TypeTarget;

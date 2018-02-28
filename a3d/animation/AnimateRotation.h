@@ -13,7 +13,7 @@ namespace a3d{
 	public:
 		static AnimateRotation* rotate(float degree, const Vector3 &vec);
 		static AnimateRotation* rotate(float degree, const Axis &axis);
-		static AnimateRotation* rotateTo(const Quaternion &quat);
+		static AnimateRotation* rotation(const Quaternion &quat);
 
 		virtual void update(double progress, Node *target);
 	private:

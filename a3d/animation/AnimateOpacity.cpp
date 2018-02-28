@@ -6,7 +6,7 @@
 
 namespace a3d{
 	
-	AnimateOpacity* AnimateOpacity::fadeTo(double opacity, double duration){
+	AnimateOpacity* AnimateOpacity::opacity(double opacity, double duration){
 		AnimateOpacity *ret = new AnimateOpacity();
 		ret->duration(duration);
 		ret->_opacity = opacity;

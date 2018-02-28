@@ -272,7 +272,7 @@ using namespace a3d;
 //
 //				Vector3 vec = Vector3(0, 0, 1);
 //				q = Quaternion(angle, vec);
-//				a3d::Animate *action = a3d::Animate::rotateTo(q);
+//				a3d::Animate *action = a3d::Animate::rotation(q);
 //				action->duration(0.5);
 //				node->runAnimation(action);
 //			}

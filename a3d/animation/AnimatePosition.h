@@ -12,7 +12,7 @@ namespace a3d{
 	{
 	public:
 		static AnimatePosition* move(const Vector3 &offset, double duration);
-		static AnimatePosition* moveTo(const Vector3 &pos, double duration);
+		static AnimatePosition* position(const Vector3 &pos, double duration);
 
 		virtual void update(double progress, Node *target);
 	private:

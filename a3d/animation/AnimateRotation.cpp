@@ -22,7 +22,7 @@ namespace a3d{
 		return ret;
 	}
 
-	AnimateRotation* AnimateRotation::rotateTo(const Quaternion &quat){
+	AnimateRotation* AnimateRotation::rotation(const Quaternion &quat){
 		AnimateRotation *ret = new AnimateRotation();
 		ret->_type = TypeQuaternion;
 		ret->_quat = quat;
