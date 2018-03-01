@@ -238,9 +238,9 @@ using namespace a3d;
 			break;
 		}
 		case ' ':{
-			Node *node = _text;
+//			Node *node = _text;
 //			node = _currentObject;
-//			Node *node = _alex;
+			Node *node = _alex;
 
 			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
 			axis = node->convertAxisFromWorld(axis);
@@ -256,10 +256,10 @@ using namespace a3d;
 
 			{
 //				[self setMaxFPS:15];
-				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 0, 1));
+				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0.1));
 				action->easingFunc(a3d::TimingFuncLinear);
 				action->repeat(true);
-				action->duration(2 * action->bounces());
+				action->duration(5 * action->bounces());
 				node->runAnimation(action);
 			}
 //			{
