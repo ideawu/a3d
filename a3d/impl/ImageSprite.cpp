@@ -108,6 +108,7 @@ namespace a3d{
 		if(!_textures[frame]){
 			Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
 			if(!bitmap){
+				log_debug("failed to create bitmap from CGImage");
 				return NULL;
 			}
 			this->width(bitmap->width());
