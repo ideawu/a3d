@@ -190,6 +190,7 @@ typedef struct{
 		return;
 	}
 	_maxFPS = fps;
+	[self resetFPS];
 }
 
 - (void)setTimescale:(double)scale{
@@ -384,14 +385,19 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 // 必须在主线程中
 - (void)doRender{
-//	double idealInterval = 0.016713;
+	double idealInterval = 0.016713;
 //	CVTime ct = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(_displayLink);
 //	if(ct.timeScale > 0){
 //		idealInterval = (double)ct.timeValue/ct.timeScale;
 //	}
-	double maxInterval = fmax(1.0/_maxFPS, 0.050);
+	double maxInterval = 3 * 1.0/fmax(_maxFPS, idealInterval);
 	double interval = _clock.time() - _refreshRate.lastTime;
-	if(interval > maxInterval){
+	if(interval > 10 * maxInterval){
+		//log_debug(@"interval: %.3f clock: %.3f, refreshTime: %.3f", interval, _clock.time(), _refreshRate.lastTime);
+		// 如果落后太多（AppKit 可能停止某个窗口的绘制），直接跳到指定时间
+	}else if(interval > maxInterval){
+		// 加速时间，以便追上
+		//log_debug(@"interval: %.3f => %.3f", interval, maxInterval);
 		interval = maxInterval;
 	}
 	
@@ -443,16 +449,20 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 	}
 }
 
+- (void)resetFPS{
+	_refreshRate.fps = 0;
+	_refreshRate.beginTime = _clock.time();
+	_refreshRate.lastTime = _refreshRate.beginTime;
+	_refreshRate.count = 0;
+}
+
 - (void)updateClock{
 	double tick = a3d::absolute_time();
 	_clock.update(tick);
 	
 	// 初始化
 	if(_refreshRate.beginTime == 0){
-		_refreshRate.fps = 0;
-		_refreshRate.beginTime = _clock.time();
-		_refreshRate.lastTime = _refreshRate.beginTime;
-		_refreshRate.count = 0;
+		[self resetFPS];
 	}
 	// 更新 fps 统计
 	double interval = _clock.time() - _refreshRate.beginTime;
