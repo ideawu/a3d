@@ -70,8 +70,8 @@ typedef struct{
 	self = [super initWithFrame:frameRect];
 	_pixelFormat = [A3DView defaultPixelFormat];
 	_openGLContext = [[NSOpenGLContext alloc] initWithFormat:_pixelFormat
-												shareContext:nil];
-												//shareContext:[A3DView defaultOpenGLContext]];
+//												shareContext:nil];
+												shareContext:[A3DView defaultOpenGLContext]];
 	[self.openGLContext makeCurrentContext];
 
 	_displayLink = NULL;
@@ -423,6 +423,13 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 - (void)drawRect:(NSRect)dirtyRect{
 	[self doRender];
+}
+
+- (void)setNeedsDisplay:(BOOL)needsDisplay{
+	[super setNeedsDisplay:needsDisplay];
+	if(needsDisplay){
+		[(A3DLayer*)self.layer setCanDraw:YES];
+	}
 }
 
 //- (BOOL)preservesContentDuringLiveResize{

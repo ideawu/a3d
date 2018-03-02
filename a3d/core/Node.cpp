@@ -12,6 +12,7 @@ namespace a3d{
 		_parent = NULL;
 		_subs = NULL;
 		_animator = NULL;
+		_clipBounds = false;
 	}
 
 	Node::Node(const Node &d){
