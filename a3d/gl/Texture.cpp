@@ -6,6 +6,8 @@
 
 namespace a3d{
 	
+	static int texture_count = 0;
+	
 	Texture* Texture::createFromBitmap(const Bitmap &bitmap){
 		Texture *ret = new Texture();
 		ret->loadBitmap(bitmap);
@@ -23,7 +25,7 @@ namespace a3d{
 	Texture::~Texture(){
 		if(_tid){
 			glDeleteTextures(1, &_tid);
-//			log_debug("del tid: %d", _tid);
+//			log_debug("del tid: %d, textures: %d", _tid, --texture_count);
 		}
 	}
 	
@@ -55,7 +57,7 @@ namespace a3d{
 		bool isNew = (_tid == 0);
 		if(isNew){
 			glGenTextures(1, &_tid);
-//			log_debug("gen tid: %d", _tid);
+//			log_debug("gen tid: %d, textures: %d", _tid, ++texture_count);
 			if(!_tid){
 				return;
 			}
