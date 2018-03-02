@@ -99,28 +99,31 @@ namespace a3d{
 		bool ret = false;
 		CFURLRef url = NULL;
 		CGImageDestinationRef dest = NULL;
-		CGImageRef imageRef = NULL;
+		CGImageRef imageRef = this->CGImage();
 		if(!imageRef){
+			log_error("no CGImageRef");
 			goto end;
 		}
 		url = CFURLCreateFromFileSystemRepresentation(NULL, (const UInt8 *)filename, strlen(filename), false);
 		if(!url){
+			log_error("failed to create CFURL for %s", filename);
 			goto end;
 		}
 		dest = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, NULL);
 		if(!dest){
+			log_error("failed to create img dst for %s", filename);
 			goto end;
 		}
 		imageRef = this->CGImage();
 		CGImageDestinationAddImage(dest, imageRef, nil);
 		if(!CGImageDestinationFinalize(dest)){
+			log_error("failed to save img dst to %s", filename);
 			goto end;
 		}
 		ret = true;
 	end:
 		if(url){CFRelease(url);}
 		if(dest){CFRelease(dest);}
-		CGImageRelease(imageRef);
 		return ret;
 	}
 
