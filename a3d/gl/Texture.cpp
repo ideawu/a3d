@@ -6,7 +6,7 @@
 
 namespace a3d{
 	
-	static int texture_count = 0;
+	int Texture::texture_count = 0;
 	
 	Texture* Texture::createFromBitmap(const Bitmap &bitmap){
 		Texture *ret = new Texture();

@@ -37,6 +37,8 @@ namespace a3d{
 
 		GLuint _tid;
 		Vector3 _size;
+
+		static int texture_count;
 	};
 }; // end namespace
 
