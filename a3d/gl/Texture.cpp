@@ -81,7 +81,7 @@ namespace a3d{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::draw(const Rect &texRect, const Rect vertRect) const{
+	void Texture::draw(const Frame &texRect, const Frame verRect) const{
 		if(!name()){
 			return;
 		}
@@ -91,11 +91,11 @@ namespace a3d{
 		float tx1 = tx0 + texRect.width;
 		float ty1 = ty0 + texRect.height;
 		
-		float vx0 = vertRect.x;
+		float vx0 = verRect.x;
 		// flip y
-		float vy0 = vertRect.y + vertRect.height;
-		float vx1 = vx0 + vertRect.width;
-		float vy1 = vy0 - vertRect.height;
+		float vy0 = verRect.y + verRect.height;
+		float vx1 = vx0 + verRect.width;
+		float vy1 = vy0 - verRect.height;
 		float z = 0;
 
 		bind();

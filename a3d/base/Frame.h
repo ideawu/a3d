@@ -6,15 +6,20 @@
 #define a3d_Rect_hpp
 
 namespace a3d{
-	class Rect
+	class Frame
 	{
 	public:
 		// width/height 可为负数
 		float x, y, width, height;
 		
-		Rect();
-		Rect(float x, float y, float width, float height);
+		Frame();
+		Frame(float x, float y, float width, float height);
 		
+		float top() const;
+		float bottom() const;
+		float left() const;
+		float right() const;
+
 		// origin point
 		float x0() const;
 		float y0() const;
@@ -22,10 +27,10 @@ namespace a3d{
 		float x1() const;
 		float y1() const;
 
-		bool equals(const Rect &d) const;
+		bool equals(const Frame &d) const;
 		bool empty() const;
 		// 返回两者的交集区域
-		Rect intersect(const Rect &d) const;
+		Frame intersect(const Frame &d) const;
 	};
 }; // end namespace
 

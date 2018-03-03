@@ -6,7 +6,7 @@
 #define a3d_Texture_hpp
 
 #include "Bitmap.h"
-#include "Rect.h"
+#include "Frame.h"
 #include "Vector3.h"
 
 namespace a3d{
@@ -27,7 +27,7 @@ namespace a3d{
 		void unbind() const;
 		void loadBitmap(const Bitmap &bitmap);
 		
-		void draw(const Rect &texRect, const Rect vertRect) const;
+		void draw(const Frame &texRect, const Frame verRect) const;
 		
 		// TODO: retain, release
 		

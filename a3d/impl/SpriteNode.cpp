@@ -103,9 +103,9 @@ namespace a3d{
 
 		Texture *texture = sprite()->textureAtTime(_clock.time());
 		if(texture){
-			Rect texRect = Rect(0, 0, 1, 1);
-			Rect vertRect = Rect(-this->width()/2, -this->height()/2, this->width(), this->height());
-			texture->draw(texRect, vertRect);
+			Frame texRect = Frame(0, 0, 1, 1);
+			Frame verRect = Frame(-this->width()/2, -this->height()/2, this->width(), this->height());
+			texture->draw(texRect, verRect);
 		}
 	}
 	

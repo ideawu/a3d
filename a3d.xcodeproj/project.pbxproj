@@ -25,8 +25,8 @@
 		08B4CB16201DE49900EEC0C5 /* Matrix4.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB09201DE49900EEC0C5 /* Matrix4.h */; };
 		08B4CB17201DE49900EEC0C5 /* Point3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB0A201DE49900EEC0C5 /* Point3.cpp */; };
 		08B4CB18201DE49900EEC0C5 /* Point3.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB0B201DE49900EEC0C5 /* Point3.h */; };
-		08B4CB19201DE49900EEC0C5 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB0C201DE49900EEC0C5 /* Rect.cpp */; };
-		08B4CB1A201DE49900EEC0C5 /* Rect.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB0D201DE49900EEC0C5 /* Rect.h */; };
+		08B4CB19201DE49900EEC0C5 /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB0C201DE49900EEC0C5 /* Frame.cpp */; };
+		08B4CB1A201DE49900EEC0C5 /* Frame.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB0D201DE49900EEC0C5 /* Frame.h */; };
 		08B4CB1B201DE49900EEC0C5 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08B4CB0E201DE49900EEC0C5 /* Vector3.cpp */; };
 		08B4CB1C201DE49900EEC0C5 /* Vector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB0F201DE49900EEC0C5 /* Vector3.h */; };
 		08B4CB1D201DE49900EEC0C5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 08B4CB10201DE49900EEC0C5 /* PrefixHeader.pch */; };
@@ -82,7 +82,7 @@
 		08B4CBC0201DEA6500EEC0C5 /* Color.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB07201DE49900EEC0C5 /* Color.h */; };
 		08B4CBC1201DEA6500EEC0C5 /* Matrix4.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB09201DE49900EEC0C5 /* Matrix4.h */; };
 		08B4CBC2201DEA6500EEC0C5 /* Point3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB0B201DE49900EEC0C5 /* Point3.h */; };
-		08B4CBC3201DEA6500EEC0C5 /* Rect.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB0D201DE49900EEC0C5 /* Rect.h */; };
+		08B4CBC3201DEA6500EEC0C5 /* Frame.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB0D201DE49900EEC0C5 /* Frame.h */; };
 		08B4CBC4201DEA6500EEC0C5 /* Vector3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB0F201DE49900EEC0C5 /* Vector3.h */; };
 		08B4CBC5201DEA6500EEC0C5 /* Animate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB20201DE4AF00EEC0C5 /* Animate.h */; };
 		08B4CBC6201DEA6500EEC0C5 /* AnimationTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB21201DE4AF00EEC0C5 /* AnimationTypes.h */; };
@@ -157,7 +157,7 @@
 				08B4CBC0201DEA6500EEC0C5 /* Color.h in CopyFiles */,
 				08B4CBC1201DEA6500EEC0C5 /* Matrix4.h in CopyFiles */,
 				08B4CBC2201DEA6500EEC0C5 /* Point3.h in CopyFiles */,
-				08B4CBC3201DEA6500EEC0C5 /* Rect.h in CopyFiles */,
+				08B4CBC3201DEA6500EEC0C5 /* Frame.h in CopyFiles */,
 				08B4CBC4201DEA6500EEC0C5 /* Vector3.h in CopyFiles */,
 				08B4CBC5201DEA6500EEC0C5 /* Animate.h in CopyFiles */,
 				08B4CBC6201DEA6500EEC0C5 /* AnimationTypes.h in CopyFiles */,
@@ -202,8 +202,8 @@
 		08B4CB09201DE49900EEC0C5 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
 		08B4CB0A201DE49900EEC0C5 /* Point3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point3.cpp; sourceTree = "<group>"; };
 		08B4CB0B201DE49900EEC0C5 /* Point3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point3.h; sourceTree = "<group>"; };
-		08B4CB0C201DE49900EEC0C5 /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
-		08B4CB0D201DE49900EEC0C5 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
+		08B4CB0C201DE49900EEC0C5 /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
+		08B4CB0D201DE49900EEC0C5 /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
 		08B4CB0E201DE49900EEC0C5 /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
 		08B4CB0F201DE49900EEC0C5 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		08B4CB10201DE49900EEC0C5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -383,8 +383,8 @@
 				08B4CB08201DE49900EEC0C5 /* Matrix4.cpp */,
 				08B4CB0B201DE49900EEC0C5 /* Point3.h */,
 				08B4CB0A201DE49900EEC0C5 /* Point3.cpp */,
-				08B4CB0D201DE49900EEC0C5 /* Rect.h */,
-				08B4CB0C201DE49900EEC0C5 /* Rect.cpp */,
+				08B4CB0D201DE49900EEC0C5 /* Frame.h */,
+				08B4CB0C201DE49900EEC0C5 /* Frame.cpp */,
 				08B4CB0F201DE49900EEC0C5 /* Vector3.h */,
 				08B4CB0E201DE49900EEC0C5 /* Vector3.cpp */,
 				084619C3202F2D4100741AF2 /* Quaternion.h */,
@@ -587,7 +587,7 @@
 				08B4CB60201DE4AF00EEC0C5 /* Sprite.h in Headers */,
 				312CD38020257852008FE758 /* TextSpirte.h in Headers */,
 				08B4CB7C201DE4AF00EEC0C5 /* util.h in Headers */,
-				08B4CB1A201DE49900EEC0C5 /* Rect.h in Headers */,
+				08B4CB1A201DE49900EEC0C5 /* Frame.h in Headers */,
 				08B4CB5A201DE4AF00EEC0C5 /* Object.h in Headers */,
 				08B4CB14201DE49900EEC0C5 /* Color.h in Headers */,
 				08B4CB5E201DE4AF00EEC0C5 /* Scene.h in Headers */,
@@ -759,7 +759,7 @@
 				08B4CB6F201DE4AF00EEC0C5 /* BufferContext.cpp in Sources */,
 				312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */,
 				31543EEE2025BE4B002AC387 /* Bitmap.cpp in Sources */,
-				08B4CB19201DE49900EEC0C5 /* Rect.cpp in Sources */,
+				08B4CB19201DE49900EEC0C5 /* Frame.cpp in Sources */,
 				08B4CB5F201DE4AF00EEC0C5 /* Sprite.cpp in Sources */,
 				08B4CB57201DE4AF00EEC0C5 /* Node.cpp in Sources */,
 				08B4CB7B201DE4AF00EEC0C5 /* util.cpp in Sources */,

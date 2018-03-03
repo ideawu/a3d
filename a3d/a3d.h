@@ -16,7 +16,7 @@ namespace a3d{
 #include "Quaternion.h"
 #include "Point3.h"
 #include "Color.h"
-#include "Rect.h"
+#include "Frame.h"
 #include "Clock.h"
 
 #include "Object.h"
