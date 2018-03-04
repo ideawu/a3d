@@ -40,6 +40,7 @@ using namespace a3d;
 - (void)setup{
 	log_debug(@"%s", __func__);
 	[self showStatistics];
+//	[self setAcceptsTouchEvents:YES];
 
 	_camera = a3d::Camera::create();
 
@@ -218,6 +219,32 @@ using namespace a3d;
 	//	[self resetMousePoint];
 }
 
+- (void)swipeWithEvent:(NSEvent *)event {
+	log_debug(@"%s", __func__);
+}
+
+- (void)magnifyWithEvent:(NSEvent *)event {
+	log_debug(@"%s", __func__);
+}
+
+- (void)rotateWithEvent:(NSEvent *)event {
+	log_debug(@"%s", __func__);
+}
+
+- (void)scrollWheel:(NSEvent *)event{
+	float sx = event.scrollingDeltaX;
+	float dx = event.deltaX;
+	float sx2 = copysign(pow(fabs(sx), 1.0/2), sx);
+	float x = sx2;
+	if(sx + dx != 0){
+		if(event.momentumPhase){
+			return;
+		}
+		log_debug(@"sx: %.2f, sx2: %.2f, dx: %.2f", sx, sx2, dx);
+		_alex->move(-x, 0, 0);
+	}
+}
+
 - (void)keyDown:(NSEvent *)event{
 	NSString *s = [event charactersIgnoringModifiers];
 	if(!s || s.length == 0){
@@ -228,6 +255,14 @@ using namespace a3d;
 	float dy = 0;
 	float dz = 0;
 	switch(c){
+		case '0':{
+			_alex->position(0, 0, 0);
+			break;
+		}
+		case 'q':{
+			[self.window close];
+			return;
+		}
 		case 'f':{
 			[self.window zoom:nil];
 			break;
