@@ -427,6 +427,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 
 - (void)setNeedsDisplay:(BOOL)needsDisplay{
 	[super setNeedsDisplay:needsDisplay];
+	[self updateClock];
 	if(needsDisplay){
 		[(A3DLayer*)self.layer setCanDraw:YES];
 	}
