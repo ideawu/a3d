@@ -19,11 +19,8 @@ namespace a3d{
 		virtual ~Node();
 
 		// 子类方法
-		virtual void draw(){};
-		virtual void drawAtTime(double time){draw();};
-
-		void render(); // renderAtTime(0);
-		void renderAtTime(double time);
+		virtual void drawAtTime(double time){};
+		virtual void renderAtTime(double time);
 
 		bool visible() const; // 结合父节点判断是否可见
 		
@@ -50,6 +47,8 @@ namespace a3d{
 		Axis convertAxisFromWorld(const Axis &axis) const;
 
 		// ### 动画管理
+		Animator* animator();
+		
 		bool isAnimating() const;
 		void startAnimation();
 		void stopAnimation();

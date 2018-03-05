@@ -17,18 +17,17 @@ namespace a3d{
 
 		~Animator();
 
+		double time() const;
+
 		bool isAnimating() const;
 		void startAnimation();
 		void stopAnimation();
 		void toggleAnimation();
-
 		void runAnimation(Animate *action);
 		void removeAnimation(Animate *action);
 		void removeAllAnimations();
 		bool hasAnimations() const;
 
-		double time() const;
-		
 		void updateAtTime(double time);
 
 	private:

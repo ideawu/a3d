@@ -20,6 +20,10 @@ namespace a3d{
 		removeAllAnimations();
 	}
 
+	double Animator::time() const{
+		return _clock.time();
+	}
+
 	bool Animator::isAnimating() const{
 		return _clock.isRunning();
 	}
@@ -27,11 +31,11 @@ namespace a3d{
 	void Animator::startAnimation(){
 		_clock.start();
 	}
-
+	
 	void Animator::stopAnimation(){
 		_clock.pause(); // 不是 stop
 	}
-
+	
 	void Animator::toggleAnimation(){
 		if(isAnimating()){
 			stopAnimation();
@@ -64,10 +68,6 @@ namespace a3d{
 
 	bool Animator::hasAnimations() const{
 		return !_actions.empty();
-	}
-
-	double Animator::time() const{
-		return _clock.time();
 	}
 
 	void Animator::updateAtTime(double time){

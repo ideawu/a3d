@@ -59,7 +59,9 @@ namespace a3d{
 	}
 
 	void Clock::pause(){
-		_pauseTick = _secondTick;
+		if(isRunning()){
+			_pauseTick = _secondTick;
+		}
 	}
 
 	void Clock::stop(){

@@ -143,7 +143,7 @@ using namespace a3d;
 	[self draw3D];
 
 
-	_scene->render();
+	_scene->renderAtTime(time);
 	_camera->renderAtTime(time);
 
 	_alex->renderAtTime(time);

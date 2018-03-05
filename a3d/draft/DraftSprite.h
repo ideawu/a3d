@@ -14,8 +14,8 @@ class DraftSprite : public a3d::Node
 public:
 	a3d::Color color;
 	DraftSprite();
-	virtual void draw();
-	
+	virtual void drawAtTime(double time);
+
 private:
 	
 	void drawHead();

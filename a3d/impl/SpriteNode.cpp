@@ -10,6 +10,7 @@ namespace a3d{
 		_sprite = NULL;
 		_isFrameLossless = false;
 		_isLooping = true;
+		pause();
 	}
 	
 	SpriteNode::~SpriteNode(){
@@ -71,7 +72,6 @@ namespace a3d{
 		if(isPaused()){
 			return;
 		}
-		
 		double thisRenderTime = _clock.time();
 
 		// 不丢帧
@@ -99,14 +99,17 @@ namespace a3d{
 		if(!sprite()){
 			return;
 		}
-		this->updateClock(time);
-
 		Texture *texture = sprite()->textureAtTime(_clock.time());
 		if(texture){
 			Frame texRect = Frame(0, 0, 1, 1);
 			Frame verRect = Frame(-this->width()/2, -this->height()/2, this->width(), this->height());
 			texture->draw(texRect, verRect);
 		}
+	}
+	
+	void SpriteNode::renderAtTime(double time){
+		this->updateClock(time);
+		Node::renderAtTime(time);
 	}
 	
 }; // end namespace

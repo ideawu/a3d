@@ -8,7 +8,7 @@ DraftSprite::DraftSprite(){
 	color = a3d::Color::gray();
 }
 
-void DraftSprite::draw(){
+void DraftSprite::drawAtTime(double time){
 	drawHead();
 
 //	glPushMatrix();

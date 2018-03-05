@@ -4,7 +4,7 @@
 
 #include "DraftScene.h"
 
-void DraftScene::draw(){
+void DraftScene::drawAtTime(double time){
 	glDisable(GL_LINE_STIPPLE);
 
 	int grids;

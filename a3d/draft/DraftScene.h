@@ -12,7 +12,7 @@ class DraftScene : public a3d::Node
 {
 public:
 	DraftScene(){}
-	virtual void draw();
+	virtual void drawAtTime(double time);
 };
 
 #endif

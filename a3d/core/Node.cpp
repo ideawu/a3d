@@ -154,10 +154,6 @@ namespace a3d{
 	}
 
 	
-	void Node::render(){
-		renderAtTime(0);
-	}
-	
 	void Node::renderAtTime(double time){
 		if(time > 0 && _animator){
 			_animator->updateAtTime(time);
@@ -216,45 +212,39 @@ namespace a3d{
 	}
 
 
+	Animator* Node::animator(){
+		if(!_animator){
+			_animator = Animator::create(this);
+		}
+		return _animator;
+	}
+
 	bool Node::isAnimating() const{
 		return _animator && _animator->isAnimating();
 	}
 
 	void Node::startAnimation(){
-		if(_animator){
-			_animator->startAnimation();
-		}
+		animator()->startAnimation();
 	}
 
 	void Node::stopAnimation(){
-		if(_animator){
-			_animator->stopAnimation();
-		}
+		animator()->stopAnimation();
 	}
 
 	void Node::toggleAnimation(){
-		if(_animator){
-			_animator->toggleAnimation();
-		}
+		animator()->toggleAnimation();
 	}
 
 	void Node::runAnimation(Animate *action){
-		if(!_animator){
-			_animator = Animator::create(this);
-		}
-		_animator->runAnimation(action);
+		animator()->runAnimation(action);
 	}
 	
 	void Node::removeAnimation(Animate *action){
-		if(_animator){
-			_animator->removeAnimation(action);
-		}
+		animator()->removeAnimation(action);
 	}
 
 	void Node::removeAllAnimations(){
-		if(_animator){
-			_animator->removeAllAnimations();
-		}
+		animator()->removeAllAnimations();
 	}
 	
 	bool Node::hasAnimations() const{
