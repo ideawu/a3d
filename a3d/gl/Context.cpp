@@ -131,12 +131,12 @@ namespace a3d{
 	
 	void Context::blit(){
 		if(framebuffer()){
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer());
 			glBlitFramebuffer(0, 0, (GLsizei)_width, (GLsizei)_height,
 							  0, 0, (GLsizei)_width, (GLsizei)_height,
 							  GL_COLOR_BUFFER_BIT, GL_NEAREST); // GL_LINEAR GL_NEAREST
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 		}
 		glFinish();
 	}
