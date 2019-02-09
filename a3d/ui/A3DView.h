@@ -19,11 +19,13 @@
 @property (readonly) CGSize framebufferSize;
 @property (readonly) float fps;
 
-// do not call this method, it is called automatically
+// 子类可重写此方法。OpenGL 初始化时，系统调用此方法。
 - (void)setup;
-// do not call this method, it is called automatically
+// 子类可重写此方法。OpenGL 销毁时，系统调用此方法。
 - (void)clean;
+// 子类可重写此方法。
 - (void)reshape;
+// 子类可重写此方法。在此方法中渲染
 - (void)renderAtTime:(double)time;
 //- (void)drawRect:(NSRect)dirtyRect;
 
