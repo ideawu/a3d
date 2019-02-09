@@ -43,17 +43,21 @@ namespace a3d{
 		void state(AnimateState state);
 		bool isEnded() const;
 
+		double beginTime() const;
+		// 动画开始的时间点，-1表示下一次执行时开始
+		void beginTime(double beginTime);
 		double duration() const;
 		void duration(double duration);
-		double beginTime() const;
-		void beginTime(double beginTime);
+		
 		int repeats() const;
+		// <0: forever; 0: don't repeat(default);
 		void repeats(int count);
-		void repeat(bool enable);
-		// 设置弹跳次数，默认是1次，如果指定2次，动画完毕后返回原点，可指定非整数次
-		// bounce 是偶数且 boundFunc 为 Linear(默认)，则作用同 repeat+autoreverse
-		float bounces() const;
-		void bounces(float count);
+		void loop(bool enable);
+		int bounce() const;
+		// 设置弹跳次数(在 duration 时间内)，如果指定奇数次，动画完毕后返回原点
+		void bounce(int count);
+		// 是否在动画执行完毕后释放，默认是
+		bool disposable() const;
 
 		void callback(AnimateCallback func, void *ctx);
 
@@ -83,10 +87,11 @@ namespace a3d{
 		AnimateCallback _callback;
 		void *_callbackCtx;
 		
-		int _repeats;
-		float _bounces;
 		double _beginTime;
 		double _duration;
+		int _repeats;
+		int _bounce;
+		bool _disposable;
 		
 		double timing(double p) const;
 	};

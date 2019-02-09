@@ -277,48 +277,26 @@ using namespace a3d;
 //			node = _currentObject;
 			Node *node = _alex;
 
-			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 200, 800));
+			a3d::Axis axis = a3d::Axis(a3d::Point3(500, 0, 800), a3d::Point3(500, 300, 800));
 			axis = node->convertAxisFromWorld(axis);
 
-
-//			a3d::Animate *action = a3d::Animate::rotate(160, axis);
-//			action->easingFunc(a3d::TimingFuncLinear);
-////			action->bounceFunc(a3d::TimingFuncLinear);
-////			action->accelateFunc(a3d::TimingFuncLinear);
-////			action->bounces(1);
-//			action->duration(5 * action->bounces());
-//			node->runAnimation(action);
-
 			{
-//				[self setMaxFPS:15];
-				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0.1));
-				action->easingFunc(a3d::TimingFuncLinear);
-				action->repeat(true);
-				action->duration(5 * action->bounces());
+				a3d::Animate *action = a3d::Animate::move(0, -80, 0);
+				action->easingFunc(a3d::TimingFuncEaseIn);
+//				action->repeats(2);
+				action->bounceFunc(a3d::TimingFuncEaseOut);
+				action->bounce(7);
+//				action->accelateFunc(a3d::TimingFuncLinear);
+				action->duration(0.5 * (action->bounce() + 1));
 				node->runAnimation(action);
 			}
 //			{
-//				Quaternion q = node->quaternion();
-//				float angle = q.angle();
-//				if(fabs(1 + q.vector().z) < 0.01){
-//					angle = 360 - angle;
-//				}
-//				angle += 80;
-//
-//				Vector3 vec = Vector3(0, 0, 1);
-//				q = Quaternion(angle, vec);
-//				a3d::Animate *action = a3d::Animate::rotation(q);
-//				action->duration(0.5);
+//				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0.5));
+//				action->easingFunc(a3d::TimingFuncLinear);
+//				action->loop(true);
+//				action->duration(5);
 //				node->runAnimation(action);
 //			}
-//			{
-////				a3d::Animate *action = a3d::Animate::size(node->size().mul(2));
-//				a3d::Animate *action = a3d::Animate::scale(1.5);
-//				action->bounces(1);
-//				action->duration(1 * action->bounces());
-//				node->runAnimation(action);
-//			}
-//			[self setMaxFPS:5];
 			break;
 		}
 		case '[':{
@@ -333,7 +311,7 @@ using namespace a3d;
 //			log_debug(@"");
 			a3d::Animate *action = a3d::Animate::rotate(60, Vector3(0, 0, 1));
 			action->easingFunc(a3d::TimingFuncLinear);
-			action->duration(1 * action->bounces());
+			action->duration(1);
 			_currentObject->runAnimation(action);
 			break;
 		}
@@ -341,7 +319,7 @@ using namespace a3d;
 //			log_debug(@"");
 			a3d::Animate *action = a3d::Animate::rotate(-60, Vector3(0, 0, 1));
 			action->easingFunc(a3d::TimingFuncLinear);
-			action->duration(1 * action->bounces());
+			action->duration(1);
 			_currentObject->runAnimation(action);
 			break;
 		}

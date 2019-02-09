@@ -84,8 +84,9 @@ namespace a3d{
 		_callback = NULL;
 		_beginTime = -1;
 		_duration = 0;
-		_bounces = 1;
-		_repeats = 1;
+		_bounce = 0;
+		_repeats = 0;
+		_disposable = true;
 	}
 	
 	Animate::~Animate(){
@@ -106,6 +107,14 @@ namespace a3d{
 		return _state == AnimateStateEnded;
 	}
 
+	double Animate::beginTime() const{
+		return _beginTime;
+	}
+	
+	void Animate::beginTime(double beginTime){
+		_beginTime = beginTime;
+	}
+
 	double Animate::duration() const{
 		return _duration;
 	}
@@ -114,25 +123,17 @@ namespace a3d{
 		_duration = duration;
 	}
 
-	double Animate::beginTime() const{
-		return _beginTime;
-	}
-
-	void Animate::beginTime(double beginTime){
-		_beginTime = beginTime;
-	}
-
 	void Animate::callback(AnimateCallback func, void *ctx){
 		_callback = func;
 		_callbackCtx = ctx;
 	}
 	
-	float Animate::bounces() const{
-		return _bounces;
+	int Animate::bounce() const{
+		return _bounce;
 	}
 
-	void Animate::bounces(float count){
-		_bounces = count;
+	void Animate::bounce(int count){
+		_bounce = count;
 	}
 
 	int Animate::repeats() const{
@@ -143,8 +144,12 @@ namespace a3d{
 		_repeats = count;
 	}
 
-	void Animate::repeat(bool enable){
-		_repeats = enable? -1 : 1;
+	void Animate::loop(bool enable){
+		_repeats = enable? -1 : 0;
+	}
+
+	bool Animate::disposable() const{
+		return _disposable;
 	}
 
 	void Animate::timingFunc(TimingFunc func){
@@ -185,62 +190,67 @@ namespace a3d{
 	double Animate::timing(double p) const{
 		double step_s = 0;
 		double step_e = 0;
-		if(_bounces != 1){
+		if(_bounce != 0){
 			// 通过反函数计算当前时间是第几跳
-			double bounce_ratio = reverse_timing_func(_bounceFunc, p);
+			double curr_bounce = reverse_timing_func(_bounceFunc, p);
 			// 相邻的两次组成一次周期
-			step_s = floor(bounce_ratio * _bounces/2) * 2; // 向下取偶
+			step_s = floor(curr_bounce * (_bounce + 1)/2.0) * 2;
 			step_e = step_s+2;
 			// 周期的开始和结束时间
-			double time_s = _bounceFunc(step_s/_bounces);
-			double time_e = _bounceFunc(step_e/_bounces);
-			
+			double time_s = _bounceFunc(step_s/(_bounce + 1));
+			double time_e = _bounceFunc(step_e/(_bounce + 1));
+//			log_debug("curr: %.3f, s: %.3f, e: %.3f, ts: %.3f, te: %.3f", curr_bounce, step_s, step_e, time_s, time_e);
+			// 将周期内对称的两条线归一化(*2)
 			p = (p - time_s)/(time_e - time_s);
 			p = (p < 0.5)? 2 * p : 2 * (1-p);
 		}
 		
 		double y = _easingFunc(p);
 		
-		if(_bounces != 1){
-			double total_steps = ceil(_bounces/2) * 2; // 向上取偶
+		if(_bounce != 0){
+			double total_steps = ceil((_bounce + 1)/2.0) * 2; // 向上取偶
 			y *= _accelateFunc(step_e/total_steps);
 		}
 		return y;
 	}
 
 	void Animate::updateAtTime(double time, Node *target){
+		// auto start
+		if(_beginTime == -1){
+			_beginTime = time;
+		}
+		// ignore before begin time
 		if(time < _beginTime){
 			return;
 		}
-
-		if(_state == AnimateStateNone || _state == AnimateStateEnded){
-			if(_beginTime == -1){
-				// auto start
-				_beginTime = time;
-			}
-			if(time >= _beginTime){
-				this->state(AnimateStateBegan);
-			}
+		
+		if(_state == AnimateStateNone){
+			this->state(AnimateStateBegan);
 		}
-		if(_state == AnimateStateBegan || _state == AnimateStateDidUpdate){
-			double progress;
-			double timing_p;
-			if(time >= _beginTime + _duration){
-				progress = 1;
-			}else{
-				progress = (time - _beginTime)/_duration;
-				progress = fmin(1, progress);
-			}
-			timing_p = this->timing(progress);
 
-			this->state(AnimateStateWillUpdate);
+		double progress;
+		progress = (time - _beginTime)/_duration;
+		progress = fmin(1, progress);
+		progress = fmax(0, progress);
+		
+		this->state(AnimateStateWillUpdate);
+		{
+			double timing_p = this->timing(progress);
 			update(timing_p, target);
-			this->state(AnimateStateDidUpdate);
+		}
+		this->state(AnimateStateDidUpdate);
 
-			if(progress >= 1){
-				_repeats --;
-				_beginTime = time;
-				this->state(AnimateStateEnded);
+		if(progress >= 1){
+			this->state(AnimateStateEnded);
+			if(!this->disposable()){
+				this->state(AnimateStateNone);
+			}
+			if(_repeats != 0){
+				if(_repeats > 0){
+					_repeats --;
+				}
+				_beginTime = -1;
+				this->state(AnimateStateNone);
 			}
 		}
 	}

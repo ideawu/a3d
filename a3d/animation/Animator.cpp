@@ -92,15 +92,13 @@ namespace a3d{
 			action->updateAtTime(_clock.time(), _target);
 
 			if(action->isEnded()){
-				// 在 current 空间里变换 origin
+				// 在 current 空间里变换 origin，将一次性动画作用于物体本身。
 				Transform trans = Transform::transformBetween(_current, *_target);
 				_origin.transform(trans);
 
-				if(action->repeats() == 0){
-					delete action;
-					it = _actions.erase(it);
-					continue;
-				}
+				delete action;
+				it = _actions.erase(it);
+				continue;
 			}
 
 			it ++;
