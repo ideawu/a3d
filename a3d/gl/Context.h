@@ -39,10 +39,10 @@ namespace a3d{
 		// TODO: blit to other FBO
 		void blit();
 
+		virtual GLuint framebuffer() = 0;
 	protected:
 		Context();
 
-		virtual GLuint framebuffer() = 0;
 		virtual void setup() = 0;
 	private:
 		Context(const Context &d);

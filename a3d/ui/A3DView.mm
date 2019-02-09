@@ -39,8 +39,8 @@ typedef struct{
 + (NSOpenGLPixelFormat*)defaultPixelFormat{
 	NSOpenGLPixelFormatAttribute attrs[] = {
 		NSOpenGLPFANoRecovery,
-		NSOpenGLPFADoubleBuffer,
 		NSOpenGLPFAAccelerated,
+		NSOpenGLPFADoubleBuffer,
 		NSOpenGLPFAColorSize, 24,
 		NSOpenGLPFADepthSize, 16,
 		NSOpenGLPFAAlphaSize, 8,
