@@ -46,7 +46,7 @@ using namespace a3d;
 
 	_node = new SpriteNode();
 //	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
-	Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 12, Color::yellow());
+	Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 	_node->sprite(sprite);
 	{
 		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
@@ -73,6 +73,8 @@ using namespace a3d;
 - (void)draw{
 	_timeLabel.stringValue = [NSString stringWithFormat:@"%.2f", _time];
 	{
+		_context->bind();
+		
 		_drawable->begin();
 		_drawable->clear(0.1, 0.1, 0.1);
 
