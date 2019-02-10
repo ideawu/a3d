@@ -48,14 +48,22 @@ using namespace a3d;
 	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
 	_node->sprite(sprite);
 	{
-		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
-//		a3d::Animate *action = a3d::Animate::move(100, 0, 0);
+		a3d::Animate *action = a3d::Animate::rotate(180, Vector3(0, 1, 0));
 		action->disposable(false);
 		action->easingFunc(a3d::TimingFuncLinear);
+		action->beginTime(0);
 		action->duration(3);
 		_node->runAnimation(action);
 	}
-	
+	{
+		a3d::Animate *action = a3d::Animate::rotate(180, Vector3(0, 1, 0));
+		action->disposable(false);
+		action->easingFunc(a3d::TimingFuncLinear);
+		action->beginTime(-3);
+		action->duration(3);
+		_node->runAnimation(action);
+	}
+
 	_time = 0;
 
 	[self draw];
@@ -79,17 +87,7 @@ using namespace a3d;
 	self.contentView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(1, -1, 1),
 														   CATransform3DMakeTranslation(0, _drawable->height(), 0));
 	self.contentView.layer.contents = img;
-//	self.contentView.layer.backgroundColor = [NSColor colorWithPatternImage:img].CGColor;
 	[self.contentView setNeedsDisplay:YES];
-	
-//	UIGraphicsBeginImageContext(self.contentView.frame.size);
-//	CGContextRef context = UIGraphicsGetCurrentContext();
-//	CGAffineTransform flipVertical = CGAffineTransformMake(
-//														   1, 0, 0, -1, 0, self.contentView.frame.size.height
-//														   );
-//	CGContextConcatCTM(context, flipVertical);
-//
-//	[self.contentView.layer renderInContext:context];
 }
 
 - (void)keyDown:(NSEvent *)event{
