@@ -152,6 +152,10 @@ namespace a3d{
 		return _disposable;
 	}
 
+	void Animate::disposable(bool enable){
+		_disposable = enable;
+	}
+
 	void Animate::timingFunc(TimingFunc func){
 		easingFunc(func);
 	}

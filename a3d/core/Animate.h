@@ -58,6 +58,7 @@ namespace a3d{
 		void bounce(int count);
 		// 是否在动画执行完毕后释放，默认是
 		bool disposable() const;
+		void disposable(bool enable);
 
 		void callback(AnimateCallback func, void *ctx);
 

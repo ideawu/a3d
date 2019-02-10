@@ -155,7 +155,7 @@ namespace a3d{
 
 	
 	void Node::renderAtTime(double time){
-		if(time >= 0 && _animator){
+		if(_animator){
 			_animator->updateAtTime(time);
 		}
 		

@@ -4,7 +4,8 @@
 using namespace a3d;
 
 @interface AnimationWindow ()
-@property MyOpenGLView *videoView;
+@property (weak) IBOutlet NSView *contentView;
+@property (weak) IBOutlet NSTextField *timeLabel;
 
 @property GLContext *context;
 @property GLDrawable *drawable;
@@ -17,17 +18,23 @@ using namespace a3d;
 
 @implementation AnimationWindow
 
+- (IBAction)onTimeScroll:(id)sender {
+	NSSlider *slider = (NSSlider *)sender;
+	_time = slider.floatValue * 10;
+	[self draw];
+}
+
 - (void)windowDidLoad {
 	[super windowDidLoad];
-	[(NSView *)self.window.contentView setWantsLayer:YES];
+	[(NSView *)self.contentView setWantsLayer:YES];
 	
 	CGRect frame = self.window.frame;
 	frame.size.width = 900;
 	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
 	
-	int width = self.window.contentView.frame.size.width;
-	int height = self.window.contentView.frame.size.height;
+	int width = self.contentView.frame.size.width;
+	int height = self.contentView.frame.size.height;
 
 	log_debug("");
 	_context = GLContext::create();
@@ -35,16 +42,17 @@ using namespace a3d;
 
 	_drawable = GLDrawable::create(width, height, 0);
 	_camera = Camera::create();
-	_camera->setup(60, width, height, width*10, -200);
+	_camera->setup(60, width, height, width*10, -600);
 
 	_node = new SpriteNode();
 	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
 	_node->sprite(sprite);
 	{
-//		a3d::Animate *action = a3d::Animate::rotate(60, Vector3(0, 0, 1));
-		a3d::Animate *action = a3d::Animate::move(100, 0, 0);
+		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
+//		a3d::Animate *action = a3d::Animate::move(100, 0, 0);
+		action->disposable(false);
 		action->easingFunc(a3d::TimingFuncLinear);
-		action->duration(1);
+		action->duration(3);
 		_node->runAnimation(action);
 	}
 	
@@ -53,8 +61,39 @@ using namespace a3d;
 	[self draw];
 }
 
+- (void)draw{
+	_timeLabel.stringValue = [NSString stringWithFormat:@"%.2f", _time];
+	{
+		_drawable->begin();
+		_drawable->clear(0.1, 1, 0.1);
+
+		_camera->view3D();
+		_node->renderAtTime(_time);
+		
+		_drawable->finish();
+	}
+
+	CGImageRef _CGImage = _drawable->bitmap()->CGImage();
+
+	NSImage *img = [[NSImage alloc] initWithCGImage:_CGImage size:NSMakeSize(_drawable->width(), _drawable->height())];
+	self.contentView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(1, -1, 1),
+														   CATransform3DMakeTranslation(0, _drawable->height(), 0));
+	self.contentView.layer.contents = img;
+//	self.contentView.layer.backgroundColor = [NSColor colorWithPatternImage:img].CGColor;
+	[self.contentView setNeedsDisplay:YES];
+	
+//	UIGraphicsBeginImageContext(self.contentView.frame.size);
+//	CGContextRef context = UIGraphicsGetCurrentContext();
+//	CGAffineTransform flipVertical = CGAffineTransformMake(
+//														   1, 0, 0, -1, 0, self.contentView.frame.size.height
+//														   );
+//	CGContextConcatCTM(context, flipVertical);
+//
+//	[self.contentView.layer renderInContext:context];
+}
+
 - (void)keyDown:(NSEvent *)event{
-	double df = 0.05;
+	double df = 0.1;
 	unichar c = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	switch(c){
 		case 'q':
@@ -73,33 +112,6 @@ using namespace a3d;
 	}
 	
 	[self draw];
-}
-
-- (void)draw{
-	{
-		_drawable->begin();
-		_drawable->clear(0.1, 1, 0.1);
-
-		_camera->view3D();
-		_node->renderAtTime(_time);
-		log_debug("%.2f %.2f", _time, _node->position().x);
-		
-		_drawable->finish();
-	}
-
-	log_debug("");
-	CGImageRef _CGImage = _drawable->bitmap()->CGImage();
-	log_debug("");
-
-	{
-		if(self.window.contentView.layer.contents){
-			self.window.contentView.layer.contents = nil;
-		}else{
-		}
-		NSImage *img = [[NSImage alloc] initWithCGImage:_CGImage size:NSMakeSize(_drawable->width(), _drawable->height())];
-		self.window.contentView.layer.contents = img;
-		[self.window.contentView setNeedsDisplay:YES];
-	}
 }
 
 @end

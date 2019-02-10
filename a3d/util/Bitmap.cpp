@@ -29,6 +29,7 @@ namespace a3d{
 			delete ret;
 			return NULL;
 		}
+		// 如果不在这里flip，那么需要在 draw texture 时 flip
 		// flip
 		//		CGContextTranslateCTM(context, 0.0, h);
 		//		CGContextScaleCTM(context, 1.0, -1.0);
