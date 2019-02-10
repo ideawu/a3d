@@ -61,13 +61,18 @@ using namespace a3d;
 	_time = 0;
 
 	[self draw];
+	
+//	// 什么狗屎！NSSlider 鼠标按住时会暂停 runloop，所以 timer 不执行了。
+//	static NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5 repeats:YES block:^(NSTimer *timer) {
+//		log_debug("");
+//	}];
 }
 
 - (void)draw{
 	_timeLabel.stringValue = [NSString stringWithFormat:@"%.3f", _time];
 	{
 		_context->bind();
-		
+
 		_drawable->begin();
 		_drawable->clear(0.1, 0.1, 0.1);
 
@@ -76,7 +81,7 @@ using namespace a3d;
 		
 		_drawable->finish();
 	}
-
+	
 	CGImageRef _CGImage = _drawable->bitmap()->CGImage();
 
 	NSImage *img = [[NSImage alloc] initWithCGImage:_CGImage size:NSMakeSize(_drawable->width(), _drawable->height())];

@@ -336,13 +336,13 @@ using namespace a3d;
 				action->duration(0.5 * (action->bounce() + 1));
 				node->runAnimation(action);
 			}
-//			{
-//				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0.5));
-//				action->easingFunc(a3d::TimingFuncLinear);
-//				action->loop(true);
-//				action->duration(5);
-//				node->runAnimation(action);
-//			}
+			{
+				a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
+				action->easingFunc(a3d::TimingFuncLinear);
+				action->loop(true);
+				action->duration(5);
+				node->runAnimation(action);
+			}
 			break;
 		}
 		case '[':{
