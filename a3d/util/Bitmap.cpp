@@ -86,11 +86,12 @@ namespace a3d{
 	}
 
 	CGImageRef Bitmap::CGImage(){
-		if(!_CGImage){
-			CGContextRef context = this->CGContext();
-			if(context){
-				_CGImage = CGBitmapContextCreateImage(context);
-			}
+		CGImageRelease(_CGImage);
+		_CGImage = NULL;
+		
+		CGContextRef context = this->CGContext();
+		if(context){
+			_CGImage = CGBitmapContextCreateImage(context);
 		}
 		return _CGImage;
 	}
