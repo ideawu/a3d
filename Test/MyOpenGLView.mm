@@ -87,7 +87,7 @@ using namespace a3d;
 		node->opacity(0.9);
 		_text = node;
 
-		_text->move(450, 150, 50);
+		_text->move(450, 150, 0);
 		
 //		_text->move(-50, 0, -20);
 //		_alex->addSubnode(_text);

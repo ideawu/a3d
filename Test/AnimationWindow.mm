@@ -33,20 +33,21 @@ using namespace a3d;
 	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
 	
-	int width = self.contentView.frame.size.width;
-	int height = self.contentView.frame.size.height;
+	int width = self.contentView.bounds.size.width;
+	int height = self.contentView.bounds.size.height;
 
 	log_debug("");
 	_context = GLContext::create();
 	log_debug("");
 
-	_drawable = GLDrawable::create(width, height, 0);
+	//_drawable = GLDrawable::create(width*2, height*2, 0); // retina @2x
+	_drawable = GLDrawable::create(width*1, height*1, 0);
 	_camera = Camera::create();
 	_camera->setup(60, width, height, width*10, -600);
 
 	_node = new SpriteNode();
-//	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
-	Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
+	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+//	Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 	_node->sprite(sprite);
 	{
 		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
@@ -56,14 +57,6 @@ using namespace a3d;
 		action->duration(5);
 		_node->runAnimation(action);
 	}
-//	{
-//		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(1, 0, 0));
-//		action->disposable(false);
-//		action->easingFunc(a3d::TimingFuncLinear);
-//		action->beginTime(-2.5);
-//		action->duration(5);
-//		_node->runAnimation(action);
-//	}
 
 	_time = 0;
 
@@ -87,10 +80,9 @@ using namespace a3d;
 	CGImageRef _CGImage = _drawable->bitmap()->CGImage();
 
 	NSImage *img = [[NSImage alloc] initWithCGImage:_CGImage size:NSMakeSize(_drawable->width(), _drawable->height())];
-	self.contentView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(1, -1, 1),
-														   CATransform3DMakeTranslation(0, _drawable->height(), 0));
-	self.contentView.layer.contents = img;
-	[self.contentView setNeedsDisplay:YES];
+	_contentView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(1, -1, 1), CATransform3DMakeTranslation(0, _contentView.bounds.size.height, 0));
+	_contentView.layer.contents = img;
+	[_contentView setNeedsDisplay:YES];
 }
 
 - (void)keyDown:(NSEvent *)event{
