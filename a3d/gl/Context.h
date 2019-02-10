@@ -16,7 +16,7 @@ namespace a3d{
 		static Context* current();
 		static Context* blankContext();
 		// 创建一个FBO，如果 width, height 不是偶数，会导致blit少一行，所以转成偶数。
-		static Context* bufferContext(int width, int height);
+		static Context* bufferContext(int width, int height, int samples);
 
 	public:
 		virtual ~Context();
@@ -36,8 +36,7 @@ namespace a3d{
 		void clearDepth();
 		void flush();
 		void finish();
-		// TODO: blit to other FBO
-		void blit();
+		void blit(GLuint dstFbo);
 
 		virtual GLuint framebuffer() = 0;
 	protected:

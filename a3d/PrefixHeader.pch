@@ -10,6 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <OpenGL/gl.h>
+#include <OpenGL/OpenGL.h>
 
 #ifdef __cplusplus
 #include "util.h"

@@ -12,6 +12,7 @@ namespace a3d{
 	// TextureBuffer/TextureFBO: render to texture
 	// ColorBuffer/ColorFBO: render to color storage
 	
+	// rename to framebuffer
  	class BufferContext : public Context
 	{
 	public:
@@ -20,11 +21,15 @@ namespace a3d{
 		
 		virtual GLuint framebuffer();
 		virtual void setup();
+		
+		int samples() const;
+		void samples(int samples);
 
 	private:
 		GLuint _framebuffer;
 		GLuint _colorbuffer;
 		GLuint _depthbuffer;
+		int _samples;
 	};
 }; // end namespace
 

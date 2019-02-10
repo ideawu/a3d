@@ -36,4 +36,7 @@ namespace a3d{
 #include "Context.h"
 #include "Renderer.h"
 
+#include "GLContext.h"
+#include "GLDrawable.h"
+
 #endif

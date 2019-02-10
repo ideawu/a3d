@@ -70,6 +70,23 @@ namespace a3d{
 		return _matrix2D;
 	}
 
+	static void loadMatrix(const Matrix4 &mat){
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf((const GLfloat *)mat.array());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+	}
+	
+	void Camera::view3D(){
+		loadMatrix(this->matrix3D());
+		glEnable(GL_CULL_FACE);
+	}
+	
+	void Camera::view2D(){
+		loadMatrix(this->matrix2D());
+		glDisable(GL_CULL_FACE);
+	}
+
 }; // end namespace
 
 // - (void)moveX:(float)x y:(float)y z:(float)z{

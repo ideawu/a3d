@@ -23,7 +23,7 @@ namespace a3d{
 		return new BlankContext();
 	}
 
-	Context* Context::bufferContext(int width, int height){
+	Context* Context::bufferContext(int width, int height, int samples){
 		BufferContext *impl = new BufferContext();
 		impl->width(width);
 		impl->height(height);
@@ -81,7 +81,7 @@ namespace a3d{
 	void Context::begin(){
 		_current = this;
 		if(_width > 0 && _height > 0){
-//			glViewport(0, 0, _width, _height);
+			glViewport(0, 0, _width, _height);
 		}
 		if(framebuffer()){
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer());
@@ -129,16 +129,15 @@ namespace a3d{
 		glFinish();
 	}
 	
-	void Context::blit(){
+	void Context::blit(GLuint dstFbo){
 		if(framebuffer()){
-			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dstFbo);
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer());
 			glBlitFramebuffer(0, 0, (GLsizei)_width, (GLsizei)_height,
 							  0, 0, (GLsizei)_width, (GLsizei)_height,
 							  GL_COLOR_BUFFER_BIT, GL_NEAREST); // GL_LINEAR GL_NEAREST
-			glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, dstFbo);
 		}
-		glFinish();
 	}
 
 }; // end namespace

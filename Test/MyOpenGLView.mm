@@ -107,8 +107,9 @@ using namespace a3d;
 
 - (void)resize{
 	delete _context;
-	_context = a3d::Context::blankContext();
-	//	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height);
+	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height, 0);
+//	_context = a3d::Context::blankContext();
+	log_debug("%d", _context->framebuffer());
 
 	CGSize size = [NSScreen mainScreen].frame.size;
 	size = self.viewportSize;
@@ -122,13 +123,18 @@ using namespace a3d;
 }
 
 - (void)renderAtTime:(double)time{
+	// 当前的 FBO 不一定是 0
+	GLint drawFboId = 0, readFboId = 0;
+	glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &drawFboId);
+	glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &readFboId);
+
 	_context->begin();
 	_context->clear(0.1, 0.1, 0.1);
 
 	{
 		CGSize size = CGSizeMake(_camera->width(), _camera->height());
 		size = [self convertSizeToBacking:size];
-		glViewport(0, 0, size.width, size.height);
+//		glViewport(0, 0, size.width, size.height);
 	}
 	{ // 在 10.13 会有导致在窗口resize时 view 更新即时
 //		CGSize size = self.frame.size;
@@ -157,8 +163,48 @@ using namespace a3d;
 
 	_context->loadMatrix2D(_camera->matrix2D());
 	[self draw2D];
+	
+	_context->blit(drawFboId);
+	_context->finish();
 
-	_context->blit();
+//	{
+//		int width = self.framebufferSize.width;
+//		int height = self.framebufferSize.height;
+//		log_debug("%d %d", width, height);
+//		int image_bytes = width * height * 4;
+//		unsigned char *_pixels = (unsigned char *)malloc(image_bytes);
+//		memset(_pixels, 0, image_bytes);
+//
+//		glBindFramebuffer(GL_READ_FRAMEBUFFER, _context->framebuffer());
+//		glReadPixels(0, 0, width, height, GL_BGRA, GL_UNSIGNED_BYTE, _pixels);
+//		log_debug("%d %d", glGetError(), GL_INVALID_OPERATION);
+//		for(int i=0; i<image_bytes; i++){
+//			if(_pixels[i] != 0 && _pixels[i] != 255){
+//				NSLog(@"%d", _pixels[i]);
+//				break;
+//			}
+//		}
+//
+//		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+//		uint32_t bitmapInfo = kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host;
+//		CGContextRef _CGContext = CGBitmapContextCreate(_pixels, width, height, 8, 4 * width, colorSpace, bitmapInfo);
+//		CGColorSpaceRelease(colorSpace);
+//
+//		CGImageRef _CGImage = CGBitmapContextCreateImage(_CGContext);
+//
+//		static NSView *view = nil;
+//		if(!view){
+//			view = self.window.contentView;
+//			[self removeFromSuperview];
+//		}
+//		NSImage *img = [[NSImage alloc] initWithCGImage:_CGImage size:NSMakeSize(width, height)];
+//		view.layer.contents = img;
+//
+//		free(_pixels);
+//		CGImageRelease(_CGImage);
+//		CGContextRelease(_CGContext);
+//
+//	}
 }
 
 - (void)draw3D{

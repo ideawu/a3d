@@ -27,7 +27,7 @@
 	frame.size.height = 600;
 	[self.window setFrame:frame display:YES animate:NO];
 
-	_videoView = [[MyOpenGLView alloc] initWithFrame:((NSView *)self.window.contentView).frame];
+	_videoView = [[MyOpenGLView alloc] initWithFrame:((NSView *)self.window.contentView).bounds];
 	[self.window.contentView addSubview:_videoView];
 	[self.window makeFirstResponder:_videoView];
 

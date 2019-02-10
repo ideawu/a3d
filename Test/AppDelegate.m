@@ -4,32 +4,29 @@
 
 #import "AppDelegate.h"
 #import "TestController.h"
+#import "AnimationWindow.h"
 
 @interface AppDelegate (){
 	TestController *_test;
-	TestController *_test2;
+	AnimationWindow *_animationWindow;
 }
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-//	_test2 = [[TestController alloc] initWithWindowNibName:@"TestController"];
-//	_test2.appDelegate = self;
-//	[_test2 showWindow:self];
+	_animationWindow = [[AnimationWindow alloc] initWithWindowNibName:@"AnimationWindow"];
+	[_animationWindow showWindow:self];
 
-	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
-	_test.appDelegate = self;
-	[_test showWindow:self];
+//	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
+//	_test.appDelegate = self;
+//	[_test showWindow:self];
 }
 
 - (void)windowWillClose:(NSWindowController *)controller{
 //	log_debug(@"%s", __func__);
 	if(controller == _test){
 		_test = nil;
-	}
-	if(controller == _test2){
-		_test2 = nil;
 	}
 }
 

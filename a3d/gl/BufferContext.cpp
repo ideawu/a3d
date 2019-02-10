@@ -10,6 +10,7 @@ namespace a3d{
 		_framebuffer = 0;
 		_colorbuffer = 0;
 		_depthbuffer = 0;
+		_samples = 0;
 	}
 	
 	BufferContext::~BufferContext(){
@@ -27,6 +28,14 @@ namespace a3d{
 	GLuint BufferContext::framebuffer(){
 		return _framebuffer;
 	}
+	
+	int BufferContext::samples() const{
+		return _samples;
+	}
+	
+	void BufferContext::samples(int samples){
+		_samples = samples;
+	}
 
 	void BufferContext::setup(){
 		int width = this->width();
@@ -37,21 +46,20 @@ namespace a3d{
 
 		glGenRenderbuffers(1, &_colorbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, _colorbuffer);
-		//glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, width, height);
-		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA, width, height);
-		
+//		glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, width, height);
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, _samples, GL_RGBA, width, height);
+
 		glGenRenderbuffers(1, &_depthbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, _depthbuffer);
-//		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT, width, height);
-		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 3, GL_DEPTH_STENCIL, width, height);
+//		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_STENCIL, width, height);
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, _samples, GL_DEPTH_STENCIL, width, height);
 
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorbuffer);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthbuffer);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _depthbuffer);
 
-		//GL_DRAW_FRAMEBUFFER
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
-			fprintf(stderr, "frame buffer not complete");
+			fprintf(stderr, "frame buffer not complete\n");
 			return;
 		}
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
