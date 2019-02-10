@@ -81,7 +81,7 @@ using namespace a3d;
 	}
 	{
 		node = new SpriteNode();
-		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
+		Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 12, Color::yellow());
 		node->sprite(sprite);
 		node->move(node->width()/2, node->height()/2, 0);
 		node->opacity(0.9);
@@ -107,7 +107,7 @@ using namespace a3d;
 
 - (void)resize{
 	delete _context;
-	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height, 0);
+	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height, 4);
 //	_context = a3d::Context::blankContext();
 	log_debug("%d", _context->framebuffer());
 
@@ -116,7 +116,7 @@ using namespace a3d;
 	float width = size.width/1;
 	float height = size.height/1;
 	float depth = fmax(width, height) * 10;
-//	log_debug(@"%.0f %.0f", width, height);
+	log_debug(@"%.0f %.0f", width, self.framebufferSize.width);
 
 	_camera->setup(60, width, height, depth, -200);
 	_camera->position(width/2, height/2, 0);

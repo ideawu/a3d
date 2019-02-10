@@ -9,8 +9,9 @@
 #include "AnimateOpacity.h"
 #include "AnimateSize.h"
 
+static const int AUTO_BEGIN_TIME = -1000000000;
+
 namespace a3d{
-	
 	Animate* Animate::move(float x, float y, float z, double duration){
 		return AnimatePosition::move(Vector3(x, y, z), duration);
 	}
@@ -82,7 +83,7 @@ namespace a3d{
 		_bounceFunc = TimingFuncLinear;
 		_accelateFunc = TimingFuncNone;
 		_callback = NULL;
-		_beginTime = -1;
+		_beginTime = AUTO_BEGIN_TIME;
 		_duration = 0;
 		_bounce = 0;
 		_repeats = 0;
@@ -220,7 +221,7 @@ namespace a3d{
 
 	void Animate::updateAtTime(double time, Node *target){
 		// auto start
-		if(_beginTime == -1){
+		if(_beginTime == AUTO_BEGIN_TIME){
 			_beginTime = time;
 		}
 		// ignore before begin time
@@ -253,7 +254,7 @@ namespace a3d{
 				if(_repeats > 0){
 					_repeats --;
 				}
-				_beginTime = -1;
+				_beginTime = AUTO_BEGIN_TIME;
 				this->state(AnimateStateNone);
 			}
 		}

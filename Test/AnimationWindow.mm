@@ -45,24 +45,25 @@ using namespace a3d;
 	_camera->setup(60, width, height, width*10, -600);
 
 	_node = new SpriteNode();
-	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/1.jpg");
+//	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+	Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 12, Color::yellow());
 	_node->sprite(sprite);
 	{
-		a3d::Animate *action = a3d::Animate::rotate(180, Vector3(0, 1, 0));
+		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(0, 1, 0));
 		action->disposable(false);
 		action->easingFunc(a3d::TimingFuncLinear);
-		action->beginTime(0);
-		action->duration(3);
+		action->beginTime(-2.5);
+		action->duration(5);
 		_node->runAnimation(action);
 	}
-	{
-		a3d::Animate *action = a3d::Animate::rotate(180, Vector3(0, 1, 0));
-		action->disposable(false);
-		action->easingFunc(a3d::TimingFuncLinear);
-		action->beginTime(-3);
-		action->duration(3);
-		_node->runAnimation(action);
-	}
+//	{
+//		a3d::Animate *action = a3d::Animate::rotate(360, Vector3(1, 0, 0));
+//		action->disposable(false);
+//		action->easingFunc(a3d::TimingFuncLinear);
+//		action->beginTime(-2.5);
+//		action->duration(5);
+//		_node->runAnimation(action);
+//	}
 
 	_time = 0;
 
@@ -73,7 +74,7 @@ using namespace a3d;
 	_timeLabel.stringValue = [NSString stringWithFormat:@"%.2f", _time];
 	{
 		_drawable->begin();
-		_drawable->clear(0.1, 1, 0.1);
+		_drawable->clear(0.1, 0.1, 0.1);
 
 		_camera->view3D();
 		_node->renderAtTime(_time);
@@ -91,7 +92,6 @@ using namespace a3d;
 }
 
 - (void)keyDown:(NSEvent *)event{
-	double df = 0.1;
 	unichar c = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	switch(c){
 		case 'q':
@@ -99,17 +99,9 @@ using namespace a3d;
 			[self.window close];
 			break;
 		}
-		case NSLeftArrowFunctionKey:{
-			_time -= df;
-			break;
-		}
-		case NSRightArrowFunctionKey:{
-			_time += df;
-			break;
-		}
 	}
 	
-	[self draw];
+//	[self draw];
 }
 
 @end

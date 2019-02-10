@@ -152,6 +152,8 @@ namespace a3d{
 			_bitmap = Bitmap::create(_width, _height);
 		}
 
+		// 如果 framebuffer 是 multisampled，那么 glReadPixels() 将报错。
+		// https://www.khronos.org/opengl/wiki/GL_EXT_framebuffer_multisample
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
 		glReadBuffer(GL_COLOR_ATTACHMENT0);
 		glReadPixels(0, 0, _width, _height, GL_BGRA, GL_UNSIGNED_BYTE, _bitmap->pixels());

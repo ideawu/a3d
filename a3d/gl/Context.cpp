@@ -27,6 +27,7 @@ namespace a3d{
 		BufferContext *impl = new BufferContext();
 		impl->width(width);
 		impl->height(height);
+		impl->samples(samples);
 		impl->setup();
 		return impl;
 	}

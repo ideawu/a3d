@@ -15,12 +15,12 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
+	_test.appDelegate = self;
+	[_test showWindow:self];
+
 	_animationWindow = [[AnimationWindow alloc] initWithWindowNibName:@"AnimationWindow"];
 	[_animationWindow showWindow:self];
-
-//	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
-//	_test.appDelegate = self;
-//	[_test showWindow:self];
 }
 
 - (void)windowWillClose:(NSWindowController *)controller{
