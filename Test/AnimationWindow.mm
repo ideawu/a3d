@@ -62,10 +62,11 @@ using namespace a3d;
 
 	[self draw];
 	
-//	// 什么狗屎！NSSlider 鼠标按住时会暂停 runloop，所以 timer 不执行了。
-//	static NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5 repeats:YES block:^(NSTimer *timer) {
+//	NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5 repeats:YES block:^(NSTimer *timer) {
 //		log_debug("");
 //	}];
+//	// 为避免 NSButton 等按住的时候卡住 timer，需要将 timer 的 runmode 设为 NSRunLoopCommonModes
+//	[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)draw{

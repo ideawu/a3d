@@ -207,6 +207,9 @@ typedef struct{
 														 selector:@selector(updateStatisticsLabel)
 														 userInfo:nil
 														  repeats:YES];
+		// 为避免 NSButton 等按住的时候卡住 timer，需要将 timer 的 runmode 设为 NSRunLoopCommonModes
+		[[NSRunLoop mainRunLoop] addTimer:_statisicsTimer forMode:NSRunLoopCommonModes];
+		
 		_statisticsLabel = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, 80, 18)];
 		_statisticsLabel.bordered = NO;
 		_statisticsLabel.selectable = NO;
