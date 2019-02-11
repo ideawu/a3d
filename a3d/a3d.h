@@ -5,6 +5,9 @@
 #ifndef A3D_h
 #define A3D_h
 
+#include <OpenGL/gl.h>
+#include <OpenGL/OpenGL.h>
+
 #ifdef __cplusplus
 namespace a3d{
 }; // end namespace
