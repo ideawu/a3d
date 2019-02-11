@@ -11,7 +11,7 @@ namespace a3d{
 	public:
 		static GLContext* create();
 
-		void bind();
+		void makeCurrent();
 		~GLContext();
 
 	private:

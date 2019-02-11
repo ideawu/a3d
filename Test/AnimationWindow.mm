@@ -72,7 +72,7 @@ using namespace a3d;
 - (void)draw{
 	_timeLabel.stringValue = [NSString stringWithFormat:@"%.3f", _time];
 	{
-		_context->bind();
+		_context->makeCurrent();
 
 		_drawable->begin();
 		_drawable->clear(0.1, 0.1, 0.1);

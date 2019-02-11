@@ -53,7 +53,7 @@ namespace a3d{
 		CGLDestroyContext(_CGLContext);
 	}
 
-	void GLContext::bind(){
+	void GLContext::makeCurrent(){
 		CGLSetCurrentContext(_CGLContext);
 	}
 
