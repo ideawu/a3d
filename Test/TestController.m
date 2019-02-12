@@ -8,7 +8,7 @@
 @interface TestController ()<NSWindowDelegate>{
 	double offset;
 }
-@property NSWindow *window;
+//@property NSWindow *window;
 @property MyOpenGLView *videoView;
 @end
 
