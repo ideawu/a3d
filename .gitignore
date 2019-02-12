@@ -4,6 +4,5 @@
 *.xcuserdatad
 build
 xcuserdata
-xcshareddata
 UserInterfaceState.xcuserstate
 
