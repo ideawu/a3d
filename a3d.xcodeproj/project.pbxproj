@@ -969,7 +969,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ideawu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Debug;
 		};
@@ -983,7 +982,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ideawu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "${BUILD_DIR}/${CONFIGURATION} /Users/ideawu/Works/cocoaui-mac/build/Debug";
 			};
 			name = Release;
 		};

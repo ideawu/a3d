@@ -3,8 +3,7 @@
 *.xcuserstate
 *.xcuserdatad
 build
-a3d.xcodeproj/project.xcworkspace/xcshareddata/a3d.xccheckout
-a3d.xcodeproj/project.xcworkspace/xcuserdata/
-a3d.xcodeproj/xcuserdata/
+xcuserdata
+xcshareddata
 UserInterfaceState.xcuserstate
 
