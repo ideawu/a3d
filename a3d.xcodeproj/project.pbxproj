@@ -148,6 +148,16 @@
 		31FABE5A22128516007359CE /* DraftSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB35201DE4AF00EEC0C5 /* DraftSprite.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		31E1A87C2213E24C004B9E5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08B4CAE1201DE3E300EEC0C5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08B4CAE8201DE3E300EEC0C5;
+			remoteInfo = a3d;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		08B4CBBD201DEA1500EEC0C5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -674,6 +684,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				31E1A87D2213E24C004B9E5A /* PBXTargetDependency */,
 			);
 			name = Test;
 			productName = Test;
@@ -825,6 +836,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		31E1A87D2213E24C004B9E5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08B4CAE8201DE3E300EEC0C5 /* a3d */;
+			targetProxy = 31E1A87C2213E24C004B9E5A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		08B4CB99201DE8B000EEC0C5 /* MainMenu.xib */ = {
