@@ -11,8 +11,10 @@ namespace a3d{
 	public:
 		static GLContext* create();
 
-		void makeCurrent();
 		~GLContext();
+		
+		// Each thread has a single current OpenGL rendering context
+		void makeCurrent();
 
 	private:
 		GLContext();

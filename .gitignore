@@ -2,7 +2,7 @@
 *.swp
 *.xcuserstate
 *.xcuserdatad
-build
+/build
 xcuserdata
 UserInterfaceState.xcuserstate
 
