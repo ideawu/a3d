@@ -64,6 +64,9 @@ namespace a3d{
 	}
 
 	void SpriteNode::updateClock(double time){
+		if(!_sprite){
+			return;
+		}
 		if(isStopped()){
 			return;
 		}
@@ -75,9 +78,9 @@ namespace a3d{
 		double thisRenderTime = _clock.time();
 
 		// 不丢帧
-		if(_isFrameLossless && sprite()->duration() > 0){
+		if(_isFrameLossless && _sprite->duration() > 0){
 			double lastDuration = 0;
-			int lastFrame = sprite()->frameAtTime(lastRenderTime, &lastDuration);
+			int lastFrame = _sprite->frameAtTime(lastRenderTime, &lastDuration);
 			if(lastFrame == -1){
 				lastFrame = 0;
 			}
@@ -96,10 +99,10 @@ namespace a3d{
 	}
 	
 	void SpriteNode::drawAtTime(double time){
-		if(!sprite()){
+		if(!_sprite){
 			return;
 		}
-		Texture *texture = sprite()->textureAtTime(_clock.time());
+		Texture *texture = _sprite->textureAtTime(_clock.time());
 		if(texture){
 			Frame texRect = Frame(0, 0, 1, 1);
 			Frame verRect = Frame(-this->width()/2, -this->height()/2, this->width(), this->height());
