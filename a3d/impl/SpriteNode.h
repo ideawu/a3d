@@ -15,8 +15,9 @@ namespace a3d{
 	public:
 		SpriteNode();
 		virtual ~SpriteNode();
+		
 		virtual void drawAtTime(double time);
-		virtual void renderAtTime(double time);
+		virtual void updateAtTime(double time);
 
 		void play();
 		void pause();
@@ -43,8 +44,6 @@ namespace a3d{
 		bool _isLooping;
 		Clock _clock;
 		Sprite *_sprite;
-
-		void updateClock(double time);
 	};
 }; // end namespace
 

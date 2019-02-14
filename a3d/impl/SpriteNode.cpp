@@ -63,7 +63,10 @@ namespace a3d{
 		_isLooping = looping;
 	}
 
-	void SpriteNode::updateClock(double time){
+	void SpriteNode::updateAtTime(double time){
+		// 调用父方法
+		Node::updateAtTime(time);
+		
 		if(!_sprite){
 			return;
 		}
@@ -76,7 +79,7 @@ namespace a3d{
 			return;
 		}
 		double thisRenderTime = _clock.time();
-
+		
 		// 不丢帧
 		if(_isFrameLossless && _sprite->duration() > 0){
 			double lastDuration = 0;
@@ -108,11 +111,6 @@ namespace a3d{
 			Frame verRect = Frame(-this->width()/2, -this->height()/2, this->width(), this->height());
 			texture->draw(texRect, verRect);
 		}
-	}
-	
-	void SpriteNode::renderAtTime(double time){
-		this->updateClock(time);
-		Node::renderAtTime(time);
 	}
 	
 }; // end namespace

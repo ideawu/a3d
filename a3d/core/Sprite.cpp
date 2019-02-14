@@ -82,4 +82,16 @@ namespace a3d{
 		return textureAtFrame(frame, NULL);
 	}
 
+	int Sprite::frameAtTime(double time, double *duration){
+		return -1;
+	}
+	
+	Texture* Sprite::textureAtTime(double time, double *duration){
+		return NULL;
+	}
+	
+	Texture* Sprite::textureAtFrame(int frame, double *duration){
+		return NULL;
+	}
+
 }; // end namespace

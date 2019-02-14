@@ -20,6 +20,7 @@ namespace a3d{
 		static Sprite* textSprite(const char *str);
 		static Sprite* textSprite(const char *str, float fontSize, const Color &fontColor);
 
+		Sprite();
 		virtual ~Sprite(){}
 
 		int frames() const;
@@ -37,14 +38,12 @@ namespace a3d{
 		Texture* textureAtFrame(int frame);
 		
 		// 如果指定时间无对应帧，返回-1
-		virtual int frameAtTime(double time, double *duration) = 0;
+		virtual int frameAtTime(double time, double *duration);
 		// 如果无对应帧，返回NULL
-		virtual Texture* textureAtTime(double time, double *duration) = 0;
-		virtual Texture* textureAtFrame(int frame, double *duration) = 0;
+		virtual Texture* textureAtTime(double time, double *duration);
+		virtual Texture* textureAtFrame(int frame, double *duration);
 
 	protected:
-		Sprite();
-
 		int _frames;
 		double _duration;
 		

@@ -18,8 +18,11 @@ namespace a3d{
 		Node();
 		virtual ~Node();
 
-		// 子类方法
+		// 进行实际的渲染
 		virtual void drawAtTime(double time){};
+		// 更新状态（如动画），但不进行渲染
+		virtual void updateAtTime(double time);
+		// 该方法调用 updateAtTime() 和 drawAtTime() 进行渲染
 		virtual void renderAtTime(double time);
 
 		bool visible() const; // 结合父节点判断是否可见

@@ -153,11 +153,14 @@ namespace a3d{
 		return Axis(p, v);
 	}
 
-	
-	void Node::renderAtTime(double time){
+	void Node::updateAtTime(double time){
 		if(_animator){
 			_animator->updateAtTime(time);
 		}
+	}
+	
+	void Node::renderAtTime(double time){
+		this->updateAtTime(time);
 		
 		bool parentVisible = Renderer::current()->opacity() > 0;
 		if(parentVisible){
