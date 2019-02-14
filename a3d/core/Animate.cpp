@@ -9,7 +9,7 @@
 #include "AnimateOpacity.h"
 #include "AnimateSize.h"
 
-static const int AUTO_BEGIN_TIME = -1000000000;
+static const double AUTO_BEGIN_TIME = 999999999.0;
 
 namespace a3d{
 	Animate* Animate::move(float x, float y, float z, double duration){

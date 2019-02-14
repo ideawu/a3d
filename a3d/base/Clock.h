@@ -8,6 +8,7 @@
 // 注意！时间要用双精度！
 
 namespace a3d{
+	// 用于将世界 tick 转成本地时间
 	class Clock
 	{
 	public:
@@ -15,6 +16,7 @@ namespace a3d{
 
 		double time() const;
 		void time(double time);
+		// 在第一次调用 update 时，自动初始化
 		void update(double tick);
 		
 		float speed() const;

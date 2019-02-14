@@ -14,6 +14,7 @@ namespace a3d{
 
 	Animator::Animator(){
 		_target = NULL;
+		_clock.update(0); // 初始化时钟的第一个 tick 为 0
 	}
 	
 	Animator::~Animator(){
