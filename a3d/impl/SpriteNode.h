@@ -44,8 +44,6 @@ namespace a3d{
 		bool _isLooping;
 		Clock _clock;
 		Sprite *_sprite;
-		
-		double spriteTime() const;
 	};
 }; // end namespace
 

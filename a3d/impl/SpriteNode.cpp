@@ -73,12 +73,26 @@ namespace a3d{
 		if(isStopped()){
 			return;
 		}
-		double lastTime = spriteTime();
+		
+		double lastTime = _clock.time();
 		_clock.update(time);
 		if(isPaused()){
 			return;
 		}
-		double thisTime = spriteTime();
+		double thisTime = _clock.time();
+
+		// 修正 looping 时钟到 [0, duration]
+		if(_isLooping && _sprite->duration() > 0){
+			if(thisTime < 0){
+				thisTime = fabs(thisTime + _sprite->duration());
+			}
+			while(thisTime > _sprite->duration()){
+				thisTime -= _sprite->duration();
+			}
+			if(thisTime != _clock.time()){
+				_clock.time(thisTime);
+			}
+		}
 		
 		// 不丢帧
 		if(_isFrameLossless && _sprite->duration() > 0){
@@ -95,22 +109,12 @@ namespace a3d{
 			}
 		}
 	}
-	
-	double SpriteNode::spriteTime() const{
-		double time = _clock.time();
-		if(_isLooping && _sprite && _sprite->duration() > 0){
-			while(time > _sprite->duration()){
-				time -= _sprite->duration();
-			}
-		}
-		return time;
-	}
 
 	void SpriteNode::draw(){
 		if(!_sprite){
 			return;
 		}
-		Texture *texture = _sprite->textureAtTime(spriteTime());
+		Texture *texture = _sprite->textureAtTime(_clock.time());
 		if(texture){
 			Frame texRect = Frame(0, 0, 1, 1);
 			Frame verRect = Frame(-this->width()/2, -this->height()/2, this->width(), this->height());
