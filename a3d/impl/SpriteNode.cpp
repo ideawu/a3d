@@ -110,7 +110,6 @@ namespace a3d{
 		if(!_sprite){
 			return;
 		}
-		log_debug("%.3f", spriteTime());
 		Texture *texture = _sprite->textureAtTime(spriteTime());
 		if(texture){
 			Frame texRect = Frame(0, 0, 1, 1);

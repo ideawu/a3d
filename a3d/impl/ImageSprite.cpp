@@ -84,22 +84,24 @@ namespace a3d{
 		if(_duration == 0){
 			return 0;
 		}
-		if(time < 0){
-			time = 0;
-		}
-		if(time > _duration){
-			time = _duration;
-		}
-		for(int i=0; i<_durations.size(); i++){
-			time -= _durations[i];
-			if(time <= 0){
-				if(duration){
-					*duration = _durations[i];
+		int idx = 0;
+		if(time <= 0){
+			idx = 0;
+		}else if(time >= _duration){
+			idx = _frames - 1;
+		}else{
+			for(int i=0; i<_durations.size(); i++){
+				time -= _durations[i];
+				if(time <= 0){
+					idx = i;
+					break;
 				}
-				return i;
 			}
 		}
-		return -1;
+		if(duration){
+			*duration = _durations[idx];
+		}
+		return idx;
 	}
 
 	Texture* ImageSprite::textureAtTime(double time, double *duration){
