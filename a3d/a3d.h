@@ -42,4 +42,8 @@ namespace a3d{
 #include "GLContext.h"
 #include "GLDrawable.h"
 
+#ifdef __OBJC__
+#	include "A3DView.h"
+#endif
+
 #endif
