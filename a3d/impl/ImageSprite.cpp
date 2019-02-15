@@ -84,9 +84,15 @@ namespace a3d{
 		if(_duration == 0){
 			return 0;
 		}
+		if(time < 0){
+			time = 0;
+		}
+		if(time > _duration){
+			time = _duration;
+		}
 		for(int i=0; i<_durations.size(); i++){
 			time -= _durations[i];
-			if(time < 0){
+			if(time <= 0){
 				if(duration){
 					*duration = _durations[i];
 				}

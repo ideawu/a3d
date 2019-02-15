@@ -152,6 +152,9 @@ namespace a3d{
 		Vector3 v = convertVectorFromWorld(axis.direction);
 		return Axis(p, v);
 	}
+	
+	void Node::draw(){
+	}
 
 	void Node::updateAtTime(double time){
 		if(_animator){
@@ -191,7 +194,7 @@ namespace a3d{
 			if(_clipBounds){
 				Renderer::current()->pushStencil();
 			}
-			this->drawAtTime(time);
+			this->draw();
 			if(_clipBounds){
 				Renderer::current()->bindStencil();
 			}

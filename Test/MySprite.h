@@ -12,7 +12,7 @@ class MySprite : public a3d::Node
 {
 public:
 	MySprite(){sprite = NULL;}
-	virtual void drawAtTime(double time);
+	virtual void draw();
 	a3d::Sprite *sprite;
 };
 

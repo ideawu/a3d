@@ -73,39 +73,45 @@ namespace a3d{
 		if(isStopped()){
 			return;
 		}
-		double lastRenderTime = _clock.time();
+		double lastTime = spriteTime();
 		_clock.update(time);
 		if(isPaused()){
 			return;
 		}
-		double thisRenderTime = _clock.time();
+		double thisTime = spriteTime();
 		
 		// 不丢帧
 		if(_isFrameLossless && _sprite->duration() > 0){
 			double lastDuration = 0;
-			int lastFrame = _sprite->frameAtTime(lastRenderTime, &lastDuration);
-			if(lastFrame == -1){
-				lastFrame = 0;
+			int lastFrame = _sprite->frameAtTime(lastTime, &lastDuration);
+			if(lastTime != -1){
+				int thisFrame = _sprite->frameAtTime(thisTime, NULL);
+				if(thisFrame == lastFrame + 1 || (_isLooping && thisFrame == 0 && lastFrame == _sprite->frames() - 1)){
+					//
+				}else{
+					double nextTime = lastTime + lastDuration;
+					_clock.time(nextTime);
+				}
 			}
-
-			double nextRenderTime = lastRenderTime + lastDuration;
-			if(thisRenderTime > nextRenderTime){
-				_clock.time(nextRenderTime);
-				//log_debug("%f %f", _clock.time(), time);
-			}
-		}
-		
-		// 重复播放
-		if(_isLooping && thisRenderTime >= sprite()->duration()){
-			_clock.time(0);
 		}
 	}
 	
-	void SpriteNode::drawAtTime(double time){
+	double SpriteNode::spriteTime() const{
+		double time = _clock.time();
+		if(_isLooping && _sprite && _sprite->duration() > 0){
+			while(time > _sprite->duration()){
+				time -= _sprite->duration();
+			}
+		}
+		return time;
+	}
+
+	void SpriteNode::draw(){
 		if(!_sprite){
 			return;
 		}
-		Texture *texture = _sprite->textureAtTime(_clock.time());
+		log_debug("%.3f", spriteTime());
+		Texture *texture = _sprite->textureAtTime(spriteTime());
 		if(texture){
 			Frame texRect = Frame(0, 0, 1, 1);
 			Frame verRect = Frame(-this->width()/2, -this->height()/2, this->width(), this->height());

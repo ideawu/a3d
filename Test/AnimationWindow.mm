@@ -46,7 +46,9 @@ using namespace a3d;
 	_camera->setup(60, width, height, width*10, -600);
 
 	_node = new SpriteNode();
-	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+	_node->isLooping(false);
+//	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
+	Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/gif/ha.gif");
 //	Sprite *sprite = Sprite::textSprite("Hello World! 你好！", 50, Color::yellow());
 	_node->sprite(sprite);
 	{

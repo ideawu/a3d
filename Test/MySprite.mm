@@ -22,7 +22,7 @@ static void drawBody();
 //	super.matrix = mat;
 //}
 
-void MySprite::drawAtTime(double time){
+void MySprite::draw(){
 	if(!sprite){
 		NSBundle* myBundle = [NSBundle mainBundle];
 		NSString* myImage = [myBundle pathForResource:@"alex" ofType:@"png"];
