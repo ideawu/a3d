@@ -31,12 +31,10 @@ namespace a3d{
 		void stop();
 
 	private:
+		int _state;
 		double _firstTick;
-		double _secondTick;
-		double _pauseTick;
+		double _lastTick;
 		float _speed;
-
-		double secondTick() const;
 	};
 }; // end namespace
 
