@@ -32,6 +32,7 @@ namespace a3d{
 
 		Node* parent() const;
 		void removeFromParent();
+		// 注意：仍然需要调用者负责释放 node
 		void addSubnode(Node *node);
 		// 如果 index 位置在 subnodes 队列之外，node 将被插入到队首或队尾
 		void insertSubnodeAtIndex(Node *node, int index);
