@@ -7,6 +7,7 @@
 namespace a3d{
 	
 	Scene::Scene(){
+		_context = NULL;
 		_drawable = NULL;
 		_rootNode = NULL;
 		_camera = new Camera();
@@ -14,6 +15,7 @@ namespace a3d{
 	}
 	
 	Scene::~Scene(){
+		delete _context;
 		delete _drawable;
 		delete _camera;
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
@@ -24,7 +26,8 @@ namespace a3d{
 	
 	Scene* Scene::create(){
 		Scene *ret = new Scene();
-		ret->_drawable = GLDrawable::blank();
+		ret->_context = GLContext::shared();
+		ret->_drawable = GLDrawable::shared();
 		return ret;
 	}
 
@@ -75,6 +78,7 @@ namespace a3d{
 	void Scene::renderAtTime(double time){
 		_time = time;
 		
+		_context->makeCurrent();
 		_drawable->begin();
 		_drawable->clearColor(0, 0, 0, 0);
 

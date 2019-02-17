@@ -12,6 +12,9 @@ namespace a3d{
 	class GLContext
 	{
 	public:
+		// 基于当前已存在的 CGLContextObj
+		static GLContext* shared();
+		
 		static GLContext* create();
 		static GLContext* current();
 
@@ -28,6 +31,7 @@ namespace a3d{
 
 		Renderer *_renderer;
 		CGLContextObj _CGLContext;
+		bool _isShared;
 	};
 }; // end namespace
 

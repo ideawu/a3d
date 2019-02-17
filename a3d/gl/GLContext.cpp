@@ -9,6 +9,14 @@ static pthread_key_t _pthread_key;
 static pthread_once_t init_once = PTHREAD_ONCE_INIT;
 
 namespace a3d{
+	
+	GLContext* GLContext::shared(){
+		GLContext *ret = new GLContext();
+		ret->_CGLContext = CGLGetCurrentContext();
+		ret->makeCurrent();
+		return ret;
+	}
+	
 	GLContext* GLContext::create(){
 		CGLPixelFormatAttribute attributes[] = {
 			kCGLPFANoRecovery,
@@ -52,12 +60,15 @@ namespace a3d{
 	GLContext::GLContext(){
 		pthread_once(&init_once, thread_init);
 		_CGLContext = NULL;
+		_isShared = false;
 		_renderer = new Renderer();
 	}
 
 	GLContext::~GLContext(){
 		CGLSetCurrentContext(NULL);
-		CGLDestroyContext(_CGLContext);
+		if(!_isShared){
+			CGLDestroyContext(_CGLContext);
+		}
 		delete _renderer;
 	}
 

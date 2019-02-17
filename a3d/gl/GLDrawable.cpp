@@ -5,7 +5,7 @@
 #include "GLDrawable.h"
 
 namespace a3d{
-	GLDrawable* GLDrawable::blank(){
+	GLDrawable* GLDrawable::shared(){
 		GLDrawable *impl = new GLDrawable();
 		return impl;
 	}

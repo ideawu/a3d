@@ -8,6 +8,7 @@
 #include <map>
 #include "Node.h"
 #include "Camera.h"
+#include "GLContext.h"
 #include "GLDrawable.h"
 
 namespace a3d{
@@ -43,6 +44,7 @@ namespace a3d{
 		Scene& operator =(const Scene &d);
 		
 		double _time;
+		GLContext *_context;
 		GLDrawable *_drawable;
 		Camera *_camera;
 		Node *_rootNode;

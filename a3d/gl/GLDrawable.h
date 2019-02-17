@@ -12,7 +12,7 @@ namespace a3d{
 	{
 	public:
 		// 创建一个空的画板，基于当前 FBO
-		static GLDrawable* blank();
+		static GLDrawable* shared();
 		// width, height 不是偶数，会导致blit少一行，所以会自动转成偶数。
 		// 注意：如果 samples 大于 0，bitmap 将不可用。
 		static GLDrawable* create(int width, int height, int samples);
