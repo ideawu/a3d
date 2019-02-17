@@ -79,11 +79,11 @@ namespace a3d{
 		_time = time;
 		
 		_context->makeCurrent();
+		_camera->updateAtTime(time);
+		
 		_drawable->begin();
 		_drawable->clearColor(0, 0, 0, 0);
 
-		_camera->renderAtTime(time);
-		
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
 			_drawable->clearDepth();
 			Node *node = it->second;
