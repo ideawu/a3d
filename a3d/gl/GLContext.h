@@ -13,8 +13,7 @@ namespace a3d{
 	{
 	public:
 		// 基于当前已存在的 CGLContextObj
-		static GLContext* shared();
-		
+		static GLContext* createShared();
 		static GLContext* create();
 		static GLContext* current();
 

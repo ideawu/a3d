@@ -15,9 +15,9 @@ namespace a3d{
 	}
 	
 	Scene::~Scene(){
-		delete _context;
-		delete _drawable;
 		delete _camera;
+		delete _drawable;
+		delete _context;
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
 			Node *node = it->second;
 			delete node;
@@ -26,8 +26,8 @@ namespace a3d{
 	
 	Scene* Scene::create(){
 		Scene *ret = new Scene();
-		ret->_context = GLContext::shared();
-		ret->_drawable = GLDrawable::shared();
+		ret->_context = GLContext::createShared();
+		ret->_drawable = GLDrawable::createShared();
 		return ret;
 	}
 

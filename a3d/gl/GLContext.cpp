@@ -10,7 +10,7 @@ static pthread_once_t init_once = PTHREAD_ONCE_INIT;
 
 namespace a3d{
 	
-	GLContext* GLContext::shared(){
+	GLContext* GLContext::createShared(){
 		GLContext *ret = new GLContext();
 		ret->_CGLContext = CGLGetCurrentContext();
 		ret->makeCurrent();
