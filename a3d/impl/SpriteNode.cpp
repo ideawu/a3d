@@ -10,7 +10,6 @@ namespace a3d{
 		_sprite = NULL;
 		_isFrameLossless = false;
 		_isLooping = true;
-		pause();
 	}
 	
 	SpriteNode::~SpriteNode(){
