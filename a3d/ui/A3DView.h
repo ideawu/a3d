@@ -25,7 +25,7 @@
 - (void)clean;
 // 子类可重写此方法。
 - (void)reshape;
-// 子类可重写此方法。在此方法中渲染
+// 子类可重写此方法。在此方法中渲染。基于性能考虑，不要在此方法中调用 glFlush/glFinish
 - (void)renderAtTime:(double)time;
 //- (void)drawRect:(NSRect)dirtyRect;
 

@@ -160,7 +160,8 @@ using namespace a3d;
 	[self draw2D];
 	
 	_drawable->blit(drawFboId);
-	_drawable->finish();
+	// 不需要调用 finish
+//	_drawable->finish();
 
 //	{
 //		int width = self.framebufferSize.width;

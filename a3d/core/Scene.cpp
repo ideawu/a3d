@@ -90,7 +90,7 @@ namespace a3d{
 			node->renderAtTime(time);
 		}
 		
-		_drawable->finish();
+//		_drawable->finish();
 	}
 
 }; // end namespace
