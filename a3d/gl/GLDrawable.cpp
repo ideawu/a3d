@@ -5,10 +5,8 @@
 #include "GLDrawable.h"
 
 namespace a3d{
-	GLDrawable* GLDrawable::createShared(int width, int height){
+	GLDrawable* GLDrawable::blank(){
 		GLDrawable *impl = new GLDrawable();
-		impl->width(width);
-		impl->height(height);
 		return impl;
 	}
 
@@ -147,10 +145,15 @@ namespace a3d{
 	
 	void GLDrawable::blit(GLDrawable *buffer){
 		GLuint dstFbo = buffer? buffer->_framebuffer : 0;
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dstFbo);
-		if(_framebuffer){
-			glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
+		this->blit(dstFbo);
+	}
+
+	void GLDrawable::blit(GLuint dstFbo){
+		if(!_framebuffer){
+			return;
 		}
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dstFbo);
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
 		glBlitFramebuffer(0, 0, (GLsizei)_width, (GLsizei)_height,
 						  0, 0, (GLsizei)_width, (GLsizei)_height,
 						  GL_COLOR_BUFFER_BIT, GL_NEAREST); // GL_LINEAR GL_NEAREST

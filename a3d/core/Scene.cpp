@@ -24,7 +24,7 @@ namespace a3d{
 	
 	Scene* Scene::create(){
 		Scene *ret = new Scene();
-		ret->_drawable = GLDrawable::createShared(0, 0);
+		ret->_drawable = GLDrawable::blank();
 		return ret;
 	}
 

@@ -14,7 +14,7 @@ using namespace a3d;
 	int _auto_rotate_y;
 	
 	Camera *_camera;
-	Context *_context;
+	GLDrawable *_drawable;
 	
 	DraftScene *_scene;
 	DraftSprite *_flag;
@@ -43,9 +43,6 @@ using namespace a3d;
 //	[self setAcceptsTouchEvents:YES];
 
 	_camera = a3d::Camera::create();
-
-
-	_context = a3d::Context::blankContext();
 
 	_rotateX = 0;
 	_rotateY = 0;
@@ -106,10 +103,9 @@ using namespace a3d;
 }
 
 - (void)resize{
-	delete _context;
-	_context = a3d::Context::bufferContext(self.framebufferSize.width, self.framebufferSize.height, 4);
+	delete _drawable;
+	_drawable = a3d::GLDrawable::create(self.framebufferSize.width, self.framebufferSize.height, 4);
 //	_context = a3d::Context::blankContext();
-	log_debug("%d", _context->framebuffer());
 
 	CGSize size = [NSScreen mainScreen].frame.size;
 	size = self.viewportSize;
@@ -128,8 +124,8 @@ using namespace a3d;
 	glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &drawFboId);
 	glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &readFboId);
 
-	_context->begin();
-	_context->clear(0.1, 0.1, 0.1);
+	_drawable->begin();
+	_drawable->clear(0.1, 0.1, 0.1);
 
 	{
 		CGSize size = CGSizeMake(_camera->width(), _camera->height());
@@ -144,8 +140,7 @@ using namespace a3d;
 //		glScissor(0, 0, size.width, size.height);
 	}
 
-	_context->loadMatrix3D(_camera->matrix3D());
-
+	_camera->view3D();
 	[self draw3D];
 
 
@@ -161,11 +156,11 @@ using namespace a3d;
 	_img1->renderAtTime(time);
 //	_img2->renderAtTime(time);
 
-	_context->loadMatrix2D(_camera->matrix2D());
+	_camera->view2D();
 	[self draw2D];
 	
-	_context->blit(drawFboId);
-	_context->finish();
+	_drawable->blit(drawFboId);
+	_drawable->finish();
 
 //	{
 //		int width = self.framebufferSize.width;

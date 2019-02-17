@@ -11,8 +11,8 @@ namespace a3d{
 	class GLDrawable
 	{
 	public:
-		// 创建一个基于当前 FBO 的对象
-		static GLDrawable* createShared(int width, int height);
+		// 创建一个空的画板，基于当前 FBO
+		static GLDrawable* blank();
 		// width, height 不是偶数，会导致blit少一行，所以会自动转成偶数。
 		// 注意：如果 samples 大于 0，bitmap 将不可用。
 		static GLDrawable* create(int width, int height, int samples);
@@ -26,9 +26,12 @@ namespace a3d{
 		void clear(float r, float g, float b, float a=1);
 		void clearColor(float r, float g, float b, float a=1);
 		void clearDepth();
+		
+		void blit(GLuint dstFbo);
+		void blit(GLDrawable *buffer=NULL);
+
 		void flush();
 		void finish();
-		void blit(GLDrawable *buffer=NULL);
 		
 		// 调用者不可释放此对象
 		Bitmap* bitmap();
