@@ -59,6 +59,7 @@ namespace a3d{
 			glGenTextures(1, &_tid);
 //			log_debug("gen tid: %d, textures: %d", _tid, ++texture_count);
 			if(!_tid){
+				log_error("glGenTextures failed!");
 				return;
 			}
 		}
