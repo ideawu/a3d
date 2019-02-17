@@ -3,6 +3,10 @@
 //
 
 #include "GLContext.h"
+#include <pthread.h>
+
+static pthread_key_t _pthread_key;
+static pthread_once_t init_once = PTHREAD_ONCE_INIT;
 
 namespace a3d{
 	GLContext* GLContext::create(){
@@ -34,27 +38,44 @@ namespace a3d{
 		if(!context){
 			return NULL;
 		}
-		error = CGLSetCurrentContext(context);
-		if(error){
-			log_error("set current ontext error: %d", error);
-		}
 
 		GLContext *ret = new GLContext();
 		ret->_CGLContext = context;
+		ret->makeCurrent();
 		return ret;
 	}
 
+	static void thread_init() {
+		pthread_key_create(&_pthread_key, NULL);
+	}
+	
 	GLContext::GLContext(){
+		pthread_once(&init_once, thread_init);
 		_CGLContext = NULL;
+		_renderer = new Renderer();
 	}
 
 	GLContext::~GLContext(){
 		CGLSetCurrentContext(NULL);
 		CGLDestroyContext(_CGLContext);
+		delete _renderer;
+	}
+
+	Renderer* GLContext::renderer() const{
+		return _renderer;
 	}
 
 	void GLContext::makeCurrent(){
-		CGLSetCurrentContext(_CGLContext);
+		pthread_setspecific(_pthread_key, this);
+		CGLError error = CGLSetCurrentContext(_CGLContext);
+		if(error){
+			log_error("set current ontext error: %d", error);
+		}
 	}
 
+	GLContext* GLContext::current(){
+		GLContext *ctx = (GLContext *)pthread_getspecific(_pthread_key);
+		return ctx;
+	}
+	
 }; // end namespace

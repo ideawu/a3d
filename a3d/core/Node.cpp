@@ -4,7 +4,7 @@
 
 #include "Node.h"
 #include "Animator.h"
-#include "Renderer.h"
+#include "GLContext.h"
 
 namespace a3d{
 
@@ -165,13 +165,15 @@ namespace a3d{
 	void Node::renderAtTime(double time){
 		this->updateAtTime(time);
 		
-		bool parentVisible = Renderer::current()->opacity() > 0;
+		Renderer *renderer = GLContext::current()->renderer();
+		
+		bool parentVisible = renderer->opacity() > 0;
 		if(parentVisible){
-			Renderer::current()->pushOpacity(this->opacity());
+			renderer->pushOpacity(this->opacity());
 		}
-		bool currentVisible = Renderer::current()->opacity() > 0;
+		bool currentVisible = renderer->opacity() > 0;
 		if(currentVisible){
-			Renderer::current()->pushMatrix(this->matrix());
+			renderer->pushMatrix(this->matrix());
 #if 0
 			{
 				int level = 0;
@@ -192,11 +194,11 @@ namespace a3d{
 			}
 #endif
 			if(_clipBounds){
-				Renderer::current()->pushStencil();
+				renderer->pushStencil();
 			}
 			this->draw();
 			if(_clipBounds){
-				Renderer::current()->bindStencil();
+				renderer->bindStencil();
 			}
 		}
 		if(_subs){
@@ -208,12 +210,12 @@ namespace a3d{
 		}
 		if(currentVisible){
 			if(_clipBounds){
-				Renderer::current()->popStencil();
+				renderer->popStencil();
 			}
-			Renderer::current()->popMatrix();
+			renderer->popMatrix();
 		}
 		if(parentVisible){
-			Renderer::current()->popOpacity();
+			renderer->popOpacity();
 		}
 	}
 

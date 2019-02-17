@@ -3,21 +3,18 @@
 //
 
 #include "Scene.h"
-#include "Camera.h"
-#include "Node.h"
-#include "Context.h"
 
 namespace a3d{
 	
 	Scene::Scene(){
-		_context = NULL;
+		_drawable = NULL;
 		_rootNode = NULL;
 		_camera = new Camera();
 		layer(0);
 	}
 	
 	Scene::~Scene(){
-		delete _context;
+		delete _drawable;
 		delete _camera;
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
 			Node *node = it->second;
@@ -27,18 +24,8 @@ namespace a3d{
 	
 	Scene* Scene::create(){
 		Scene *ret = new Scene();
-		ret->_context = Context::blankContext();
+		ret->_drawable = GLDrawable::createShared(0, 0);
 		return ret;
-	}
-
-	Scene* Scene::create(Context *context){
-		Scene *ret = new Scene();
-		ret->_context = context;
-		return ret;
-	}
-
-	Context* Scene::context() const{
-		return _context;
 	}
 
 	Camera* Scene::camera() const{
@@ -74,11 +61,11 @@ namespace a3d{
 	}
 
 	void Scene::view3D(){
-		_context->loadMatrix3D(_camera->matrix3D());
+		_camera->view3D();
 	}
 	
 	void Scene::view2D(){
-		_context->loadMatrix3D(_camera->matrix2D());
+		_camera->view2D();
 	}
 
 	void Scene::render(){
@@ -88,18 +75,18 @@ namespace a3d{
 	void Scene::renderAtTime(double time){
 		_time = time;
 		
-		_context->begin();
-		_context->clearColor(0, 0, 0, 0);
+		_drawable->begin();
+		_drawable->clearColor(0, 0, 0, 0);
 
 		_camera->renderAtTime(time);
 		
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
-			_context->clearDepth();
+			_drawable->clearDepth();
 			Node *node = it->second;
 			node->renderAtTime(time);
 		}
 		
-		_context->finish();
+		_drawable->finish();
 	}
 
 }; // end namespace

@@ -5,12 +5,14 @@
 #ifndef GLDrawable_hpp
 #define GLDrawable_hpp
 
+#include "Bitmap.h"
+
 namespace a3d{
-	class Bitmap;
-	
 	class GLDrawable
 	{
 	public:
+		// 创建一个基于当前 FBO 的对象
+		static GLDrawable* createShared(int width, int height);
 		// width, height 不是偶数，会导致blit少一行，所以会自动转成偶数。
 		// 注意：如果 samples 大于 0，bitmap 将不可用。
 		static GLDrawable* create(int width, int height, int samples);
@@ -42,7 +44,7 @@ namespace a3d{
 		void height(int height);
 		void samples(int samples);
 		
-		void setup();
+		void setupFBO();
 
 		int _width;
 		int _height;

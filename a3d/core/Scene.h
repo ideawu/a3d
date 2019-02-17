@@ -6,20 +6,17 @@
 #define a3d_Scene_hpp
 
 #include <map>
+#include "Node.h"
+#include "Camera.h"
+#include "GLDrawable.h"
 
 namespace a3d{
-	class Node;
-	class Camera;
-	class Context;
-	
 	class Scene
 	{
 	public:
 		~Scene();
 		static Scene* create();
-		static Scene* create(Context *context);
 
-		Context* context() const;
 		Camera* camera() const;
 		
 		double time() const;
@@ -46,7 +43,7 @@ namespace a3d{
 		Scene& operator =(const Scene &d);
 		
 		double _time;
-		Context *_context;
+		GLDrawable *_drawable;
 		Camera *_camera;
 		Node *_rootNode;
 		std::map<int, Node*> _layers;

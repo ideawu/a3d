@@ -3,15 +3,21 @@
 //
 
 #include "GLDrawable.h"
-#include "Bitmap.h"
 
 namespace a3d{
+	GLDrawable* GLDrawable::createShared(int width, int height){
+		GLDrawable *impl = new GLDrawable();
+		impl->width(width);
+		impl->height(height);
+		return impl;
+	}
+
 	GLDrawable* GLDrawable::create(int width, int height, int samples){
 		GLDrawable *impl = new GLDrawable();
 		impl->width(width);
 		impl->height(height);
 		impl->samples(samples);
-		impl->setup();
+		impl->setupFBO();
 		return impl;
 	}
 
@@ -61,7 +67,7 @@ namespace a3d{
 	}
 
 	
-	void GLDrawable::setup(){
+	void GLDrawable::setupFBO(){
 		int width = this->width();
 		int height = this->height();
 		
@@ -93,7 +99,9 @@ namespace a3d{
 			// glViewport 逻辑上不属于"相机"
 			glViewport(0, 0, _width, _height);
 		}
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, _framebuffer);
+		if(_framebuffer){
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, _framebuffer);
+		}
 
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
@@ -140,7 +148,9 @@ namespace a3d{
 	void GLDrawable::blit(GLDrawable *buffer){
 		GLuint dstFbo = buffer? buffer->_framebuffer : 0;
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dstFbo);
-		glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
+		if(_framebuffer){
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
+		}
 		glBlitFramebuffer(0, 0, (GLsizei)_width, (GLsizei)_height,
 						  0, 0, (GLsizei)_width, (GLsizei)_height,
 						  GL_COLOR_BUFFER_BIT, GL_NEAREST); // GL_LINEAR GL_NEAREST
@@ -154,7 +164,9 @@ namespace a3d{
 
 		// 如果 framebuffer 是 multisampled，那么 glReadPixels() 将报错。
 		// https://www.khronos.org/opengl/wiki/GL_EXT_framebuffer_multisample
-		glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
+		if(_framebuffer){
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, _framebuffer);
+		}
 		glReadBuffer(GL_COLOR_ATTACHMENT0);
 		glReadPixels(0, 0, _width, _height, GL_BGRA, GL_UNSIGNED_BYTE, _bitmap->pixels());
 		

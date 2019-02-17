@@ -3,17 +3,12 @@
 //
 
 #include "Renderer.h"
-#include "Context.h"
 
 namespace a3d{
 
 	Renderer::Renderer(){
 		_opacity = 1;
 		_stencilRef = 0;
-	}
-	
-	Renderer* Renderer::current(){
-		return Context::current()->renderer();
 	}
 
 	float Renderer::opacity() const{
