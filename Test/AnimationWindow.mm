@@ -1,5 +1,4 @@
 #import "AnimationWindow.h"
-#import "MyOpenGLView.h"
 #include "a3d/a3d.h"
 using namespace a3d;
 
@@ -74,7 +73,7 @@ using namespace a3d;
 		_context->makeCurrent();
 
 		_drawable->begin();
-		_drawable->clear(0.1, 0.1, 0.1);
+		_drawable->clear(1, 1, 1);
 
 		_camera->view3D();
 		_node->renderAtTime(_time);

@@ -107,6 +107,8 @@
 		31018B33220FDE5500C19DB7 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 31018B31220FDE5500C19DB7 /* Drawable.h */; };
 		31018B5922110C8C00C19DB7 /* Context.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31018B2D220FDE0200C19DB7 /* Context.h */; };
 		31018B5A22110C8C00C19DB7 /* Drawable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31018B31220FDE5500C19DB7 /* Drawable.h */; };
+		310B8F4D221A6A3D00DF5993 /* TransparencyWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 310B8F4B221A6A3D00DF5993 /* TransparencyWindow.mm */; };
+		310B8F4E221A6A3D00DF5993 /* TransparencyWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 310B8F4C221A6A3D00DF5993 /* TransparencyWindow.xib */; };
 		3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
 		3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
@@ -288,6 +290,9 @@
 		31018B2D220FDE0200C19DB7 /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		31018B30220FDE5500C19DB7 /* Drawable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
 		31018B31220FDE5500C19DB7 /* Drawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
+		310B8F4A221A6A3D00DF5993 /* TransparencyWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransparencyWindow.h; sourceTree = "<group>"; };
+		310B8F4B221A6A3D00DF5993 /* TransparencyWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TransparencyWindow.mm; sourceTree = "<group>"; };
+		310B8F4C221A6A3D00DF5993 /* TransparencyWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransparencyWindow.xib; sourceTree = "<group>"; };
 		312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTypes.cpp; sourceTree = "<group>"; };
 		312CD37D20257852008FE758 /* TextSpirte.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextSpirte.cpp; sourceTree = "<group>"; };
 		312CD37E20257852008FE758 /* TextSpirte.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSpirte.h; sourceTree = "<group>"; };
@@ -495,6 +500,9 @@
 				31018B27220F077700C19DB7 /* AnimationWindow.h */,
 				31018B28220F077700C19DB7 /* AnimationWindow.mm */,
 				31018B29220F077700C19DB7 /* AnimationWindow.xib */,
+				310B8F4A221A6A3D00DF5993 /* TransparencyWindow.h */,
+				310B8F4B221A6A3D00DF5993 /* TransparencyWindow.mm */,
+				310B8F4C221A6A3D00DF5993 /* TransparencyWindow.xib */,
 				08B4CBAE201DE93D00EEC0C5 /* MyOpenGLView.h */,
 				08B4CBAF201DE93D00EEC0C5 /* MyOpenGLView.mm */,
 				08B4CBB0201DE93D00EEC0C5 /* MySprite.h */,
@@ -733,6 +741,7 @@
 			files = (
 				08B4CB98201DE8B000EEC0C5 /* Images.xcassets in Resources */,
 				314A2010201EBDC50093D902 /* alex.png in Resources */,
+				310B8F4E221A6A3D00DF5993 /* TransparencyWindow.xib in Resources */,
 				31018B2B220F077700C19DB7 /* AnimationWindow.xib in Resources */,
 				08B4CBBA201DE93E00EEC0C5 /* Test.entitlements in Resources */,
 				08B4CB9B201DE8B100EEC0C5 /* MainMenu.xib in Resources */,
@@ -793,6 +802,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31018B2A220F077700C19DB7 /* AnimationWindow.mm in Sources */,
+				310B8F4D221A6A3D00DF5993 /* TransparencyWindow.mm in Sources */,
 				08B4CBB8201DE93E00EEC0C5 /* MySprite.mm in Sources */,
 				08B4CBB7201DE93E00EEC0C5 /* MyOpenGLView.mm in Sources */,
 				08B4CB96201DE8B000EEC0C5 /* main.m in Sources */,

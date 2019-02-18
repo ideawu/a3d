@@ -5,22 +5,27 @@
 #import "AppDelegate.h"
 #import "TestController.h"
 #import "AnimationWindow.h"
+#import "TransparencyWindow.h"
 
 @interface AppDelegate (){
 	TestController *_test;
 	AnimationWindow *_animationWindow;
+	TransparencyWindow *_transparencyWindow;
 }
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
-	_test.appDelegate = self;
-	[_test showWindow:self];
-
-	_animationWindow = [[AnimationWindow alloc] initWithWindowNibName:@"AnimationWindow"];
-	[_animationWindow showWindow:self];
+//	_test = [[TestController alloc] initWithWindowNibName:@"TestController"];
+//	_test.appDelegate = self;
+//	[_test showWindow:self];
+//
+//	_animationWindow = [[AnimationWindow alloc] initWithWindowNibName:@"AnimationWindow"];
+//	[_animationWindow showWindow:self];
+	
+	_transparencyWindow = [[TransparencyWindow alloc] initWithWindowNibName:@"TransparencyWindow"];
+	[_transparencyWindow showWindow:self];
 }
 
 - (void)windowWillClose:(NSWindowController *)controller{
