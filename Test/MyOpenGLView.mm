@@ -13,9 +13,10 @@ using namespace a3d;
 	int _auto_rotate_x;
 	int _auto_rotate_y;
 	
+	Context *_context;
+	Drawable *_drawable;
 	Camera *_camera;
-	GLDrawable *_drawable;
-	
+
 	DraftScene *_scene;
 	DraftSprite *_flag;
 	DraftSprite *_camera_alex;
@@ -42,6 +43,7 @@ using namespace a3d;
 	[self showStatistics];
 //	[self setAcceptsTouchEvents:YES];
 
+	_context = a3d::Context::createShared();
 	_camera = a3d::Camera::create();
 
 	_rotateX = 0;
@@ -104,8 +106,7 @@ using namespace a3d;
 
 - (void)resize{
 	delete _drawable;
-	_drawable = a3d::GLDrawable::create(self.framebufferSize.width, self.framebufferSize.height, 4);
-//	_context = a3d::Context::blankContext();
+	_drawable = a3d::Drawable::create(self.framebufferSize.width, self.framebufferSize.height, 4);
 
 	CGSize size = [NSScreen mainScreen].frame.size;
 	size = self.viewportSize;
@@ -124,6 +125,7 @@ using namespace a3d;
 	glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &drawFboId);
 	glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &readFboId);
 
+	_context->makeCurrent();
 	_drawable->begin();
 	_drawable->clear(0.1, 0.1, 0.1);
 
@@ -143,7 +145,6 @@ using namespace a3d;
 	_camera->view3D();
 	[self draw3D];
 
-
 	_scene->renderAtTime(time);
 	_camera->renderAtTime(time);
 
@@ -162,45 +163,6 @@ using namespace a3d;
 	_drawable->blit(drawFboId);
 	// 不需要调用 finish
 //	_drawable->finish();
-
-//	{
-//		int width = self.framebufferSize.width;
-//		int height = self.framebufferSize.height;
-//		log_debug("%d %d", width, height);
-//		int image_bytes = width * height * 4;
-//		unsigned char *_pixels = (unsigned char *)malloc(image_bytes);
-//		memset(_pixels, 0, image_bytes);
-//
-//		glBindFramebuffer(GL_READ_FRAMEBUFFER, _context->framebuffer());
-//		glReadPixels(0, 0, width, height, GL_BGRA, GL_UNSIGNED_BYTE, _pixels);
-//		log_debug("%d %d", glGetError(), GL_INVALID_OPERATION);
-//		for(int i=0; i<image_bytes; i++){
-//			if(_pixels[i] != 0 && _pixels[i] != 255){
-//				NSLog(@"%d", _pixels[i]);
-//				break;
-//			}
-//		}
-//
-//		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-//		uint32_t bitmapInfo = kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host;
-//		CGContextRef _CGContext = CGBitmapContextCreate(_pixels, width, height, 8, 4 * width, colorSpace, bitmapInfo);
-//		CGColorSpaceRelease(colorSpace);
-//
-//		CGImageRef _CGImage = CGBitmapContextCreateImage(_CGContext);
-//
-//		static NSView *view = nil;
-//		if(!view){
-//			view = self.window.contentView;
-//			[self removeFromSuperview];
-//		}
-//		NSImage *img = [[NSImage alloc] initWithCGImage:_CGImage size:NSMakeSize(width, height)];
-//		view.layer.contents = img;
-//
-//		free(_pixels);
-//		CGImageRelease(_CGImage);
-//		CGContextRelease(_CGContext);
-//
-//	}
 }
 
 - (void)draw3D{

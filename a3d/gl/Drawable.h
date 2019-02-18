@@ -2,20 +2,20 @@
 //  Copyright © 2019 ideawu. All rights reserved.
 //
 
-#ifndef GLDrawable_hpp
-#define GLDrawable_hpp
+#ifndef Drawable_hpp
+#define Drawable_hpp
 
 #include "Bitmap.h"
 
 namespace a3d{
-	class GLDrawable
+	class Drawable
 	{
 	public:
 		// 创建一个空的画板，基于当前 FBO
-		static GLDrawable* createShared();
+		static Drawable* createShared();
 		// width, height 不是偶数，会导致blit少一行，所以会自动转成偶数。
 		// 注意：如果 samples 大于 0，bitmap 将不可用。
-		static GLDrawable* create(int width, int height, int samples);
+		static Drawable* create(int width, int height, int samples);
 
 		int width() const;
 		int height() const;
@@ -28,7 +28,7 @@ namespace a3d{
 		void clearDepth();
 		
 		void blit(GLuint dstFbo);
-		void blit(GLDrawable *buffer=NULL);
+		void blit(Drawable *buffer=NULL);
 
 		void flush();
 		void finish();
@@ -36,12 +36,12 @@ namespace a3d{
 		// 调用者不可释放此对象
 		Bitmap* bitmap();
 
-		~GLDrawable();
+		~Drawable();
 		
 	private:
-		GLDrawable();
-		GLDrawable(const GLDrawable &d);
-		GLDrawable& operator =(const GLDrawable &d);
+		Drawable();
+		Drawable(const Drawable &d);
+		Drawable& operator =(const Drawable &d);
 
 		void width(int width);
 		void height(int height);
@@ -53,6 +53,7 @@ namespace a3d{
 		int _height;
 		int _samples;
 		
+		bool _isShared;
 		GLuint _framebuffer;
 		GLuint _colorbuffer;
 		GLuint _depthbuffer;
@@ -61,4 +62,4 @@ namespace a3d{
 	};
 }; // end namespace
 
-#endif /* GLDrawable_hpp */
+#endif /* Drawable_hpp */

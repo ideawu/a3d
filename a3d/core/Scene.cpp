@@ -26,8 +26,8 @@ namespace a3d{
 	
 	Scene* Scene::create(){
 		Scene *ret = new Scene();
-		ret->_context = GLContext::createShared();
-		ret->_drawable = GLDrawable::createShared();
+		ret->_context = Context::createShared();
+		ret->_drawable = Drawable::createShared();
 		return ret;
 	}
 

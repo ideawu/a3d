@@ -38,8 +38,8 @@ namespace a3d{
 #include "Texture.h"
 #include "Renderer.h"
 
-#include "GLContext.h"
-#include "GLDrawable.h"
+#include "Context.h"
+#include "Drawable.h"
 
 #ifdef __OBJC__
 #	include "A3DView.h"

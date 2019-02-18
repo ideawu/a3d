@@ -4,7 +4,7 @@
 
 #include "Node.h"
 #include "Animator.h"
-#include "GLContext.h"
+#include "Context.h"
 
 namespace a3d{
 
@@ -165,7 +165,7 @@ namespace a3d{
 	void Node::renderAtTime(double time){
 		this->updateAtTime(time);
 		
-		Renderer *renderer = GLContext::current()->renderer();
+		Renderer *renderer = Context::current()->renderer();
 		
 		bool parentVisible = renderer->opacity() > 0;
 		if(parentVisible){

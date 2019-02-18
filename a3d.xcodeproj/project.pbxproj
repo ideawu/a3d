@@ -101,12 +101,12 @@
 		08FAAE2D2042A18300D831E6 /* A3DView2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08FAAE2B2042A18300D831E6 /* A3DView2.mm */; };
 		31018B2A220F077700C19DB7 /* AnimationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31018B28220F077700C19DB7 /* AnimationWindow.mm */; };
 		31018B2B220F077700C19DB7 /* AnimationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31018B29220F077700C19DB7 /* AnimationWindow.xib */; };
-		31018B2E220FDE0200C19DB7 /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31018B2C220FDE0200C19DB7 /* GLContext.cpp */; };
-		31018B2F220FDE0200C19DB7 /* GLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 31018B2D220FDE0200C19DB7 /* GLContext.h */; };
-		31018B32220FDE5500C19DB7 /* GLDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31018B30220FDE5500C19DB7 /* GLDrawable.cpp */; };
-		31018B33220FDE5500C19DB7 /* GLDrawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 31018B31220FDE5500C19DB7 /* GLDrawable.h */; };
-		31018B5922110C8C00C19DB7 /* GLContext.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31018B2D220FDE0200C19DB7 /* GLContext.h */; };
-		31018B5A22110C8C00C19DB7 /* GLDrawable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31018B31220FDE5500C19DB7 /* GLDrawable.h */; };
+		31018B2E220FDE0200C19DB7 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31018B2C220FDE0200C19DB7 /* Context.cpp */; };
+		31018B2F220FDE0200C19DB7 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = 31018B2D220FDE0200C19DB7 /* Context.h */; };
+		31018B32220FDE5500C19DB7 /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31018B30220FDE5500C19DB7 /* Drawable.cpp */; };
+		31018B33220FDE5500C19DB7 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 31018B31220FDE5500C19DB7 /* Drawable.h */; };
+		31018B5922110C8C00C19DB7 /* Context.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31018B2D220FDE0200C19DB7 /* Context.h */; };
+		31018B5A22110C8C00C19DB7 /* Drawable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31018B31220FDE5500C19DB7 /* Drawable.h */; };
 		3124E7B12025F50D00CF156F /* Texture.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EF62025E691002AC387 /* Texture.h */; };
 		3124E7B22025F53800CF156F /* Bitmap.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31543EED2025BE4B002AC387 /* Bitmap.h */; };
 		312CD37C2024A6C1008FE758 /* AnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */; };
@@ -160,8 +160,8 @@
 			files = (
 				31FABE5922128516007359CE /* DraftScene.h in CopyFiles */,
 				31FABE5A22128516007359CE /* DraftSprite.h in CopyFiles */,
-				31018B5922110C8C00C19DB7 /* GLContext.h in CopyFiles */,
-				31018B5A22110C8C00C19DB7 /* GLDrawable.h in CopyFiles */,
+				31018B5922110C8C00C19DB7 /* Context.h in CopyFiles */,
+				31018B5A22110C8C00C19DB7 /* Drawable.h in CopyFiles */,
 				3169B74B203D361400D70259 /* ImageSprite.h in CopyFiles */,
 				083EF8772034684C009960EC /* Animator.h in CopyFiles */,
 				084619C7202F427200741AF2 /* Quaternion.h in CopyFiles */,
@@ -284,10 +284,10 @@
 		31018B27220F077700C19DB7 /* AnimationWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationWindow.h; sourceTree = "<group>"; };
 		31018B28220F077700C19DB7 /* AnimationWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AnimationWindow.mm; sourceTree = "<group>"; };
 		31018B29220F077700C19DB7 /* AnimationWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnimationWindow.xib; sourceTree = "<group>"; };
-		31018B2C220FDE0200C19DB7 /* GLContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLContext.cpp; sourceTree = "<group>"; };
-		31018B2D220FDE0200C19DB7 /* GLContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLContext.h; sourceTree = "<group>"; };
-		31018B30220FDE5500C19DB7 /* GLDrawable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLDrawable.cpp; sourceTree = "<group>"; };
-		31018B31220FDE5500C19DB7 /* GLDrawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLDrawable.h; sourceTree = "<group>"; };
+		31018B2C220FDE0200C19DB7 /* Context.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
+		31018B2D220FDE0200C19DB7 /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		31018B30220FDE5500C19DB7 /* Drawable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
+		31018B31220FDE5500C19DB7 /* Drawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
 		312CD37B2024A6C1008FE758 /* AnimationTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTypes.cpp; sourceTree = "<group>"; };
 		312CD37D20257852008FE758 /* TextSpirte.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextSpirte.cpp; sourceTree = "<group>"; };
 		312CD37E20257852008FE758 /* TextSpirte.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSpirte.h; sourceTree = "<group>"; };
@@ -544,10 +544,10 @@
 				31543EF52025E691002AC387 /* Texture.cpp */,
 				08B4CB2B201DE4AF00EEC0C5 /* Renderer.h */,
 				08B4CB2A201DE4AF00EEC0C5 /* Renderer.cpp */,
-				31018B2D220FDE0200C19DB7 /* GLContext.h */,
-				31018B2C220FDE0200C19DB7 /* GLContext.cpp */,
-				31018B31220FDE5500C19DB7 /* GLDrawable.h */,
-				31018B30220FDE5500C19DB7 /* GLDrawable.cpp */,
+				31018B2D220FDE0200C19DB7 /* Context.h */,
+				31018B2C220FDE0200C19DB7 /* Context.cpp */,
+				31018B31220FDE5500C19DB7 /* Drawable.h */,
+				31018B30220FDE5500C19DB7 /* Drawable.cpp */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -613,7 +613,7 @@
 				08B4CB62201DE4AF00EEC0C5 /* Transform.h in Headers */,
 				08FAAE2C2042A18300D831E6 /* A3DView2.h in Headers */,
 				08B4CB74201DE4AF00EEC0C5 /* Animator.h in Headers */,
-				31018B2F220FDE0200C19DB7 /* GLContext.h in Headers */,
+				31018B2F220FDE0200C19DB7 /* Context.h in Headers */,
 				31C6788B202471D7000BF908 /* AnimateRotation.h in Headers */,
 				08B4CB5C201DE4AF00EEC0C5 /* Renderer.h in Headers */,
 				083EF876203073DF009960EC /* AnimateScale.h in Headers */,
@@ -624,7 +624,7 @@
 				08B4CB63201DE4AF00EEC0C5 /* DraftScene.h in Headers */,
 				083EF87220306E60009960EC /* AnimateSize.h in Headers */,
 				08B4CB65201DE4AF00EEC0C5 /* DraftSprite.h in Headers */,
-				31018B33220FDE5500C19DB7 /* GLDrawable.h in Headers */,
+				31018B33220FDE5500C19DB7 /* Drawable.h in Headers */,
 				31543EF32025C649002AC387 /* Text.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,7 +767,7 @@
 				31543EF22025C649002AC387 /* Text.cpp in Sources */,
 				08B4CB50201DE4AF00EEC0C5 /* Animate.cpp in Sources */,
 				08B4CB53201DE4AF00EEC0C5 /* Camera.cpp in Sources */,
-				31018B2E220FDE0200C19DB7 /* GLContext.cpp in Sources */,
+				31018B2E220FDE0200C19DB7 /* Context.cpp in Sources */,
 				312CD37F20257852008FE758 /* TextSpirte.cpp in Sources */,
 				08FAAE252042583E00D831E6 /* A3DLayer.m in Sources */,
 				08B4CBE0201DF38D00EEC0C5 /* Clock.cpp in Sources */,
@@ -782,7 +782,7 @@
 				08B4CB7B201DE4AF00EEC0C5 /* util.cpp in Sources */,
 				08B4CB66201DE4AF00EEC0C5 /* DraftSprite.mm in Sources */,
 				08B4CB6D201DE4AF00EEC0C5 /* AnimatePosition.cpp in Sources */,
-				31018B32220FDE5500C19DB7 /* GLDrawable.cpp in Sources */,
+				31018B32220FDE5500C19DB7 /* Drawable.cpp in Sources */,
 				084619C4202F2D4100741AF2 /* Quaternion.cpp in Sources */,
 				08B4CB71201DE4AF00EEC0C5 /* ImageSprite.cpp in Sources */,
 			);

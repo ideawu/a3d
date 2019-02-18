@@ -7,8 +7,8 @@ using namespace a3d;
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSTextField *timeLabel;
 
-@property GLContext *context;
-@property GLDrawable *drawable;
+@property Context *context;
+@property Drawable *drawable;
 @property Camera *camera;
 @property SpriteNode *node;
 
@@ -36,12 +36,9 @@ using namespace a3d;
 	int width = self.contentView.bounds.size.width;
 	int height = self.contentView.bounds.size.height;
 
-	log_debug("");
-	_context = GLContext::create();
-	log_debug("");
-
-	//_drawable = GLDrawable::create(width*2, height*2, 0); // retina @2x
-	_drawable = GLDrawable::create(width*1, height*1, 0);
+	_context = Context::create();
+	//_drawable = Drawable::create(width*2, height*2, 0); // retina @2x
+	_drawable = Drawable::create(width*1, height*1, 0);
 	_camera = Camera::create();
 	_camera->setup(60, width, height, width*10, -600);
 

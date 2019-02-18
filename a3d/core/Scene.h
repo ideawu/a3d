@@ -8,8 +8,8 @@
 #include <map>
 #include "Node.h"
 #include "Camera.h"
-#include "GLContext.h"
-#include "GLDrawable.h"
+#include "Context.h"
+#include "Drawable.h"
 
 namespace a3d{
 	class Scene
@@ -44,8 +44,8 @@ namespace a3d{
 		Scene& operator =(const Scene &d);
 		
 		double _time;
-		GLContext *_context;
-		GLDrawable *_drawable;
+		Context *_context;
+		Drawable *_drawable;
 		Camera *_camera;
 		Node *_rootNode;
 		std::map<int, Node*> _layers;

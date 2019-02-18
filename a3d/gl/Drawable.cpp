@@ -2,16 +2,20 @@
 //  Copyright © 2019 ideawu. All rights reserved.
 //
 
-#include "GLDrawable.h"
+#include "Drawable.h"
 
 namespace a3d{
-	GLDrawable* GLDrawable::createShared(){
-		GLDrawable *impl = new GLDrawable();
-		return impl;
+	Drawable* Drawable::createShared(){
+		Drawable *ret = new Drawable();
+		ret->_isShared = true;
+//		GLint drawFbo = 0;
+//		glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &drawFbo);
+//		ret->_framebuffer = drawFbo;
+		return ret;
 	}
 
-	GLDrawable* GLDrawable::create(int width, int height, int samples){
-		GLDrawable *impl = new GLDrawable();
+	Drawable* Drawable::create(int width, int height, int samples){
+		Drawable *impl = new Drawable();
 		impl->width(width);
 		impl->height(height);
 		impl->samples(samples);
@@ -19,7 +23,8 @@ namespace a3d{
 		return impl;
 	}
 
-	GLDrawable::GLDrawable(){
+	Drawable::Drawable(){
+		_isShared = false;
 		_framebuffer = 0;
 		_colorbuffer = 0;
 		_depthbuffer = 0;
@@ -27,45 +32,47 @@ namespace a3d{
 		_bitmap = NULL;
 	}
 	
-	GLDrawable::~GLDrawable(){
-		if(_framebuffer){
-			glDeleteFramebuffers(1, &_framebuffer);
-		}
-		if(_colorbuffer){
-			glDeleteRenderbuffers(1, &_colorbuffer);
-		}
-		if(_depthbuffer){
-			glDeleteRenderbuffers(1, &_depthbuffer);
+	Drawable::~Drawable(){
+		if(!_isShared){
+			if(_framebuffer){
+				glDeleteFramebuffers(1, &_framebuffer);
+			}
+			if(_colorbuffer){
+				glDeleteRenderbuffers(1, &_colorbuffer);
+			}
+			if(_depthbuffer){
+				glDeleteRenderbuffers(1, &_depthbuffer);
+			}
 		}
 		delete _bitmap;
 	}
 
-	int GLDrawable::width() const{
+	int Drawable::width() const{
 		return _width;
 	}
 	
-	void GLDrawable::width(int width){
+	void Drawable::width(int width){
 		_width = ceil(width/2.0) * 2;
 	}
 
-	int GLDrawable::height() const{
+	int Drawable::height() const{
 		return _height;
 	}
 	
-	void GLDrawable::height(int height){
+	void Drawable::height(int height){
 		_height = ceil(height/2.0) * 2;
 	}
 	
-	int GLDrawable::samples() const{
+	int Drawable::samples() const{
 		return _samples;
 	}
 	
-	void GLDrawable::samples(int samples){
+	void Drawable::samples(int samples){
 		_samples = samples;
 	}
 
 	
-	void GLDrawable::setupFBO(){
+	void Drawable::setupFBO(){
 		int width = this->width();
 		int height = this->height();
 		
@@ -85,14 +92,14 @@ namespace a3d{
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _depthbuffer);
 		
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
-			fprintf(stderr, "frame buffer not complete\n");
+			log_error("frame buffer not complete");
 			return;
 		}
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	
-	void GLDrawable::begin(){
+	void Drawable::begin(){
 		if(_width > 0 && _height > 0){
 			// glViewport 逻辑上不属于"相机"
 			glViewport(0, 0, _width, _height);
@@ -117,39 +124,39 @@ namespace a3d{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	}
 	
-	void GLDrawable::clear(){
+	void Drawable::clear(){
 		clear(0, 0, 0, 0);
 	}
 	
-	void GLDrawable::clear(float r, float g, float b, float a){
+	void Drawable::clear(float r, float g, float b, float a){
 		clearColor(r, g, b, a);
 		clearDepth();
 	}
 	
-	void GLDrawable::clearColor(float r, float g, float b, float a){
+	void Drawable::clearColor(float r, float g, float b, float a){
 		glClearColor(r, g, b, a);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
-	void GLDrawable::clearDepth(){
+	void Drawable::clearDepth(){
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
-	void GLDrawable::flush(){
+	void Drawable::flush(){
 		glFlush();
 	}
 	
-	void GLDrawable::finish(){
+	void Drawable::finish(){
 		glFinish();
 	}
 	
-	void GLDrawable::blit(GLDrawable *buffer){
+	void Drawable::blit(Drawable *buffer){
 		GLuint dstFbo = buffer? buffer->_framebuffer : 0;
 		this->blit(dstFbo);
 	}
 
-	void GLDrawable::blit(GLuint dstFbo){
-		if(!_framebuffer){
+	void Drawable::blit(GLuint dstFbo){
+		if(_isShared){ // TODO:
 			return;
 		}
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dstFbo);
@@ -160,7 +167,7 @@ namespace a3d{
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, dstFbo);
 	}
 
-	Bitmap* GLDrawable::bitmap(){
+	Bitmap* Drawable::bitmap(){
 		if(!_bitmap){
 			_bitmap = Bitmap::create(_width, _height);
 		}

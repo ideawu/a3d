@@ -2,31 +2,31 @@
 //  Copyright © 2019 ideawu. All rights reserved.
 //
 
-#ifndef GLContext_hpp
-#define GLContext_hpp
+#ifndef Context_hpp
+#define Context_hpp
 
 #include "Renderer.h"
 
 namespace a3d{
 	// Each thread has a single current OpenGL rendering context
-	class GLContext
+	class Context
 	{
 	public:
-		// 基于当前已存在的 CGLContextObj
-		static GLContext* createShared();
-		static GLContext* create();
-		static GLContext* current();
+		// 基于当前已存在的 CContextObj
+		static Context* createShared();
+		static Context* create();
+		static Context* current();
 
-		~GLContext();
+		~Context();
 		
 		Renderer* renderer() const;
 
 		void makeCurrent();
 		
 	private:
-		GLContext();
-		GLContext(const GLContext &d);
-		GLContext& operator =(const GLContext &d);
+		Context();
+		Context(const Context &d);
+		Context& operator =(const Context &d);
 
 		Renderer *_renderer;
 		CGLContextObj _CGLContext;
@@ -34,4 +34,4 @@ namespace a3d{
 	};
 }; // end namespace
 
-#endif /* GLContext_hpp */
+#endif /* Context_hpp */
