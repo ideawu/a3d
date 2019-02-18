@@ -174,25 +174,6 @@ namespace a3d{
 		bool currentVisible = renderer->opacity() > 0;
 		if(currentVisible){
 			renderer->pushMatrix(this->matrix());
-#if 0
-			{
-				int level = 0;
-				Node *p = this;
-				while(p->parent()){
-					p = p->parent();
-					level ++;
-				}
-				char buf[256];
-				int w = 2;
-				for(int i=0; i<level*w; i+=w){
-					buf[i] = ' ';
-					buf[i+1] = ' ';
-				}
-				buf[level*w] = '\0';
-				int subs = _subs? (int)_subs->size() : 0;
-				log_debug("%s %d, subs: %d", buf, this, subs);
-			}
-#endif
 			if(_clipBounds){
 				renderer->pushStencil();
 			}
@@ -260,3 +241,23 @@ namespace a3d{
 	}
 
 }; // end namespace
+
+#if 0
+{
+	int level = 0;
+	Node *p = this;
+	while(p->parent()){
+		p = p->parent();
+		level ++;
+	}
+	char buf[256];
+	int w = 2;
+	for(int i=0; i<level*w; i+=w){
+		buf[i] = ' ';
+		buf[i+1] = ' ';
+	}
+	buf[level*w] = '\0';
+	int subs = _subs? (int)_subs->size() : 0;
+	log_debug("%s %d, subs: %d", buf, this, subs);
+}
+#endif
