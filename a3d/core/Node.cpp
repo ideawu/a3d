@@ -57,7 +57,7 @@ namespace a3d{
 	}
 	
 	void Node::addSubnode(Node *node){
-		addSubnode(node, false);
+		addSubnode(node, true);
 	}
 	
 	void Node::addSubnode(Node *node, bool isFront){

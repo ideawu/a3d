@@ -24,12 +24,18 @@ namespace a3d{
 		// glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 		//glColor4f(_color.r*_color.a, _color.g*_color.a, _color.b*_color.a, _color.a);
 		glColor4f(_opacity, _opacity, _opacity, _opacity);
+		if(_opacity < 1){
+			glDisable(GL_DEPTH_TEST);
+		}
 	}
 	
 	void Renderer::popOpacity(){
 		_opacity = _opacity_list.back();
 		_opacity_list.pop_back();
 		glColor4f(_opacity, _opacity, _opacity, _opacity);
+		if(_opacity >= 1){
+			glEnable(GL_DEPTH_TEST);
+		}
 	}
 
 	void Renderer::pushMatrix(const Matrix4 &mat){

@@ -48,13 +48,17 @@ using namespace a3d;
 		_node2 = new SpriteNode();
 		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
 		_node2->sprite(sprite);
-		_node2->opacity(0.6);
+		_node2->opacity(0.4);
+//		_node2->z(-1);
 	}
 
 	[self draw];
 }
 
 - (void)draw{
+//	glDepthMask(GL_FALSE);
+//	glDepthMask(GL_TRUE);
+
 	{
 		_context->makeCurrent();
 		
@@ -62,8 +66,8 @@ using namespace a3d;
 		_drawable->clear(1, 1, 1);
 		
 		_camera->view3D();
-		_node2->renderAtTime(0);
 		_node1->renderAtTime(0);
+		_node2->renderAtTime(0);
 
 		_drawable->finish();
 	}
