@@ -1,8 +1,8 @@
-#import "AnimationWindow.h"
+#import "TestAnimation.h"
 #include "a3d/a3d.h"
 using namespace a3d;
 
-@interface AnimationWindow ()
+@interface TestAnimation ()
 @property (weak) IBOutlet NSView *contentView;
 @property (weak) IBOutlet NSTextField *timeLabel;
 
@@ -15,7 +15,7 @@ using namespace a3d;
 
 @end
 
-@implementation AnimationWindow
+@implementation TestAnimation
 
 - (IBAction)onTimeScroll:(id)sender {
 	NSSlider *slider = (NSSlider *)sender;

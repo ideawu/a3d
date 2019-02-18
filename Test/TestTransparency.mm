@@ -2,11 +2,11 @@
 //  Copyright © 2019 ideawu. All rights reserved.
 //
 
-#import "TransparencyWindow.h"
+#import "TestTransparency.h"
 #include "a3d/a3d.h"
 using namespace a3d;
 
-@interface TransparencyWindow ()
+@interface TestTransparency ()
 @property (weak) IBOutlet NSView *contentView;
 
 @property Context *context;
@@ -18,7 +18,7 @@ using namespace a3d;
 
 @end
 
-@implementation TransparencyWindow
+@implementation TestTransparency
 
 - (void)windowDidLoad {
     [super windowDidLoad];

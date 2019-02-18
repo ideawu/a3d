@@ -1,5 +1,5 @@
 //
-//  AnimationWindow.h
+//  TestAnimation.h
 //  Test
 //
 //  Created by ideawu on 2019/2/9.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AnimationWindow : NSWindowController
+@interface TestAnimation : NSWindowController
 
 @end
 
