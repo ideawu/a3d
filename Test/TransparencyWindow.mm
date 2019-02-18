@@ -14,6 +14,7 @@ using namespace a3d;
 @property Camera *camera;
 @property SpriteNode *node1;
 @property SpriteNode *node2;
+@property SpriteNode *node22;
 
 @end
 
@@ -48,8 +49,15 @@ using namespace a3d;
 		_node2 = new SpriteNode();
 		Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/9.jpg");
 		_node2->sprite(sprite);
-		_node2->opacity(0.4);
-//		_node2->z(-1);
+		_node2->opacity(0.6);
+		{
+			_node22 = new SpriteNode();
+			Sprite *sprite = Sprite::imageSprite("/Users/ideawu/Downloads/imgs/2.jpg");
+			_node22->sprite(sprite);
+			_node22->x(300);
+			_node22->opacity(0.5);
+			_node2->addSubnode(_node22);
+		}
 	}
 
 	[self draw];
@@ -78,6 +86,10 @@ using namespace a3d;
 	_contentView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(1, -1, 1), CATransform3DMakeTranslation(0, _contentView.bounds.size.height, 0));
 	_contentView.layer.contents = img;
 	[_contentView setNeedsDisplay:YES];
+}
+
+- (void)keyDown:(NSEvent *)event{
+	[self draw];
 }
 
 @end
