@@ -54,6 +54,14 @@ namespace a3d{
 		return _camera;
 	}
 
+	Color Scene::backgroundColor() const{
+		return _backgroundColor;
+	}
+	
+	void Scene::backgroundColor(const Color &color){
+		_backgroundColor = color;
+	}
+
 	double Scene::time() const{
 		return _time;
 	}

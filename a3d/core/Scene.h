@@ -24,6 +24,9 @@ namespace a3d{
 		Context* context() const;
 		Drawable* drawable() const;
 		Camera* camera() const;
+		
+		Color backgroundColor() const;
+		void backgroundColor(const Color &color);
 
 		double time() const;
 		void time(double time);
