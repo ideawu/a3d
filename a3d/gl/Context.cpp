@@ -56,11 +56,9 @@ namespace a3d{
 
 	void Context::makeCurrent(){
 		pthread_setspecific(_pthread_key, this);
-		if(!_isShared){
-			CGLError error = CGLSetCurrentContext(_CGLContext);
-			if(error){
-				log_error("set current ontext error: %d", error);
-			}
+		CGLError error = CGLSetCurrentContext(_CGLContext);
+		if(error){
+			log_error("set current ontext error: %d", error);
 		}
 	}
 
