@@ -41,13 +41,17 @@ namespace a3d{
 		delete _drawable;
 		delete _context;
 	}
-
-	Camera* Scene::camera() const{
-		return _camera;
+	
+	Context* Scene::context() const{
+		return _context;
 	}
 
 	Drawable* Scene::drawable() const{
 		return _drawable;
+	}
+
+	Camera* Scene::camera() const{
+		return _camera;
 	}
 
 	double Scene::time() const{

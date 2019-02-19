@@ -21,8 +21,9 @@ namespace a3d{
 
 		~Scene();
 
-		Camera* camera() const;
+		Context* context() const;
 		Drawable* drawable() const;
+		Camera* camera() const;
 
 		double time() const;
 		void time(double time);
