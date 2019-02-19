@@ -17,6 +17,7 @@ namespace a3d{
 		Color();
 		Color(float r, float g, float b, float a=1);
 		
+		static Color clear(){ return Color(0,0,0, 0);} // 透明
 		static Color black(){ return Color(0,0,0);}
 		static Color white(){ return Color(1,1,1);}
 		static Color red(){   return Color(1,0,0);}

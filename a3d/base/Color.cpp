@@ -7,7 +7,7 @@
 namespace a3d{
 	
 	Color::Color(){
-		r = g = b = a = 1;
+		r = g = b = a = 0;
 	}
 
 	Color::Color(float r, float g, float b, float a){

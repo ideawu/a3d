@@ -6,33 +6,48 @@
 
 namespace a3d{
 	
+	Scene* Scene::create(){
+		return Scene::createWith(Context::createShared(), Drawable::createShared());
+	}
+	
+	Scene* Scene::createWith(Context *context, Drawable *drawable){
+		int width = drawable->width();
+		int height = drawable->height();
+		
+		Scene *ret = new Scene();
+		ret->_context = context;
+		ret->_drawable = drawable;
+		ret->_camera->setup(60, width, height, width*10, -width/2);
+		return ret;
+	}
+
 	Scene::Scene(){
 		_context = NULL;
 		_drawable = NULL;
 		_rootNode = NULL;
+		
 		_camera = new Camera();
+		_backgroundColor = Color::clear();
+		
 		layer(0);
 	}
 	
 	Scene::~Scene(){
-		delete _camera;
-		delete _drawable;
-		delete _context;
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
 			Node *node = it->second;
 			delete node;
 		}
-	}
-	
-	Scene* Scene::create(){
-		Scene *ret = new Scene();
-		ret->_context = Context::createShared();
-		ret->_drawable = Drawable::createShared();
-		return ret;
+		delete _camera;
+		delete _drawable;
+		delete _context;
 	}
 
 	Camera* Scene::camera() const{
 		return _camera;
+	}
+
+	Drawable* Scene::drawable() const{
+		return _drawable;
 	}
 
 	double Scene::time() const{
@@ -82,7 +97,7 @@ namespace a3d{
 		_camera->updateAtTime(time);
 		
 		_drawable->begin();
-		_drawable->clearColor(0, 0, 0, 0);
+		_drawable->clearColor(_backgroundColor);
 
 		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
 			_drawable->clearDepth();

@@ -6,6 +6,7 @@
 #define Drawable_hpp
 
 #include "Bitmap.h"
+#include "Color.h"
 
 namespace a3d{
 	class Drawable
@@ -24,6 +25,7 @@ namespace a3d{
 		void begin();
 		void clear();
 		void clear(float r, float g, float b, float a=1);
+		void clearColor(const Color &color);
 		void clearColor(float r, float g, float b, float a=1);
 		void clearDepth();
 		

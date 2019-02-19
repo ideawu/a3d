@@ -132,7 +132,11 @@ namespace a3d{
 		clearColor(r, g, b, a);
 		clearDepth();
 	}
-	
+
+	void Drawable::clearColor(const Color &color){
+		clearColor(color.r, color.g, color.b, color.a);
+	}
+
 	void Drawable::clearColor(float r, float g, float b, float a){
 		glClearColor(r, g, b, a);
 		glClear(GL_COLOR_BUFFER_BIT);

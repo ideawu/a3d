@@ -10,16 +10,20 @@
 #include "Camera.h"
 #include "Context.h"
 #include "Drawable.h"
+#include "Color.h"
 
 namespace a3d{
 	class Scene
 	{
 	public:
-		~Scene();
 		static Scene* create();
+		static Scene* createWith(Context *context, Drawable *drawable);
+
+		~Scene();
 
 		Camera* camera() const;
-		
+		Drawable* drawable() const;
+
 		double time() const;
 		void time(double time);
 		
@@ -47,6 +51,8 @@ namespace a3d{
 		Context *_context;
 		Drawable *_drawable;
 		Camera *_camera;
+		Color _backgroundColor;
+		
 		Node *_rootNode;
 		std::map<int, Node*> _layers;
 	};
