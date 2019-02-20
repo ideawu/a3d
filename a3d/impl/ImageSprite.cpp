@@ -57,10 +57,12 @@ namespace a3d{
 	void ImageSprite::loadFromFile(const char *filename){
 		this->_cgimgSrc = load_CGImageSource(filename);
 		if(!this->_cgimgSrc){
+			log_debug("failed to load CGImageSource %s", filename);
 			return;
 		}
 		int frames = (int)CGImageSourceGetCount(this->_cgimgSrc);
 		if(frames == 0){
+			log_debug("empty CGImageSource %s", filename);
 			return;
 		}
 		
