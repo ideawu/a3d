@@ -43,6 +43,6 @@ namespace a3d{
 
 #ifdef __OBJC__
 #	include "A3DView.h"
-#endif
+#endif // end __OBJC__
 
 #endif
