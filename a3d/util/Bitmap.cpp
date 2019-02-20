@@ -23,6 +23,10 @@ namespace a3d{
 	Bitmap* Bitmap::createFromCGImage(const CGImageRef image){
 		int w = (int)CGImageGetWidth(image);
 		int h = (int)CGImageGetHeight(image);
+		return createFromCGImage(image, w, h);
+	}
+	
+	Bitmap* Bitmap::createFromCGImage(const CGImageRef image, int w, int h){
 		Bitmap *ret = Bitmap::create(w, h);
 		CGContextRef context = ret->CGContext();
 		if(!context){
