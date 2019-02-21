@@ -24,19 +24,13 @@ namespace a3d{
 	Scene::Scene(){
 		_context = NULL;
 		_drawable = NULL;
-		_rootNode = NULL;
-		
 		_camera = new Camera();
 		_backgroundColor = Color::clear();
-		
-		layer(0);
+		_layer = 0;
 	}
 	
 	Scene::~Scene(){
-		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
-			Node *node = it->second;
-			delete node;
-		}
+		removeAllNodes();
 		delete _camera;
 		delete _drawable;
 		delete _context;
@@ -71,23 +65,32 @@ namespace a3d{
 	}
 	
 	void Scene::layer(int index){
-		_rootNode = _layers[index];
-		if(!_rootNode){
-			_rootNode = new Node();
-			_layers[index] = _rootNode;
-		}
+		_layer = index;
 	}
 
 	Node* Scene::rootNode(){
-		return _rootNode;
+		Node *root = _layers[_layer];
+		if(!root){
+			root = new Node();
+			_layers[_layer] = root;
+		}
+		return root;
 	}
 
 	void Scene::addNode(Node *node){
-		_rootNode->addSubnode(node);
+		rootNode()->addSubnode(node);
 	}
 	
 	void Scene::removeNode(Node *node){
-		_rootNode->removeSubnode(node);
+		rootNode()->removeSubnode(node);
+	}
+	
+	void Scene::removeAllNodes(){
+		for(std::map<int, Node*>::iterator it = _layers.begin(); it != _layers.end(); it++){
+			Node *node = it->second;
+			delete node;
+		}
+		_layers.clear();
 	}
 
 	void Scene::view3D(){

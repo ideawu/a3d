@@ -33,12 +33,15 @@ namespace a3d{
 		
 		// 使用指定层开始绘图
 		void layer(int index);
-
 		// 返回当前 layer 的 rootNode
 		Node* rootNode();
-		// node 内存不由 Scene 管理
+		// 将 node 添加到当前 layer，node 内存不由 Scene 管理
 		void addNode(Node *node);
+		// 将当前 layer 的 node 清除
 		void removeNode(Node *node);
+		
+		// 将场景中所有 node 清除
+		void removeAllNodes();
 
 		void view3D();
 		void view2D();
@@ -57,7 +60,7 @@ namespace a3d{
 		Camera *_camera;
 		Color _backgroundColor;
 		
-		Node *_rootNode;
+		int _layer;
 		std::map<int, Node*> _layers;
 	};
 }; // end namespace

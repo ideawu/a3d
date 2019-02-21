@@ -27,15 +27,14 @@ namespace a3d{
 
 	Node::~Node(){
 		if(_subs){
-			// 需要将子节点的 parent 指针清除，但不释放子节点的内存
-			for(std::list<Node*>::iterator it=_subs->begin(); it != _subs->end(); it++){
-				Node *sub = *it;
-				sub->removeFromParent();
+			// 不要遍历 subs，因为 removeSubnode() 会操作 subs
+			while(!_subs->empty()){
+				Node *sub = _subs->back();
+				// 不释放子节点的内存
+				removeSubnode(sub);
 			}
 		}
-		if(_parent){
-			removeFromParent();
-		}
+		removeFromParent();
 		delete _subs;
 		delete _animator;
 	}
@@ -82,13 +81,7 @@ namespace a3d{
 		if(!_subs){
 			_subs = new std::list<Node *>();
 		}
-		if(node->_parent){
-			if(node->_parent == this){
-				return;
-			}else{
-				node->removeFromParent();
-			}
-		}
+		node->removeFromParent();
 		node->_parent = this;
 
 		if(index >= _subs->size()){
