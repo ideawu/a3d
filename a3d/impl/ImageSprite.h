@@ -15,10 +15,10 @@ namespace a3d{
 	class ImageSprite : public Sprite
 	{
 	public:
-		static ImageSprite* create();
 		static ImageSprite* createFromFile(const char *filename);
 		static ImageSprite* createFromBitmap(const Bitmap &bitmap);
 		static ImageSprite* createWithTexture(Texture *texture);
+		static ImageSprite* createWithCGImageSource(CGImageSourceRef imgSource);
 
 		virtual ~ImageSprite();
 		virtual int frameAtTime(double time, double *duration);
@@ -37,7 +37,7 @@ namespace a3d{
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 		
-		void loadFromFile(const char *filename);
+		void loadWithCGImageSource(CGImageSourceRef imgSource);
 	};
 }; // end namespace
 

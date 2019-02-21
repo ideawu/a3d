@@ -8,10 +8,6 @@
 
 namespace a3d{
 
-	Sprite* Sprite::imageSprite(){
-		return ImageSprite::create();
-	}
-
 	Sprite* Sprite::imageSprite(const char *filename){
 		return ImageSprite::createFromFile(filename);
 	}

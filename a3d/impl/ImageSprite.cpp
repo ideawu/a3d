@@ -11,11 +11,6 @@ static double get_duration(CGImageSourceRef src, int index);
 
 namespace a3d{
 
-	ImageSprite* ImageSprite::create(){
-		ImageSprite *ret = new ImageSprite();
-		return ret;
-	}
-
 	ImageSprite* ImageSprite::createFromBitmap(const Bitmap &bitmap){
 		Texture *texture = Texture::createFromBitmap(bitmap);
 		if(!texture){
@@ -25,18 +20,26 @@ namespace a3d{
 	}
 
 	ImageSprite* ImageSprite::createFromFile(const char *filename){
-		ImageSprite *ret = new ImageSprite();
-		ret->loadFromFile(filename);
-		if(ret->frames() == 0){
-			delete ret;
+		CGImageSourceRef imgSource = load_CGImageSource(filename);
+		if(!imgSource){
+			log_debug("failed to load CGImageSource %s", filename);
 			return NULL;
 		}
+
+		ImageSprite *ret = new ImageSprite();
+		ret->loadWithCGImageSource(imgSource);
 		return ret;
 	}
 
 	ImageSprite* ImageSprite::createWithTexture(Texture *texture){
 		ImageSprite *ret = new ImageSprite();
 		ret->addTexture(texture, 0);
+		return ret;
+	}
+
+	ImageSprite* ImageSprite::createWithCGImageSource(CGImageSourceRef imgSource){
+		ImageSprite *ret = new ImageSprite();
+		ret->loadWithCGImageSource(imgSource);
 		return ret;
 	}
 
@@ -54,15 +57,11 @@ namespace a3d{
 		}
 	}
 	
-	void ImageSprite::loadFromFile(const char *filename){
-		this->_cgimgSrc = load_CGImageSource(filename);
-		if(!this->_cgimgSrc){
-			log_debug("failed to load CGImageSource %s", filename);
-			return;
-		}
+	void ImageSprite::loadWithCGImageSource(CGImageSourceRef cgimgSrc){
+		this->_cgimgSrc = cgimgSrc;
+		
 		int frames = (int)CGImageSourceGetCount(this->_cgimgSrc);
 		if(frames == 0){
-			log_debug("empty CGImageSource %s", filename);
 			return;
 		}
 		
