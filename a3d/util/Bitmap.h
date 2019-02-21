@@ -8,16 +8,18 @@
 #include <ImageIO/ImageIO.h>
 
 namespace a3d{
+	
 	class Bitmap
 	{
 	public:
 		~Bitmap();
 
 		static Bitmap* create(int width, int height);
-		static Bitmap* createWithPixels(char *pixels, int width, int height);
+		static Bitmap* createFromFile(const char *filename);
 		static Bitmap* createFromCGImage(const CGImageRef image);
 		static Bitmap* createFromCGImage(const CGImageRef image, int width, int height);
 		static Bitmap* createFromCGImageSourceAtIndex(const CGImageSourceRef imageSource, int index);
+		static Bitmap* createWithPixels(char *pixels, int width, int height);
 
 		int width() const;
 		int height() const;

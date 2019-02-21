@@ -8,7 +8,7 @@ namespace a3d{
 	
 	int Texture::texture_count = 0;
 	
-	Texture* Texture::createFromBitmap(const Bitmap &bitmap){
+	Texture* Texture::createFromBitmap(const Bitmap *bitmap){
 		Texture *ret = new Texture();
 		ret->loadBitmap(bitmap);
 		if(ret->name() == 0){
@@ -53,7 +53,7 @@ namespace a3d{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::loadBitmap(const Bitmap &bitmap){
+	void Texture::loadBitmap(const Bitmap *bitmap){
 		bool isNew = (_tid == 0);
 		if(isNew){
 			glGenTextures(1, &_tid);
@@ -63,11 +63,11 @@ namespace a3d{
 				return;
 			}
 		}
-		_size = Vector3(bitmap.width(), bitmap.height(), 0);
+		_size = Vector3(bitmap->width(), bitmap->height(), 0);
 
-		GLsizei width = bitmap.width();
-		GLsizei height = bitmap.height();
-		const char *pixels = bitmap.pixels();
+		GLsizei width = bitmap->width();
+		GLsizei height = bitmap->height();
+		const char *pixels = bitmap->pixels();
 		
 		glBindTexture(GL_TEXTURE_2D, _tid);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // LINEAR 使用平均算法，抗锯齿

@@ -6,17 +6,28 @@
 #include <CoreServices/CoreServices.h>
 
 namespace a3d{
+	static CGImageSourceRef load_CGImageSource(const char *filename){
+		CFURLRef url = CFURLCreateFromFileSystemRepresentation(NULL, (const UInt8 *)filename, strlen(filename), false);
+		if(!url){
+			return NULL;
+		}
+		CGImageSourceRef src = CGImageSourceCreateWithURL((CFURLRef)url, NULL);
+		CFRelease(url);
+		return src;
+	}
 
 	Bitmap* Bitmap::create(int width, int height){
 		char *pixels = (char *)malloc(4 * width * height);
 		return Bitmap::createWithPixels(pixels, width, height);
 	}
 
-	Bitmap* Bitmap::createWithPixels(char *pixels, int width, int height){
-		Bitmap *ret = new Bitmap();
-		ret->_pixels = pixels;
-		ret->_width = width;
-		ret->_height = height;
+	Bitmap* Bitmap::createFromFile(const char *filename){
+		CGImageSourceRef imgSource = load_CGImageSource(filename);
+		if(!imgSource){
+			return NULL;
+		}
+		Bitmap *ret = Bitmap::createFromCGImageSourceAtIndex(imgSource, 0);
+		CFRelease(imgSource);
 		return ret;
 	}
 
@@ -51,6 +62,14 @@ namespace a3d{
 		}
 		Bitmap *ret = Bitmap::createFromCGImage(image);
 		CGImageRelease(image);
+		return ret;
+	}
+
+	Bitmap* Bitmap::createWithPixels(char *pixels, int width, int height){
+		Bitmap *ret = new Bitmap();
+		ret->_pixels = pixels;
+		ret->_width = width;
+		ret->_height = height;
 		return ret;
 	}
 

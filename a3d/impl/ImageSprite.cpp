@@ -8,10 +8,11 @@
 
 static CGImageSourceRef load_CGImageSource(const char *filename);
 static double get_duration(CGImageSourceRef src, int index);
+static void get_size(CGImageSourceRef src, float *width, float *height);
 
 namespace a3d{
 
-	ImageSprite* ImageSprite::createFromBitmap(const Bitmap &bitmap){
+	ImageSprite* ImageSprite::createFromBitmap(const Bitmap *bitmap){
 		Texture *texture = Texture::createFromBitmap(bitmap);
 		if(!texture){
 			return NULL;
@@ -76,8 +77,12 @@ namespace a3d{
 		this->frames(frames);
 		this->duration(total_duration);
 		this->_textures.resize(frames, NULL);
-		// 加载第1张图片，生成width,height
-		this->textureAtFrame(0, NULL);
+		
+		float width = 0;
+		float height = 0;
+		get_size(this->_cgimgSrc, &width, &height);
+		this->width(width);
+		this->height(height);
 	}
 
 	int ImageSprite::frameAtTime(double time, double *duration){
@@ -120,9 +125,7 @@ namespace a3d{
 				log_debug("failed to create bitmap from CGImage");
 				return NULL;
 			}
-			this->width(bitmap->width());
-			this->height(bitmap->height());
-			Texture *texture = Texture::createFromBitmap(*bitmap);
+			Texture *texture = Texture::createFromBitmap(bitmap);
 			_textures[frame] = texture;
 			delete bitmap;
 		}
@@ -162,12 +165,12 @@ static double get_duration(CGImageSourceRef src, int index){
 			CFTypeRef val;
 			val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFUnclampedDelayTime);
 			if (val) {
-				CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
+				CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, &duration);
 			}
 			if(duration == 0){
 				val = CFDictionaryGetValue(gifProperties, kCGImagePropertyGIFDelayTime);
 				if(val){
-					CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, (void *)&duration);
+					CFNumberGetValue((CFNumberRef)val, kCFNumberDoubleType, &duration);
 				}
 			}
 		}
@@ -176,3 +179,32 @@ static double get_duration(CGImageSourceRef src, int index){
 	return duration;
 }
 
+static void get_size(CGImageSourceRef src, float *width, float *height){
+	*width = 0;
+	*height = 0;
+	
+	CFDictionaryRef properties = CGImageSourceCopyPropertiesAtIndex(src, 0, NULL);
+	if(properties) {
+		CFTypeRef val;
+		val = CFDictionaryGetValue(properties, kCGImagePropertyPixelWidth);
+		if (val != NULL){
+			CFNumberGetValue((CFNumberRef)val, kCFNumberFloatType, width);
+		}
+		val = CFDictionaryGetValue(properties, kCGImagePropertyPixelHeight);
+		if (val != NULL){
+			CFNumberGetValue((CFNumberRef)val, kCFNumberFloatType, height);
+		}
+//		// Check orientation and flip size if required
+//		val = CFDictionaryGetValue(properties, kCGImagePropertyOrientation);
+//		if(val != NULL){
+//			int orientation;
+//			CFNumberGetValue((CFNumberRef)val, kCFNumberIntType, &orientation);
+//			if(orientation > 4){
+//				CGFloat temp = width;
+//				width = height;
+//				height = temp;
+//			}
+//		}
+		CFRelease(properties);
+	}
+}

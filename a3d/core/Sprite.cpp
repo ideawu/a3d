@@ -12,7 +12,7 @@ namespace a3d{
 		return ImageSprite::createFromFile(filename);
 	}
 
-	Sprite* Sprite::imageSprite(const Bitmap &bitmap){
+	Sprite* Sprite::imageSprite(const Bitmap *bitmap){
 		return ImageSprite::createFromBitmap(bitmap);
 	}
 

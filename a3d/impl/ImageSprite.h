@@ -16,7 +16,7 @@ namespace a3d{
 	{
 	public:
 		static ImageSprite* createFromFile(const char *filename);
-		static ImageSprite* createFromBitmap(const Bitmap &bitmap);
+		static ImageSprite* createFromBitmap(const Bitmap *bitmap);
 		static ImageSprite* createWithTexture(Texture *texture);
 		static ImageSprite* createWithCGImageSource(CGImageSourceRef imgSource);
 

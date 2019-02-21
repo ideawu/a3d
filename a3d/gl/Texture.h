@@ -16,7 +16,7 @@ namespace a3d{
 		Texture();
 		~Texture();
 
-		static Texture* createFromBitmap(const Bitmap &bitmap);
+		static Texture* createFromBitmap(const Bitmap *bitmap);
 
 		Vector3 size() const;
 		float width() const;
@@ -25,7 +25,7 @@ namespace a3d{
 		GLuint name() const;
 		void bind() const;
 		void unbind() const;
-		void loadBitmap(const Bitmap &bitmap);
+		void loadBitmap(const Bitmap *bitmap);
 		
 		void draw(const Frame &texRect, const Frame verRect) const;
 		

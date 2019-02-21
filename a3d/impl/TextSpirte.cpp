@@ -24,7 +24,7 @@ namespace a3d{
 		if(!bitmap){
 			return NULL;
 		}
-		Texture *texture = Texture::createFromBitmap(*bitmap);
+		Texture *texture = Texture::createFromBitmap(bitmap);
 		if(!texture){
 			delete bitmap;
 			return NULL;
