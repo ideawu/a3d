@@ -20,6 +20,7 @@ namespace a3d{
 	
 	Texture::Texture(){
 		_tid = 0;
+//		log_debug("create %d", this);
 	}
 
 	Texture::~Texture(){
@@ -27,6 +28,7 @@ namespace a3d{
 			glDeleteTextures(1, &_tid);
 //			log_debug("del tid: %d, textures: %d", _tid, --texture_count);
 		}
+//		log_debug("delete %d", this);
 	}
 	
 	Vector3 Texture::size() const{

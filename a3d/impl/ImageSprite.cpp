@@ -46,6 +46,7 @@ namespace a3d{
 
 	ImageSprite::ImageSprite():Sprite(){
 		_cgimgSrc = NULL;
+//		log_debug("create %d", this);
 	}
 
 	ImageSprite::~ImageSprite(){
@@ -56,6 +57,10 @@ namespace a3d{
 			Texture *texture = *it;
 			delete texture;
 		}
+		for(int i=0; i<_bitmaps.size(); i++){
+			delete _bitmaps[i];
+		}
+//		log_debug("delete %d", this);
 	}
 	
 	void ImageSprite::loadWithCGImageSource(CGImageSourceRef cgimgSrc){
@@ -120,10 +125,9 @@ namespace a3d{
 		if(frame < 0 || frame >= _frames){
 			return;
 		}
-		if(!_textures[frame]){
+		if(!_bitmaps[frame]){
 			Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
 			if(!bitmap){
-				log_debug("failed to create bitmap from CGImage");
 				return;
 			}
 			_bitmaps[frame] = bitmap;
@@ -140,6 +144,7 @@ namespace a3d{
 			if(bitmap){
 				Texture *texture = Texture::createFromBitmap(bitmap);
 				_textures[frame] = texture;
+				_bitmaps[frame] = NULL;
 				delete bitmap;
 			}
 		}

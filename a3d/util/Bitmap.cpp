@@ -78,12 +78,14 @@ namespace a3d{
 		_pixels = NULL;
 		_CGImage = NULL;
 		_CGContext = NULL;
+//		log_debug("create %d", this);
 	}
 
 	Bitmap::~Bitmap(){
 		free(_pixels);
 		CGImageRelease(_CGImage);
 		CGContextRelease(_CGContext);
+//		log_debug("delete %d", this);
 	}
 
 	int Bitmap::width() const{
