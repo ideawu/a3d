@@ -26,9 +26,9 @@ namespace a3d{
 		char* pixels() const;
 		
 		// 调用者不可释放此对象
-		CGContextRef CGContext();
+		const CGContextRef CGContext();
 		// 调用者不可释放此对象
-		CGImageRef CGImage();
+		const CGImageRef CGImage();
 		bool savePNGFile(const char *filename);
 		
 	private:

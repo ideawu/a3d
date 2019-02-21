@@ -97,7 +97,7 @@ namespace a3d{
 		return _pixels;
 	}
 	
-	CGContextRef Bitmap::CGContext(){
+	const CGContextRef Bitmap::CGContext(){
 		if(!_CGContext){
 			size_t w = _width;
 			size_t h = _height;
@@ -109,7 +109,7 @@ namespace a3d{
 		return _CGContext;
 	}
 
-	CGImageRef Bitmap::CGImage(){
+	const CGImageRef Bitmap::CGImage(){
 		CGImageRelease(_CGImage);
 		_CGImage = NULL;
 		
