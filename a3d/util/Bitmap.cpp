@@ -58,6 +58,7 @@ namespace a3d{
 	Bitmap* Bitmap::createFromCGImageSourceAtIndex(const CGImageSourceRef imageSource, int index){
 		CGImageRef image = CGImageSourceCreateImageAtIndex(imageSource, index, NULL);
 		if(!image){
+			log_error("CGImageSourceCreateImageAtIndex %d failed", index);
 			return NULL;
 		}
 		Bitmap *ret = Bitmap::createFromCGImage(image);

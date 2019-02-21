@@ -77,7 +77,8 @@ namespace a3d{
 		this->frames(frames);
 		this->duration(total_duration);
 		this->_textures.resize(frames, NULL);
-		
+		this->_bitmaps.resize(frames, NULL);
+
 		float width = 0;
 		float height = 0;
 		get_size(this->_cgimgSrc, &width, &height);
@@ -115,19 +116,32 @@ namespace a3d{
 		return textureAtFrame(frame, NULL);
 	}
 
-	Texture* ImageSprite::textureAtFrame(int frame, double *duration){
+	void ImageSprite::loadImageAtFrame(int frame){
 		if(frame < 0 || frame >= _frames){
-			return NULL;
+			return;
 		}
 		if(!_textures[frame]){
 			Bitmap *bitmap = Bitmap::createFromCGImageSourceAtIndex(_cgimgSrc, frame);
 			if(!bitmap){
 				log_debug("failed to create bitmap from CGImage");
-				return NULL;
+				return;
 			}
-			Texture *texture = Texture::createFromBitmap(bitmap);
-			_textures[frame] = texture;
-			delete bitmap;
+			_bitmaps[frame] = bitmap;
+		}
+	}
+	
+	Texture* ImageSprite::textureAtFrame(int frame, double *duration){
+		if(frame < 0 || frame >= _frames){
+			return NULL;
+		}
+		if(!_textures[frame]){
+			loadImageAtFrame(frame);
+			Bitmap *bitmap = _bitmaps[frame];
+			if(bitmap){
+				Texture *texture = Texture::createFromBitmap(bitmap);
+				_textures[frame] = texture;
+				delete bitmap;
+			}
 		}
 		if(duration){
 			*duration = _durations[frame];

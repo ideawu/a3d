@@ -26,6 +26,8 @@ namespace a3d{
 		virtual Texture* textureAtFrame(int frame, double *duration);
 
 		void addTexture(Texture *texture, double duration);
+		// 解析图片，不涉及 OpenGL 操作
+		void loadImageAtFrame(int frame);
 		
 	private:
 		ImageSprite();
@@ -34,6 +36,7 @@ namespace a3d{
 		
 		// 不要重复利用 texture，因为解码GIF耗CPU，用VRAM换CPU
 		std::vector<Texture*> _textures;
+		std::vector<Bitmap *> _bitmaps;
 		std::vector<double> _durations;
 		CGImageSourceRef _cgimgSrc;
 		
