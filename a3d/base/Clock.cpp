@@ -8,7 +8,7 @@ namespace a3d{
 	enum{
 		INVALID, PAUSED, STOP, RUNNING
 	};
-	static const int INVALID_TICK = 999999999.0;
+	static const double INVALID_TICK = 999999999.0;
 
 	Clock::Clock(){
 		_state = RUNNING;

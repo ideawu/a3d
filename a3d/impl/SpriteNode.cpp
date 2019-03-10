@@ -66,20 +66,16 @@ namespace a3d{
 		// 调用父方法
 		Node::updateAtTime(time);
 		
+		double lastTime = _clock.time();
+		_clock.update(time);
+		if(!isPlaying()){
+			return;
+		}
 		if(!_sprite){
 			return;
 		}
-		if(isStopped()){
-			return;
-		}
-		
-		double lastTime = _clock.time();
-		_clock.update(time);
-		if(isPaused()){
-			return;
-		}
 		double thisTime = _clock.time();
-
+		
 		// 修正 looping 时钟到 [0, duration]
 		if(_isLooping && _sprite->duration() > 0){
 			if(thisTime < 0){
@@ -92,7 +88,7 @@ namespace a3d{
 				_clock.time(thisTime);
 			}
 		}
-		
+
 		// 不丢帧
 		if(_isFrameLossless && _sprite->duration() > 0){
 			double lastDuration = 0;
