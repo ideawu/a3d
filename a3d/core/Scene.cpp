@@ -27,6 +27,7 @@ namespace a3d{
 		_camera = new Camera();
 		_backgroundColor = Color::clear();
 		_layer = 0;
+		_time = 0;
 	}
 	
 	Scene::~Scene(){
