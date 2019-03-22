@@ -8,7 +8,7 @@
 #include <ImageIO/ImageIO.h>
 
 namespace a3d{
-	
+	/// RAM based image
 	class Bitmap
 	{
 	public:

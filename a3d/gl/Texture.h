@@ -10,6 +10,7 @@
 #include "Vector3.h"
 
 namespace a3d{
+	/// VRAM based image
 	class Texture
 	{
 	public:
