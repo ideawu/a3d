@@ -81,9 +81,10 @@ namespace a3d{
 			if(thisTime < 0){
 				thisTime = fabs(thisTime + _sprite->duration());
 			}
-			while(thisTime > _sprite->duration()){
-				thisTime -= _sprite->duration();
-			}
+			thisTime = fmod(thisTime, _sprite->duration());
+//			while(thisTime > _sprite->duration()){
+//				thisTime -= _sprite->duration();
+//			}
 			if(thisTime != _clock.time()){
 				_clock.time(thisTime);
 			}
