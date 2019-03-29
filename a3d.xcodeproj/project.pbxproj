@@ -129,6 +129,8 @@
 		315964AB2026E65300FB0679 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964AA2026E65300FB0679 /* QuartzCore.framework */; };
 		315964AD2026E6FA00FB0679 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 315964A62026AC9500FB0679 /* libxml2.tbd */; };
 		3169B74B203D361400D70259 /* ImageSprite.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */; };
+		318ACE97224DBA9400943BA9 /* TextureNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 318ACE95224DBA9400943BA9 /* TextureNode.cpp */; };
+		318ACE98224DBA9400943BA9 /* TextureNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 318ACE96224DBA9400943BA9 /* TextureNode.h */; };
 		319A809D202C581C00DF1175 /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319A809B202C581C00DF1175 /* SpriteNode.cpp */; };
 		319A809E202C581C00DF1175 /* SpriteNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
 		319A809F202C59B200DF1175 /* SpriteNode.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 319A809C202C581C00DF1175 /* SpriteNode.h */; };
@@ -304,6 +306,8 @@
 		315964A62026AC9500FB0679 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		315964A82026E62700FB0679 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		315964AA2026E65300FB0679 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		318ACE95224DBA9400943BA9 /* TextureNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureNode.cpp; sourceTree = "<group>"; };
+		318ACE96224DBA9400943BA9 /* TextureNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureNode.h; sourceTree = "<group>"; };
 		319A809B202C581C00DF1175 /* SpriteNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		319A809C202C581C00DF1175 /* SpriteNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpriteNode.h; sourceTree = "<group>"; };
 		31C67888202471D7000BF908 /* AnimateRotation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimateRotation.cpp; sourceTree = "<group>"; };
@@ -446,6 +450,10 @@
 		08B4CB3B201DE4AF00EEC0C5 /* impl */ = {
 			isa = PBXGroup;
 			children = (
+				31543EED2025BE4B002AC387 /* Bitmap.h */,
+				31543EEC2025BE4B002AC387 /* Bitmap.cpp */,
+				318ACE96224DBA9400943BA9 /* TextureNode.h */,
+				318ACE95224DBA9400943BA9 /* TextureNode.cpp */,
 				319A809C202C581C00DF1175 /* SpriteNode.h */,
 				319A809B202C581C00DF1175 /* SpriteNode.cpp */,
 				08B4CB43201DE4AF00EEC0C5 /* ImageSprite.h */,
@@ -478,8 +486,6 @@
 				08B4CB4E201DE4AF00EEC0C5 /* util.cpp */,
 				31543EF12025C649002AC387 /* Text.h */,
 				31543EF02025C649002AC387 /* Text.cpp */,
-				31543EED2025BE4B002AC387 /* Bitmap.h */,
-				31543EEC2025BE4B002AC387 /* Bitmap.cpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 				084619C5202F2D4100741AF2 /* Quaternion.h in Headers */,
 				31543EF82025E691002AC387 /* Texture.h in Headers */,
 				08B4CB18201DE49900EEC0C5 /* Point3.h in Headers */,
+				318ACE98224DBA9400943BA9 /* TextureNode.h in Headers */,
 				08B4CB16201DE49900EEC0C5 /* Matrix4.h in Headers */,
 				08B4CBE1201DF38D00EEC0C5 /* Clock.h in Headers */,
 				08B4CB72201DE4AF00EEC0C5 /* ImageSprite.h in Headers */,
@@ -752,6 +759,7 @@
 				083EF87120306E60009960EC /* AnimateSize.cpp in Sources */,
 				083EF875203073DF009960EC /* AnimateScale.cpp in Sources */,
 				08B4CB79201DE4AF00EEC0C5 /* log.cpp in Sources */,
+				318ACE97224DBA9400943BA9 /* TextureNode.cpp in Sources */,
 				08B4CB7E201DE6B100EEC0C5 /* A3DView.mm in Sources */,
 				08B4CB61201DE4AF00EEC0C5 /* Transform.cpp in Sources */,
 				08B4CB5B201DE4AF00EEC0C5 /* Renderer.cpp in Sources */,

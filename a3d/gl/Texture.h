@@ -14,9 +14,9 @@ namespace a3d{
 	class Texture
 	{
 	public:
-		Texture();
 		~Texture();
 
+		static Texture* create(int width, int height);
 		static Texture* createFromBitmap(const Bitmap *bitmap);
 
 		Vector3 size() const;
@@ -33,6 +33,7 @@ namespace a3d{
 		// TODO: retain, release
 		
 	private:
+		Texture();
 		Texture(const Texture &d);
 		Texture& operator =(const Texture &d);
 

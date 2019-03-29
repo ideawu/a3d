@@ -7,9 +7,20 @@
 namespace a3d{
 	
 	int Texture::texture_count = 0;
-	
+
+	Texture* Texture::create(int width, int height){
+		Bitmap *bitmap = Bitmap::create(width, height);
+		if(!bitmap){
+			return NULL;
+		}
+		Texture *ret = Texture::createFromBitmap(bitmap);
+		delete bitmap;
+		return ret;
+	}
+
 	Texture* Texture::createFromBitmap(const Bitmap *bitmap){
 		Texture *ret = new Texture();
+		ret->_size = Vector3(bitmap->width(), bitmap->height(), 0);
 		ret->loadBitmap(bitmap);
 		if(ret->name() == 0){
 			delete ret;
@@ -59,13 +70,12 @@ namespace a3d{
 		bool isNew = (_tid == 0);
 		if(isNew){
 			glGenTextures(1, &_tid);
-//			log_debug("gen tid: %d, textures: %d", _tid, ++texture_count);
+			// log_debug("gen tid: %d, textures: %d", _tid, ++texture_count);
 			if(!_tid){
 				log_error("glGenTextures failed!");
 				return;
 			}
 		}
-		_size = Vector3(bitmap->width(), bitmap->height(), 0);
 
 		GLsizei width = bitmap->width();
 		GLsizei height = bitmap->height();
